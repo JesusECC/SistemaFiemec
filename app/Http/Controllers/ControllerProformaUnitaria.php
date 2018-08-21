@@ -33,7 +33,7 @@ class ControllerProformaUnitaria extends Controller
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
     ->join('Empleado as e','p.idEmpleado','=','e.id')
     ->join('Detalle_proforma as dp','p.idProforma','=','dp.idProforma')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','e.nombres','e.materno','e.paterno','p.serie_proforma','p.igv','p.precio_total','dp.descuento')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','e.nombres','e.materno','e.paterno','p.serie_proforma','p.igv','p.precio_total','dp.descuento','dp.cantidad')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->orderBy('p.idProforma','desc')
      
