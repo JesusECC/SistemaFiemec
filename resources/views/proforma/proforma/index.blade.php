@@ -13,8 +13,7 @@
 					
 					<th>fecha</th>
 					<th>Comprobante</th>
-					<th>Cliente</th>
-					<th>Empleado</th>
+					<th>Nombre</th>
 					<th>impuesto</th>
 					<th>total</th>
 					
@@ -27,10 +26,9 @@
 				<tr>
 
 					<td>{{$prof->fecha_hora}}</td>
-					<td>{{$prof->serie_comprobante.' /  f000-'.$prof->id_Proforma}}</td>
+					<td>{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}</td>
 					<td>{{$prof->nombres_Rs}}</td>
-					<td>{{$prof->nombres}}</td>
-					<td>{{$prof->impuesto}}</td>
+					<td>{{$prof->igv}}</td>
 					<td>{{$prof->precio_total}}</td>
 					
 					<td>

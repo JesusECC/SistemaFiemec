@@ -16,9 +16,10 @@
     {!!Form::open(array('url'=>'proforma/producto','method'=>'POST','autocomplete'=>'off'))!!}
 
     {{Form::token()}}
+
 <div class="form-group">
 	<label for="serie_producto">Numero de serie</label>
-	<input type="text" name="serie_producto" class="form-control" placeholder="Nº serie...">	
+	<input type="text" name="serie_producto" class="form-control" {{old('serie_producto')}} placeholder="Nº serie...">	
 </div>
 <div class="form-group">
 	<label for="codigo_pedido">Codigo de Pedido</label>
