@@ -28,7 +28,7 @@ class ControllerProducto extends Controller
            $productos=DB::table('Producto')
             ->where('serie_producto','LIKE','%'.$query.'%')
             ->where('estado','=','activo')
-           ->orderby('id','asc')
+           ->orderby('idProducto','asc')
            ->paginate(10);
 
            return view('proforma.producto.index',["productos"=>$productos,"searchText"=>$query]);

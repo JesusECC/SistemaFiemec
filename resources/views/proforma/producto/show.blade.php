@@ -34,7 +34,6 @@
 					<th style="text-align:center;"><font FACE="Arial" SIZE=4 COLOR="white">Stock</font></th>
 					<th style="text-align:center;"><font FACE="Arial" SIZE=4 COLOR="white">Descripcion</font></th>
 					<th style="text-align:center;"><font FACE="Arial" SIZE=4 COLOR="white">Precio Unitario</font></th>
-
 					<th style="text-align:center;"><font FACE="Arial" SIZE=4 COLOR="white">Foto</font></th>
 					<th style="text-align:center;"><font FACE="Arial" SIZE=4 COLOR="white">Categoria</font></th>
 					<th style="text-align:center;"><font FACE="Arial" SIZE=4 COLOR="white">Fecha Sistema</font></th>

@@ -24,29 +24,24 @@ class RequestFormProforma extends FormRequest
     public function rules()
     {
         return [
-            //ids
-        //'idCliente'=>'requered',//idCliente pertenence ala tabla proforma
-
-       /*
-
-        'idProducto'=>'require',//idProducto pertenece a la tabla Detalleproforma y 
-
-
-
-        //proforma
+        'idCliente'=>'require',
+        'idEmpleado'=>'require',
         'serie_proforma'=>'max:45',
-        
+        'num_proforma'=>'max:45',
+        //'fecha_hora',--detro del codigo se asignara el valor
+        'igv'=>'numeric',
         'subtotal'=>'numeric',
-        'precio_total'=>'required',
+        'precio_total'=>'numeric',
         'descripcion'=>'max:500',
-
-       //detalle profomra
-        'cantidad'=>'required',
-        'precio_venta'=>'required',
-        
-        'observacion_detalleP'=>'max:500',
-        'descuento'=>'required', 
-*/
+        'tipo_proforma'=>'max:45',
+        'caracterisiticas_proforma'=>'max:500',
+        'forma_de'=>'max:125',
+        'plazo_fabricacion'=>'max:145',
+        'plazo_oferta'=>'max:45',
+        'garantia'=>'max:45',
+        'observacion_condicion'=>'max:500',
+        'observacion_estado'=>'max:500',
+        'estado',
         ];
     }
 }

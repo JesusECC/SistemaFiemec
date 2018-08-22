@@ -4,24 +4,32 @@ namespace SistemaFiemec;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Proforma extends Model
+class ProformaHistorial extends Model
 {
     protected $table='Historial';
     protected $primaryKey='idHistorial';
     public $timestamps=false;
 
     protected $filleable = [
+        'idCliente',
+        'idEmpleado',
         'idProforma',
-    	'idCliente',
-    	'idEmpleado',
-    	'idProducto',
-    	'serie_proformaH',
-    	'num_proformaH',
-    	'fecha_horaH',
-    	'igvH',
-    	'subtotalH',
-    	'precio_totalH',
-    	'descripcionH',
+        'serie_proforma',
+        'num_proforma',
+        'fecha_hora',
+        'igv',
+        'subtotal',
+        'precio_total',
+        'descripcion',
+        'tipo_proforma',
+        'caracterisiticas_proforma',
+        'forma_de',
+        'plazo_fabricacion',
+        'plazo_oferta',
+        'garantia',
+        'observacion_condicion',
+        'observacion_proforma',
+        'estado',
     	
    ];
 

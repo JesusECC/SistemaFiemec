@@ -8,7 +8,7 @@ class Empleados extends Model
 {
    
     protected $table='Empleado';
-    protected $primarykey='id';
+    protected $primarykey='idEmpleado';
     public $timestamps=false;
 
 
@@ -28,6 +28,10 @@ class Empleados extends Model
     	'direccion',
     	'correo',
     	'foto',
+        'cargo',
+        'sueldo',
+        'fecha_inicio',
+        'fecha_fin',
     	'estado',
      
    ];

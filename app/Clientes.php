@@ -29,6 +29,10 @@ class Clientes extends Model
     	'cuenta_2',
     	'cuenta_3',
     	'fecha_sistema',
+        'departamento',
+        'distrito',
+        'direcion',
+        'referencia',
     	'estado',
      
    ];

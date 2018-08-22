@@ -28,7 +28,7 @@
                 <option value=""></option>
 		       @foreach($clientes as $cliente)
                
-		       <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+		       <option value="{{$cliente->idCliente}}">{{$cliente->nombre}}</option>
 		       @endforeach	
            </select>
         </div>
@@ -168,7 +168,7 @@ total=0;
 subtotal=[];
 $("#guardar").hide();
 $("#pid").change(mostrarValores);
-$("#idCliente").change(mostrarValor);
+//$("#idCliente").change(mostrarValor);
 
 
 function mostrarValores()
@@ -177,13 +177,12 @@ function mostrarValores()
     $("#pprecio_unitario").val(datosProducto[1]);
 }
 
-function mostrarValor()
-{
+/*{
     datos=document.getElementById('idCliente').value.split('_');
     $("#pnro_documento").val(datos[2]);
     $("#pdireccion").val(datos[1]);
 }
-
+*/
 function agregar()
 {
     datosProducto=document.getElementById('pid').value.split('_');

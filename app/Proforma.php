@@ -21,6 +21,15 @@ class Proforma extends Model
     	'subtotal',
     	'precio_total',
     	'descripcion',
+        'tipo_proforma',
+        'caracterisiticas_proforma',
+        'forma_de',
+        'plazo_fabricacion',
+        'plazo_oferta',
+        'garantia',
+        'observacion_condicion',
+        'observacion_proforma',
+        'estado',
     	
    ];
 
@@ -28,3 +37,7 @@ class Proforma extends Model
      
    ];
 }
+
+ 
+
+       
