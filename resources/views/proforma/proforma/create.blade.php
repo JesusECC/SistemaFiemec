@@ -18,20 +18,20 @@
     {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
 
     {{Form::token()}}
+<div>
+	<div>
+        <div class="form-group">
+            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                <label>Cliente</label>
+                <select required name="idCliente" class="form-control selectpicker" id="idCliente" data-live-search="true">
 
-
-<div class="row">
-	<div class="form-group" >
-        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" style="margin-top: 20px;">
-            <label>Cliente</label>
-	        <select required name="idCliente" class="form-control selectpicker" id="idCliente" data-live-search="true">
-
-                <option value=""></option>
-		       @foreach($clientes as $cliente)
-               
-		       <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
-		       @endforeach	
-           </select>
+                    <option value=""></option>
+                   @foreach($clientes as $cliente)
+                   
+                   <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                   @endforeach  
+               </select>
+            </div>
         </div>
 
         
@@ -172,11 +172,8 @@
       </div>
 </div>
 </div>
-
-
-{!!Form::close()!!}
 </div>
-
+{!!Form::close()!!}
 
 
 @push('scripts')
