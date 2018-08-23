@@ -47,6 +47,7 @@
             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
             	<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
             		<thead style="background-color:#A9D0F5">
+
             			
             			<th>Producto</th>
             			<th>cantidad</th>
@@ -60,7 +61,13 @@
             			<th></th>
             			<th></th>
             			<th></th>
-            			<th><h4 id="total">{{$proforma->precio_total}}</h4></th>
+            			<th>
+                        <!-- <h4 id="total">Subtotal: {{$proforma->precio_total/(1+$proforma->igv/100)}}</h4>-->
+
+                            <h4 type="number" id="total">IGV:  {{$proforma->precio_total/(1+$proforma->igv/100)*($proforma->igv/100)}}
+
+                            <h4 id="total">Precio total:    {{$proforma->precio_total/(1+$proforma->igv/100)*($proforma->igv/100) + $proforma->precio_total}}</th><br>
+
 
             		</tfoot>
             		<tbody>
@@ -70,7 +77,7 @@
                             <td>{{$det->cantidad}}</td>
                             <td>S/.{{$det->precio_venta}}</td>
                             <td>{{$det->descuento}} x c/u</td>
-                            <td>{{$det->cantidad*$det->precio_venta}}</td>
+                            <td>{{$det->cantidad*$det->precio_venta-$det->cantidad*$det->descuento}}</td>
                         </tr>
 
                         @endforeach
@@ -90,3 +97,4 @@
 
 
 @endsection
+
