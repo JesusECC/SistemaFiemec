@@ -20,15 +20,11 @@ class ControllerEmpresa extends Controller
     {
     if($request)
     {
-       $query=trim($request->get('searchText'));
-       $empresas=DB::table('Cliente_Proveedor as cp')
-       ->join('Cliente_direccion as cd','cp.idCliente','=','cd.idCliente')
-       ->select('cp.idCliente','cp.tipo_documento','cp.nro_documento','cp.nombres_Rs','cp.telefono','cp.celular','cp.correo','cp.cuenta_1','cp.cuenta_2','cp.cuenta_3','cd.provincia','cd.distrito','cd.direcion','cp.estado')
-       ->where('cp.nombres_Rs','LIKE','%'.$query.'%')
-       ->where('cp.tipo_persona','=','Cliente Empresa')
-       ->orderby('cp.idCliente','asc')
-       
-
+        $query=trim($request->get('searchText'));
+       $empresas=DB::table('Cliente_Proveedor as cr')
+       ->where('nombres_Rs','LIKE','%'.$query.'%')
+       ->where('tipo_persona','=','Cliente Empresa')
+       ->orderby('idCliente','asc')
        ->paginate(10);
 
        return view('proforma.empresa.index',["empresas"=>$empresas,"searchText"=>$query]);
@@ -38,10 +34,8 @@ class ControllerEmpresa extends Controller
 
 public function show($id)
     {
- 	$empresa=DB::table('Cliente_Proveedor as cp')
-    ->join('Cliente_direccion as cd','cp.idCliente','=','cd.idCliente')
-    ->select('cp.idCliente','cp.tipo_documento','cp.nro_documento','cp.nombres_Rs','cp.paterno','cp.materno','cp.fecha_nacimiento','cp.sexo','cp.telefono','cp.celular','cp.correo','cp.foto','cp.tipo_persona','cp.cuenta_1','cp.cuenta_2','cp.cuenta_3','cp.fecha_sistema','cp.estado','cd.provincia','cd.distrito','cd.direcion','cd.referencia')
-    ->where('cp.idCliente','=',$id)
+ 	$empresa=DB::table('Cliente_Proveedor')
+    ->where('idCliente','=',$id)
     ->get();
 		return view("proforma.empresa.show",["empresa"=>$empresa]);
    
@@ -57,35 +51,79 @@ public function show($id)
   
 
 
- public function store(RequestFormIngresoCliProEmp $request){
+ public function store(RequestFormIngresoCliProEmp $request)
+ {
   
-     $idCliente=DB::table('Cliente_Proveedor')->insertGetId([
+                  $empresa= new Clientes;
 
-                  'tipo_documento'=>'RUC',
-                  'nro_documento'=>intval($request->get('nro_documento')),
-                  'nombres_Rs'=>$request->get('nombres_RS'), 
-                  'paterno'=>'.',
-                  'materno'=>'.',                 
-                  'telefono'=>$request->get('telefono'),
-                  'celular'=>$request->get('celular'),
-                  'correo'=>$request->get('correo'),
-                  'tipo_persona'=>'Cliente Empresa',
-                  'cuenta_1'=>$request->get('cuenta_1'),
-                  'cuenta_2'=>$request->get('cuenta_2'),
-                  'cuenta_3'=>$request->get('cuenta_3'),
-                  'estado'=>'activo',
-              ]);
-            
-
-        $cliente_direccion=new ClienteDireccion();
-        $cliente_direccion->provincia=$request->get('provincia');
-        $cliente_direccion->distrito=$request->get('distrito');
-        $cliente_direccion->direcion=$request->get('direcion');
-        $cliente_direccion->referencia=$request->get('referencia');
-        $cliente_direccion->idCliente=$idCliente;
-        $cliente_direccion->save();
+                  $empresa->tipo_documento='DNI';
+                  $empresa->nro_documento=intval($request->get('nro_documento'));
+                  $empresa->nombres_Rs=$request->get('nombres_RS');
+                  $Cliente->paterno='.';
+                  $Cliente->materno='.' ;                
+                  $empresa->telefono=$request->get('telefono');
+                  $empresa->celular=$request->get('celular');
+                  $empresa->correo=$request->get('correo');
+                  $empresa->tipo_persona='Cliente Empresa';
+                  $empresa->cuenta_1=$request->get('cuenta_1');
+                  $empresa->cuenta_2=$request->get('cuenta_2');
+                  $empresa->cuenta_3=$request->get('cuenta_3');
+                  $empresa->estado='activo';
+                  $empresa->provincia=$request->get('provincia');
+                  $empresa->distrito=$request->get('distrito');
+                  $empresa->direcion=$request->get('direcion');
+                  $empresa->referencia=$request->get('referencia');
+                  $empresa->idCliente=$idCliente;
+                  $empresa->save();
  
             
             return redirect::to('proforma/empresa');
           }
+
+
+          public function edit($id)
+    {
+
+        return view("proforma.empresa.edit",["Clientes"=>Clientes::findOrFail($id)]);
+    }
+
+   
+    public function update(RequestFormIngresoCliProEmp $request,$id)
+    {
+
+        $empresa=Clientes::find($id);
+
+         $empresa->tipo_documento='DNI';
+                  $empresa->nro_documento=intval($request->get('nro_documento'));
+                  $empresa->nombres_Rs=$request->get('nombres_RS');                  
+                  $empresa->telefono=$request->get('telefono');
+                  $empresa->celular=$request->get('celular');
+                  $empresa->correo=$request->get('correo');
+                  $empresa->tipo_persona='Cliente Empresa';
+                  $empresa->cuenta_1=$request->get('cuenta_1');
+                  $empresa->cuenta_2=$request->get('cuenta_2');
+                  $empresa->cuenta_3=$request->get('cuenta_3');
+                  $empresa->estado='activo';
+                  $empresa->provincia=$request->get('provincia');
+                  $empresa->distrito=$request->get('distrito');
+                  $empresa->direcion=$request->get('direcion');
+                  $empresa->referencia=$request->get('referencia');
+                  $empresa->idCliente=$idCliente;
+                  $empresa->update();
+
+        return Redirect::to('proforma/empresa');
+    }
+
+    public function destroy($id)
+    {
+        $producto=Clientes::findOrFail($id);
+        $producto->estado='inactivo';
+        $producto->update();
+        return Redirect::to('proforma/empresa');
+
+
+    }
 }
+
+
+                  

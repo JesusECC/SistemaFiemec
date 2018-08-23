@@ -23,7 +23,7 @@ class ControllerCatalogo extends Controller
        $catalogos=DB::table('Producto')
        ->where('serie_producto','LIKE','%'.$query.'%')
        ->where('estado','=','activo')
-       ->orderby('id','asc')
+       ->orderby('idProducto','asc')
        ->paginate(20);
 
        return view('proforma.catalogo.index',["catalogos"=>$catalogos,"searchText"=>$query]);
@@ -35,7 +35,7 @@ class ControllerCatalogo extends Controller
     {
         
         $detalleproducto=DB::table('Producto')
-        ->where('id','=',$id)
+        ->where('idProducto','=',$id)
         ->get();
         return view('proforma.catalogo.show',["detalleproducto"=>$detalleproducto]);
     }

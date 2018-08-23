@@ -38,11 +38,10 @@ class RequestFormIngresoCliProEmp extends FormRequest
         'cuenta_1'=>'max:45',
         'cuenta_2'=>'max:45',
         'cuenta_3'=>'max:45',
-        'idCliente'=>'require',
-        'provincia'=>'max:45',
-        'distrito'=>'max:45',
-        'direcion'=>'max:250',
-        'referencia'=>'max:145',       
+        'Departamento'=>'max:45',
+        'Distrito'=>'max:45',
+        'Direcion'=>'max:250',
+        'Referencia'=>'max:145',       
          ];
     }
 }

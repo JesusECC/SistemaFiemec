@@ -24,12 +24,9 @@ class ControllerEmpleados extends Controller
     {
        $query=trim($request->get('searchText'));
        $Empleados=DB::table('Empleado as e')
-       ->join ('Detalle_empleado as de','e.id','=','de.Empleado')
-       ->select('e.id','e.tipo_documento','e.nro_documento','e.nombres','e.materno','e.paterno','e.fecha_nacimiento','e.sexo','e.telefono','e.celular','e.usuario','e.contraseña','e.direccion','e.correo','e.foto','e.estado','de.cargo','de.sueldo','de.fecha_inicio','de.fecha_fin')
         ->where('e.nombres','LIKE','%'.$query.'%')
-         ->orwhere('e.nro_documento','LIKE','%'.$query.'%')
        ->where('e.estado','=','activo')
-       ->orderby('e.id','asc')
+       ->orderby('idEmpleado','asc')
        ->paginate(10);
        return view('proforma.empleado.index',["Empleados"=>$Empleados,"searchText"=>$query]);
     }
@@ -45,32 +42,28 @@ class ControllerEmpleados extends Controller
 
  public function store(RequestFormIngresoEmpleados $request){
   
-     $idEmpleado=DB::table('Empleado')->insertGetId([
-
-                  'tipo_documento'=>'DNI',
-                  'nro_documento'=>intval($request->get('nro_documento')),
-                  'nombres'=>$request->get('nombres'),
-                  'materno'=>$request->get('materno'),
-                  'paterno'=>$request->get('paterno'),
-                  'fecha_nacimiento'=>$request->get('fecha_nacimiento'),
-                  'sexo'=>$request->get('sexo'),
-                  'telefono'=>$request->get('telefono'),
-                  'celular'=>$request->get('celular'),
-                  'usuario'=>$request->get('usuario'),
-                  'contraseña'=>$request->get('contraseña'),
-                  'direccion'=>$request->get('telefono'),
-                  'correo'=>$request->get('correo'),
-                  'estado'=>'activo',
-              ]);
-            
-
-        $detallaEmpleado=new DetalleEmpleado();
-        $detallaEmpleado->cargo=$request->get('cargo');
-        $detallaEmpleado->sueldo=$request->get('sueldo');
-        $detallaEmpleado->fecha_inicio=$request->get('fecha_inicio');
-        $detallaEmpleado->fecha_fin=$request->get('fecha_fin');
-        $detallaEmpleado->Empleado=$idEmpleado;
-        $detallaEmpleado->save();
+     
+                  $Empleado=new Empleados;
+                  $Empleado->tipo_documento='DNI';
+                  $Empleado->nro_documento=$request->get('nro_documento');
+                  $Empleado->nombres=$request->get('nombres');
+                  $Empleado->materno=$request->get('materno');
+                  $Empleado->paterno=$request->get('paterno');
+                  $Empleado->fecha_nacimiento=$request->get('fecha_nacimiento');
+                  $Empleado->sexo=$request->get('sexo');
+                  $Empleado->telefono=$request->get('telefono');
+                  $Empleado->celular=$request->get('celular');
+                  $Empleado->usuario=$request->get('usuario');
+                  $Empleado->contraseña=$request->get('contraseña');
+                  $Empleado->direccion=$request->get('telefono');
+                  $Empleado->correo=$request->get('correo');
+                  $Empleado->estado='activo';
+                  $Empleado->cargo=$request->get('cargo');
+                  $Empleado->sueldo=$request->get('sueldo');
+                  $Empleado->fecha_inicio=$request->get('fecha_inicio');
+                  $Empleado->fecha_fin=$request->get('fecha_fin');
+                  
+                  $Empleado->save();
  
             
             return redirect::to('proforma/empleado');

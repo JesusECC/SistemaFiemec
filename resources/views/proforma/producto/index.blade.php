@@ -32,9 +32,9 @@
 					<td>S/. {{$pro->precio_unitario}}</td>
 					<td>
 
-					<a href="{{route('producto.edit',$pro->id)}}"><button class="btn btn-info">editar</button>
+					<a href="{{route('producto.edit',$pro->idProducto)}}"><button class="btn btn-info">editar</button>
 					</a>
-					<a href="" data-target="#modal-delete-{{$pro->id}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
+					<a href="" data-target="#modal-delete-{{$pro->idProducto}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
 					</td>
 					
 					

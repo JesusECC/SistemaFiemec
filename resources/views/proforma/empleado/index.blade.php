@@ -13,12 +13,9 @@
 					<th>Tipo Documento</th>
 					<th>Nro Documento</th>
 					<th>Nombres</th>
-					<th>Paterno</th>
-                    <th>Materno</th>
                     <th>Cargo</th>
-
-                    <th>Telefono</th>
-					 <th>Celular</th>
+                    <th>Telefono/Celular</th>
+					 
 					  <th>Correo</th>
 	                
 	                  <th>Estado</th>
@@ -32,22 +29,20 @@
 					
 					<td>{{$empl->tipo_documento}}</td>
 					<td>{{$empl->nro_documento}}</td>
-					<td>{{$empl->nombres}}</td>
-					<td>{{$empl->paterno}}</td>
-					<td>{{$empl->materno}}</td>
+					<td>{{$empl->nombres}} {{$empl->paterno}} {{$empl->paterno}}</td>
 					<td>{{$empl->cargo}}</td>
-					<td>{{$empl->telefono}}</td>
-					<td>{{$empl->celular}}</td>
+					<td>{{$empl->telefono}} / {{$empl->celular}}</td>
+					
 					<td>{{$empl->correo}}</td>
 					<td>{{$empl->estado}}</td>
 					
 					<td>
-					<a href="{{URL::action('ControllerEmpleados@show',$empl->id)}}"><button class="btn btn-info">ver</button>
+					<a href="{{URL::action('ControllerEmpleados@show',$empl->idEmpleado)}}"><button class="btn btn-info">ver</button>
 					</a>
 					<td>
-					<a href="{{URL::action('ControllerEmpleados@edit',$empl->id)}}"><button class="btn btn-info">editar</button>
+					<a href="{{URL::action('ControllerEmpleados@edit',$empl->idEmpleado)}}"><button class="btn btn-info">editar</button>
 					</a>
-					<a href="" data-target="#modal-delete-{{$empl->id}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
+					<a href="" data-target="#modal-delete-{{$empl->idEmpleado}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
 					</td>
 				</tr>
 				@include('proforma.empleado.modal')

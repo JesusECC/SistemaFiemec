@@ -31,7 +31,7 @@ class ControllerProformaUnitaria extends Controller
     $query=trim($request->get('searchText'));
     $proformas=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
-    ->join('Empleado as e','p.idEmpleado','=','e.id')
+    ->join('Empleado as e','p.idEmpleado','=','e.idEmpleado')
     ->join('Detalle_proforma as dp','p.idProforma','=','dp.idProforma')
     ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','e.nombres','e.materno','e.paterno','p.serie_proforma','p.igv','p.precio_total','dp.descuento','dp.cantidad')
     ->where('p.idProforma','LIKE','%'.$query.'%')
@@ -49,11 +49,10 @@ public function create()
  ->get();
 
  $clientes=DB::table('Cliente_Proveedor as cp')
- ->join('Cliente_direccion as clid','cp.idCliente','=','clid.idCliente')
- ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) AS nombre'),'cp.nro_documento',DB::raw('CONCAT(clid.provincia," ",clid.distrito," ",clid.direcion," ",clid.referencia) AS direccion'))
- ->where('tipo_persona','=','Cliente persona')
+ ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
+->where('tipo_persona','=','Cliente persona')
 ->orwhere('tipo_persona','=','Cliente Empresa')
- ->groupBy('nombre','direccion','cp.nro_documento','cp.idCliente')
+
  ->get();
 
 
@@ -61,11 +60,11 @@ public function create()
  return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes]);
 }
 
-public function store(RequestFormProforma $request)
+public function store(Request $request)
 {
 
-    
-    try {
+   // dd($request);
+   /* try {*/
         DB::beginTransaction();
         $Proforma=new Proforma;
         $Proforma->idCliente=$request->get('idCliente');
@@ -84,7 +83,7 @@ public function store(RequestFormProforma $request)
 
         $cont=0;
 
-        //dd($Proforma);
+        
         
         while ($cont<count($idProducto)) 
         {
@@ -100,11 +99,12 @@ public function store(RequestFormProforma $request)
 
 
          DB::Commit();
-        
+   /*     
     } catch (\Exception $e) {
+
         DB::rollback();
         
-    }
+    }*/
 
          return Redirect::to('proforma/proforma');
      }

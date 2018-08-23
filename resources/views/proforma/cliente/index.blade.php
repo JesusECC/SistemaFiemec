@@ -37,7 +37,7 @@
 					<td>{{$cli->nombres_Rs.' '.$cli->paterno.' '.$cli->materno }}</td>
 					<td>{{$cli->telefono.' / '.$cli->celular}}</td>
 					<td>{{$cli->correo}}</td>
-					<td>{{$cli->direcion}}</td>
+					<td>{{$cli->Direccion}}</td>
 
 					<td>
 					<a href="{{URL::action('ControllerClientes@show',$cli->idCliente)}}"><button class="btn btn-info">ver</button>

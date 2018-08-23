@@ -28,10 +28,12 @@
                 <option value=""></option>
 		       @foreach($clientes as $cliente)
                
-		       <option value="{{$cliente->idCliente}}">{{$cliente->nombre}}</option>
+		       <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
 		       @endforeach	
            </select>
         </div>
+
+        
               <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
                 <div class="from-group">
                     <label for="direccion">Direccion</label>
@@ -52,11 +54,11 @@
               <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                   <div class="form-group">
                 	<label>Producto</label>
-                	<select name="pid" class="form-control selectpicker" id="pid" data-live-search="true">
+                	<select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                         <option value=""></option>
                 		@foreach($productos as $pro)
                         
-                        <option value="{{$pro->id}}_{{$pro->precio_unitario}}">{{$pro->codigo_producto.' '.$pro->nombre_producto}}</option>
+                        <option value="{{$pro->idProducto}}_{{$pro->precio_unitario}}">{{$pro->codigo_producto.' '.$pro->nombre_producto}}</option>
                         @endforeach
                 	</select>
                   </div>
@@ -131,12 +133,12 @@
 <div class="container-fluid" id="guardar">
     <div class="row">
         <div class="form" class="col-lg-6">
-            <!--<div class="col-lg-6">
+            <div class="col-lg-6">
               <input name"_token" value="{{ csrf_token() }}" type="hidden">
               <label for="cantidad">Observaciones</label>
               <textarea name="pcantidad" id="pcantidad" class="form-control">
                 </textarea>           
-            </div>-->
+            </div>
               @csrf
             <div class="col-lg-8">
                 <div class="col-lg-3"  style="padding: 10px">
@@ -167,28 +169,28 @@ var cont=0;
 total=0;
 subtotal=[];
 $("#guardar").hide();
-$("#pid").change(mostrarValores);
-//$("#idCliente").change(mostrarValor);
+$("#pidProducto").change(mostrarValores);
+$("#idCliente").change(mostrarValor);
 
 
 function mostrarValores()
 {
-    datosProducto=document.getElementById('pid').value.split('_');
+    datosProducto=document.getElementById('pidProducto').value.split('_');
     $("#pprecio_unitario").val(datosProducto[1]);
 }
-
-/*{
+function mostrarValor()
+{
     datos=document.getElementById('idCliente').value.split('_');
     $("#pnro_documento").val(datos[2]);
     $("#pdireccion").val(datos[1]);
 }
-*/
+
 function agregar()
 {
-    datosProducto=document.getElementById('pid').value.split('_');
+    datosProducto=document.getElementById('pidProducto').value.split('_');
 
     idProducto=datosProducto[0];
-    producto=$("#pid option:selected").text();
+    producto=$("#pidProducto option:selected").text();
     cantidad=$("#pcantidad").val();
 
     descuento=$("#pdescuento").val();
@@ -206,7 +208,7 @@ function agregar()
        subtotal[cont]=((precio_venta-descuento)*cantidad);
        total=total+subtotal[cont];
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]" value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]" value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]" value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]" disabled value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"  disabled value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]" disabled value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $("#total").html("s/. " + total);

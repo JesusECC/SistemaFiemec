@@ -54,7 +54,7 @@
 					
 					
 					<td>
-					<a href="{{URL::action('ControllerCatalogo@show',$pro->id)}}"><button class="btn btn-input">ver</button>
+					<a href="{{URL::action('ControllerCatalogo@show',$pro->idProducto)}}"><button class="btn btn-input">ver</button>
 					</a>
 					</td>
 
