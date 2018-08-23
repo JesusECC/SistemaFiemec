@@ -66,7 +66,7 @@
 
                             <h4 type="number" id="total">IGV:{{round($proforma->precio_total/(1+$proforma->igv/100)*($proforma->igv/100),2)}}
 
-                            <h4 id="total">Precio total:    {{round(($proforma->precio_total/(1+$proforma->igv/100)*($proforma->igv/100) + $proforma->precio_total),2)}}</th><br>
+                            <h4 id="total">Precio total:{{round(($proforma->precio_total/(1+$proforma->igv/100)*($proforma->igv/100) + $proforma->precio_total),2)}}</th><br>
 
 
             		</tfoot>

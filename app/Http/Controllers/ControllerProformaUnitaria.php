@@ -65,9 +65,14 @@ public function store(Request $request)
 
    // dd($request);
    /* try {*/
+
+    $splitid = explode('_', $request->get('idCliente'), 2);
+    $idclien= $splitid[0];
+
         DB::beginTransaction();
+       
         $Proforma=new Proforma;
-        $Proforma->idCliente=$request->get('idCliente');
+        $Proforma->idCliente=$idclien;
         $Proforma->serie_proforma='365122018';
         $mytime = Carbon::now('America/Lima');
         $Proforma->fecha_hora=$mytime->toDateTimeString();
@@ -100,7 +105,8 @@ public function store(Request $request)
             $detalle->descuento=$descuento[$cont];
             $detalle->precio_venta=$precio_venta[$cont];
             $detalle->save();
-            $cont=$cont+1;            
+            $cont=$cont+1; 
+            //dd($Proforma,$detalle);           
         }
 
 
