@@ -72,10 +72,16 @@ public function store(Request $request)
         $mytime = Carbon::now('America/Lima');
         $Proforma->fecha_hora=$mytime->toDateTimeString();
         $Proforma->igv='18';
-        $Proforma->descripcion=$request->get('descripcion');
+        $Proforma->subtotal=$request->get('subtotal');
         $Proforma->precio_total=$request->get('precio_total');
+        $Proforma->forma_de=$request->get('forma_de');
+        $Proforma->observacion_condicion=$request->get('observacion_condicion');
+        $Proforma->plazo_oferta=$request->get('plazo_oferta');
+        $Proforma->garantia=$request->get('garantia');
+        $Proforma->tipo_proforma='unitaria';
+        
         $Proforma->save();
-
+        
         $idProducto=$request->get('idProducto');
         $cantidad=$request->get('cantidad');
         $descuento=$request->get('descuento');
@@ -115,13 +121,13 @@ public function store(Request $request)
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
     ->join('Empleado as e','p.idEmpleado','=','e.idEmpleado')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','e.nombres','e.materno','e.paterno','p.serie_comprobante','p.igv','p.precio_total')
-    ->where('p.idventa','=',$id)
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.num_proforma')
+    ->where('p.idProforma','=',$id)
     ->first();
 
     $detalles=DB::table('Detalle_proforma as dpr')
-    ->join('producto as pro','dpr.idProducto','=','pro.id')
-    ->select('p.nombre as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.observacion_detalleP')
+    ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
+    ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.observacion_detalleP')
     ->where('dpr.idProforma','=',$id)
     ->get();
 return view("proforma.proforma.show",["proforma"=>$proforma,"detalles"=>$detalles]);

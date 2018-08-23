@@ -111,7 +111,7 @@
             			<th>cantidad</th>
                         <th>precio venta</th>
             			<th>Descuento</th>
-            			<th>subtotal</th>
+            			<th>total</th>
             		</thead>
             		<tfoot>
             			<th>total</th>
@@ -130,27 +130,50 @@
       </div>
 </div>
 </div>
+
+
+
+<!--JOSE ARREGLA ESTA PARTE ESTA FEOOO XD-->
+
+
+
 <div class="container-fluid" id="guardar">
     <div class="row">
-        <div class="form" class="col-lg-6">
-            <div class="col-lg-6">
+
+       <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
+                <div class="from-group">
+              <label for="forma_de">forma De:</label>
+              <input type="text"  name="forma_de" id="forma_de" class="form-control">
+               </div>
+        <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
+                <div class="from-group">
+              <label for="plazo_oferta">Plazo de oferta</label>
+              <input type="date"  name="cantidad" id="pcantidad" class="form-control">         
+               </div>
+
+          <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
+                <div class="from-group">
+              <label for="garantia">Garantia</label>
+              <input type="text"  name="garantia" id="garantia" class="form-control">
+                </div>
+        <div class="col-lg-8">
               <input name"_token" value="{{ csrf_token() }}" type="hidden">
-              <label for="cantidad">Observaciones</label>
-              <textarea name="pcantidad" id="pcantidad" class="form-control">
+              <label for="observacion_condicion">Observaciones</label>
+              <textarea name="observacion_condicion" id="observacion_condicion" class="form-control">
                 </textarea>           
-            </div>
+         </div>
+
               @csrf
             <div class="col-lg-8">
-                <div class="col-lg-3"  style="padding: 10px">
+                <div class="col-lg-5"  style="padding: 10px">
                     <button class="btn btn-primary" type="submit">guardar</button>
 
                     <button class="btn btn-danger" type="reset">cancelar</button>
                 </div>         
              </div>           
           </div>
-       </div>
     </div>
-    
+</div>
 </div>
 {!!Form::close()!!}
 </div>

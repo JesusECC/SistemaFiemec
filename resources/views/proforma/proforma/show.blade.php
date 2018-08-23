@@ -2,33 +2,42 @@
 @section ('contenido')
 
 <div class="row">
-	<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
         <div class="form-group">
 	        <label for="cliente">Cliente</label>
-	        <p>{{$venta->nombre}}</p>
-  </div>
-</div>
-<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-	<div class="from-group">
-	    <label>Tipo Comprobante</label>
-	    <p>{{$venta->tipo_comprobante}}</p>
-	</div>
-</div>
-
-<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-	<div class="form-group">
-		<label for="serie_comprobante">Serie Comprobante</label>
-		<p>{{$venta->serie_comprobante}}</p>		
-	</div>
-</div>
+	        <p>{{$proforma->nombre}}</p>
+       </div>
+    </div>
 
 
-<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-	<div class="form-group">
-		<label for="num_comprobante">Numero Comprobante</label>
-		<p>{{$venta->num_comprobante}}</p>	
-     </div>	
-   </div>
+    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+	    <div class="form-group">
+		<label for="serie_proforma">Serie Proforma</label>
+		<p>{{$proforma->serie_proforma}}</p>		
+	    </div>
+    </div>
+
+
+    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+	     <div class="form-group">
+		<label for="num_proforma">Numero Proforma</label>
+		<p>f000-{{$proforma->idProforma}}</p>	
+         </div>	
+    </div>
+
+    <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
+        <div class="form-group">
+        <label for="direccion">Direccion</label>
+        <p>{{$proforma->direccion}}</p>   
+         </div> 
+    </div>
+    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+        <div class="form-group">
+        <label for="fecha_hora">Fecha</label>
+        <p>{{$proforma->fecha_hora}}</p>   
+         </div> 
+    </div>
+
 </div>
 <div class="row">
     	<div class="panel panel-primary">
@@ -43,7 +52,7 @@
             			<th>cantidad</th>
             			<th>precio venta</th>
             			<th>descuento</th>
-            			<th>subtotal</th>
+            			<th>total</th>
             		</thead>
             		<tfoot>
             			
@@ -51,7 +60,7 @@
             			<th></th>
             			<th></th>
             			<th></th>
-            			<th><h4 id="total">{{$venta->total_venta}}</h4></th>
+            			<th><h4 id="total">{{$proforma->precio_total}}</h4></th>
 
             		</tfoot>
             		<tbody>
@@ -59,9 +68,9 @@
                         <tr>
                             <td>{{$det->producto}}</td>
                             <td>{{$det->cantidad}}</td>
-                            <td>{{$det->precio_venta}}</td>
-                            <td>{{$det->descuento}}</td>
-                            <td>{{$det->cantidad*$det->precio_venta-$det->descuento}}</td>
+                            <td>S/.{{$det->precio_venta}}</td>
+                            <td>{{$det->descuento}} x c/u</td>
+                            <td>{{$det->cantidad*$det->precio_venta}}</td>
                         </tr>
 
                         @endforeach
@@ -71,7 +80,7 @@
 
             		
             	</table>
-                <font SIZE=4 COLOR="white">---------------------------------------------------------------------------------------------------------------------------------------------------*---------</font><a href="{{url('ventas/venta')}}"><button class="btn btn-success"><font FACE="Arial" SIZE=3 COLOR="white">volver</font></button></a></h3>
+                
             </div>
       </div>
 </div>
