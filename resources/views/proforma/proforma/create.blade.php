@@ -18,20 +18,20 @@
     {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
 
     {{Form::token()}}
+<div>
+	<div>
+        <div class="form-group">
+            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                <label>Cliente</label>
+                <select required name="idCliente" class="form-control selectpicker" id="idCliente" data-live-search="true">
 
-
-<div class="row">
-	<div class="form-group" >
-        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" style="margin-top: 20px;">
-            <label>Cliente</label>
-	        <select required name="idCliente" class="form-control selectpicker" id="idCliente" data-live-search="true">
-
-                <option value=""></option>
-		       @foreach($clientes as $cliente)
-               
-		       <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
-		       @endforeach	
-           </select>
+                    <option value=""></option>
+                   @foreach($clientes as $cliente)
+                   
+                   <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                   @endforeach  
+               </select>
+            </div>
         </div>
 
         
@@ -127,58 +127,53 @@
             		   <tbody>
             	    </tbody>            		
             	</table>
+                <div class="container-fluid" id="guardar">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-lg-4">
+                                <label for="forma_de">
+                                    Forma de Pago:
+                                </label>
+                                <input type="text" name="forma_de" id="forma_de" class="form-control">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="plazo_oferta">
+                                    Plazo de oferta:
+                                </label>
+                                <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="garantia">
+                                    Plazo de Garantia
+                                </label>
+                                <input type="date" name="garantia" id="garantia" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="form-group">
+                            <div class="col-lg-6">
+                              <input name"_token" value="{{ csrf_token() }}" type="hidden">
+                              <label for="observacion_condicion">Observaciones</label>
+                              <textarea name="observacion_condicion" id="observacion_condicion" class="form-control">
+                                </textarea>                                 
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="col-lg-5"  style="padding: 10px">
+                                    <button class="btn btn-primary" type="submit">guardar</button>
+
+                                    <button class="btn btn-danger" type="reset">cancelar</button>
+                                </div>         
+                             </div>                             
+                        </div>
+                    </div>
+                </div>
             </div>
       </div>
 </div>
 </div>
-
-
-
-<!--JOSE ARREGLA ESTA PARTE ESTA FEOOO XD-->
-
-
-
-<div class="container-fluid" id="guardar">
-    <div class="row">
-
-       <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
-                <div class="from-group">
-              <label for="forma_de">forma De:</label>
-              <input type="text"  name="forma_de" id="forma_de" class="form-control">
-               </div>
-        <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
-                <div class="from-group">
-              <label for="plazo_oferta">Plazo de oferta</label>
-              <input type="date"  name="cantidad" id="pcantidad" class="form-control">         
-               </div>
-
-          <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
-                <div class="from-group">
-              <label for="garantia">Garantia</label>
-              <input type="text"  name="garantia" id="garantia" class="form-control">
-                </div>
-        <div class="col-lg-8">
-              <input name"_token" value="{{ csrf_token() }}" type="hidden">
-              <label for="observacion_condicion">Observaciones</label>
-              <textarea name="observacion_condicion" id="observacion_condicion" class="form-control">
-                </textarea>           
-         </div>
-
-              @csrf
-            <div class="col-lg-8">
-                <div class="col-lg-5"  style="padding: 10px">
-                    <button class="btn btn-primary" type="submit">guardar</button>
-
-                    <button class="btn btn-danger" type="reset">cancelar</button>
-                </div>         
-             </div>           
-          </div>
-    </div>
-</div>
 </div>
 {!!Form::close()!!}
-</div>
-
 
 
 @push('scripts')
