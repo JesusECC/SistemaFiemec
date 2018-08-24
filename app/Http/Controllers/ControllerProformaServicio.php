@@ -3,7 +3,17 @@
 namespace SistemaFiemec\Http\Controllers;
 
 use Illuminate\Http\Request;
+use SistemaFiemec\Http\Requests;
+use SistemaFiemec\Proforma;
+use SistemaFiemec\DetalleProforma;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use SistemaFiemec\Http\Requests\RequestFormProforma;
 
+use Carbon\Carbon;
+use Response;
+use Illuminate\Support\Collection;
+use DB;
 class ControllerProformaServicio extends Controller
 {
    public function __construct()
@@ -117,3 +127,7 @@ return view("proforma.servicio.show",["servicio"=>$servicio,"detalles"=>$detalle
    }
 
 }
+
+
+
+

@@ -158,15 +158,10 @@ var cont=0;
 total=0;
 subtotal=[];
 $("#guardar").hide();
-$("#pidProducto").change(mostrarValores);
 $("#idCliente").change(mostrarValor);
 
 
-function mostrarValores()
-{
-    datosProducto=document.getElementById('pidProducto').value.split('_');
-    $("#pprecio_unitario").val(datosProducto[1]);
-}
+
 function mostrarValor()
 {
     datos=document.getElementById('idCliente').value.split('_');
@@ -176,15 +171,8 @@ function mostrarValor()
 
 function agregar()
 {
-    datosProducto=document.getElementById('pidProducto').value.split('_');
-
-    idProducto=datosProducto[0];
-    producto=$("#pidProducto option:selected").text();
+    
     cantidad=$("#pcantidad").val();
-
-    descuento=$("#pdescuento").val();
-    precio_venta=$("#pprecio_unitario").val();
-    stock=$("#pstock").val();
 
     alert(datosProducto);
 
