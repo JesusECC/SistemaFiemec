@@ -73,7 +73,7 @@ public function store(Request $request)
        
         $Proforma=new Proforma;
         $Proforma->idCliente=$idclien;
-        $Proforma->serie_proforma='365122018';
+        $Proforma->serie_proforma='PU365122018';
         $mytime = Carbon::now('America/Lima');
         $Proforma->fecha_hora=$mytime->toDateTimeString();
         $Proforma->igv='18';
