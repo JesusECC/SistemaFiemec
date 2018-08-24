@@ -63,7 +63,7 @@
 
              <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                 <div class="from-group">
-                    <label for="precio_unitario">Precio unitario</label>
+                    <label for="precio_unitario">Precio </label>
                     <input type="number" name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
                     
 
