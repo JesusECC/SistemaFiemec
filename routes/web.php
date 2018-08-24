@@ -31,11 +31,8 @@ Route::get('servicios/create',['as'=> 'servicio-create','uses' =>'ControllerProf
 
 //tableros
 Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
-
 Route::get('tableros/create',['as' => 'tablero-create','uses'=>'ControllerProformaTableros@create']);
-
 Route::post('tableros',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
-
 Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'ControllerProformaTableros@buscarProducto']);
 
 
