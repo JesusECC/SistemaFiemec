@@ -24,4 +24,30 @@ Route::resource('proforma/empresa','ControllerEmpresa');
 Route::resource('proforma/proforma','ControllerProformaUnitaria');
 Route::resource('proforma/servicio','ControllerProformaServicio');
 
+<<<<<<< HEAD
 //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
+=======
+//Servicios
+Route::get('servicios',['as'=> 'servicio','uses' =>'ControllerProformaServicio@index']);
+
+Route::get('servicios/create',['as'=> 'servicio-create','uses' =>'ControllerProformaServicio@create']);
+
+
+Route::get('servicios/show',['as'=> 'servicio-show','uses' =>'ControllerProformaServicio@show']);
+
+//tableros
+Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
+Route::get('tableros/create',['as' => 'tablero-create','uses'=>'ControllerProformaTableros@create']);
+Route::post('tableros',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
+Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'ControllerProformaTableros@buscarProducto']);
+
+
+
+
+
+
+
+
+
+Route::post('proforma/proforma','ControllerProformaUnitaria@store');
+>>>>>>> a3748d16a8b4d8e034752a3b5f1d91d8d555993f

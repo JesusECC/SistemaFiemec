@@ -5,7 +5,7 @@
 	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
         <div class="form-group">
 	        <label for="cliente">Cliente</label>
-	        <p>{{$proforma->nombre}}</p>
+	        <p>{{$servicio->nombre}}</p>
        </div>
     </div>
 
@@ -13,7 +13,7 @@
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
 	    <div class="form-group">
 		<label for="serie_proforma">Serie Proforma</label>
-		<p>{{$proforma->serie_proforma}}</p>		
+		<p>{{$servicio->serie_proforma}}</p>		
 	    </div>
     </div>
 
@@ -21,20 +21,20 @@
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
 	     <div class="form-group">
 		<label for="num_proforma">Numero Proforma</label>
-		<p>f000-{{$proforma->idProforma}}</p>	
+		<p>f000-{{$servicio->idProforma}}</p>	
          </div>	
     </div>
 
     <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
         <div class="form-group">
         <label for="direccion">Direccion</label>
-        <p>{{$proforma->direccion}}</p>   
+        <p>{{$servicio->direccion}}</p>   
          </div> 
     </div>
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
         <div class="form-group">
         <label for="fecha_hora">Fecha</label>
-        <p>{{$proforma->fecha_hora}}</p>   
+        <p>{{$servicio->fecha_hora}}</p>   
          </div> 
     </div>
 
@@ -62,11 +62,11 @@
             			<th></th>
             			<th></th>
             			<th>
-                        <!-- <h4 id="total">Subtotal: {{$proforma->precio_total/(1+$proforma->igv/100)}}</h4>-->
+                        <!-- <h4 id="total">Subtotal: {{$servicio->precio_total/(1+$servicio->igv/100)}}</h4>-->
 
-                            <h4 type="number" id="total">IGV:{{round($proforma->precio_total/(1+$proforma->igv/100)*($proforma->igv/100),2)}}
+                            <h4 type="number" id="total">IGV:{{round($servicio->precio_total/(1+$servicio->igv/100)*($servicio->igv/100),2)}}
 
-                            <h4 id="total">Precio total:{{round(($proforma->precio_total/(1+$proforma->igv/100)*($proforma->igv/100) + $proforma->precio_total),2)}}</th><br>
+                            <h4 id="total">Precio total:{{round(($servicio->precio_total/(1+$servicio->igv/100)*($servicio->igv/100) + $servicio->precio_total),2)}}</th><br>
 
 
             		</tfoot>

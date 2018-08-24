@@ -2,8 +2,9 @@
 @section ('contenido')
 
 <div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Lista de Proformas    <a href="proforma/create"><button class="btn btn-success">Nuevo</button></a></h3>
-	@include('proforma.proforma.search')
+	<h3> Lista de Proformas    <a href="{{ route('proforma/create')}}"><button class="btn btn-success">Nuevo</button></a></h3>
+
+	@include('proforma.servicio.search')
 </div>
 <div class='row'>
 	<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
@@ -20,19 +21,19 @@
 					<th>opciones</th>
 				</thead>
 
-				@foreach ($proformas as $prof)
+				@foreach ($servicios as $ser)
 				
 
 				<tr>
 
-					<td>{{$prof->fecha_hora}}</td>
-					<td>{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}</td>
-					<td>{{$prof->nombres_Rs}}</td>
-					<td>{{$prof->igv}}</td>
-					<td>{{$prof->precio_total}}</td>
+					<td>{{$ser->fecha_hora}}</td>
+					<td>{{$ser->serie_proforma.' /  f000-'.$ser->idProforma}}</td>
+					<td>{{$ser->nombres_Rs}}</td>
+					<td>{{$ser->igv}}</td>
+					<td>{{$ser->precio_total}}</td>
 					
 					<td>
-					<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">detalles</button>
+					<a href="{{URL::action('ControllerProformaServicio@show',$ser->idProforma)}}"><button class="btn btn-primary">detalles</button>
 					</a>
 					</td>
 				</tr>
@@ -40,7 +41,7 @@
             
 			</table>
 		</div>
-		{{$proformas->render()}}
+		{{$servicios->render()}}
 	</div>
 </div>
 
