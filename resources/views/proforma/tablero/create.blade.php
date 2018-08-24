@@ -74,33 +74,12 @@
         </div>
     </div>
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-            	<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
 
-            		<thead style="background-color:#A9D0F5">
-            			<th>Item</th>
-            			<th>Descripcion</th>
-            			<th>Uni.</th>
-                        <th>Cant.</th>
-            			<th>P. Unit.</th>
-            			<th>Importe</th>
-            		</thead>
-            		<tfoot>
-            			<th>total</th>
-            			<th></th>
-            			<th></th>
-            			<th></th>
-            			<th></th>
-            			<th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">
-                        </th>
-
-            		</tfoot>
-            		   <tbody>
-            	    </tbody>            		
-            	</table>  
 
         <div id="tablerosn" >
         </div>          
 
+    
     <!-- JOSE CORRIGE EL MARGIN DEL BOTON VOLVER CTMR!!!! -->
     <div style="margin-top: 20px" class="from-group ">
 
@@ -139,13 +118,33 @@ function agregarTablero(){
         cont++;
         if(bool!=true ){
             table+='<div class="panel panel-default">'+
-                    '<div class="panel-heading">'+
-                        '<h3 class="panel-title">'+nomTablero+'</h3>'+
-                    '</div>'+
-                    '<div class="panel-body">'+
-                        nomTablero+
-                    '</div>'+
-                '</div>';
+                        '<div class="panel-heading">'+
+                            '<h3 class="panel-title">'+nomTablero+'</h3>'+
+                        '</div>'+
+                        '<div class="panel-body">'+
+                            '<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">'+
+                                '<thead style="background-color:#A9D0F5">'+
+                                    '<th>Item</th>'+
+                                    '<th>Descripcion</th>'+
+                                    '<th>Uni.</th>'+
+                                    '<th>Cant.</th>'+
+                                    '<th>P. Unit.</th>'+
+                                    '<th>Importe</th>'+
+                                '</thead>'+
+                                '<tfoot>'+
+                                    '<th>total</th>'+
+                                    '<th></th>'+
+                                    '<th></th>'+
+                                    '<th></th>'+
+                                    '<th></th>'+
+                                    '<th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">'+
+                                    '</th>'+
+                                '</tfoot>'+
+                                '<tbody>'+
+                                '</tbody>'+            		
+                            '</table>'+
+                        '</div>'+
+                    '</div>';
         }else{
             console.log("anademe");
         }
@@ -160,7 +159,6 @@ function agregarTablero(){
     // }
 
 }
-
     
 </script>
 
