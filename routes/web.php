@@ -29,6 +29,9 @@ Route::get('servicios',['as'=> 'servicio','uses' =>'ControllerProformaServicio@i
 
 Route::get('servicios/create',['as'=> 'servicio-create','uses' =>'ControllerProformaServicio@create']);
 
+
+Route::get('servicios/show',['as'=> 'servicio-show','uses' =>'ControllerProformaServicio@show']);
+
 //tableros
 Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
 Route::get('tableros/create',['as' => 'tablero-create','uses'=>'ControllerProformaTableros@create']);
