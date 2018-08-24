@@ -49,22 +49,28 @@
             </div>
     </div>
 
-                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                <div class="from-group">
-                    <label for="precio_unitario">Precio unitario</label>
-                    <input type="number" disabled name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
-                    
+               
 
-                </div>
-            </div>
-
-            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+            <div class="col-lg-10 col-sm-10 col-md-10 col-xs-12">
                 <div class="from-group">
                     <label for="descripccion">Descripccion del Servicio</label>
                     <input type="number" name="descripccion" id="descripccion" class="form-control" placeholder="descripccion">
 
                 </div>
             </div>
+
+
+
+             <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                <div class="from-group">
+                    <label for="precio_unitario">Precio unitario</label>
+                    <input type="number" name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
+                    
+
+                </div>
+            </div>
+
+
             <div  class="container-fluid">
                 <div class="row">
                     <div class="col-lg-11">
