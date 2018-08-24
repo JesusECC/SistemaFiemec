@@ -28,7 +28,7 @@
                     <option value=""></option>
                    @foreach($clientes as $cli)
                    
-                   <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cli->nombre}}</option>
+                   <option value="{{$cli->idCliente}}_{{$cli->direccion}}_{{$cli->nro_documento}}">{{$cli->nombre}}</option>
                    @endforeach  
                </select>
             </div>
@@ -158,15 +158,9 @@ var cont=0;
 total=0;
 subtotal=[];
 $("#guardar").hide();
-$("#pidProducto").change(mostrarValores);
 $("#idCliente").change(mostrarValor);
 
 
-function mostrarValores()
-{
-    datosProducto=document.getElementById('pidProducto').value.split('_');
-    $("#pprecio_unitario").val(datosProducto[1]);
-}
 function mostrarValor()
 {
     datos=document.getElementById('idCliente').value.split('_');
@@ -176,28 +170,17 @@ function mostrarValor()
 
 function agregar()
 {
-    datosProducto=document.getElementById('pidProducto').value.split('_');
 
-    idProducto=datosProducto[0];
-    producto=$("#pidProducto option:selected").text();
-    cantidad=$("#pcantidad").val();
 
-    descuento=$("#pdescuento").val();
-    precio_venta=$("#pprecio_unitario").val();
-    stock=$("#pstock").val();
-
-    alert(datosProducto);
-
-    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="")
+    if(precio_venta!="")
     {
 
-        if(cantidad>0)
+        if(precio_venta>0)
         {
 
-       subtotal[cont]=((precio_venta-descuento)*cantidad);
-       total=total+subtotal[cont];
+    
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]" disabled value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"  disabled value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]" disabled value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="number"  name="descripcion[]"  disabled value="'+descripcion+'"></td> <td><input type="number"  name="precio_venta[]"  disabled value="'+precio_venta+'"></td></tr>';
        cont++;
        limpiar();
        $("#total").html("s/. " + total);
@@ -220,8 +203,8 @@ function agregar()
 
     total=0;
     function limpiar(){
-        $("#pcantidad").val("");
-        $("#pdescuento").val("");
+        
+        $("#pdescripcion").val("");
         $("#pprecio_venta").val("");
     }
 
