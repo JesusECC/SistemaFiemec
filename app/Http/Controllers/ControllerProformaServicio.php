@@ -13,10 +13,7 @@ use SistemaFiemec\Http\Requests\RequestFormProforma;
 use Carbon\Carbon;
 use Response;
 use Illuminate\Support\Collection;
-
-
 use DB;
-
 class ControllerProformaServicio extends Controller
 {
    public function __construct()
@@ -33,9 +30,7 @@ class ControllerProformaServicio extends Controller
     ->join('Empleado as e','p.idEmpleado','=','e.idEmpleado')
     ->join('Detalle_proforma as dp','p.idProforma','=','dp.idProforma')
     ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','e.nombres','e.materno','e.paterno','p.serie_proforma','p.igv','p.precio_total','dp.descuento','dp.cantidad')
-
     ->where('p.idProforma','LIKE','%'.$query.'%')
-    ->where('p.tipo_proforma','=','servicio')
     ->orderBy('p.idProforma','desc')
      
     	->paginate(7);           
@@ -51,7 +46,7 @@ public function create()
 ->where('tipo_persona','=','Cliente persona')
 ->orwhere('tipo_persona','=','Cliente Empresa')
  ->get();
- //dd($clientes);
+ 
  return view("proforma.servicio.create",["clientes"=>$clientes]);
 }
 
@@ -132,3 +127,7 @@ return view("proforma.servicio.show",["servicio"=>$servicio,"detalles"=>$detalle
    }
 
 }
+
+
+
+

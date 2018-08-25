@@ -28,7 +28,7 @@
                     <option value=""></option>
                    @foreach($clientes as $cli)
                    
-                   <option value="{{$cli->idCliente}}_{{$cli->direccion}}_{{$cli->nro_documento}}">{{$cli->nombre}}</option>
+                   <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cli->nombre}}</option>
                    @endforeach  
                </select>
             </div>
@@ -49,28 +49,22 @@
             </div>
     </div>
 
-               
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                <div class="from-group">
+                    <label for="precio_unitario">Precio unitario</label>
+                    <input type="number" disabled name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
+                    
 
-            <div class="col-lg-10 col-sm-10 col-md-10 col-xs-12">
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                 <div class="from-group">
                     <label for="descripccion">Descripccion del Servicio</label>
                     <input type="number" name="descripccion" id="descripccion" class="form-control" placeholder="descripccion">
 
                 </div>
             </div>
-
-
-
-             <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                <div class="from-group">
-                    <label for="precio_unitario">Precio </label>
-                    <input type="number" name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
-                    
-
-                </div>
-            </div>
-
-
             <div  class="container-fluid">
                 <div class="row">
                     <div class="col-lg-11">
@@ -167,6 +161,7 @@ $("#guardar").hide();
 $("#idCliente").change(mostrarValor);
 
 
+
 function mostrarValor()
 {
     datos=document.getElementById('idCliente').value.split('_');
@@ -176,17 +171,21 @@ function mostrarValor()
 
 function agregar()
 {
+    
+    cantidad=$("#pcantidad").val();
 
+    alert(datosProducto);
 
-    if(precio_venta!="")
+    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="")
     {
 
-        if(precio_venta>0)
+        if(cantidad>0)
         {
 
-    
+       subtotal[cont]=((precio_venta-descuento)*cantidad);
+       total=total+subtotal[cont];
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="number"  name="descripcion[]"  disabled value="'+descripcion+'"></td> <td><input type="number"  name="precio_venta[]"  disabled value="'+precio_venta+'"></td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]" disabled value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"  disabled value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]" disabled value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $("#total").html("s/. " + total);
@@ -209,8 +208,8 @@ function agregar()
 
     total=0;
     function limpiar(){
-        
-        $("#pdescripcion").val("");
+        $("#pcantidad").val("");
+        $("#pdescuento").val("");
         $("#pprecio_venta").val("");
     }
 
