@@ -24,6 +24,9 @@ Route::resource('proforma/empresa','ControllerEmpresa');
 Route::resource('proforma/proforma','ControllerProformaUnitaria');
 Route::resource('proforma/servicio','ControllerProformaServicio');
 
+<<<<<<< HEAD
+//Route::post('proforma/proforma','ControllerProformaUnitaria@store');
+=======
 //Servicios
 //Route::get('servicios',['as'=> 'servicio','uses' =>'ControllerProformaServicio@index']);
 
@@ -47,3 +50,4 @@ Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'Controll
 
 
 Route::post('proforma/proforma','ControllerProformaUnitaria@store');
+>>>>>>> a3748d16a8b4d8e034752a3b5f1d91d8d555993f

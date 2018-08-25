@@ -241,3 +241,25 @@ return view("proforma.proforma.show",["proforma"=>$proforma,"detalles"=>$detalle
 
     
 }
+-*******************************************************************************************************************************************
+fila=
+    '<tr class="selected" id="fila'+cont+'">
+        <td>
+            <button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button>
+        </td> 
+        <td>
+            <input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'
+        </td>
+        <td>
+            <input type="number"  name="cantidad[]" disabled value="'+cantidad+'">
+        </td> 
+        <td>
+            <input type="number"  name="precio_venta[]"  disabled value="'+precio_venta+'">
+        </td> 
+        <td>
+            <input type="number"  name="descuento[]" disabled value="'+descuento+'">
+        </td> 
+        <td>'+subtotal[cont]+'
+        </td>
+    </tr>';
+     
