@@ -116,9 +116,6 @@ $(document).ready(function(){
     $('#bt_add_produc').click(function(){
         agregarProductosTablero();
     });
-    $('#bt_add_produc').click(function(){
-        agregarProductosTablero();
-    });
 });
 var tablero=[];
 var filaob=[];
@@ -128,7 +125,7 @@ var table;
 var subtotal=0;
 //var nomTablero;
 $("#pidProducto").change(MostarProducto);
-$("#bt_add_tablero").change($("#total_"+nomTablero).html("s/. " + subtotal));
+//$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
 
 function MostarProducto(){
     Producto=document.getElementById('pidProducto').value.split('_');
@@ -168,6 +165,7 @@ function agregarProductosTablero(){
                         $('#detalle_'+nomTablero).append(filas);
                         // $("#total_"+nomTablero).html("s/. " + subtotal);
         }
+        console.log(filas);
         var dat={nombre:nomTablero,fila:filas,subtota:pcant*puni};
         filaob.push(dat);
 
@@ -207,7 +205,7 @@ function agregarTablero(){
                             '</table>'+
                         '</div>'+
                     '</div>'+
-                    '<table id="detalle_'+nomTablero+'" class="table table-striped table-bordered table-condensed table-hover">'+
+                    '<table class="table table-striped table-bordered table-condensed table-hover">'+
                         '</tbody>'+ 
                             '<tfoot>'+
                                 '<th colspan="3" >Total</th>'+
@@ -221,7 +219,7 @@ function agregarTablero(){
     $('#tablerosn').html(table);
     if(tablero.length>0){
         for (var i = 0; i < tablero.length; i++) {
-            for (const key in filaob) {
+            for (var key in filaob) {
                 if (filaob.hasOwnProperty(key)) {
                     if(tablero[i]==filaob[key]['nombre'])
                     $('#detalle_'+tablero[i]).append(filaob[key]['fila']);
