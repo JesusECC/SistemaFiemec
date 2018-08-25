@@ -45,6 +45,9 @@ class ControllerProformaServicio extends Controller
 
 public function create()
 {
+ $productos=DB::table('Producto')
+ ->where('estado','=','activo')
+ ->get();
 
  $clientes=DB::table('Cliente_Proveedor as cp')
  ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion," ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
@@ -52,13 +55,13 @@ public function create()
 ->orwhere('tipo_persona','=','Cliente Empresa')
  ->get();
  //dd($clientes);
- return view("proforma.servicio.create",["clientes"=>$clientes]);
+ return view("proforma.servicio.create",["productos"=>$productos,"clientes"=>$clientes]);
 }
 
 public function store(Request $request)
 {
 
-   // dd($request);
+    //dd($request);
    /* try {*/
 
     $splitid = explode('_', $request->get('idCliente'), 2);
@@ -73,6 +76,7 @@ public function store(Request $request)
         $Servicios->fecha_hora=$mytime->toDateTimeString();
         $Servicios->igv='18';
         $Servicios->subtotal=$request->get('subtotal');
+        $Servicios->descripcion_proforma=$request->get('descripcion_proforma');
         $Servicios->precio_total=$request->get('precio_total');
         $Servicios->forma_de=$request->get('forma_de');
         $Servicios->observacion_condicion=$request->get('observacion_condicion');
@@ -80,10 +84,10 @@ public function store(Request $request)
         $Servicios->plazo_fabricaion=$request->get('plazo_fabricacion');
         $Servicios->tipo_proforma='servicio';
         
-        $Servicios->save();
+       //$Servicios->save();
         
        
-        $descripcion=$request->get('descripcion');
+        
         $precio_venta=$request->get('precio_venta');
 
         $cont=0;
@@ -94,11 +98,11 @@ public function store(Request $request)
         {
             $detalle = new DetalleProforma();
             $detalle->idProforma=$Proforma->idProforma;
-            $detalle->descripcion=$descripcion[$cont];
+            
             $detalle->precio_venta=$precio_venta[$cont];
-            $detalle->save();
+           // $detalle->save();
             $cont=$cont+1; 
-            //dd($Proforma,$detalle);           
+            dd($Proforma,$detalle);           
         }
 
 

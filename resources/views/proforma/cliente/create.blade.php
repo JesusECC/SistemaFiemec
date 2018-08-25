@@ -21,7 +21,10 @@
 
 
 
-
+<div class="form-group">
+	<label for="num_proforma">Numero de Documento</label>
+	<input type="text" name="num_proforma" class="form-control" placeholder="Numero DNI...">	
+</div>
 <div class="form-group">
 	<label for="nombres_RS">Nombres</label>
 	<input type="text" name="nombres_RS" class="form-control" placeholder="nombre...">	

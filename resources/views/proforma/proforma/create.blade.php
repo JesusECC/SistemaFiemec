@@ -1,15 +1,15 @@
 @extends ('layouts.admin')
 @section ('contenido')
 <div class="row">
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	<h3>Nueva Proforma</h3>
-	@if (count($errors)>0)
-	<div class="alert-alert-danger">
-		<ul>
-			@foreach ($errors->all() as $error)
-			    <li>{{$error}}</li>
-			@endforeach 
-		</ul>	
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <h3>Nueva Proforma</h3>
+    @if (count($errors)>0)
+    <div class="alert-alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach 
+        </ul>   
     </div>
     @endif
     </div>
@@ -19,7 +19,7 @@
 
     {{Form::token()}}
 <div>
-	<div>
+    <div>
         <div class="form-group">
             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                 <label>Cliente</label>
@@ -33,8 +33,6 @@
                </select>
             </div>
         </div>
-
-        
               <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
                 <div class="from-group">
                     <label for="direccion">Direccion</label>
@@ -50,26 +48,26 @@
         
     </div>
     <div class="row">
-    	<div class="panel panel-primary">
-    	   <div class="panel-body">
+        <div class="panel panel-primary">
+           <div class="panel-body">
               <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                   <div class="form-group">
-                	<label>Producto</label>
-                	<select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                    <label>Producto</label>
+                    <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                         <option value=""></option>
-                		@foreach($productos as $pro)
+                        @foreach($productos as $pro)
                         
                         <option value="{{$pro->idProducto}}_{{$pro->precio_unitario}}">{{$pro->codigo_producto.' '.$pro->nombre_producto}}</option>
                         @endforeach
-                	</select>
+                    </select>
                   </div>
-    		   </div>
+               </div>
 
 
                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                 <div class="from-group">
-                    <label for="pcantidad">Cantidad</label>
-                    <input type="number"  name="cantidad" id="pcantidad" class="form-control" placeholder="cantidad">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number"  name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad">
                     
 
                 </div>
@@ -104,29 +102,29 @@
             </div>
 
             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-            	<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
+                <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
 
-            		<thead style="background-color:#A9D0F5">
-            			<th>opciones</th>
-            			<th>Producto</th>
-            			<th>cantidad</th>
+                    <thead style="background-color:#A9D0F5">
+                        <th>opciones</th>
+                        <th>Producto</th>
+                        <th>cantidad</th>
                         <th>precio venta</th>
-            			<th>Descuento</th>
-            			<th>total</th>
-            		</thead>
-            		<tfoot>
-            			<th>total</th>
-            			<th></th>
-            			<th></th>
-            			<th></th>
-            			<th></th>
-            			<th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">
+                        <th>Descuento</th>
+                        <th>total</th>
+                    </thead>
+                    <tfoot>
+                        <th>total</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">
                         </th>
 
-            		</tfoot>
-            		   <tbody>
-            	    </tbody>            		
-            	</table>
+                    </tfoot>
+                       <tbody>
+                    </tbody>                    
+                </table>
                 <div class="container-fluid" id="guardar">
                     <div class="row">
                         <div class="form-group">

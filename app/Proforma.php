@@ -20,7 +20,7 @@ class Proforma extends Model
     	'igv',
     	'subtotal',
     	'precio_total',
-    	'descripcion',
+    	'descripcion_proforma',
         'tipo_proforma',
         'caracterisiticas_proforma',
         'forma_de',

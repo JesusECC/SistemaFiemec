@@ -85,7 +85,7 @@ public function store(Request $request)
         $Proforma->garantia=$request->get('garantia');
         $Proforma->tipo_proforma='unitaria';
         
-        $Proforma->save();
+       // $Proforma->save();
         
         $idProducto=$request->get('idProducto');
         $cantidad=$request->get('cantidad');
@@ -104,9 +104,9 @@ public function store(Request $request)
             $detalle->cantidad=$cantidad[$cont];
             $detalle->descuento=$descuento[$cont];
             $detalle->precio_venta=$precio_venta[$cont];
-            $detalle->save();
+            //$detalle->save();
             $cont=$cont+1; 
-            //dd($Proforma,$detalle);           
+            dd($Proforma,$detalle);           
         }
 
 

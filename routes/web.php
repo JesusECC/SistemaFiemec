@@ -25,12 +25,12 @@ Route::resource('proforma/proforma','ControllerProformaUnitaria');
 Route::resource('proforma/servicio','ControllerProformaServicio');
 
 //Servicios
-Route::get('servicios',['as'=> 'servicio','uses' =>'ControllerProformaServicio@index']);
+//Route::get('servicios',['as'=> 'servicio','uses' =>'ControllerProformaServicio@index']);
 
-Route::get('servicios/create',['as'=> 'servicio-create','uses' =>'ControllerProformaServicio@create']);
+Route::get('servicio/create',['as'=> 'servicio-create','uses' =>'ControllerProformaServicio@create']);
 
 
-Route::get('servicios/show',['as'=> 'servicio-show','uses' =>'ControllerProformaServicio@show']);
+//Route::get('servicios/show',['as'=> 'servicio-show','uses' =>'ControllerProformaServicio@show']);
 
 //tableros
 Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
