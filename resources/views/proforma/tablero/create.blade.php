@@ -230,6 +230,10 @@ function agregarTablero(){
     nomtablero="";
 }
 
+function elimiar(){
+    
+}
+
 
 
 </script>
