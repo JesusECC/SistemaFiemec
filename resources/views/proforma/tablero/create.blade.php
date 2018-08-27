@@ -96,7 +96,6 @@
                 </table>
             </table>
         </div>
-    <!-- JOSE CORRIGE EL MARGIN DEL BOTON VOLVER CTMR!!!! -->
     <div style="margin-top: 20px" class="from-group ">
 
         <button class="btn btn-primary" type="submit">guardar</button>
@@ -177,7 +176,7 @@
                                     '</td>'+
                                     '<td>'+
                                         '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+contp+');">'+
-                                                '<i class="fa fa-times"></i>'+
+                                                '<i class="glyphicon glyphicon-trash"></i>'+
                                         '</button>'+
                                     '</td>'+
                                 '</tr>';
@@ -246,7 +245,13 @@
         }
         //console.log(table);
         nomTablero="";
-        var tab;       
+        var tab;     
+        if(tablero.length>0){
+            for (var keyt in tablero) {
+                tab+=tablero[keyt]['tablero'];
+            }
+            $('#tablerosn').html(tab);
+        }  
         //console.log(tablero.length,tablero);
         if(tablero.length>0){
             for (var keyt in tablero) {
@@ -259,7 +264,7 @@
                 }
             }
         }
-        $('#tablerosn').html(tab);
+        
         //nomtablero="";
     }
 
