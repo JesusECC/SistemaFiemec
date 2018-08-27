@@ -84,8 +84,18 @@
         </div>
     </div>
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-        <div id="tablerosn" >
+        <div id="tablerosn">
+        
         </div>   
+        <div>
+            <table class="table table-striped table-bordered table-condensed table-hover">
+                    <tfoot>
+                        <th colspan="3" >Total</th>
+                        <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
+                    </tfoot>
+                </table>
+            </table>
+        </div>
     <!-- JOSE CORRIGE EL MARGIN DEL BOTON VOLVER CTMR!!!! -->
     <div style="margin-top: 20px" class="from-group ">
 
@@ -119,7 +129,7 @@
     var contp=0;
     var table;
     var subtotal=0;
-    //var nomTablero;
+    var nomTablero;
     $("#pidProducto").change(MostarProducto);
     //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
 
@@ -135,12 +145,20 @@
         var pname=$("#Productoname ").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
-        var nomTablero=$("#NomTablero").val();
+        nomTablero=$("#NomTablero").val();
         var filas;
         
         if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!=""){
-            var bool=Boolean(tablero.includes(nomTablero));
+            var bool=false;
+            for (const key in tablero) {
+                if (tablero.hasOwnProperty(key)) {
+                    if(tablero[key]['nombre']==nomTablero){
+                        bool=true;
+                    }                    
+                }
+            }
             contp++;
+            console.log(bool);
             if(bool==true ){
                 subtotal+=pcant*puni;
                         filas=
@@ -164,27 +182,37 @@
                                     '</td>'+
                                 '</tr>';
                             $('#detalle_'+nomTablero).append(filas);
+                            console.log(filas);
+                            var dat={nombre:nomTablero,fila:filas,subtotal:pcant*puni,posi:contp};
+                            filaob.push(dat);
                             // $("#total_"+nomTablero).html("s/. " + subtotal);
             }        
             //console.log(filas);
-            var dat={nombre:nomTablero,fila:filas,subtotal:pcant*puni,posi:contp};
-            filaob.push(dat);
-            //console.log(filaob,contp)
+            
+            console.log(filaob,contp)
 
         }
         nomtablero="";
     }
+    var bool;
     function agregarTablero(){    
-        var nomTablero=$("#NomTablerop").val();
-        //console.log(nomTablero);
-        
+        nomTablero=$("#NomTablerop").val();
+        //console.log(nomTablero);     
+        bool=false;   
+        //console.log(tablero.length);    
         if(tablero.length>=0 && nomTablero!=""){
-            var bool=Boolean(tablero.includes(nomTablero));
-            
-            console.log(bool);
-            if(bool!=true ){
-                tablero[cont]=nomTablero;
-                table+='<div class="panel panel-default">'+
+            //console.log(nomTablero); 
+            //for para evitar tablas con el  mismo nombre execto las cuando inicia con mayusculas   
+            for (const key in tablero) {
+                if (tablero.hasOwnProperty(key)) {
+                    if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
+                        bool=true; 
+                    }                                       
+                }
+            }
+            //if que compara e inserta la tabla contenedora de los produtos vacia.
+            if(bool==false ){  
+                table='<div class="panel panel-default" id="'+nomTablero+'_'+cont+'">'+
                             '<div class="panel-heading">'+
                                 '<h3 class="panel-title">Tablero '+nomTablero+'</h3>'+
                                 '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
@@ -211,29 +239,27 @@
                                     // '</tfoot>'+
                                 '</table>'+
                             '</div>'+
-                        '</div>'+
-                        '<table class="table table-striped table-bordered table-condensed table-hover">'+
-                            '</tbody>'+ 
-                                '<tfoot>'+
-                                    '<th colspan="3" >Total</th>'+
-                                    '<th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>'+
-                                '</tfoot>'+
-                            '</table>'+
-                        '</table>';
+                        '</div>';
+            var ta={nombre:nomTablero,posi:cont,tablero:table}
+            tablero.push(ta);                        
             } cont++;       
         }
-        
-        $('#tablerosn').html(table);
+        //console.log(table);
+        nomTablero="";
+        var tab;       
+        //console.log(tablero.length,tablero);
         if(tablero.length>0){
-            for (var i = 0; i < tablero.length; i++) {
+            for (var keyt in tablero) {
+                tab+=tablero[keyt]['tablero'];
                 for (var key in filaob) {
                     if (filaob.hasOwnProperty(key)) {
-                        if(tablero[i]==filaob[key]['nombre'])
-                        $('#detalle_'+tablero[i]).append(filaob[key]['fila']);
+                        if(tablero[keyt]['nombre']==filaob[key]['nombre'])
+                        $('#detalle_'+tablero[keyt]['nombre']).append(filaob[key]['fila']);
                     }
                 }
             }
         }
+        $('#tablerosn').html(tab);
         //nomtablero="";
     }
 
@@ -244,18 +270,31 @@
                         if(index==filaob[key]['posi']){
                             $("#fila_"+filaob[key]['nombre']+'_'+index).remove();
                             filaob.splice(key,1);
+                            console.log(filaob);
                             
                     }
                 }
             }  
     }
     function eliminarTablero(a){
+
+        console.log(tablero,filaob);
         for (const key in tablero) {
             if (tablero.hasOwnProperty(key)) {
-                console.log(tablero);
-
-                console.log(tablero[key],a,key);
-                
+                if(a==tablero[key]['posi']){
+                    //console.log(a);        
+                    //console.log(tablero);
+                    for (var k in filaob) {
+                        if (filaob.hasOwnProperty(k)) {
+                            if(tablero[key]['nombre']==filaob[k]['nombre']){
+                                console.log("encontrado");
+                                filaob.splice(k,1);
+                            }
+                        }
+                    }   
+                    $("#"+tablero[key]['nombre']+'_'+tablero[key]['posi']).remove();                      
+                    tablero.splice(key,1);                 
+                }              
             }
         }
     }
