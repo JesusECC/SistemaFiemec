@@ -27,13 +27,13 @@ class ControllerProformaServicio extends Controller
     $query=trim($request->get('searchText'));
     $servicios=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
-    ->join('Empleado as e','p.idEmpleado','=','e.idEmpleado')
-    ->join('Detalle_proforma as dp','p.idProforma','=','dp.idProforma')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','e.nombres','e.materno','e.paterno','p.serie_proforma','p.igv','p.precio_total','dp.descuento','dp.cantidad')
+    
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
+    ->where('p.tipo_proforma','=','servicio')
+    ->where('p.estado','=','activo')
     ->orderBy('p.idProforma','desc')
-     
-    	->paginate(7);           
+    ->paginate(7);           
             return view('proforma.servicio.index',["servicios"=>$servicios,"searchText"=>$query]);
         }
     }
@@ -41,7 +41,7 @@ class ControllerProformaServicio extends Controller
 public function create()
 {
  $productos=DB::table('Producto')
- ->where('estado','=','activo')
+ ->where('categoria_producto','=','servicio')
  ->get();
 
  $clientes=DB::table('Cliente_Proveedor as cp')
@@ -49,13 +49,13 @@ public function create()
 ->where('tipo_persona','=','Cliente persona')
 ->orwhere('tipo_persona','=','Cliente Empresa')
  ->get();
-<<<<<<< HEAD
+
  //dd($clientes);
  return view("proforma.servicio.create",["productos"=>$productos,"clientes"=>$clientes]);
-=======
+
  
- return view("proforma.servicio.create",["clientes"=>$clientes]);
->>>>>>> 4f6717b7eaa0e82b2ca44043a8e4d24067d3d4a8
+
+
 }
 
 public function store(Request $request)
@@ -71,25 +71,26 @@ public function store(Request $request)
        
         $Servicios=new Proforma;
         $Servicios->idCliente=$idclien;
+        $Servicios->idEmpleado='2';
         $Servicios->serie_proforma='SV365122018';
         $mytime = Carbon::now('America/Lima');
         $Servicios->fecha_hora=$mytime->toDateTimeString();
         $Servicios->igv='18';
-        $Servicios->subtotal=$request->get('subtotal');
-        $Servicios->descripcion_proforma=$request->get('descripcion_proforma');
         $Servicios->precio_total=$request->get('precio_total');
         $Servicios->forma_de=$request->get('forma_de');
+        $Servicios->tipo_proforma='servicio';
         $Servicios->observacion_condicion=$request->get('observacion_condicion');
         $Servicios->plazo_oferta=$request->get('plazo_oferta');
-        $Servicios->plazo_fabricaion=$request->get('plazo_fabricacion');
+        $Servicios->plaza_fabricacion=$request->get('plaza_fabricacion');
         $Servicios->tipo_proforma='servicio';
+        $Servicios->estado='activo';
         
-       //$Servicios->save();
+       $Servicios->save();
         
        
-        
+        $idProducto=$request->get('idProducto');
         $precio_venta=$request->get('precio_venta');
-
+        $descripcionDP=$request->get('descripcionDP');
         $cont=0;
 
         
@@ -97,23 +98,17 @@ public function store(Request $request)
         while ($cont<count($precio_venta)) 
         {
             $detalle = new DetalleProforma();
-            $detalle->idProforma=$Proforma->idProforma;
-            
+            $detalle->idProducto=$idProducto[$cont];
+            $detalle->idProforma=$Servicios->idProforma;
             $detalle->precio_venta=$precio_venta[$cont];
-           // $detalle->save();
+            $detalle->descripcionDP=$descripcionDP[$cont];
+           $detalle->save();
             $cont=$cont+1; 
-            dd($Proforma,$detalle);           
+                     
         }
-
-
+//dd($Servicios,$detalle);
          DB::Commit();
-   /*     
-    } catch (\Exception $e) {
-
-        DB::rollback();
-        
-    }*/
-
+   
          return Redirect::to('proforma/servicio');
      }
 
@@ -129,11 +124,21 @@ public function store(Request $request)
 
     $detalles=DB::table('Detalle_proforma as dpr')
     ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.observacion_detalleP')
+    ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.observacion_detalleP','dpr.descripcionDP')
     ->where('dpr.idProforma','=',$id)
     ->get();
 return view("proforma.servicio.show",["servicio"=>$servicio,"detalles"=>$detalles]);
    }
+
+   public function destroy($id)
+    {
+        $producto=Proforma::findOrFail($id);
+        $producto->estado='anulada';
+        $producto->update();
+        return Redirect::to('proforma/servicio');
+
+
+    }
 
 }
 

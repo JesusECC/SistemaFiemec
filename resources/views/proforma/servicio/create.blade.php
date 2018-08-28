@@ -1,15 +1,15 @@
 @extends ('layouts.admin')
 @section ('contenido')
 <div class="row">
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	<h3>Nueva Proforma</h3>
-	@if (count($errors)>0)
-	<div class="alert-alert-danger">
-		<ul>
-			@foreach ($errors->all() as $error)
-			    <li>{{$error}}</li>
-			@endforeach 
-		</ul>	
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <h3>Nueva Proforma</h3>
+    @if (count($errors)>0)
+    <div class="alert-alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach 
+        </ul>   
     </div>
     @endif
     </div>
@@ -19,22 +19,20 @@
 
     {{Form::token()}}
 <div>
-	<div>
+    <div>
         <div class="form-group">
             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                 <label>Cliente</label>
                 <select required name="idCliente" class="form-control selectpicker" id="idCliente" data-live-search="true">
 
                     <option value=""></option>
-                   @foreach($clientes as $cli)
+                   @foreach($clientes as $cliente)
                    
-                   <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cli->nombre}}</option>
+                   <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
                    @endforeach  
                </select>
             </div>
         </div>
-
-        
               <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
                 <div class="from-group">
                     <label for="direccion">Direccion</label>
@@ -47,24 +45,45 @@
                     <input type="text" disabled name="nro_documento" id="pnro_documento" class="form-control" placeholder="numero documento">
                 </div>
             </div>
+        
     </div>
+    <div class="row">
+        <div class="panel panel-primary">
+           <div class="panel-body">
+              <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                  <div class="form-group">
+                    <label>Producto</label>
+                    <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                        <option value=""></option>
+                        @foreach($productos as $pro)
+                        
+                        <option value="{{$pro->idProducto}}">{{$pro->codigo_producto.' '.$pro->nombre_producto}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+               </div>
 
-                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+
+               <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12">
                 <div class="from-group">
-                    <label for="precio_unitario">Precio unitario</label>
-                    <input type="number" disabled name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
+                    <label for="descripcionDP">Descripcion de Servicio</label>
+                    <input type="text"  name="descripcionDP" id="descripcionDP" class="form-control" placeholder="Descripcion">
                     
 
                 </div>
             </div>
 
-            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                 <div class="from-group">
-                    <label for="descripccion">Descripccion del Servicio</label>
-                    <input type="number" name="descripccion" id="descripccion" class="form-control" placeholder="descripccion">
+                    <label for="precio_venta">Costo</label>
+                    <input type="number" name="pprecio_venta" id="pprecio_venta" class="form-control" placeholder="costo">
+                    
 
                 </div>
             </div>
+
+           
             <div  class="container-fluid">
                 <div class="row">
                     <div class="col-lg-11">
@@ -76,27 +95,30 @@
                 </div>
             </div>
 
-            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-            	<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
+            <div class="table-responsive">
+                <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
 
-            		<thead style="background-color:#A9D0F5">
-            			<th>opciones</th>
-            			
-            			<th>descripcion</th>
-                        <th>precio venta</th>          			
-            			<th>total</th>
-            		</thead>
-            		<tfoot>
-            			<th>total</th>
-            			<th></th>
-            			<th></th>
-            			<th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">
+                    <thead style="background-color:#A9D0F5">
+                        <th>opciones</th>
+                        <th>Tipo de Sercicio</th>
+                        <th>Descripcion</th>
+                        <th>Costo</th>
+                    
+                        <th>total</th>
+                    </thead>
+                    <tfoot>
+                        <th>total</th>
+                        <th></th>
+                        <th></th>
+                       
+                        <th></th>
+                        <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">
                         </th>
 
-            		</tfoot>
-            		   <tbody>
-            	    </tbody>            		
-            	</table>
+                    </tfoot>
+                       <tbody>
+                    </tbody>                    
+                </table>
                 <div class="container-fluid" id="guardar">
                     <div class="row">
                         <div class="form-group">
@@ -158,9 +180,8 @@ var cont=0;
 total=0;
 subtotal=[];
 $("#guardar").hide();
+
 $("#idCliente").change(mostrarValor);
-
-
 
 function mostrarValor()
 {
@@ -171,21 +192,29 @@ function mostrarValor()
 
 function agregar()
 {
+    datosProducto=document.getElementById('pidProducto').value.split('_');
+
+    idProducto=datosProducto[0];
+    producto=$("#pidProducto option:selected").text();
     
-    cantidad=$("#pcantidad").val();
+    descripcion=$("#descripcionDP").val();
 
-    alert(datosProducto);
+   
+    precio_venta=$("#pprecio_venta").val();
+    
 
-    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="")
+    //alert(datosProducto);
+
+    if(idProducto!="" && precio_venta!="")
     {
 
-        if(cantidad>0)
+        if(precio_venta>0)
         {
 
-       subtotal[cont]=((precio_venta-descuento)*cantidad);
+       subtotal[cont]=precio_venta*1;
        total=total+subtotal[cont];
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]" disabled value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"  disabled value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]" disabled value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td></tr>';
+      var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td>  <td><input  type="hidden"  name="descripcionDP[]"  value="'+descripcion+'">'+descripcion+'</td>  <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td>    <td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $("#total").html("s/. " + total);
@@ -209,7 +238,7 @@ function agregar()
     total=0;
     function limpiar(){
         $("#pcantidad").val("");
-        $("#pdescuento").val("");
+        $("#descripcionDP").val("");
         $("#pprecio_venta").val("");
     }
 

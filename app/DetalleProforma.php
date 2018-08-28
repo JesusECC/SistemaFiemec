@@ -21,6 +21,7 @@ class DetalleProforma extends Model
     	'texto_precio_venta',
     	'observacion_detalleP',
     	'descuento', 
+      'descripcionDP',
    ];
 
    protected $guarded =[
