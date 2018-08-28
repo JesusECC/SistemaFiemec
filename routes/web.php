@@ -23,6 +23,7 @@ Route::resource('proforma/proveedor','ControllerProveedor');
 Route::resource('proforma/empresa','ControllerEmpresa');
 Route::resource('proforma/proforma','ControllerProformaUnitaria');
 Route::resource('proforma/servicio','ControllerProformaServicio');
+Route::resource('dashboard/dashboard-admin','ControllerDashboard');
 
 
 //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
