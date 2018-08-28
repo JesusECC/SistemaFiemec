@@ -31,10 +31,10 @@ class ControllerProformaUnitaria extends Controller
     $query=trim($request->get('searchText'));
     $proformas=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
-    ->join('Empleado as e','p.idEmpleado','=','e.idEmpleado')
-    ->join('Detalle_proforma as dp','p.idProforma','=','dp.idProforma')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','e.nombres','e.materno','e.paterno','p.serie_proforma','p.igv','p.precio_total','dp.descuento','dp.cantidad')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
+    ->where('p.estado','=','activo')
+
     ->orderBy('p.idProforma','desc')
      
     	->paginate(7);           
@@ -45,6 +45,7 @@ class ControllerProformaUnitaria extends Controller
 public function create()
 {
  $productos=DB::table('Producto')
+ ->where('categoria_producto','=','catalogo')
  ->where('estado','=','activo')
  ->get();
 
@@ -63,8 +64,7 @@ public function create()
 public function store(Request $request)
 {
 
-   // dd($request);
-   /* try {*/
+   
 
     $splitid = explode('_', $request->get('idCliente'), 2);
     $idclien= $splitid[0];
@@ -73,6 +73,7 @@ public function store(Request $request)
        
         $Proforma=new Proforma;
         $Proforma->idCliente=$idclien;
+        $Proforma->idEmpleado='2';
         $Proforma->serie_proforma='PU365122018';
         $mytime = Carbon::now('America/Lima');
         $Proforma->fecha_hora=$mytime->toDateTimeString();
@@ -84,8 +85,9 @@ public function store(Request $request)
         $Proforma->plazo_oferta=$request->get('plazo_oferta');
         $Proforma->garantia=$request->get('garantia');
         $Proforma->tipo_proforma='unitaria';
+        $Proforma->estado='activo';
         
-       // $Proforma->save();
+        $Proforma->save();
         
         $idProducto=$request->get('idProducto');
         $cantidad=$request->get('cantidad');
@@ -104,19 +106,14 @@ public function store(Request $request)
             $detalle->cantidad=$cantidad[$cont];
             $detalle->descuento=$descuento[$cont];
             $detalle->precio_venta=$precio_venta[$cont];
-            //$detalle->save();
+           $detalle->save();
             $cont=$cont+1; 
-            dd($Proforma,$detalle);           
+                     
         }
 
-
+//dd($Proforma,$detalle);
          DB::Commit();
-   /*     
-    } catch (\Exception $e) {
-
-        DB::rollback();
-        
-    }*/
+   
 
          return Redirect::to('proforma/proforma');
      }
@@ -139,5 +136,13 @@ public function store(Request $request)
 return view("proforma.proforma.show",["proforma"=>$proforma,"detalles"=>$detalles]);
    }
 
-    
+    public function destroy($id)
+    {
+        $producto=Proforma::findOrFail($id);
+        $producto->estado='anulada';
+        $producto->update();
+        return Redirect::to('proforma/proforma');
+
+
+    }
 }
