@@ -205,7 +205,10 @@
     }
     var bool;
     function agregarTablero(){    
-        nomTablero=$("#NomTablerop").val();
+        var i=" ";
+        var r="_";
+        var tabl=$("#NomTablerop").val();
+        nomTablero=tabl.replace(" ","_");
         //console.log(nomTablero);     
         bool=false;   
         //console.log(tablero.length);    
