@@ -14,8 +14,8 @@
 					<th>fecha</th>
 					<th>Comprobante</th>
 					<th>Nombre</th>
-					<th>impuesto</th>
-					<th>total</th>
+					
+					
 					
 					<th>opciones</th>
 				</thead>
@@ -27,15 +27,17 @@
 
 					<td>{{$prof->fecha_hora}}</td>
 					<td>{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}</td>
-					<td>{{$prof->nombres_Rs}}</td>
-					<td>{{$prof->igv}}</td>
-					<td>{{$prof->precio_total}}</td>
+					<td>{{$prof->nombre}}</td>
+					
+					
 					
 					<td>
 					<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">detalles</button>
 					</a>
+					<a href="" data-target="#modal-delete-{{$prof->idProforma}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
 					</td>
 				</tr>
+				@include('proforma.proforma.modal')
              @endforeach
             
 			</table>

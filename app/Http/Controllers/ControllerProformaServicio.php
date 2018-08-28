@@ -27,7 +27,6 @@ class ControllerProformaServicio extends Controller
     $query=trim($request->get('searchText'));
     $servicios=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
-    
     ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('p.tipo_proforma','=','servicio')
