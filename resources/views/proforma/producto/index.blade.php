@@ -2,7 +2,7 @@
 @extends ('layouts.admin')
 @section ('contenido')
 <div class='col-lg-12 col-sm-12 col-xs-12'>
-	<h3> Control de Productos <a href="producto/create"> <button class="btn btn-success">Nuevo</button></a></h3>
+	<h3> Control de Productos <a href="{{route('producto-create')}}"> <button class="btn btn-success">Nuevo</button></a></h3>
 	
 	@include('proforma.producto.search')
 </div>
@@ -25,7 +25,7 @@
 	        </p>
 	        <p>
 	        	<a  class="btn btn-primary" role="button"><i class="far fa-eye"></i> Ver</a> 
-	        	<a href="{{route('producto.edit',$pro->idProducto)}}" class="btn btn-success" role="button"><i class="fas fa-edit"></i> Editar</a> 
+	        	<a href="{{route('producto-edit',$pro->idProducto)}}" class="btn btn-success" role="button"><i class="fas fa-edit"></i> Editar</a> 
 	        	<a href="" data-target="#modal-delete-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-danger" ><i class="fas fa-trash-alt"></i> Eliminar</a></p>
 	      </div>
 	    </div>

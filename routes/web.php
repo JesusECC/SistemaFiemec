@@ -5,9 +5,9 @@
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Aquí es donde puede registrar rutas web para su aplicación. Estas son
+| las rutas  cargadas por el RouteServiceProvider dentro de un grupo que
+| contiene el grupo de middleware "web". ¡Ahora crea algo grandioso!
 |
 */
 
@@ -28,26 +28,25 @@ Route::resource('dashboard/dashboard-admin','ControllerDashboard');
 
 //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
 
-//Servicios
-//Route::get('servicios',['as'=> 'servicio','uses' =>'ControllerProformaServicio@index']);
+//Se crea las rutas para servicios 
 
 Route::get('servicio/create',['as'=> 'servicio-create','uses' =>'ControllerProformaServicio@create']);
 
 
 //Route::get('servicios/show',['as'=> 'servicio-show','uses' =>'ControllerProformaServicio@show']);
 
-//tableros
+// Se crea las rutas paratableros
 Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
 Route::get('tableros/create',['as' => 'tablero-create','uses'=>'ControllerProformaTableros@create']);
 Route::post('tableros',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
 Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'ControllerProformaTableros@buscarProducto']);
 
 
-
-
-
-
-
+//Se crea las rutas para productos
+Route::get('productos',['as'=>'producto','uses'=>'ControllerProducto@index']);
+Route::get('productos/create',['as'=>'producto-create','uses'=>'ControllerProducto@create']);
+Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
+Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
 
 
 Route::post('proforma/proforma','ControllerProformaUnitaria@store');
