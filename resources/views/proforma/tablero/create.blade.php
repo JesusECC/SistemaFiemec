@@ -176,7 +176,7 @@
                                     '</td>'+
                                     '<td>'+
                                         '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+contp+');">'+
-                                                '<i class="glyphicon glyphicon-trash"></i>'+
+                                                '<i class="fas fa-trash"></i>'+
                                         '</button>'+
                                     '</td>'+
                                 '</tr>';

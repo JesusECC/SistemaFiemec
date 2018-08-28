@@ -1,3 +1,4 @@
+
 @extends ('layouts.admin')
 @section ('contenido')
 <div class='col-lg-12 col-sm-12 col-xs-12'>
@@ -39,4 +40,6 @@
 <!-- COMENTARIOS
 -Codigo de pedido ira en el detalle catalogo
 -Foto ira en el detalle catalogo
--fecha de sistema de registro ira en el detalle catalogo  -->
+-fecha de sistema de registro ira en el detalle catalogo  
+-la opcion de eliminar producto solo tendra el administrador
+-->
