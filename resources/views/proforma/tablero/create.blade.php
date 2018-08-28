@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="producto-oculto" style='display:none;'>
         <div class="col-sm-7">
             <div class="form-group label-floating">
                 <label class="control-label">Producto</label>
@@ -39,7 +39,7 @@
     {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
     @csrf
 
-    <div class="card">
+    <div class="card" id="producto-crear-oculto" style='display:none;'>
         <div class="card-header">
         Producto
         </div>
@@ -70,7 +70,8 @@
                 <div class="col-sm-2">
                     <div class="form-group label-floating">
                         <label class="control-label">Nombre Tablero</label>
-                        <input type="text" id="NomTablero" class="form-control" name="NomTablero" >
+                        <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
+                        <div id="select-pro" >s</div>
                     </div>
                 </div
 
@@ -117,6 +118,7 @@
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
             agregarTablero();
+            mostrarcampos();
         });
         $('#bt_add_produc').click(function(){
             agregarProductosTablero();
@@ -138,15 +140,23 @@
         $("#Productoname").val(Producto[1]);
         $("#precio_uni").val(Producto[2]);
     }
+    function mostrarcampos(){
+        document.getElementById('producto-crear-oculto').style.display = 'block';
+        document.getElementById('producto-oculto').style.display = 'block';
+        // $("#producto-crear-oculto").style.display='block';
+        // $("#producto-oculto").style.display='block';
+    } 
 
     function agregarProductosTablero(){    
         var idProd=$('#idProd').val();
         var pname=$("#Productoname ").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
-        nomTablero=$("#NomTablero").val();
+        var sel=$('#prod-selec').val();
+        // nomTablero=$("#NomTablero").val();
+        nomTablero=$('#prod-selec').val();
         var filas;
-        
+        console.log(nomTablero,sel);
         if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!=""){
             var bool=false;
             for (const key in tablero) {
@@ -245,8 +255,20 @@
         }
         //console.log(table);
         nomTablero="";
-        var tab;     
+        var tab;    
+        var selectop; 
+        
         if(tablero.length>0){
+            for (const pro in tablero) {
+                if (tablero.hasOwnProperty(pro)) {
+                    selectop+='<option value="'+tablero[pro]['nombre']+'">'+tablero[pro]['nombre']+'</option>';                            
+                }
+            }
+            // class="form-control selectpicker" data-live-search="true"
+            var selec='<select name="prod-selec" id="prod-selec"  >'+
+                    selectop+
+                      '</select>';
+            $('#select-pro').html(selec);
             for (var keyt in tablero) {
                 tab+=tablero[keyt]['tablero'];
             }
