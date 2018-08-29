@@ -259,6 +259,7 @@
             }
             console.log(filaob);
             if(bool==true ){
+<<<<<<< HEAD
 
                 subtotal+=pcant*puni;
                         filas=
@@ -288,6 +289,8 @@
                             subTotalTable();
                             subTotal();
             }     
+=======
+>>>>>>> 57d0b473f36c95c49682cc6eceea867bb075477a
                 for (const fil in filaob) {
                     if (filaob.hasOwnProperty(fil)) {
                         if(filaob[fil]['idProducto']==idProd){
@@ -309,6 +312,10 @@
             }
             nomtablero="";
         }
+<<<<<<< HEAD
+=======
+    }
+>>>>>>> 57d0b473f36c95c49682cc6eceea867bb075477a
     function fila(){
         if(filaob.length>0){
             var filas;
