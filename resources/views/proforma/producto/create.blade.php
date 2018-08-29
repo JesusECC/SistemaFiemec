@@ -24,8 +24,6 @@
 		                <div class="box-header with-border" style="padding:5px !important;background-color: rgb(82, 86, 97);color: white;border-top-left-radius: 2px !important;border-top-right-radius: 2px !important;">
 		                 <h4>Ingrese datos del producto</h4>
 		                  <div class="box-tools pull-right">
-
-<<<<<<< HEAD
 		                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 		                    
 		                  </div>
@@ -128,7 +126,6 @@
 			</div>
 		</div><!--cierra panel primary-->
     </div><!--cierra col-ñg-12-->
-=======
 	                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 	                    
 	                  </div>
@@ -226,7 +223,6 @@
 		  </div>
 		</div>
     </div>
->>>>>>> 61dd9803977e6e7031d66fc7d753098e661ce849
 {!!Form::close()!!}
 </div><!--cierra todo el row-->
 
