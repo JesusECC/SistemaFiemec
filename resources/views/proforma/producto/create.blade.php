@@ -109,8 +109,53 @@
 			    </div>
 			    <div class="col-lg-4 col-md-4 col-sm-12 col-xl-12">
 			    	<div class="box">
-				    	<label for="foto">Imagen</label>
-						<input type="file" name="foto" class="form-control">
+		                <div class="box-header with-border" style="padding:5px !important;background-color: rgb(82, 86, 97);color: white;border-top-left-radius: 2px !important;border-top-right-radius: 2px !important;">
+		                 <h4>Ingrese imagen </h4>
+		                  <div class="box-tools pull-right">
+		                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		                    
+		                  </div>
+		                </div>
+		                <div class="box-body">
+		                	<div class="row">
+		                		<div class="col-lg-12">
+		                			<label for="foto">Imagen</label>
+		                			<input type="file" id="files" name="foto[]" class="form-control">
+									<br>
+									<output id="list">
+									</output>
+		                		</div>
+		                	</div>
+		                </div>			    		
+				    	
+						
+						<script>
+							function archivo(evt) {
+      var foto = evt.target.files; // FileList object
+       
+        //Obtenemos la imagen del campo "file". 
+      for (var i = 0, f; f = foto[i]; i++) {         
+           //Solo admitimos imágenes.
+           if (!f.type.match('image.*')) {
+                continue;
+           }
+       
+           var reader = new FileReader();
+           
+           reader.onload = (function(theFile) {
+               return function(e) {
+               // Creamos la imagen.
+                      document.getElementById("list").innerHTML = ['<img class="thumb img-responsive" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+               };
+           })(f);
+ 
+           reader.readAsDataURL(f);
+       }
+}
+             
+      document.getElementById('files').addEventListener('change', archivo, false);
+
+						</script>
 			    	</div>		    	
 			    </div>
 			    <div class="container">
