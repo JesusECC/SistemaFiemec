@@ -41,13 +41,13 @@
 			                      	<div class="col-lg-4">
 										<div class="form-group">
 											<label for="codigo_pedido">Codigo de Pedido</label>
-											<input type="text" name="codigo_pedido" class="form-control" placeholder="codigo pedido...">	
+											<input type="text" name="codigo_pedido" class="form-control" {{old('codigo_pedido')}} placeholder="codigo pedido...">	
 										</div>	                      		
 			                      	</div> 
 			                      	<div class="col-lg-4">
 										<div class="form-group">
 											<label for="codigo_producto">Codigo producto</label>
-											<input type="text" name="codigo_producto" class="form-control" placeholder="codigo...">	
+											<input type="text" name="codigo_producto" class="form-control" {{old('odigo_producto')}} placeholder="codigo...">	
 										</div>  	                      		
 			                      	</div>                     		
 		                      	</div>
@@ -55,7 +55,7 @@
 		                      		<div class="col-lg-8">
 										<div class="form-group">
 											<label for="nombre_producto">Nombre producto</label>
-											<input type="text" name="nombre_producto" class="form-control" placeholder="nombre...">	
+											<input type="text" name="nombre_producto" class="form-control"  {{old('nombre_producto')}} placeholder="nombre...">	
 										</div>	
 		                      		</div>
 		                      		<div class="col-lg-4">
@@ -164,7 +164,7 @@
 			    			<div style="margin-top: 20px" class="from-group ">
 			    				<button class="btn btn-primary" type="submit">guardar</button>
 							  	<button class="btn btn-danger" type="reset">Limpiar</button>
-							  	<button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="{{url('proforma/producto')}}">volver</a></button>
+							  	<button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="{{url('productos')}}">volver</a></button>
 							</div>
 						</div>
 					</div>
