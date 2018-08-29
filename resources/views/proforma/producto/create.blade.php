@@ -15,7 +15,7 @@
 		    </div>
 		    @endif
 		  </div>
-	{!!Form::open(array('url'=>'producto-store','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
+	{!!Form::open(array('url'=>'proforma/producto','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
 
     {{Form::token()}}
 		  <div class="panel-body">
