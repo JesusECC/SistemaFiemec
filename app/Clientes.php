@@ -24,6 +24,7 @@ class Clientes extends Model
     	'telefono',
     	'celular',
     	'correo',
+        'fotoCEP',
     	'tipo_persona',
     	'cuenta_1',
     	'cuenta_2',

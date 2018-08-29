@@ -26,7 +26,7 @@ class ControllerProducto extends Controller
         {
            $query=trim($request->get('searchText'));
            $productos=DB::table('Producto')
-            ->where('serie_producto','LIKE','%'.$query.'%')
+            ->where('codigo_producto','LIKE','%'.$query.'%')
             ->where('estado','=','activo')
            ->orderby('idProducto','asc')
            ->paginate(10);

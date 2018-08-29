@@ -112,7 +112,10 @@
 	<input type="text" name="Referencia" class="form-control" placeholder="Ingrese la cuenta">	
 </div>
 
-
+<div class="col-lg-12">
+    <label for="fotoCEP">Imagen</label>
+    <input type="file" id="files" name="fotoCEP[]" class="form-control">
+</div>
 
 <!-- JOSE CORRIGE EL MARGIN DEL BOTON VOLVER CTMR!!!! -->
 <div style="margin-top: 20px" class="from-group ">

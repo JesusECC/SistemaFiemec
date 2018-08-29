@@ -37,7 +37,7 @@ class RequestFormIngresoEmpleados extends FormRequest
         'contraseño'=>'max:45',
         'direccion'=>'max:250',
         'correo'=>'max:90',
-        'foto'=>'max:105',
+        'fotoE'=>'mimes:jpeg,bmp,jpg,png',
         'estado'=>'max:15',
         'id'=>'require',
         'cargo'=>'max:50',
