@@ -56,6 +56,13 @@ class ControllerProducto extends Controller
         $mytime = Carbon::now('America/Lima');
         $producto->fecha_sistema=$mytime->toDateTimeString();
         $producto->estado='activo';
+
+         if (Input::hasFile('foto')){
+           $file=Input::file('foto');
+           $file->move(public_path().'/fotos/productos/',$file->getClientOriginalName());
+           $producto->foto=$file->getClientOriginalName();
+
+        }
         $producto->save();
         return Redirect::to('proforma/producto');
     }
@@ -64,7 +71,7 @@ class ControllerProducto extends Controller
    
     public function edit($id)
     {
-
+        
         return view("proforma.producto.edit",["producto"=>Producto::findOrFail($id)]);
     }
 
@@ -74,7 +81,7 @@ class ControllerProducto extends Controller
 
         $producto=Producto::find($id);
 
-        $producto->serie_producto=$request->get('serie_producto');
+       $producto->serie_producto=$request->get('serie_producto');
         $producto->codigo_pedido=$request->get('codigo_pedido');
         $producto->codigo_producto=$request->get('codigo_producto');
         $producto->nombre_producto=$request->get('nombre_producto');
@@ -83,6 +90,16 @@ class ControllerProducto extends Controller
         $producto->descripcion_producto=$request->get('descripcion_producto');
         $producto->precio_unitario=$request->get('precio_unitario');
         $producto->categoria_producto=$request->get('categoria_producto');
+        $mytime = Carbon::now('America/Lima');
+        $producto->fecha_sistema=$mytime->toDateTimeString();
+        $producto->estado='activo';
+
+         if(Input::hasFile('foto')){
+           $file=Input::file('foto');
+           $file->move(public_path().'/fotos/productos/',$file->getClientOriginalName());
+           $producto->foto=$file->getClientOriginalName();
+
+        }
         $producto->update();
         return Redirect::to('proforma/producto');
     }

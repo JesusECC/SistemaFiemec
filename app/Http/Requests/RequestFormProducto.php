@@ -33,7 +33,7 @@ class RequestFormProducto extends FormRequest
         'stock'=>'numeric|max:11',
         'descripcion_producto'=>'max:200',
         'precio_unitario'=>'numeric',
-        'foto'=>'max:250',
+        'foto'=>'mimes:jpeg,bmp,jpg,png',
         'categoria_producto'=>'max:45',
         'estado'=>'max:15',
        

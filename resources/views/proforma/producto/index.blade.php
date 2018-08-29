@@ -11,7 +11,7 @@
   	@foreach($productos as $pro)
 	  <div class="col-sm-4 col-md-4">
 	    <div class="thumbnail">
-	      <img src="http://www.repairservo.com/images/abb-img.jpg" alt="...">
+	      <img src="{{asset('fotos/productos/'.$pro->foto)}}">
 	      <div class="caption">
 	        <h3>{{$pro->nombre_producto}}</h3>
 	        <h4 style="color:#028039">S/. {{$pro->precio_unitario}} o S/. 25.80</h4>
