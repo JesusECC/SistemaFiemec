@@ -91,8 +91,26 @@
         <div>
             <table class="table table-striped table-bordered table-condensed table-hover">
                     <tfoot>
-                        <th colspan="3" >Total</th>
-                        <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
+                        <tr>
+                            <th colspan="3" >Sub Total</th>
+                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" >Descuentos</th>
+                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" >Valor Venta</th>
+                            <th><h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" >I.G.V. 18%</th>
+                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" >Total</th>
+                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
+                        </tr>
                     </tfoot>
                 </table>
             </table>
@@ -153,10 +171,9 @@
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
         var sel=$('#prod-selec').val();
-        // nomTablero=$("#NomTablero").val();
         nomTablero=$('#prod-selec').val();
         var filas;
-        console.log(nomTablero,sel);
+        // console.log(nomTablero,sel);
         if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!=""){
             var bool=false;
             for (const key in tablero) {
@@ -167,7 +184,6 @@
                 }
             }
             contp++;
-            console.log(bool);
             if(bool==true ){
                 subtotal+=pcant*puni;
                         filas=
@@ -191,29 +207,21 @@
                                     '</td>'+
                                 '</tr>';
                             $('#detalle_'+nomTablero).append(filas);
-                            console.log(filas);
+                            // console.log(filas);
                             var dat={nombre:nomTablero,fila:filas,subtotal:pcant*puni,posi:contp};
                             filaob.push(dat);
-                            // $("#total_"+nomTablero).html("s/. " + subtotal);
+                            subTotalTable();
+                            subTotal();
             }        
-            //console.log(filas);
-            
-            console.log(filaob,contp)
-
         }
         nomtablero="";
     }
     var bool;
     function agregarTablero(){    
-        var i=" ";
-        var r="_";
         var tabl=$("#NomTablerop").val();
-        nomTablero=tabl.replace(" ","_");
-        //console.log(nomTablero);     
-        bool=false;   
-        //console.log(tablero.length);    
+        nomTablero=tabl.replace(/ /gi,"_");  
+        bool=false;  
         if(tablero.length>=0 && nomTablero!=""){
-            //console.log(nomTablero); 
             //for para evitar tablas con el  mismo nombre execto las cuando inicia con mayusculas   
             for (const key in tablero) {
                 if (tablero.hasOwnProperty(key)) {
@@ -230,7 +238,7 @@
                                     '<div class="col-md-12">'+
                                         '<div class="box">'+
                                             '<div class="box-header with-border" style="padding:5px !important;">'+
-                                            '<p> Tablero ' +nomTablero+'</p>'+
+                                            '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
                                                 '<div class="box-tools pull-right">'+
 
                                                     '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
@@ -252,13 +260,13 @@
                                                             '</thead>'+
                                                             '<tbody>'+
                                                             '</tbody>'+ 
-                                                            // '<tfoot>'+
-                                                            //     '<th>Total</th>'+
-                                                            //     '<th></th>'+
-                                                            //     '<th></th>'+
-                                                            //     '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                            //     '</th>'+
-                                                            // '</tfoot>'+
+                                                            '<tfoot>'+
+                                                                '<th>Total</th>'+
+                                                                '<th></th>'+
+                                                                '<th></th>'+
+                                                                '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                '</th>'+
+                                                            '</tfoot>'+
                                                         '</table>'+
                                                     '</div>'+
                                                 '<div>'+
@@ -300,31 +308,38 @@
             tablero.push(ta);                        
             } cont++;       
         }
-        //console.log(table);
+        // console.log(table);
         nomTablero="";
+        // realiza el listado de todas los tableros que se añaden
+        ListaSelect()
+       // mantiene en la vista las filas cuando se agrega una nueva tabla
+        detalleFilas();
+        //nomtablero="";
+    }
+    function ListaSelect(){
+        // realiza el listado de todas los tableros que se añaden
         var tab;    
-        var selectop; 
-        
+        var selectop;
         if(tablero.length>0){
             for (const pro in tablero) {
                 if (tablero.hasOwnProperty(pro)) {
-                    selectop+='<option value="'+tablero[pro]['nombre']+'">'+tablero[pro]['nombre']+'</option>';                            
+                    selectop+='<option value="'+tablero[pro]['nombre']+'">'+tablero[pro]['nombre'].replace(/_/gi," ")+'</option>';                            
                 }
             }
-            // class="form-control selectpicker" data-live-search="true"
             var selec='<select name="prod-selec" id="prod-selec"  >'+
-                    selectop+
+                            selectop+
                       '</select>';
             $('#select-pro').html(selec);
             for (var keyt in tablero) {
                 tab+=tablero[keyt]['tablero'];
             }
             $('#tablerosn').html(tab);
-        }  
-        //console.log(tablero.length,tablero);
+        }
+    }
+    function detalleFilas(){
+        // mantiene en la vista las filas cuando se agrega una nueva tabla
         if(tablero.length>0){
             for (var keyt in tablero) {
-                tab+=tablero[keyt]['tablero'];
                 for (var key in filaob) {
                     if (filaob.hasOwnProperty(key)) {
                         if(tablero[keyt]['nombre']==filaob[key]['nombre'])
@@ -333,8 +348,37 @@
                 }
             }
         }
-        
-        //nomtablero="";
+        subTotalTable();
+    }
+    function subTotalTable(){
+        // funcion para realizar la suma del sub total de todos los tableros que se declaran
+        var sub=0;
+        if(tablero.length>0){
+            for (const key in tablero) {
+                if (tablero.hasOwnProperty(key)) {
+                    for (const fila in filaob) {
+                        if (filaob.hasOwnProperty(fila)) {
+                            if(tablero[key]['nombre']==filaob[fila]['nombre']){
+                                sub+=filaob[fila]['subtotal'];
+                            }                            
+                        }
+                    }   
+                    // console.log(sub);
+                    $("#total_"+tablero[key]['nombre']).html("s/. " + sub);                 
+                }
+                sub=0;
+            }            
+        }
+    }
+    function subTotal(){
+        var sub=0;
+        for (const fila in filaob) {
+            if (filaob.hasOwnProperty(fila)) {
+                sub+=filaob[fila]['subtotal'];                            
+            }
+        }   
+        // console.log(sub);
+        $("#subtotal").html("s/. " + sub);
     }
 
     function eliminar(index){
@@ -344,7 +388,7 @@
                         if(index==filaob[key]['posi']){
                             $("#fila_"+filaob[key]['nombre']+'_'+index).remove();
                             filaob.splice(key,1);
-                            console.log(filaob);
+                            // console.log(filaob);
                             
                     }
                 }
@@ -352,7 +396,7 @@
     }
     function eliminarTablero(a){
 
-        console.log(tablero,filaob);
+        // console.log(tablero,filaob);
         for (const key in tablero) {
             if (tablero.hasOwnProperty(key)) {
                 if(a==tablero[key]['posi']){
@@ -361,7 +405,7 @@
                     for (var k in filaob) {
                         if (filaob.hasOwnProperty(k)) {
                             if(tablero[key]['nombre']==filaob[k]['nombre']){
-                                console.log("encontrado");
+                                // console.log("encontrado");
                                 filaob.splice(k,1);
                             }
                         }
