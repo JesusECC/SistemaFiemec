@@ -86,7 +86,8 @@ public function store(Request $request)
         $Proforma->garantia=$request->get('garantia');
         $Proforma->tipo_proforma='unitaria';
         $Proforma->estado='activo';
-        
+
+       
         $Proforma->save();
         
         $idProducto=$request->get('idProducto');

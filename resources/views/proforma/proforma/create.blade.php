@@ -142,12 +142,7 @@
                                 </label>
                                 <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
                             </div>
-                            <div class="col-lg-4">
-                                <label for="garantia">
-                                    Plazo de Garantia
-                                </label>
-                                <input type="date" name="garantia" id="garantia" class="form-control">
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="row" >

@@ -15,7 +15,7 @@
 		    </div>
 		    @endif
 		  </div>
-	{!!Form::open(array('url'=>'producto-store','method'=>'POST','autocomplete'=>'off'))!!}
+	{!!Form::open(array('url'=>'producto-store','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
 
     {{Form::token()}}
 		  <div class="panel-body">
@@ -110,7 +110,8 @@
 		    </div>
 		    <div class="col-lg-4 col-md-4 col-sm-12 col-xl-12">
 		    	<div class="box">
-		    		<!--aca va la imagen-->
+		    		<label for="foto">Imagen</label>
+					<input type="file" name="foto" class="form-control">
 		    	</div>		    	
 		    </div>
 		  </div>
