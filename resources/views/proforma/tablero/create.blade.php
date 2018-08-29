@@ -305,16 +305,18 @@
                                             '<div class="box-body">'+
                                                 '<div class="row">'+
                                                     '<div class="col-md-12">'+
-                                                        '<table id="detalle_'+nomTablero+'" class="table table-striped table-bordered table-condensed table-hover">'+
+                                                        '<table  class="table table-striped table-bordered table-condensed table-hover">'+
                                                             '<thead style="background-color:#A9D0F5">'+
-                                                                '<th>Producto</th>'+
-                                                                '<th>Cant.</th>'+
-                                                                '<th>P. Unit.</th>'+
-                                                                '<th>Descuento</th>'+
-                                                                '<th>Importe</th>'+
-                                                                //'<th></th>'+
+                                                                '<tr>'+
+                                                                    '<th>Producto</th>'+
+                                                                    '<th>Cant.</th>'+
+                                                                    '<th>P. Unit.</th>'+
+                                                                    '<th>Descuento</th>'+
+                                                                    '<th>Importe</th>'+
+                                                                '</tr>'+
                                                             '</thead>'+
-                                                            '<tbody>'+
+                                                            '<tbody id="detalle_'+nomTablero+'" >'+
+
                                                             '</tbody>'+ 
                                                             '<tfoot>'+
                                                                 '<th>Total</th>'+
@@ -332,34 +334,6 @@
                                     '</div>'+
                                 '</div>'+
                             '</section>'+
-                        '</div>'
-                
-                            '<div class="panel-heading">'+
-                                '<h3 class="panel-title">Tablero '+nomTablero+'</h3>'+
-                                '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
-                                                '<i class="fa fa-times"></i>'+
-                                        '</button>'+
-                            '</div>'+
-                            '<div class="panel-body">'+
-                                '<table id="detalle_'+nomTablero+'" class="table table-striped table-bordered table-condensed table-hover">'+
-                                    '<thead style="background-color:#A9D0F5">'+
-                                        '<th>Producto</th>'+
-                                        '<th>Cant.</th>'+
-                                        '<th>P. Unit.</th>'+
-                                        '<th>Importe</th>'+
-                                        //'<th></th>'+
-                                    '</thead>'+
-                                    '<tbody>'+
-                                    '</tbody>'+ 
-                                    // '<tfoot>'+
-                                    //     '<th>Total</th>'+
-                                    //     '<th></th>'+
-                                    //     '<th></th>'+
-                                    //     '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                    //     '</th>'+
-                                    // '</tfoot>'+
-                                '</table>'+
-                            '</div>'+
                         '</div>';
             var ta={nombre:nomTablero,posi:cont,tablero:table}
             tablero.push(ta);                        
