@@ -13,29 +13,83 @@
         </ul>   
     </div>
     @endif
-    <label class="control-label">Ingresar Nombre de tablero</label>
-    <div class="form-group">
-        <div class="input-group">
-            <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero..." >
-            <samp class="input-group-btn">
-                <button type="button" id="bt_add_tablero" class="btn btn-primary">Agregar</button>
-            </samp>
-        </div>
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ingresar Nombre de tablero</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero..." >
+                        <samp class="input-group-btn">
+                            <button type="button" id="bt_add_tablero" class="btn btn-primary">Agregar</button>
+                        </samp>
+                    </div>
+                </div>
+                <div class="form-group" id="producto-oculto" style='display:none;'>
+                    <label class="control-label">Producto</label>
+                    <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                        @foreach($productos as $producto)
+                            <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}">{{ $producto->nombre_producto }}</option>
+                        @endforeach
+                    </select>                   
+                </div>
+                {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
+                @csrf
+                <div class="card" id="producto-crear-oculto" style='display:none;'>
+                    <div class="card-header">
+                        Seleccionó
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Nombre de Producto</label>
+                                    <input type="hidden" id="idProd" name="idProd" disabled>
+                                    <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
+                                </div>                               
+                            </div>
+                            <div class="col-lg-3 col-xs-3 col-md-3 col-sm-3">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">P. UNIT.</label>
+                                    <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
+                                </div>
+                            </div> 
+                            <div class="col-lg-3">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Cantidad</label>
+                                    <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
+                                </div>
+                            </div> 
+                            <div class="col-sm-6">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Nombre Tablero</label>
+                                    <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
+                                    <div id="select-pro" ></div>
+                                </div>
+                            </div> 
+                            <div class="col-sm-1">
+                                <div class="form-group label-floating">
+                                <label class="control-label"></label>
+                                    <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
     </div>
-
-    <div class="row" id="producto-oculto" style='display:none;'>
-        <div class="col-sm-7">
-            <div class="form-group label-floating">
-                <label class="control-label">Producto</label>
-                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                    @foreach($productos as $producto)
-                        <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}">{{ $producto->nombre_producto }}</option>
-                    @endforeach
-                </select>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div id="tablerosn">
+                
+                </div>
             </div>
         </div>
     </div>
-
     {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
     @csrf
 
@@ -92,9 +146,6 @@
         </div>
     </div>
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-        <div id="tablerosn">
-        
-        </div>   
         <div>
             <table class="table table-striped table-bordered table-condensed table-hover">
                     <tfoot>
@@ -177,7 +228,6 @@
         $("#idProd").val(Producto[0]);
         $("#Productoname").val(Producto[1]);
         $("#precio_uni").val(Producto[2]);
-        // descuentoP -->para emostar el 
     }
     function mostrarcampos(){
         document.getElementById('producto-crear-oculto').style.display = 'block';
@@ -185,6 +235,7 @@
         // $("#producto-crear-oculto").style.display='block';
         // $("#producto-oculto").style.display='block';
     } 
+
 
     function agregarProductosTablero(){    
         var idProd=$('#idProd').val();
@@ -287,7 +338,7 @@
             }
             //if que compara e inserta la tabla contenedora de los produtos vacia.
             if(bool==false ){  
-                table='<div id="'+nomTablero+'_'+cont+'">'+
+                table='<div id="'+nomTablero+'_'+cont+'" >'+
                             '<section class="content" style="min-height:0px !important">'+
                                 '<div class="row">'+
                                     '<div class="col-md-12">'+
@@ -304,15 +355,16 @@
                                             '</div>'+
                                             '<div class="box-body">'+
                                                 '<div class="row">'+
-                                                    '<div class="col-md-12">'+
-                                                        '<table id="detalle_'+nomTablero+'" class="table table-striped table-bordered table-condensed table-hover">'+
+                                                    '<div class="col-md-12 table-responsive">'+
+                                                        '<table id="detalle_'+nomTablero+'" class="table table-bordered table-condensed table-hover responsive" cellspacing="0" width="100%">'+
                                                             '<thead style="background-color:#A9D0F5">'+
-                                                                '<th>Producto</th>'+
-                                                                '<th>Cant.</th>'+
-                                                                '<th>P. Unit.</th>'+
-                                                                '<th>Descuento</th>'+
-                                                                '<th>Importe</th>'+
-                                                                //'<th></th>'+
+                                                                '<tr>'+
+                                                                    '<th >Producto</th>'+
+                                                                    '<th width="10px">Cant.</th>'+
+                                                                    '<th>P. Unit.</th>'+
+                                                                    '<th>Descuento</th>'+
+                                                                    '<th>Importe</th>'+              
+                                                                '</tr>'+
                                                             '</thead>'+
                                                             '<tbody>'+
                                                             '</tbody>'+ 
@@ -343,21 +395,15 @@
                             '<div class="panel-body">'+
                                 '<table id="detalle_'+nomTablero+'" class="table table-striped table-bordered table-condensed table-hover">'+
                                     '<thead style="background-color:#A9D0F5">'+
-                                        '<th>Producto</th>'+
-                                        '<th>Cant.</th>'+
-                                        '<th>P. Unit.</th>'+
-                                        '<th>Importe</th>'+
-                                        //'<th></th>'+
+                                        '<tr>'+
+                                            '<th>Producto</th>'+
+                                            '<th width="10px">Cant.</th>'+
+                                            '<th>P. Unit.</th>'+
+                                            '<th>Importe</th>'+
+                                        '</tr>'+
                                     '</thead>'+
                                     '<tbody>'+
                                     '</tbody>'+ 
-                                    // '<tfoot>'+
-                                    //     '<th>Total</th>'+
-                                    //     '<th></th>'+
-                                    //     '<th></th>'+
-                                    //     '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                    //     '</th>'+
-                                    // '</tfoot>'+
                                 '</table>'+
                             '</div>'+
                         '</div>';
@@ -371,7 +417,6 @@
         ListaSelect()
        // mantiene en la vista las filas cuando se agrega una nueva tabla
         // detalleFilas();
-        fila();
         //nomtablero="";
     }
     function ListaSelect(){
@@ -443,8 +488,8 @@
             // elimina las filas de un tablero especifico 
             for (var key in filaob) {
                 if (filaob.hasOwnProperty(key)) {
-                    if(index==filaob[key]['posiP']){
-                        $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
+                    if(index==filaob[key]['posi']){
+                        $("#fila_"+filaob[key]['nombre']+'_'+index).remove();
                         filaob.splice(key,1);
                         // console.log(filaob);                            
                     }
