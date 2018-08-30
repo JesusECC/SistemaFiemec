@@ -62,6 +62,13 @@ class ControllerEmpleados extends Controller
                   $Empleado->sueldo=$request->get('sueldo');
                   $Empleado->fecha_inicio=$request->get('fecha_inicio');
                   $Empleado->fecha_fin=$request->get('fecha_fin');
+                   
+                   if (Input::hasFile('fotoE')){
+           $file=Input::file('fotoE');
+           $file->move(public_path().'/fotos/empleados/',$file->getClientOriginalName());
+           $producto->fotoCEP=$file->getClientOriginalName();
+
+        }
                   
                   $Empleado->save();
  
@@ -98,10 +105,19 @@ class ControllerEmpleados extends Controller
         $Empleado->direccion=$request->get('telefono');
         $Empleado->correo=$request->get('correo');
         $Empleado->celular=$request->get('celular');
+        $Empleado->cargo=$request->get('cargo');
+        $Empleado->sueldo=$request->get('sueldo');
+        $Empleado->fecha_inicio=$request->get('fecha_inicio');
+        $Empleado->fecha_fin=$request->get('fecha_fin');
+
+         if (Input::hasFile('fotoE')){
+           $file=Input::file('fotoE');
+           $file->move(public_path().'/fotos/empleados/',$file->getClientOriginalName());
+           $producto->fotoCEP=$file->getClientOriginalName();
+
+        }
 
         $Empleado->update();
-
-        $updates = DB::table('Detalle_empleado')->where('Empleado', '=', $id)   ->update([    'cargo' => $request->get('cargo'),'sueldo' =>$request->get('sueldo'), 'fecha_inicio' =>$request->get('fecha_inicio'), 'fecha_fin' =>$request->get('fecha_fin')]);
   
             return redirect::to('proforma/empleado');
           

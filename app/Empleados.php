@@ -27,7 +27,7 @@ class Empleados extends Model
     	'contraseña',
     	'direccion',
     	'correo',
-    	'foto',
+    	'fotoE',
         'cargo',
         'sueldo',
         'fecha_inicio',

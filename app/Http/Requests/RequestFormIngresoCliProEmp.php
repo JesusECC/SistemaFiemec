@@ -34,6 +34,7 @@ class RequestFormIngresoCliProEmp extends FormRequest
         'telefono'=>'max:11',
         'celular'=>'max:11',
         'correo'=>'max:100',
+        'fotoCEP'=>'mimes:jpeg,bmp,jpg,png',
         'tipo_persona'=>'max:100',
         'cuenta_1'=>'max:45',
         'cuenta_2'=>'max:45',

@@ -13,7 +13,7 @@
     </div>
     @endif
 <!-- mantener valores al -->
-    {!!Form::open(array('url'=>'proforma/empleado','method'=>'POST','autocomplete'=>'off'))!!}
+    {!!Form::open(array('url'=>'proforma/empleado','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
 
     {{Form::token()}}
 
@@ -101,6 +101,12 @@
 <div class="form-group">
 	<label for="fecha_fin">Fecha Final</label>
 	<input type="date" name="fecha_fin" class="form-control" placeholder="Ingrese Fecha Final">	
+</div>
+
+
+<div class="col-lg-12">
+    <label for="fotoE">Imagen</label>
+    <input type="file" id="files" name="fotoE[]" class="form-control">
 </div>
 
 <!-- JOSE CORRIGE EL MARGIN DEL BOTON VOLVER CTMR!!!! -->

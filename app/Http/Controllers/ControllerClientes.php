@@ -83,6 +83,12 @@ class ControllerClientes extends Controller
                   $Cliente->Distrito=$request->get('Distrito');
                   $Cliente->Direccion=$request->get('Direccion');
                   $Cliente->Referencia=$request->get('Referencia');
+                  if (Input::hasFile('fotoCEP')){
+           $file=Input::file('fotoCEP');
+           $file->move(public_path().'/fotos/clientes/',$file->getClientOriginalName());
+           $producto->fotoCEP=$file->getClientOriginalName();
+
+        }
                 
                   $Cliente->save();
  
@@ -124,6 +130,13 @@ class ControllerClientes extends Controller
                   $Cliente->direcion=$request->get('direcion');
                   $Cliente->referencia=$request->get('referencia');
                   $Cliente->idCliente=$idCliente;
+                  
+                  if (Input::hasFile('fotoCEP')){
+           $file=Input::file('fotoCEP');
+           $file->move(public_path().'/fotos/clientes/',$file->getClientOriginalName());
+           $producto->fotoCEP=$file->getClientOriginalName();
+
+        }
                   $Cliente->update();
  
             
