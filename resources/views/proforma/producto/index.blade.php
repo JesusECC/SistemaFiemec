@@ -14,9 +14,9 @@
 	      <img src="{{asset('fotos/productos/'.$pro->foto)}}">
 	      <div class="caption">
 	        <h3>{{$pro->nombre_producto}}</h3>
-	        <h4 style="color:#028039">S/. {{$pro->precio_unitario}} o S/. 25.80</h4>
+	        <h4 style="color:#028039">S/. {{$pro->precio_unitario}} o </h4>
 	        <p style="font-size: 20px">
-	        	Stock: <span style="font">5</span>
+	        	Stock: <span style="font">{{$pro->stock}}</span>
 	        </p>
 	        <p style="font-size: 20px">
 	        	<span>
@@ -24,13 +24,14 @@
 	        	</span>
 	        </p>
 	        <p>
-	        	<a  class="btn btn-primary" role="button"><i class="far fa-eye"></i> Ver</a> 
+	        	<a  href=""  data-target="#modal-show-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-primary"><i class="far fa-eye"></i> Ver</a> 
 	        	<a href="{{route('producto-edit',$pro->idProducto)}}" class="btn btn-success" role="button"><i class="fas fa-edit"></i> Editar</a> 
 	        	<a href="" data-target="#modal-delete-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-danger" ><i class="fas fa-trash-alt"></i> Eliminar</a></p>
 	      </div>
 	    </div>
 	  </div>
 	  @include('proforma.producto.modal')
+	  @include('proforma.producto.modal-producto')
 	 @endforeach
   </div>
   {{$productos->render()}}
