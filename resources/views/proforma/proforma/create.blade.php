@@ -50,7 +50,7 @@
     <div class="row">
         <div class="panel panel-primary">
            <div class="panel-body">
-              <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+              <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                   <div class="form-group">
                     <label>Producto</label>
                     <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
@@ -84,6 +84,27 @@
             </div>
 
 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                <label>Tipo de cambio</label>
+                <select required name="idTipo_moneda" class="form-control selectpicker" id="pidTipo_moneda" data-live-search="true">
+
+                    <option value=""></option>
+                   @foreach($monedas as $mo)
+                   
+                   <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}">{{$mo->nombre_moneda.' '.$mo->simbolo}}</option>
+                   @endforeach  
+               </select>
+            </div>
+
+<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                <div class="from-group">
+                    <label for="tipo_cambio"></label>
+                    <input type="number" disabled name="tipo_cambio" id="ptipo_cambio" class="form-control" >
+                    
+
+                </div>
+            </div>
+
+<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                 <div class="from-group">
                     <label for="descuentoP">Descuento en %</label>
                     <input type="number"  name="pdescuentoP" id="pdescuentoP" class="form-control" placeholder="descuento">
@@ -110,8 +131,10 @@
                         <th>opciones</th>
                         <th>Producto</th>
                         <th>cantidad</th>
+
                         <th>precio venta</th>
                         <th>Descuento</th>
+                       
                         <th>total</th>
                     </thead>
                     <tfoot>
@@ -120,7 +143,10 @@
                         <th></th>
                         <th></th>
                         <th></th>
+               
                         <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">
+                        </th>
+                        <th><h4 id="toca">0.00</h4><input type="hidden" name="precio_totalC" id="precio_totalC">
                         </th>
 
                     </tfoot>
@@ -179,12 +205,17 @@ $(document).ready(function(){
     });
 });
 
+
 var cont=0;
 total=0;
+toca=0;
 subtotal=[];
+subcambio=[];
+
 $("#guardar").hide();
 $("#pidProducto").change(mostrarValores);
 $("#idCliente").change(mostrarValor);
+$("#pidTipo_moneda").change(mostrarV);
 
 
 function mostrarValores()
@@ -199,6 +230,11 @@ function mostrarValor()
     $("#pnro_documento").val(datos[2]);
     $("#pdireccion").val(datos[1]);
 }
+function mostrarV()
+{
+    datosm=document.getElementById('pidTipo_moneda').value.split('_');
+    $("#ptipo_cambio").val(datosm[1]);
+}
 
 function agregar()
 {
@@ -207,15 +243,16 @@ function agregar()
     idProducto=datosProducto[0];
     producto=$("#pidProducto option:selected").text();
     cantidad=$("#pcantidad").val();
-
+    moneda=$("#ptipo_cambio").val();
     descuento=$("#pdescuentoP").val();
     precio_venta=$("#pprecio_unitario").val();
-    stock=$("#pstock").val();
+    
 
-    alert(datosProducto);
+    //alert(datosProducto);
 
-    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="")
+    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="" && moneda!="")
     {
+
 
         if(cantidad>0)
         {
@@ -223,11 +260,22 @@ function agregar()
        subtotal[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad);
        total=total+subtotal[cont];
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td></tr>';
+       subcambio[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad)/moneda;
+       toca=toca+subcambio[cont];
+       
+       
+       
+
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td> <td>'+subcambio[cont]+'</td></tr>';
        cont++;
+       
        limpiar();
-       $("#total").html("s/. " + total);
+       //soles
+       $("#total").html("s/." + total);
        $("#precio_total").val(total);
+       //cambio
+       $("#toca").html(+ toca);
+       $("#precio_total").val(toca/moneda);
        evaluar();
        $('#detalles').append(fila);
 
@@ -245,6 +293,7 @@ function agregar()
 
 
     total=0;
+    toca=0;
     function limpiar(){
         $("#pcantidad").val("");
         $("#pdescuento").val("");
@@ -263,9 +312,14 @@ function agregar()
         }
     }
     function eliminar(index){
+       //soles
         total=total-subtotal[index];
         $("#total").html("s/. "+total);
         $("#precio_total").val(total);
+       //cambio
+        toca=toca-subcambio[index];
+        $("#toca").html(+ toca);
+        $("#precio_total").val(toca/moneda);
         $("#fila" + index).remove();
         evaluar();
     }

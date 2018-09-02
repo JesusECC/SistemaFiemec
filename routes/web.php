@@ -24,6 +24,7 @@ Route::resource('proforma/empresa','ControllerEmpresa');
 Route::resource('proforma/proforma','ControllerProformaUnitaria');
 Route::resource('proforma/servicio','ControllerProformaServicio');
 Route::resource('dashboard/dashboard-admin','ControllerDashboard');
+//Route::get('pdf','ControllerProformaUnitaria@pdf')->name('productos.pdf');
 
 
 //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
@@ -49,5 +50,5 @@ Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@sto
 Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
 
 
-Route::post('proforma/proforma','ControllerProformaUnitaria@store');
+//Route::post('proforma/proforma','ControllerProformaUnitaria@store');
 

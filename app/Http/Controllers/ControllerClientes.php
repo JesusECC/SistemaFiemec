@@ -60,7 +60,7 @@ class ControllerClientes extends Controller
   
 
 
- public function store(RequestFormIngresoCliProEmp $request){
+ public function store(Request $request){
   
                   $Cliente=new Clientes;
 
@@ -105,7 +105,7 @@ class ControllerClientes extends Controller
     }
 
    
-    public function update(RequestFormIngresoCliProEmp $request,$id)
+    public function update(Request $request,$id)
     {
 
                   $Cliente=Clientes::Find($id);
