@@ -29,13 +29,19 @@
 	  		</div><!--final de columna de foto-->
 	  		<div class="col-lg-9">
 	  			<h4 class="modal-title" id="myModalLabel" style="color: #0F7A87">{{$pro->nombre_producto}}</h4>
-	  			<span>
-	  				Código de pedido : {{$pro->codigo_pedido}}
-	  			</span>
-	  			<span>///</span>
-	  			<span>
-	  				Código de producto : {{$pro->codigo_producto}}
-	  			</span>
+
+	  			<p>
+	  				<span><i class="fas fa-barcode"></i> Código de pedido : {{$pro->codigo_pedido}}</span> 
+	  			</p>
+	  			<p>
+	  				<span><i class="fas fa-barcode"></i> Código de producto : {{$pro->codigo_producto}}</span>
+	  			</p>
+	  			<p>
+	  				<span><i class="fas fa-pen-alt"></i> Descripción : {{$pro->descripcion_producto}}</span>
+	  			</p>	
+	  			<p>
+	  				<span><i class="fas fa-money-bill"></i> Precio : S/. {{$pro->precio_unitario}}</span>
+	  			</p>
 	  			<br>
 	  			<span>
 	  				{{$pro->descripcion_producto}}
