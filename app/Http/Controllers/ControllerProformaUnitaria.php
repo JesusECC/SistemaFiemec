@@ -5,11 +5,12 @@ namespace SistemaFiemec\Http\Controllers;
 use Illuminate\Http\Request;
 use SistemaFiemec\Http\Requests;
 use SistemaFiemec\Proforma;
+
 use SistemaFiemec\DetalleProforma;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SistemaFiemec\Http\Requests\RequestFormProforma;
-
+//use PDF;
 use Carbon\Carbon;
 use Response;
 use Illuminate\Support\Collection;
@@ -34,7 +35,6 @@ class ControllerProformaUnitaria extends Controller
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('p.estado','=','activo')
-
     ->orderBy('p.idProforma','desc')
      
     	->paginate(7);           
@@ -49,6 +49,10 @@ public function create()
  ->where('estado','=','activo')
  ->get();
 
+ $monedas=DB::table('Tipo_moneda')
+ ->where('estado','=','activo')
+ ->get();
+
  $clientes=DB::table('Cliente_Proveedor as cp')
  ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
 ->where('tipo_persona','=','Cliente persona')
@@ -58,7 +62,7 @@ public function create()
 
 
 
- return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes]);
+ return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
 }
 
 public function store(Request $request)
@@ -69,17 +73,21 @@ public function store(Request $request)
     $splitid = explode('_', $request->get('idCliente'), 2);
     $idclien= $splitid[0];
 
+    $splitid = explode('_', $request->get('idTipo_moneda'), 2);
+    $idmoneda= $splitid[0];
         DB::beginTransaction();
        
         $Proforma=new Proforma;
         $Proforma->idCliente=$idclien;
         $Proforma->idEmpleado='2';
+        $Proforma->idTipo_moneda=$idmoneda;
         $Proforma->serie_proforma='PU365122018';
         $mytime = Carbon::now('America/Lima');
         $Proforma->fecha_hora=$mytime->toDateTimeString();
         $Proforma->igv='18';
         $Proforma->subtotal=$request->get('subtotal');
         $Proforma->precio_total=$request->get('precio_total');
+        $Proforma->precio_totalC=$request->get('precio_totalC');
         $Proforma->forma_de=$request->get('forma_de');
         $Proforma->observacion_condicion=$request->get('observacion_condicion');
         $Proforma->plazo_oferta=$request->get('plazo_oferta');
@@ -134,9 +142,19 @@ public function store(Request $request)
     ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.observacion_detalleP')
     ->where('dpr.idProforma','=',$id)
     ->get();
+
 return view("proforma.proforma.show",["proforma"=>$proforma,"detalles"=>$detalles]);
    }
 
+/*public function pdf()
+    {
+    $product=Producto::all()
+    ->where('estado','=','activo');
+    $pdf=PDF::loadView('pdf',['product'=>$product]);
+    return $pdf->download('Lista de requerimientos.pdf');
+}
+
+*/
     public function destroy($id)
     {
         $producto=Proforma::findOrFail($id);

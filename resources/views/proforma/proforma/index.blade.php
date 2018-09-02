@@ -2,7 +2,7 @@
 @section ('contenido')
 
 <div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Lista de Proformas    <a href="proforma/create"><button class="btn btn-success">Nuevo</button></a></h3>
+	<h3> Lista de Proformas   <a href="proforma/create"><button class="btn btn-success">Nuevo</button></a> </h3>
 	@include('proforma.proforma.search')
 </div>
 <div class='row'>
@@ -35,8 +35,11 @@
 					<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">detalles</button>
 					</a>
 					<a href="" data-target="#modal-delete-{{$prof->idProforma}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
+
+					
 					</td>
 				</tr>
+				
 				@include('proforma.proforma.modal')
              @endforeach
             
