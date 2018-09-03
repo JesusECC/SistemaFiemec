@@ -2,14 +2,16 @@
 @section ('contenido')
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-    <h3>Nueva Proforma</h3>
-    @if (count($errors)>0)
-    <div class="alert-alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach 
-        </ul>   
+        <h3>Nueva Proforma</h3>
+        @if (count($errors)>0)
+        <div class="alert-alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach 
+            </ul>   
+        </div>
+        @endif
     </div>
 </div>
 {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
@@ -110,196 +112,90 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-                
-        </div>
-    @endif
+                    <div class="col-lg-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Importe
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
 
+                                    <thead style="background-color:#A9D0F5">
+                                        <th>opciones</th>
+                                        <th>Producto</th>
+                                        <th>cantidad</th>
+
+                                        <th>precio venta</th>
+                                        <th>Descuento</th>
+                                       
+                                        <th>total</th>
+                                    </thead>
+
+
+                                    <tfoot>
+                                        <th>total</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                               
+                                        <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">
+                                        </th>
+                                        <th><h4 id="toca">0.00</h4><input type="hidden" name="precio_totalC" id="precio_totalC">
+                                        </th>
+
+                                    </tfoot>
+                                       <tbody>
+                                    </tbody>                    
+                                </table>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="container-fluid" id="guardar">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-4">
+                                        <label for="forma_de">
+                                            Forma de Pago:
+                                        </label>
+                                        <input type="text" name="forma_de" id="forma_de" class="form-control">
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="plazo_oferta">
+                                            Plazo de oferta:
+                                        </label>
+                                        <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                      <input name"_token" value="{{ csrf_token() }}" type="hidden">
+                                      <label for="observacion_condicion">Observaciones</label>
+                                      <textarea name="observacion_condicion" id="observacion_condicion" class="form-control">
+                                        </textarea>                                 
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="col-lg-5"  style="padding: 10px">
+                                            <button class="btn btn-primary" type="submit">guardar</button>
+
+                                            <button class="btn btn-danger" type="reset">cancelar</button>
+                                        </div>         
+                                     </div>                             
+                                </div>
+                            </div>
+                        </div>                                            
+                    </div>
+                </div>
+            </div> 
+        </div>
     </div>
  </div>
-
-    {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
-
-    {{Form::token()}}
-<div>
-    <div>
-        <div class="form-group">
-            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                <label>Cliente</label>
-                <select required name="idCliente" class="form-control selectpicker" id="idCliente" data-live-search="true">
-
-                    <option value=""></option>
-                   @foreach($clientes as $cliente)
-                   
-                   <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
-                   @endforeach  
-               </select>
-            </div>
-        </div>
-              <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
-                <div class="from-group">
-                    <label for="direccion">Direccion</label>
-                    <input type="text" disabled name="direccion" id="pdireccion" class="form-control" placeholder="direccion">
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                <div class="from-group">
-                    <label for="nro_documento">Numero de Documento</label>
-                    <input type="text" disabled name="nro_documento" id="pnro_documento" class="form-control" placeholder="numero documento">
-                </div>
-            </div>
-        
-    </div>
-    <div class="row">
-        <div class="panel panel-primary">
-           <div class="panel-body">
-              <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                  <div class="form-group">
-                    <label>Producto</label>
-                    <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                        <option value=""></option>
-                        @foreach($productos as $pro)
-                        
-                        <option value="{{$pro->idProducto}}_{{$pro->precio_unitario}}_{{$pro->descuentoP}}">{{$pro->codigo_producto.' '.$pro->nombre_producto}}</option>
-                        @endforeach
-                    </select>
-                  </div>
-               </div>
-
-
-               <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                <div class="from-group">
-                    <label for="cantidad">Cantidad</label>
-                    <input type="number"  name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad">
-                    
-
-                </div>
-            </div>
-
-
-                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                <div class="from-group">
-                    <label for="precio_unitario">Precio unitario</label>
-                    <input type="number" disabled name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
-                    
-
-                </div>
-            </div>
-
-<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                <label>Tipo de cambio</label>
-                <select required name="idTipo_moneda" class="form-control selectpicker" id="pidTipo_moneda" data-live-search="true">
-
-                    <option value=""></option>
-                   @foreach($monedas as $mo)
-                   
-                   <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}">{{$mo->nombre_moneda.' '.$mo->simbolo}}</option>
-                   @endforeach  
-               </select>
-            </div>
-
-<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                <div class="from-group">
-                    <label for="tipo_cambio"></label>
-                    <input type="number" disabled name="tipo_cambio" id="ptipo_cambio" class="form-control" >
-                    
-
-                </div>
-            </div>
-
-<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                <div class="from-group">
-                    <label for="descuentoP">Descuento en %</label>
-                    <input type="number"  name="pdescuentoP" id="pdescuentoP" class="form-control" placeholder="descuento">
-                    
-
-                </div>
-            </div>
-
-            <div  class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-11">
-                        
-                    </div>
-                    <div class="col-lg-1">
-                         <button type="button" id="bt_add" class="btn btn-primary active btn-block " style="margin-bottom: 10px">agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
-
-                    <thead style="background-color:#A9D0F5">
-                        <th>opciones</th>
-                        <th>Producto</th>
-                        <th>cantidad</th>
-
-                        <th>precio venta</th>
-                        <th>Descuento</th>
-                       
-                        <th>total</th>
-                    </thead>
-
-
-                    <tfoot>
-                        <th>total</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-               
-                        <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">
-                        </th>
-                        <th><h4 id="toca">0.00</h4><input type="hidden" name="precio_totalC" id="precio_totalC">
-                        </th>
-
-                    </tfoot>
-                       <tbody>
-                    </tbody>                    
-                </table>
-                <div class="container-fluid" id="guardar">
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-lg-4">
-                                <label for="forma_de">
-                                    Forma de Pago:
-                                </label>
-                                <input type="text" name="forma_de" id="forma_de" class="form-control">
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="plazo_oferta">
-                                    Plazo de oferta:
-                                </label>
-                                <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="row" >
-                        <div class="form-group">
-                            <div class="col-lg-6">
-                              <input name"_token" value="{{ csrf_token() }}" type="hidden">
-                              <label for="observacion_condicion">Observaciones</label>
-                              <textarea name="observacion_condicion" id="observacion_condicion" class="form-control">
-                                </textarea>                                 
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="col-lg-5"  style="padding: 10px">
-                                    <button class="btn btn-primary" type="submit">guardar</button>
-
-                                    <button class="btn btn-danger" type="reset">cancelar</button>
-                                </div>         
-                             </div>                             
-                        </div>
-                    </div>
-                </div>
-            </div>
-      </div>
-</div>
-</div>
-</div>
 {!!Form::close()!!}
 
 
