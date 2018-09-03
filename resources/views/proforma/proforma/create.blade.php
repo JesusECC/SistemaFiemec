@@ -99,6 +99,15 @@
                                             <input type="number"  name="pdescuentoP" id="pdescuentoP" class="form-control" placeholder="descuento">
                                         </div>
                                     </div>
+                                    <div class="col-lg-9">
+                                        
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group" style="margin-top: 10px;">
+                                           <button type="button" id="bt_add" class="btn btn-primary active btn-block ">Agregar</button> 
+                                        </div>
+                                         
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +118,6 @@
         </div>
     </div>
 </div>
-
 
 
 
