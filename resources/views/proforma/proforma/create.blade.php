@@ -137,6 +137,8 @@
                        
                         <th>total</th>
                     </thead>
+
+
                     <tfoot>
                         <th>total</th>
                         <th></th>
@@ -257,11 +259,13 @@ function agregar()
         if(cantidad>0)
         {
 
+subcambio[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad/moneda);
+       toca=toca+subcambio[cont];
+
        subtotal[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad);
        total=total+subtotal[cont];
 
-       subcambio[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad)/moneda;
-       toca=toca+subcambio[cont];
+  
        
        
        
@@ -275,7 +279,7 @@ function agregar()
        $("#precio_total").val(total);
        //cambio
        $("#toca").html(+ toca);
-       $("#precio_total").val(toca/moneda);
+       $("#precio_total").val(toca);
        evaluar();
        $('#detalles').append(fila);
 
@@ -317,9 +321,10 @@ function agregar()
         $("#total").html("s/. "+total);
         $("#precio_total").val(total);
        //cambio
-        toca=toca-subcambio[index];
+       toca=toca-subcambio[index];
         $("#toca").html(+ toca);
-        $("#precio_total").val(toca/moneda);
+        $("#precio_total").val(toca);
+
         $("#fila" + index).remove();
         evaluar();
     }

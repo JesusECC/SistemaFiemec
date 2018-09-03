@@ -14,6 +14,7 @@ class Moneda extends Model
     protected $filleable = [
     	'nombre_moneda',
     	'tipo_cambio',
+      'simbolo',
     	'estado', 
    ];
 

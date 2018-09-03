@@ -23,6 +23,7 @@ Route::resource('proforma/proveedor','ControllerProveedor');
 Route::resource('proforma/empresa','ControllerEmpresa');
 Route::resource('proforma/proforma','ControllerProformaUnitaria');
 Route::resource('proforma/servicio','ControllerProformaServicio');
+Route::resource('proforma/config','ControllerConfiguracion');
 Route::resource('dashboard/dashboard-admin','ControllerDashboard');
 //Route::get('pdf','ControllerProformaUnitaria@pdf')->name('productos.pdf');
 
