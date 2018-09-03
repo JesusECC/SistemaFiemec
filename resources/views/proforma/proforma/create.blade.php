@@ -2,17 +2,16 @@
 @section ('contenido')
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <h3>Nueva Proforma</h3>
-        @if (count($errors)>0)
-        <div class="alert-alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach 
-            </ul>   
-        </div>
-        @endif
+    <h3>Nueva Proforma</h3>
+    @if (count($errors)>0)
+    <div class="alert-alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach 
+        </ul>   
     </div>
+<<<<<<< HEAD
 </div>
 {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
 
@@ -116,13 +115,18 @@
             </div>
                 
         </div>
+=======
+    @endif
+>>>>>>> bc4731962514afa47e4c330b2463c5507b2ec944
     </div>
-</div>
+ </div>
 
+<<<<<<< HEAD
+=======
+    {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
 
-
-
-
+    {{Form::token()}}
+>>>>>>> bc4731962514afa47e4c330b2463c5507b2ec944
 <div>
     <div>
         <div class="form-group">
@@ -375,7 +379,7 @@ function agregar()
        
        
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td> <td>'+subcambio[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td> </tr>';
        cont++;
        
        limpiar();
