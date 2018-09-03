@@ -146,19 +146,11 @@ public function store(Request $request)
 return view("proforma.proforma.show",["proforma"=>$proforma,"detalles"=>$detalles]);
    }
 
-/*public function pdf()
-    {
-    $product=Producto::all()
-    ->where('estado','=','activo');
-    $pdf=PDF::loadView('pdf',['product'=>$product]);
-    return $pdf->download('Lista de requerimientos.pdf');
-}
 
-*/
     public function destroy($id)
     {
         $producto=Proforma::findOrFail($id);
-        $producto->estado='anulada';
+        $producto->estado='cancelada';
         $producto->update();
         return Redirect::to('proforma/proforma');
 
