@@ -259,7 +259,7 @@ function agregar()
         if(cantidad>0)
         {
 
-subcambio[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad/moneda);
+       subcambio[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad/moneda);
        toca=toca+subcambio[cont];
 
        subtotal[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad);

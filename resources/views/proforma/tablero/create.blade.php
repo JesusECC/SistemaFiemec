@@ -13,115 +13,170 @@
 		</ul>	
     </div>
     @endif
-    <label class="control-label">Ingresar Nombre de tablero</label>
-    <div class="form-group">
-        <div class="input-group">
-            <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero..." >
-            <samp class="input-group-btn">
-                <button type="button" id="bt_add_tablero" class="btn btn-primary">Agregar</button>
-            </samp>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Datos de proforma
+                        </h3>
+                    </div>
+                    <div class="panel-body">              
+                    </div>            
+                </div>
+            </div> 
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Datos de Cliente
+                        </h3>
+                    </div>
+                    <div class="panel-body">              
+                    </div>            
+                </div>
+            </div> 
         </div>
     </div>
-
-    <div class="row" id="producto-oculto" style='display:none;'>
-        <div class="col-sm-7">
-            <div class="form-group label-floating">
-                <label class="control-label">Producto</label>
-                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                    @foreach($productos as $producto)
-                        <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}">{{ $producto->nombre_producto }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-    </div>
-
-    {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
-    @csrf
-
-    <div class="card" id="producto-crear-oculto" style='display:none;'>
-        <div class="card-header">
-        Producto
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Producto</label>
-                        <input type="hidden" id="idProd" name="idProd" disabled>
-                        <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Ingresar Nombre de Tablero
+                        </h3>
                     </div>
-                </div>
-
-                <div class="col-sm-1">
-                    <div class="form-group label-floating">
-                        <label class="control-label">P. UNIT.</label>
-                        <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
-                    </div>
-                </div>
-
-                <div class="col-sm-1">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Cantidad</label>
-                        <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Descuento %</label>
-                        <input type="number" id="pdescuento" class="form-control" name="pdescuento" >
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Nombre Tablero</label>
-                        <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
-                        <div id="select-pro" >
-                            
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
+                                <samp class="input-group-btn">
+                                    <button type="button" id="bt_add_tablero" class="btn btn-primary">
+                                        Agregar
+                                    </button>
+                                </samp>
+                            </div>
+                        </div>
+                        <div class="form-group" id="producto-oculto" style='display:none;'>
+                            <label class="control-label">Producto</label>
+                            <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                @foreach($productos as $producto)
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}">{{ $producto->nombre_producto }}</option>
+                                @endforeach
+                            </select>                    
+                        </div>
+                        {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
+                        @csrf
+                        <div class="card" id="producto-crear-oculto" style='display:none;'>
+                            <div class="card-header">
+                                Seleccionó
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Nombre de Producto</label>
+                                            <input type="hidden" id="idProd" name="idProd" disabled>
+                                            <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
+                                        </div>                               
+                                    </div>
+                                    <div class="col-lg-3 col-xs-3 col-md-3 col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">P. UNIT.</label>
+                                            <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cantidad</label>
+                                            <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Descuento %</label>
+                                            <input type="number" id="pdescuento" class="form-control" name="pdescuento" >
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Nom.Tablero</label>
+                                            <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
+                                            <div id="select-pro" ></div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-1">
+                                        <div class="form-group label-floating">
+                                        <label class="control-label"></label>
+                                            <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+                                        </div>
+                                    </div>                        
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-sm-1">
-                    <div class="form-group label-floating">
-                        <label class="control-label"></label>
-                        <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Concepto
+                        </h3>
                     </div>
+                    <div class="panel-body">
+                        <div id="tablerosn">
+                            
+                        </div>                
+                    </div>            
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Importe
+                        </h3>
+                    </div>
+                    <div class="panel-body">   
+                        <div id="totales-general" style='display:none;'>
+                            <table class="table table-striped table-bordered table-condensed table-hover">
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3" >Sub Total</th>
+                                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Descuentos</th>
+                                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" width="10px" name="descuentos" id="descuentos"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Valor Venta</th>
+                                            <th><h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >I.G.V. 18%</th>
+                                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Total</th>
+                                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
+                                        </tr>
+                                    </tfoot>
+                            </table>                            
+                        </div>
+                    </div>                     
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-        <div id="tablerosn">
-        
-        </div>   
-        <div id="totales-general" style='display:none;'>
-            <table class="table table-striped table-bordered table-condensed table-hover">
-                    <tfoot>
-                        <tr>
-                            <th colspan="3" >Sub Total</th>
-                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
-                        </tr>
-                        <tr>
-                            <th colspan="3" >Descuentos</th>
-                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos"></th>
-                        </tr>
-                        <tr>
-                            <th colspan="3" >Valor Venta</th>
-                            <th><h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
-                        </tr>
-                        <tr>
-                            <th colspan="3" >I.G.V. 18%</th>
-                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
-                        </tr>
-                        <tr>
-                            <th colspan="3" >Total</th>
-                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </table>
-        </div>
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">  
     <div style="margin-top: 20px" class="from-group ">
 
         <button class="btn btn-primary" type="submit">guardar</button>
@@ -229,11 +284,11 @@
                                                     '<div class="col-md-12">'+
                                                         '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
                                                             '<thead style="background-color:#A9D0F5">'+
-                                                                '<th>Producto</th>'+
-                                                                '<th>Cant.</th>'+
-                                                                '<th>P. Unit.</th>'+
-                                                                '<th>Descuento</th>'+
-                                                                '<th>Importe</th>'+
+                                                                '<th width="10px" >Producto</th>'+
+                                                                '<th width="10px">Cant.</th>'+
+                                                                '<th width="10px">P. Unit.</th>'+
+                                                                '<th width="10px">Descuento</th>'+
+                                                                '<th width="10px">Importe</th>'+
                                                                 //'<th></th>'+
                                                             '</thead>'+
                                                             '<tbody id="detalle_'+nomTablero+'">'+
@@ -335,16 +390,16 @@
                                             '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                                         '</td>'+
                                         '<td> '+ 
-                                            '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                                            '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'" style="width:40px !important">'+
                                         '</td>'+
                                         '<td> '+   
-                                            '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'">'+
+                                            '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" style="width:70px !important">'+
                                         '</td>'+
                                         '<td> '+   
-                                            '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'">'+
+                                            '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" style="width:70px  !important">'+
                                         '</td>'+
                                         '<td> '+   
-                                            '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+
+                                            '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'" style="width:70px !important">'+
                                         '</td>'+
                                         '<td>'+
                                             '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
