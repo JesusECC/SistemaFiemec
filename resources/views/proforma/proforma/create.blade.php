@@ -2,22 +2,119 @@
 @section ('contenido')
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-    <h3>Nueva Proforma</h3>
-    @if (count($errors)>0)
-    <div class="alert-alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach 
-        </ul>   
+        <h3>Nueva Proforma</h3>
+        @if (count($errors)>0)
+        <div class="alert-alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach 
+            </ul>   
+        </div>
+        @endif
     </div>
-    @endif
+</div>
+{!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
+
+{{Form::token()}}
+<div class="row"><!--div contenedor sobresaliente-->
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Datos Clientes
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group label-floating">
+                                            <label>Cliente</label>
+                                            <select required name="idCliente" class="form-control selectpicker" id="idCliente" data-live-search="true">
+
+                                                <option value=""></option>
+                                               @foreach($clientes as $cliente)
+                                               
+                                               <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                                               @endforeach  
+                                           </select>
+                                        </div> 
+                                    </div> 
+                                    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12">
+                                        <div class="from-group label-floating">
+                                            <label for="direccion">Direccion</label>
+                                            <input type="text" disabled name="direccion" id="pdireccion" class="form-control" placeholder="direccion">
+                                        </div>
+                                    </div>  
+                                    <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
+                                        <div class="from-group">
+                                            <label for="nro_documento">Numero de Documento</label>
+                                            <input type="text" disabled name="nro_documento" id="pnro_documento" class="form-control" placeholder="numero documento">
+                                        </div>
+                                    </div>                             
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Datos Productos
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Producto</label>
+                                            <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                                <option value=""></option>
+                                                @foreach($productos as $pro)
+                                                
+                                                <option value="{{$pro->idProducto}}_{{$pro->precio_unitario}}_{{$pro->descuentoP}}">{{$pro->codigo_producto.' '.$pro->nombre_producto}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="from-group">
+                                            <label for="precio_unitario">Precio unitario</label>
+                                            <input type="number" disabled name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
+                                        </div>                                        
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="from-group">
+                                            <label for="cantidad">Cantidad</label>
+                                            <input type="number"  name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="from-group">
+                                            <label for="descuentoP">Descuento en %</label>
+                                            <input type="number"  name="pdescuentoP" id="pdescuentoP" class="form-control" placeholder="descuento">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+        </div>
     </div>
- </div>
+</div>
 
-    {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
 
-    {{Form::token()}}
+
+
+
+
 <div>
     <div>
         <div class="form-group">
