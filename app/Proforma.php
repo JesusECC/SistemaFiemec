@@ -14,6 +14,7 @@ class Proforma extends Model
 
     	'idCliente',
     	'idEmpleado',
+        'idTipo_moneda',
     	'serie_proforma',
     	'num_proforma',
     	'fecha_hora',

@@ -77,7 +77,7 @@ public function store(Request $request)
        
         $Proforma=new Proforma;
         $Proforma->idCliente=$idclien;
-        $Proforma->idEmpleado='2';
+       // $Proforma->idEmpleado='2';
         $Proforma->idTipo_moneda=$idmoneda;
         $Proforma->serie_proforma='PU365122018';
         $mytime = Carbon::now('America/Lima');
@@ -94,7 +94,7 @@ public function store(Request $request)
         $Proforma->estado='activo';
 
        
-        $Proforma->save();
+       // $Proforma->save();
         
         $idProducto=$request->get('idProducto');
         $cantidad=$request->get('cantidad');
@@ -113,12 +113,12 @@ public function store(Request $request)
             $detalle->cantidad=$cantidad[$cont];
             $detalle->descuento=$descuento[$cont];
             $detalle->precio_venta=$precio_venta[$cont];
-           $detalle->save();
+           //$detalle->save();
             $cont=$cont+1; 
                      
         }
 
-//dd($Proforma,$detalle);
+dd($Proforma,$detalle);
          DB::Commit();
    
 
