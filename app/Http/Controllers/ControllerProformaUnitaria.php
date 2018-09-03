@@ -53,12 +53,6 @@ public function create()
  ->where('estado','=','activo')
  ->get();
 
- $clientes=DB::table('Cliente_Proveedor as cp')
- ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
-->where('tipo_persona','=','Cliente persona')
-->orwhere('tipo_persona','=','Cliente Empresa')
-
- ->get();
 
 
 
