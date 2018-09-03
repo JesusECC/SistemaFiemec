@@ -53,6 +53,12 @@ public function create()
  ->where('estado','=','activo')
  ->get();
 
+ $clientes=DB::table('Cliente_Proveedor as cp')
+ ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
+->where('tipo_persona','=','Cliente persona')
+->orwhere('tipo_persona','=','Cliente Empresa')
+
+ ->get();
 
 
 
@@ -90,7 +96,7 @@ public function store(Request $request)
         $Proforma->estado='activo';
 
        
-       // $Proforma->save();
+        $Proforma->save();
         
         $idProducto=$request->get('idProducto');
         $cantidad=$request->get('cantidad');
@@ -109,12 +115,12 @@ public function store(Request $request)
             $detalle->cantidad=$cantidad[$cont];
             $detalle->descuento=$descuento[$cont];
             $detalle->precio_venta=$precio_venta[$cont];
-           //$detalle->save();
+           $detalle->save();
             $cont=$cont+1; 
                      
         }
 
-dd($Proforma,$detalle);
+//dd($Proforma,$detalle);
          DB::Commit();
    
 
@@ -126,7 +132,7 @@ dd($Proforma,$detalle);
 
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-    ->join('Empleado as e','p.idEmpleado','=','e.idEmpleado')
+   // ->join('Empleado as e','p.idEmpleado','=','e.idEmpleado')
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.num_proforma')
     ->where('p.idProforma','=',$id)
     ->first();

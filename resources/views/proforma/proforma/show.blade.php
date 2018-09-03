@@ -62,11 +62,12 @@
             			<th></th>
             			<th></th>
             			<th>
-                        <!-- <h4 id="total">Subtotal: {{$proforma->precio_total/(1+$proforma->igv/100)}}</h4>-->
 
-                            <h4 type="number" id="total">IGV:{{round($proforma->precio_total/(1+$proforma->igv/100)*($proforma->igv/100),2)}}
+                         <h4 id="total">Subtotal: {{$proforma->precio_total}}</h4>
 
-                            <h4 id="total">Precio total:{{round(($proforma->precio_total/(1+$proforma->igv/100)*($proforma->igv/100) + $proforma->precio_total),2)}}</th><br>
+                            <h4 type="number" id="total">IGV:{{round(($proforma->precio_total)*($proforma->igv/100),2)}}
+
+                            <h4 id="total">Precio total:{{round($proforma->precio_total+($proforma->precio_total)*($proforma->igv/100),2)}}</th><br>
 
 
             		</tfoot>
@@ -76,8 +77,8 @@
                             <td>{{$det->producto}}</td>
                             <td>{{$det->cantidad}}</td>
                             <td>S/.{{$det->precio_venta}}</td>
-                            <td>{{$det->descuento}} x c/u</td>
-                            <td>{{$det->cantidad*$det->precio_venta-$det->cantidad*$det->descuento}}</td>
+                            <td>{{$det->descuento}}%</td>
+                            <td>S/.{{$det->precio_venta-($det->cantidad*$det->precio_venta)*($det->descuento/100)}}</td>
                         </tr>
 
                         @endforeach
