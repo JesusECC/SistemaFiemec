@@ -416,6 +416,7 @@
             }
         }
     }
+    
     function ListaSelect(){
         // realiza el listado de todas los tableros que se añaden
         var tab;    
