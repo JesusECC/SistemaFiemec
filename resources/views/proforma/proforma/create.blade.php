@@ -11,7 +11,6 @@
             @endforeach 
         </ul>   
     </div>
-<<<<<<< HEAD
 </div>
 {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
 
@@ -115,18 +114,14 @@
             </div>
                 
         </div>
-=======
     @endif
->>>>>>> bc4731962514afa47e4c330b2463c5507b2ec944
+
     </div>
  </div>
 
-<<<<<<< HEAD
-=======
     {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
 
     {{Form::token()}}
->>>>>>> bc4731962514afa47e4c330b2463c5507b2ec944
 <div>
     <div>
         <div class="form-group">
