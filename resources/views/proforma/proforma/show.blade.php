@@ -2,29 +2,27 @@
 @section ('contenido')
 
 <div class="row">
-	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+	<div class="col-lg-3 col-sm-6 col-md-6 col-xs-6">
         <div class="form-group">
 	        <label for="cliente">Cliente</label>
 	        <p>{{$proforma->nombre}}</p>
        </div>
     </div>
-
-
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
 	    <div class="form-group">
 		<label for="serie_proforma">Serie Proforma</label>
 		<p>{{$proforma->serie_proforma}}</p>		
 	    </div>
     </div>
-
-
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
 	     <div class="form-group">
 		<label for="num_proforma">Numero Proforma</label>
 		<p>f000-{{$proforma->idProforma}}</p>	
          </div>	
     </div>
-
+    <div class="col-lg-3">
+        <img src="{{asset('img/logo.png')}}" alt="">
+    </div>
     <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
         <div class="form-group">
         <label for="direccion">Direccion</label>
@@ -37,7 +35,6 @@
         <p>{{$proforma->fecha_hora}}</p>   
          </div> 
     </div>
-
 </div>
 <div class="row">
     	<div class="panel panel-primary">
