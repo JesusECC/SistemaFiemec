@@ -81,6 +81,12 @@
                                             </select>
                                         </div>
                                     </div>
+                                     <div class="col-lg-12">
+                                        <div class="from-group">
+                                            <label for="descripcionDP">Descripccion</label>
+                                            <input type="text"  name="pdescripcionDP" id="pdescripcionDP" class="form-control" placeholder="Agregar Descripcion del Producto">
+                                        </div>
+                                    </div>
                                     <div class="col-lg-4">
                                         <div class="from-group">
                                             <label for="precio_unitario">Precio unitario</label>
@@ -99,6 +105,9 @@
                                             <input type="number"  name="pdescuentoP" id="pdescuentoP" class="form-control" placeholder="descuento">
                                         </div>
                                     </div>
+
+                                   
+
                                     <div class="col-lg-4">
                                         <label>Tipo de cambio</label>
                                         <select required name="idTipo_moneda" class="form-control selectpicker" id="pidTipo_moneda" data-live-search="true">
@@ -139,6 +148,7 @@
                                     <thead style="background-color:#A9D0F5">
                                         <th>opciones</th>
                                         <th>Producto</th>
+                                        <th>Descripcion</th>
                                         <th>cantidad</th>
 
                                         <th>precio venta</th>
@@ -150,6 +160,7 @@
 
                                     <tfoot>
                                         <th>total</th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
@@ -261,12 +272,13 @@ function agregar()
     cantidad=$("#pcantidad").val();
     moneda=$("#ptipo_cambio").val();
     descuento=$("#pdescuentoP").val();
+    descripcion=$("#pdescripcionDP").val();
     precio_venta=$("#pprecio_unitario").val();
     
 
     //alert(datosProducto);
 
-    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="" && moneda!="")
+    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="" && moneda!="" && descripcion!="")
     {
 
 
@@ -280,7 +292,7 @@ function agregar()
             total=total+subtotal[cont];
 
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td><td>'+subcambio[cont]+'</td> </tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td>  <td><input  type="hidden"  name="descripcionDP[]"  value="'+descripcion+'"></td> <td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td><td>'+subcambio[cont]+'</td> </tr>';
        cont++;
        
        limpiar();

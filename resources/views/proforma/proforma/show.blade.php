@@ -2,6 +2,12 @@
 @section ('contenido')
 
 <div class="row">
+
+
+    <div class="col-lg-3">
+        <img src="{{asset('img/logo.jpg')}}" width="230" height="180">
+    </div> 
+
 	<div class="col-lg-3 col-sm-6 col-md-6 col-xs-6">
         <div class="form-group">
 	        <label for="cliente">Cliente</label>
@@ -20,9 +26,16 @@
 		<p>f000-{{$proforma->idProforma}}</p>	
          </div>	
     </div>
-    <div class="col-lg-3">
-        <img src="{{asset('img/logo.png')}}" alt="">
-    </div>
+
+<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+<div class="form-group">
+<p>P. P. N. Pachacutec Mz. W1 Lot. 7 Gru. Residencial E4 - Sector E Callao - Ventanilla</p>    
+<p>Cel. 946398756 - 947342692  Tef. (01) 4808910- 7582351</p>    
+<p>Email: ventas@jfiemec.pe</p>
+<p>www.fiemec.pe  </p>
+</div> 
+</div>
+    
     <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
         <div class="form-group">
         <label for="direccion">Direccion</label>
@@ -85,7 +98,19 @@
 
             		
             	</table>
-                
+
+
+                <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+        <div class="form-group">
+        <label>FIEMEC S.A.C  RUC: 20546979611</label>
+        
+        <label>Cta. Corriente  BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95 </label>
+        <label>Cta. Corriente  BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</label>
+        <label>Cta. Corriente  BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</label>
+        <label>Cta. Corriente  detracciones BN :   00-088-006879</label>
+
+        </div> 
+    </div>
             </div>
       </div>
 </div>

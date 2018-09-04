@@ -101,6 +101,7 @@ public function store(Request $request)
         $idProducto=$request->get('idProducto');
         $cantidad=$request->get('cantidad');
         $descuento=$request->get('descuento');
+        $descripcionDP=$request->get('descripcionDP');
         $precio_venta=$request->get('precio_venta');
 
         $cont=0;
@@ -112,10 +113,11 @@ public function store(Request $request)
             $detalle = new DetalleProforma();
             $detalle->idProforma=$Proforma->idProforma;
             $detalle->idProducto=$idProducto[$cont];
+            $detalle->descripcionDP=$descripcionDP[$cont];
             $detalle->cantidad=$cantidad[$cont];
             $detalle->descuento=$descuento[$cont];
             $detalle->precio_venta=$precio_venta[$cont];
-           $detalle->save();
+            $detalle->save();
             $cont=$cont+1; 
                      
         }
