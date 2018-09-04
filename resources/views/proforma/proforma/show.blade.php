@@ -78,7 +78,7 @@
                             <td>{{$det->cantidad}}</td>
                             <td>S/.{{$det->precio_venta}}</td>
                             <td>{{$det->descuento}}%</td>
-                            <td>S/.{{$det->precio_venta-($det->cantidad*$det->precio_venta)*($det->descuento/100)}}</td>
+                            <td>S/.{{($det->precio_venta*$det->cantidad)-(($det->cantidad*$det->precio_venta)*($det->descuento/100))}}</td>
                         </tr>
 
                         @endforeach

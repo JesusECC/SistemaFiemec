@@ -155,9 +155,9 @@
                                         <th></th>
                                         <th></th>
                                
-                                        <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_total" id="precio_total">
+                                        <th><h4 id="total">s/. 0.00</h4><input type="text" name="precio_total" id="precio_total">
                                         </th>
-                                        <th><h4 id="toca">0.00</h4><input type="hidden" name="precio_totalC" id="precio_totalC">
+                                        <th><h4 id="toca">0.00</h4><input type="text" name="precio_totalC" id="precio_totalC">
                                         </th>
 
                                     </tfoot>
@@ -273,14 +273,14 @@ function agregar()
         if(cantidad>0)
         {
 
-       subcambio[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad/moneda);
-       toca=toca+subcambio[cont];
+            subcambio[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad/moneda);
+            toca=toca+subcambio[cont];
 
-       subtotal[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad);
-       total=total+subtotal[cont];
+            subtotal[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad);
+            total=total+subtotal[cont];
 
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td> </tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td><td>'+subcambio[cont]+'</td> </tr>';
        cont++;
        
        limpiar();
@@ -289,7 +289,7 @@ function agregar()
        $("#precio_total").val(total);
        //cambio
        $("#toca").html(+ toca);
-       $("#precio_total").val(toca);
+       $("#precio_totalC").val(toca);
        evaluar();
        $('#detalles').append(fila);
 
