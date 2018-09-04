@@ -100,7 +100,14 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-9">
-                                        
+                                        <label>Tipo de cambio</label>
+                                        <select required name="idTipo_moneda" class="form-control selectpicker" id="pidTipo_moneda" data-live-search="true">
+                                             <option value=""></option>
+                                           @foreach($monedas as $mo)
+                                           
+                                           <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}">{{$mo->nombre_moneda.' '.$mo->simbolo}}</option>
+                                           @endforeach  
+                                       </select>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group" style="margin-top: 10px;">
@@ -265,10 +272,6 @@ function agregar()
        subtotal[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad);
        total=total+subtotal[cont];
 
-  
-       
-       
-       
 
        var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td><td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td> </tr>';
        cont++;
