@@ -99,7 +99,7 @@
                                             <input type="number"  name="pdescuentoP" id="pdescuentoP" class="form-control" placeholder="descuento">
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-4">
                                         <label>Tipo de cambio</label>
                                         <select required name="idTipo_moneda" class="form-control selectpicker" id="pidTipo_moneda" data-live-search="true">
                                              <option value=""></option>
@@ -109,7 +109,14 @@
                                            @endforeach  
                                        </select>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
+                                        <div class="from-group">
+                                            <label for="tipo_cambio"></label>
+                                            <input type="number" disabled name="tipo_cambio" id="ptipo_cambio" class="form-control" >
+                                            
+                                         </div>                                        
+                                    </div>
+                                    <div class="col-lg-4">
                                         <div class="form-group" style="margin-top: 10px;">
                                            <button type="button" id="bt_add" class="btn btn-primary active btn-block ">Agregar</button> 
                                         </div>
