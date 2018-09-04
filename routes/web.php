@@ -25,7 +25,7 @@ Route::resource('proforma/proforma','ControllerProformaUnitaria');
 Route::resource('proforma/servicio','ControllerProformaServicio');
 Route::resource('proforma/config','ControllerConfiguracion');
 Route::resource('dashboard/dashboard-admin','ControllerDashboard');
-//Route::get('pdf','ControllerProformaUnitaria@pdf')->name('productos.pdf');
+Route::get('pdf','ControllerProformaUnitaria@pdf')->name('productos.pdf');
 
 
 //Route::post('proforma/proforma','ControllerProformaUnitaria@store');

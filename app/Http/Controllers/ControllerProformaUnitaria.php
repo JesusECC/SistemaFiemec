@@ -10,7 +10,7 @@ use SistemaFiemec\DetalleProforma;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SistemaFiemec\Http\Requests\RequestFormProforma;
-//use PDF;
+use PDF;
 use Carbon\Carbon;
 use Response;
 use Illuminate\Support\Collection;
@@ -134,7 +134,6 @@ public function store(Request $request)
 
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-   // ->join('Empleado as e','p.idEmpleado','=','e.idEmpleado')
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.num_proforma')
     ->where('p.idProforma','=',$id)
     ->first();
@@ -146,9 +145,19 @@ public function store(Request $request)
     ->get();
 
 return view("proforma.proforma.show",["proforma"=>$proforma,"detalles"=>$detalles]);
-   }
+   
+
+}
 
 
+public function pdf($id){
+
+    $proforma = Proforma::find($id);
+
+    $pdf=PDF::loadView('proforma/pdf',compact('proforma'));
+    return $pdf->download('proforma.pdf');
+
+}
     public function destroy($id)
     {
         $producto=Proforma::findOrFail($id);
