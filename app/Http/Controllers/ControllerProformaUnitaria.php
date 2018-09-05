@@ -134,13 +134,13 @@ public function store(Request $request)
 
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.num_proforma')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.num_proforma','p.forma_de','p.plazo_oferta','p.observacion_condicion')
     ->where('p.idProforma','=',$id)
     ->first();
 
     $detalles=DB::table('Detalle_proforma as dpr')
     ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.observacion_detalleP')
+    ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
     ->where('dpr.idProforma','=',$id)
     ->get();
 
@@ -149,13 +149,24 @@ return view("proforma.proforma.show",["proforma"=>$proforma,"detalles"=>$detalle
 
 }
 
-
 public function pdf($id){
 
-    $proforma = Proforma::find($id);
+    $proforma=DB::table('Proforma as p')
+    ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.num_proforma','p.forma_de','p.plazo_oferta','p.observacion_condicion')
+    ->where('p.idProforma','=',$id)
+    ->first();
 
-    $pdf=PDF::loadView('proforma/pdf',compact('proforma'));
-    return $pdf->download('proforma.pdf');
+    $detalles=DB::table('Detalle_proforma as dpr')
+    ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
+    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
+    ->where('dpr.idProforma','=',$id)
+    ->get();
+
+    $pdf=PDF::loadView('proforma/proforma/pdf',['proforma'=>$proforma,"detalles"=>$detalles]);
+    return $pdf->stream('proforma');
+    //return $pdf->download('Lista de requerimientos.pdf');
+
 
 }
     public function destroy($id)

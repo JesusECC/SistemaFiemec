@@ -60,10 +60,11 @@
 
             			
             			<th>Producto</th>
-            			<th>cantidad</th>
-            			<th>precio venta</th>
-            			<th>descuento</th>
-            			<th>total</th>
+            			<th>Cantidad</th>
+            			<th>Precio</th>
+            			<th>Descuento</th>
+            			<th>Total</th>
+                        <th></th>
             		</thead>
             		<tfoot>
             			
@@ -84,7 +85,7 @@
             		<tbody>
             			@foreach($detalles as $det)
                         <tr>
-                            <td>{{$det->producto}}</td>
+                            <td>{{$det->producto.'  | '.$det->descripcionDP}}</td>
                             <td>{{$det->cantidad}}</td>
                             <td>S/.{{$det->precio_venta}}</td>
                             <td>{{$det->descuento}}%</td>
@@ -102,6 +103,17 @@
 
                 <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
         <div class="form-group">
+
+            <div>
+        <label>Forma de:  {{$proforma->forma_de}}</label>
+        </div>
+        <div>
+        <label>Plazo de Oferta:  {{$proforma->plazo_oferta}}</label>
+        </div>
+        <div>
+        <label>Observaciones:  {{$proforma->observacion_condicion}}</label>
+        </div>
+        --------------------------------------------------------------------
         <label>FIEMEC S.A.C  RUC: 20546979611</label>
         
         <label>Cta. Corriente  BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95 </label>
