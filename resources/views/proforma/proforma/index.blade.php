@@ -32,6 +32,9 @@
 					
 					
 					<td>
+
+					<a href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}"><button class="btn btn-primary">PDF</button>
+					</a>
 					<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">detalles</button>
 					</a>
 					<a href="" data-target="#modal-delete-{{$prof->idProforma}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
