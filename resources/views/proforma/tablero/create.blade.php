@@ -33,7 +33,32 @@
                             Datos de Cliente
                         </h3>
                     </div>
-                    <div class="panel-body">              
+                    <div class="panel-body">        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Nombre del Cliente</label>
+                                    <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
+                                        <option value="">Seleccione Cliente</option>
+                                        @foreach($clientes as $cliente)
+                                            <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                                        @endforeach
+                                    </select> 
+                                </div>                               
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group label-floating">
+                                    <label for="cdireccion">Direccion</label>
+                                    <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="direccion">
+                                </div>                               
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group label-floating">
+                                    <label for="nro_documento">Numero de Documento</label>
+                                    <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="numero documento">
+                                </div>                               
+                            </div>
+                        </div>
                     </div>            
                 </div>
             </div> 
@@ -62,13 +87,14 @@
                         <div class="form-group" id="producto-oculto" style='display:none;'>
                             <label class="control-label">Producto</label>
                             <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                <option value="">Seleccione Producto</option>
                                 @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}">{{ $producto->nombre_producto }}</option>
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuentoP}}">{{ $producto->nombre_producto }}</option>
                                 @endforeach
                             </select>                    
                         </div>
-                        {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
-                        @csrf
+                        <!-- {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
+                        @csrf -->
                         <div class="card" id="producto-crear-oculto" style='display:none;'>
                             <div class="card-header">
                                 Seleccionó
@@ -97,7 +123,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Descuento %</label>
-                                            <input type="number" id="pdescuento" class="form-control" name="pdescuento" >
+                                            <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -120,6 +146,17 @@
                 </div>
             </div>
             <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Datos del Vendedor
+                        </h3>
+                    </div>
+                    <div class="panel-body">              
+                    </div>            
+                </div>
+            </div>
+            <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -179,7 +216,7 @@
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">  
     <div style="margin-top: 20px" class="from-group ">
 
-        <button class="btn btn-primary" type="submit">guardar</button>
+        <button class="btn btn-primary" id="save" type="button">Guardar</button>
         <button class="btn btn-danger" type="reset">Limpiar</button>
         <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
 
@@ -189,7 +226,7 @@
     </div>
 
 
-    {!!Form::close()!!}
+    <!-- {!!Form::close()!!} -->
 
 </div>
 
@@ -201,27 +238,31 @@
             agregarTablero();
             mostrarcampos();
         });
+        $('#save').click(function(){
+            // console.log("asd");
+            saveProforma();
+        });
         $('#bt_add_produc').click(function(){
             agregarProductosTablero();
             document.getElementById('totales-general').style.display = 'block';
-
         });
         $('#Pcantidad').keyup(function (){
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
+            this.value = (this.value + '').replace(/[^0-9]/g, '1');
         });
         $('#Pcantidad').click(function (){
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
+            this.value = (this.value + '').replace(/[^0-9]/g, '1');
         });
         $('#pdescuento').keyup(function (){
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
+            this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
         });
         $('#pdescuento').click(function (){
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
+            this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
         });
         // Actualizar
        
 
     });
+    $("#idClientes").change(MostrarCliente);
     var tablero=[];
     var filaob=[];
     var cont=0;
@@ -229,14 +270,24 @@
     var table;
     var subtotal=0;
     var nomTablero;
+    var idcliente;
     $("#pidProducto").change(MostarProducto);
-    //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
+    
 
+    //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
+    function MostrarCliente(){
+        // cdireccion/cnro_documentoidClientes
+        Cliente=document.getElementById('idClientes').value.split('_');
+        idcliente=Cliente[0];
+        $("#cdireccion").val(Cliente[1]);
+        $("#cnro_documento").val(Cliente[2]);
+    }
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
         $("#idProd").val(Producto[0]);
         $("#Productoname").val(Producto[1]);
         $("#precio_uni").val(Producto[2]);
+        $("#pdescuento").val(Producto[3]);
         // descuentoP -->para emostar el 
     }
     function mostrarcampos(){
@@ -246,7 +297,26 @@
         // $("#producto-oculto").style.display='block';
     } 
 
-
+    function saveProforma(){
+        // se enviar los datos al controlador proforma tableros
+        // console.log(idcliente);
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:  {"tableros":tablero,"fila":filaob,"idcliente":idcliente}, //datos que se envian a traves de ajax
+            url:   'guardar', //archivo que recibe la peticion
+            type:  'post', //método de envio
+            dataType: "json",
+            beforeSend: function () {
+                // console.log()
+                    // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                    // $("#resultado").html(response);
+            }
+        });
+        // console.log(tablero,filaob);
+    }
     var bool;
     function agregarTablero(){    
         var tabl=$("#NomTablerop").val();
@@ -366,7 +436,7 @@
             }
             detalleFilas();
             subTotal();
-            console.log(filaob);            
+            // console.log(filaob);            
             nomtablero="";            
         }
     }
@@ -382,7 +452,8 @@
                         if (filaob.hasOwnProperty(fila)) {                            
                             var cantidad=parseFloat(filaob[fila]['cantidadP']);
                             var precio=parseFloat(filaob[fila]['prec_uniP']);
-                            var subt=cantidad*precio;
+                            var descuento=parseFloat(filaob[fila]['descuentoP']);
+                            var subt=(cantidad*precio)-((cantidad*precio)*(cantidad*(descuento/100)));
                             if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
                                 filas=
                                     '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
@@ -470,7 +541,11 @@
                     for (const fila in filaob) {
                         if (filaob.hasOwnProperty(fila)) {
                             if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
-                                sub+=parseFloat(filaob[fila]['prec_uniP'])*parseFloat(filaob[fila]['cantidadP']);
+                                // (cantidad*precio)-((cantidad*precio)*(cantidad*(descuento/100)));
+                                var precio=parseFloat(filaob[fila]['prec_uniP']);
+                                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                                var descuento=parseFloat(filaob[fila]['descuentoP']);
+                                sub+=(cantidad*precio)-((cantidad*precio)*(cantidad*(descuento/100)));
                                 console.log(sub,"---");
                             }                            
                         }
@@ -483,32 +558,45 @@
         }
     }
     function subTotal(){
+        // la suma de tosos los tableros
         subTotalTable();
         var sub=0;
+        var desc=0;
         for (const fila in filaob) {
             if (filaob.hasOwnProperty(fila)) {
-                sub+=parseFloat(filaob[fila]['prec_uniP'])*parseFloat(filaob[fila]['cantidadP']);
-                console.log(sub);                        
+                var precio=parseFloat(filaob[fila]['prec_uniP']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var descuento=parseFloat(filaob[fila]['descuentoP']);
+                sub+=(cantidad*precio)-((cantidad*precio)*(cantidad*(descuento/100)));
+                // console.log(sub);                        
             }
         }
-
         // console.log(sub);
         $("#subtotal").html("s/. " + sub);
     }
+    function descuentos(){
+        for (const fila in filaob) {
+            if (filaob.hasOwnProperty(fila)) {
+                desc+=parseFloat(filaob[fila]['descuentoP']);
+                // console.log(sub);                        
+            }
+        }
+        $("#descuentos").html(desc+ " %");
+    }
     function eliminar(index){
-            // elimina las filas de un tablero especifico 
-            console.log(filaob,"eliminar",index);
-            for (var key in filaob) {
-                if (filaob.hasOwnProperty(key)) {
-                    if(index==filaob[key]['posiP']){
-                        console.log(filaob[key]['nomTablero'],"eliminar");
-                        $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
-                        filaob.splice(key,1);
-                        // console.log(filaob);                            
-                    }
+        // elimina las filas de un tablero especifico 
+        // console.log(filaob,"eliminar",index);
+        for (var key in filaob) {
+            if (filaob.hasOwnProperty(key)) {
+                if(index==filaob[key]['posiP']){
+                    console.log(filaob[key]['nomTablero'],"eliminar");
+                    $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
+                    filaob.splice(key,1);
+                    // console.log(filaob);                            
                 }
-            } 
-            subTotal(); 
+            }
+        } 
+        subTotal(); 
     }
     function eliminarTablero(a){
     // elimina todo un tablero con todos los datos que contiene

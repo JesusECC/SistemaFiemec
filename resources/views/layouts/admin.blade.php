@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>ADVentas | www.incanatoit.com</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -109,7 +110,7 @@
               <ul class="treeview-menu">
                 <li><a href="compras/ingreso"><i class="fa fa-circle-o"></i> Proforma de Productos</a></li>
                 <li><a href="compras/proveedor"><i class="fa fa-circle-o"></i> Proforma de Servicios</a></li>
-                <li><a href="compras/proveedor"><i class="fa fa-circle-o"></i> Proforma de Tableros</a></li>
+                <li><a href="{{ route('tablero')}}"><i class="fa fa-circle-o"></i> Proforma de Tableros</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -134,7 +135,7 @@
                 <li><a href="ventas/cliente"><i class="fa fa-circle-o"></i> Clientes</a></li>
                 <li><a href="ventas/cliente"><i class="fa fa-circle-o"></i> Proforma de Productos</a></li>
                 <li><a href="ventas/cliente"><i class="fa fa-circle-o"></i> Proforma de Servicios</a></li>
-                <li><a href="ventas/cliente"><i class="fa fa-circle-o"></i> Proforma de Tableros</a></li>
+                <li><a href="{{ route('tablero')}}"><i class="fa fa-circle-o"></i> Proforma de Tableros</a></li>
               </ul>
             </li>
                        

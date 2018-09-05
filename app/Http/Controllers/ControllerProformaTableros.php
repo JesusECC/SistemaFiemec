@@ -24,7 +24,7 @@ class ControllerProformaTableros extends Controller
         ->where('tipo_persona','=','Cliente persona')
         ->orwhere('tipo_persona','=','Cliente Empresa')
         ->get();
-        return view('proforma.tablero.create',["productos"=>$productos]);
+        return view('proforma.tablero.create',["productos"=>$productos,"clientes"=>$clientes]);
     }
     public function buscarProducto(Request $request)
     {
@@ -42,6 +42,8 @@ class ControllerProformaTableros extends Controller
     }
     public function store(Request $request)
     {
-        return view('proforma.tablero.create');
+        $cant=count($request->fila);
+
+        return ['data' => $cant];
     }
 }

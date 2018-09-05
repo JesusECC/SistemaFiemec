@@ -40,7 +40,7 @@ Route::get('servicio/create',['as'=> 'servicio-create','uses' =>'ControllerProfo
 // Se crea las rutas paratableros
 Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
 Route::get('tableros/create',['as' => 'tablero-create','uses'=>'ControllerProformaTableros@create']);
-Route::post('tableros',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
+Route::post('tableros/guardar',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
 Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'ControllerProformaTableros@buscarProducto']);
 
 
