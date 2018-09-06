@@ -26,6 +26,7 @@ class Proforma extends Model
         'tipo_proforma',
         'caracterisiticas_proforma',
         'forma_de',
+        'tipocambio',
         'plazo_fabricacion',
         'plazo_oferta',
         'garantia',

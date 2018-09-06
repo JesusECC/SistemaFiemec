@@ -22,7 +22,7 @@
         <div class="panel-body">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-9">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
@@ -60,7 +60,59 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+
+
+
+
+                    <div class="col-lg-3">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Tipo de Cambio
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    
+
+                                    <div class="col-lg-6">
+                                        <label>Tipo de cambio</label>
+                                        <select required name="idTipo_moneda" class="form-control selectpicker" id="pidTipo_moneda" data-live-search="true">
+                                             <option value=""></option>
+                                           @foreach($monedas as $mo)
+                                           
+                                           <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}">{{$mo->nombre_moneda}}</option>
+                                           @endforeach  
+                                       </select>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="from-group">
+                                            <label for="simbolo">Simbolo</label>
+                                            <input type="text" disabled name="simbolo" id="psimbolo" class="form-control" >
+                                            
+                                         </div>                                        
+                                    </div>
+
+                                    <div style="margin-top: 15px" class="col-lg-6">
+                                        <div class="from-group">
+                                            <label for="tipo_cambio">Valor</label>
+                                            <input type="number" disabled name="tipo_cambio" id="ptipo_cambio" class="form-control" >
+                                            
+                                         </div>                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="col-lg-12">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
@@ -81,25 +133,25 @@
                                             </select>
                                         </div>
                                     </div>
-                                     <div class="col-lg-12">
+                                     <div style="margin-top: 16px" class="col-lg-6">
                                         <div class="from-group">
                                             <label for="descripcionDP">Descripccion</label>
-                                            <input type="text"  name="pdescripcionDP" id="pdescripcionDP" class="form-control" placeholder="Agregar Descripcion del Producto">
+                                            <input type="text"  name="pdescripcionDP"  id="pdescripcionDP" class="form-control" placeholder="Agregar Descripcion del Producto">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div style="margin-top: 16px"  class="col-lg-2">
                                         <div class="from-group">
                                             <label for="precio_unitario">Precio unitario</label>
                                             <input type="number" disabled name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
                                         </div>                                        
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div style="margin-top: 16px"  class="col-lg-2">
                                         <div class="from-group">
                                             <label for="cantidad">Cantidad</label>
                                             <input type="number"  name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div style="margin-top: 15px"  class="col-lg-2">
                                         <div class="from-group">
                                             <label for="descuentoP">Descuento en %</label>
                                             <input type="number"  name="pdescuentoP" id="pdescuentoP" class="form-control" placeholder="descuento">
@@ -108,25 +160,9 @@
 
                                    
 
-                                    <div class="col-lg-4">
-                                        <label>Tipo de cambio</label>
-                                        <select required name="idTipo_moneda" class="form-control selectpicker" id="pidTipo_moneda" data-live-search="true">
-                                             <option value=""></option>
-                                           @foreach($monedas as $mo)
-                                           
-                                           <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}">{{$mo->nombre_moneda.' '.$mo->simbolo}}</option>
-                                           @endforeach  
-                                       </select>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="from-group">
-                                            <label for="tipo_cambio"></label>
-                                            <input type="number" disabled name="tipo_cambio" id="ptipo_cambio" class="form-control" >
-                                            
-                                         </div>                                        
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group" style="margin-top: 10px;">
+                                    
+                                    <div class="col-lg-2">
+                                        <div class="form-group" style="margin-top: 20px;">
                                            <button type="button" id="bt_add" class="btn btn-primary active btn-block ">Agregar</button> 
                                         </div>
                                          
@@ -260,6 +296,7 @@ function mostrarValor()
 function mostrarV()
 {
     datosm=document.getElementById('pidTipo_moneda').value.split('_');
+    $("#psimbolo").val(datosm[2]);
     $("#ptipo_cambio").val(datosm[1]);
 }
 
@@ -278,7 +315,7 @@ function agregar()
 
     //alert(datosProducto);
 
-    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="" && moneda!="" && descripcion!="")
+    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="" && moneda!="" )
     {
 
 
@@ -292,7 +329,17 @@ function agregar()
             total=total+subtotal[cont];
 
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td>  <td><input  type="hidden"  name="descripcionDP[]"  value="'+descripcion+'"></td> <td><input type="number"  name="cantidad[]"  value="'+cantidad+'"></td> <td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'"></td> <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td><td>'+subcambio[cont]+'</td> </tr>';
+       var fila='<tr class="selected" id="fila'+cont+'">'+
+       '<td>'+
+       '<button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td>'+
+       ' <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td>'+
+       ' <td><input  type="text"  name="descripcionDP[]"  value="'+descripcion+'">'+
+       '</td>'+
+       ' <td><input type="number"  name="cantidad[]"  value="'+cantidad+'">'+
+       '</td> '+
+       '<td><input type="number"  name="precio_venta[]"   value="'+precio_venta+'">'
+       +'</td>'+
+       ' <td><input type="number"  name="descuento[]"  value="'+descuento+'"></td> <td>'+subtotal[cont]+'</td><td>'+subcambio[cont]+'</td> </tr>';
        cont++;
        
        limpiar();
@@ -324,6 +371,7 @@ function agregar()
         $("#pcantidad").val("");
         $("#pdescuento").val("");
         $("#pprecio_venta").val("");
+        $("#pdescripcionDP").val("");
     }
 
     function evaluar()
