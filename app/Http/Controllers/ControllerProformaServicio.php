@@ -40,7 +40,7 @@ class ControllerProformaServicio extends Controller
 public function create()
 {
  $productos=DB::table('Producto')
- ->where('categoria_producto','=','servicio')
+ ->where('estado','=','activo')
  ->get();
 
  $clientes=DB::table('Cliente_Proveedor as cp')

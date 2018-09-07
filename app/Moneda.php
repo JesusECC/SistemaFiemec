@@ -12,6 +12,7 @@ class Moneda extends Model
 
 
     protected $filleable = [
+      'impuesto',
     	'nombre_moneda',
     	'tipo_cambio',
       'simbolo',
