@@ -42,8 +42,53 @@ class ControllerProformaTableros extends Controller
     }
     public function store(Request $request)
     {
-        $cant=count($request->fila);
+    //     $Proforma=new Proforma;
+    //     $Proforma->idCliente=$idclien;
+    //    // $Proforma->idEmpleado='2';
+    //     $Proforma->idTipo_moneda=1;
+    //     $Proforma->serie_proforma='PU365122018';
+    //     $mytime = Carbon::now('America/Lima');
+    //     $Proforma->fecha_hora=$mytime->toDateTimeString();
+    //     $Proforma->igv='18';
+    //     $Proforma->subtotal=$request->get('subtotal');
+    //     $Proforma->precio_total=$request->get('precio_total');
+    //     $Proforma->precio_totalC=$request->get('precio_totalC');
+    //     $Proforma->forma_de=$request->get('forma_de');
+    //     $Proforma->observacion_condicion=$request->get('observacion_condicion');
+    //     $Proforma->plazo_oferta=$request->get('plazo_oferta');
+    //     $Proforma->garantia=$request->get('garantia');
+    //     $Proforma->tipo_proforma='unitaria';
+    //     $Proforma->estado='activo';       
+    //     $Proforma->save();	
+         
+        // $idProforma=DB::table('Proforma')->insertGetId(
+        //     ['idCliente'=>(int)$request->idcliente,
+        //     // 'idEmpleado'=>$request->,           
+        //     'idTipo_moneda'=>1,
+        //     'serie_proforma'=>'PU365122018',
+        //     'fecha_hora'=>$mytime->toDateTimeString(),
+        //     'igv'=>'18',
+        //     'subtotal'=>$request->valorVenta,
+        //     'precio_total'=>$request->total,
+        //     // 'tipocambio'=>$request->,
+        //     // 'precio_totalC'=>$request->,
+        //     // 'descripcion_proforma'=>$request->,
+        //     'tipo_proforma'=>'Tablero',
+        //     // 'caracteristicas_proforma'=>$request->,
+        //     // 'forma_de'=>$request->,
+        //     // 'plaza_fabricacion'=>$request->,
+        //     // 'plazo_oferta'=>$request->,
+        //     // 'garantia'=>$request->,
+        //     // 'observacion_condicion'=>$request->,
+        //     // 'observacion_proforma'=>$request->,
+        //     'estado'=>'activo',
+        //     ]
+        // ); 
+        $fil=$request->tableros;
+        $filaob=json_decode( $fil);
+        // $cant=count($request->tableros->nombre);
 
-        return ['data' => $cant];
+
+        return ['data' => array($filaob)];
     }
 }
