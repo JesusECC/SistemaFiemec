@@ -61,8 +61,8 @@
             			
             			<th>Producto</th>
             			<th>Cantidad</th>
-            			<th>Precio</th>
-            			<th>Descuento</th>
+            			<th>Precio de Venta</th>
+            			<th>Descuento x c/u</th>
             			<th>Total</th>
                         <th></th>
             		</thead>
@@ -74,11 +74,11 @@
             			<th></th>
             			<th>
 
-                         <h4 id="total">Subtotal: {{$proforma->precio_total}}</h4>
+                         <h4 id="total">Subtotal: {{$proforma->subtotal}}</h4>
 
-                            <h4 type="number" id="total">IGV:{{round(($proforma->precio_total)*($proforma->igv/100),2)}}
+                            <h4 type="number" id="total">IGV: {{round(($proforma->igv),2)}}
 
-                            <h4 id="total">Precio total:{{round($proforma->precio_total+($proforma->precio_total)*($proforma->igv/100),2)}}</th><br>
+                            <h4 id="total">Precio total: {{round($proforma->precio_total,2)}}</th><br>
 
 
             		</tfoot>

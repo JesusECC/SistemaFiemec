@@ -44,9 +44,10 @@ class ControllerProformaUnitaria extends Controller
 
 public function create()
 {
- $productos=DB::table('Producto')
- ->where('categoria_producto','=','catalogo')
- ->where('estado','=','activo')
+ $productos=DB::table('Producto as po')
+ ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
+ ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descuentoP','po.descripcion_producto','po.precio_unitario','po.foto','po.familia','po.categoria_producto','po.fecha_sistema')
+ ->where('po.estado','=','activo')
  ->get();
 
  $monedas=DB::table('Tipo_moneda')
@@ -84,8 +85,9 @@ public function store(Request $request)
         $Proforma->serie_proforma='PU365122018';
         $mytime = Carbon::now('America/Lima');
         $Proforma->fecha_hora=$mytime->toDateTimeString();
-        $Proforma->igv='18';
+        $Proforma->igv=$request->get('igv');
         $Proforma->subtotal=$request->get('subtotal');
+        $Proforma->tipocambio=$request->get('tipocambio');
         $Proforma->precio_total=$request->get('precio_total');
         $Proforma->precio_totalC=$request->get('precio_totalC');
         $Proforma->forma_de=$request->get('forma_de');
@@ -134,7 +136,7 @@ public function store(Request $request)
 
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.num_proforma','p.forma_de','p.plazo_oferta','p.observacion_condicion')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC')
     ->where('p.idProforma','=',$id)
     ->first();
 
@@ -153,6 +155,7 @@ public function pdf($id){
 
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
+    
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.num_proforma','p.forma_de','p.plazo_oferta','p.observacion_condicion')
     ->where('p.idProforma','=',$id)
     ->first();
