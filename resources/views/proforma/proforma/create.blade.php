@@ -99,18 +99,19 @@
                                          </div>                                        
                                     </div>
 
-                                    <div style="margin-top: 15px" class="col-lg-6">
+                                    <div style="margin-top: 15px" class="col-lg-4" >
+                                        
                                         <div class="from-group">
-                                            <label for="tipo_cambio">Valor</label>
-                                            <input type="number" disabled name="tipo_cambio" id="ptipo_cambio" class="form-control" >
-                                            
-                                         </div>                                        
+                                            <label for="tipocambio">Valor</label>
+                                            <input type="number"  name="tipocambio" id="ptipo_cambio" class="form-control">
+
+                                        </div>
                                     </div>
 
                                     <div style="margin-top: 15px" class="col-lg-4">
                                         <div class="from-group">
                                             <label for="tipocambio">Igv</label>
-                                            <input type="number" disabled name="tipocambio"  id="pimpuesto" class="form-control">
+                                            <input type="number" disabled id="pimpuesto" class="form-control">
                                             
                                          </div>                                        
                                     </div>
@@ -141,7 +142,7 @@
                                                 <option value=""></option>
                                                 @foreach($productos as $pro)
                                                 
-                                                <option value="{{$pro->idProducto}}_{{$pro->precio_unitario}}_{{$pro->descuento_familia}}">{{$pro->codigo_producto.' '.$pro->nombre_producto}}</option>
+                                                <option value="{{$pro->idProducto}}_{{$pro->precio_unitario}}_{{$pro->descuento_familia}}_{{$pro->codigo_pedido}}">{{$pro->codigo_producto.' '.$pro->nombre_producto}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -155,7 +156,7 @@
                                     <div style="margin-top: 16px"  class="col-lg-2">
                                         <div class="from-group">
                                             <label for="precio_unitario">Precio unitario</label>
-                                            <input type="number"  name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
+                                            <input type="number" disabled name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
                                         </div>                                        
                                     </div>
                                     <div style="margin-top: 16px"  class="col-lg-2">
@@ -194,7 +195,7 @@
                             <div class="panel-body">
                                 <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
 
-                                    <thead style="background-color:#A9D0F5">
+                                    <thead style="background-color:grey">
                                         <th>Opciones</th>
                                         <th>Producto</th>
                                         <th>Descripcion</th>
@@ -324,13 +325,24 @@ $("#pidProducto").change(mostrarValores);
 $("#idCliente").change(mostrarValor);
 $("#pidTipo_moneda").change(mostrarV);
 
+//guradar
+function cambiaropcion(){
+        Producto=document.getElementById('pidProducto').value.split('_');
+        var codigo_pedido=Producto[3];
+       if(codigo_pedido=="t1"){
+            $('#pprecio_unitario').attr("disabled", false);
+        }
+   }
 
 function mostrarValores()
 {
     datosProducto=document.getElementById('pidProducto').value.split('_');
+
     $("#pdescuento_familia").val(datosProducto[2]);
     $("#pprecio_unitario").val(datosProducto[1]);
+    cambiaropcion();
 }
+
 function mostrarValor()
 {
     datos=document.getElementById('idCliente').value.split('_');
