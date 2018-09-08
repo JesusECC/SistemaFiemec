@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <h3>Nueva Proforma</h3>
+        <h1>Nueva Proforma</h1>
         @if (count($errors)>0)
         <div class="alert-alert-danger">
             <ul>
@@ -23,8 +23,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-9">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
+                        <div  class="panel panel-primary">
+                            <div  class="panel-heading">
                                 <h3 class="panel-title">
                                     Datos Clientes
                                 </h3>
@@ -183,7 +183,7 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    Importe
+                                    Concepto
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -237,7 +237,7 @@
                             <table class="table table-striped table-bordered table-condensed table-hover">
                                     <tfoot>
                                         <tr>
-                                            <th colspan="3" >Sub Total</th>
+                                            <th colspan="3" >Sub Total:</th>
                                             <th><h4 id="total">s/. 0.00</h4>
                                             <input type="hidden" name="subtotal" id="subtotal"></th>
 
@@ -247,14 +247,15 @@
                                             <th><input type="text" name="forma_de" id="forma_de" class="form-control"></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="3" >I.G.V.</th>
-                                            <th><h4 id="igvC">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
+                                            <th colspan="3" >I.G.V:</th>
+                                            <th><h4 id="igvC">s/. 0.00</h4>
+                                                <input type="hidden" name="igv" id="igv"></th>
 
                                             <th colspan="3" >Plazo de Oferta:</th>
                                             <th><input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control"></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="3" >Total</th>
+                                            <th colspan="3" >Total:</th>
                                            <th><h4 id="tota">s/. 0.00</h4>
                                             <input type="hidden" name="precio_total" id="precio_total"></th>
 
@@ -263,7 +264,7 @@
                                         </textarea>
                                         </tr>
                                          <tr>
-                                            <th colspan="3" >Cambio</th>
+                                            <th colspan="3" >Conversion al Tipo de cambio</th>
                                             <th><h4 id="toca">0.00</h4>
                                             <input type="hidden" name="precio_totalC" id="precio_totalC"></th>
                                         </tr>
@@ -355,6 +356,7 @@ function agregar()
     descripcion=$("#pdescripcionDP").val();
     precio_venta=$("#pprecio_unitario").val();
     igvT=$("#pimpuesto").val();
+    s=$("#psimbolo").val();
     
 
     //alert(datosProducto);
@@ -382,7 +384,7 @@ function agregar()
         subcambio[cont]=totall[cont]/moneda;
             toca=toca+subcambio[cont];
 
-
+            
              
 
 
@@ -392,8 +394,8 @@ function agregar()
        ' <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td>'+
        ' <td><input  type="hidden"  name="descripcionDP[]"  value="'+descripcion+'">'+descripcion+'</td>'+
        ' <td><input type="hidden"  name="cantidad[]"  value="'+cantidad+'">'+cantidad+'</td> '+
-       '<td><input type="hidden"  name="precio_venta[]"   value="'+precio_venta+'">'+precio_venta+'</td>'+
-       ' <td><input type="hidden"  name="descuento[]"  value="'+descuento+'">'+descuento+'</td> <td>'+subtotal[cont]+'</td> <td>'+subcambio[cont]+'</td></tr>';
+       '<td><input type="hidden"  name="precio_venta[]"   value="'+precio_venta+'">S/. '+precio_venta+'</td>'+
+       ' <td><input type="hidden"  name="descuento[]"  value="'+descuento+'">'+descuento+'%</td><td>S/. '+subtotal[cont]+'</td> <td>'+s+subcambio[cont]+'</td></tr>';
        cont++;
        
        limpiar();
@@ -401,13 +403,13 @@ function agregar()
        $("#total").html("s/." + total);
        $("#subtotal").val(total);
        //cambio
-       $("#toca").html(+ toca);
+       $("#toca").html(s + toca);
        $("#precio_totalC").val(toca);
        //impuesto
-      $("#igvC").html(+ igvC);
+      $("#igvC").html("s/." + igvC);
        $("#igv").val(igvC);
        //total
-       $("#tota").html(+ tota);
+       $("#tota").html("s/." + tota);
        $("#precio_total").val(tota);
          
        evaluar();
