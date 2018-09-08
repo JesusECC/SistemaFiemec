@@ -333,6 +333,9 @@ function cambiaropcion(){
        if(codigo_pedido=="t1"){
             $('#pprecio_unitario').attr("disabled", false);
         }
+        else{
+           $('#pprecio_unitario').attr("disabled", true); 
+        }
    }
 
 function mostrarValores()
