@@ -1,8 +1,9 @@
 @extends ('layouts.admin')
 @section ('contenido')
 <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-  
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h2>Nueva Proforma de Tableros</h2>
+    <hr />
         @if (count($errors)>0)
         <div class="alert-alert-danger">
             <ul>
@@ -18,7 +19,7 @@
 
 {{Form::token()}}
 
-  <div  class="col-lg-12">
+  <!--<div  class="col-lg-12">
     <div style="margin-top: 20px" class="col-lg-9">
        <img src="{{asset('img/ti.jpg')}}" width="600" height=190">
     </div>
@@ -26,7 +27,7 @@
        <img src="{{asset('img/logo.jpg')}}" width="250" height=120">
     </div>
    
-</div>
+</div>-->
                     <div style="margin-top: 15px" class="col-lg-9">
                         <div  class="panel panel-primary">
                             <div  class="panel-heading">
@@ -195,7 +196,7 @@
                             <div class="panel-body">
                                 <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
 
-                                    <thead style="background-color:grey">
+                                    <thead style="background-color:#cacfd2">
                                         <th>Opciones</th>
                                         <th>Producto</th>
                                         <th>Descripcion</th>
