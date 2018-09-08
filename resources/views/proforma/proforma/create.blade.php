@@ -103,8 +103,8 @@
                                         
                                         <div class="from-group">
                                             <label for="tipocambio">Valor</label>
-                                            <input type="number"  name="tipocambio" id="ptipo_cambio" class="form-control">
-
+                                            <input type="text" disabled id="ptipocambio" class="form-control">
+                                            <input type="hidden" name="tipocambio" id="ptipo_cambio" class="form-control">
                                         </div>
                                     </div>
 
@@ -354,7 +354,8 @@ function mostrarV()
     datosm=document.getElementById('pidTipo_moneda').value.split('_');
     $("#pimpuesto").val(datosm[3]);
     $("#psimbolo").val(datosm[2]);
-    $("#ptipo_cambio").val(datosm[1]);
+    $("#ptipocambio").val(datosm[1]);
+     $("#ptipo_cambio").val(datosm[1]);
 }
 
 function agregar()
