@@ -38,8 +38,8 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu">
-    <li><a href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Soles</a></li>
-    <li><a href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Tipo Cambio</a></li>
+    <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Soles</a></li>
+    <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Tipo Cambio</a></li>
   </ul>
 </div>
 
