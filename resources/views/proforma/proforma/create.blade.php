@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <h1>Nueva Proforma</h1>
+  
         @if (count($errors)>0)
         <div class="alert-alert-danger">
             <ul>
@@ -17,12 +17,17 @@
 {!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
 
 {{Form::token()}}
-<div class="row"><!--div contenedor sobresaliente-->
-    <div class="panel panel-primary">
-        <div class="panel-body">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-9">
+
+  <div  class="col-lg-12">
+    <div style="margin-top: 20px" class="col-lg-9">
+       <img src="{{asset('img/ti.jpg')}}" width="600" height=190">
+    </div>
+     <div style="margin-top: 50px" class="col-lg-3">
+       <img src="{{asset('img/logo.jpg')}}" width="250" height=120">
+    </div>
+   
+</div>
+                    <div style="margin-top: 15px" class="col-lg-9">
                         <div  class="panel panel-primary">
                             <div  class="panel-heading">
                                 <h3 class="panel-title">
@@ -44,13 +49,13 @@
                                            </select>
                                         </div> 
                                     </div> 
-                                    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12">
+                                    <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
                                         <div class="from-group label-floating">
                                             <label for="direccion">Direccion</label>
                                             <input type="text" disabled name="direccion" id="pdireccion" class="form-control" placeholder="direccion">
                                         </div>
                                     </div>  
-                                    <div class="col-lg-5 col-sm-5 col-md-5 col-xs-12">
+                                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                                         <div class="from-group">
                                             <label for="nro_documento">Numero de Documento</label>
                                             <input type="text" disabled name="nro_documento" id="pnro_documento" class="form-control" placeholder="numero documento">
@@ -64,7 +69,7 @@
 
 
 
-                    <div class="col-lg-3">
+                    <div style="margin-top: 15px" class="col-lg-3">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
@@ -150,7 +155,7 @@
                                     <div style="margin-top: 16px"  class="col-lg-2">
                                         <div class="from-group">
                                             <label for="precio_unitario">Precio unitario</label>
-                                            <input type="number" disabled name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
+                                            <input type="number"  name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
                                         </div>                                        
                                     </div>
                                     <div style="margin-top: 16px"  class="col-lg-2">
@@ -278,22 +283,18 @@
         </div>
     </div>
                     
-                                    <div class="col-lg-8">
+                                    <div  class="col-lg-8">
                                         <div class="col-lg-5"  style="padding: 10px">
-                                            <button class="btn btn-primary" type="submit">guardar</button>
+                                            <button class="btn btn-primary" type="submit" >Generar Proforma</button>
 
-                                            <button class="btn btn-danger" type="reset">cancelar</button>
+                                            <button class="btn btn-danger" type="reset">Cancelar Proforma</button>
                                         </div>         
                                      </div>                             
                                 </div>
                             </div>
                         </div>                                            
                     </div>
-                </div>
-            </div> 
-        </div>
-    </div>
- </div>
+              
 {!!Form::close()!!}
 
 

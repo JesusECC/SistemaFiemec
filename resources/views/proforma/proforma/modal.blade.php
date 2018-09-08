@@ -8,10 +8,10 @@
   	       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
   	       	<samp aria-hidden="true">x</samp>
   	       </button>
-  	       <h4 class="modal-title">cancelar venta</h4>
+  	       <h4 class="modal-title">anular proforma</h4>
   </div>
   <div class="modal-body">
-  			<p>Confirme si desea cancelar la venta</p>
+  			<p>Confirme si desea anular la proforma</p>
   </div>
   <div class="modal-footer">
        <button type="button" class="btn btn-submit" data-dismiss="modal" aria-label="Close">Cerrar</button>
