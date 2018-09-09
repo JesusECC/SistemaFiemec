@@ -36,7 +36,7 @@
 					<td>{{$em->nombres_Rs}}</td>
 					<td>{{$em->telefono.' / '.$em->celular}}</td>
 					<td>{{$em->correo}}</td>
-					<td>{{$em->direcion}}</td>
+					<td>{{$em->Direccion.' '.$em->Departamento.' '.$em->Distrito}}</td>
 
 					<td>
 					<a href="{{URL::action('ControllerEmpresa@show',$em->idCliente)}}"><button class="btn btn-info">ver</button>

@@ -12,7 +12,7 @@ class Familia extends Model
 
 
     protected $filleable = [
-    	'impuesto';
+    	
     	'nombre_familia',
     	'descuento_familia',
       
@@ -24,4 +24,4 @@ class Familia extends Model
    ];
 }
 
-}
+

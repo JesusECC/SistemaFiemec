@@ -64,8 +64,8 @@
 </div>
 
 <div class="form-group">
-	<label for="provincia">Provincia</label>
-	<input type="text" name="provincia" class="form-control" placeholder="Ingrese Provincia">	
+	<label for="departamento">Departamento</label>
+	<input type="text" name="departamento" class="form-control" placeholder="Ingrese Departamento">	
 </div>
 
 <div class="form-group">
@@ -74,8 +74,8 @@
 </div>
 
 <div class="form-group">
-	<label for="direcion">direccion</label>
-	<input type="text" name="direcion" class="form-control" placeholder="direcion">	
+	<label for="direccion">direccion</label>
+	<input type="text" name="direccion" class="form-control" placeholder="direccion">	
 </div>
 
 <div class="form-group">

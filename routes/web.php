@@ -24,6 +24,7 @@ Route::resource('proforma/empresa','ControllerEmpresa');
 Route::resource('proforma/proforma','ControllerProformaUnitaria');
 Route::resource('proforma/servicio','ControllerProformaServicio');
 Route::resource('proforma/config','ControllerConfiguracion');
+Route::resource('proforma/familia','ControllerFamilia');
 Route::resource('dashboard/dashboard-admin','ControllerDashboard');
 Route::get('proforma/proforma/pdf/{idProforma}','ControllerProformaUnitaria@pdf');
 
@@ -49,6 +50,15 @@ Route::get('productos',['as'=>'producto','uses'=>'ControllerProducto@index']);
 Route::get('productos/create',['as'=>'producto-create','uses'=>'ControllerProducto@create']);
 Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
 Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
+
+//Se crea rutas para familias
+
+Route::get('familias',['as'=>'familia','uses'=>'ControllerFamilia@index']);
+Route::get('familias/create',['as'=>'familia-create','uses'=>'ControllerFamilia@create']);
+Route::post('familias/',['as'=>'familia-store','uses'=>'ControllerFamilia@store']);
+Route::get('familias/{idFamilia}/edit',['as'=>'familia-edit','uses'=>'ControllerFamilia@edit']);
+
+
 
 
 //Route::post('proforma/proforma','ControllerProformaUnitaria@store');

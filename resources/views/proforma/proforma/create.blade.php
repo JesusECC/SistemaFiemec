@@ -272,7 +272,7 @@
                                         </tr>
                                          <tr>
                                             <th colspan="3" >Conversion al Tipo de cambio</th>
-                                            <th><h4 id="toca">0.00</h4>
+                                            <th><h4 id="toca2">0.00</h4>
                                             <input type="hidden" name="precio_totalC" id="precio_totalC"></th>
                                         </tr>
                                     </tfoot>
@@ -314,8 +314,11 @@ var cont=0;
 total=0;
 tota=0;
 toca=0;
+toca2=0;
+
 igvC=0;
 
+subcambio2=[];
 subtotal=[];
 subcambio=[];
 impuesto=[];
@@ -399,7 +402,11 @@ function agregar()
         totall[cont]=impuesto[cont]+subtotal[cont];
             tota=tota+totall[cont];
 
-        subcambio[cont]=totall[cont]/moneda;
+       subcambio2[cont]=totall[cont]/moneda;
+            toca2=toca2+subcambio2[cont];
+
+
+        subcambio[cont]=subtotal[cont]/moneda;
             toca=toca+subcambio[cont];
 
             
@@ -421,8 +428,9 @@ function agregar()
        $("#total").html("s/." + total);
        $("#subtotal").val(total);
        //cambio
-       $("#toca").html(s + toca);
-       $("#precio_totalC").val(toca);
+       $("#toca2").html(s + toca2);
+       $("#precio_totalC").val(toca2);
+
        //impuesto
       $("#igvC").html("s/." + igvC);
        $("#igv").val(igvC);
@@ -471,8 +479,8 @@ function agregar()
         $("#subtotal").val(total);
        //cambio
        toca=toca-subcambio[index];
-        $("#toca").html(+ toca);
-        $("#precio_total").val(toca);
+        $("#toca2").html(+ toca2);
+        $("#precio_total").val(toca2);
         //impuesto
         igvC=igvC-impuesto[index];
         $("#igvC").html(+ igv);
