@@ -60,7 +60,7 @@ public function show($id)
   
                   $proveedor= new Clientes;
 
-                  $proveedor->tipo_documento='DNI';
+                  $proveedor->tipo_documento='RUC';
                   $proveedor->nro_documento=intval($request->get('nro_documento'));
                   $proveedor->nombres_Rs=$request->get('nombres_RS');                  
                   $proveedor->telefono=$request->get('telefono');
@@ -75,7 +75,7 @@ public function show($id)
                   $proveedor->distrito=$request->get('distrito');
                   $proveedor->direcion=$request->get('direcion');
                   $proveedor->referencia=$request->get('referencia');
-                  $proveedor->idCliente=$idCliente;
+                 
                   $proveedor->save();
  
             

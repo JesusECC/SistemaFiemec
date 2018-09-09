@@ -32,9 +32,6 @@
 					
 					
 					<td>
-					<a href="{{URL::action('ControllerConfiguracion@show',$mo->idTipo_moneda)}}"><button class="btn btn-info">ver</button>
-					</a>
-					<td>
 					<a href="{{URL::action('ControllerConfiguracion@edit',$mo->idTipo_moneda)}}"><button class="btn btn-info">editar</button>
 					</a>
 					<a href="" data-target="#modal-delete-{{$mo->idTipo_moneda}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>

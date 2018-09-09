@@ -84,7 +84,7 @@ public function show($id)
           public function edit($id)
     {
 
-        return view("proforma.empresa.edit",["Clientes"=>Clientes::findOrFail($id)]);
+        return view("proforma.empresa.edit",["empresa"=>Clientes::findOrFail($id)]);
     }
 
    
@@ -93,7 +93,7 @@ public function show($id)
 
         $empresa=Clientes::find($id);
 
-         $empresa->tipo_documento='DNI';
+         $empresa->tipo_documento='RUC';
                   $empresa->nro_documento=intval($request->get('nro_documento'));
                   $empresa->nombres_Rs=$request->get('nombres_RS');                  
                   $empresa->telefono=$request->get('telefono');
