@@ -12,16 +12,16 @@ class DetalleProforma extends Model
 
 
     protected $filleable = [
-
-    	
-    	'idProforma',
       'idProducto',
-    	'cantidad',
-    	'precio_venta',
-    	'texto_precio_venta',
-    	'observacion_detalleP',
-    	'descuento', 
+      'idProforma',
+      'idTableros',
+      'cantidad',
+      'precio_venta',
+      'texto_precio_venta',
+      'observacion_detalleP',
+      'descuento',
       'descripcionDP',
+
    ];
 
    protected $guarded =[

@@ -36,3 +36,4 @@ class ProformaHistorial extends Model
    protected $guarded =[
      
    ];
+}

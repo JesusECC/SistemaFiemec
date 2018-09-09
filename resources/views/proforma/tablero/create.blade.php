@@ -15,18 +15,7 @@
     @endif
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Datos de proforma
-                        </h3>
-                    </div>
-                    <div class="panel-body">              
-                    </div>            
-                </div>
-            </div> 
-            <div class="col-lg-6">
+            <div class="col-lg-9">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -35,7 +24,7 @@
                     </div>
                     <div class="panel-body">        
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-10">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Nombre del Cliente</label>
                                     <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
@@ -44,6 +33,7 @@
                                             <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
                                         @endforeach
                                     </select> 
+                                    <button type="button" id="bt_add_Cliente" class="btn btn-primary">Agregar Cliente</button>
                                 </div>                               
                             </div>
                             <div class="col-lg-6">
@@ -62,11 +52,51 @@
                     </div>            
                 </div>
             </div> 
+            <div class="col-lg-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Tipo de Cambio
+                        </h3>
+                    </div>
+                    <div class="panel-body">         
+                        <div class="col-lg-6">
+                            <label>Tipo de cambio</label>
+                            <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
+                                <option value=""></option>
+                                @foreach($monedas as $mo)                
+                                    <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
+                                @endforeach  
+                            </select>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="from-group">
+                                <label for="simbolo">Simbolo</label>
+                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" >                                                
+                            </div>                                        
+                        </div>
+
+                        <div class="col-lg-4" >                                            
+                            <div class="from-group">
+                                <label for="valorcambio">Valor</label>
+                                <input type="text" disabled id="valorcambio" class="form-control">                    
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="from-group">
+                                <label for="igv_tipocambio">IGV</label>
+                                <input type="text" disabled id="igv_tipocambio" class="form-control">                                
+                            </div>                                        
+                        </div>
+                    </div>         
+                </div>
+            </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -89,7 +119,7 @@
                             <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                 <option value="">Seleccione Producto</option>
                                 @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuentoP}}">{{ $producto->nombre_producto }}</option>
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
                                 @endforeach
                             </select>                    
                         </div>
@@ -97,36 +127,44 @@
                         @csrf -->
                         <div class="card" id="producto-crear-oculto" style='display:none;'>
                             <div class="card-header">
-                                Seleccionó
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-12">
+                                    <!-- <div class="col-lg-12">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Nombre de Producto</label>
                                             <input type="hidden" id="idProd" name="idProd" disabled>
                                             <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
                                         </div>                               
-                                    </div>
-                                    <div class="col-lg-3 col-xs-3 col-md-3 col-sm-3">
+                                    </div> -->
+                                    <div class="col-lg-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Descripcion</label>
+                                            <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
+                                            <!-- <textarea rows="4" cols="50">
+                                            
+                                            </textarea> -->
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">P. UNIT.</label>
                                             <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
                                         </div>
                                     </div> 
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-1">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Cantidad</label>
                                             <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
                                         </div>
                                     </div> 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Descuento %</label>
                                             <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Nom.Tablero</label>
                                             <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
@@ -145,7 +183,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -155,7 +193,7 @@
                     <div class="panel-body">              
                     </div>            
                 </div>
-            </div>
+            </div> -->
             <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -191,7 +229,7 @@
                                         </tr>
                                         <tr>
                                             <th colspan="3" >Descuentos</th>
-                                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" width="10px" name="descuentos" id="descuentos"></th>
+                                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos"></th>
                                         </tr>
                                         <tr>
                                             <th colspan="3" >Valor Venta</th>
@@ -236,7 +274,7 @@
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
             agregarTablero();
-            mostrarcampos();
+            valoresFinales();
         });
         $('#save').click(function(){
             // console.log("asd");
@@ -244,7 +282,8 @@
         });
         $('#bt_add_produc').click(function(){
             agregarProductosTablero();
-            document.getElementById('totales-general').style.display = 'block';
+            valoresFinales();
+           
         });
         $('#Pcantidad').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
@@ -263,6 +302,7 @@
 
     });
     $("#idClientes").change(MostrarCliente);
+    $("#idTipo_moneda").change(mostrarTipoCambio);
     var tablero=[];
     var filaob=[];
     var cont=0;
@@ -271,6 +311,8 @@
     var subtotal=0;
     var nomTablero;
     var idcliente;
+    var totalt;
+    var valorventa;
     $("#pidProducto").change(MostarProducto);
     
 
@@ -284,11 +326,19 @@
     }
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
-        $("#idProd").val(Producto[0]);
-        $("#Productoname").val(Producto[1]);
+        // $("#idProd").val(Producto[0]);
+        // $("#Productoname").val(Producto[1]);
         $("#precio_uni").val(Producto[2]);
         $("#pdescuento").val(Producto[3]);
         // descuentoP -->para emostar el 
+    }
+    function mostrarTipoCambio(){
+        // {{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}
+        tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
+        $("#simbolo").val(tipoCambio[2]);
+        $("#valorcambio").val(tipoCambio[1]);
+        $("#igv_tipocambio").val(tipoCambio[3]+ " %");
+
     }
     function mostrarcampos(){
         document.getElementById('producto-crear-oculto').style.display = 'block';
@@ -300,105 +350,131 @@
     function saveProforma(){
         // se enviar los datos al controlador proforma tableros
         // console.log(idcliente);
+        tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
+        var idtipocam=tipoCambio[0];
+        var valorcambio=tipoCambio[1];
         var vVenta=$("#valorVenta").val();
         var tl=$("#total").val();
-        console.log(idcliente);
-        $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data:  {"tableros":tablero,"fila":filaob,"idcliente":idcliente,'valorVenta':vVenta,'total':tl}, //datos que se envian a traves de ajax
-            url:   'guardar', //archivo que recibe la peticion
-            type:  'post', //método de envio
-            dataType: "json",//tipo de dato que envio 
-            beforeSend: function () {
-                // console.log()
-                    // $("#resultado").html("Procesando, espere por favor...");
-            },
-            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                console.log(response);
-                    // $("#resultado").html(response);
-            }
-        });
-        // console.log(tablero,filaob);
+        console.log(tablero,filaob);
+        if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
+            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio}];
+            // console.log(dat,tablero,filaob);
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
+                url:   'guardar', //archivo que recibe la peticion
+                type:  'post', //método de envio
+                dataType: "json",//tipo de dato que envio 
+                beforeSend: function () {
+                    // console.log()
+                        // $("#resultado").html("Procesando, espere por favor...");
+                },
+                success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                    console.log(response);
+                    window.location.replace(response.data);
+                    // document.location.href="{ url('/tableros') }";
+                        // $("#resultado").html(response);
+                }
+            });
+            // console.log(tablero,filaob);
+        }else {
+            alert('ingrese productos al tablero!!');
+        }
     }
     var bool;
     function agregarTablero(){    
         var tabl=$("#NomTablerop").val();
         nomTablero=tabl.replace(/ /gi,"_");  
         bool=false;  
-        // fila();
-        if(tablero.length>=0 && nomTablero!=""){
-            //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
-            for (const key in tablero) {
-                if (tablero.hasOwnProperty(key)) {
-                    if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
-                        bool=true; 
-                    }                                       
+        if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
+            mostrarcampos();
+            // fila();
+            if(tablero.length>=0 && nomTablero!=""){
+                //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
+                for (const key in tablero) {
+                    if (tablero.hasOwnProperty(key)) {
+                        if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
+                            bool=true; 
+                        }                                       
+                    }
                 }
-            }
-            //if que compara e inserta la tabla contenedora de los produtos vacia.
-            if(bool==false ){  
-                table='<div id="'+nomTablero+'_'+cont+'">'+
-                            '<section class="content" style="min-height:0px !important">'+
-                                '<div class="row">'+
-                                    '<div class="col-md-12">'+
-                                        '<div class="box">'+
-                                            '<div class="box-header with-border" style="padding:5px !important;">'+
-                                            '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
-                                                '<div class="box-tools pull-right">'+
+                //if que compara e inserta la tabla contenedora de los produtos vacia.
+                if(bool==false ){  
+                    table='<div id="'+nomTablero+'_'+cont+'">'+
+                                '<section class="content" style="min-height:0px !important">'+
+                                    '<div class="row">'+
+                                        '<div class="col-md-12">'+
+                                            '<div class="box">'+
+                                                '<div class="box-header with-border" style="padding:5px !important;">'+
+                                                '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
+                                                    '<div class="box-tools pull-right">'+
 
-                                                    '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
-                                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
-                                                                    '<i class="fa fa-times"></i>'+
-                                                            '</button>'+
-                                                '</div>'+
-                                            '</div>'+
-                                            '<div class="box-body">'+
-                                                '<div class="row">'+
-                                                    '<div class="col-md-12">'+
-                                                        '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
-                                                            '<thead style="background-color:#A9D0F5">'+
-                                                                '<th width="10px" >Producto</th>'+
-                                                                '<th width="10px">Cant.</th>'+
-                                                                '<th width="10px">P. Unit.</th>'+
-                                                                '<th width="10px">Descuento</th>'+
-                                                                '<th width="10px">Importe</th>'+
-                                                                //'<th></th>'+
-                                                            '</thead>'+
-                                                            '<tbody id="detalle_'+nomTablero+'">'+
-                                                            '</tbody>'+ 
-                                                            '<tfoot>'+
-                                                                '<th>Total</th>'+
-                                                                '<th></th>'+
-                                                                '<th></th>'+
-                                                                '<th></th>'+
-                                                                '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                                '</th>'+
-                                                            '</tfoot>'+
-                                                        '</table>'+
+                                                        '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
+                                                        '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
+                                                                        '<i class="fa fa-times"></i>'+
+                                                                '</button>'+
                                                     '</div>'+
-                                                '<div>'+
-                                            '</div>'+                                
+                                                '</div>'+
+                                                '<div class="box-body">'+
+                                                    '<div class="row">'+
+                                                        '<div class="col-md-12">'+
+                                                            '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
+                                                                '<thead style="background-color:#A9D0F5">'+
+                                                                    '<th>Producto</th>'+
+                                                                    '<th>Descripción</th>'+
+                                                                    '<th>Cant.</th>'+
+                                                                    '<th>P. Unit.</th>'+
+                                                                    '<th>Descuento</th>'+
+                                                                    '<th>Importe</th>'+
+                                                                    //'<th></th>'+
+                                                                '</thead>'+
+                                                                '<tbody id="detalle_'+nomTablero+'">'+
+                                                                '</tbody>'+ 
+                                                                '<tfoot>'+
+                                                                    '<th>Total</th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                    '</th>'+
+                                                                '</tfoot>'+
+                                                            '</table>'+
+                                                        '</div>'+
+                                                    '<div>'+
+                                                '</div>'+                                
+                                            '</div>'+
                                         '</div>'+
                                     '</div>'+
-                                '</div>'+
-                            '</section>'+
-                        '</div>';
-            var ta={nombre:nomTablero,posi:cont,tablero:table}
-            tablero.push(ta);                        
-            } cont++;       
+                                '</section>'+
+                            '</div>';
+                var ta={nombre:nomTablero,posi:cont,tablero:table}
+                tablero.push(ta);                        
+                } cont++;       
+            }
+            // console.log(table);
+            nomTablero="";
+            // realiza el listado de todas los tableros que se añaden
+            ListaSelect()
+            // mantiene en la vista las filas cuando se agrega una nueva tabla
+            detalleFilas();
+            // fila();
+            //nomtablero="";
+        }else{
+            // (tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!=''
+            if($("#simbolo").val()=='' && $("#valorcambio").val()=='' && $("#igv_tipocambio").val()==''){
+                alert("seleccione un tipo de Moneda");
+            }else if(tabl==''){
+                alert("ingrese nombre del Tablero");
+            }            
         }
-        // console.log(table);
-        nomTablero="";
-        // realiza el listado de todas los tableros que se añaden
-        ListaSelect()
-       // mantiene en la vista las filas cuando se agrega una nueva tabla
-       detalleFilas();
-        // fila();
-        //nomtablero="";
+        
     }
     function agregarProductosTablero(){    
-        var idProd=$('#idProd').val();
-        var pname=$("#Productoname ").val();
+        Producto=document.getElementById('pidProducto').value.split('_');
+        var idProd=Producto[0];
+        var pname=Producto[1];
+        var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
         var sel=$('#prod-selec').val();
@@ -406,8 +482,9 @@
         // console.log(descuento);
         nomTablero=$('#prod-selec').val();
         var filas;
-        // console.log(nomTablero,sel);
-        if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!="" && descuento!=""){
+        // console.log(idProd,pname);
+        if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!="" && descuento!="" ){
+            document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
             for (const key in tablero) {
@@ -418,7 +495,10 @@
                             if (filaob.hasOwnProperty(fil)) {
                                 if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['nomTablero']==tablero[key]['nombre']){
                                     var su=parseInt(pcant);
+                                    var des=parseInt(descuento);
                                     filaob[fil]['cantidadP']=su;
+                                    filaob[fil]['descuentoP']=des;
+                                    filaob[fil]['descripcionP']=pdescripcion;
                                     fila();
                                     boolfila=true;
                                     console.log("Actualizar producto");                      
@@ -427,7 +507,7 @@
                         }
                         if(boolfila==false){
                             console.log("produc nuevoo",contp);
-                            var dat={idProducto:idProd,producto:pname,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+                            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
                             filaob.push(dat);
                             fila();
                             contp++;
@@ -437,10 +517,12 @@
                     }                    
                 }
             }
-            detalleFilas();
+            // detalleFilas();
             valoresFinales();
             // console.log(filaob);            
             nomtablero="";            
+        }else{
+            alert("Ingresar Datos del Producto!!");
         }
     }
     function fila(){
@@ -464,16 +546,19 @@
                                             '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                                         '</td>'+
                                         '<td> '+ 
-                                            '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'" style="width:40px !important">'+
+                                            '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+                                        '</td>'+
+                                        '<td> '+ 
+                                            '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
                                         '</td>'+
                                         '<td> '+   
-                                            '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" style="width:70px !important">'+
+                                            '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
                                         '</td>'+
                                         '<td> '+   
-                                            '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" style="width:70px  !important">'+
+                                            '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
                                         '</td>'+
                                         '<td> '+   
-                                            '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'" style="width:70px !important">'+
+                                            '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+
                                         '</td>'+
                                         '<td>'+
                                             '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
@@ -501,6 +586,7 @@
                 }
             }
             var selec='<select name="prod-selec" id="prod-selec"  >'+
+                            // '<option value="">Seleccione...</option>'+
                             selectop+
                       '</select>';
             $('#select-pro').html(selec);
@@ -548,7 +634,7 @@
                                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                                 var descuento=parseFloat(filaob[fila]['descuentoP']);
                                 sub+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                                console.log(sub,"---");
+                                // console.log(sub,"---");
                             }                            
                         }
                     }   
@@ -560,10 +646,8 @@
         }
     }
     function subTotal(){
-        // la suma de tosos los tableros
-        
-        var sub=0;
-        
+        // la suma de tosos los tableros        
+        var sub=0;        
         for (const fila in filaob) {
             if (filaob.hasOwnProperty(fila)) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
@@ -575,7 +659,7 @@
             }
         }
         // console.log(sub);
-        $("#subtotal").html("s/. " + sub);
+        $("#subtotal").html("s/. " + sub.toFixed(2));
     }
     function descuentos(){
         var desc=0;
@@ -587,7 +671,7 @@
                 desc+=((precio*(descuento/100)*cantidad));                       
             }
         }
-        $("#descuentos").html("s/. "+desc);
+        $("#descuentos").html("s/. "+desc.toFixed(2));
     }
     function valorVenta(){
         var venta=0;        
@@ -601,8 +685,9 @@
                 // console.log(sub);                        
             }
         }
+        valorventa=venta.toFixed(2);
         // console.log(sub);
-        $("#valorVenta").html("s/. " + venta);
+        $("#valorVenta").html("s/. " + venta.toFixed(2));
     }
     function igv(){
         var venta=0;   
@@ -619,7 +704,7 @@
         }
         ig=venta*0.18;
         // console.log(sub);
-        $("#igv").html("s/. " + ig);
+        $("#igv").html("s/. " + ig.toFixed(2));
     }
     function total(){
         var venta=0;   
@@ -637,10 +722,14 @@
         }
         igv=venta*0.18;
         tota=venta+igv;
+        totalt=tota.toFixed(2);
         // console.log(sub);
-        $("#total").html("s/. " + tota);
+        $("#total").html("s/. " + tota.toFixed(2));
     }
     function valoresFinales(){
+        if(filaob.length>0){
+            detalleFilas();
+        }
         subTotal();
         subTotalTable();
         descuentos();
@@ -661,7 +750,7 @@
                 }
             }
         } 
-        subTotal(); 
+        valoresFinales();
     }
     function eliminarTablero(a){
     // elimina todo un tablero con todos los datos que contiene
@@ -683,7 +772,9 @@
                 }              
             }
         }
+        detalleFilas();
         ListaSelect();
+        valoresFinales()
     }
     function ocultar(){
         tablero.length>0
