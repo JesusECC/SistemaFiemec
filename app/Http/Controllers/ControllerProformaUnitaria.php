@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SistemaFiemec\Http\Requests\RequestFormProforma;
 use PDF;
-use Carbon\Carbon;
+
 use Response;
 use Illuminate\Support\Collection;
 
@@ -46,7 +46,7 @@ public function create()
 {
  $productos=DB::table('Producto as po')
  ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
- ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descuentoP','po.descripcion_producto','po.precio_unitario','po.foto','po.familia','po.categoria_producto','po.fecha_sistema')
+ ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema')
  ->where('po.estado','=','activo')
  ->get();
 
@@ -83,8 +83,6 @@ public function store(Request $request)
        // $Proforma->idEmpleado='2';
         $Proforma->idTipo_moneda=$idmoneda;
         $Proforma->serie_proforma='PU365122018';
-        $mytime = Carbon::now('America/Lima');
-        $Proforma->fecha_hora=$mytime->toDateTimeString();
         $Proforma->igv='18';
         $Proforma->subtotal=$request->get('subtotal');
         $Proforma->tipocambio=$request->get('tipocambio');
@@ -98,7 +96,7 @@ public function store(Request $request)
         $Proforma->estado='activo';
 
        
-       // $Proforma->save();
+        $Proforma->save();
         
         $idProducto=$request->get('idProducto');
         $cantidad=$request->get('cantidad');
@@ -119,7 +117,7 @@ public function store(Request $request)
             $detalle->cantidad=$cantidad[$cont];
             $detalle->descuento=$descuento[$cont];
             $detalle->precio_venta=$precio_venta[$cont];
-           // $detalle->save();
+            $detalle->save();
             $cont=$cont+1; 
                      
         }

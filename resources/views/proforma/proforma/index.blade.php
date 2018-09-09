@@ -33,19 +33,21 @@
 					
 					<td>
 						<div class="btn-group">
-  <button type="button" class="btn btn-primary">PDF</button>
-  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Soles</a></li>
-    <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Tipo Cambio</a></li>
-  </ul>
-</div>
+                       <button type="button" class="btn btn-primary">PDF</button>
+                       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                       <span class="caret"></span>
+                       </button>
+                       <ul class="dropdown-menu" role="menu">
+                       <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Soles</a></li>
+                       <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Tipo Cambio</a></li>
+                       </ul>
+                       </div>
 
 					
 					<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
 					</a>
+
+					
 					<a href="" data-target="#modal-delete-{{$prof->idProforma}}" data-toggle="modal"><button class="btn btn-danger">Anular</button></a>
 
 					
