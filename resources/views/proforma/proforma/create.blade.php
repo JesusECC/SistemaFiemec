@@ -287,7 +287,34 @@
                     
                                     <div  class="col-lg-8">
                                         <div class="col-lg-5"  style="padding: 10px">
-                                            <button class="btn btn-primary" type="submit" >Generar Proforma</button>
+                                            <form class="form-inline" onsubmit="openModal()" id="myForm">
+                                                <button class="btn btn-primary" type="submit">Generar Proforma</button>
+                                            </form>
+                                            
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    $('#myForm').on('submit', function(e){
+  $('#myModal').modal('show');
+  e.preventDefault();
+});
+</script>
 
                                             <button class="btn btn-danger" type="reset">Cancelar Proforma</button>
                                         </div>         

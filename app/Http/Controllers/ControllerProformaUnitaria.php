@@ -124,7 +124,7 @@ public function store(Request $request)
                      
         }
 
-dd($Proforma,$detalle);
+//dd($Proforma,$detalle);
          DB::Commit();
    
 
