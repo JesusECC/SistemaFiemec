@@ -165,7 +165,7 @@ public function pdf($id){
     ->get();
 
     $pdf=PDF::loadView('proforma/proforma/pdf',['proforma'=>$proforma,"detalles"=>$detalles]);
-    return $pdf->stream('proforma');
+    return $pdf->stream('proforma.pdf');
     //return $pdf->download('Lista de requerimientos.pdf');
 
 

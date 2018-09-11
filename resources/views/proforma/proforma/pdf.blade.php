@@ -170,32 +170,33 @@ footer {
           @endforeach
         </tbody>
         <tfoot>
-            <tr>
-              <td colspan="2" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
-              <td colspan="2" >SUBTOTAL</td>
+            <tr style="font-weight: bold;">
+              <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
+              <td colspan="1" >Subtotal</td>
               <td align="center"> S/. {{$proforma->precio_total}}</td>
             </tr>
-            <tr>
-              <td colspan="2" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
-              <td colspan="2">IGV 18%</td>
+            <tr style="font-weight: bold;">
+              <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
+              <td colspan="1">IGV 18%</td>
               <td align="center"> S/. {{round(($proforma->precio_total)*($proforma->igv/100),2)}}</td>
             </tr>
-            <tr>  
-              <td colspan="2" style="background-color: white !important"></td>
-              <td colspan="2">PRECIO TOTAL</td>
+            <tr style="font-weight: bold;">  
+              <td colspan="3" style="background-color: white !important"></td>
+              <td colspan="1">Precio Total</td>
               <td align="center">S/. {{round($proforma->precio_total+($proforma->precio_total)*($proforma->igv/100),2)}}</td>
             </tr> 
         </tfoot>
       </table>
     </div>
-    <h5>Forma de pago: {{$proforma->forma_de}}</h5>
-    <h5>Condición de venta: {{$proforma->observacion_condicion}} </h5>
-    <h5>Validez de oferta {{$proforma->plazo_oferta}}  </h5>
-    <h4>Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
-     <h5>BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
-                        <h5>BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
-                        <h5>BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
-                        <h5>Cta. Corriente  detracciones BN :   00-088-006879</h5>
+    <h5 style="font-size: 12px !important;line-height:1px">Forma de pago: {{$proforma->forma_de}}</h5>
+    <h5 style="font-size: 12px !important;line-height:1px">Condición de venta: {{$proforma->observacion_condicion}} </h5>
+    <h5 style="font-size: 12px !important;line-height:1px">Validez de oferta {{$proforma->plazo_oferta}}  </h5>
+    <br>
+    <h4 style="font-size: 14px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
+     <h5 style="font-size: 12px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
+                        <h5 style="font-size: 12px !important;line-height:1px">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
+                        <h5 style="font-size: 12px !important;line-height:1px">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
+                        <h5 style="font-size: 12px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>
 
   </main>
   <footer>  
