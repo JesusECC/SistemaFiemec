@@ -172,18 +172,18 @@ footer {
         <tfoot>
             <tr style="font-weight: bold;">
               <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
-              <td colspan="1" >Subtotal</td>
-              <td align="center"> S/. {{$proforma->precio_total}}</td>
+              <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
+              <td align="center" style="border-right: 1px solid #323639"> S/. {{$proforma->precio_total}}</td>
             </tr>
             <tr style="font-weight: bold;">
               <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
-              <td colspan="1">IGV 18%</td>
-              <td align="center"> S/. {{round(($proforma->precio_total)*($proforma->igv/100),2)}}</td>
+              <td colspan="1" style="border-left:1px solid #323639; ">IGV 18%</td>
+              <td align="center" style="border-right: 1px solid #323639"> S/. {{round(($proforma->precio_total)*($proforma->igv/100),2)}}</td>
             </tr>
             <tr style="font-weight: bold;">  
               <td colspan="3" style="background-color: white !important"></td>
-              <td colspan="1">Precio Total</td>
-              <td align="center">S/. {{round($proforma->precio_total+($proforma->precio_total)*($proforma->igv/100),2)}}</td>
+              <td colspan="1" style="border-left:1px solid #323639;border-bottom: 1px solid #323639 ">Precio Total</td>
+              <td align="center" style="border-right: 1px solid #323639;border-bottom: 1px solid #323639">S/. {{round($proforma->precio_total+($proforma->precio_total)*($proforma->igv/100),2)}}</td>
             </tr> 
         </tfoot>
       </table>
