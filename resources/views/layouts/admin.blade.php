@@ -49,6 +49,9 @@
               <!-- Messages: style can be found in dropdown.less-->
               
               <!-- User Account: style can be found in dropdown.less -->
+              <li>
+                <a href=""> <i class="fas fa-cogs"></i></a>
+              </li>
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <small class="bg-red">Online</small>
@@ -100,7 +103,17 @@
                 <li><a href="almacen/categoria"><i class="fa fa-circle-o"></i> Categorías</a></li>
               </ul>
             </li>
-            
+            <li class="treeview">
+              <a href="#">
+                <i class="fas fa-dolly"></i>
+                 <span>Productos</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="productos"><i class="fa fa-circle-o"></i> Fiemec </a></li>
+                <li><a href="catalogo"><i class="fa fa-circle-o"></i> Catálogo</a></li>
+              </ul>
+            </li>            
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-file-powerpoint"></i>
@@ -108,9 +121,9 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="compras/ingreso"><i class="fa fa-circle-o"></i> Proforma de Productos</a></li>
-                <li><a href="compras/proveedor"><i class="fa fa-circle-o"></i> Proforma de Servicios</a></li>
-                <li><a href="{{ route('tablero')}}"><i class="fa fa-circle-o"></i> Proforma de Tableros</a></li>
+                <li><a href="compras/ingreso"><i class="fa fa-circle-o"></i> Productos</a></li>
+                <li><a href="compras/proveedor"><i class="fa fa-circle-o"></i> Servicios</a></li>
+                <li><a href="{{ route('tablero')}}"><i class="fa fa-circle-o"></i> Tableros</a></li>
               </ul>
             </li>
             <li class="treeview">

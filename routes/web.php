@@ -38,19 +38,22 @@ Route::get('servicio/create',['as'=> 'servicio-create','uses' =>'ControllerProfo
 
 //Route::get('servicios/show',['as'=> 'servicio-show','uses' =>'ControllerProformaServicio@show']);
 
-// Se crea las rutas paratableros
+// Se crea las rutas para tableros
 Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
 Route::get('tableros/create',['as' => 'tablero-create','uses'=>'ControllerProformaTableros@create']);
 Route::post('tableros/guardar',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
 Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'ControllerProformaTableros@buscarProducto']);
 
 
-//Se crea las rutas para productos
+//Se crea las rutas para productos 
 Route::get('productos',['as'=>'producto','uses'=>'ControllerProducto@index']);
 Route::get('productos/create',['as'=>'producto-create','uses'=>'ControllerProducto@create']);
 Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
 Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
 
+//se crea las rutas para catalago 
+Route::get('catalogo',['as'=>'catalogo','uses'=>'ControllerCatalogo@index']);
+Route::get('catalogo/show/{idProducto}',['as'=>'catalogo-show','uses'=>'ControllerCatalogo@show']);
 //Se crea rutas para familias
 
 Route::get('familias',['as'=>'familia','uses'=>'ControllerFamilia@index']);
