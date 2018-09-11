@@ -416,10 +416,6 @@ function agregar()
         if(cantidad>0)
         {
              
-            
-            
-
-        
         subtotal[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad);
             total=total+subtotal[cont];
 

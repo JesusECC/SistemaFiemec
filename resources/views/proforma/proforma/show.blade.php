@@ -76,7 +76,7 @@
 
                          <h4 id="total">Subtotal: {{$proforma->subtotal}}</h4>
 
-                            <h4 type="number" id="total">IGV: {{round(($proforma->igv),2)}}
+                            <h4 type="number" id="total">IGV: {{round($proforma->subtotal*$proforma->igv/100,2)}}
 
                             <h4 id="total">Precio total: {{round($proforma->precio_total,2)}}</th><br>
 
