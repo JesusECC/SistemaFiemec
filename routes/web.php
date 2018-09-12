@@ -43,6 +43,9 @@ Route::get('tableros/create',['as' => 'tablero-create','uses'=>'ControllerProfor
 Route::post('tableros/guardar',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
 Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'ControllerProformaTableros@buscarProducto']);
 
+Route::get('proforma/tablero/pdf/{idProforma}','ControllerProformaTableros@pdf');
+//Route::get('proforma/tablero/pdf2/{idProforma}','ControllerProformaTableros@pdf2');
+
 
 //Se crea las rutas para productos 
 Route::get('productos',['as'=>'producto','uses'=>'ControllerProducto@index']);

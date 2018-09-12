@@ -35,6 +35,7 @@ class ControllerProformaUnitaria extends Controller
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('p.estado','=','activo')
+    ->where('tipo_proforma','=','unitaria')
     ->orderBy('p.idProforma','desc')
      
     	->paginate(7);           

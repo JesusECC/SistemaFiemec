@@ -7,13 +7,33 @@ use Producto;
 use Proforma;
 use SistemaFiemec\DetalleProforma;
 use Carbon\Carbon;
+
+use SistemaFiemec\Http\Requests;
+
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
+use PDF;
 use DB;
 class ControllerProformaTableros extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        return view('proforma.tablero.index');
+        if ($request)
+    {
+    $query=trim($request->get('searchText'));
+    $proformas=DB::table('Proforma as p')
+    ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
+    ->where('p.idProforma','LIKE','%'.$query.'%')
+    ->where('tipo_proforma','=','tablero')
+    ->where('p.estado','=','activo')
+    ->orderBy('p.idProforma','desc')
+     
+        ->paginate(7);           
+            return view('proforma.tablero.index',["proformas"=>$proformas,"searchText"=>$query]);
+        }
     }
     public function create()
     {
@@ -131,5 +151,28 @@ class ControllerProformaTableros extends Controller
         }catch(Exception $e){
             return ['data' =>$e];
         }
+    }
+
+
+    public function pdf($id){
+
+$proforma=DB::table('Proforma as p')
+    ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.subtotal')
+    ->where('p.idProforma','=',$id)
+    ->first();
+
+    $detalles=DB::table('Detalle_proforma as dpr')
+    ->join('Tableros as ta','dpr.idTableros','=','ta.idTableros')
+    ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
+    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','ta.nombre_tablero')
+    ->where('dpr.idProforma','=',$id)
+    
+    ->get();
+
+    $pdf=PDF::loadView('proforma/tablero/pdf',['proforma'=>$proforma,"detalles"=>$detalles]);
+    return $pdf->stream('proforma.pdf');
+
+
     }
 }
