@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <h2>Nueva Proforma de Tableros</h2>
+    <h2>Nueva Proforma </h2>
     <hr />
         @if (count($errors)>0)
         <div class="alert-alert-danger">
@@ -95,7 +95,8 @@
                                     <div class="col-lg-4">
                                         <div class="from-group">
                                             <label for="simbolo">Simbolo</label>
-                                            <input type="text" disabled name="simbolo" id="psimbolo" class="form-control" >
+                                            <input type="text"  disabled id="psimbolo" class="form-control" >
+                                            <input type="hidden" name="simboloP" id="psimbol" class="form-control">
                                             
                                          </div>                                        
                                     </div>
@@ -388,6 +389,7 @@ function mostrarV()
     datosm=document.getElementById('pidTipo_moneda').value.split('_');
     $("#pimpuesto").val(datosm[3]);
     $("#psimbolo").val(datosm[2]);
+    $("#psimbol").val(datosm[2]);
     $("#ptipocambio").val(datosm[1]);
      $("#ptipo_cambio").val(datosm[1]);
 }
@@ -441,6 +443,8 @@ function agregar()
        '<button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td>'+
        ' <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td>'+
        ' <td><input  type="hidden"  name="descripcionDP[]"  value="'+descripcion+'">'+descripcion+'</td>'+
+       ' <input  type="hidden"  name="cambioDP[]"  value="'+moneda+'">'+
+       ' <input  type="hidden"  name="simboloDP[]"  value="'+s+'">'+
        ' <td><input type="hidden"  name="cantidad[]"  value="'+cantidad+'">'+cantidad+'</td> '+
        '<td><input type="hidden"  name="precio_venta[]"   value="'+precio_venta+'">S/. '+precio_venta+'</td>'+
        ' <td><input type="hidden"  name="descuento[]"  value="'+descuento+'">'+descuento+'%</td><td>S/. '+subtotal[cont]+'</td> <td>'+s+subcambio[cont]+'</td></tr>';
@@ -506,8 +510,8 @@ function agregar()
         $("#precio_total").val(toca2);
         //impuesto
         igvC=igvC-impuesto[index];
-        $("#igvC").html(+ igv);
-        $("#precio_total").val(igv);
+        $("#igvC").html(+ igvC);
+        $("#precio_total").val(igvC);
         //total
         tota=tota-totall[index];
         $("#tota").html(+ tota);

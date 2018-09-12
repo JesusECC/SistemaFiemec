@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <h3>Nueva Proforma de tableros</h3>
+    <h3>Nueva Proforma de Servicios</h3>
     <hr />
     @if (count($errors)>0)
     <div class="alert-alert-danger">
@@ -100,13 +100,13 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            Ingresar Nombre de Tablero
+                             Nombre de Servicio
                         </h3>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
+                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del servicio...">
                                 <samp class="input-group-btn">
                                     <button type="button" id="bt_add_tablero" class="btn btn-primary">
                                         Agregar
@@ -385,7 +385,9 @@
     function agregarTablero(){    
         var tabl=$("#NomTablerop").val();
         nomTablero=tabl.replace(/ /gi,"_");  
-        bool=false;  
+        bool=false; 
+
+
         if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
             mostrarcampos();
             // fila();
@@ -395,18 +397,19 @@
                     if (tablero.hasOwnProperty(key)) {
                         if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
                             bool=true; 
-                        }                                       
+                        }
+                                                               
                     }
                 }
                 //if que compara e inserta la tabla contenedora de los produtos vacia.
-                if(bool==false ){  
+                if(bool=="asd" ){  
                     table='<div id="'+nomTablero+'_'+cont+'">'+
                                 '<section class="content" style="min-height:0px !important">'+
                                     '<div class="row">'+
                                         '<div class="col-md-12">'+
                                             '<div class="box">'+
                                                 '<div class="box-header with-border" style="padding:5px !important;">'+
-                                                '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
+                                                '<p>' +nomTablero.replace(/_/gi," ")+'</p>'+
                                                     '<div class="box-tools pull-right">'+
 
                                                         '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
@@ -450,7 +453,60 @@
                             '</div>';
                 var ta={nombre:nomTablero,posi:cont,tablero:table}
                 tablero.push(ta);                        
-                } cont++;       
+                } 
+//-----------------------------------------------------------------------------
+        else if(bool==false){  
+                    table='<div id="'+nomTablero+'_'+cont+'">'+
+                                '<section class="content" style="min-height:0px !important">'+
+                                    '<div class="row">'+
+                                        '<div class="col-md-12">'+
+                                            '<div class="box">'+
+                                                '<div class="box-header with-border" style="padding:5px !important;">'+
+                                                '<p>' +nomTablero.replace(/_/gi," ")+'</p>'+
+                                                    '<div class="box-tools pull-right">'+
+
+                                                        '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
+                                                        '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
+                                                                        '<i class="fa fa-times"></i>'+
+                                                                '</button>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="box-body">'+
+                                                    '<div class="row">'+
+                                                        '<div class="col-md-12">'+
+                                                            '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
+                                                                '<thead style="background-color:#A9D0F5">'+
+                                                                    '<th>Producto</th>'+
+                                                                    '<th>Descripción</th>'+
+                                                                    '<th>Cant.</th>'+
+                                                                    '<th>P. Unit.</th>'+
+                                                                    
+                                                                    '<th>Importe</th>'+
+                                                                    //'<th></th>'+
+                                                                '</thead>'+
+                                                                '<tbody id="detalle_'+nomTablero+'">'+
+                                                                '</tbody>'+ 
+                                                                '<tfoot>'+
+                                                                    '<th>Total</th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    
+                                                                    '<th></th>'+
+                                                                    '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                    '</th>'+
+                                                                '</tfoot>'+
+                                                            '</table>'+
+                                                        '</div>'+
+                                                    '<div>'+
+                                                '</div>'+                                
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</section>'+
+                            '</div>';
+                var ta={nombre:nomTablero,posi:cont,tablero:table}
+                tablero.push(ta);                        
+                }cont++;       
             }
             // console.log(table);
             nomTablero="";
@@ -460,16 +516,20 @@
             detalleFilas();
             // fila();
             //nomtablero="";
-        }else{
+        }
+
+
+
+        else{
             // (tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!=''
             if($("#simbolo").val()=='' && $("#valorcambio").val()=='' && $("#igv_tipocambio").val()==''){
                 alert("seleccione un tipo de Moneda");
             }else if(tabl==''){
                 alert("ingrese nombre del Tablero");
-            }            
+            }               
         }
-        
-    }
+
+}
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
         var idProd=Producto[0];

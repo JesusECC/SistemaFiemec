@@ -163,9 +163,9 @@ footer {
           <tr class="principal"> 
             <td class="principal" style="font-size: 11px !important;"> {{$det->producto.' | '.$det->descripcionDP}} </td>
             <td class="principal" align="center">{{$det->cantidad}}</td>
-            <td class="principal"  align="center">S/.{{$det->precio_venta}}</td>
+            <td class="principal"  align="center">{{$det->simboloDP.' '.round($det->precio_venta/$det->cambioDP,2)}}</td>
             <td class="principal" align="center">{{$det->descuento}}%</td>
-            <td class="principal" align="center">S/.{{($det->precio_venta*$det->cantidad)-(($det->cantidad*$det->precio_venta)*($det->descuento/100))}}</td>
+            <td class="principal" align="center">{{$det->simboloDP.' '.round((($det->precio_venta*$det->cantidad)-(($det->cantidad*$det->precio_venta)*($det->descuento/100)))/$det->cambioDP,2)}}</td>
           </tr>
           @endforeach
         </tbody>
@@ -173,17 +173,17 @@ footer {
             <tr style="font-weight: bold;">
               <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
               <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
-              <td align="center" style="border-right: 1px solid #323639"> S/. {{$proforma->subtotal}}</td>
+              <td align="center" style="border-right: 1px solid #323639"> {{$proforma->simboloP.' '.round($proforma->subtotal/$proforma->tipocambio,2)}}</td>
             </tr>
             <tr style="font-weight: bold;">
               <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
               <td colspan="1" style="border-left:1px solid #323639; ">IGV 18%</td>
-              <td align="center" style="border-right: 1px solid #323639"> S/. {{round(($proforma->precio_total)*($proforma->igv/100),2)}}</td>
+              <td align="center" style="border-right: 1px solid #323639"> {{$proforma->simboloP.' '.round((($proforma->subtotal)*($proforma->igv/100))/$proforma->tipocambio,2)}}</td>
             </tr>
             <tr style="font-weight: bold;">  
               <td colspan="3" style="background-color: white !important"></td>
               <td colspan="1" style="border-left:1px solid #323639;border-bottom: 1px solid #323639 ">Precio Total</td>
-              <td align="center" style="border-right: 1px solid #323639;border-bottom: 1px solid #323639">S/. {{round($proforma->precio_total,2)}}</td>
+              <td align="center" style="border-right: 1px solid #323639;border-bottom: 1px solid #323639"> {{$proforma->simboloP.' '.round($proforma->precio_total/$proforma->tipocambio,2)}}</td>
             </tr> 
         </tfoot>
       </table>

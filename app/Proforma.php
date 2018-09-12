@@ -24,6 +24,7 @@ class Proforma extends Model
         'precio_totalC',
     	'descripcion_proforma',
         'tipo_proforma',
+        'simboloP',
         'caracterisiticas_proforma',
         'forma_de',
         'tipocambio',

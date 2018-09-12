@@ -50,7 +50,8 @@
               
               <!-- User Account: style can be found in dropdown.less -->
               <li>
-                <a href=""> <i class="fas fa-cogs"></i></a>
+               
+                <a href="#" ><i class="fas fa-cogs" data-toggle="modal" data-target="#create"></i></a>
               </li>
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -82,6 +83,8 @@
 
         </nav>
       </header>
+
+      @include('modal')
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -110,7 +113,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="productos"><i class="fa fa-circle-o"></i> Fiemec </a></li>
+                <li><a href="c"><i class="fa fa-circle-o"></i> Fiemec </a></li>
                 <li><a href="catalogo"><i class="fa fa-circle-o"></i> Catálogo</a></li>
               </ul>
             </li>            
@@ -121,8 +124,8 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="compras/ingreso"><i class="fa fa-circle-o"></i> Productos</a></li>
-                <li><a href="compras/proveedor"><i class="fa fa-circle-o"></i> Servicios</a></li>
+                <li><a href="{{ route('proforma')}}"><i class="fa fa-circle-o"></i> Productos</a></li>
+                <li><a href="{{ route('servicio')}}"><i class="fa fa-circle-o"></i> Servicios</a></li>
                 <li><a href="{{ route('tablero')}}"><i class="fa fa-circle-o"></i> Tableros</a></li>
               </ul>
             </li>

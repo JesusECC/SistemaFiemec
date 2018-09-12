@@ -16,9 +16,25 @@ use Illuminate\Support\Collection;
 use DB;
 class ControllerProformaServicio extends Controller
 {
-   public function index()
+   public function __construct()
     {
-        return view('proforma.tablero.index');
+
+    }
+    public function index(Request $request)
+    {
+    if ($request)
+    {
+    $query=trim($request->get('searchText'));
+    $servicios=DB::table('Proforma as p')
+    ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
+    ->where('p.idProforma','LIKE','%'.$query.'%')
+    ->where('p.estado','=','activo')
+    ->orderBy('p.idProforma','desc')
+     
+        ->paginate(7);           
+            return view('proforma.servicio.index',["servicios"=>$servicios,"searchText"=>$query]);
+        }
     }
     public function create()
     {
@@ -54,7 +70,7 @@ class ControllerProformaServicio extends Controller
         ->where('tipo_persona','=','Cliente persona')
         ->orwhere('tipo_persona','=','Cliente Empresa')
         ->get();
-        return view('proforma.tablero.create',["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
+        return view('proforma.servicio.create',["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
     }
     public function buscarProducto(Request $request)
     {

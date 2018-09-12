@@ -1,7 +1,7 @@
 @extends ('layouts.admin')
 @section ('contenido')
 <div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Tipo de Cambio <a href="familia/create"> <button class="btn btn-success">Nuevo</button></a></h3></h3>
+	<h3> Tipo de Cambio <a href="familias/create"> <button class="btn btn-success">Nuevo</button></a></h3></h3>
 	
 	@include('proforma.familia.search')
 </div>

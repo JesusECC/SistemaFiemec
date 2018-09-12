@@ -18,7 +18,8 @@ class DetalleProforma extends Model
       'cantidad',
       'precio_venta',
       'texto_precio_venta',
-      'observacion_detalleP',
+      'cambioDP',
+      'simboloDP',
       'descuento',
       'descripcionDP',
 

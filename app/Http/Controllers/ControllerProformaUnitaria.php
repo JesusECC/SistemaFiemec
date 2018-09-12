@@ -86,6 +86,7 @@ public function store(Request $request)
         $Proforma->igv='18';
         $Proforma->subtotal=$request->get('subtotal');
         $Proforma->tipocambio=$request->get('tipocambio');
+        $Proforma->simboloP=$request->get('simboloP');
         $Proforma->precio_total=$request->get('precio_total');
         $Proforma->precio_totalC=$request->get('precio_totalC');
         $Proforma->forma_de=$request->get('forma_de');
@@ -103,6 +104,8 @@ public function store(Request $request)
         $descuento=$request->get('descuento');
         $descripcionDP=$request->get('descripcionDP');
         $precio_venta=$request->get('precio_venta');
+        $cambioDP=$request->get('cambioDP');
+        $simboloDP=$request->get('simboloDP');
 
         $cont=0;
 
@@ -116,6 +119,8 @@ public function store(Request $request)
             $detalle->descripcionDP=$descripcionDP[$cont];
             $detalle->cantidad=$cantidad[$cont];
             $detalle->descuento=$descuento[$cont];
+            $detalle->cambioDP=$cambioDP[$cont];
+            $detalle->simboloDP=$simboloDP[$cont];
             $detalle->precio_venta=$precio_venta[$cont];
             $detalle->save();
             $cont=$cont+1; 
@@ -154,7 +159,7 @@ public function pdf($id){
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
     
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.subtotal')
     ->where('p.idProforma','=',$id)
     ->first();
 
@@ -165,6 +170,27 @@ public function pdf($id){
     ->get();
 
     $pdf=PDF::loadView('proforma/proforma/pdf',['proforma'=>$proforma,"detalles"=>$detalles]);
+    return $pdf->stream('proforma.pdf');
+    //return $pdf->download('Lista de requerimientos.pdf');
+
+
+}
+public function pdf2($id){
+
+    $proforma=DB::table('Proforma as p')
+    ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
+    
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.tipocambio','p.simboloP','p.subtotal')
+    ->where('p.idProforma','=',$id)
+    ->first();
+
+    $detalles=DB::table('Detalle_proforma as dpr')
+    ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
+    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','dpr.simboloDP','dpr.cambioDP')
+    ->where('dpr.idProforma','=',$id)
+    ->get();
+
+    $pdf=PDF::loadView('proforma/proforma/pdf2',['proforma'=>$proforma,"detalles"=>$detalles]);
     return $pdf->stream('proforma.pdf');
     //return $pdf->download('Lista de requerimientos.pdf');
 

@@ -26,7 +26,6 @@ Route::resource('proforma/servicio','ControllerProformaServicio');
 Route::resource('proforma/config','ControllerConfiguracion');
 Route::resource('proforma/familia','ControllerFamilia');
 Route::resource('dashboard/dashboard-admin','ControllerDashboard');
-Route::get('proforma/proforma/pdf/{idProforma}','ControllerProformaUnitaria@pdf');
 
 
 //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
@@ -62,7 +61,27 @@ Route::post('familias/',['as'=>'familia-store','uses'=>'ControllerFamilia@store'
 Route::get('familias/{idFamilia}/edit',['as'=>'familia-edit','uses'=>'ControllerFamilia@edit']);
 
 
+//Se crea rutas para tipodecambio
+Route::get('configuraciones',['as'=>'config','uses'=>'ControllerConfiguracion@index']);
+Route::get('configuraciones/create',['as'=>'config-create','uses'=>'ControllerConfiguracion@create']);
+Route::post('configuraciones/',['as'=>'config-store','uses'=>'ControllerConfiguracion@store']);
+Route::get('configuraciones/{idFamilia}/edit',['as'=>'config-edit','uses'=>'ControllerConfiguracion@edit']);
 
 
+//rutas de proforma
+
+Route::get('proformas',['as'=>'proforma','uses'=>'ControllerProformaUnitaria@index']);
+Route::get('proformas/create',['as'=>'proforma-create','uses'=>'ControllerProformaUnitaria@create']);
+Route::post('proformas/',['as'=>'proforma-store','uses'=>'ControllerProformaUnitaria@store']);
+Route::get('proforma/proforma/pdf/{idProforma}','ControllerProformaUnitaria@pdf');
+Route::get('proforma/proforma/pdf2/{idProforma}','ControllerProformaUnitaria@pdf2');
+
+//rutas servicios
+
+
+
+Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);
+Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProformaServicio@create']);
+Route::post('servicios/',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
 //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
 

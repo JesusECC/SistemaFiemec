@@ -2,7 +2,7 @@
 @section ('contenido')
 
 <div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Lista de Proformas   <a href="proforma/create"><button class="btn btn-success">Nuevo</button></a> </h3>
+	<h3> Lista de Proformas   <a href="proformas/create"><button class="btn btn-success">Nuevo</button></a> </h3>
 	@include('proforma.proforma.search')
 </div>
 <div class='row'>
@@ -39,7 +39,7 @@
                        </button>
                        <ul class="dropdown-menu" role="menu">
                        <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Soles</a></li>
-                       <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Tipo Cambio</a></li>
+                       <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf2',$prof->idProforma)}}">PDF Tipo Cambio</a></li>
                        </ul>
                        </div>
 
@@ -56,6 +56,8 @@
 				
 				@include('proforma.proforma.modal')
              @endforeach
+
+             
             
 			</table>
 		</div>
