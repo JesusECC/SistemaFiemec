@@ -147,7 +147,7 @@ footer {
             <th colspan="5" align="left">
                 <img src="img/img-pdf.png" alt="" width="180px">
             </th>
-            <th colspan="5" valign="middle" >
+            <th colspan="5" align="right"  >
                 <img src="img/dir-pdf.png" alt="" width="180px">
             </th>
           </tr>
@@ -212,7 +212,7 @@ footer {
         </tfoot>
       </table>
     </div>
-    <div style="margin-bottom: 5px;">
+    <div style="margin-bottom: 5px;margin-top: 100px">
       <h5 style="font-size: 10px !important;line-height:1px">Forma de pago: {{$proforma->forma_de}}</h5>
       <h5 style="font-size: 10px !important;line-height:1px">Condición de venta: {{$proforma->observacion_condicion}} </h5>
       <h5 style="font-size: 10px !important;line-height:1px;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5>      
