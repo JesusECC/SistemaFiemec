@@ -5,26 +5,6 @@
 	
 	@include('proforma.catalogo.search')
 </div>
-<!--
-<div class="container-fluid">
-	<div class="row">
-		@foreach($catalogos as $pro)
-	  <div class="col-sm-6 col-md-4">
-	    <div class="thumbnail">
-	      <img src="http://www.repairservo.com/images/abb-img.jpg" alt="...">
-	      <div class="caption">
-	        <h3>{{$pro->nombre_producto}}</h3>
-	        <p>...</p>
-	        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-	      </div>
-	    </div>
-	  </div>
-	  @endforeach
-	</div>	
-</div>
--->
-
-
 <div class='row'>
 	<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
 		<div class="table-responsive">
