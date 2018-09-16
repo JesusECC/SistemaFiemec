@@ -1,237 +1,245 @@
 @extends ('layouts.admin')
 @section ('contenido')
 <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <h2>Nueva Proforma </h2>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<h3>Nueva Proforma de tableros</h3>
     <hr />
-        @if (count($errors)>0)
-        <div class="alert-alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach 
-            </ul>   
+	@if (count($errors)>0)
+	<div class="alert-alert-danger">
+		<ul>
+			@foreach ($errors->all() as $error)
+			    <li>{{$error}}</li>
+			@endforeach 
+		</ul>	
+    </div>
+    @endif
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Datos de Cliente
+                        </h3>
+                    </div>
+                    <div class="panel-body">        
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Nombre del Cliente</label>
+                                    <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
+                                        <option value="">Seleccione Cliente</option>
+                                        @foreach($clientes as $cliente)
+                                            <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                                        @endforeach
+                                    </select> 
+                                    <button type="button" id="bt_add_Cliente" class="btn btn-primary">Agregar Cliente</button>
+                                </div>                               
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group label-floating">
+                                    <label for="cdireccion">Direccion</label>
+                                    <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="direccion">
+                                </div>                               
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group label-floating">
+                                    <label for="nro_documento">Numero de Documento</label>
+                                    <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="numero documento">
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+            </div> 
+            <div class="col-lg-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Tipo de Cambio
+                        </h3>
+                    </div>
+                    <div class="panel-body">         
+                        <div class="col-lg-6">
+                            <label>Tipo de cambio</label>
+                            <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
+                                <option value=""></option>
+                                @foreach($monedas as $mo)                
+                                    <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
+                                @endforeach  
+                            </select>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="from-group">
+                                <label for="simbolo">Simbolo</label>
+                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" >                                                
+                            </div>                                        
+                        </div>
+
+                        <div class="col-lg-4" >                                            
+                            <div class="from-group">
+                                <label for="valorcambio">Valor</label>
+                                <input type="text" disabled id="valorcambio" class="form-control">                    
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="from-group">
+                                <label for="igv_tipocambio">IGV</label>
+                                <input type="text" disabled id="igv_tipocambio" class="form-control">                                
+                            </div>                                        
+                        </div>
+                    </div>         
+                </div>
+            </div>
         </div>
-        @endif
     </div>
-</div>
-{!!Form::open(array('url'=>'proforma/proforma','method'=>'POST','autocomplete'=>'off'))!!}
-
-{{Form::token()}}
-
-  <!--<div  class="col-lg-12">
-    <div style="margin-top: 20px" class="col-lg-9">
-       <img src="{{asset('img/ti.jpg')}}" width="600" height=190">
-    </div>
-     <div style="margin-top: 50px" class="col-lg-3">
-       <img src="{{asset('img/logo.jpg')}}" width="250" height=120">
-    </div>
-   
-</div>-->
-                    <div style="margin-top: 15px" class="col-lg-9">
-                        <div  class="panel panel-primary">
-                            <div  class="panel-heading">
-                                <h3 class="panel-title">
-                                    Datos Clientes
-                                </h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Ingresar Producto
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group" id="producto-oculto" >
+                            <label class="control-label">Producto</label>
+                            <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                <option value="">Seleccione Producto</option>
+                                @foreach($productos as $producto)
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                @endforeach
+                            </select>                    
+                        </div>
+                        <!-- {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
+                        @csrf -->
+                        <div class="card" id="producto-crear-oculto" >
+                            <div class="card-header">
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-12">
+                                    <!-- <div class="col-lg-12">
                                         <div class="form-group label-floating">
-                                            <label>Cliente</label>
-                                            <select required name="idCliente" class="form-control selectpicker" id="idCliente" data-live-search="true">
-
-                                                <option value=""></option>
-                                               @foreach($clientes as $cliente)
-                                               
-                                               <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
-                                               @endforeach  
-                                           </select>
-                                        </div> 
-                                    </div> 
-                                    <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
-                                        <div class="from-group label-floating">
-                                            <label for="direccion">Direccion</label>
-                                            <input type="text" disabled name="direccion" id="pdireccion" class="form-control" placeholder="direccion">
-                                        </div>
-                                    </div>  
-                                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
-                                        <div class="from-group">
-                                            <label for="nro_documento">Numero de Documento</label>
-                                            <input type="text" disabled name="nro_documento" id="pnro_documento" class="form-control" placeholder="numero documento">
-                                        </div>
-                                    </div>                             
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <div style="margin-top: 15px" class="col-lg-3">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    Tipo de Cambio
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    
-
+                                            <label class="control-label">Nombre de Producto</label>
+                                            <input type="hidden" id="idProd" name="idProd" disabled>
+                                            <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
+                                        </div>                               
+                                    </div> -->
                                     <div class="col-lg-6">
-                                        <label>Tipo de cambio</label>
-                                        <select  name="idTipo_moneda" class="form-control selectpicker" id="pidTipo_moneda" data-live-search="true">
-                                             <option value=""></option>
-                                           @foreach($monedas as $mo)
-                                           
-                                           <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
-                                           @endforeach  
-                                       </select>
-                                    </div>
-
-                                    <div class="col-lg-4">
-                                        <div class="from-group">
-                                            <label for="simbolo">Simbolo</label>
-                                            <input type="text"  disabled id="psimbolo" class="form-control" >
-                                            <input type="hidden" name="simboloP" id="psimbol" class="form-control">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Descripcion</label>
+                                            <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
+                                            <!-- <textarea rows="4" cols="50">
                                             
-                                         </div>                                        
-                                    </div>
-
-                                    <div style="margin-top: 15px" class="col-lg-4" >
-                                        
-                                        <div class="from-group">
-                                            <label for="tipocambio">Valor</label>
-                                            <input type="text" disabled id="ptipocambio" class="form-control">
-                                            <input type="hidden" name="tipocambio" id="ptipo_cambio" class="form-control">
+                                            </textarea> -->
                                         </div>
-                                    </div>
-
-                                    <div style="margin-top: 15px" class="col-lg-4">
-                                        <div class="from-group">
-                                            <label for="tipocambio">Igv</label>
-                                            <input type="number" disabled id="pimpuesto" class="form-control">
-                                            
-                                         </div>                                        
-                                    </div>
-                                    <div style="margin-top: 45px" class="col-lg-2">%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-                    <div class="col-lg-12">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    Datos Productos
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label>Producto</label>
-                                            <select  required name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                                <option value=""></option>
-                                                @foreach($productos as $pro)
-                                                
-                                                <option value="{{$pro->idProducto}}_{{$pro->precio_unitario}}_{{$pro->descuento_familia}}_{{$pro->codigo_pedido}}">{{$pro->codigo_producto.' '.$pro->nombre_producto}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                     <div style="margin-top: 16px" class="col-lg-6">
-                                        <div class="from-group">
-                                            <label for="descripcionDP">Descripccion</label>
-                                            <input type="text"  name="pdescripcionDP"  id="pdescripcionDP" class="form-control" placeholder="Agregar Descripcion del Producto">
-                                        </div>
-                                    </div>
-                                    <div style="margin-top: 16px"  class="col-lg-2">
-                                        <div class="from-group">
-                                            <label for="precio_unitario">Precio unitario</label>
-                                            <input type="number" disabled name="pprecio_unitario" id="pprecio_unitario" class="form-control" placeholder="precio unitario">
-                                        </div>                                        
-                                    </div>
-                                    <div style="margin-top: 16px"  class="col-lg-2">
-                                        <div class="from-group">
-                                            <label for="cantidad">Cantidad</label>
-                                            <input type="number"  name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad">
-                                        </div>
-                                    </div>
-                                    <div style="margin-top: 15px"  class="col-lg-2">
-                                        <div class="from-group">
-                                            <label for="descuento_familia">Descuento en %</label>
-                                            <input type="number"  name="descuento_familia" id="pdescuento_familia" class="form-control" placeholder="descuento">
-                                        </div>
-                                    </div>
-
-                                   
-
-                                    
+                                    </div> 
                                     <div class="col-lg-2">
-                                        <div class="form-group" style="margin-top: 20px;">
-                                           <button type="button" id="bt_add" class="btn btn-primary active btn-block ">Agregar</button> 
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">P. UNIT.</label>
+                                            <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
                                         </div>
-                                         
+                                    </div> 
+                                    <div class="col-lg-1">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cantidad</label>
+                                            <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Descuento %</label>
+                                            <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
+                                        </div>
                                     </div>
+                                    <div class="col-sm-1">
+                                        <div class="form-group label-floating">
+                                        <label class="control-label"></label>
+                                            <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+                                        </div>
+                                    </div>                        
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    Concepto
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
-
-                                    <thead style="background-color:#cacfd2">
-                                        <th>Opciones</th>
-                                        <th>Producto</th>
-                                        <th>Descripcion</th>
-                                        <th>Cantidad</th>
-                                        <th>Precio V.</th>
-                                        <th>Descuento</th>
-                                        <th>Total</th>
-                                        <th>Cambio</th>
-                                        
-                                    </thead>
-
-
-                                    <tfoot>
-                                        <th></th>
-                
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        
-                                        
-
-                                    </tfoot>
-                                                           
-                                </table>
-
-</div>
-                        </div>
+                </div>
+            </div>
+            <!-- <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Datos del Vendedor
+                        </h3>
                     </div>
-
-<div class="container-fluid">
+                    <div class="panel-body">              
+                    </div>            
+                </div>
+            </div> -->
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Concepto
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="tablerosn">
+                            <div id="Tablero_unitaria">
+                                <section class="content" style="min-height:0px !important">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="box">
+                                                <div class="box-header with-border" style="padding:5px !important;">
+                                                <p> Tablero Proforma Unitaria </p>
+                                                    <div class="box-tools pull-right">
+                                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                        <button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
+                                                                <thead style="background-color:#A9D0F5">
+                                                                    <th>Producto</th>
+                                                                    <th>Descripción</th>
+                                                                    <th>Cant.</th>
+                                                                    <th>P. Unit.</th>
+                                                                    <th>Descuento</th>
+                                                                    <th>Importe</th>
+                                                                    <th></th>
+                                                                </thead>
+                                                                <tbody id="tablero_unitario">
+                                                                </tbody>
+                                                                <!-- <tfoot>
+                                                                    <th>Total</th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">
+                                                                    </th>
+                                                                </tfoot> -->
+                                                            </table>
+                                                        </div>
+                                                    <div>
+                                                </div>                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>                
+                    </div>            
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-primary">
@@ -241,287 +249,556 @@
                         </h3>
                     </div>
                     <div class="panel-body">   
-                        <div id="guardar" style='display:none;'>
+                        <div id="totales-general" style='display:none;'>
                             <table class="table table-striped table-bordered table-condensed table-hover">
                                     <tfoot>
                                         <tr>
-                                            <th colspan="3" >Sub Total:</th>
-                                            <th><h4 id="total">s/. 0.00</h4>
-                                            <input type="hidden" name="subtotal" id="subtotal"></th>
-
-
-
-                                            <th colspan="3" >Forma de:</th>
-                                            <th><input type="text" name="forma_de" id="forma_de" class="form-control"></th>
+                                            <th colspan="3" >Sub Total</th>
+                                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="3" >I.G.V:</th>
-                                            <th><h4 id="igvC">s/. 0.00</h4>
-                                                <input type="hidden" name="igv" id="igv"></th>
-
-                                            <th colspan="3" >Plazo de Oferta:</th>
-                                            <th><input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control"></th>
+                                            <th colspan="3" >Descuentos</th>
+                                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos"></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="3" >Total:</th>
-                                           <th><h4 id="tota">s/. 0.00</h4>
-                                            <input type="hidden" name="precio_total" id="precio_total"></th>
-
-                                                <th colspan="3" >Observacion</th>
-                                            <th><textarea name="observacion_condicion" id="observacion_condicion" class="form-control">
-                                        </textarea>
+                                            <th colspan="3" >Valor Venta</th>
+                                            <th><h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
                                         </tr>
-                                         <tr>
-                                            <th colspan="3" >Conversion al Tipo de cambio</th>
-                                            <th><h4 id="toca2">0.00</h4>
-                                            <input type="hidden" name="precio_totalC" id="precio_totalC"></th>
+                                        <tr>
+                                            <th colspan="3" >I.G.V. 18%</th>
+                                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Total</th>
+                                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
                                         </tr>
                                     </tfoot>
-                            </table> 
-                                                     
+                            </table>                            
                         </div>
                     </div>                     
                 </div>
             </div>
         </div>
     </div>
-                    
-                                    <div  class="col-lg-8">
-                                        <div class="col-lg-5"  style="padding: 10px">
-                                            <form class="form-inline" onsubmit="openModal()" id="myForm">
-                                                <button class="btn btn-primary" type="submit">Generar Proforma</button>
-                                            </form>
-                                            
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">  
+    <div style="margin-top: 20px" class="from-group ">
+
+        <button class="btn btn-primary" id="save" type="button">Guardar</button>
+        <button class="btn btn-danger" type="reset">Limpiar</button>
+        <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
+
+
     </div>
-  </div>
+
+    </div>
+
+
+    <!-- {!!Form::close()!!} -->
+
 </div>
-<script>
-    $('#myForm').on('submit', function(e){
-  $('#myModal').modal('show');
-  e.preventDefault();
-});
-</script>
-
-                                            <button class="btn btn-danger" type="reset">Cancelar Proforma</button>
-                                        </div>         
-                                     </div>                             
-                                </div>
-                            </div>
-                        </div>                                            
-                    </div>
-              
-{!!Form::close()!!}
-
 
 @push('scripts')
 <script>
-$(document).ready(function(){
-    $('#bt_add').click(function(){
-        agregar();
+    
+    $(document).ready(function(){
+        $('#bt_add_tablero').click(function(){
+            // agregarTablero();
+            valoresFinales();
+        });
+        $('#save').click(function(){
+            // console.log("asd");
+            saveProforma();
+        });
+        // boton agregar producto
+        $('#bt_add_produc').click(function(){
+            agregarProductosTablero();
+            valoresFinales();
+           
+        });
+        $('#Pcantidad').keyup(function (){
+            this.value = (this.value + '').replace(/[^0-9]/g, '1');
+        });
+        $('#Pcantidad').click(function (){
+            this.value = (this.value + '').replace(/[^0-9]/g, '1');
+        });
+        $('#pdescuento').keyup(function (){
+            this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
+        });
+        $('#pdescuento').click(function (){
+            this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
+        });
+        // Actualizar
+       
+
     });
-});
-
-
-var cont=0;
-
-total=0;
-tota=0;
-toca=0;
-toca2=0;
-
-igvC=0;
-
-subcambio2=[];
-subtotal=[];
-subcambio=[];
-impuesto=[];
-totall=[];
-
-$("#guardar").hide();
-$("#pidProducto").change(mostrarValores);
-$("#idCliente").change(mostrarValor);
-$("#pidTipo_moneda").change(mostrarV);
-
-//guradar
-function cambiaropcion(){
-        Producto=document.getElementById('pidProducto').value.split('_');
-        var codigo_pedido=Producto[3];
-       if(codigo_pedido=="t1"){
-            $('#pprecio_unitario').attr("disabled", false);
-        }
-        else{
-           $('#pprecio_unitario').attr("disabled", true); 
-        }
-   }
-
-function mostrarValores()
-{
-    datosProducto=document.getElementById('pidProducto').value.split('_');
-
-    $("#pdescuento_familia").val(datosProducto[2]);
-    $("#pprecio_unitario").val(datosProducto[1]);
-    cambiaropcion();
-}
-
-function mostrarValor()
-{
-    datos=document.getElementById('idCliente').value.split('_');
-    $("#pnro_documento").val(datos[2]);
-    $("#pdireccion").val(datos[1]);
-}
-function mostrarV()
-{
-    datosm=document.getElementById('pidTipo_moneda').value.split('_');
-    $("#pimpuesto").val(datosm[3]);
-    $("#psimbolo").val(datosm[2]);
-    $("#psimbol").val(datosm[2]);
-    $("#ptipocambio").val(datosm[1]);
-     $("#ptipo_cambio").val(datosm[1]);
-}
-
-function agregar()
-{
-    datosProducto=document.getElementById('pidProducto').value.split('_');
-
-    idProducto=datosProducto[0];
-    producto=$("#pidProducto option:selected").text();
-    cantidad=$("#pcantidad").val();
-    moneda=$("#ptipo_cambio").val();
-    descuento=$("#pdescuento_familia").val();
-    descripcion=$("#pdescripcionDP").val();
-    precio_venta=$("#pprecio_unitario").val();
-    igvT=$("#pimpuesto").val();
-    s=$("#psimbolo").val();
+    $("#idClientes").change(MostrarCliente);
+    $("#idTipo_moneda").change(mostrarTipoCambio);
+    var tablero=[];
+    var filaob=[];
+    var cont=0;
+    var contp=0;
+    var table;
+    var subtotal=0;
+    var nomTablero='unitaria';
+    var idcliente;
+    var totalt;
+    var valorventa;
+    $("#pidProducto").change(MostarProducto);
     
 
-    //alert(datosProducto);
-
-    if(idProducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="" && moneda!="" )
-    {
-
-
-        if(cantidad>0)
-        {
-             
-        subtotal[cont]=((precio_venta-(descuento/100*precio_venta))*cantidad);
-            total=total+subtotal[cont];
-
-        impuesto[cont]=subtotal[cont]*igvT/100;
-            igvC=igvC+impuesto[cont];
-
-        totall[cont]=impuesto[cont]+subtotal[cont];
-            tota=tota+totall[cont];
-
-       subcambio2[cont]=totall[cont]/moneda;
-            toca2=toca2+subcambio2[cont];
-
-
-        subcambio[cont]=subtotal[cont]/moneda;
-            toca=toca+subcambio[cont];
-
-            
-             
-
-
-       var fila='<tr class="selected" id="fila'+cont+'">'+
-       '<td>'+
-       '<button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td>'+
-       ' <td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td>'+
-       ' <td><input  type="hidden"  name="descripcionDP[]"  value="'+descripcion+'">'+descripcion+'</td>'+
-       ' <input  type="hidden"  name="cambioDP[]"  value="'+moneda+'">'+
-       ' <input  type="hidden"  name="simboloDP[]"  value="'+s+'">'+
-       ' <td><input type="hidden"  name="cantidad[]"  value="'+cantidad+'">'+cantidad+'</td> '+
-       '<td><input type="hidden"  name="precio_venta[]"   value="'+precio_venta+'">S/. '+precio_venta+'</td>'+
-       ' <td><input type="hidden"  name="descuento[]"  value="'+descuento+'">'+descuento+'%</td><td>S/. '+subtotal[cont]+'</td> <td>'+s+subcambio[cont]+'</td></tr>';
-       cont++;
-       
-       limpiar();
-       //soles
-       $("#total").html("s/." + total);
-       $("#subtotal").val(total);
-       //cambio
-       $("#toca2").html(s + toca2);
-       $("#precio_totalC").val(toca2);
-
-       //impuesto
-      $("#igvC").html("s/." + igvC);
-       $("#igv").val(igvC);
-       //total
-       $("#tota").html("s/." + tota);
-       $("#precio_total").val(tota);
-         
-       evaluar();
-       $('#detalles').append(fila);
-
-        }
-       
+    //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
+    function MostrarCliente(){
+        // cdireccion/cnro_documentoidClientes
+        Cliente=document.getElementById('idClientes').value.split('_');
+        idcliente=Cliente[0];
+        $("#cdireccion").val(Cliente[1]);
+        $("#cnro_documento").val(Cliente[2]);
     }
-    else
-    {
-        alert("Completar los datos de la Proforma");
+    function MostarProducto(){
+        Producto=document.getElementById('pidProducto').value.split('_');
+        // $("#idProd").val(Producto[0]);
+        // $("#Productoname").val(Producto[1]);
+        $("#precio_uni").val(Producto[2]);
+        $("#pdescuento").val(Producto[3]);
+        // descuentoP -->para emostar el 
     }
-}
+    function mostrarTipoCambio(){
+        // {{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}
+        tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
+        $("#simbolo").val(tipoCambio[2]);
+        $("#valorcambio").val(tipoCambio[1]);
+        $("#igv_tipocambio").val(tipoCambio[3]+ " %");
 
-
-    total=0;
-    toca=0;
-    igv=0;
-    function limpiar(){
-        $("#pcantidad").val("");
-       
-        $("#pprecio_venta").val("");
-        $("#pdescripcionDP").val("");
     }
+    function mostrarcampos(){
+        document.getElementById('producto-crear-oculto').style.display = 'block';
+        document.getElementById('producto-oculto').style.display = 'block';
+        // $("#producto-crear-oculto").style.display='block';
+        // $("#producto-oculto").style.display='block';
+    } 
 
-    function evaluar()
-    {
-        if(total>0)
-        {
-            $("#guardar").show();
+    function saveProforma(){
+        // se enviar los datos al controlador proforma tableros
+        // console.log(idcliente);
+        tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
+        var idtipocam=tipoCambio[0];
+        var valorcambio=tipoCambio[1];
+        var vVenta=$("#valorVenta").val();
+        var tl=$("#total").val();
+        console.log(tablero,filaob);
+        if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
+            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio}];
+            // console.log(dat,tablero,filaob);
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
+                url:   'guardar', //archivo que recibe la peticion
+                type:  'post', //método de envio
+                dataType: "json",//tipo de dato que envio 
+                beforeSend: function () {
+                    // console.log()
+                        // $("#resultado").html("Procesando, espere por favor...");
+                },
+                success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                    console.log(response);
+                    window.location.replace(response.data);
+                    // document.location.href="{ url('/tableros') }";
+                        // $("#resultado").html(response);
+                }
+            });
+            // console.log(tablero,filaob);
+        }else {
+            alert('ingrese productos al tablero!!');
         }
-        else
-        {
-            $("#guardar").hide();
+    }
+    var bool;
+    // function agregarTablero(){    
+    //     var tabl=$("#NomTablerop").val();
+    //     nomTablero=tabl.replace(/ /gi,"_");  
+    //     bool=false;  
+    //     if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
+    //         mostrarcampos();
+    //         // fila();
+    //         if(tablero.length>=0 && nomTablero!=""){
+    //             //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
+    //             for (const key in tablero) {
+    //                 if (tablero.hasOwnProperty(key)) {
+    //                     if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
+    //                         bool=true; 
+    //                     }                                       
+    //                 }
+    //             }
+    //             //if que compara e inserta la tabla contenedora de los produtos vacia.
+    //             if(bool==false ){  
+    //                 table='<div id="'+nomTablero+'_'+cont+'">'+
+    //                             '<section class="content" style="min-height:0px !important">'+
+    //                                 '<div class="row">'+
+    //                                     '<div class="col-md-12">'+
+    //                                         '<div class="box">'+
+    //                                             '<div class="box-header with-border" style="padding:5px !important;">'+
+    //                                             '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
+    //                                                 '<div class="box-tools pull-right">'+
+
+    //                                                     '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
+    //                                                     '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
+    //                                                                     '<i class="fa fa-times"></i>'+
+    //                                                             '</button>'+
+    //                                                 '</div>'+
+    //                                             '</div>'+
+    //                                             '<div class="box-body">'+
+    //                                                 '<div class="row">'+
+    //                                                     '<div class="col-md-12">'+
+    //                                                         '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
+    //                                                             '<thead style="background-color:#A9D0F5">'+
+    //                                                                 '<th>Producto</th>'+
+    //                                                                 '<th>Descripción</th>'+
+    //                                                                 '<th>Cant.</th>'+
+    //                                                                 '<th>P. Unit.</th>'+
+    //                                                                 '<th>Descuento</th>'+
+    //                                                                 '<th>Importe</th>'+
+    //                                                                 //'<th></th>'+
+    //                                                             '</thead>'+
+    //                                                             '<tbody id="detalle_'+nomTablero+'">'+
+    //                                                             '</tbody>'+ 
+    //                                                             '<tfoot>'+
+    //                                                                 '<th>Total</th>'+
+    //                                                                 '<th></th>'+
+    //                                                                 '<th></th>'+
+    //                                                                 '<th></th>'+
+    //                                                                 '<th></th>'+
+    //                                                                 '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+    //                                                                 '</th>'+
+    //                                                             '</tfoot>'+
+    //                                                         '</table>'+
+    //                                                     '</div>'+
+    //                                                 '<div>'+
+    //                                             '</div>'+                                
+    //                                         '</div>'+
+    //                                     '</div>'+
+    //                                 '</div>'+
+    //                             '</section>'+
+    //                         '</div>';
+    //             var ta={nombre:nomTablero,posi:cont,tablero:table}
+    //             tablero.push(ta);                        
+    //             } cont++;       
+    //         }
+    //         // console.log(table);
+    //         nomTablero="";
+    //         // realiza el listado de todas los tableros que se añaden
+    //         ListaSelect()
+    //         // mantiene en la vista las filas cuando se agrega una nueva tabla
+    //         detalleFilas();
+    //         // fila();
+    //         //nomtablero="";
+    //     }else{
+    //         // (tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!=''
+    //         if($("#simbolo").val()=='' && $("#valorcambio").val()=='' && $("#igv_tipocambio").val()==''){
+    //             alert("seleccione un tipo de Moneda");
+    //         }else if(tabl==''){
+    //             alert("ingrese nombre del Tablero");
+    //         }            
+    //     }
+        
+    // }
+    function agregarProductosTablero(){    
+        Producto=document.getElementById('pidProducto').value.split('_');
+        var idProd=Producto[0];
+        var pname=Producto[1];
+        var pdescripcion=$("#descripcionp ").val();
+        var puni=$('#precio_uni').val();
+        var pcant=$('#Pcantidad').val();
+        // var sel=$('#prod-selec').val();
+        var descuento=$('#pdescuento').val();
+        // console.log(descuento);
+        // nomTablero=$('#prod-selec').val();
+        var filas;
+        // console.log(idProd,pname);
+        if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" ){
+            document.getElementById('totales-general').style.display = 'block';
+            var bool=false;
+            var boolfila=false;
+            // for (const key in tablero) {
+                // if (tablero.hasOwnProperty(key)) {
+                    // if(tablero[key]['nombre']==nomTablero){
+                        bool=true;
+                        for (const fil in filaob) {
+                            if (filaob.hasOwnProperty(fil)) {
+                                if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd){
+                                    var su=parseInt(pcant);
+                                    var des=parseInt(descuento);
+                                    filaob[fil]['cantidadP']=su;
+                                    filaob[fil]['descuentoP']=des;
+                                    filaob[fil]['descripcionP']=pdescripcion;
+                                    fila();
+                                    boolfila=true;
+                                    console.log("Actualizar producto");                      
+                                }                
+                            }
+                        }
+                        if(boolfila==false){
+                            console.log("produc nuevoo",contp);
+                            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+                            filaob.push(dat);
+                            fila();
+                            contp++;
+                            
+
+                        }
+                    // }                    
+                // }
+            // }
+            // detalleFilas();
+            valoresFinales();
+            console.log(filaob);            
+            // nomtablero="";            
+        }else{
+            alert("Ingresar Datos del Producto!!");
         }
+    }
+    function fila(){
+        // realiza la insercion de las filas agregadas actualizando los importes y las cantidaddes
+        if(filaob.length>0){
+            var filas;
+            // console.log(filaob.length+ " --> ");
+            // for (const key in tablero) {
+            //     if (tablero.hasOwnProperty(key)) {
+                    // $("#detalle_"+tablero[key]['nombre']).load();
+                    for (const fila in filaob) {
+                        if (filaob.hasOwnProperty(fila)) {                            
+                            var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                            var precio=parseFloat(filaob[fila]['prec_uniP']);
+                            var descuento=parseFloat(filaob[fila]['descuentoP']);
+                            var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                            // if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
+                                filas=
+                                    '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
+                                        '<td> '+ 
+                                            '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+                                        '</td>'+
+                                        '<td> '+ 
+                                            '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+                                        '</td>'+
+                                        '<td> '+ 
+                                            '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                                        '</td>'+
+                                        '<td> '+   
+                                            '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                                        '</td>'+
+                                        '<td> '+   
+                                            '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                                        '</td>'+
+                                        '<td> '+   
+                                            '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
+                                        '</td>'+
+                                        '<td>'+
+                                            '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
+                                                    '<i class="fas fa-trash"></i>'+
+                                            '</button>'+
+                                        '</td>'+
+                                    '</tr>';  
+                                    filaob[fila]['fila']=filas;
+                                    filas="";
+                            // }                                                         
+                        }
+                    }                    
+            //     }
+            // }
+        }
+    }    
+    function detalleFilas(){
+        // mantiene en la vista las filas cuando se agrega una nueva tabla
+        // var dat={idProducto:idProd,producto:pname,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp};
+        // fila(); 
+        var fil='';
+        // if(tablero.length>0){
+            // for (var keyt in tablero) {
+                //  $("#detalle_"+tablero[keyt]['nombre']).load();
+                // $("#detalle_"+tablero[keyt]['nombre']).val('');  
+                for (var key in filaob) {                   
+                    if (filaob.hasOwnProperty(key)) {
+                        // if(tablero[keyt]['nombre']==filaob[key]['nomTablero']){
+                            fil+=filaob[key]['fila'];
+                        // }
+                    }
+                }
+                console.log(fil);
+                $('#tablero_unitario').html(fil);
+                fil='';
+            // }
+        // }else{
+        //     $('#detalle_'+tablero[keyt]['nombre']).html('');
+        // }
+        // subTotalTable();
+    }
+    // function subTotalTable(){
+    //     // funcion para realizar la suma del sub total de todos los tableros que se declaran
+    //     var sub=0;
+    //     // if(tablero.length>0){
+    //         // for (const key in tablero) {
+    //             // if (tablero.hasOwnProperty(key)) {
+    //                 for (const fila in filaob) {
+    //                     if (filaob.hasOwnProperty(fila)) {
+    //                         // if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
+    //                             // (cantidad*precio)-((cantidad*precio)*(cantidad*(descuento/100)));
+    //                             var precio=parseFloat(filaob[fila]['prec_uniP']);
+    //                             var cantidad=parseFloat(filaob[fila]['cantidadP']);
+    //                             var descuento=parseFloat(filaob[fila]['descuentoP']);
+    //                             sub+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+    //                             // console.log(sub,"---");
+    //                         // }                            
+    //                     }
+    //                 }   
+    //                 // console.log(sub);
+    //                 $("#total_"+tablero[key]['nombre']).html("s/. " + sub);                 
+    //             // }
+    //             sub=0;
+    //         // }            
+    //     // }
+    // }
+    function subTotal(){
+        // la suma de tosos los tableros        
+        var sub=0;        
+        for (const fila in filaob) {
+            if (filaob.hasOwnProperty(fila)) {
+                var precio=parseFloat(filaob[fila]['prec_uniP']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var descuento=parseFloat(filaob[fila]['descuentoP']);
+                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                sub+=cantidad*precio;
+                // console.log(sub);                        
+            }
+        }
+        // console.log(sub);
+        $("#subtotal").html("s/. " + sub.toFixed(2));
+    }
+    function descuentos(){
+        var desc=0;
+        for (const fila in filaob) {
+            if (filaob.hasOwnProperty(fila)) {
+                var precio=parseFloat(filaob[fila]['prec_uniP']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var descuento=parseFloat(filaob[fila]['descuentoP']);
+                desc+=((precio*(descuento/100)*cantidad));                       
+            }
+        }
+        $("#descuentos").html("s/. "+desc.toFixed(2));
+    }
+    function valorVenta(){
+        var venta=0;        
+        for (const fila in filaob) {
+            if (filaob.hasOwnProperty(fila)) {
+                var precio=parseFloat(filaob[fila]['prec_uniP']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var descuento=parseFloat(filaob[fila]['descuentoP']);
+                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                // console.log(sub);                        
+            }
+        }
+        valorventa=venta.toFixed(2);
+        // console.log(sub);
+        $("#valorVenta").html("s/. " + venta.toFixed(2));
+    }
+    function igv(){
+        var venta=0;   
+        var ig=0;     
+        for (const fila in filaob) {
+            if (filaob.hasOwnProperty(fila)) {
+                var precio=parseFloat(filaob[fila]['prec_uniP']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var descuento=parseFloat(filaob[fila]['descuentoP']);
+                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                // console.log(sub);                        
+            }
+        }
+        ig=venta*0.18;
+        // console.log(sub);
+        $("#igv").html("s/. " + ig.toFixed(2));
+    }
+    function total(){
+        var venta=0;   
+        var igv=0;  
+        var tota=0;   
+        for (const fila in filaob) {
+            if (filaob.hasOwnProperty(fila)) {
+                var precio=parseFloat(filaob[fila]['prec_uniP']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var descuento=parseFloat(filaob[fila]['descuentoP']);
+                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                // console.log(sub);                        
+            }
+        }
+        igv=venta*0.18;
+        tota=venta+igv;
+        totalt=tota.toFixed(2);
+        // console.log(sub);
+        $("#total").html("s/. " + tota.toFixed(2));
+    }
+    function valoresFinales(){
+        if(filaob.length>0){
+            detalleFilas();
+        }
+        subTotal();
+        // subTotalTable();
+        descuentos();
+        valorVenta();
+        igv();
+        total();
     }
     function eliminar(index){
-       //soles
-        total=total-subtotal[index];
-        $("#total").html("s/. "+total);
-        $("#subtotal").val(total);
-       //cambio
-       toca=toca-subcambio[index];
-        $("#toca2").html(+ toca2);
-        $("#precio_total").val(toca2);
-        //impuesto
-        igvC=igvC-impuesto[index];
-        $("#igvC").html(+ igvC);
-        $("#precio_total").val(igvC);
-        //total
-        tota=tota-totall[index];
-        $("#tota").html(+ tota);
-        $("#precio_total").val(tota);
-
-        $("#fila" + index).remove();
-        evaluar();
+        // elimina las filas de un tablero especifico 
+        // console.log(filaob,"eliminar",index);
+        for (var key in filaob) {
+            if (filaob.hasOwnProperty(key)) {
+                if(index==filaob[key]['posiP']){
+                    console.log(filaob[key]['nomTablero'],"eliminar");
+                    $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
+                    filaob.splice(key,1);
+                    // console.log(filaob);                            
+                }
+            }
+        } 
+        valoresFinales();
     }
-
+    // function eliminarTablero(a){
+    // // elimina todo un tablero con todos los datos que contiene
+    //     for (const key in tablero) {
+    //         if (tablero.hasOwnProperty(key)) {
+    //             if(a==tablero[key]['posi']){
+    //                 //console.log(a);        
+    //                 //console.log(tablero);
+    //                 for (var k in filaob) {
+    //                     if (filaob.hasOwnProperty(k)) {
+    //                         if(tablero[key]['nombre']==filaob[k]['nomTablero']){
+    //                             // console.log("encontrado");
+    //                             filaob.splice(k,1);
+    //                         }
+    //                     }
+    //                 }   
+    //                 $("#"+tablero[key]['nombre']+'_'+tablero[key]['posi']).remove();                      
+    //                 tablero.splice(key,1);                 
+    //             }              
+    //         }
+    //     }
+    //     detalleFilas();
+    //     ListaSelect();
+    //     valoresFinales()
+    // }
+    function ocultar(){
+        tablero.length>0
+        if (0<tablero.length && 0<filaob){
+            
+        }
+    }
 </script>
-
 @endpush
 @endsection
+
+
+
+
+
+
+
