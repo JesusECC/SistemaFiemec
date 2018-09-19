@@ -34,6 +34,7 @@ class Proforma extends Model
         'observacion_condicion',
         'observacion_proforma',
         'estado',
+        'cliente_empleado'
     	
    ];
 

@@ -21,7 +21,7 @@ Route::resource('proforma/producto','ControllerProducto');
 Route::resource('proforma/cliente','ControllerClientes');
 Route::resource('proforma/proveedor','ControllerProveedor');
 Route::resource('proforma/empresa','ControllerEmpresa');
-Route::resource('proforma/proforma','ControllerProformaUnitaria');
+// Route::resource('proforma/proforma','ControllerProformaUnitaria');
 Route::resource('proforma/servicio','ControllerProformaServicio');
 Route::resource('proforma/config','ControllerConfiguracion');
 Route::resource('proforma/familia','ControllerFamilia');
@@ -72,12 +72,14 @@ Route::get('configuraciones/{idFamilia}/edit',['as'=>'config-edit','uses'=>'Cont
 
 
 //rutas de proforma
-
+Route::post('proformas/guardar',['as' => 'proforma-store','uses'=>'ControllerProformaUnitaria@store']);
 Route::get('proformas',['as'=>'proforma','uses'=>'ControllerProformaUnitaria@index']);
 Route::get('proformas/create',['as'=>'proforma-create','uses'=>'ControllerProformaUnitaria@create']);
-Route::post('proformas/',['as'=>'proforma-store','uses'=>'ControllerProformaUnitaria@store']);
+// Route::post('proformas/',['as'=>'proforma-store','uses'=>'ControllerProformaUnitaria@store']);
 Route::get('proforma/proforma/pdf/{idProforma}','ControllerProformaUnitaria@pdf');
 Route::get('proforma/proforma/pdf2/{idProforma}','ControllerProformaUnitaria@pdf2');
+Route::get('proformas/show/{id}',['as'=>'proforma-show','uses'=>'ControllerProformaUnitaria@show']);
+Route::delete('proformas/eliminar/{id}',['as'=>'proforma-eliminar','uses'=>'ControllerProformaUnitaria@destroy']);
 
 //rutas servicios
 

@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	<h3>Nueva Proforma de tableros</h3>
+	<h3>Nueva Proforma </h3>
     <hr />
 	@if (count($errors)>0)
 	<div class="alert-alert-danger">
@@ -192,7 +192,7 @@
                                         <div class="col-md-12">
                                             <div class="box">
                                                 <div class="box-header with-border" style="padding:5px !important;">
-                                                <p> Tablero Proforma Unitaria </p>
+                                                <p> Proforma Unitaria </p>
                                                     <div class="box-tools pull-right">
                                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                         <button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">
@@ -269,9 +269,32 @@
                                             <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="3" >Total</th>
+                                            <th colspan="3" >Total Soles</th>
                                             <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
                                         </tr>
+                                        <tr>
+                                            <th colspan="3" >Total Dolares</th>
+                                            <th><h4 id="total_dolares">s/. 0.00</h4><input type="hidden" name="tota_dolares" id="tota_dolares"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Forma de:</th>
+                                            <th>
+                                            <h4><input type="text" name="forma_de" id="forma_de" class="form-control"></h4>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Plazo de Oferta:</th>
+                                            <th>
+                                            <h4><input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control"></h4>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Observacion:</th>
+                                            <th>
+                                            <textarea name="observacion_condicion" id="observacion_condicion" class="form-control"></textarea>
+                                            </th>
+                                        </tr>
+                                        
                                     </tfoot>
                             </table>                            
                         </div>
@@ -343,7 +366,12 @@
     var idcliente;
     var totalt;
     var valorventa;
+    var tipocam;
+    var simbolo;
+    var totaldolares=0;
     $("#pidProducto").change(MostarProducto);
+
+    $("#idTipo_moneda").change(cambioMoneda);
     
 
     //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
@@ -368,6 +396,9 @@
         $("#simbolo").val(tipoCambio[2]);
         $("#valorcambio").val(tipoCambio[1]);
         $("#igv_tipocambio").val(tipoCambio[3]+ " %");
+        tipocam=tipoCambio[1];
+        simbolo=tipoCambio[2];
+        // console.log(tipocam,simbolo);
 
     }
     function mostrarcampos(){
@@ -385,9 +416,13 @@
         var valorcambio=tipoCambio[1];
         var vVenta=$("#valorVenta").val();
         var tl=$("#total").val();
-        console.log(tablero,filaob);
+        var forma=$("#forma_de").val();
+        var plazo=$("#plazo_oferta").val();
+        var observacion=$("#observacion_condicion").val();
+        console.log(totaldolares,forma,plazo,observacion);
+        
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio}];
+            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion}];
             // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -401,6 +436,7 @@
                 },
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
                     console.log(response);
+                    // console.log(response);
                     window.location.replace(response.data);
                     // document.location.href="{ url('/tableros') }";
                         // $("#resultado").html(response);
@@ -412,94 +448,6 @@
         }
     }
     var bool;
-    // function agregarTablero(){    
-    //     var tabl=$("#NomTablerop").val();
-    //     nomTablero=tabl.replace(/ /gi,"_");  
-    //     bool=false;  
-    //     if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
-    //         mostrarcampos();
-    //         // fila();
-    //         if(tablero.length>=0 && nomTablero!=""){
-    //             //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
-    //             for (const key in tablero) {
-    //                 if (tablero.hasOwnProperty(key)) {
-    //                     if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
-    //                         bool=true; 
-    //                     }                                       
-    //                 }
-    //             }
-    //             //if que compara e inserta la tabla contenedora de los produtos vacia.
-    //             if(bool==false ){  
-    //                 table='<div id="'+nomTablero+'_'+cont+'">'+
-    //                             '<section class="content" style="min-height:0px !important">'+
-    //                                 '<div class="row">'+
-    //                                     '<div class="col-md-12">'+
-    //                                         '<div class="box">'+
-    //                                             '<div class="box-header with-border" style="padding:5px !important;">'+
-    //                                             '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
-    //                                                 '<div class="box-tools pull-right">'+
-
-    //                                                     '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
-    //                                                     '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
-    //                                                                     '<i class="fa fa-times"></i>'+
-    //                                                             '</button>'+
-    //                                                 '</div>'+
-    //                                             '</div>'+
-    //                                             '<div class="box-body">'+
-    //                                                 '<div class="row">'+
-    //                                                     '<div class="col-md-12">'+
-    //                                                         '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
-    //                                                             '<thead style="background-color:#A9D0F5">'+
-    //                                                                 '<th>Producto</th>'+
-    //                                                                 '<th>Descripción</th>'+
-    //                                                                 '<th>Cant.</th>'+
-    //                                                                 '<th>P. Unit.</th>'+
-    //                                                                 '<th>Descuento</th>'+
-    //                                                                 '<th>Importe</th>'+
-    //                                                                 //'<th></th>'+
-    //                                                             '</thead>'+
-    //                                                             '<tbody id="detalle_'+nomTablero+'">'+
-    //                                                             '</tbody>'+ 
-    //                                                             '<tfoot>'+
-    //                                                                 '<th>Total</th>'+
-    //                                                                 '<th></th>'+
-    //                                                                 '<th></th>'+
-    //                                                                 '<th></th>'+
-    //                                                                 '<th></th>'+
-    //                                                                 '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-    //                                                                 '</th>'+
-    //                                                             '</tfoot>'+
-    //                                                         '</table>'+
-    //                                                     '</div>'+
-    //                                                 '<div>'+
-    //                                             '</div>'+                                
-    //                                         '</div>'+
-    //                                     '</div>'+
-    //                                 '</div>'+
-    //                             '</section>'+
-    //                         '</div>';
-    //             var ta={nombre:nomTablero,posi:cont,tablero:table}
-    //             tablero.push(ta);                        
-    //             } cont++;       
-    //         }
-    //         // console.log(table);
-    //         nomTablero="";
-    //         // realiza el listado de todas los tableros que se añaden
-    //         ListaSelect()
-    //         // mantiene en la vista las filas cuando se agrega una nueva tabla
-    //         detalleFilas();
-    //         // fila();
-    //         //nomtablero="";
-    //     }else{
-    //         // (tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!=''
-    //         if($("#simbolo").val()=='' && $("#valorcambio").val()=='' && $("#igv_tipocambio").val()==''){
-    //             alert("seleccione un tipo de Moneda");
-    //         }else if(tabl==''){
-    //             alert("ingrese nombre del Tablero");
-    //         }            
-    //     }
-        
-    // }
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
         var idProd=Producto[0];
@@ -513,7 +461,7 @@
         // nomTablero=$('#prod-selec').val();
         var filas;
         // console.log(idProd,pname);
-        if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" ){
+        if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
@@ -536,7 +484,7 @@
                             }
                         }
                         if(boolfila==false){
-                            console.log("produc nuevoo",contp);
+                            console.log("produc nuevo",contp);
                             var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
                             filaob.push(dat);
                             fila();
@@ -549,10 +497,10 @@
             // }
             // detalleFilas();
             valoresFinales();
-            console.log(filaob);            
+            // console.log(filaob);            
             // nomtablero="";            
         }else{
-            alert("Ingresar Datos del Producto!!");
+            alert("Ingresar Datos del Producto!! o datos del tipo de cambio");
         }
     }
     function fila(){
@@ -621,7 +569,7 @@
                         // }
                     }
                 }
-                console.log(fil);
+                // console.log(fil);
                 $('#tablero_unitario').html(fil);
                 fil='';
             // }
@@ -630,31 +578,6 @@
         // }
         // subTotalTable();
     }
-    // function subTotalTable(){
-    //     // funcion para realizar la suma del sub total de todos los tableros que se declaran
-    //     var sub=0;
-    //     // if(tablero.length>0){
-    //         // for (const key in tablero) {
-    //             // if (tablero.hasOwnProperty(key)) {
-    //                 for (const fila in filaob) {
-    //                     if (filaob.hasOwnProperty(fila)) {
-    //                         // if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
-    //                             // (cantidad*precio)-((cantidad*precio)*(cantidad*(descuento/100)));
-    //                             var precio=parseFloat(filaob[fila]['prec_uniP']);
-    //                             var cantidad=parseFloat(filaob[fila]['cantidadP']);
-    //                             var descuento=parseFloat(filaob[fila]['descuentoP']);
-    //                             sub+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-    //                             // console.log(sub,"---");
-    //                         // }                            
-    //                     }
-    //                 }   
-    //                 // console.log(sub);
-    //                 $("#total_"+tablero[key]['nombre']).html("s/. " + sub);                 
-    //             // }
-    //             sub=0;
-    //         // }            
-    //     // }
-    // }
     function subTotal(){
         // la suma de tosos los tableros        
         var sub=0;        
@@ -720,6 +643,7 @@
         var venta=0;   
         var igv=0;  
         var tota=0;   
+        
         for (const fila in filaob) {
             if (filaob.hasOwnProperty(fila)) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
@@ -733,8 +657,10 @@
         igv=venta*0.18;
         tota=venta+igv;
         totalt=tota.toFixed(2);
+        totaldolares=(tota/tipocam).toFixed(2);
         // console.log(sub);
         $("#total").html("s/. " + tota.toFixed(2));
+        
     }
     function valoresFinales(){
         if(filaob.length>0){
@@ -746,6 +672,19 @@
         valorVenta();
         igv();
         total();
+        cambioMoneda();
+    }
+    function cambioMoneda(){
+        if(filaob.length>0){
+            if("$"==simbolo){    
+                totaldolares=(totalt/tipocam).toFixed(2);        
+                $("#total_dolares").html(simbolo+" " + totaldolares);
+            }else{
+                $("#total_dolares").html(0);
+            }
+        }
+        console.log(totaldolares);
+        
     }
     function eliminar(index){
         // elimina las filas de un tablero especifico 
@@ -762,30 +701,7 @@
         } 
         valoresFinales();
     }
-    // function eliminarTablero(a){
-    // // elimina todo un tablero con todos los datos que contiene
-    //     for (const key in tablero) {
-    //         if (tablero.hasOwnProperty(key)) {
-    //             if(a==tablero[key]['posi']){
-    //                 //console.log(a);        
-    //                 //console.log(tablero);
-    //                 for (var k in filaob) {
-    //                     if (filaob.hasOwnProperty(k)) {
-    //                         if(tablero[key]['nombre']==filaob[k]['nomTablero']){
-    //                             // console.log("encontrado");
-    //                             filaob.splice(k,1);
-    //                         }
-    //                     }
-    //                 }   
-    //                 $("#"+tablero[key]['nombre']+'_'+tablero[key]['posi']).remove();                      
-    //                 tablero.splice(key,1);                 
-    //             }              
-    //         }
-    //     }
-    //     detalleFilas();
-    //     ListaSelect();
-    //     valoresFinales()
-    // }
+    
     function ocultar(){
         tablero.length>0
         if (0<tablero.length && 0<filaob){

@@ -2,7 +2,7 @@
 @section ('contenido')
 
 <div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Lista de Proformas   <a href="{{url('proformas/create')}}"><button class="btn btn-success">Nuevo</button></a> </h3>
+	<h3> Lista de Proformas   <a href="{{route('proforma-create')}}"><button class="btn btn-success">Nuevo</button></a> </h3>
 	@include('proforma.proforma.search')
 </div>
 <div class='row'>
@@ -44,7 +44,7 @@
                        </div>
 
 					
-					<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
+					<a href="{{route('proforma-show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
 					</a>
 
 					
