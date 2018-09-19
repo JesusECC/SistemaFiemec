@@ -147,9 +147,9 @@ class ControllerProformaTableros extends Controller
                     }
                 }
             }
-            return ['data' =>'tableros'];
+            return ['data' =>'tableros','veri'=>true];
         }catch(Exception $e){
-            return ['data' =>$e];
+            return ['data' =>$e,'veri'=>false];
         }
     }
 

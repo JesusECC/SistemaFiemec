@@ -370,13 +370,16 @@
                         // $("#resultado").html("Procesando, espere por favor...");
                 },
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                    console.log(response);
-                    window.location.replace(response.data);
-                    // document.location.href="{ url('/tableros') }";
-                        // $("#resultado").html(response);
+                
+                    if(response.veri==true){
+                        var urlBase=window.location.origin;
+                        var url=urlBase+'/'+response.data;
+                        document.location.href=url;
+                    }else{
+                        alert("problemas al guardar la informacion");
+                    }
                 }
             });
-            // console.log(tablero,filaob);
         }else {
             alert('ingrese productos al tablero!!');
         }

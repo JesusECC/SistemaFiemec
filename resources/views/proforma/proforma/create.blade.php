@@ -322,14 +322,11 @@
 
 @push('scripts')
 <script>
-    
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
-            // agregarTablero();
             valoresFinales();
         });
         $('#save').click(function(){
-            // console.log("asd");
             saveProforma();
         });
         // boton agregar producto
@@ -373,10 +370,8 @@
 
     $("#idTipo_moneda").change(cambioMoneda);
     
-
-    //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
     function MostrarCliente(){
-        // cdireccion/cnro_documentoidClientes
+       
         Cliente=document.getElementById('idClientes').value.split('_');
         idcliente=Cliente[0];
         $("#cdireccion").val(Cliente[1]);
@@ -384,33 +379,25 @@
     }
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
-        // $("#idProd").val(Producto[0]);
-        // $("#Productoname").val(Producto[1]);
         $("#precio_uni").val(Producto[2]);
         $("#pdescuento").val(Producto[3]);
-        // descuentoP -->para emostar el 
     }
     function mostrarTipoCambio(){
-        // {{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         $("#simbolo").val(tipoCambio[2]);
         $("#valorcambio").val(tipoCambio[1]);
         $("#igv_tipocambio").val(tipoCambio[3]+ " %");
         tipocam=tipoCambio[1];
         simbolo=tipoCambio[2];
-        // console.log(tipocam,simbolo);
 
     }
     function mostrarcampos(){
         document.getElementById('producto-crear-oculto').style.display = 'block';
         document.getElementById('producto-oculto').style.display = 'block';
-        // $("#producto-crear-oculto").style.display='block';
-        // $("#producto-oculto").style.display='block';
     } 
 
     function saveProforma(){
         // se enviar los datos al controlador proforma tableros
-        // console.log(idcliente);
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         var idtipocam=tipoCambio[0];
         var valorcambio=tipoCambio[1];
@@ -419,30 +406,25 @@
         var forma=$("#forma_de").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_condicion").val();
-        console.log(totaldolares,forma,plazo,observacion);
         
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
             var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion}];
-            // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
                 url:   'guardar', //archivo que recibe la peticion
                 type:  'post', //método de envio
                 dataType: "json",//tipo de dato que envio 
-                beforeSend: function () {
-                    // console.log()
-                        // $("#resultado").html("Procesando, espere por favor...");
-                },
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                    console.log(response);
-                    // console.log(response);
-                    window.location.replace(response.data);
-                    // document.location.href="{ url('/tableros') }";
-                        // $("#resultado").html(response);
+                    if(response.veri==true){
+                        var urlBase=window.location.origin;
+                        var url=urlBase+'/'+response.data;
+                        document.location.href=url;
+                    }else{
+                        alert("problemas al guardar la informacion");
+                    }
                 }
             });
-            // console.log(tablero,filaob);
         }else {
             alert('ingrese productos al tablero!!');
         }
@@ -455,50 +437,34 @@
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
-        // var sel=$('#prod-selec').val();
         var descuento=$('#pdescuento').val();
-        // console.log(descuento);
-        // nomTablero=$('#prod-selec').val();
         var filas;
-        // console.log(idProd,pname);
         if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
-            // for (const key in tablero) {
-                // if (tablero.hasOwnProperty(key)) {
-                    // if(tablero[key]['nombre']==nomTablero){
-                        bool=true;
-                        for (const fil in filaob) {
-                            if (filaob.hasOwnProperty(fil)) {
-                                if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd){
-                                    var su=parseInt(pcant);
-                                    var des=parseInt(descuento);
-                                    filaob[fil]['cantidadP']=su;
-                                    filaob[fil]['descuentoP']=des;
-                                    filaob[fil]['descripcionP']=pdescripcion;
-                                    fila();
-                                    boolfila=true;
-                                    console.log("Actualizar producto");                      
-                                }                
-                            }
-                        }
-                        if(boolfila==false){
-                            console.log("produc nuevo",contp);
-                            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
-                            filaob.push(dat);
-                            fila();
-                            contp++;
-                            
-
-                        }
-                    // }                    
-                // }
-            // }
-            // detalleFilas();
-            valoresFinales();
-            // console.log(filaob);            
-            // nomtablero="";            
+            bool=true;
+            for (const fil in filaob) {
+                if (filaob.hasOwnProperty(fil)) {
+                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd){
+                        var su=parseInt(pcant);
+                        var des=parseInt(descuento);
+                        filaob[fil]['cantidadP']=su;
+                        filaob[fil]['descuentoP']=des;
+                        filaob[fil]['descripcionP']=pdescripcion;
+                        fila();
+                        boolfila=true;                
+                    }                
+                }
+            }
+            if(boolfila==false){
+                // console.log("produc nuevo",contp);
+                var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+                filaob.push(dat);
+                fila();
+                contp++;            
+            }
+            valoresFinales();            
         }else{
             alert("Ingresar Datos del Producto!! o datos del tipo de cambio");
         }
@@ -507,76 +473,54 @@
         // realiza la insercion de las filas agregadas actualizando los importes y las cantidaddes
         if(filaob.length>0){
             var filas;
-            // console.log(filaob.length+ " --> ");
-            // for (const key in tablero) {
-            //     if (tablero.hasOwnProperty(key)) {
-                    // $("#detalle_"+tablero[key]['nombre']).load();
-                    for (const fila in filaob) {
-                        if (filaob.hasOwnProperty(fila)) {                            
-                            var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                            var precio=parseFloat(filaob[fila]['prec_uniP']);
-                            var descuento=parseFloat(filaob[fila]['descuentoP']);
-                            var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                            // if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
-                                filas=
-                                    '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                                        '<td> '+ 
-                                            '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
-                                        '</td>'+
-                                        '<td> '+ 
-                                            '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
-                                        '</td>'+
-                                        '<td> '+ 
-                                            '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
-                                        '</td>'+
-                                        '<td> '+   
-                                            '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
-                                        '</td>'+
-                                        '<td> '+   
-                                            '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
-                                        '</td>'+
-                                        '<td> '+   
-                                            '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
-                                        '</td>'+
-                                        '<td>'+
-                                            '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
-                                                    '<i class="fas fa-trash"></i>'+
-                                            '</button>'+
-                                        '</td>'+
-                                    '</tr>';  
-                                    filaob[fila]['fila']=filas;
-                                    filas="";
-                            // }                                                         
-                        }
-                    }                    
-            //     }
-            // }
+            for (const fila in filaob) {
+                if (filaob.hasOwnProperty(fila)) {                            
+                    var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                    var precio=parseFloat(filaob[fila]['prec_uniP']);
+                    var descuento=parseFloat(filaob[fila]['descuentoP']);
+                    var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                    filas=
+                        '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
+                            '<td> '+ 
+                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+                            '</td>'+
+                            '<td> '+ 
+                                '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+                            '</td>'+
+                            '<td> '+ 
+                                '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                            '</td>'+
+                            '<td> '+   
+                                '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                            '</td>'+
+                            '<td> '+   
+                                '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                            '</td>'+
+                            '<td> '+   
+                                '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
+                            '</td>'+
+                            '<td>'+
+                                '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
+                                        '<i class="fas fa-trash"></i>'+
+                                '</button>'+
+                            '</td>'+
+                        '</tr>';  
+                    filaob[fila]['fila']=filas;
+                    filas="";                                  
+                }
+            }                    
         }
     }    
     function detalleFilas(){
         // mantiene en la vista las filas cuando se agrega una nueva tabla
-        // var dat={idProducto:idProd,producto:pname,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp};
-        // fila(); 
         var fil='';
-        // if(tablero.length>0){
-            // for (var keyt in tablero) {
-                //  $("#detalle_"+tablero[keyt]['nombre']).load();
-                // $("#detalle_"+tablero[keyt]['nombre']).val('');  
-                for (var key in filaob) {                   
-                    if (filaob.hasOwnProperty(key)) {
-                        // if(tablero[keyt]['nombre']==filaob[key]['nomTablero']){
-                            fil+=filaob[key]['fila'];
-                        // }
-                    }
-                }
-                // console.log(fil);
-                $('#tablero_unitario').html(fil);
-                fil='';
-            // }
-        // }else{
-        //     $('#detalle_'+tablero[keyt]['nombre']).html('');
-        // }
-        // subTotalTable();
+        for (var key in filaob) {                   
+            if (filaob.hasOwnProperty(key)) {
+                    fil+=filaob[key]['fila'];
+            }
+        }
+        $('#tablero_unitario').html(fil);
+        fil='';
     }
     function subTotal(){
         // la suma de tosos los tableros        
@@ -586,12 +530,9 @@
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
-                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                sub+=cantidad*precio;
-                // console.log(sub);                        
+                sub+=cantidad*precio;              
             }
         }
-        // console.log(sub);
         $("#subtotal").html("s/. " + sub.toFixed(2));
     }
     function descuentos(){
@@ -613,13 +554,10 @@
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
-                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                // console.log(sub);                        
             }
         }
         valorventa=venta.toFixed(2);
-        // console.log(sub);
         $("#valorVenta").html("s/. " + venta.toFixed(2));
     }
     function igv(){
@@ -630,13 +568,10 @@
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
-                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                // console.log(sub);                        
             }
         }
         ig=venta*0.18;
-        // console.log(sub);
         $("#igv").html("s/. " + ig.toFixed(2));
     }
     function total(){
@@ -649,25 +584,20 @@
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
-                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                // console.log(sub);                        
             }
         }
         igv=venta*0.18;
         tota=venta+igv;
         totalt=tota.toFixed(2);
         totaldolares=(tota/tipocam).toFixed(2);
-        // console.log(sub);
         $("#total").html("s/. " + tota.toFixed(2));
-        
     }
     function valoresFinales(){
         if(filaob.length>0){
             detalleFilas();
         }
         subTotal();
-        // subTotalTable();
         descuentos();
         valorVenta();
         igv();
@@ -683,25 +613,19 @@
                 $("#total_dolares").html(0);
             }
         }
-        console.log(totaldolares);
-        
     }
     function eliminar(index){
         // elimina las filas de un tablero especifico 
-        // console.log(filaob,"eliminar",index);
         for (var key in filaob) {
             if (filaob.hasOwnProperty(key)) {
                 if(index==filaob[key]['posiP']){
-                    console.log(filaob[key]['nomTablero'],"eliminar");
                     $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
-                    filaob.splice(key,1);
-                    // console.log(filaob);                            
+                    filaob.splice(key,1);                      
                 }
             }
         } 
         valoresFinales();
-    }
-    
+    }    
     function ocultar(){
         tablero.length>0
         if (0<tablero.length && 0<filaob){

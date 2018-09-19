@@ -133,9 +133,9 @@ public function store(Request $request)
             $detalleProforma->descripcionDP=$fila['descripcionP'];
             $detalleProforma->save();            
         }
-        return ['data' =>'proformas'];
+        return ['data' =>'proformas','veri'=>true];
     }catch(Exception $e){
-        return ['data' =>$e];
+        return ['data' =>$e,'veri'=>false];
     }
    
 
