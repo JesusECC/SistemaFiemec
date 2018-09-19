@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title> </title>
+  <title>{{$proforma->serie_proforma}}  F000-{{$proforma->idProforma}}</title>
 </head>
 <style type="text/css"> 
   .clearfix:after 
@@ -19,7 +19,7 @@
   {
     border-radius: 5px;
     border: 1px inset black;
-    background-color:#1C4C6D;
+    background-color:#00709A;
     padding: 2.5px;
     margin-top: 6px;
     margin-bottom: 6px;
@@ -38,7 +38,7 @@
 #company span {
   color: #5D6975;
   text-align: left;
-  width: 100px;
+  width: 110px;
   margin-right: 10px;
   display: inline-block;
   font-size: 0.6em;
@@ -46,7 +46,7 @@
 #project span {
   color: #5D6975;
   text-align: left;
-  width: 50px;
+  width: 60px;
   margin-right: 10px;
   display: inline-block;
   font-size: 0.6em;
@@ -98,14 +98,14 @@ th.principal
 }
 td.principal
 {
-    border-bottom:  1px solid #323639;
+    border-bottom:  1px solid #7D7D7D;
     font-size: 11px !important;
 }
 table tbody tr:nth-child(2n-1) td {
-  background: #F5F5F5;
+  background: #DADADA;
 } 
 table tfoot tr:nth-child(2n-1) td {
-  background: #F5F5F5;
+  background: #DADADA;
   }
 table tfoot td {
   background: #FFFFFF;
@@ -116,7 +116,7 @@ table tfoot td {
 }
 
 thead.principal{
-    background-color: #072F3E;
+    background-color: #7D7D7D;
     border-bottom: solid 5px #323639;
     color: white;
     text-align: center;
@@ -131,12 +131,11 @@ td.foot
 footer {
   color: #5D6975;
   width: 100%;
-  height: 30px;
+  height: 35px;
   position: absolute;
   bottom: 0;
   border-top: 1px solid #C1CED9;
   padding: 8px 0;
-  text-align: center;
 }
 
 </style>
@@ -145,10 +144,10 @@ footer {
     <table width="100%"> 
           <tr align="center" valign="middle"> 
             <th colspan="5" align="left">
-                <img src="img/img-pdf.png" alt="" width="180px">
+                <img src="img/img-pdf.png" alt="" width="200px">
             </th>
             <th colspan="5" align="right"  >
-                <img src="img/dir-pdf.png" alt="" width="180px">
+                <img src="img/dir-pdf.png" alt="" width="200px">
             </th>
           </tr>
           <th colspan="10" class="cotizacion" align="center">
@@ -159,14 +158,14 @@ footer {
     </table>
     <div class="datos" > 
       <div id="company">
-        <div><span>EMAIL</span> <span><a href="{{$proforma->email}}">{{$proforma->email}}</a></span></div>
-        <div><span>FECHA</span> <span style="font-size: 0.7em;color: black">{{$proforma->fecha_hora}}</span></div>
-        <div><span>ASESOR COMERCIAL</span><span style="font-size: 0.7em;color: black">-----</span></div>
+        <div><span>EMAIL :</span> <span><a href="{{$proforma->email}}">{{$proforma->email}}</a></span></div>
+        <div><span>FECHA :</span> <span style="font-size: 0.7em;color: black">{{$proforma->fecha_hora}}</span></div>
+        <div><span>CLIENTE EMPLEADO :</span><span style="font-size: 0.7em;color: black">{{$proforma->cliente_empleado}}</span></div>
       </div>
       <div id="project" class="clearfix">
-        <div><span>CLIENTE</span> <span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->nombre}}</span></div>
-        <div><span>RUC / DNI</span> <span style="font-size: 0.7em;color: black">{{$proforma->ndoc}}</span></div>
-        <div><span>DIRECCIÓN</span> <span class="direccion" style="font-size: 0.7em;color: black">{{$proforma->direccion}}</span> </div>
+        <div><span>CLIENTE :</span> <span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->nombre}}</span></div>
+        <div><span>RUC / DNI :</span> <span style="font-size: 0.7em;color: black">{{$proforma->ndoc}}</span></div>
+        <div><span>DIRECCIÓN :</span> <span class="direccion" style="font-size: 0.7em;color: black">{{$proforma->direccion}}</span> </div>
       </div>
     </div>
   </header> 
@@ -175,6 +174,7 @@ footer {
       <table class="principal" width="100%"> 
         <thead class="principal"> 
           <tr class="principal"> 
+            <th class="principal">Item</th>
             <th class="principal" style="width: 460px !important">Producto</th>
             <th class="principal" >Cant. </th>
             <th class="principal" >Precio</th>
@@ -183,8 +183,13 @@ footer {
           </tr>
         </thead>
         <tbody>
+          
+          {{$i=1}}
+
           @foreach($detalles as $det)
+          
           <tr class="principal"> 
+            <td>{{$i++}}</td>
             <td class="principal" style="font-size: 11px !important;"> {{$det->producto.' | '.$det->descripcionDP}} </td>
             <td class="principal" align="center" >{{$det->cantidad}}</td>
             <td class="principal"  align="center">S/.{{$det->precio_venta}}</td>
@@ -192,43 +197,42 @@ footer {
             <td class="principal" align="center" >S/.{{($det->precio_venta*$det->cantidad)-(($det->cantidad*$det->precio_venta)*($det->descuento/100))}}</td>
           </tr>
           @endforeach
+          
         </tbody>
         <tfoot>
             <tr style="font-weight: bold;">
-              <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
+              <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
               <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
               <td align="center" style="border-right: 1px solid #323639"> S/. {{$proforma->subtotal}}</td>
             </tr>
             <tr style="font-weight: bold;">
-              <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
+              <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
               <td colspan="1" style="border-left:1px solid #323639; ">IGV 18%</td>
               <td align="center" style="border-right: 1px solid #323639"> S/. {{round(($proforma->precio_total)*($proforma->igv/100),2)}}</td>
             </tr>
             <tr style="font-weight: bold;">  
-              <td colspan="3" style="background-color: white !important"></td>
+              <td colspan="4" style="background-color: white !important"></td>
               <td colspan="1" style="border-left:1px solid #323639;border-bottom: 1px solid #323639 ">Precio Total</td>
               <td align="center" style="border-right: 1px solid #323639;border-bottom: 1px solid #323639">S/. {{round($proforma->precio_total,2)}}</td>
             </tr> 
         </tfoot>
       </table>
     </div>
-    <div style="margin-bottom: 5px;margin-top: 100px">
-      <h5 style="font-size: 10px !important;line-height:1px">Forma de pago: {{$proforma->forma_de}}</h5>
-      <h5 style="font-size: 10px !important;line-height:1px">Condición de venta: {{$proforma->observacion_condicion}} </h5>
-      <h5 style="font-size: 10px !important;line-height:1px;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5>      
-    </div>
-    <div style="">
-      <h4 style="font-size: 10px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
-       <h5 style="font-size: 10px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
-                          <h5 style="font-size: 10px !important;line-height:1px">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
-                          <h5 style="font-size: 10px !important;line-height:1px">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
-                          <h5 style="font-size: 10px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>      
-    </div>
-
-
   </main>
   <footer>  
-    La factura fue creada en una computadora y es válida sin la firma y el sello
+    <div style="width: 50%;float: left;">
+      <h5 style="font-size: 10px !important;line-height:1px">Forma de pago: {{$proforma->forma_de}}</h5>
+      <h5 style="font-size: 10px !important;line-height:1px;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5> 
+      <h5 style="font-size: 10px !important;line-height:1px">Condición de venta: {{$proforma->observacion_proforma}} </h5>
+
+    </div>
+    <div style="width: 50%;float: right;">
+      <h4 style="font-size: 10px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
+      <h5 style="font-size: 10px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
+      <h5 style="font-size: 10px !important;line-height:1px">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
+      <h5 style="font-size: 10px !important;line-height:1px">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
+      <h5 style="font-size: 10px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>
+    </div>
   </footer>
 </body>
 </html>

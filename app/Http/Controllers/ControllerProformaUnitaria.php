@@ -80,6 +80,7 @@ public function store(Request $request)
         $totaldolares;
         $forma;
         $plazo;
+        $clienteemp;
         $observacion;
 // [{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldola:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,
 //     forma:forma,plazo:plazo,observacion:observacion}];
@@ -94,6 +95,7 @@ public function store(Request $request)
             $totaldolares=$dato['totaldolares'];
             $forma=$dato['forma'];
             $plazo=$dato['plazo'];
+            $clienteemp=$dato['clienteemp'];
             $observacion=$dato['observacion'];
         }
         $idProforma=DB::table('Proforma')->insertGetId(
@@ -115,6 +117,7 @@ public function store(Request $request)
             'plazo_oferta'=>$plazo,
             // 'garantia'=>$request->,
             // 'observacion_condicion'=>$request->,
+            'cliente_empleado'=>$clienteemp,
             'observacion_proforma'=>$observacion,
             'estado'=>'activo'
             ]
@@ -226,7 +229,7 @@ public function pdf($id){
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
     
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.subtotal')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.observacion_proforma','cp.correo as email','cp.nro_documento as ndoc','p.subtotal','p.cliente_empleado')
     ->where('p.idProforma','=',$id)
     ->first();
 
