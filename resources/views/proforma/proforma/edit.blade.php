@@ -15,7 +15,7 @@
     @endif
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-10">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -24,70 +24,56 @@
                     </div>
                     <div class="panel-body">        
                         <div class="row">
-                            <div class="col-lg-10">
+                            
+                            <div class="col-lg-12">
                                 <div class="form-group label-floating">
-                                    <label class="control-label">Nombre del Cliente</label>
-                                    <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
-                                        <option value="">Seleccione Cliente</option>
-                                        @foreach($clientes as $cliente)
-                                            <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
-                                        @endforeach
-                                    </select> 
-                                    <button type="button" id="bt_add_Cliente" class="btn btn-primary">Agregar Cliente</button>
+                                    <label for="nombreclie">Nombre y Apellido</label>
+                                    <input type="text" disabled name="nombreclie" id="nombreclie" class="form-control">
                                 </div>                               
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group label-floating">
                                     <label for="cdireccion">Direccion</label>
-                                    <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="direccion">
+                                    <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control">
                                 </div>                               
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <div class="form-group label-floating">
                                     <label for="nro_documento">Numero de Documento</label>
-                                    <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="numero documento">
+                                    <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control">
+                                </div>                               
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group label-floating">
+                                    <label for="cotizador">Nombre del Cotizador</label>
+                                    <input type="text" disabled name="cotizador" id="cotizador" class="form-control">
                                 </div>                               
                             </div>
                         </div>
                     </div>            
                 </div>
             </div> 
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Tipo de Cambio
                         </h3>
                     </div>
-                    <div class="panel-body">         
-                        <div class="col-lg-6">
-                            <label>Tipo de cambio</label>
-                            <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
-                                <option value=""></option>
-                                @foreach($monedas as $mo)                
-                                    <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
-                                @endforeach  
-                            </select>
-                        </div>
+                    <div class="panel-body">
 
-                        <div class="col-lg-4">
+                        <div class="col-lg-12">
                             <div class="from-group">
                                 <label for="simbolo">Simbolo</label>
                                 <input type="text" disabled name="simbolo" id="simbolo" class="form-control" >                                                
                             </div>                                        
                         </div>
 
-                        <div class="col-lg-4" >                                            
+                        <div class="col-lg-12" >                                            
                             <div class="from-group">
                                 <label for="valorcambio">Valor</label>
                                 <input type="text" disabled id="valorcambio" class="form-control">                    
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="from-group">
-                                <label for="igv_tipocambio">IGV</label>
-                                <input type="text" disabled id="igv_tipocambio" class="form-control">                                
-                            </div>                                        
                         </div>
                     </div>         
                 </div>
@@ -113,27 +99,15 @@
                                 @endforeach
                             </select>                    
                         </div>
-                        <!-- {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
-                        @csrf -->
                         <div class="card" id="producto-crear-oculto" >
                             <div class="card-header">
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <!-- <div class="col-lg-12">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Nombre de Producto</label>
-                                            <input type="hidden" id="idProd" name="idProd" disabled>
-                                            <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
-                                        </div>                               
-                                    </div> -->
                                     <div class="col-lg-6">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Descripcion</label>
                                             <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
-                                            <!-- <textarea rows="4" cols="50">
-                                            
-                                            </textarea> -->
                                         </div>
                                     </div> 
                                     <div class="col-lg-2">
@@ -166,17 +140,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-lg-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Datos del Vendedor
-                        </h3>
-                    </div>
-                    <div class="panel-body">              
-                    </div>            
-                </div>
-            </div> -->
             <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -214,16 +177,7 @@
                                                                     <th></th>
                                                                 </thead>
                                                                 <tbody id="tablero_unitario">
-                                                                </tbody>
-                                                                <!-- <tfoot>
-                                                                    <th>Total</th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">
-                                                                    </th>
-                                                                </tfoot> -->
+                                                                </tbody>                                                               
                                                             </table>
                                                         </div>
                                                     <div>
@@ -305,21 +259,12 @@
     </div>
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">  
     <div style="margin-top: 20px" class="from-group ">
-
         <button class="btn btn-primary" id="save" type="button">Guardar</button>
         <button class="btn btn-danger" type="reset">Limpiar</button>
         <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
-
-
     </div>
-
     </div>
-
-
-    <!-- {!!Form::close()!!} -->
-
 </div>
-
 @push('scripts')
 <script>
     $(document).ready(function(){
@@ -332,8 +277,7 @@
         // boton agregar producto
         $('#bt_add_produc').click(function(){
             agregarProductosTablero();
-            valoresFinales();
-           
+            valoresFinales();           
         });
         $('#Pcantidad').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
@@ -348,11 +292,16 @@
             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
         });
         // Actualizar
-       
-
+        // asignarValores();
     });
     $("#idClientes").change(MostrarCliente);
     $("#idTipo_moneda").change(mostrarTipoCambio);
+    
+    var pro={!! $proforma !!};
+    var editarval=true;
+    
+    
+    // console.log(pro);
     var tablero=[];
     var filaob=[];
     var cont=0;
@@ -366,10 +315,13 @@
     var tipocam;
     var simbolo;
     var totaldolares=0;
+    var idtipocam;
+    var idProforma;
     $("#pidProducto").change(MostarProducto);
 
     $("#idTipo_moneda").change(cambioMoneda);
-    
+    asignarValores();
+
     function MostrarCliente(){
        
         Cliente=document.getElementById('idClientes').value.split('_');
@@ -389,6 +341,8 @@
         $("#igv_tipocambio").val(tipoCambio[3]+ " %");
         tipocam=tipoCambio[1];
         simbolo=tipoCambio[2];
+        idtipocam=tipoCambio[0];
+        valorcambio=tipoCambio[1];
 
     }
     function mostrarcampos(){
@@ -398,21 +352,17 @@
 
     function saveProforma(){
         // se enviar los datos al controlador proforma tableros
-        tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
-        var idtipocam=tipoCambio[0];
-        var valorcambio=tipoCambio[1];
-        var vVenta=$("#valorVenta").val();
-        var tl=$("#total").val();
+        // tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         var forma=$("#forma_de").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_condicion").val();
-        
+        console.log(forma,plazo,observacion);
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,simbolo:simbolo}];
+            var dat=[{idProforma:idProforma,nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
-                url:   'guardar', //archivo que recibe la peticion
+                url:   'editar', //archivo que recibe la peticion
                 type:  'post', //método de envio
                 dataType: "json",//tipo de dato que envio 
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
@@ -439,7 +389,7 @@
         var pcant=$('#Pcantidad').val();
         var descuento=$('#pdescuento').val();
         var filas;
-        if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
+        if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!=""  ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
@@ -459,7 +409,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+                var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:1,idDetalleProforma:''};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -515,12 +465,78 @@
         // mantiene en la vista las filas cuando se agrega una nueva tabla
         var fil='';
         for (var key in filaob) {                   
-            if (filaob.hasOwnProperty(key)) {
+            if (filaob.hasOwnProperty(key) && filaob[key]['estado']==1) {
                     fil+=filaob[key]['fila'];
             }
         }
         $('#tablero_unitario').html(fil);
         fil='';
+    }
+    
+    function asignarValores(){
+        var pro={!! $proforma !!};
+        
+        var nombreClie;
+        var apellidoP;
+        var apellidoM;
+        var direccion;
+        var documento;
+        var cotiza;
+        
+        // var descuento;
+        if (editarval==true) {
+            for (const key in pro) {
+                if (pro.hasOwnProperty(key)) {
+                    idProforma=pro[key]['idProforma'];
+                    nombreClie=pro[key]['nombres_Rs'];
+                    apellidoP=pro[key]['paterno'];
+                    apellidoM=pro[key]['materno'];
+                    direccion=pro[key]['Direccion'];
+                    documento=pro[key]['nro_documento'];
+                    var idProd=pro[key]['idProducto'];
+                    var pname=pro[key]['nombre_producto'];
+                    var pdescripcion;
+                    tipocam=pro[key]['tipocambio'];
+                    simbolo=pro[key]['simboloP'];
+                    cotiza=pro[key]['cliente_empleado'];
+                    if(pro[key]['descripcionDP']==null){
+                        pdescripcion='';
+                    }else{
+                        pdescripcion=pro[key]['descripcionDP'];
+                    }
+                    var puni=pro[key]['precio_venta'];
+                    var pcant=pro[key]['cantidad'];
+                    var descuento=pro[key]['descuento'];     
+                    var estado=pro[key]['estadoDP'];  
+                    var idDetalleProform=pro[key]['idDetalle_proforma']; 
+                    var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
+                    filaob.push(dat);  
+                    fila();
+                    contp++;               
+                }
+            }
+            console.log(pro);
+            console.log(simbolo);
+            document.getElementById('totales-general').style.display = 'block';
+            valoresFinales(); 
+            editarval=false;
+            // cotizador
+            $("#nombreclie").val(nombreClie+" "+apellidoP+" "+apellidoM);
+            $("#cdireccion").val(direccion);
+            $("#cnro_documento").val(documento);
+            $("#cotizador").val(cotiza);
+
+            $("#simbolo").val(simbolo);
+            $("#valorcambio").val(tipocam);
+
+        }
+        
+        
+        console.log(filaob);
+        // var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+        //         filaob.push(dat);
+        //         fila();
+        //         contp++;
     }
     function subTotal(){
         // la suma de tosos los tableros        
@@ -591,6 +607,7 @@
         tota=venta+igv;
         totalt=tota.toFixed(2);
         totaldolares=(tota/tipocam).toFixed(2);
+        // console.log($("#total").html("s/. " + tota.toFixed(2)));    
         $("#total").html("s/. " + tota.toFixed(2));
     }
     function valoresFinales(){
@@ -620,7 +637,8 @@
             if (filaob.hasOwnProperty(key)) {
                 if(index==filaob[key]['posiP']){
                     $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
-                    filaob.splice(key,1);                      
+                    // filaob.splice(key,1);         
+                    filaob[key]['estado']='0';  
                 }
             }
         } 
