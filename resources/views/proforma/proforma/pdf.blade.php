@@ -153,8 +153,8 @@ footer {
           <th colspan="10" class="cotizacion" align="center">
             <div class="proforma">
            COTIZACIÓN N° {{$proforma->serie_proforma}}  F000-{{$proforma->idProforma}} 
-        </div>
-    </th>     
+            </div>
+          </th>     
     </table>
     <div class="datos" > 
       <div id="company">
@@ -219,19 +219,18 @@ footer {
       </table>
     </div>
   </main>
-  <footer>  
-    <div style="width: 50%;float: left;">
-      <h5 style="font-size: 10px !important;line-height:1px">Forma de pago: {{$proforma->forma_de}}</h5>
-      <h5 style="font-size: 10px !important;line-height:1px;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5> 
-      <h5 style="font-size: 10px !important;line-height:1px">Condición de venta: {{$proforma->observacion_proforma}} </h5>
-
+  <footer> 
+    <div style="width: 50%;float: left;display: inline-block !important;vertical-align: middle;border-right:  2px solid #C1CED9">
+      <h5 style="font-size: 10px !important;line-height:0.5px;">Forma de pago: {{$proforma->forma_de}}</h5>
+      <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5> 
+      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$proforma->observacion_proforma}} </h5>
     </div>
     <div style="width: 50%;float: right;">
-      <h4 style="font-size: 10px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
-      <h5 style="font-size: 10px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
-      <h5 style="font-size: 10px !important;line-height:1px">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
-      <h5 style="font-size: 10px !important;line-height:1px">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
-      <h5 style="font-size: 10px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>
+      <h4 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
+      <h5 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
+      <h5 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
+      <h5 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
+      <h5 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">Cta. Corriente  detracciones BN :   00-088-006879</h5>
     </div>
   </footer>
 </body>
