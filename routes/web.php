@@ -83,6 +83,16 @@ Route::get('proforma/proforma/pdf2/{idProforma}','ControllerProformaUnitaria@pdf
 Route::get('proformas/show/{id}',['as'=>'proforma-show','uses'=>'ControllerProformaUnitaria@show']);
 Route::delete('proformas/eliminar/{id}',['as'=>'proforma-eliminar','uses'=>'ControllerProformaUnitaria@destroy']);
 
+
+//rutas bandejas
+Route::post('bandejas/guardar',['as' => 'bandejas-store','uses'=>'ControllerBandejas@store']);
+Route::get('bandejas',['as'=>'bandejas','uses'=>'ControllerBandejas@index']);
+Route::get('bandejas/create',['as'=>'bandejas-create','uses'=>'ControllerBandejas@create']);
+Route::get('proforma/bandejas/pdf/{idProforma}','ControllerBandejas@pdf');
+Route::get('proforma/bandejas/pdf2/{idProforma}','ControllerBandejas@pdf2');
+Route::get('bandejas/show/{id}',['as'=>'bandejas-show','uses'=>'ControllerBandejas@show']);
+Route::delete('bandejas/eliminar/{id}',['as'=>'bandejas-eliminar','uses'=>'ControllerBandejas@destroy']);
+
 //rutas servicios
 
 

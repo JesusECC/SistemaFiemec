@@ -161,16 +161,28 @@ $proforma=DB::table('Proforma as p')
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.subtotal')
     ->where('p.idProforma','=',$id)
     ->first();
-
+/*
     $detalles=DB::table('Detalle_proforma as dpr')
-    ->join('Tableros as ta','dpr.idTableros','=','ta.idTableros')
+    ->join('Tableros as ta','ta.idTableros','=','dpr.idTableros')
     ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','ta.nombre_tablero')
+    ->distinct()
+    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','ta.nombre_tablero','dpr.idTableros as tablero')
     ->where('dpr.idProforma','=',$id)
-    
+    ->get();
+*/
+    $tableros=DB::table('Tableros as t')
+    ->join('Detalle_proforma as d','t.idTableros','=','d.idTableros')
+    ->join('Proforma as p','d.idProforma','=','p.idProforma')
+    ->join('Producto as pr','pr.idProducto','=','d.idProducto')
+    ->distinct()
+    ->select('t.idTableros','p.idProforma',DB::raw('CONCAT(pr.nombre_producto,"  ",pr.marca_producto," | ",pr.descripcion_producto) as producto'),'t.nombre_tablero as nombre')
+    ->where('p.idProforma','=',$id)
     ->get();
 
-    $pdf=PDF::loadView('proforma/tablero/pdf',['proforma'=>$proforma,"detalles"=>$detalles]);
+    //dd($tableros);
+
+
+    $pdf=PDF::loadView('proforma/tablero/pdf',['proforma'=>$proforma,"tableros"=>$tableros]);
     return $pdf->stream('proforma.pdf');
 
 

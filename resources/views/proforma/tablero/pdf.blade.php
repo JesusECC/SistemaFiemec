@@ -118,7 +118,7 @@ footer {
 </style>
 <body>
   <header class="clearfix">  
-    <table width="100%"> 
+    <table width="100%" style="margin-top: -20px;"> 
           <tr align="center" valign="middle"> 
             <th colspan="5" align="left">
                 <img src="img/img-pdf.png" alt="" >
@@ -146,53 +146,40 @@ footer {
       </div>
     </div>
   </header> 
-  <main> 
-    <div id="main-container"> 
-      <table class="principal"> 
-        <thead class="principal"> 
-          <tr class="principal"> 
-            <th class="principal">Nombre de tablero</th>
-            <th class="principal">Producto</th>
-            <th class="principal">Cantidad</th>
-            <th class="principal">Precio</th>
-            <th class="principal">Descuento U.</th>
-            <th class="principal">Valor V.</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($detalles as $det)
-          <tr class="principal"> 
-            <td class="principal" style="font-size: 13px !important;"> {{$det->nombre_tablero}} </td>
-            <td class="principal" style="font-size: 11px !important;"> {{$det->producto.' | '.$det->descripcionDP}} </td>
-            <td class="principal" align="center">{{$det->cantidad}}</td>
-            <td class="principal"  align="center">S/.{{$det->precio_venta}}</td>
-            <td class="principal" align="center">{{$det->descuento}}%</td>
-            <td class="principal" align="center">S/.{{($det->precio_venta*$det->cantidad)-(($det->cantidad*$det->precio_venta)*($det->descuento/100))}}</td>
-          </tr>
-          @endforeach
+  <main>
+ 
+@php
+$tab=$tableros;
+$count=0;
+$x=[];
+
+foreach($tableros as $t){
+  foreach($tab as $ta){
+    if($t->idProforma==$ta->idProforma)
+      {
+
+        $x[$count]=$t->idTableros;  
+      }
+
+    }
+  }
+
+  dd(array_unique($x));
+@endphp
+
+@foreach($tableros as $ta)
+  {{$ta->nombre}}
+  <br>
+  @foreach($x as $tx)
+    @if($ta->idTableros == $tx)
+      {{$ta->producto}}
+      <br>
+    @endif
+  @endforeach
+@endforeach
 
 
-          
-        </tbody>
-        <tfoot>
-            <tr style="font-weight: bold;">
-              <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
-              <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
-              <td align="center" style="border-right: 1px solid #323639"> S/. {{$proforma->subtotal}}</td>
-            </tr>
-            <tr style="font-weight: bold;">
-              <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
-              <td colspan="1" style="border-left:1px solid #323639; ">IGV 18%</td>
-              <td align="center" style="border-right: 1px solid #323639"> S/. {{round(($proforma->precio_total)*($proforma->igv/100),2)}}</td>
-            </tr>
-            <tr style="font-weight: bold;">  
-              <td colspan="3" style="background-color: white !important"></td>
-              <td colspan="1" style="border-left:1px solid #323639;border-bottom: 1px solid #323639 ">Precio Total</td>
-              <td align="center" style="border-right: 1px solid #323639;border-bottom: 1px solid #323639">S/. {{round($proforma->precio_total,2)}}</td>
-            </tr> 
-        </tfoot>
-      </table>
-    </div>
+
     <h5 style="font-size: 12px !important;line-height:1px">Forma de pago: {{$proforma->forma_de}}</h5>
     <h5 style="font-size: 12px !important;line-height:1px">Condición de venta: {{$proforma->observacion_condicion}} </h5>
     <h5 style="font-size: 12px !important;line-height:1px">Plazo de oferta {{$proforma->plazo_oferta}}  </h5>

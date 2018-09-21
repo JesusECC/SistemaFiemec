@@ -42,10 +42,16 @@
                                     <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="direccion">
                                 </div>                               
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <div class="form-group label-floating">
                                     <label for="nro_documento">Numero de Documento</label>
                                     <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="numero documento">
+                                </div>                               
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group label-floating">
+                                    <label for="cliente_empleado">Cliente Empleado</label>
+                                    <input type="text"  name="cliente_empleado" id="cliente_empleado"  class="form-control" placeholder="ingrese Empleado">
                                 </div>                               
                             </div>
                         </div>
@@ -404,11 +410,13 @@
         var vVenta=$("#valorVenta").val();
         var tl=$("#total").val();
         var forma=$("#forma_de").val();
+        var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_condicion").val();
         
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,simbolo:simbolo}];
+            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp,simbolo:simbolo}];
+            // var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
