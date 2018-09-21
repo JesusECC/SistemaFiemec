@@ -69,6 +69,15 @@
   display: inline-block;
   font-size: 0.6em;
 }
+#company span.cliente
+{
+  color: #5D6975;
+  text-align: left;
+  width: 200px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 0.6em;
+}
 #project {
   float: left;
   text-align: left;
@@ -160,7 +169,7 @@ footer {
       <div id="company">
         <div><span>EMAIL :</span> <span><a href="{{$proforma->email}}">{{$proforma->email}}</a></span></div>
         <div><span>FECHA :</span> <span style="font-size: 0.7em;color: black">{{$proforma->fecha_hora}}</span></div>
-        <div><span>CLIENTE EMPLEADO :</span><span style="font-size: 0.7em;color: black">{{$proforma->cliente_empleado}}</span></div>
+        <div><span>CLIENTE EMPLEADO :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->cliente_empleado}}</span></div>
       </div>
       <div id="project" class="clearfix">
         <div><span>CLIENTE :</span> <span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->nombre}}</span></div>
