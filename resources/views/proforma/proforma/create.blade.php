@@ -115,7 +115,7 @@
                             <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                 <option value="">Seleccione Producto</option>
                                 @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->productos}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->codigo_pedido}}">{{ $producto->productos }}</option>
                                 @endforeach
                             </select>                    
                         </div>
@@ -375,6 +375,18 @@
     $("#pidProducto").change(MostarProducto);
 
     $("#idTipo_moneda").change(cambioMoneda);
+
+    function cambiaropcion(){
+        Producto=document.getElementById('pidProducto').value.split('_');
+        var codigo_pedido=Producto[4];
+       if(codigo_pedido=="t1"){
+            $('#precio_uni').attr("disabled", false);
+        }
+        else{
+           $('#precio_uni').attr("disabled", true); 
+        }
+   }
+
     
     function MostrarCliente(){
        
@@ -387,6 +399,7 @@
         Producto=document.getElementById('pidProducto').value.split('_');
         $("#precio_uni").val(Producto[2]);
         $("#pdescuento").val(Producto[3]);
+        cambiaropcion();
     }
     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
@@ -514,11 +527,19 @@
                             '</td>'+
                         '</tr>';  
                     filaob[fila]['fila']=filas;
-                    filas="";                                  
+                    filas="";   
+                    limpiar();                               
                 }
             }                    
         }
-    }    
+    }   
+
+    function limpiar(){
+        $("#Pcantidad").val("");
+       
+      
+        $("#descripcionp").val("");
+    } 
     function detalleFilas(){
         // mantiene en la vista las filas cuando se agrega una nueva tabla
         var fil='';

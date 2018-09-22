@@ -153,7 +153,7 @@ footer {
     <table width="100%"> 
           <tr align="center" valign="middle"> 
             <th colspan="5" align="left">
-                <img src="img/img-pdf.png" alt="" width="200px">
+                <img src="img/img-pdf2.jpg" alt="" width="230px">
             </th>
             <th colspan="5" align="right"  >
                 <img src="img/dir-pdf.png" alt="" width="200px">
