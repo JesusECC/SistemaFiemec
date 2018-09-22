@@ -2,9 +2,8 @@
 @section ('contenido')
 <div class='col-lg-8 col-sm-8 col-xs-12'>
 	<h3> Catalogo de Productos</h3>
-	
 	@include('proforma.catalogo.search')
-
+</div>
 
 
 <!-- COMENTARIOS
@@ -18,7 +17,7 @@
  <div class="row">
   <div class="col-sm-12 col-md-12">
   	@foreach($catalogos as $pro)
-	  <div class="col-sm-3 col-md-3">
+	  <div class="col-lg-3 col-sm-3 col-md-3">
 	    <div class="thumbnail">
 	      <img src="{{asset('fotos/productos/'.$pro->foto)}}">
 	      <div class="caption">
@@ -33,7 +32,6 @@
 	        	</span>
 	        </p>
 	        <p>
-
 	        	<a  href=""  data-target="#modal-show-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-primary"><i class="far fa-eye"></i> Ver</a> 
 	        	
 	        	<a href="{{route('producto-edit',$pro->idProducto)}}" class="btn btn-success" role="button"><i class="fas fa-edit"></i> Editar</a> 
@@ -46,6 +44,6 @@
 	  				@include('proforma.producto.modal-producto')	  
 	 @endforeach
   </div>
-  {{$catalogos->render()}}
 </div>
+{{$catalogos->render()}}
 @endsection
