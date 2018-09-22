@@ -357,12 +357,12 @@
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_condicion").val();
         console.log(forma,plazo,observacion);
-        if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idProforma:idProforma,nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion}];
+        if(valorventa>0 && totalt>0 ){
+            var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
-                url:   'editar', //archivo que recibe la peticion
+                url:   'modificar', //archivo que recibe la peticion
                 type:  'post', //método de envio
                 dataType: "json",//tipo de dato que envio 
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
@@ -508,7 +508,7 @@
                     var pcant=pro[key]['cantidad'];
                     var descuento=pro[key]['descuento'];     
                     var estado=pro[key]['estadoDP'];  
-                    var idDetalleProform=pro[key]['idDetalle_proforma']; 
+                    var idDetalleProforma=pro[key]['idDetalle_proforma']; 
                     var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
                     filaob.push(dat);  
                     fila();

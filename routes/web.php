@@ -76,7 +76,7 @@ Route::post('proformas/guardar',['as' => 'proforma-store','uses'=>'ControllerPro
 Route::get('proformas',['as'=>'proforma','uses'=>'ControllerProformaUnitaria@index']);
 Route::get('proformas/create',['as'=>'proforma-create','uses'=>'ControllerProformaUnitaria@create']);
 Route::get('proformas/editar/{id}',['as'=>'proforma-edit','uses'=>'ControllerProformaUnitaria@edit']);
-Route::post('proformas/editar',['as' => 'proforma-update','uses'=>'ControllerProformaUnitaria@update']);
+Route::post('proformas/editar/modificar',['as' => 'proforma-update','uses'=>'ControllerProformaUnitaria@update']);
 // Route::post('proformas/',['as'=>'proforma-store','uses'=>'ControllerProformaUnitaria@store']);
 Route::get('proforma/proforma/pdf/{idProforma}','ControllerProformaUnitaria@pdf');
 Route::get('proforma/proforma/pdf2/{idProforma}','ControllerProformaUnitaria@pdf2');

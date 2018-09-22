@@ -151,31 +151,38 @@ footer {
 @php
 $tab=$tableros;
 $count=0;
-$x=[];
+$xidt=[];
+$xnomtab=[];
 
 foreach($tableros as $t){
   foreach($tab as $ta){
     if($t->idProforma==$ta->idProforma)
       {
-
-        $x[$count]=$t->idTableros;  
+        $xidt[$count]=$t->idTableros;
+        $xnomtab[$count]=$t->nombre;
       }
-
     }
+    $count++;
   }
-
-  dd(array_unique($x));
+ $idt=array_unique($x);
+ $nomtab=array_unique($xnomtab);
+ $bool=true;
+ $val;
 @endphp
 
 @foreach($tableros as $ta)
-  {{$ta->nombre}}
-  <br>
-  @foreach($x as $tx)
+  @foreach($xi as $tx)
+  @if($bool==true)
+    {{$ta->nombre.' hola'}}
+    <br>
+    {{$bool==false}}
+  @endif
     @if($ta->idTableros == $tx)
       {{$ta->producto}}
       <br>
     @endif
   @endforeach
+  {{$bool=true}}
 @endforeach
 
 

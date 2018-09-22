@@ -230,7 +230,7 @@ public function pdf($id){
 
 
     }
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
         try{
@@ -253,11 +253,11 @@ public function pdf($id){
                
             foreach ($request->datos as $dato) {
                 $idProforma=$dato['idProforma'];
-                $idclie=$dato['idcliente'];
+                // $idclie=$dato['idcliente'];
                 $valorv=$dato['valorVenta'];
                 $tota=$dato['total'];
-                $idTipoCam=$dato['idTipoCambio'];
-                $valorcambio=$dato['valorTipoCambio'];
+                // $idTipoCam=$dato['idTipoCambio'];
+                // $valorcambio=$dato['valorTipoCambio'];
                 $nomTablero=$dato['nomTablero'];
                 $totaldolares=$dato['totaldolares'];
                 $forma=$dato['forma'];
@@ -265,15 +265,16 @@ public function pdf($id){
                 $observacion=$dato['observacion'];
             }
                 Proforma::where('idProforma',$idProforma)
-                ->update(['idCliente'=>$idclie,
+                ->update([
+                    // 'idCliente'=>$idclie,
                 // 'idEmpleado'=>$request->,           
-                'idTipo_moneda'=>$idTipoCam,
+                // 'idTipo_moneda'=>$idTipoCam,
                 'serie_proforma'=>'PU365122018',
                 // 'fecha_hora'=>$mytime->toDateTimeString(),
                 'igv'=>'18',
                 'subtotal'=>$valorv,
                 'precio_total'=>$tota,
-                'tipocambio'=>$valorcambio,
+                // 'tipocambio'=>$valorcambio,
                 'precio_totalC'=>$totaldolares,
                 // 'descripcion_proforma'=>$observacion, //preguntar
                 'tipo_proforma'=>'unitaria',
@@ -293,7 +294,7 @@ public function pdf($id){
                 // $detalleProforma->idDetalle_proforma=$fila[''];	
                 'idProducto'=>$fila['idProducto'],
                 'idProforma'=>$idProforma,
-                '// idTableros'=>$idTablero,
+                // 'idTableros'=>$idTablero,
                 'cantidad'=>$fila['cantidadP'],
                 'precio_venta'=>$fila['prec_uniP'],
                 // texto_precio_venta=>$fila[''	
