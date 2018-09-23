@@ -21,6 +21,7 @@ class DetalleProforma extends Model
       'cambioDP',
       'simboloDP',
       'descuento',
+      'medidas',
       'descripcionDP',
 
    ];

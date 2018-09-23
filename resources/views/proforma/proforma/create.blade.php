@@ -537,7 +537,7 @@
     function limpiar(){
         $("#Pcantidad").val("");
        
-      
+        
         $("#descripcionp").val("");
     } 
     function detalleFilas(){

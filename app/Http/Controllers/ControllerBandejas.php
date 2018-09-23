@@ -34,7 +34,7 @@ class ControllerBandejas extends Controller
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('p.estado','=','activo')
-    ->where('tipo_proforma','=','bandejas')
+    ->where('tipo_proforma','=','bandeja')
     ->orderBy('p.idProforma','desc')
      
     	->paginate(7);           
@@ -47,7 +47,12 @@ public function create()
  $productos=DB::table('Producto as po')
  ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
  ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema')
+ ->where('po.tipo_producto','=','BANDEJA')
  ->where('po.estado','=','activo')
+ ->get();
+
+ $medidas=DB::table('Medidas')
+ ->where('estado','=','activo')
  ->get();
 
  $monedas=DB::table('Tipo_moneda')
@@ -63,7 +68,7 @@ public function create()
 
 
 
- return view("proforma.bandejas.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
+ return view("proforma.bandejas.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"medidas"=>$medidas]);
 }
 
 public function store(Request $request)
@@ -101,7 +106,7 @@ public function store(Request $request)
             ['idCliente'=>$idclie,
             // 'idEmpleado'=>$request->,           
             'idTipo_moneda'=>$idTipoCam,
-            'serie_proforma'=>'PU365122018',
+            'serie_proforma'=>'BU365122018',
             // 'fecha_hora'=>$mytime->toDateTimeString(),
             'igv'=>'18',
             'subtotal'=>$valorv,
@@ -109,7 +114,7 @@ public function store(Request $request)
             'tipocambio'=>$valorcambio,
             'precio_totalC'=>$totaldolares,
             // 'descripcion_proforma'=>$observacion, //preguntar
-            'tipo_proforma'=>'unitaria',
+            'tipo_proforma'=>'bandeja',
             // 'caracteristicas_proforma'=>$request->, preguntar
             'forma_de'=>$forma,
             // 'plaza_fabricacion'=>$request->,
@@ -126,12 +131,14 @@ public function store(Request $request)
             // $detalleProforma->idDetalle_proforma=$fila[''];	
             $detalleProforma->idProducto=$fila['idProducto'];
             $detalleProforma->idProforma=$idProforma;
+            $detalleProforma->idMedidas=$fila['idMedidas'];
             // $detalleProforma->idTableros=$idTablero;
             $detalleProforma->cantidad=$fila['cantidadP'];
             $detalleProforma->precio_venta=$fila['prec_uniP'];	
             // $detalleProforma->texto_precio_venta=$fila[''];	
             // $detalleProforma->observacion_detalleP=$fila[''];	
             $detalleProforma->descuento=$fila['descuentoP'];	
+
             $detalleProforma->descripcionDP=$fila['descripcionP'];
             $detalleProforma->save();            
         }
