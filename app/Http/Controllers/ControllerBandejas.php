@@ -86,6 +86,8 @@ public function store(Request $request)
         $plazo;
         $clienteemp;
         $observacion;
+        $incluye;
+        $plazofabri;
 // [{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldola:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,
 //     forma:forma,plazo:plazo,observacion:observacion}];
            
@@ -101,6 +103,8 @@ public function store(Request $request)
             $plazo=$dato['plazo'];
             $clienteemp=$dato['clienteemp'];
             $observacion=$dato['observacion'];
+            $incluye=$dato['incluye'];
+            $plazofabri=$dato['plazofabri'];
         }
         $idProforma=DB::table('Proforma')->insertGetId(
             ['idCliente'=>$idclie,
@@ -123,6 +127,8 @@ public function store(Request $request)
             // 'observacion_condicion'=>$request->,
             'cliente_empleado'=>$clienteemp,
             'observacion_proforma'=>$observacion,
+            'incluye'=>$incluye,
+            'plaza_fabricacion'=>$plazofabri,
             'estado'=>'activo'
             ]
         );

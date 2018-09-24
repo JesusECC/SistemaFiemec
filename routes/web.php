@@ -14,8 +14,10 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/','HomeController@index');
+// Route::get('/','HomeController@index');
 
+Route::get('/', 'MainController@index');
+Route::get('fiemec',['as' => 'fiemec','uses'=> 'MainController@index']);
 Route::resource('proforma/catalogo','ControllerCatalogo');
 Route::resource('proforma/empleado','ControllerEmpleados');
 Route::resource('proforma/producto','ControllerProducto');

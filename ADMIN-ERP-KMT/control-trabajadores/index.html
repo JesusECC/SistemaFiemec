@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+
+    <title>Control de Trabajadores</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">
+      <img src="../iconos-svg/icono-adaptable.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      I.E.P
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html"> <span><img src="../iconos-svg/boss.svg" class="d-inline-block align-top mr-sm-2" width="30" height="30" alt=""></span>Control de Trabajadores<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><span><img src="../iconos-svg/asistencia.svg" class="d-inline-block align-top mr-sm-2" width="30" height="30" alt=""></span>Control de Asistentes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><span><img src="../iconos-svg/planilla.svg" class="d-inline-block align-top mr-sm-2" width="30" height="30" alt=""></span>Cálculo de Planilla</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><span><img src="../iconos-svg/reporte.png" class="d-inline-block align-top mr-sm-2" width="30" height="30" alt=""></span>Reportes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><span><img src="../iconos-svg/usuarios.png" class="d-inline-block align-top mr-sm-2" width="30" height="30" alt=""></span>Control de Usuarios</a>
+        </li>      
+      </ul> 
+      <div class="btn-group justify-content-end">
+        <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span><img src="../iconos-svg/man.svg" class="d-inline-block align-top mr-sm-2" width="30" height="30" alt="">Administrador Jose
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <button class="dropdown-item" type="button"><img src="../iconos-svg/user.svg" width="20" height="20" class="d-inline-block align-top mr-sm-2" alt="Perfil">Editar Perfil</button>
+          <button class="dropdown-item" type="button"><img src="../iconos-svg/lock.svg" width="20" height="20" class="d-inline-block align-top mr-sm-2" alt="Contraseña">Cambiar Contraseña</button>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"><img src="../iconos-svg/logout.svg" width="20" height="20" class="d-inline-block align-top mr-sm-2" alt="Contraseña">Cerrar Sesión</a>
+        </div>
+      </div>  
+    </div>
+  </nav>
+  <div class="container-fluid mt-5">
+      <div class="row d-flex d-md-block flex-nowrap wrapper">
+          <div class="col-md-3 float-left col-1 pl-0 pr-0 collapse width pt-2" id="sidebar">
+                  <div class="list-group border-0 card text-center text-md-left">
+                    <a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+                      <img src="../iconos-svg/tools.svg" alt="" width="30" height="30">                      
+                      <span class="d-none d-md-inline">Mantener Trabajador</span> 
+                    </a>
+                    <div class="collapse" id="menu1">
+                      <a href="#" class="list-group-item" data-parent="#menu1"><img src="../iconos-svg/adduser.svg" alt="" width="30" height="30" class="mr-2">Registrar Trabajador </a>
+                      <a href="#" class="list-group-item" data-parent="#menu1"><img src="../iconos-svg/edituser.svg" alt="" width="30" height="30" class="mr-2">Editar Trabajador</a>
+                      <a href="#" class="list-group-item" data-parent="#menu1"><img src="../iconos-svg/litsuser.svg" alt="" width="30" height="30" class="mr-2">Listar Trabajador</a>
+                      <a href="#" class="list-group-item" data-parent="#menu1"><img src="../iconos-svg/deleteuser.svg" alt="" width="30" height="30" class="mr-2">Eliminar Trabajador</a>
+                    </div>
+              </div>
+          </div>
+          <main class="col-md-9 col px-5 pl-md-2 pt-2 main mx-auto">
+              <a href="#" data-target="#sidebar" data-toggle="collapse" aria-expanded="false"><i class="fa fa-navicon fa-2x py-2 p-1"></i></a>
+              <div class="page-header">
+                  <h2>Registro de Personal</h2>
+              </div>
+              
+              <hr>
+              <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><img src="../iconos-svg/datos-personales.svg" alt="" width="30" height="30" class="mr-2">Datos Personales</a>
+                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><img src="../iconos-svg/manager.svg" alt="" width="30" height="30" class="mr-2">Datos Laborales</a>
+                  <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><img src="../iconos-svg/contrato.svg" alt="" width="30" height="30" class="mr-2">Contrato</a>
+                </div>
+              </nav>
+<div class="tab-content" id="nav-tabContent">
+  <!--Inicio tag de datos personales-->
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <form action="datos-personales.php" method="post" enctype="multipart/form-data" style="border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;" class="px-5 py-5 mb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Nombre">Nombres:</label>
+              <input type="text" class="form-control" id="nombre" placeholder="Nombres Completos">
+            </div> 
+            <div class="form-group">
+              <label for="ApellidoPaterno">Apellido Paterno:</label>
+              <input type="text" class="form-control" id="apepaterno" placeholder="Apellido Paterno">
+            </div> 
+            <div class="form-group">
+              <label for="ApellidoMaterno">Apellido Materno:</label>
+              <input type="text" class="form-control" id="apematerno" placeholder="Apellido Materno">
+            </div> 
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="DNI">DNI:</label>
+                <input type="text" class="form-control" id="dni" placeholder="DNI">                
+              </div>
+              <div class="col-md-6">
+                <label for="DNI">Fecha de Nacimiento:</label>
+                <input type="date" class="form-control" id="fdn">
+              </div>
+            </div>                     
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleFormControlFile1">Foto del Trabajador</label>
+              <img src="../iconos-svg/xscarletx.jpg" class="rounded mx-auto d-block img-fluid" alt="la rica scarlet">
+              <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+          </div>
+          <div class="col-md-12 form-row">
+            <div class="col-md-4">
+              <label for="fc">Teléfono Fijo</label>
+              <input type="text" class="form-control" id="telefono" placeholder="Teléfono Fijo">
+            </div>  
+            <div class="col-md-4">
+              <label for="tc">Celular</label>
+              <input type="text" class="form-control" id="celular" placeholder="Celular">
+            </div> 
+            <div class="col-md-4">
+              <label for="Correo">Correo</label>
+              <input type="email" class="form-control" id="correo" placeholder="email@gmail.com">
+            </div>                          
+          </div>
+          <div class="col-md-12 form-row">
+            <div class="col-md-4">
+              <label for="departamento">Departamento</label>
+              <select class="form-control" id="departamento">
+                <option>Lima</option>
+                <option>Callo</option>
+              </select>
+            </div>  
+            <div class="col-md-4">
+              <label for="provincia">Provincia</label>
+              <select class="form-control" id="provincia">
+                <option>Lima</option>
+                <option>Callo</option>
+              </select>
+            </div> 
+            <div class="col-md-4">
+              <label for="distrito">Distrito</label>
+              <select class="form-control" id="distrito">
+                <option>Lima</option>
+                <option>Callo</option>
+              </select>
+            </div>         
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label >Dirección</label>
+              <input type="text" class="form-control"   placeholder="Dirección">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--Fin de tag de datos personales-->
+  <!--inicio de ta de datos laborales-->
+  <div class="tab-pane fade mt-5 " id="nav-profile" role="tabpanel1" aria-labelledby="nav-profile-tab">
+    <nav style="padding-left: 33%;">
+      <div class="nav nav-tabs" id="nav-tab" role="tablist" style="border-bottom: none !important;">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-docente" role="tab" aria-controls="nav-home" aria-selected="true">Profesores</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-docente" role="tab" aria-controls="nav-profile" aria-selected="false">Auxiliar</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-otros" role="tab" aria-controls="nav-contact" aria-selected="false">Otros</a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-docente" role="tabpanel" aria-labelledby="nav-home-tab">
+        <form action="datos-personales.php" method="post" enctype="multipart/form-data" style="border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;" class="px-5 py-5 mb-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="Nombre">Nombres:</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Nombres Completos">
+                </div> 
+                <div class="form-group">
+                  <label for="ApellidoPaterno">Apellido Paterno:</label>
+                  <input type="text" class="form-control" id="apepaterno" placeholder="Apellido Paterno">
+                </div> 
+                <div class="form-group">
+                  <label for="ApellidoMaterno">Apellido Materno:</label>
+                  <input type="text" class="form-control" id="apematerno" placeholder="Apellido Materno">
+                </div> 
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="DNI">DNI:</label>
+                    <input type="text" class="form-control" id="dni" placeholder="DNI">                
+                  </div>
+                  <div class="col-md-6">
+                    <label for="DNI">Fecha de Nacimiento:</label>
+                    <input type="date" class="form-control" id="fdn">
+                  </div>
+                </div>                     
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleFormControlFile1">Foto del Trabajador</label>
+                  <img src="../iconos-svg/xscarletx.jpg" class="rounded mx-auto d-block img-fluid" alt="la rica scarlet">
+                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+              </div>
+              <div class="col-md-12 form-row">
+                <div class="col-md-4">
+                  <label for="fc">Teléfono Fijo</label>
+                  <input type="text" class="form-control" id="telefono" placeholder="Teléfono Fijo">
+                </div>  
+                <div class="col-md-4">
+                  <label for="tc">Celular</label>
+                  <input type="text" class="form-control" id="celular" placeholder="Celular">
+                </div> 
+                <div class="col-md-4">
+                  <label for="Correo">Correo</label>
+                  <input type="email" class="form-control" id="correo" placeholder="email@gmail.com">
+                </div>                          
+              </div>
+              <div class="col-md-12 form-row">
+                <div class="col-md-4">
+                  <label for="departamento">Departamento</label>
+                  <select class="form-control" id="departamento">
+                    <option>Lima</option>
+                    <option>Callo</option>
+                  </select>
+                </div>  
+                <div class="col-md-4">
+                  <label for="provincia">Provincia</label>
+                  <select class="form-control" id="provincia">
+                    <option>Lima</option>
+                    <option>Callo</option>
+                  </select>
+                </div> 
+                <div class="col-md-4">
+                  <label for="distrito">Distrito</label>
+                  <select class="form-control" id="distrito">
+                    <option>Lima</option>
+                    <option>Callo</option>
+                  </select>
+                </div>         
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label >Dirección</label>
+                  <input type="text" class="form-control"   placeholder="Dirección">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>        
+      </div>
+      <div class="tab-pane fade" id="nav-tutor" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+      <div class="tab-pane fade" id="nav-otros" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+    </div>
+  </div>
+  <!--Fin de tag de datos laborales-->
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+</div>
+          </main>
+      </div>
+  </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

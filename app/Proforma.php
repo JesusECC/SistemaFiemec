@@ -28,13 +28,14 @@ class Proforma extends Model
         'caracterisiticas_proforma',
         'forma_de',
         'tipocambio',
-        'plazo_fabricacion',
+        'plaza_fabricacion',
         'plazo_oferta',
         'garantia',
         'observacion_condicion',
         'observacion_proforma',
         'estado',
-        'cliente_empleado'
+        'cliente_empleado',
+        'incluye',
     	
    ];
 

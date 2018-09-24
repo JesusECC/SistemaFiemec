@@ -142,6 +142,13 @@ body.hold-transition .main-header .logo {
   transition: none;
 }
 /* Content */
+.skin-blue .content-header {
+    background: transparent;
+}
+.content-header {
+    position: relative;
+    padding: 15px 15px 0 15px;
+}
 .content {
   min-height: 250px;
   padding: 15px;
@@ -183,7 +190,6 @@ a:focus {
 }
 .page-header > small {
   color: #666;
-  display: block;
   margin-top: 5px;
 }
 /*
@@ -308,6 +314,19 @@ a:focus {
 }
 .main-header .navbar-brand {
   color: #fff;
+}
+.page-header {
+    color: #000;
+    padding: 0;
+    border: none;
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: 500;
+}
+.page-header > small {
+    font-size: 14px;
+    font-size: 12px;
+    color: #777;
 }
 .content-header {
   position: relative;
