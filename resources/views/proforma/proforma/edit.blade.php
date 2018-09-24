@@ -543,7 +543,7 @@
         // la suma de tosos los tableros        
         var sub=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[key]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -555,7 +555,7 @@
     function descuentos(){
         var desc=0;
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[key]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -567,7 +567,7 @@
     function valorVenta(){
         var venta=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[key]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -581,7 +581,7 @@
         var venta=0;   
         var ig=0;     
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[key]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -597,7 +597,7 @@
         var tota=0;   
         
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[key]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
