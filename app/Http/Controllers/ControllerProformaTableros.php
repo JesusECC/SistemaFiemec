@@ -8,6 +8,7 @@ use Proforma;
 use Tableros;
 use detalleProformatableros;
 use SistemaFiemec\DetalleProforma;
+use SistemaFiemec\ProformaDetalleTableros;
 use Carbon\Carbon;
 
 use SistemaFiemec\Http\Requests;
@@ -134,7 +135,7 @@ class ControllerProformaTableros extends Controller
                 );
                 foreach($request->filas as $fila){
                     if($fila['nomTablero']==$tablero['nombre']){
-                        $detalleProforma=new DetalleProforma;
+                        $detalleProforma=new ProformaDetalleTableros;
                         // $detalleProforma->idDetalle_proforma=$fila[''];	
                         $detalleProforma->idProducto=$fila['idProducto'];
                         $detalleProforma->idProforma=$idProforma;

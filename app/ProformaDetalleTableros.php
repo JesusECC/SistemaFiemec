@@ -4,10 +4,10 @@ namespace SistemaFiemec;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DetalleProforma extends Model
+class ProformaDetalleTableros extends Model
 {
-    protected $table='Detalle_proforma';
-    protected $primarykey='idDetalle_proforma';
+     protected $table='Detalle_proforma_tableros';
+    protected $primarykey='idDetalle_tableros';
     public $timestamps=false;
 
 
@@ -18,12 +18,10 @@ class DetalleProforma extends Model
       'cantidad',
       'precio_venta',
       'texto_precio_venta',
-      'cambioDP',
-      'simboloDP',
+      
       'descuento',
-      'medidas',
+      
       'descripcionDP',
-      'estadoDP'
 
    ];
 
