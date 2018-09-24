@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/','HomeController@index');
 
 Route::resource('proforma/catalogo','ControllerCatalogo');
 Route::resource('proforma/empleado','ControllerEmpleados');
@@ -103,3 +104,7 @@ Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProfor
 Route::post('servicios/',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
 //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
