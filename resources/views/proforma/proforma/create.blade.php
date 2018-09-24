@@ -115,7 +115,7 @@
                             <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                 <option value="">Seleccione Producto</option>
                                 @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->productos}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->codigo_pedido}}">{{ $producto->productos }}</option>
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->productos}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->tipo_producto}}">{{ $producto->productos }}</option>
                                 @endforeach
                             </select>                    
                         </div>
@@ -378,8 +378,8 @@
 
     function cambiaropcion(){
         Producto=document.getElementById('pidProducto').value.split('_');
-        var codigo_pedido=Producto[4];
-       if(codigo_pedido=="t1"){
+        var tipo_producto=Producto[4];
+       if(tipo_producto=="TABLERO"){
             $('#precio_uni').attr("disabled", false);
         }
         else{
@@ -397,9 +397,9 @@
     }
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
-       
+       $("#precio_uni").val(Producto[2]);
         $("#pdescuento").val(Producto[3]);
-        
+        cambiaropcion();
     }
     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
