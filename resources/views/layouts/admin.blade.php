@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>ADVentas | www.incanatoit.com</title>
+    <title>FIEMEC | www.fiemec.pe</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 4.1 -->
@@ -22,12 +22,12 @@
     <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
+    <link rel="stylesheet" href="{{asset('css/themify-icons.css')}}">
 
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-
-      <header class="main-header">
+      <header class="main-header navbar-fixed-top">
 
         <!-- Logo -->
         <a href="index2.html" class="logo">
@@ -80,10 +80,8 @@
               
             </ul>
           </div>
-
         </nav>
       </header>
-
       @include('modal')
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
@@ -94,7 +92,12 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header"></li>
-            
+            <li class="treeview">
+              <a href="{{ route('fiemec')}}">
+                <i class="fas fa-tachometer-alt"></i>
+                <span> Panel de Control</span>
+              </a>
+            </li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>
@@ -125,8 +128,9 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ route('proforma')}}"><i class="fa fa-circle-o"></i> Productos</a></li>
-                <li><a href="{{ route('servicio')}}"><i class="fa fa-circle-o"></i> Servicios</a></li>
                 <li><a href="{{ route('tablero')}}"><i class="fa fa-circle-o"></i> Tableros</a></li>
+                <li><a href="{{ route('servicio')}}"><i class="fa fa-circle-o"></i> Servicios</a></li>
+                <li><a href="{{ route('bandejas')}}"><i class="fa fa-circle-o"></i> Bandejas</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -182,15 +186,19 @@
         </section>
         <!-- /.sidebar -->
       </aside>
-
-
-
-
-
        <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        
+        <section class="content-header">
+          <h1>
+            Panel de Administrador
+            <small>Version 2.3.0</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Inicio</a></li>
+            <li class="active">Dashboard</li>
+          </ol>
+        </section>
         <!-- Main content -->
         <section class="content">
           
@@ -227,7 +235,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.3.0
         </div>
-        <strong>Copyright &copy; 2015-2020 <a href="www.incanatoit.com">IncanatoIT</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2018 <a href="www.incanatoit.com">KMT ADVANCE SYSTEMS</a>.</strong> All rights reserved.
       </footer>
 
       

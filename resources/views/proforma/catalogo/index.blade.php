@@ -17,7 +17,7 @@
  <div class="row">
   <div class="col-sm-12 col-md-12">
   	@foreach($catalogos as $pro)
-	  <div class="col-lg-3 col-sm-3 col-md-3">
+	  <div class="col-lg-3 col-sm-4 col-md-3">
 	    <div class="thumbnail">
 	      <img src="{{asset('fotos/productos/'.$pro->foto)}}">
 	      <div class="caption">
