@@ -38,13 +38,13 @@
                        <span class="caret"></span>
                        </button>
                        <ul class="dropdown-menu" role="menu">
-                       <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}">PDF Soles</a></li>
-                       <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf2',$prof->idProforma)}}">PDF Tipo Cambio</a></li>
+                       <li><a target="_blank" href="{{URL::action('ControllerBandejas@pdf',$prof->idProforma)}}">PDF Soles</a></li>
+                       <li><a target="_blank" href="{{URL::action('ControllerBandejas@pdf2',$prof->idProforma)}}">PDF Tipo Cambio</a></li>
                        </ul>
                        </div>
 
 					
-					<a href="{{route('proforma-show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
+					<a href="{{route('bandejas-show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
 					</a>
 
 					
@@ -54,7 +54,7 @@
 					</td>
 				</tr>
 				
-				@include('proforma.proforma.modal')
+				@include('proforma.bandejas.modal')
              @endforeach
 
              

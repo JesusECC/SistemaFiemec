@@ -16,6 +16,7 @@ class Tableros extends Model
         'serie_proforma',
         'nombre_tablero',
         'caracteristicas_tablero',
+        'estadoT',
         
     	
    ];

@@ -46,7 +46,8 @@
 					
 					<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
 					</a>
-
+					<a href="{{route('tablero-edit',$prof->idProforma)}}"><button class="btn btn-primary">Editar</button>
+					</a>
 					
 					<a href="" data-target="#modal-delete-{{$prof->idProforma}}" data-toggle="modal"><button class="btn btn-danger">Anular</button></a>
 

@@ -47,7 +47,7 @@ public function create()
 {
     $productos=DB::table('Producto as po')
     ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
-    ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto," | ",po.marca_producto," | ",descripcion_producto) as productos'))
+    ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.codigo_producto," | ",po.nombre_producto," | ",po.marca_producto," | ",descripcion_producto) as productos'),'po.tipo_producto')
     ->where('po.estado','=','activo')
     ->get();
 
@@ -197,7 +197,8 @@ public function pdf($id){
 
         $detalles=DB::table('Detalle_proforma as dpr')
         ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-        ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','dpr.simboloDP','dpr.cambioDP')
+        ->join('Proforma as pr','pr.idProforma','=','dpr.idProforma')
+        ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','dpr.simboloDP','pr.tipocambio')
         ->where('dpr.idProforma','=',$id)
         ->get();
 
@@ -221,7 +222,7 @@ public function pdf($id){
         ->join('Detalle_proforma as deP','p.idProforma','=','deP.idProforma')
         ->join('Producto as pd','pd.idProducto','=','deP.idProducto')
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
-        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_proforma','deP.idProducto','deP.idProforma','deP.idTableros','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.cambioDP','deP.descuento','deP.descripcionDP','deP.simboloDP','pd.nombre_producto','deP.estadoDP','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion')
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_proforma','deP.idProducto','deP.idProforma','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.cambioDP','deP.estadoDP','deP.descuento','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion')
         ->where('deP.idProforma','=',$id)
         ->get();
     
@@ -288,21 +289,38 @@ public function pdf($id){
                 'estado'=>'activo'
                 ]);
             foreach($request->filas as $fila){
-                DetalleProforma::where('idProforma',$idProforma)
-                ->where('idDetalle_proforma',$fila['idDetalleProforma'])
-                ->update([
-                // $detalleProforma->idDetalle_proforma=$fila[''];	
-                'idProducto'=>$fila['idProducto'],
-                'idProforma'=>$idProforma,
-                // 'idTableros'=>$idTablero,
-                'cantidad'=>$fila['cantidadP'],
-                'precio_venta'=>$fila['prec_uniP'],
-                // texto_precio_venta=>$fila[''	
-                // observacion_detalleP=>$fila[''	
-                'descuento'=>$fila['descuentoP'],
-                'descripcionDP'=>$fila['descripcionP'],
-                'estadoDP'=>$fila['estado']
-                ]);
+                if ($fila['estado']==1 || $fila['estado']==0) {
+                    DetalleProforma::where('idProforma',$idProforma)
+                    ->where('idDetalle_proforma',$fila['idDetalleProforma'])
+                    ->update([
+                    // $detalleProforma->idDetalle_proforma=$fila[''];	
+                    'idProducto'=>$fila['idProducto'],
+                    // 'idProforma'=>$idProforma,
+                    // 'idTableros'=>$idTablero,
+                    'cantidad'=>$fila['cantidadP'],
+                    'precio_venta'=>$fila['prec_uniP'],
+                    // texto_precio_venta=>$fila[''	
+                    // observacion_detalleP=>$fila[''	
+                    'descuento'=>$fila['descuentoP'],
+                    'descripcionDP'=>$fila['descripcionP'],
+                    'estadoDP'=>$fila['estado']
+                    ]);
+                }else if($fila['estado']==2){
+                    $detalleProforma=new DetalleProforma;
+                    // $detalleProforma->idDetalle_proforma=$fila[''];	
+                    $detalleProforma->idProducto=$fila['idProducto'];
+                    $detalleProforma->idProforma=$idProforma;
+                    // $detalleProforma->idTableros=$idTablero;
+                    $detalleProforma->cantidad=$fila['cantidadP'];
+                    $detalleProforma->precio_venta=$fila['prec_uniP'];	
+                    // $detalleProforma->texto_precio_venta=$fila[''];	
+                    // $detalleProforma->observacion_detalleP=$fila[''];	
+                    $detalleProforma->descuento=$fila['descuentoP'];	
+                    $detalleProforma->descripcionDP=$fila['descripcionP'];
+                    $detalleProforma->estadoDP=1;
+                    $detalleProforma->save();
+                }
+                
             }
                 return ['data' =>'proformas','veri'=>true];
             }catch(Exception $e){

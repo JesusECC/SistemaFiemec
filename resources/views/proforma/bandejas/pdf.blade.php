@@ -190,7 +190,7 @@ footer {
           
           <tr class="principal"> 
             <td>{{$i++}}</td>
-            <td class="principal" style="font-size: 11px !important;"> {{$det->producto.' | '.$det->descripcionDP}} </td>
+            <td class="principal" style="font-size: 11px !important;"> {{$det->productos}} </td>
             <td class="principal" align="center" >{{$det->cantidad}}</td>
             <td class="principal"  align="center">S/.{{$det->precio_venta}}</td>
             <td class="principal" align="center" >{{$det->descuento}} % </td>
@@ -208,7 +208,7 @@ footer {
             <tr style="font-weight: bold;">
               <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
               <td colspan="1" style="border-left:1px solid #323639; ">IGV 18%</td>
-              <td align="center" style="border-right: 1px solid #323639"> S/. {{round(($proforma->precio_total)*($proforma->igv/100),2)}}</td>
+              <td align="center" style="border-right: 1px solid #323639"> S/. {{round(($proforma->subtotal)*($proforma->igv/100),2)}}</td>
             </tr>
             <tr style="font-weight: bold;">  
               <td colspan="4" style="background-color: white !important"></td>

@@ -110,18 +110,31 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <div class="col-lg-9">
+                        <div class="col-lg-7">
                         <div class="form-group" id="producto-oculto" >
                             <label class="control-label">Producto</label>
                             <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                 <option value="">Seleccione Producto</option>
                                 @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->productos }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->productos2}}</option>
                                 @endforeach
                             </select>                    
                         </div>
                     </div>
 
+                                <div class="col-lg-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Espesor</label>
+                                            <input type="number"  id="pespesor" class="form-control" name="pespesor"  >
+                                            <!-- <textarea rows="4" cols="50">
+                                            
+                                            </textarea> -->
+                                        </div>
+                                    </div> 
+
+
+
+                            
 
                     <div class="col-lg-3">
                         <div class="form-group" id="medida-oculto" >
@@ -148,7 +161,7 @@
                                             <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
                                         </div>                               
                                     </div> -->
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-5">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Descripcion</label>
                                             <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
@@ -163,7 +176,7 @@
                                             <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
                                         </div>
                                     </div> 
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Cantidad</label>
                                             <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
@@ -316,6 +329,18 @@
                                             <textarea name="observacion_condicion" id="observacion_condicion" class="form-control"></textarea>
                                             </th>
                                         </tr>
+                                        <tr>
+                                            <th colspan="3" >Incluye:</th>
+                                            <th>
+                                            <textarea name="incluye" id="incluye" class="form-control"></textarea>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Plazo de fabricacion:</th>
+                                            <th>
+                                            <textarea name="plaza_fabricacion" id="plaza_fabricacion" class="form-control"></textarea>
+                                            </th>
+                                        </tr>
                                         
                                     </tfoot>
                             </table>                            
@@ -389,7 +414,7 @@
     var tipocam;
     var simbolo;
     var totaldolares=0;
-    
+    $("#pidProducto").change(MostarProducto);
     $("#idMedidas").change(MostrarMedida);
     $("#idTipo_moneda").change(cambioMoneda);
     
@@ -399,6 +424,13 @@
         idcliente=Cliente[0];
         $("#cdireccion").val(Cliente[1]);
         $("#cnro_documento").val(Cliente[2]);
+    }
+
+    function MostarProducto(){
+        Producto=document.getElementById('pidProducto').value.split('_');
+        
+        $("#pdescuento").val(Producto[3]);
+        
     }
     
     function MostrarMedida(){
@@ -432,9 +464,11 @@
         var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_condicion").val();
+        var incluye=$("#incluye").val();
+        var plazofabri=$("#plaza_fabricacion").val();
         
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp}];
+            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,incluye:incluye,plazofabri:plazofabri,clienteemp:clienteemp}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
@@ -465,10 +499,11 @@
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
+        var pesp=$('#pespesor').val();
         /*var pcant=$('#Pcantidad').val();*/
         var descuento=$('#pdescuento').val();
         var filas;
-        if(nomTablero!="" && idMed!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
+        if(nomTablero!="" && idMed!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && pesp!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
@@ -476,8 +511,10 @@
 for (const fil in filaob) {
 if (filaob.hasOwnProperty(fil)) {
  if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['idMedidas']==idMed){
+                         var es=parseInt(pesp);
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
+                        filaob[fil]['espesorP']=es;
                         filaob[fil]['cantidadP']=su;
                         filaob[fil]['descuentoP']=des;
                         filaob[fil]['descripcionP']=pdescripcion;
@@ -488,7 +525,7 @@ if (filaob.hasOwnProperty(fil)) {
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,idMedidas:idMed,medida:mname,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+                var dat={idProducto:idProd,idMedidas:idMed,medida:mname,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,espesorP:pesp,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -503,7 +540,8 @@ if (filaob.hasOwnProperty(fil)) {
         if(filaob.length>0){
             var filas;
             for (const fila in filaob) {
-                if (filaob.hasOwnProperty(fila)) {                            
+                if (filaob.hasOwnProperty(fila)) {   
+                    var espesor=parseFloat(filaob[fila]['espesorP']);
                     var cantidad=parseFloat(filaob[fila]['cantidadP']);
                     var precio=parseFloat(filaob[fila]['prec_uniP']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -514,22 +552,26 @@ if (filaob.hasOwnProperty(fil)) {
                                 '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                             '</td>'+
                             '<td> '+ 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idMedidas']+'">'+filaob[fila]['medida']+
+                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idMedidas']+'">'+filaob[fila]['medida']+' | Con un espesor de '+
+
+                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesorP']+'">'+filaob[fila]['espesorP']+' mm'+
                             '</td>'+
                             '<td> '+ 
                                 '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+
+                                
                             '</td>'+
                             '<td> '+ 
-                                '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                                '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                             '</td>'+
                             '<td> '+   
-                                '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                                '<input type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+filaob[fila]['prec_uniP']+
                             '</td>'+
                             '<td> '+   
-                                '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                                '<input type="hidden" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+filaob[fila]['descuentoP']+
                             '</td>'+
                             '<td> '+   
-                                '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
+                                '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2) +' '+ 
                             '</td>'+
                             '<td>'+
                                 '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+

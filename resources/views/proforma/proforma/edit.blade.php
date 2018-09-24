@@ -356,10 +356,9 @@
         var forma=$("#forma_de").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_condicion").val();
-        console.log(forma,plazo,observacion);
         if(valorventa>0 && totalt>0 ){
             var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion}];
-            $.ajax({
+           $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
                 url:   'modificar', //archivo que recibe la peticion
@@ -409,7 +408,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:1,idDetalleProforma:''};
+                var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:2,idDetalleProforma:''};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -465,8 +464,11 @@
         // mantiene en la vista las filas cuando se agrega una nueva tabla
         var fil='';
         for (var key in filaob) {                   
-            if (filaob.hasOwnProperty(key) && filaob[key]['estado']==1) {
+            if (filaob.hasOwnProperty(key)) {
+                if (filaob[key]['estado']==1 || filaob[key]['estado']==2  ) {
                     fil+=filaob[key]['fila'];
+                }
+                    
             }
         }
         $('#tablero_unitario').html(fil);
@@ -475,15 +477,17 @@
     
     function asignarValores(){
         var pro={!! $proforma !!};
-        
         var nombreClie;
         var apellidoP;
         var apellidoM;
         var direccion;
         var documento;
         var cotiza;
-        
+        var formade;
+        var plazpOf;
+        var obser;
         // var descuento;
+        console.log(pro);
         if (editarval==true) {
             for (const key in pro) {
                 if (pro.hasOwnProperty(key)) {
@@ -507,17 +511,20 @@
                     var puni=pro[key]['precio_venta'];
                     var pcant=pro[key]['cantidad'];
                     var descuento=pro[key]['descuento'];     
-                    var estado=pro[key]['estadoDP'];  
-                    var idDetalleProforma=pro[key]['idDetalle_proforma']; 
+                    var estado=parseInt(pro[key]['estadoDP']);  
+                    var idDetalleProforma=pro[key]['idDetalle_proforma'];
+                    formade=pro[key]['forma_de'];
+                    plazpOf=pro[key]['plazo_oferta'];
+                    obser=pro[key]['observacion_proforma']; 
+                    console.log(estado);
                     var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
                     filaob.push(dat);  
                     fila();
                     contp++;               
                 }
             }
-            console.log(pro);
-            console.log(simbolo);
             document.getElementById('totales-general').style.display = 'block';
+            console.log(filaob);
             valoresFinales(); 
             editarval=false;
             // cotizador
@@ -528,21 +535,18 @@
 
             $("#simbolo").val(simbolo);
             $("#valorcambio").val(tipocam);
+            $("#forma_de").val(formade);
+            $("#plazo_oferta").val(plazpOf);
+            $("#observacion_condicion").val(obser);
 
+            
         }
-        
-        
-        console.log(filaob);
-        // var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
-        //         filaob.push(dat);
-        //         fila();
-        //         contp++;
     }
     function subTotal(){
         // la suma de tosos los tableros        
         var sub=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -554,7 +558,7 @@
     function descuentos(){
         var desc=0;
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -566,7 +570,7 @@
     function valorVenta(){
         var venta=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -580,7 +584,7 @@
         var venta=0;   
         var ig=0;     
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -590,17 +594,19 @@
         ig=venta*0.18;
         $("#igv").html("s/. " + ig.toFixed(2));
     }
+    var boolean_dolar=false;
     function total(){
         var venta=0;   
         var igv=0;  
         var tota=0;   
         
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                boolean_dolar=true;
             }
         }
         igv=venta*0.18;
@@ -622,13 +628,17 @@
         cambioMoneda();
     }
     function cambioMoneda(){
-        if(filaob.length>0){
+        console.log(contp);
+        if(filaob.length>0 && boolean_dolar!=true){
             if("$"==simbolo){    
                 totaldolares=(totalt/tipocam).toFixed(2);        
                 $("#total_dolares").html(simbolo+" " + totaldolares);
             }else{
                 $("#total_dolares").html(0);
             }
+        }else{
+            $("#total_dolares").val(0);
+            $("#tota_dolares").val(0);
         }
     }
     function eliminar(index){
@@ -638,10 +648,11 @@
                 if(index==filaob[key]['posiP']){
                     $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
                     // filaob.splice(key,1);         
-                    filaob[key]['estado']='0';  
+                    filaob[key]['estado']=0;  
                 }
             }
         } 
+        console.log(filaob);
         valoresFinales();
     }    
     function ocultar(){

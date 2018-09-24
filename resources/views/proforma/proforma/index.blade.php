@@ -49,7 +49,7 @@
 
 					
 					<a href="" data-target="#modal-delete-{{$prof->idProforma}}" data-toggle="modal"><button class="btn btn-danger">Anular</button></a>
-
+					<a href="{{route('proforma-edit',$prof->idProforma)}}"><button class="btn btn-primary">Editar</button>
 					
 					</td>
 				</tr>

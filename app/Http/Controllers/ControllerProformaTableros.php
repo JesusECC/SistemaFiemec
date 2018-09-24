@@ -5,7 +5,10 @@ namespace SistemaFiemec\Http\Controllers;
 use Illuminate\Http\Request;
 use Producto;
 use Proforma;
+use Tableros;
+use detalleProformatableros;
 use SistemaFiemec\DetalleProforma;
+use SistemaFiemec\ProformaDetalleTableros;
 use Carbon\Carbon;
 
 use SistemaFiemec\Http\Requests;
@@ -132,7 +135,7 @@ class ControllerProformaTableros extends Controller
                 );
                 foreach($request->filas as $fila){
                     if($fila['nomTablero']==$tablero['nombre']){
-                        $detalleProforma=new DetalleProforma;
+                        $detalleProforma=new ProformaDetalleTableros;
                         // $detalleProforma->idDetalle_proforma=$fila[''];	
                         $detalleProforma->idProducto=$fila['idProducto'];
                         $detalleProforma->idProforma=$idProforma;
@@ -187,4 +190,42 @@ $proforma=DB::table('Proforma as p')
 
 
     }
+
+    public function edit($id)
+    {
+        //
+        $productos=DB::table('Producto as po')
+        ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
+        ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema')
+        ->where('po.estado','=','activo')
+        ->get();
+
+        $monedas=DB::table('Tipo_moneda')
+        ->where('estado','=','activo')
+        ->get();
+
+        $clientes=DB::table('Cliente_Proveedor as cp')
+        ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
+        ->where('tipo_persona','=','Cliente persona')
+        ->orwhere('tipo_persona','=','Cliente Empresa')
+        ->get();
+
+        $proforma=DB::table('Proforma as p')
+        ->join('Detalle_proforma_tableros as dePT','p.idProforma','=','dePT.idProforma')
+        ->join('Producto as pd','pd.idProducto','=','dePT.idProducto')
+        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+        ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP')
+        ->where('p.idProforma','=',$id)
+        ->get();
+        // 'dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP'
+        // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
+        return view("proforma.tablero.edit",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,'proforma'=>$proforma]);
+    }   
+    public function update(Request $request)
+    {
+        //
+        
+    }
 }
+
