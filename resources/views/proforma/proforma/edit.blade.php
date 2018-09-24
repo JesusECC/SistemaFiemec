@@ -487,6 +487,7 @@
         var plazpOf;
         var obser;
         // var descuento;
+        console.log(pro);
         if (editarval==true) {
             for (const key in pro) {
                 if (pro.hasOwnProperty(key)) {
@@ -510,11 +511,12 @@
                     var puni=pro[key]['precio_venta'];
                     var pcant=pro[key]['cantidad'];
                     var descuento=pro[key]['descuento'];     
-                    var estado=pro[key]['estadoDP'];  
+                    var estado=parseInt(pro[key]['estadoDP']);  
                     var idDetalleProforma=pro[key]['idDetalle_proforma'];
                     formade=pro[key]['forma_de'];
                     plazpOf=pro[key]['plazo_oferta'];
                     obser=pro[key]['observacion_proforma']; 
+                    console.log(estado);
                     var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
                     filaob.push(dat);  
                     fila();
@@ -522,6 +524,7 @@
                 }
             }
             document.getElementById('totales-general').style.display = 'block';
+            console.log(filaob);
             valoresFinales(); 
             editarval=false;
             // cotizador
@@ -536,7 +539,7 @@
             $("#plazo_oferta").val(plazpOf);
             $("#observacion_condicion").val(obser);
 
-
+            
         }
     }
     function subTotal(){
@@ -591,6 +594,7 @@
         ig=venta*0.18;
         $("#igv").html("s/. " + ig.toFixed(2));
     }
+    var boolean_dolar=false;
     function total(){
         var venta=0;   
         var igv=0;  
@@ -602,6 +606,7 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                boolean_dolar=true;
             }
         }
         igv=venta*0.18;
@@ -623,13 +628,17 @@
         cambioMoneda();
     }
     function cambioMoneda(){
-        if(filaob.length>0){
+        console.log(contp);
+        if(filaob.length>0 && boolean_dolar!=true){
             if("$"==simbolo){    
                 totaldolares=(totalt/tipocam).toFixed(2);        
                 $("#total_dolares").html(simbolo+" " + totaldolares);
             }else{
                 $("#total_dolares").html(0);
             }
+        }else{
+            $("#total_dolares").val(0);
+            $("#tota_dolares").val(0);
         }
     }
     function eliminar(index){
