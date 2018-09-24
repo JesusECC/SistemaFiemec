@@ -222,7 +222,7 @@ public function pdf($id){
         ->join('Detalle_proforma as deP','p.idProforma','=','deP.idProforma')
         ->join('Producto as pd','pd.idProducto','=','deP.idProducto')
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
-        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_proforma','deP.idProducto','deP.idProforma','deP.idTableros','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.cambioDP','deP.descuento','deP.descripcionDP','deP.simboloDP','pd.nombre_producto','deP.estadoDP','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion')
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_proforma','deP.idProducto','deP.idProforma','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.cambioDP','deP.descuento','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion')
         ->where('deP.idProforma','=',$id)
         ->get();
     
