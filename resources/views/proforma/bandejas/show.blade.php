@@ -61,11 +61,12 @@
             			
             			<th>Poducto</th>
             			<th>Cantidad</th>
-                        <th>medidas</th>
+                        <th>Dimenciones de Bandeja</th>
+                        <th>Espesor</th>
             			<th>Precio de Venta</th>
             			<th>Descuento x c/u</th>
-            			<th>Total</th>
-                        <th></th>
+            			<th>Total por Producto</th>
+                        
             		</thead>
             		<tfoot>
             			
@@ -76,7 +77,7 @@
             			<th></th>
             			<th></th>
 
-
+                        <th></th>
                         
             			<th>
 
@@ -84,16 +85,17 @@
 
                             <h4 type="number" id="total">IGV: {{round($proforma->subtotal*$proforma->igv/100,2)}}
 
-                            <h4 id="total">Precio total: {{round($proforma->precio_total,2)}}</th><br>
+                            <h4 id="total">Precio total: {{round($proforma->precio_total,2)}}</th>
 
 
             		</tfoot>
             		<tbody>
             			@foreach($detalles as $det)
                         <tr>
-                            <td>{{$det->producto.'  | '.$det->descripcionDP}}</td>
+                            <td>{{$det->productos}}</td>
                             <td>{{$det->cantidad}}</td>
                             <td>{{$det->medida}}</td>
+                            <td>{{$det->espesor}} mm</td>
                             <td>S/.{{$det->precio_venta}}</td>
                             <td>{{$det->descuento}}%</td>
                             <td>S/.{{($det->precio_venta*$det->cantidad)-(($det->cantidad*$det->precio_venta)*($det->descuento/100))}}</td>

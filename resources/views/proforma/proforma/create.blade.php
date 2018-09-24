@@ -397,9 +397,9 @@
     }
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
-        $("#precio_uni").val(Producto[2]);
+       
         $("#pdescuento").val(Producto[3]);
-        cambiaropcion();
+        
     }
     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');

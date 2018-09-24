@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use SistemaFiemec\Http\Requests;
 use SistemaFiemec\Proforma;
 
-use SistemaFiemec\DetalleProforma;
+use SistemaFiemec\DetalleBandejas;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SistemaFiemec\Http\Requests\RequestFormProforma;
@@ -46,13 +46,13 @@ public function create()
 {
  $productos=DB::table('Producto as po')
  ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
- ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema')
+ ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto," | ",po.marca_producto," | ",descripcion_producto) as productos'),DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto) as productos2'))
  ->where('po.tipo_producto','=','BANDEJA')
- ->where('po.estado','=','activo')
+ ->where('po.estado','=','estado')
  ->get();
 
  $medidas=DB::table('Medidas')
- ->where('estado','=','activo')
+ ->where('estadoM','=','activo')
  ->get();
 
  $monedas=DB::table('Tipo_moneda')
@@ -127,7 +127,7 @@ public function store(Request $request)
             ]
         );
         foreach($request->filas as $fila){
-            $detalleProforma=new DetalleProforma;
+            $detalleProforma=new DetalleBandejas;
             // $detalleProforma->idDetalle_proforma=$fila[''];	
             $detalleProforma->idProducto=$fila['idProducto'];
             $detalleProforma->idProforma=$idProforma;
@@ -137,9 +137,12 @@ public function store(Request $request)
             $detalleProforma->precio_venta=$fila['prec_uniP'];	
             // $detalleProforma->texto_precio_venta=$fila[''];	
             // $detalleProforma->observacion_detalleP=$fila[''];	
-            $detalleProforma->descuento=$fila['descuentoP'];	
+            $detalleProforma->descuento=$fila['descuentoP'];
+            $detalleProforma->espesor=$fila['espesorP'];	
 
             $detalleProforma->descripcionDP=$fila['descripcionP'];
+            $detalleProforma->estadoDB=1;
+
             $detalleProforma->save();            
         }
         return ['data' =>'bandejas','veri'=>true];
@@ -219,11 +222,11 @@ public function store(Request $request)
     ->where('p.idProforma','=',$id)
     ->first();
 
-    $detalles=DB::table('Detalle_proforma as dpr')
-    ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->join('Medidas as m','dpr.idMedidas','=','m.idMedidas')
-    ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','m.medida')
-    ->where('dpr.idProforma','=',$id)
+    $detalles=DB::table('Detalle_bandejas as db')
+    ->join('Producto as pro','db.idProducto','=','pro.idProducto')
+    ->join('Medidas as m','db.idMedidas','=','m.idMedidas')
+    ->select(DB::raw('CONCAT(pro.nombre_producto," | ",pro.codigo_producto," | ",pro.marca_producto," | ",pro.descripcion_producto) as productos'),'db.cantidad','db.descuento','db.precio_venta','db.descripcionDP','m.medida','db.espesor')
+    ->where('db.idProforma','=',$id)
     ->get();
     
     return view("proforma.bandejas.show",["proforma"=>$proforma,"detalles"=>$detalles]);
@@ -235,21 +238,20 @@ public function pdf($id){
 
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-    
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.observacion_proforma','cp.correo as email','cp.nro_documento as ndoc','p.subtotal','p.cliente_empleado')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma')
     ->where('p.idProforma','=',$id)
     ->first();
 
-    $detalles=DB::table('Detalle_proforma as dpr')
-    ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
-    ->where('dpr.idProforma','=',$id)
+    $detalles=DB::table('Detalle_bandejas as db')
+    ->join('Producto as pro','db.idProducto','=','pro.idProducto')
+    ->join('Medidas as m','db.idMedidas','=','m.idMedidas')
+    ->select(DB::raw('CONCAT(pro.marca_producto," | ",pro.codigo_producto," | ",pro.nombre_producto," de ",m.medida," con espesor de plancha de ",db.espesor,"mm | ",pro.descripcion_producto) as productos'),'db.cantidad','db.descuento','db.precio_venta','db.descripcionDP','m.medida','db.espesor')
+    ->where('db.idProforma','=',$id)
     ->get();
 
     $pdf=PDF::loadView('proforma/bandejas/pdf',['proforma'=>$proforma,"detalles"=>$detalles]);
     return $pdf->stream('proforma.pdf');
-    //return $pdf->download('Lista de requerimientos.pdf');
-
+    
 
 }
 public function pdf2($id){
@@ -261,10 +263,10 @@ public function pdf2($id){
     ->where('p.idProforma','=',$id)
     ->first();
 
-    $detalles=DB::table('Detalle_proforma as dpr')
-    ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','dpr.simboloDP','dpr.cambioDP')
-    ->where('dpr.idProforma','=',$id)
+    $detalles=DB::table('Detalle_bandejas as db')
+    ->join('Producto as pro','db.idProducto','=','pro.idProducto')
+    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'db.cantidad','db.descuento','db.precio_venta','db.descripcionDP','db.estadoDB')
+    ->where('db.idProforma','=',$id)
     ->get();
 
     $pdf=PDF::loadView('proforma/bandejas/pdf2',['proforma'=>$proforma,"detalles"=>$detalles]);
