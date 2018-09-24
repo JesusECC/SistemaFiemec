@@ -288,21 +288,38 @@ public function pdf($id){
                 'estado'=>'activo'
                 ]);
             foreach($request->filas as $fila){
-                DetalleProforma::where('idProforma',$idProforma)
-                ->where('idDetalle_proforma',$fila['idDetalleProforma'])
-                ->update([
-                // $detalleProforma->idDetalle_proforma=$fila[''];	
-                'idProducto'=>$fila['idProducto'],
-                'idProforma'=>$idProforma,
-                // 'idTableros'=>$idTablero,
-                'cantidad'=>$fila['cantidadP'],
-                'precio_venta'=>$fila['prec_uniP'],
-                // texto_precio_venta=>$fila[''	
-                // observacion_detalleP=>$fila[''	
-                'descuento'=>$fila['descuentoP'],
-                'descripcionDP'=>$fila['descripcionP'],
-                'estadoDP'=>$fila['estado']
-                ]);
+                if ($fila['estado']==1 || $fila['estado']==0) {
+                    DetalleProforma::where('idProforma',$idProforma)
+                    ->where('idDetalle_proforma',$fila['idDetalleProforma'])
+                    ->update([
+                    // $detalleProforma->idDetalle_proforma=$fila[''];	
+                    'idProducto'=>$fila['idProducto'],
+                    // 'idProforma'=>$idProforma,
+                    // 'idTableros'=>$idTablero,
+                    'cantidad'=>$fila['cantidadP'],
+                    'precio_venta'=>$fila['prec_uniP'],
+                    // texto_precio_venta=>$fila[''	
+                    // observacion_detalleP=>$fila[''	
+                    'descuento'=>$fila['descuentoP'],
+                    'descripcionDP'=>$fila['descripcionP'],
+                    'estadoDP'=>$fila['estado']
+                    ]);
+                }else if($fila['estado']==2){
+                    $detalleProforma=new DetalleProforma;
+                    // $detalleProforma->idDetalle_proforma=$fila[''];	
+                    $detalleProforma->idProducto=$fila['idProducto'];
+                    $detalleProforma->idProforma=$idProforma;
+                    // $detalleProforma->idTableros=$idTablero;
+                    $detalleProforma->cantidad=$fila['cantidadP'];
+                    $detalleProforma->precio_venta=$fila['prec_uniP'];	
+                    // $detalleProforma->texto_precio_venta=$fila[''];	
+                    // $detalleProforma->observacion_detalleP=$fila[''];	
+                    $detalleProforma->descuento=$fila['descuentoP'];	
+                    $detalleProforma->descripcionDP=$fila['descripcionP'];
+                    $detalleProforma->estadoDP=1;
+                    $detalleProforma->save();
+                }
+                
             }
                 return ['data' =>'proformas','veri'=>true];
             }catch(Exception $e){

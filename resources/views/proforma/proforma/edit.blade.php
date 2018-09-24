@@ -356,10 +356,9 @@
         var forma=$("#forma_de").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_condicion").val();
-        console.log(forma,plazo,observacion);
         if(valorventa>0 && totalt>0 ){
             var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion}];
-            $.ajax({
+           $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
                 url:   'modificar', //archivo que recibe la peticion
@@ -409,7 +408,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:1,idDetalleProforma:''};
+                var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:2,idDetalleProforma:''};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -465,7 +464,10 @@
         // mantiene en la vista las filas cuando se agrega una nueva tabla
         var fil='';
         for (var key in filaob) {                   
-            if (filaob.hasOwnProperty(key) && filaob[key]['estado']==1) {
+            if (filaob.hasOwnProperty(key)) {
+                if (filaob[key]['estado']==1 || filaob[key]['estado']==2  ) {
+                    
+                }
                     fil+=filaob[key]['fila'];
             }
         }
@@ -475,14 +477,15 @@
     
     function asignarValores(){
         var pro={!! $proforma !!};
-        
         var nombreClie;
         var apellidoP;
         var apellidoM;
         var direccion;
         var documento;
         var cotiza;
-        
+        var formade;
+        var plazpOf;
+        var obser;
         // var descuento;
         if (editarval==true) {
             for (const key in pro) {
@@ -508,15 +511,16 @@
                     var pcant=pro[key]['cantidad'];
                     var descuento=pro[key]['descuento'];     
                     var estado=pro[key]['estadoDP'];  
-                    var idDetalleProforma=pro[key]['idDetalle_proforma']; 
+                    var idDetalleProforma=pro[key]['idDetalle_proforma'];
+                    formade=pro[key]['forma_de'];
+                    plazpOf=pro[key]['plazo_oferta'];
+                    obser=pro[key]['observacion_proforma']; 
                     var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
                     filaob.push(dat);  
                     fila();
                     contp++;               
                 }
             }
-            console.log(pro);
-            console.log(simbolo);
             document.getElementById('totales-general').style.display = 'block';
             valoresFinales(); 
             editarval=false;
@@ -528,15 +532,12 @@
 
             $("#simbolo").val(simbolo);
             $("#valorcambio").val(tipocam);
+            $("#forma_de").val(formade);
+            $("#plazo_oferta").val(plazpOf);
+            $("#observacion_condicion").val(obser);
+
 
         }
-        
-        
-        console.log(filaob);
-        // var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
-        //         filaob.push(dat);
-        //         fila();
-        //         contp++;
     }
     function subTotal(){
         // la suma de tosos los tableros        
@@ -638,7 +639,7 @@
                 if(index==filaob[key]['posiP']){
                     $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
                     // filaob.splice(key,1);         
-                    filaob[key]['estado']='0';  
+                    filaob[key]['estado']=0;  
                 }
             }
         } 
