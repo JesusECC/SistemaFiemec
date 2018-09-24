@@ -329,6 +329,18 @@
                                             <textarea name="observacion_condicion" id="observacion_condicion" class="form-control"></textarea>
                                             </th>
                                         </tr>
+                                        <tr>
+                                            <th colspan="3" >Incluye:</th>
+                                            <th>
+                                            <textarea name="incluye" id="incluye" class="form-control"></textarea>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Plazo de fabricacion:</th>
+                                            <th>
+                                            <textarea name="plaza_fabricacion" id="plaza_fabricacion" class="form-control"></textarea>
+                                            </th>
+                                        </tr>
                                         
                                     </tfoot>
                             </table>                            
@@ -418,7 +430,7 @@
         Producto=document.getElementById('pidProducto').value.split('_');
         
         $("#pdescuento").val(Producto[3]);
-        cambiaropcion();
+        
     }
     
     function MostrarMedida(){
@@ -452,9 +464,11 @@
         var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_condicion").val();
+        var incluye=$("#incluye").val();
+        var plazofabri=$("#plaza_fabricacion").val();
         
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp}];
+            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,incluye:incluye,plazofabri:plazofabri,clienteemp:clienteemp}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
