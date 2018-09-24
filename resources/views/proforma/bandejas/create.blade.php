@@ -121,13 +121,15 @@
                             </select>                    
                         </div>
                     </div>
+
+
                     <div class="col-lg-3">
-                        <div class="form-group" id="producto-oculto" >
+                        <div class="form-group" id="medida-oculto" >
                             <label class="control-label">Medidas</label>
-                            <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                <option value="">Seleccione Producto</option>
-                                @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                            <select name="idMedidas" class="form-control selectpicker" id="idMedidas" data-live-search="true">
+                                <option value="">Seleccione Medidas</option>
+                                @foreach($medidas as $me)
+                                    <option value="{{$me->idMedidas}}_{{$me->precio}}_{{ $me->medida}}">{{$me->medida}}</option>
                                 @endforeach
                             </select>                    
                         </div>
@@ -211,7 +213,7 @@
                                         <div class="col-md-12">
                                             <div class="box">
                                                 <div class="box-header with-border" style="padding:5px !important;">
-                                                <p> Proforma Unitaria </p>
+                                                <p> Proforma Unitaria de Bandejas </p>
                                                     <div class="box-tools pull-right">
                                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                         <button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">
@@ -381,13 +383,14 @@
     var subtotal=0;
     var nomTablero='unitaria';
     var idcliente;
+    var idmedidas;
     var totalt;
     var valorventa;
     var tipocam;
     var simbolo;
     var totaldolares=0;
-    $("#pidProducto").change(MostarProducto);
-
+    
+    $("#idMedidas").change(MostrarMedida);
     $("#idTipo_moneda").change(cambioMoneda);
     
     function MostrarCliente(){
@@ -397,11 +400,13 @@
         $("#cdireccion").val(Cliente[1]);
         $("#cnro_documento").val(Cliente[2]);
     }
-    function MostarProducto(){
-        Producto=document.getElementById('pidProducto').value.split('_');
-        $("#precio_uni").val(Producto[2]);
-        $("#pdescuento").val(Producto[3]);
-    }
+    
+    function MostrarMedida(){
+        Medidas=document.getElementById('idMedidas').value.split('_');
+        idmedidas=Medidas[0];
+        $("#precio_uni").val(Medidas[1]);
+        }
+
     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         $("#simbolo").val(tipoCambio[2]);
@@ -454,21 +459,23 @@
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
         var idProd=Producto[0];
+        var idMed=Medidas[0];
         var pname=Producto[1];
+        var mname=Medidas[2];
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
         /*var pcant=$('#Pcantidad').val();*/
         var descuento=$('#pdescuento').val();
         var filas;
-        if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
+        if(nomTablero!="" && idMed!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
             bool=true;
-            for (const fil in filaob) {
-                if (filaob.hasOwnProperty(fil)) {
-                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd){
+for (const fil in filaob) {
+if (filaob.hasOwnProperty(fil)) {
+ if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['idMedidas']==idMed){
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
                         filaob[fil]['cantidadP']=su;
@@ -481,7 +488,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+                var dat={idProducto:idProd,idMedidas:idMed,medida:mname,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -506,9 +513,9 @@
                             '<td> '+ 
                                 '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                             '</td>'+
-                            /*'<td> '+ 
-                                '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
-                            '</td>'+*/
+                            '<td> '+ 
+                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idMedidas']+'">'+filaob[fila]['medida']+
+                            '</td>'+
                             '<td> '+ 
                                 '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                             '</td>'+
@@ -531,11 +538,22 @@
                             '</td>'+
                         '</tr>';  
                     filaob[fila]['fila']=filas;
-                    filas="";                                  
+                    filas="";   
+
+                    limpiar();                               
                 }
             }                    
         }
     }    
+
+
+
+     function limpiar(){
+        $("#Pcantidad").val("");
+       
+        
+        $("#descripcionp").val("");
+    } 
     function detalleFilas(){
         // mantiene en la vista las filas cuando se agrega una nueva tabla
         var fil='';
