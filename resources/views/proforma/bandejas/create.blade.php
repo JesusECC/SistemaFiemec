@@ -110,19 +110,42 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <div class="col-lg-9">
+                        <div class="col-lg-7">
                         <div class="form-group" id="producto-oculto" >
                             <label class="control-label">Producto</label>
                             <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                 <option value="">Seleccione Producto</option>
                                 @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto.' | '. $producto->descripcion_producto}}</option>
                                 @endforeach
                             </select>                    
                         </div>
                     </div>
 
-
+                            <div class="col-lg-2">
+                        <div class="from-group">
+                                            <label>Marca</label>
+                                            <select name="espesor" class="form-control">
+                                                <option ></option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="0.6">0.6</option>
+                                                <option value="0.7">0.7</option>
+                                                <option value="0.8">0.8</option>
+                                                <option value="0.9">0.9</option>
+                                                <option value="1">1</option>
+                                                <option value="1.1">1.1</option>
+                                                <option value="1.2">1.2</option>
+                                                <option value="1.3">1.3</option>
+                                                <option value="1.4">1.4</option>
+                                                <option value="1.5">1.5</option>
+                                                <option value="1.6">1.6</option>
+                                                <option value="1.7">1.7</option>
+                                                <option value="1.8">1.8</option>
+                                                <option value="1.9">1.9</option>
+                                                <option value="2">2</option>
+                                            </select>
+                                        </div>  
+                                    </div>
                     <div class="col-lg-3">
                         <div class="form-group" id="medida-oculto" >
                             <label class="control-label">Medidas</label>

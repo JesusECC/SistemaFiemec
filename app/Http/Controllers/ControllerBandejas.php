@@ -221,10 +221,11 @@ public function store(Request $request)
 
     $detalles=DB::table('Detalle_proforma as dpr')
     ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
+    ->join('Medidas as m','dpr.idMedidas','=','m.idMedidas')
+    ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','m.medida')
     ->where('dpr.idProforma','=',$id)
     ->get();
-
+    
     return view("proforma.bandejas.show",["proforma"=>$proforma,"detalles"=>$detalles]);
    
 

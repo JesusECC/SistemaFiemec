@@ -44,7 +44,7 @@
                        </div>
 
 					
-					<a href="{{route('proforma-show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
+					<a href="{{route('bandejas-show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
 					</a>
 
 					
@@ -54,7 +54,7 @@
 					</td>
 				</tr>
 				
-				@include('proforma.proforma.modal')
+				@include('proforma.bandejas.modal')
              @endforeach
 
              

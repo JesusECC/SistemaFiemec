@@ -59,8 +59,9 @@
             		<thead style="background-color:#A9D0F5">
 
             			
-            			<th>Producto</th>
+            			<th>Poducto</th>
             			<th>Cantidad</th>
+                        <th>medidas</th>
             			<th>Precio de Venta</th>
             			<th>Descuento x c/u</th>
             			<th>Total</th>
@@ -68,10 +69,15 @@
             		</thead>
             		<tfoot>
             			
+                        
+                        <th></th>
+            			<th></th>
+                        <th></th>
             			<th></th>
             			<th></th>
-            			<th></th>
-            			<th></th>
+
+
+                        
             			<th>
 
                          <h4 id="total">Subtotal: {{$proforma->subtotal}}</h4>
@@ -87,6 +93,7 @@
                         <tr>
                             <td>{{$det->producto.'  | '.$det->descripcionDP}}</td>
                             <td>{{$det->cantidad}}</td>
+                            <td>{{$det->medida}}</td>
                             <td>S/.{{$det->precio_venta}}</td>
                             <td>{{$det->descuento}}%</td>
                             <td>S/.{{($det->precio_venta*$det->cantidad)-(($det->cantidad*$det->precio_venta)*($det->descuento/100))}}</td>
