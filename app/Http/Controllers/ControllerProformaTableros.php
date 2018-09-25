@@ -4,9 +4,9 @@ namespace SistemaFiemec\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Producto;
-use Proforma;
+use SistemaFiemec\Proforma;
 use Tableros;
-use detalleProformatableros;
+use SistemaFiemec\DetalleProformaTableros;
 use SistemaFiemec\DetalleProforma;
 use SistemaFiemec\ProformaDetalleTableros;
 use Carbon\Carbon;
@@ -31,7 +31,7 @@ class ControllerProformaTableros extends Controller
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('tipo_proforma','=','tablero')
-    ->where('p.estado','=','activo')
+    ->where('p.estado','=',1)
     ->orderBy('p.idProforma','desc')
      
         ->paginate(7);           
@@ -125,13 +125,16 @@ class ControllerProformaTableros extends Controller
                 // 'garantia'=>$request->,
                 // 'observacion_condicion'=>$request->,
                 // 'observacion_proforma'=>$request->,
-                'estado'=>'activo'
+                'estado'=>1
                 ]
             );
             foreach ($request->tableros as $tablero) {
                 $nombre=$tablero['nombre'];
+                $est=$tablero['estado'];
                 $idTablero=DB::table('Tableros')->insertGetId(
-                    ['nombre_tablero'=>$nombre]
+                    ['nombre_tablero'=>$nombre,
+                    'estadoT'=>$est,
+                    ]
                 );
                 foreach($request->filas as $fila){
                     if($fila['nomTablero']==$tablero['nombre']){
@@ -146,6 +149,7 @@ class ControllerProformaTableros extends Controller
                         // $detalleProforma->observacion_detalleP=$fila[''];	
                         $detalleProforma->descuento=$fila['descuentoP'];	
                         $detalleProforma->descripcionDP=$fila['descripcionP'];
+                        $detalleProforma->estadoDP=1;
                         $detalleProforma->save();
                     }
                 }
@@ -214,7 +218,7 @@ $proforma=DB::table('Proforma as p')
         ->distinct()
         ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
         ->where('dpt.idProforma','=',$id)
-        ->get(['t.nombre_tablero']);
+        ->get(['t.nombre_tablero','estadoT']);
 
 
         $proforma=DB::table('Proforma as p')
@@ -232,6 +236,115 @@ $proforma=DB::table('Proforma as p')
     public function update(Request $request)
     {
         //
+        try{
+            
+            $idProforma;
+            $idclie;
+            $valorv;
+            $tota;
+            $tableros;
+            $idTipoCam;
+            $valorcambio;
+            foreach ($request->datos as $dato) {
+                // $idclie=$dato['idcliente'];
+                $valorv=$dato['valorVenta'];
+                $tota=$dato['total'];
+                // $idTipoCam=$dato['idTipoCambio'];
+                // $valorcambio=$dato['valorTipoCambio'];
+                $idProforma=$dato['idProforma'];
+            }	
+            // $idProforma=DB::table('Proforma')->insertGetId(
+            //     [
+            //         // 'idCliente'=>$idclie,        
+            //         // 'idTipo_moneda'=>$idTipoCam,
+            //         // 'serie_proforma'=>'PU365122019',
+            //         'igv'=>'18',
+            //         'subtotal'=>$valorv,
+            //         'precio_total'=>$tota,
+            //         'tipocambio'=>$valorcambio,
+            //         'tipo_proforma'=>'Tablero',
+            //         'estado'=>1
+            //     ]
+            // );
+            Proforma::where('idProforma',$idProforma)
+                ->update([
+                    // 'idCliente'=>$idclie,
+                // 'idEmpleado'=>$request->,           
+                // 'idTipo_moneda'=>$idTipoCam,
+                'serie_proforma'=>'PU365122018',
+                // 'fecha_hora'=>$mytime->toDateTimeString(),
+                // 'igv'=>'18',
+                'subtotal'=>$valorv,
+                'precio_total'=>$tota,
+                // 'tipocambio'=>$valorcambio,
+                // 'precio_totalC'=>$totaldolares,
+                // 'descripcion_proforma'=>$observacion, //preguntar
+                'tipo_proforma'=>'Tablero',
+                // 'caracteristicas_proforma'=>$request->, preguntar
+                // 'forma_de'=>$forma,
+                // 'plaza_fabricacion'=>$request->,
+                // 'plazo_oferta'=>$plazo,
+                // 'garantia'=>$request->,
+                // 'observacion_condicion'=>$request->,
+                // 'observacion_proforma'=>$observacion,
+                'estado'=>1
+                ]);
+
+
+
+
+
+
+            foreach ($request->tableros as $tablero) {
+                $nombre=$tablero['nombre'];
+                $est=$tablero['estado'];
+                $idTablero=DB::table('Tableros')->insertGetId(
+                    ['nombre_tablero'=>$nombre,
+                    'estadoT'=>$est,
+                    ]
+                );
+                
+                foreach($request->filas as $fila){
+                    if($fila['nomTablero']==$tablero['nombre']){
+                        if($fila['estado']==2){
+                            $detalleProforma=new ProformaDetalleTableros;
+                            // $detalleProforma->idDetalle_proforma=$fila[''];	
+                            $detalleProforma->idProducto=$fila['idProducto'];
+                            $detalleProforma->idProforma=$idProforma;
+                            $detalleProforma->idTableros=$idTablero;
+                            $detalleProforma->cantidad=$fila['cantidadP'];
+                            $detalleProforma->precio_venta=$fila['prec_uniP'];	
+                            // $detalleProforma->texto_precio_venta=$fila[''];	
+                            // $detalleProforma->observacion_detalleP=$fila[''];	
+                            $detalleProforma->descuento=$fila['descuentoP'];	
+                            $detalleProforma->descripcionDP=$fila['descripcionP'];
+                            $detalleProforma->save();
+                        }else if($fila['estado']==1 || $fila['estado']==0){
+                            DetalleProformaTableros::where('idProforma',$idProforma)
+                            ->where('idDetalle_tableros',$fila['idDetalleTablero'])
+                            ->update([
+                                // $detalleProforma->idDetalle_proforma=$fila[''];	
+                                'idProducto'=>$fila['idProducto'],
+                                // 'idProforma'=>$idProforma,
+                                // 'idTableros'=>$idTablero,
+                                'cantidad'=>$fila['cantidadP'],
+                                'precio_venta'=>$fila['prec_uniP'],
+                                // texto_precio_venta=>$fila[''	
+                                // observacion_detalleP=>$fila[''	
+                                'descuento'=>$fila['descuentoP'],
+                                'descripcionDP'=>$fila['descripcionP'],
+                                'estadoDP'=>$fila['estado']
+                            ]);
+
+                        }
+                        
+                    }
+                }
+            }
+            return ['data' =>'tableros','veri'=>true];
+        }catch(Exception $e){
+            return ['data' =>$e,'veri'=>false];
+        }
         
     }
 }

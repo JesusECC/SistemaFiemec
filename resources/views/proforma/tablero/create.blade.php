@@ -451,7 +451,7 @@
                                     '</div>'+
                                 '</section>'+
                             '</div>';
-                var ta={nombre:nomTablero,posi:cont,tablero:table}
+                var ta={nombre:nomTablero,posi:cont,tablero:table,estado:1};
                 tablero.push(ta);                        
                 } cont++;       
             }
@@ -510,7 +510,7 @@
                         }
                         if(boolfila==false){
                             console.log("produc nuevoo",contp);
-                            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+                            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:1,fila:""};
                             filaob.push(dat);
                             fila();
                             contp++;

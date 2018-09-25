@@ -47,6 +47,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('tableros/guardar',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
     Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'ControllerProformaTableros@buscarProducto']);
     Route::get('tableros/edit/{id}',['as' => 'tablero-edit','uses'=>'ControllerProformaTableros@edit']);
+    Route::post('tableros/edit/update',['as' => 'tablero-update','uses'=>'ControllerProformaTableros@update']);
 
     Route::get('proforma/tablero/pdf/{idProforma}','ControllerProformaTableros@pdf');
     //Route::get('proforma/tablero/pdf2/{idProforma}','ControllerProformaTableros@pdf2');

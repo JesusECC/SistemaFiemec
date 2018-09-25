@@ -34,7 +34,7 @@ class ControllerProformaUnitaria extends Controller
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
-    ->where('p.estado','=','activo')
+    ->where('p.estado','=',1)
     ->where('tipo_proforma','=','unitaria')
     ->orderBy('p.idProforma','desc')
      
@@ -122,7 +122,7 @@ public function store(Request $request)
             // 'observacion_condicion'=>$request->,
             'cliente_empleado'=>$clienteemp,
             'observacion_proforma'=>$observacion,
-            'estado'=>'activo'
+            'estado'=>1
             ]
         );
         foreach($request->filas as $fila){
@@ -286,7 +286,7 @@ public function pdf($id){
                 // 'garantia'=>$request->,
                 // 'observacion_condicion'=>$request->,
                 'observacion_proforma'=>$observacion,
-                'estado'=>'activo'
+                'estado'=>1
                 ]);
             foreach($request->filas as $fila){
                 if ($fila['estado']==1 || $fila['estado']==0) {
