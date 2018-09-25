@@ -93,7 +93,7 @@
                                 </samp>
                             </div>
                         </div>
-                        <div class="form-group" id="producto-oculto" style='display:none;'>
+                        <div class="form-group" id="producto-oculto">
                             <label class="control-label">Producto</label>
                             <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                 <option value="">Seleccione Producto</option>
@@ -102,20 +102,11 @@
                                 @endforeach
                             </select>                    
                         </div>
-                        <!-- {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
-                        @csrf -->
-                        <div class="card" id="producto-crear-oculto" style='display:none;'>
+                        <div class="card" id="producto-crear-oculto">
                             <div class="card-header">
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <!-- <div class="col-lg-12">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Nombre de Producto</label>
-                                            <input type="hidden" id="idProd" name="idProd" disabled>
-                                            <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
-                                        </div>                               
-                                    </div> -->
                                     <div class="col-lg-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Descripcion</label>
@@ -162,17 +153,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-lg-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Datos del Vendedor
-                        </h3>
-                    </div>
-                    <div class="panel-body">              
-                    </div>            
-                </div>
-            </div> -->
             <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -181,8 +161,7 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <div id="tablerosn">
-                            
+                        <div id="tablerosn">                            
                         </div>                
                     </div>            
                 </div>
@@ -199,7 +178,7 @@
                         </h3>
                     </div>
                     <div class="panel-body">   
-                        <div id="totales-general" style='display:none;'>
+                        <div id="totales-general">
                             <table class="table table-striped table-bordered table-condensed table-hover">
                                     <tfoot>
                                         <tr>
@@ -231,25 +210,15 @@
         </div>
     </div>
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">  
-    <div style="margin-top: 20px" class="from-group ">
-
-        <button class="btn btn-primary" id="save" type="button">Guardar</button>
-        <button class="btn btn-danger" type="reset">Limpiar</button>
-        <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
-
-
+        <div style="margin-top: 20px" class="from-group ">
+            <button class="btn btn-primary" id="save" type="button">Guardar</button>
+            <button class="btn btn-danger" type="reset">Limpiar</button>
+            <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
+        </div>
     </div>
-
-    </div>
-
-
-    <!-- {!!Form::close()!!} -->
-
 </div>
-
 @push('scripts')
-<script>
-    
+<script>    
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
             agregarTablero();
@@ -261,8 +230,7 @@
         });
         $('#bt_add_produc').click(function(){
             agregarProductosTablero();
-            valoresFinales();
-           
+            valoresFinales();           
         });
         $('#Pcantidad').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
@@ -276,9 +244,6 @@
         $('#pdescuento').click(function (){
             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
         });
-        // Actualizar
-       
-
     });
     $("#idClientes").change(MostrarCliente);
     $("#idTipo_moneda").change(mostrarTipoCambio);
@@ -294,13 +259,83 @@
     var valorventa;
 
     $("#pidProducto").change(MostarProducto);
-    // variables para asignar valores 
-    
+    // variables para asignar valores    
     var editarval=true;
     asignarValores();
     function asignarValores(){
         var pro={!! $proforma !!};
-        console.log(pro);
+        var tabl={!! $tablero !!};
+        for (const tab in tabl) {
+            nomTablero=tabl[tab]['nombre_tablero'];
+            table='<div id="'+nomTablero+'_'+cont+'">'+
+                                '<section class="content" style="min-height:0px !important">'+
+                                    '<div class="row">'+
+                                        '<div class="col-md-12">'+
+                                            '<div class="box">'+
+                                                '<div class="box-header with-border" style="padding:5px !important;">'+
+                                                '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
+                                                    '<div class="box-tools pull-right">'+
+
+                                                        '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
+                                                        '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
+                                                                        '<i class="fa fa-times"></i>'+
+                                                                '</button>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="box-body">'+
+                                                    '<div class="row">'+
+                                                        '<div class="col-md-12">'+
+                                                            '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
+                                                                '<thead style="background-color:#A9D0F5">'+
+                                                                    '<th>Producto</th>'+
+                                                                    '<th>Descripción</th>'+
+                                                                    '<th>Cant.</th>'+
+                                                                    '<th>P. Unit.</th>'+
+                                                                    '<th>Descuento</th>'+
+                                                                    '<th>Importe</th>'+
+                                                                    //'<th></th>'+
+                                                                '</thead>'+
+                                                                '<tbody id="detalle_'+nomTablero+'">'+
+                                                                '</tbody>'+ 
+                                                                '<tfoot>'+
+                                                                    '<th>Total</th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                    '</th>'+
+                                                                '</tfoot>'+
+                                                            '</table>'+
+                                                        '</div>'+
+                                                    '<div>'+
+                                                '</div>'+                                
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</section>'+
+                            '</div>';
+            var ta={nombre:nomTablero,posi:cont,tablero:table}
+            tablero.push(ta);
+            cont++;
+        }
+        nomTablero="";
+        ListaSelect();
+        for (const dtp in pro) {
+            var idProd=pro[dtp]['idProducto'];
+            var pname=pro[dtp]['nombre_producto'];
+            var pdescripcion=pro[dtp]['descripcionDP'];
+            var puni=pro[dtp]['precio_venta'];
+            var pcant=pro[dtp]['cantidad'];
+            var descuento=pro[dtp]['descuento'];
+            var nomTabl=pro[dtp]['nombre_tablero'];
+            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,posiP:contp,fila:""};
+            filaob.push(dat);
+            fila();
+            contp++;
+        }     
+        valoresFinales();  
+        console.log(pro,filaob,tablero); 
     }
 
     //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
@@ -472,7 +507,7 @@
         var filas;
         // console.log(idProd,pname);
         if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!="" && descuento!="" ){
-            document.getElementById('totales-general').style.display = 'block';
+            // document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
             for (const key in tablero) {
@@ -555,6 +590,7 @@
                                         '</td>'+
                                     '</tr>';  
                                     filaob[fila]['fila']=filas;
+                                    console.log(filas);
                                     filas="";
                             }                                                         
                         }

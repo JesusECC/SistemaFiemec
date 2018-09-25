@@ -210,6 +210,13 @@ $proforma=DB::table('Proforma as p')
         ->orwhere('tipo_persona','=','Cliente Empresa')
         ->get();
 
+        $tablero=DB::table('Tableros as t')
+        ->distinct()
+        ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
+        ->where('dpt.idProforma','=',$id)
+        ->get(['t.nombre_tablero']);
+
+
         $proforma=DB::table('Proforma as p')
         ->join('Detalle_proforma_tableros as dePT','p.idProforma','=','dePT.idProforma')
         ->join('Producto as pd','pd.idProducto','=','dePT.idProducto')
@@ -220,7 +227,7 @@ $proforma=DB::table('Proforma as p')
         ->get();
         // 'dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP'
         // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
-        return view("proforma.tablero.edit",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,'proforma'=>$proforma]);
+        return view("proforma.tablero.edit",["productos"=>$productos,'tablero'=>$tablero,"clientes"=>$clientes,"monedas"=>$monedas,'proforma'=>$proforma]);
     }   
     public function update(Request $request)
     {
