@@ -1,179 +1,176 @@
 @extends ('layouts.admin')
 @section ('contenido')
-<div class="row">
-    <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
-		<div class="panel panel-primary">
-		  <div class="panel-heading">
-		    <h2 class="panel-title">Nuevo Producto</h2>
-		    @if(count($errors)>0)
-			<div class="alert-alert-danger">
-				<ul>
-					@foreach ($errors->all() as $error)
-					    <li>{{$error}}</li>
-					@endforeach 
-				</ul>	
-		    </div>
-		    @endif
-		  </div>
-	{!!Form::open(array('url'=>'proforma/producto','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
+<section class="content-header">
+	<h1 style="margin-top: 55px;">
+		Panel de Administrador
+		<small>Version 2.3.0</small>
+    </h1>
+    <ol class="breadcrumb" style="margin-top: 55px;">
+    	<li>
+    		<a href="#">
+    			<i class="fas fa-dolly"></i> Productos</a>
+    	</li>
+    	<li class="active">Fiemec</li>
+    	<li>
+    		<a href="#">
+    		 Nuevo</a>
+    	</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box" style="border-top: 3px solid #18A689">
+				<div class="box-header with-border" style="padding: 10px !important">
+					<h4>
+						<strong style="font-weight: 400">
+							<i class="fas fa-dolly"></i> Datos Productos Fiemec
+						</strong>
+					</h4>
+				    @if(count($errors)>0)
+					<div class="alert-alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+							    <li>{{$error}}</li>
+							@endforeach 
+						</ul>	
+				    </div>
+				    @endif
 
-    {{Form::token()}}
-			<div class="panel-body" style="background-color: #ECF0F5 !important">
-			    <div class="col-lg-8 col-md-8 col-sm-12 col-xl-12">
-			    	<div class="box" style="border-radius: 7px !important;">
-		                <div class="box-header with-border" style="padding:5px !important;background-color: rgb(82, 86, 97);color: white;border-top-left-radius: 2px !important;border-top-right-radius: 2px !important;">
-		                 <h4>Ingrese datos del producto</h4>
-		                  <div class="box-tools pull-right">
-		                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		                    
-		                  </div>
-		                </div>	
-		                <div class="box-body" >
-		                  	<div class="row">
-		                      <div class="col-md-12">
-		                      	<div class="row">
-			                      	<div class="col-lg-4">
-										<div class="form-group">
-											<label for="serie_producto">Numero de serie</label>
-											<input type="text" name="serie_producto" class="form-control" {{old('serie_producto')}} placeholder="Nº serie...">	
-										</div>                     		
-			                      	</div>
-			                      	<div class="col-lg-4">
-										<div class="form-group">
-											<label for="codigo_pedido">Codigo de Pedido</label>
-											<input type="text" name="codigo_pedido" class="form-control" {{old('codigo_pedido')}} placeholder="codigo pedido...">	
-										</div>	                      		
-			                      	</div> 
-			                      	<div class="col-lg-4">
-										<div class="form-group">
-											<label for="codigo_producto">Codigo producto</label>
-											<input type="text" name="codigo_producto" class="form-control" {{old('odigo_producto')}} placeholder="codigo...">	
-										</div>  	                      		
-			                      	</div>                     		
-		                      	</div>
-		                      	<div class="row">
-		                      		<div class="col-lg-8">
-										<div class="form-group">
-											<label for="nombre_producto">Nombre producto</label>
-											<input type="text" name="nombre_producto" class="form-control"  {{old('nombre_producto')}} placeholder="nombre...">	
-										</div>	
-		                      		</div>
-		                      		<div class="col-lg-4">
-										<div class="from-group">
-										    <label>Marca</label>
-										    <select name="marca_producto" class="form-control">
-										    	<option ></option>
-										    	<option value="FIEMEC">FIEMEC</option>
-												<option value="ABB">ABB</option>
-												<option value="Schneider">Schneider</option>
-											</select>
-										</div>	
-		                      		</div>
-		                      	</div>
-		                      	<div class="row">
-		                      		<div class="col-lg-4">
-										<div class="form-group">
-											<label for="stock">stock</label>
-											<input type="text" name="stock" class="form-control" placeholder="stock...">	
-										</div>                      			
-		                      		</div>
-		                      		<div class="col-lg-4">
-										<div class="form-group">
-											<label for="precio_unitario">Precio</label>
-											<input type="text" name="precio_unitario" class="form-control" placeholder="precio...">	
-										</div>                      			
-		                      		</div>
-		                      		<div class="col-lg-4">
-										<div class="from-group">
-											<label>Categoria</label>
-											<select name="categoria_producto" class="form-control">
-											    	<option ></option>
-													<option value="Catalogo">Catalogo</option>
-													<option value="Producto Fiemec">Producto Fiemec</option>
-											</select>
-										</div>                      			
-		                      		</div>              
-		                      	</div>
-		                      	<div class="row">
-		                      		<div class="col-lg-12">
-										<div class="form-group">
-											<label for="descripcion_producto">Descripcion</label>
-											<input type="text" name="descripcion_producto" class="form-control" placeholder="descripcion...">
+				</div>
+                <!-- /.box-header -->
+                	{!!Form::open(array('url'=>'proforma/producto','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
+
+    				{{Form::token()}}
+				<div class="box-body bg-gray-c">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="panel panel-default panel-shadow">
+								<div class="panel-body">
+									<div class="form-group">
+										<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+											Producto Fiemec
+										</label>
+									</div>
+									<div class="row">
+										<div class="col-sm-4">
+											<div class="form-group">
+												<input type="text" name="serie_producto" class="form-control" {{old('serie_producto')}} placeholder="Número Serie ...">	
+											</div> 												
 										</div>
-		                      		</div>
-		                      	</div>
-		                      </div>
-		                  	</div><!-- /.row -->
-		                </div><!-- /.box-body -->	    		
-			    	</div><!--finaliza box completo-->
-			    </div>
-			    <div class="col-lg-4 col-md-4 col-sm-12 col-xl-12">
-			    	<div class="box">
-		                <div class="box-header with-border" style="padding:5px !important;background-color: rgb(82, 86, 97);color: white;border-top-left-radius: 2px !important;border-top-right-radius: 2px !important;">
-		                 <h4>Ingrese imagen </h4>
-		                  <div class="box-tools pull-right">
-		                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		                    
-		                  </div>
-		                </div>
-		                <div class="box-body">
-		                	<div class="row">
-		                		<div class="col-lg-12">
-		                			<label for="foto">Imagen</label>
-		                			<input type="file" id="files" name="foto[]" class="form-control">
-									<br>
-									<output id="list">
-									</output>
-		                		</div>
-		                	</div>
-		                </div>			    		
-				    	
-						
+										<div class="col-sm-4">
+											<div class="form-group">
+												<input type="text" name="codigo_pedido" class="form-control" {{old('codigo_pedido')}} placeholder="Código Pedido ...">	
+											</div>													
+										</div>
+										<div class="col-sm-4">
+											<div class="form-group">
+												<input type="text" name="codigo_producto" class="form-control" {{old('odigo_producto')}} placeholder="Código Producto ...">	
+											</div> 												
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-8">
+											<div class="form-group">
+												<input type="text" name="nombre_producto" class="form-control"  {{old('nombre_producto')}} placeholder="Nombre Producto ...">	
+											</div>												
+										</div>
+										<div class="col-sm-4">
+											<div class="form-group">
+												   <select name="marca_producto" class="form-control">
+												    <option ></option>
+												    <option value="FIEMEC">FIEMEC</option>
+													<option value="ABB">ABB</option>
+													<option value="Schneider">Schneider</option>
+												</select>													
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4">
+											<div class="form-group">
+												<input type="text" name="stock" class="form-control" placeholder="Stock ...">	
+											</div>   												
+										</div>
+										<div class="col-sm-4">
+											<div class="form-group">
+												<input type="text" name="precio_unitario" class="form-control" placeholder="Precio ...">	
+											</div>  												
+										</div>
+										<div class="col-sm-4">
+											<div class="from-group">
+												<select name="categoria_producto" class="form-control" >
+													    <option value="">Seleccione Categoria</option>
+														<option value="Catalogo">Catalogo</option>
+														<option value="Producto Fiemec">Producto Fiemec</option>
+												</select>
+											</div>  												
+										</div>											
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<input type="text" name="descripcion_producto" class="form-control" placeholder="Descripción...">
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="panel panel-default panel-shadow">
+								<div class="panel-body">
+									<div class="form-group">
+										<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+											Imagen Producto Fiemec
+										</label>
+			                			<input type="file" id="files" name="foto[]" class="form-control">
+										<br>
+										<output id="list">
+										</output>
+									</div>
 						<script>
 							function archivo(evt) {
-      var foto = evt.target.files; // FileList object
+      							var foto = evt.target.files; // FileList object
        
-        //Obtenemos la imagen del campo "file". 
-      for (var i = 0, f; f = foto[i]; i++) {         
-           //Solo admitimos imágenes.
-           if (!f.type.match('image.*')) {
-                continue;
-           }
+        						//Obtenemos la imagen del campo "file". 
+      							for (var i = 0, f; f = foto[i]; i++) {         
+           						//Solo admitimos imágenes.
+           						if (!f.type.match('image.*')) {
+                					continue;
+           						}
        
-           var reader = new FileReader();
+           						var reader = new FileReader();
            
-           reader.onload = (function(theFile) {
-               return function(e) {
-               // Creamos la imagen.
-                      document.getElementById("list").innerHTML = ['<img class="thumb img-responsive" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
-               };
-           })(f);
+           						reader.onload = (function(theFile) {
+               					return function(e) {
+               					// Creamos la imagen.
+                      			document.getElementById("list").innerHTML = ['<img class="thumb img-responsive" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+               					};
+          					 })(f);
  
-           reader.readAsDataURL(f);
-       }
-}
+           					reader.readAsDataURL(f);
+      					 }
+					}
              
-      document.getElementById('files').addEventListener('change', archivo, false);
+      				document.getElementById('files').addEventListener('change', archivo, false);
 
-						</script>
-			    	</div>		    	
-			    </div>
-			    <div class="container">
-			    	<div class="row">
-			    		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			    			<div style="margin-top: 20px" class="from-group ">
-			    				<button class="btn btn-primary" type="submit">guardar</button>
-							  	<button class="btn btn-danger" type="reset">Limpiar</button>
-							  	<button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="{{url('productos')}}">volver</a></button>
+					</script>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--cierra panel primary-->
-    </div><!--cierra col-lg-12-->
-{!!Form::close()!!}
-</div><!--cierra todo el row-->
-
-
+				<div class="box-footer">
+					<div class="text-right">
+			    		<button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
+						<button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+						<button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('productos')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+					</div>
+				</div>
+              </div><!-- /.box -->
+              {!!Form::close()!!}
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+</section><!-- /.content -->
 @endsection
