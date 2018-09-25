@@ -330,10 +330,8 @@ public function pdf($id){
     public function destroy($id)
     {
         $producto=Proforma::findOrFail($id);
-        $producto->estado='cancelada';
+        $producto->estado=0;
         $producto->update();
         return Redirect::to('proformas');
-
-
     }
 }
