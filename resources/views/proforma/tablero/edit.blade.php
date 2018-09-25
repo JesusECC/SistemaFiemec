@@ -334,7 +334,7 @@
             if(pro[dtp]['descripcionDP']==null){
                 pdescripcion='';
             }else{
-                pdescripcion=pro[key]['descripcionDP'];
+                pdescripcion=pro[dtp]['descripcionDP'];
             }
             var puni=pro[dtp]['precio_venta'];
             var pcant=pro[dtp]['cantidad'];
