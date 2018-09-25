@@ -15,7 +15,7 @@
 //     return view('welcome');
 // });
 // Route::get('/','HomeController@index');
-// Route::middleware(['auth','admin'])->group(function () {
+Route::middleware(['auth','admin'])->group(function () {
 
     Route::get('/', 'MainController@index');
     Route::get('fiemec',['as' => 'fiemec','uses'=> 'MainController@index']);
@@ -111,5 +111,5 @@
  
 
     // Route::get('/home', 'HomeController@index')->name('home');
-// });   
+});   
 Auth::routes();
