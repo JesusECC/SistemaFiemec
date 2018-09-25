@@ -430,6 +430,7 @@
                 for (const key in tablero) {
                     if (tablero.hasOwnProperty(key)) {
                         if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
+                            tablero[key]['estado']=1;
                             bool=true; 
                         }                                       
                     }
@@ -535,6 +536,7 @@
                                     filaob[fil]['cantidadP']=su;
                                     filaob[fil]['descuentoP']=des;
                                     filaob[fil]['descripcionP']=pdescripcion;
+                                    filaob[fil]['estado']=1;
                                     fila();
                                     boolfila=true;
                                     console.log("Actualizar producto");                      
