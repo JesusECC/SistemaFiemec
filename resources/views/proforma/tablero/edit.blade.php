@@ -630,7 +630,9 @@
                       '</select>';
             $('#select-pro').html(selec);
             for (var keyt in tablero) {
-                tab+=tablero[keyt]['tablero'];
+                if( tablero[keyt]['estado']==1){
+                    tab+=tablero[keyt]['tablero'];
+                }                
             }
             $('#tablerosn').html(tab);
         }
