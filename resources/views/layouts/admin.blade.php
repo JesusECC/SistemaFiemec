@@ -71,14 +71,10 @@
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a class="dropdown-item" href="{{ route('logout') }}"
-                         onclick="event.preventDefault();
-                                       document.getElementById('logout-form').submit();">
-                          Cerrar
-                      </a>
-                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                          @csrf
-                      </form>                      
+                      <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit">cerrar</button>
+                      </form>         
                     </div>
                   </li>
                 </ul>
