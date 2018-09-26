@@ -109,8 +109,13 @@ Route::middleware(['auth','admin'])->group(function () {
     //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
 
 
- 
+    // $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 
     // Route::get('/home', 'HomeController@index')->name('home');
 });   
 Auth::routes();
+
+// $this->post('logout', 'Auth\LoginController@logout')->name('logout');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
