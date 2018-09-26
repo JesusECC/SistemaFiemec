@@ -1,49 +1,96 @@
 @extends ('layouts.admin')
 @section ('contenido')
-<div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Catalogo de Productos</h3>
-	@include('proforma.catalogo.search')
-</div>
+<section class="content-header">
+	<h1 style="margin-top: 55px;">
+		Panel de Administrador
+		<small>Version 2.3.0</small>
+    </h1>
+    <ol class="breadcrumb" style="margin-top: 55px;">
+    	<li>
+    		<a href="#">
+    		<i class="fas fa-dolly"></i> Productos</a>
+    	</li>
+    	<li class="active">Catálogo</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header with-border" style="padding: 10px !important">
+					<h4>
+						<strong style="font-weight: 400">
+							<i class="fas fa-list-ul"></i> Catalogo de Productos
+						</strong>
+					</h4>
+				</div>
+                <!-- /.box-header -->
+				<div class="box-body">
+					<div class="row">
+						<div class="col-lg-4"></div>
+						<div class='col-lg-8 col-sm-8 col-xs-12'>
+							@include('proforma.catalogo.search')
+						</div>	
+					</div>
+					<div class="row">
+						@foreach($catalogos as $pro)
+						<div class="col-sm-3">
+							<div class="box box-success">
+								<div class="box-header with-border" style="padding-top: 20px !important;padding-bottom: 10px !important;padding-left: 10px  !important;padding-right: 10px !important">
+									<h5 style="font-size: 12px; ">{{$pro->nombre_producto}}</h5>
+									<!--<div class="box-tools pull-right">
+										<button  type="button" class="btn btn-box-tool" data-widget="collapse">
+											<i class="fa fa-minus"></i>
+										</button>
+									</div>-->
+								</div>
+								<div class="box-body">
+									<img src="{{asset('fotos/productos/'.$pro->foto)}}">
+									<br>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<div class="input-group">
+													<span class="input-group-addon" style="padding: 5px 5px !important;font-size: 12px !important">
+														S/. 
+													</span>
+													<input type="text" class="form-control" disabled="" value="{{$pro->precio_unitario}}" style="height: 30px !important;padding: 6px 4px !important;font-size: 11px !important;text-align: center;">
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<div class="input-group">
+													<span class="input-group-addon" style="padding: 5px 5px !important;font-size: 12px !important">
+														$. 
+													</span>
+													<input type="text" class="form-control" disabled="" value="{{$pro->precio_unitario}}" style="height: 30px !important;padding: 6px 4px !important;font-size: 11px !important;text-align: center;">
+												</div>
+											</div>											
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<i class="fas fa-boxes"></i> Stock : {{$pro->stock}}
+										</div>
+										<div class="col-sm-6">
+											<i class="fas fa-barcode"></i> Código : {{$pro->codigo_producto}}
+										</div>
+									</div>
+								</div>
+								<div class="box-footer" style="text-align: center;">
+									<a  href=""  data-target="#modal-show-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-primary btn-sm text-center" style="background-color: #18A689;border:1px solid #18A689"><i class="far fa-eye"></i> Ver</a>
+								</div>
+							</div>
+						</div>
+						@include('proforma.catalogo.modal-catalogo')
+						@endforeach
+					</div>
+				</div>
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+          {{$catalogos->render()}}
+</section><!-- /.content -->
 
-
-<!-- COMENTARIOS
--Codigo de pedido ira en el detalle catalogo
--Foto ira en el detalle catalogo
--fecha de sistema de registro ira en el detalle catalogo
--Stock ira en el detalle catalogo
--categoria ira en el detalle catalogo
--estado ira en el detalle catalogo
- -->
- <div class="row">
-  <div class="col-sm-12 col-md-12">
-  	@foreach($catalogos as $pro)
-	  <div class="col-lg-3 col-sm-4 col-md-3">
-	    <div class="thumbnail">
-	      <img src="{{asset('fotos/productos/'.$pro->foto)}}">
-	      <div class="caption">
-	        <h3>{{$pro->nombre_producto}}</h3>
-	        <h4 style="color:#028039">S/. {{$pro->precio_unitario}} o </h4>
-	        <p style="font-size: 20px">
-	        	Stock: <span style="font">{{$pro->stock}}</span>
-	        </p>
-	        <p style="font-size: 20px">
-	        	<span>
-	        		Código <span style="font">{{$pro->codigo_producto}}</span>
-	        	</span>
-	        </p>
-	        <p>
-	        	<a  href=""  data-target="#modal-show-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-primary"><i class="far fa-eye"></i> Ver</a> 
-	        	
-	        	<a href="{{route('producto-edit',$pro->idProducto)}}" class="btn btn-success" role="button"><i class="fas fa-edit"></i> Editar</a> 
-	        	
-	        	<a href="" data-target="#modal-delete-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-danger" ><i class="fas fa-trash-alt"></i> Eliminar</a></p>
-	      </div>
-	    </div>
-	  </div>
-@include('proforma.producto.modal')
-	  				@include('proforma.producto.modal-producto')	  
-	 @endforeach
-  </div>
-</div>
-{{$catalogos->render()}}
 @endsection

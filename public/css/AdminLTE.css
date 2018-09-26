@@ -4963,3 +4963,90 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 .panel-shadow {
     box-shadow: 1px 1px 3px rgba(0,0,0,.1) !important;
 }
+.modal-content {
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    outline: 0 none;
+    position: relative;
+}
+
+.modal-header {
+    padding: 30px 15px;
+    text-align: center;
+}
+.mh-p {
+    background: #ed5565 !important;
+    color: #ffffff !important;
+}
+.mh-v{
+    color: #ffffff !important;
+    background: #1A7BB9 !important;
+}
+.mh-c{
+    color: #ffffff !important;
+    background: #18A689 !important;
+}
+.modal-icon {
+    font-size: 84px;
+    color: #e2e3e3;
+}
+.modal-body {
+    background: #f8fafb;
+}
+.modal-body {
+    padding: 20px 30px 30px 30px;
+}
+.panel-transparent {
+    background-color: transparent !important;
+}
+.p-md {
+    padding: 25px;
+}
+.form-control, .form-control:focus, .has-error .form-control:focus, .has-success .form-control:focus, .has-warning .form-control:focus, .navbar-collapse, .navbar-form, .navbar-form-custom .form-control:focus, .navbar-form-custom .form-control:hover, .open .btn.dropdown-toggle, .panel, .popover, .progress, .progress-bar {
+    box-shadow: none !important;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.text-warning {
+    color: #f8ac59 !important;
+}
+
+.fa-3x {
+    font-size: 3em;
+}
+.m-b-sm {
+    margin-bottom: 10px;
+}
+
+.m-t-none {
+    margin-top: 0;
+}
+.text-warning {
+  margin-top: 5px !important;
+    color: #f8ac59 !important;
+}
+p.p-text-delete {
+
+font-size: 13px;
+    color: #676a6c !important;
+}
+h3, h4, h5 {
+    margin-top: 5px;
+    font-weight: 600;
+}
+h3 {
+    font-size: 16px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+}

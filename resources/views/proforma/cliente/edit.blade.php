@@ -1,114 +1,199 @@
 @extends ('layouts.admin')
 @section ('contenido')
-<div class="row">
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	<h3>Modificar Trabajador:{{$Cliente->nombres.' '.$Cliente->paterno.' '.$Cliente->materno }}</h3>
-	@if (count($errors)>0)
-	<div class="alert-alert-danger">
-		<ul>
-			@foreach ($errors->all() as $error)
-			    <li>{{$error}}</li>
-			@endforeach 
-		</ul>	
-    </div>
-    @endif
-</div>
-</div>
-
-    {!!Form::model($Cliente,['method'=>'PATCH','route'=>['cliente.update',$Cliente->idCliente]])!!}
-    {{Form::token()}}
-
-<div class="form-group">
-	<label for="tipo_documento">Tipo Documento</label>
-	<input type="text" name="tipo_documento" class="form-control" required value="{{$Cliente->tipo_documento}}">	
-</div>
-
-<div class="form-group">
-	<label for="nro_documento">NUmero Documento</label>
-	<input type="text" name="nro_documento" class="form-control" required value="{{$Cliente->nro_documento}}">	
-</div>
-
-<div class="form-group">
-	<label for="nombres">Nombre</label>
-	<input type="text" name="nombres" class="form-control" required value="{{$Cliente->nombres}}">	
-</div>
-
-<div class="form-group">
-	<label for="paterno">Apellido paterno</label>
-	<input type="text" name="paterno" class="form-control" required value="{{$Cliente->paterno}}">	
-</div>
-
-<div class="form-group">
-	<label for="materno">Apeliido materno</label>
-	<input type="text" name="materno" class="form-control" required value="{{$Cliente->materno}}">	
-</div>
-
-<div class="form-group">
-	<label for="fecha_nacimiento">Fecha de nacimiento</label>
-	<input type="date" name="fecha_nacimiento" class="form-control" required value="{{$Cliente->fecha_nacimiento}}">	
-</div>
-<div class="form-group">
-	<label for="sexo">Sexo</label>
-	<input type="text" name="sexo" class="form-control" required value="{{$Cliente->sexo}}">	
-</div>
-
-<div class="form-group">
-	<label for="telefono">Telefono</label>
-	<input type="text" name="telefono" class="form-control" required value="{{$Cliente->telefono}}">	
-</div>
-
-<div class="form-group">
-	<label for="celular">Celular</label>
-	<input type="text" name="celular" class="form-control" required value="{{$Cliente->celular}}">	
-</div>
-
-<div class="form-group">
-	<label for="usuario">Usuario</label>
-	<input type="text" name="usuario" class="form-control" required value="{{$Cliente->usuario}}">	
-</div>
-
-<div class="form-group">
-	<label for="contraseña">contraseña</label>
-	<input type="text" name="contraseña" class="form-control" required value="{{$Cliente->contraseña}}">	
-</div>
-
-<div class="form-group">
-	<label for="direccion">direccion</label>
-	<input type="text" name="direccion" class="form-control" required value="{{$Cliente->direccion}}">	
-</div>
-
-<div class="form-group">
-	<label for="correo">correo</label>
-	<input type="text" name="correo" class="form-control" required value="{{$Cliente->correo}}">	
-</div>
-
-<div class="form-group">
-	<label for="cargo">cargo</label>
-	<input type="text" name="cargo" class="form-control" required value="{{$Cliente->cargo}}">	
-</div>
-
-<div class="form-group">
-	<label for="sueldo">sueldo</label>
-	<input type="text" name="sueldo" class="form-control" required value="{{$Cliente->sueldo}}">	
-</div>
-
-<div class="form-group">
-	<label for="fecha_inicio">Fecha de inicio</label>
-	<input type="date" name="fecha_inicio" class="form-control" required value="{{$Cliente->fecha_inicio}}">	
-</div>
-
-<div class="form-group">
-	<label for="fecha_fin">fecha de fin</label>
-	<input type="text" name="fecha_fin" class="form-control" required value="{{$Cliente->fecha_fin}}">	
-</div>
-
-<div class="from-group">
-	<button class="btn btn-primary" type="submit">guardar</button>
-	
-
-</div>
-{!!Form::close()!!}
-
-
-
+<section class="content-header">
+	<h1 style="margin-top: 55px;">
+		Panel de Administrador
+		<small>Version 2.3.0</small>
+    </h1>
+    <ol class="breadcrumb" style="margin-top: 55px;">
+    	<li>
+    		<a href="#">
+    		<i class="fas fa-user-edit"></i> Clientes</a>
+    	</li>
+    	<li class="active">Editar Cliente</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box" style="border-top: 3px solid #18A689">
+				<div class="box-header with-border" style="padding: 10px !important">
+					<h4>
+						<strong style="font-weight: 400">
+							<i class="fas fa-users"></i> Editar Datos Cliente
+						</strong>
+					</h4>
+				    @if(count($errors)>0)
+					<div class="alert-alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+							    <li>{{$error}}</li>
+							@endforeach 
+						</ul>	
+				    </div>
+				    @endif
+				</div>
+                <!-- /.box-header -->
+                	{!!Form::model($cliente,['method'=>'PATCH','route'=>['cliente.update',$cliente->idCliente]])!!}
+					{{Form::token()}}
+				<div class="box-body bg-gray-c">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a href="#dni" data-toggle="tab"  style="font-size: 13px;color: #676a6c">DNI</a>
+									</li>
+									<li>
+										<a href="#ruc" data-toggle="tab" style="font-size: 13px;color: #676a6c">RUC</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="active tab-pane" id="dni">
+										<div class="panel panel-default panel-shadow">
+											<div class="panel-body">
+												<div class="form-group">
+													<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+														Datos Generales
+													</label>
+												</div>
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="form-group">
+															<input type="text" name="nro_documento" class="form-control" required value="{{$cliente->nro_documento}}">
+														</div> 												
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group">
+															<input type="text" name="nombres_Rs" class="form-control" required value="{{$cliente->nombres_Rs}}">
+														</div>													
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-6">
+														<div class="form-group">
+															<input type="text" name="paterno" class="form-control" required value="{{$cliente->paterno}}" {{old('paterno')}}>
+														</div> 												
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group">
+															<input type="text" name="materno" class="form-control" required value="{{$cliente->materno}}" {{old('materno')}}>	
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-5">
+														<div class="form-group">
+															<div class="input-group date">
+																<div class="input-group-addon">
+																	<i class="far fa-calendar-alt"></i>
+																</div>
+																<input type="date" name="fecha_nacimiento" class="form-control" required value="{{$cliente->fecha_nacimiento}}">
+															</div>
+														</div>												
+													</div>
+													<div class="col-sm-3">
+														<div class="form-group">
+															<select name="sexo" class="form-control">
+																@if($cliente->sexo=='hombre')
+															   <option value="hombre" selected>Hombre</option>
+															   <option value="mujer">Mujer</option>	
+															   @elseif($cliente->sexo=='mujer')
+															   <option value="hombre">Hombre</option>
+															   <option value="mujer" selected>Mujer</option>
+															   @endif
+															</select>													
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<input type="text" name="telefono" class="form-control" required value="{{$cliente->telefono}}">	
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-5">
+														<div class="form-group">
+															<input type="text" name="celular" class="form-control" required value="{{$cliente->celular}}">	
+														</div>   												
+													</div>
+													<div class="col-sm-7">
+														<div class="form-group">
+															<input type="text" name="correo" class="form-control" required value="{{$cliente->correo}}">	
+														</div>  												
+													</div>										
+												</div>
+												<div class="form-group">
+													<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+														Dirección de Cliente
+													</label>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<input type="text" name="Departamento" class="form-control" required value="{{$cliente->Departamento}}">
+														</div>														
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<input type="text" name="Distrito" class="form-control" required value="{{$cliente->Distrito}}">
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<input type="text" name="Direccion" class="form-control" required value="{{$cliente->Direccion}}">
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<input type="text" name="Referencia" class="form-control" required value="{{$cliente->Referencia}}">
+															
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+														Número de Cuentas
+													</label>
+												</div>
+												<div class="row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<input type="text" name="cuenta_1" class="form-control" required value="{{$cliente->cuenta_1}}">
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<input type="text" name="cuenta_2" class="form-control" required value="{{$cliente->cuenta_2}}">
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<input type="text" name="cuenta_3" class="form-control" required value="{{$cliente->cuenta_3}}">
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>										
+									</div>
+									<div class="tab-pane" id="ruc">
+										RUC
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-footer">
+					<div class="text-right">
+			    		<button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
+						<button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+						<button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{route('clientes')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+					</div>
+				</div>
+              </div><!-- /.box -->
+              {!!Form::close()!!}
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+</section><!-- /.content -->
 @endsection

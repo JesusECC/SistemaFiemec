@@ -133,15 +133,10 @@
               </ul>
             </li>
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-user-plus "></i>
+              <a href="{{route ('clientes')}}">
+                <i class="fas fa-users"></i>
                 <span>Cliente</span>
-                 <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="ventas/venta"><i class="fa fa-circle-o"></i> Nuevo Cliente</a></li>
-                <li><a href="ventas/cliente"><i class="fa fa-circle-o"></i> Clientes</a></li>
-              </ul>
             </li>
             <li class="treeview">
               <a href="#">
@@ -211,6 +206,7 @@
 
     <script src="{{asset("https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")}}"></script>
     <script src="{{asset("https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js")}}"></script>
+    
     <script type="text/javascript">
   $(document).ready(function() {
                      $('#example').DataTable({

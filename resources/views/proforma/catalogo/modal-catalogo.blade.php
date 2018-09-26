@@ -1,7 +1,7 @@
 <div class="modal fade in" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-show-{{$pro->idProducto}}" style="border-radius:0px !important;">
   <div class="modal-dialog " role="document">
   	<div class="modal-content">
-	      <div class="modal-header mh-v">
+	    <div class="modal-header mh-c" >
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
 	        <i class="far fa-eye modal-icon"></i>
 	      </div>
@@ -36,6 +36,16 @@
 	  			<p>
 	  				<span>
 	  					<i class="far fa-bookmark"></i> Categoría : {{$pro->categoria_producto}}
+	  				</span>
+	  			</p>
+	  			<p>
+	  				<span>
+	  					<i class="fas fa-calendar-alt"></i> Fecha : {{$pro->fecha_sistema}}
+	  				</span>
+	  			</p>
+	  			<p>
+	  				<span>
+	  					<i class="fas fa-hashtag"></i> Estado : {{$pro->estado}}		
 	  				</span>
 	  			</p>
 	  		</div><!--final de cuerpo-->

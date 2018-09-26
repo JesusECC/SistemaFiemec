@@ -105,11 +105,15 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);
     Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProformaServicio@create']);
     Route::post('servicios/',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
+
     //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
 
-
- 
-
+    //rutas cliente
+    Route::get('cliente',['as'=>'clientes','uses'=>'ControllerClientes@index']);
+    Route::get('cliente/create',['as'=>'clientes-create','uses'=>'ControllerClientes@create']);
+    Route::post('cliente/',['as'=>'clientes-store','uses'=>'ControllerClientes@store']);
+    Route::get('cliente/{idCliente}/edit',['as'=>'clientes-edit','uses'=>'ControllerClientes@edit']);
+    Route::get('cliente/show/{idCliente}',['as'=>'clientes-show','uses'=>'ControllerClientes@show']);
     // Route::get('/home', 'HomeController@index')->name('home');
 });   
 Auth::routes();

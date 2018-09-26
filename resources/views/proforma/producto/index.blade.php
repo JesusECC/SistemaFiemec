@@ -1,4 +1,3 @@
-
 @extends ('layouts.admin')
 @section ('contenido')
 <section class="content-header">
@@ -11,7 +10,7 @@
     		<a href="#">
     			<i class="fas fa-dolly"></i> Productos</a>
     	</li>
-    	<li class="active">Fiemec</li>
+    	<li class="active">Lista Fiemec</li>
     </ol>
 </section>
 <section class="content">
@@ -63,7 +62,7 @@
 				        			S/. {{$pro->precio_unitario}}
 				        		</td>
 				        		<td align="center">
-				        			<a  href=""  data-target="#modal-show-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="left" title="Ver Producto"><i class="far fa-eye" style="font-weight: 400"></i> </a>
+				        			<a  href=""  data-target="#modal-show-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="left" title="Ver Producto"><i class="far fa-eye"></i> </a>
 									<a href="{{route('producto-edit',$pro->idProducto)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
 									<a href="" data-target="#modal-delete-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> </a>
 								</td>
@@ -73,6 +72,7 @@
 							@endforeach
 				        </tbody>
     				</table>
+    				{{$productos->render()}}
 				</div>
               </div><!-- /.box -->
             </div><!-- /.col -->

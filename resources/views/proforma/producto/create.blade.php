@@ -78,7 +78,7 @@
 										<div class="col-sm-4">
 											<div class="form-group">
 												   <select name="marca_producto" class="form-control">
-												    <option ></option>
+												    <option value="" disabled selected >Seleccione Marca</option>
 												    <option value="FIEMEC">FIEMEC</option>
 													<option value="ABB">ABB</option>
 													<option value="Schneider">Schneider</option>
@@ -100,7 +100,7 @@
 										<div class="col-sm-4">
 											<div class="from-group">
 												<select name="categoria_producto" class="form-control" >
-													    <option value="">Seleccione Categoria</option>
+													    <option value="" disabled selected>Seleccione Categoria</option>
 														<option value="Catalogo">Catalogo</option>
 														<option value="Producto Fiemec">Producto Fiemec</option>
 												</select>
