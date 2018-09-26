@@ -107,11 +107,11 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProformaServicio@create']);
     Route::post('servicios/',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
 
-<<<<<<< HEAD
+
     //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
-=======
+
     // $this->post('logout', 'Auth\LoginController@logout')->name('logout');
->>>>>>> 14923468d7e8c2d204739d325e4cc141b448408c
+
 
     //rutas cliente
     Route::get('cliente',['as'=>'clientes','uses'=>'ControllerClientes@index']);
