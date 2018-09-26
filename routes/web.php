@@ -47,6 +47,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('tableros/guardar',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
     Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'ControllerProformaTableros@buscarProducto']);
     Route::get('tableros/edit/{id}',['as' => 'tablero-edit','uses'=>'ControllerProformaTableros@edit']);
+    Route::post('tableros/edit/update',['as' => 'tablero-update','uses'=>'ControllerProformaTableros@update']);
 
     Route::get('proforma/tablero/pdf/{idProforma}','ControllerProformaTableros@pdf');
     //Route::get('proforma/tablero/pdf2/{idProforma}','ControllerProformaTableros@pdf2');
@@ -106,7 +107,11 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProformaServicio@create']);
     Route::post('servicios/',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
 
+<<<<<<< HEAD
     //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
+=======
+    // $this->post('logout', 'Auth\LoginController@logout')->name('logout');
+>>>>>>> 14923468d7e8c2d204739d325e4cc141b448408c
 
     //rutas cliente
     Route::get('cliente',['as'=>'clientes','uses'=>'ControllerClientes@index']);
@@ -117,3 +122,8 @@ Route::middleware(['auth','admin'])->group(function () {
     // Route::get('/home', 'HomeController@index')->name('home');
 });   
 Auth::routes();
+
+// $this->post('logout', 'Auth\LoginController@logout')->name('logout');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

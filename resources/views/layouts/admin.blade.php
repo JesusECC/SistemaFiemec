@@ -71,7 +71,10 @@
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Cerrar</a>
+                      <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit">cerrar</button>
+                      </form>         
                     </div>
                   </li>
                 </ul>
