@@ -63,7 +63,6 @@ class ControllerClientes extends Controller
  public function store(Request $request){
   
                   $Cliente=new Clientes;
-
                   $Cliente->tipo_documento='DNI';
                   $Cliente->nro_documento=intval($request->get('nro_documento'));
                   $Cliente->nombres_Rs=$request->get('nombres_RS');                  
@@ -83,12 +82,7 @@ class ControllerClientes extends Controller
                   $Cliente->Distrito=$request->get('Distrito');
                   $Cliente->Direccion=$request->get('Direccion');
                   $Cliente->Referencia=$request->get('Referencia');
-                  if (Input::hasFile('fotoCEP')){
-           $file=Input::file('fotoCEP');
-           $file->move(public_path().'/fotos/clientes/',$file->getClientOriginalName());
-           $producto->fotoCEP=$file->getClientOriginalName();
-
-        }
+                  
                 
                   $Cliente->save();
  
@@ -101,7 +95,7 @@ class ControllerClientes extends Controller
   public function edit($id)
     {
 
-        return view("proforma.cliente.edit",["cliente"=>Clientes::findOrFail($id)]);
+        return view("proforma.cliente.edit",["Cliente"=>Clientes::findOrFail($id)]);
     }
 
    
@@ -109,10 +103,9 @@ class ControllerClientes extends Controller
     {
 
                   $Cliente=Clientes::Find($id);
-
                   $Cliente->tipo_documento='DNI';
                   $Cliente->nro_documento=intval($request->get('nro_documento'));
-                  $Cliente->nombres_Rs=$request->get('nombres_RS');               
+                  $Cliente->nombres_Rs=$request->get('nombres_Rs');               
                   $Cliente->paterno=$request->get('paterno');
                   $Cliente->materno=$request->get('materno');
                   $Cliente->fecha_nacimiento=$request->get('fecha_nacimiento');
@@ -125,18 +118,10 @@ class ControllerClientes extends Controller
                   $Cliente->cuenta_2=$request->get('cuenta_2');
                   $Cliente->cuenta_3=$request->get('cuenta_3');
                   $Cliente->estado='activo';
-                  $Cliente->provincia=$request->get('provincia');
-                  $Cliente->distrito=$request->get('distrito');
-                  $Cliente->direcion=$request->get('direcion');
-                  $Cliente->referencia=$request->get('referencia');
-                  $Cliente->idCliente=$idCliente;
-                  
-                  if (Input::hasFile('fotoCEP')){
-           $file=Input::file('fotoCEP');
-           $file->move(public_path().'/fotos/clientes/',$file->getClientOriginalName());
-           $producto->fotoCEP=$file->getClientOriginalName();
-
-        }
+                  $Cliente->Departamento=$request->get('Departamento');
+                  $Cliente->Distrito=$request->get('Distrito');
+                  $Cliente->Direccion=$request->get('Direccion');
+                  $Cliente->Referencia=$request->get('Referencia');
                   $Cliente->update();
  
             

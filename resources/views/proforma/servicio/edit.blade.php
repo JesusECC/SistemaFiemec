@@ -27,13 +27,7 @@
                             <div class="col-lg-10">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Nombre del Cliente</label>
-                                    <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
-                                        <option value="">Seleccione Cliente</option>
-                                        @foreach($clientes as $cliente)
-                                            <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
-                                        @endforeach
-                                    </select> 
-                                    <button type="button" id="bt_add_Cliente" class="btn btn-primary">Agregar Cliente</button>
+                                    <input type="text" disabled name="NombreClie" id="NombreClie" class="form-control" placeholder="Nombre">
                                 </div>                               
                             </div>
                             <div class="col-lg-6">
@@ -59,16 +53,7 @@
                             Tipo de Cambio
                         </h3>
                     </div>
-                    <div class="panel-body">         
-                        <div class="col-lg-6">
-                            <label>Tipo de cambio</label>
-                            <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
-                                <option value=""></option>
-                                @foreach($monedas as $mo)                
-                                    <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
-                                @endforeach  
-                            </select>
-                        </div>
+                    <div class="panel-body">
 
                         <div class="col-lg-4">
                             <div class="from-group">
@@ -82,13 +67,7 @@
                                 <label for="valorcambio">Valor</label>
                                 <input type="text" disabled id="valorcambio" class="form-control">                    
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="from-group">
-                                <label for="igv_tipocambio">IGV</label>
-                                <input type="text" disabled id="igv_tipocambio" class="form-control">                                
-                            </div>                                        
-                        </div>
+                        </div>                       
                     </div>         
                 </div>
             </div>
@@ -114,7 +93,6 @@
                                 </samp>
                             </div>
                         </div>
-                        <div class="col-lg-6">
                         <div class="form-group" id="producto-oculto" style='display:none;'>
                             <label class="control-label">Producto</label>
                             <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
@@ -124,8 +102,6 @@
                                 @endforeach
                             </select>                    
                         </div>
-                        </div>
-                         
                         <!-- {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
                         @csrf -->
                         <div class="card" id="producto-crear-oculto" style='display:none;'>
@@ -316,8 +292,16 @@
     var idcliente;
     var totalt;
     var valorventa;
+
     $("#pidProducto").change(MostarProducto);
+    // variables para asignar valores 
     
+    var editarval=true;
+    asignarValores();
+    function asignarValores(){
+        var pro={!! $proforma !!};
+        console.log(pro);
+    }
 
     //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
     function MostrarCliente(){
@@ -336,8 +320,6 @@
         // descuentoP -->para emostar el 
     }
     function mostrarTipoCambio(){
-        // {{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}
-        tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         $("#simbolo").val(tipoCambio[2]);
         $("#valorcambio").val(tipoCambio[1]);
         $("#igv_tipocambio").val(tipoCambio[3]+ " %");
@@ -387,7 +369,6 @@
             alert('ingrese productos al tablero!!');
         }
     }
-
     var bool;
     function agregarTablero(){    
         var tabl=$("#NomTablerop").val();
@@ -532,7 +513,6 @@
             alert("Ingresar Datos del Producto!!");
         }
     }
-
     function fila(){
         // realiza la insercion de las filas agregadas actualizando los importes y las cantidaddes
         if(filaob.length>0){
@@ -582,8 +562,7 @@
                 }
             }
         }
-    } 
-
+    }    
     function ListaSelect(){
         // realiza el listado de todas los tableros que se añaden
         var tab;    
@@ -605,7 +584,6 @@
             $('#tablerosn').html(tab);
         }
     }
-
     function detalleFilas(){
         // mantiene en la vista las filas cuando se agrega una nueva tabla
         // var dat={idProducto:idProd,producto:pname,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp};

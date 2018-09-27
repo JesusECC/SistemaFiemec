@@ -63,28 +63,25 @@
 </div>
 
 <div class="form-group">
-	<label for="provincia">Provincia</label>
-	<input type="text" name="provincia" class="form-control" placeholder="Ingrese Provincia">	
+	<label for="Departamento">Provincia</label>
+	<input type="text" name="Departamento" class="form-control" placeholder="Ingrese Provincia">	
 </div>
 
 <div class="form-group">
-	<label for="distrito">Distrito</label>
-	<input type="text" name="distrito" class="form-control" placeholder="Ingrese Distrito">	
+	<label for="Distrito">Distrito</label>
+	<input type="text" name="Distrito" class="form-control" placeholder="Ingrese Distrito">	
 </div>
 
 <div class="form-group">
-	<label for="direcion">direccion</label>
-	<input type="text" name="direcion" class="form-control" placeholder="direcion">	
+	<label for="Direccion">direccion</label>
+	<input type="text" name="Direccion" class="form-control" placeholder="direcion">	
 </div>
 
 <div class="form-group">
-	<label for="referencia">Referencia</label>
-	<input type="text" name="referencia" class="form-control" placeholder="Ingrese la cuenta">	
+	<label for="Referencia">Referencia</label>
+	<input type="text" name="Referencia" class="form-control" placeholder="Ingrese la cuenta">	
 </div>
-<div class="col-lg-12">
-    <label for="fotoCEP">Imagen</label>
-    <input type="file" id="files" name="fotoCEP[]" class="form-control">
-</div>
+
 
 <div style="margin-top: 20px" class="from-group ">
 

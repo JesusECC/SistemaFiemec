@@ -34,7 +34,7 @@
 					<td>{{$pr->nombres_Rs}}</td>
 					<td>{{$pr->telefono.' / '.$pr->celular}}</td>
 					<td>{{$pr->correo}}</td>
-					<td>{{$pr->direcion}}</td>
+					<td>{{$pr->Direccion}}</td>
 
 					<td>
 					<a href="{{URL::action('ControllerProveedor@show',$pr->idCliente)}}"><button class="btn btn-info">ver</button>

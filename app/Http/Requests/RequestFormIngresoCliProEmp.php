@@ -26,9 +26,8 @@ class RequestFormIngresoCliProEmp extends FormRequest
         return [
         'tipo_documento'=>'max:45',
         'nro_documento'=>'max:145',
-        'nombres_Rs'=>'max:45',
-        'paterno'=>'max:45',
-        'materno'=>'max:45',
+        
+        
         'fecha_nacimiento'=>'date',
         'sexo'=>'max:45',
         'telefono'=>'max:11',

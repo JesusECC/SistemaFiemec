@@ -1,10 +1,9 @@
 @extends ('layouts.admin')
 @section ('contenido')
-
 <div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Lista de Servicios  <a href="servicio/create"><button class="btn btn-success">Nuevo</button></a></h3>
-
-	@include('proforma.servicio.search')
+	<h3> Buscar Proformas <a href="{{route('tablero-create')}}"> <button class="btn btn-success">Nuevo</button></a></h3>
+	
+@include('proforma.proforma.search')
 </div>
 <div class='row'>
 	<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
@@ -16,34 +15,54 @@
 					<th>Comprobante</th>
 					<th>Nombre</th>
 					
-					<th>total</th>
+					
 					
 					<th>opciones</th>
 				</thead>
 
-				@foreach ($servicios as $ser)
+				@foreach ($proformas as $prof)
 				
 
 				<tr>
 
-					<td>{{$ser->fecha_hora}}</td>
-					<td>{{$ser->serie_proforma.' /  f000-'.$ser->idProforma}}</td>
-					<td>{{$ser->nombre}}</td>
+					<td>{{$prof->fecha_hora}}</td>
+					<td>{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}</td>
+					<td>{{$prof->nombre}}</td>
 					
-					<td>{{$ser->precio_total}}</td>
+					
 					
 					<td>
-					<a href="{{URL::action('ControllerProformaServicio@show',$ser->idProforma)}}"><button class="btn btn-primary">detalles</button>
+						<div class="btn-group">
+                       <button type="button" class="btn btn-primary">PDF</button>
+                       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                       <span class="caret"></span>
+                       </button>
+                       <ul class="dropdown-menu" role="menu">
+                       <li><a target="_blank" href="{{URL::action('ControllerProformaTableros@pdf',$prof->idProforma)}}">PDF Soles</a></li>
+                       <li><a target="_blank" href="{{URL::action('ControllerProformaTableros@pdf',$prof->idProforma)}}">PDF Tipo Cambio</a></li>
+                       </ul>
+                       </div>
+
+					
+					<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
 					</a>
-					<a href="" data-target="#modal-delete-{{$ser->idProforma}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
+					<a href="{{route('tablero-edit',$prof->idProforma)}}"><button class="btn btn-primary">Editar</button>
+					</a>
+					
+					<a href="" data-target="#modal-delete-{{$prof->idProforma}}" data-toggle="modal"><button class="btn btn-danger">Anular</button></a>
+
+					
 					</td>
 				</tr>
-				@include('proforma.servicio.modal')
+				
+				@include('proforma.proforma.modal')
              @endforeach
+
+             
             
 			</table>
 		</div>
-		{{$servicios->render()}}
+		{{$proformas->render()}}
 	</div>
 </div>
 

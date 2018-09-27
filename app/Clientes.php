@@ -14,7 +14,7 @@ class Clientes extends Model
 
     protected $filleable = [
 
-    	'tipo_documento',
+    	'tipo_documento',//tabla aparte
     	'nro_documento',
     	'nombres_Rs',
     	'paterno',
@@ -25,7 +25,7 @@ class Clientes extends Model
     	'celular',
     	'correo',
         'fotoCEP',
-    	'tipo_persona',
+    	'tipo_persona',//tabla aparte
     	'cuenta_1',
     	'cuenta_2',
     	'cuenta_3',

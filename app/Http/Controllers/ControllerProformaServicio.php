@@ -30,6 +30,7 @@ class ControllerProformaServicio extends Controller
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('p.estado','=','activo')
+    ->where('p.tipo_proforma','=','servicios')
     ->orderBy('p.idProforma','desc')
      
         ->paginate(7);           
@@ -61,6 +62,10 @@ class ControllerProformaServicio extends Controller
         ->where('po.estado','=','activo')
         ->get();
         
+        $monedas=DB::table('Tipo_moneda')
+        ->where('estado','=','activo')
+        ->get();
+
         $monedas=DB::table('Tipo_moneda')
         ->where('estado','=','activo')
         ->get();

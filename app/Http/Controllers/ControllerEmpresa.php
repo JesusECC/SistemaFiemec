@@ -58,7 +58,7 @@ public function show($id)
 
                   $empresa->tipo_documento='DNI';
                   $empresa->nro_documento=intval($request->get('nro_documento'));
-                  $empresa->nombres_Rs=$request->get('nombres_RS');
+                  $empresa->nombres_Rs=$request->get('nombres_Rs');
                   $empresa->paterno='.';
                   $empresa->materno='.';                
                   $empresa->telefono=$request->get('telefono');
@@ -95,7 +95,7 @@ public function show($id)
 
          $empresa->tipo_documento='RUC';
                   $empresa->nro_documento=intval($request->get('nro_documento'));
-                  $empresa->nombres_Rs=$request->get('nombres_RS');                  
+                  $empresa->nombres_Rs=$request->get('nombres_Rs');                  
                   $empresa->telefono=$request->get('telefono');
                   $empresa->celular=$request->get('celular');
                   $empresa->correo=$request->get('correo');

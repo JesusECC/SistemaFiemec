@@ -7,7 +7,7 @@ use SistemaFiemec\Http\Requests;
 use SistemaFiemec\Producto;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use SistemaFiemec\Http\Requests\RequestFormProducto;
+
 
 use Carbon\Carbon;
 use Response;
@@ -45,7 +45,7 @@ class ControllerProducto extends Controller
     }
 
     
-    public function store(RequestFormProducto $request)
+    public function store(Request $request)
     {
         $producto=new Producto;
         $producto->serie_producto=$request->get('serie_producto');
@@ -80,7 +80,7 @@ class ControllerProducto extends Controller
     }
 
    
-    public function update(RequestFormProducto $request,$id)
+    public function update(Request $request,$id)
     {
 
         $producto=Producto::find($id);
@@ -105,7 +105,7 @@ class ControllerProducto extends Controller
 
         }
         $producto->update();
-        return Redirect::to('proforma/producto');
+        return Redirect::to('productos');
     }
 
     public function destroy($id)

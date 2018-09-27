@@ -6,13 +6,11 @@ namespace SistemaFiemec\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SistemaFiemec\Clientes;
-use SistemaFiemec\ClienteDireccion;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use SistemaFiemec\Http\Requests\RequestFormIngresoCliProEmp;
-
 
 use DB;
+
 
 class ControllerProveedor extends Controller
 {
@@ -26,7 +24,7 @@ class ControllerProveedor extends Controller
     {
         $query=trim($request->get('searchText'));
        $proveedores=DB::table('Cliente_Proveedor as cr')
-       ->where('nombres_Rs','LIKE','%'.$query.'%')
+       ->where('estado','LIKE','%'.$query.'%')
        ->where('tipo_persona','=','Cliente proveedor')
        ->orderby('idCliente','asc')
        ->paginate(10);
@@ -55,14 +53,14 @@ public function show($id)
   
 
 
- public function store(RequestFormIngresoCliProEmp $request)
+ public function store(Request $request)
  {
   
                   $proveedor= new Clientes;
 
                   $proveedor->tipo_documento='RUC';
                   $proveedor->nro_documento=intval($request->get('nro_documento'));
-                  $proveedor->nombres_Rs=$request->get('nombres_RS');                  
+                  $proveedor->nombres_Rs=$request->get('nombres_Rs');                  
                   $proveedor->telefono=$request->get('telefono');
                   $proveedor->celular=$request->get('celular');
                   $proveedor->correo=$request->get('correo');
@@ -71,10 +69,10 @@ public function show($id)
                   $proveedor->cuenta_2=$request->get('cuenta_2');
                   $proveedor->cuenta_3=$request->get('cuenta_3');
                   $proveedor->estado='activo';
-                  $proveedor->provincia=$request->get('provincia');
-                  $proveedor->distrito=$request->get('distrito');
-                  $proveedor->direcion=$request->get('direcion');
-                  $proveedor->referencia=$request->get('referencia');
+                  $proveedor->Departamento=$request->get('Departamento');
+                  $proveedor->Distrito=$request->get('Distrito');
+                  $proveedor->Direccion=$request->get('Direccion');
+                  $proveedor->Referencia=$request->get('Referencia');
                  
                   $proveedor->save();
  
@@ -83,21 +81,21 @@ public function show($id)
           }
 
 
-          public function edit($id)
+    public function edit($id)
     {
 
-        return view("proforma.proveedor.edit",["Clientes"=>Clientes::findOrFail($id)]);
+        return view("proforma.proveedor.edit",["proveedor"=>Clientes::findOrFail($id)]);
     }
 
    
-    public function update(RequestFormIngresoCliProEmp $request,$id)
+    public function update(Request $request,$id)
     {
 
-        $proveedor=Clientes::find($id);
+                 $proveedor=Clientes::find($id);
 
-         $proveedor->tipo_documento='DNI';
-                  $proveedor->nro_documento=intval($request->get('nro_documento'));
-                  $proveedor->nombres_Rs=$request->get('nombres_RS');                  
+                  $proveedor->tipo_documento='DNI';
+                  $proveedor->nro_documento=$request->get('nro_documento');
+                  $proveedor->nombres_Rs=$request->get('nombres_Rs');                  
                   $proveedor->telefono=$request->get('telefono');
                   $proveedor->celular=$request->get('celular');
                   $proveedor->correo=$request->get('correo');
@@ -106,11 +104,11 @@ public function show($id)
                   $proveedor->cuenta_2=$request->get('cuenta_2');
                   $proveedor->cuenta_3=$request->get('cuenta_3');
                   $proveedor->estado='activo';
-                  $proveedor->provincia=$request->get('provincia');
-                  $proveedor->distrito=$request->get('distrito');
-                  $proveedor->direcion=$request->get('direcion');
-                  $proveedor->referencia=$request->get('referencia');
-                  $proveedor->idCliente=$idCliente;
+                  $proveedor->Departamento=$request->get('Departamento');
+                  $proveedor->Distrito=$request->get('Distrito');
+                  $proveedor->Direccion=$request->get('Direccion');
+                  $proveedor->Referencia=$request->get('Referencia');
+                  
                   $proveedor->update();
 
         return Redirect::to('proforma/proveedor');

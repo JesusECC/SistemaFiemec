@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	<h3>Modificar Trabajador:{{$proveedor->nombres.' '.$proveedor->paterno.' '.$proveedor->materno }}</h3>
+	
 	@if (count($errors)>0)
 	<div class="alert-alert-danger">
 		<ul>
@@ -15,7 +15,7 @@
 </div>
 </div>
 
-    {!!Form::model($proveedor,['method'=>'PATCH','route'=>['empleado.update',$proveedor->id]])!!}
+{!!Form::model($proveedor,['method'=>'PATCH','route'=>['proveedor.update',$proveedor->idCliente]])!!}
     {{Form::token()}}
 
 <div class="form-group">
@@ -40,29 +40,9 @@
 </div>
 
 <div class="form-group">
-	<label for="nombres">Nombre</label>
-	<input type="text" name="nombres" class="form-control" required value="{{$proveedor->nombres}}">	
+	<label for="nombres_Rs">Nombre</label>
+	<input type="text" name="nombres_Rs" class="form-control" required value="{{$proveedor->nombres_Rs}}">	
 </div>
-
-<div class="form-group">
-	<label for="paterno">Apellido paterno</label>
-	<input type="text" name="paterno" class="form-control" required value="{{$proveedor->paterno}}">	
-</div>
-
-<div class="form-group">
-	<label for="materno">Apeliido materno</label>
-	<input type="text" name="materno" class="form-control" required value="{{$proveedor->materno}}">	
-</div>
-
-<div class="form-group">
-	<label for="fecha_nacimiento">Fecha de nacimiento</label>
-	<input type="date" name="fecha_nacimiento" class="form-control" required value="{{$proveedor->fecha_nacimiento}}">	
-</div>
-<div class="form-group">
-	<label for="sexo">Sexo</label>
-	<input type="text" name="sexo" class="form-control" required value="{{$proveedor->sexo}}">	
-</div>
-
 <div class="form-group">
 	<label for="telefono">Telefono</label>
 	<input type="text" name="telefono" class="form-control" required value="{{$proveedor->telefono}}">	
@@ -74,52 +54,48 @@
 </div>
 
 <div class="form-group">
-	<label for="usuario">Usuario</label>
-	<input type="text" name="usuario" class="form-control" required value="{{$proveedor->usuario}}">	
+	<label for="correo">Correo</label>
+	<input type="text" name="correo" class="form-control" required value="{{$proveedor->correo}}">	
 </div>
 
 <div class="form-group">
-	<label for="contraseña">contraseña</label>
-	<input type="text" name="contraseña" class="form-control" required value="{{$proveedor->contraseña}}">	
+	<label for="cuenta_1">cuenta_1</label>
+	<input type="text" name="cuenta_1" class="form-control" required value="{{$proveedor->cuenta_1}}">	
+</div>
+<div class="form-group">
+	<label for="cuenta_2">cuenta_2</label>
+	<input type="text" name="cuenta_2" class="form-control" required value="{{$proveedor->cuenta_2}}">	
+</div>
+<div class="form-group">
+	<label for="cuenta_3">cuenta_3</label>
+	<input type="text" name="cuenta_3" class="form-control" required value="{{$proveedor->cuenta_3}}">	
+</div>
+<div class="form-group">
+	<label for="Departamento">Departamento</label>
+	<input type="text" name="Departamento" class="form-control" required value="{{$proveedor->Departamento}}">	
 </div>
 
 <div class="form-group">
-	<label for="direccion">direccion</label>
-	<input type="text" name="direccion" class="form-control" required value="{{$proveedor->direccion}}">	
+	<label for="Distrito">Distrito</label>
+	<input type="text" name="Distrito" class="form-control" required value="{{$proveedor->Distrito}}">	
 </div>
-
+<div class="form-group">
+	<label for="Direccion">Direccion</label>
+	<input type="text" name="Direccion" class="form-control" required value="{{$proveedor->Direccion}}">	
+</div>
+<div class="form-group">
+	<label for="Referencia">Referencia</label>
+	<input type="text" name="Referencia" class="form-control" required value="{{$proveedor->Referencia}}">	
+</div>
 <div class="form-group">
 	<label for="correo">correo</label>
 	<input type="text" name="correo" class="form-control" required value="{{$proveedor->correo}}">	
 </div>
 
-<div class="form-group">
-	<label for="cargo">cargo</label>
-	<input type="text" name="cargo" class="form-control" required value="{{$proveedor->cargo}}">	
-</div>
-
-<div class="form-group">
-	<label for="sueldo">sueldo</label>
-	<input type="text" name="sueldo" class="form-control" required value="{{$proveedor->sueldo}}">	
-</div>
-
-<div class="form-group">
-	<label for="fecha_inicio">Fecha de inicio</label>
-	<input type="date" name="fecha_inicio" class="form-control" required value="{{$proveedor->fecha_inicio}}">	
-</div>
-
-<div class="form-group">
-	<label for="fecha_fin">fecha de fin</label>
-	<input type="text" name="fecha_fin" class="form-control" required value="{{$proveedor->fecha_fin}}">	
-</div>
 
 <div class="from-group">
 	<button class="btn btn-primary" type="submit">guardar</button>
-	
-
 </div>
 {!!Form::close()!!}
-
-
 
 @endsection
