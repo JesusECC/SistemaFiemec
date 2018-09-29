@@ -20,7 +20,7 @@
 					<th>opciones</th>
 				</thead>
 
-				@foreach ($proformas as $prof)
+				@foreach ($servicios as $prof)
 				
 
 				<tr>
@@ -62,7 +62,7 @@
             
 			</table>
 		</div>
-		{{$proformas->render()}}
+		{{$servicios->render()}}
 	</div>
 </div>
 

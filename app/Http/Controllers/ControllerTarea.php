@@ -20,21 +20,28 @@ class ControllerTarea extends Controller
     {
 
     }
+    
     public function create()
     {
-        return view('proforma.producto.create');
+        
+ return view("proforma.cliente.create");
+
     }
+  
 
-    
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-         'nombre_servicio'=> 'required'
-        ]);
 
-        Task::create($request->all());
-    }
+ public function store(Request $request){
+  
+                  $tarea=new Clientes;
+                  $tarea->tipo_documento='DNI';
+               
+                  
+                
+                  $Cliente->save();
+ 
+            
+            return redirect::to('proforma/cliente');
+          }
 
-         return;
 
 }
