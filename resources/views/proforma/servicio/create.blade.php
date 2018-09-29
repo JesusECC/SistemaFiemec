@@ -103,6 +103,7 @@
                             Ingresar Nombre de Tablero
                         </h3>
                     </div>
+                    <div class="col-lg-9">
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="input-group">
@@ -114,18 +115,30 @@
                                 </samp>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                    </div>
+                     </div>
+                      <div class="col-lg-3">
+                    
+                    <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#createe"><button class="btn btn-danger">Registar nueva tarea</button></a>
+                    </div>
+                    </div>
+
+
+
+                        <div class="col-lg-9">
                         <div class="form-group" id="producto-oculto" style='display:none;'>
-                            <label class="control-label">Producto</label>
-                            <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                <option value="">Seleccione Producto</option>
-                                @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                            <label class="control-label">Tareas</label>
+                            <select name="pidServicios" class="form-control selectpicker" id="pidServicios" data-live-search="true">
+                                <option value="">Seleccione Servicio</option>
+                                @foreach($servicios as $ser)
+                            <option value="{{$ser->nombre_servicio}}">{{$ser->nombre_servicio}}
+                             </option>
                                 @endforeach
                             </select>                    
                         </div>
                         </div>
-                         
+
+                    
                         <!-- {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
                         @csrf -->
                         <div class="card" id="producto-crear-oculto" style='display:none;'>
@@ -144,11 +157,13 @@
                                         <div class="form-group label-floating">
                                             <label class="control-label">Descripcion</label>
                                             <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
-                                            <!-- <textarea rows="4" cols="50">
-                                            
-                                            </textarea> -->
                                         </div>
                                     </div> 
+
+                    
+
+
+
                                     <div class="col-lg-2">
                                         <div class="form-group label-floating">
                                             <label class="control-label">P. UNIT.</label>
@@ -270,7 +285,7 @@
     <!-- {!!Form::close()!!} -->
 
 </div>
-
+@include('proforma.servicio.modal2')
 @push('scripts')
 <script>
     
@@ -316,7 +331,7 @@
     var idcliente;
     var totalt;
     var valorventa;
-    $("#pidProducto").change(MostarProducto);
+  /*  $("#pidProducto").change(MostarProducto);*/
     
 
     //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
@@ -327,14 +342,13 @@
         $("#cdireccion").val(Cliente[1]);
         $("#cnro_documento").val(Cliente[2]);
     }
-    function MostarProducto(){
-        Producto=document.getElementById('pidProducto').value.split('_');
+   /* function MostarProducto(){
+        Producto=document.getElementById('pidServicios').value.split('_');
         // $("#idProd").val(Producto[0]);
         // $("#Productoname").val(Producto[1]);
-        $("#precio_uni").val(Producto[2]);
-        $("#pdescuento").val(Producto[3]);
+        $("#precio_uni").val(Producto[1]);
         // descuentoP -->para emostar el 
-    }
+    }*/
     function mostrarTipoCambio(){
         // {{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
