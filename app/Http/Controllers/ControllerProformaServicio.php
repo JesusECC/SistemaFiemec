@@ -66,8 +66,21 @@ class ControllerProformaServicio extends Controller
         ->where('estado','=','activo')
         ->get();
 
-        $monedas=DB::table('Tipo_moneda')
-        ->where('estado','=','activo')
+       /* $servicios=DB::table('Servicios as s')
+        ->select('s.idServicios', DB::raw('DISTINCT(s.nombre_servicio) as tarea'))
+        ->get();*/
+
+    /*  $picks = DB::table('picks')
+      ->distinct()
+      ->select('user_id')
+      ->where('weeknum', '=', 1)
+      ->groupBy('user_id')
+      ->get();*/
+        
+        $servicios=DB::table('Servicios')
+        ->distinct()
+        ->select('nombre_servicio')
+        ->groupBy('nombre_servicio')
         ->get();
 
         $clientes=DB::table('Cliente_Proveedor as cp')
@@ -75,7 +88,7 @@ class ControllerProformaServicio extends Controller
         ->where('tipo_persona','=','Cliente persona')
         ->orwhere('tipo_persona','=','Cliente Empresa')
         ->get();
-        return view('proforma.servicio.create',["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
+        return view('proforma.servicio.create',["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"servicios"=>$servicios]);
     }
     public function buscarProducto(Request $request)
     {
