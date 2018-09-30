@@ -8,23 +8,23 @@
         <img src="{{asset('img/logo.jpg')}}" width="230" height="180">
     </div> 
 
-	<div class="col-lg-3 col-sm-6 col-md-6 col-xs-6">
+  <div class="col-lg-3 col-sm-6 col-md-6 col-xs-6">
         <div class="form-group">
-	        <label for="cliente">Cliente</label>
-	        <p>{{$proforma->nombre}}</p>
+          <label for="cliente">Cliente</label>
+          <p>{{$proforma->nombre}}</p>
        </div>
     </div>
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
-	    <div class="form-group">
-		<label for="serie_proforma">Serie Proforma</label>
-		<p>{{$proforma->serie_proforma}}</p>		
-	    </div>
+      <div class="form-group">
+    <label for="serie_proforma">Serie Proforma</label>
+    <p>{{$proforma->serie_proforma}}</p>    
+      </div>
     </div>
     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
-	     <div class="form-group">
-		<label for="num_proforma">Numero Proforma</label>
-		<p>f000-{{$proforma->idProforma}}</p>	
-         </div>	
+       <div class="form-group">
+    <label for="num_proforma">Numero Proforma</label>
+    <p>f000-{{$proforma->idProforma}}</p> 
+         </div> 
     </div>
 
 <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
@@ -50,29 +50,29 @@
     </div>
 </div>
 <div class="row">
-    	<div class="panel panel-primary">
+      <div class="panel panel-primary">
             <div class="panel-body">
-    	   
+         
 
             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-            	<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
-            		<thead style="background-color:#A9D0F5">
+              <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
+                <thead style="background-color:#A9D0F5">
 
-            			
-            			<th>Producto</th>
-            			<th>Cantidad</th>
-            			<th>Precio de Venta</th>
-            			<th>Descuento x c/u</th>
-            			<th>Total</th>
+                  
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio de Venta</th>
+                  <th>Descuento x c/u</th>
+                  <th>Total</th>
                         <th></th>
-            		</thead>
-            		<tfoot>
-            			
-            			<th></th>
-            			<th></th>
-            			<th></th>
-            			<th></th>
-            			<th>
+                </thead>
+                <tfoot>
+                  
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>
 
                          <h4 id="total">Subtotal: {{$proforma->subtotal}}</h4>
 
@@ -81,9 +81,9 @@
                             <h4 id="total">Precio total: {{round($proforma->precio_total,2)}}</th><br>
 
 
-            		</tfoot>
-            		<tbody>
-            			@foreach($detalles as $det)
+                </tfoot>
+                <tbody>
+                  @foreach($detalles as $det)
                         <tr>
                             <td>{{$det->producto.'  | '.$det->descripcionDP}}</td>
                             <td>{{$det->cantidad}}</td>
@@ -94,11 +94,11 @@
 
                         @endforeach
 
-            		</tbody>
+                </tbody>
 
 
-            		
-            	</table>
+                
+              </table>
 
 
                 <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">

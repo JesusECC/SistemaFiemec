@@ -5005,7 +5005,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 .p-md {
     padding: 25px;
 }
-.form-control, .form-control:focus, .has-error .form-control:focus, .has-success .form-control:focus, .has-warning .form-control:focus, .navbar-collapse, .navbar-form, .navbar-form-custom .form-control:focus, .navbar-form-custom .form-control:hover, .open .btn.dropdown-toggle, .panel, .popover, .progress, .progress-bar {
+.form-control, .form-control:focus, .has-error .form-control:focus, .has-success .form-control:focus, .has-warning .form-control:focus, .navbar-collapse, .navbar-form, .navbar-form-custom .form-control:focus, .navbar-form-custom .form-control:hover, .open .btn.dropdown-toggle, .popover, .progress, .progress-bar {
     box-shadow: none !important;
 }
 .panel {
@@ -5049,4 +5049,48 @@ h3 {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 100;
+}
+
+.btn-create
+{
+    background-color: #18a689;
+    border-color: #18a689;
+    color: #FFFFFF;
+}
+.btn-create:hover
+{
+    background-color: #18a689 !important;
+    border-color: #18a689 !important;
+    color: #FFFFFF !important;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option
+{
+  font-size: 10px !important;
+}
+.tip-sales {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.panel-dashed {
+    border: 1px dashed #d9dee1 !important;
+}
+.panel-transparent {
+    background-color: transparent;
+}
+.ibox-content h1, .ibox-content h2, .ibox-content h3, .ibox-content h4, .ibox-content h5, .ibox-title h1, .ibox-title h2, .ibox-title h3, .ibox-title h4, .ibox-title h5 {
+    margin-top: 5px;
+}
+.ich {
+    color: #FF9D3A;
+}
+.m-t-none {
+    margin-top: 0;
+}
+h3, h4, h5 {
+    margin-top: 5px;
+    font-weight: 600;
+}
+h3 {
+    font-size: 16px;
 }
