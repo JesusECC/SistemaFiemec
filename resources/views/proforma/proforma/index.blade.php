@@ -53,20 +53,24 @@
 				        		<td>
 				        			{{$prof->nombre}}
 				        		</td>
-				        		<td align="center">
-									<div class="dropdown">
-									  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-									    Seleccione
-									    <span class="caret"></span>
-									  </button>
-									  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-									    <li><a  href="{{route('proforma-show',$prof->idProforma)}}"   title="Ver Producto"><i class="far fa-eye"></i> Ver Proforma </a></li>
-									    <li><a href="{{route('proforma-edit',$prof->idProforma)}}"  role="button"><i class="fas fa-edit" title="Editar Producto"></i> Editar Proforma </a></li>
-									    <li><a href="" data-target="#modal-delete-{{$prof->idProforma}}"  data-toggle="modal" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> Eliminar Proforma </a></li>
-									    <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}"><i class="far fa-file-pdf"></i> PDF Soles</a></li>
-									    <li><a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf2',$prof->idProforma)}}"> <i class="far fa-file-pdf"></i> PDF Dolares</a></li>
-									  </ul>
-									</div>									
+				        		<td align="center" style="width: 220px">
+				        			<div class="pull-right box-tools">
+				        				<a  href="{{route('proforma-show',$prof->idProforma)}}" class="btn btn-primary btn-xs"  title="Ver Producto"><i class="far fa-eye"></i> Ver </a>
+				        				<a href="{{route('proforma-edit',$prof->idProforma)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> Editar </a>
+				        				<a href="" data-target="#modal-delete-{{$prof->idProforma}}" class="btn btn-danger btn-xs" data-toggle="modal" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> Eliminar</a>
+				        				<div class="btn-group">
+				        					<button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+				        						<i class="far fa-file-pdf" title="PDF"></i>
+				        					</button>
+				        					<ul class="dropdown-menu pull-right" role="menu">
+				        						<li>
+				        							<a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}"><i class="far fa-file-pdf"></i> PDF Soles</a>
+				        							<a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf2',$prof->idProforma)}}"> <i class="far fa-file-pdf"></i> PDF Dolares</a>
+				        						</li>
+				        					</ul>
+				        				</div>
+
+				        			</div>							
 								</td>
 							</tr>
 							@include('proforma.proforma.modal')
