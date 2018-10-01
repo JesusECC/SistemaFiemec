@@ -183,57 +183,121 @@
                                     </div>
                                 </div>
                                 <div class="panel-footer">
-                        <div id="tablerosn">
-                            <div id="Tablero_unitaria">
-                                <section class="content" style="min-height:0px !important">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="box">
-                                                <div class="box-header with-border" style="padding:5px !important;">
-                                                <p> Proforma Unitaria </p>
-                                                    <div class="box-tools pull-right">
-                                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <div id="tablerosn">
+                                        <div id="Tablero_unitaria">
+                                            <section class="content" style="min-height:0px !important">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="box">
+                                                            <div class="box-header with-border" style="padding:5px !important;">
+                                                            <p> Proforma Unitaria </p>
+                                                                <div class="box-tools pull-right">
+                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
+                                                                            <thead style="background-color:#A9D0F5">
+                                                                                <th>Producto</th>
+                                                                                <th>Descripción</th>
+                                                                                <th>Cant.</th>
+                                                                                <th>P. Unit.</th>
+                                                                                <th>Descuento</th>
+                                                                                <th>Importe</th>
+                                                                                <th></th>
+                                                                            </thead>
+                                                                            <tbody id="tablero_unitario">
+                                                                                <tr>
+                                                                                    <th colspan="7" align="text-center"> 
+                                                                                        <div class="panel panel-transparent panel-dashed tip-sales text-center" >
+                                                                                            <div class="row">
+                                                                                                <div class="col-sm-8 col-sm-push-2">
+                                                                                            <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
+                                                                                            <h3 class="ich m-t-none">
+                                                                                                No hay detalles de productos
+                                                                                            </h3>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                <div>
+                                                            </div>                            
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="box-body">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
-                                                                <thead style="background-color:#A9D0F5">
-                                                                    <th>Producto</th>
-                                                                    <th>Descripción</th>
-                                                                    <th>Cant.</th>
-                                                                    <th>P. Unit.</th>
-                                                                    <th>Descuento</th>
-                                                                    <th>Importe</th>
-                                                                    <th></th>
-                                                                </thead>
-                                                                <tbody id="tablero_unitario">
-                                                                    <tr>
-                                                                        <th colspan="7" align="text-center"> 
-                                                                            <div class="panel panel-transparent panel-dashed tip-sales text-center" >
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-8 col-sm-push-2">
-                                                                                <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
-                                                                                <h3 class="ich m-t-none">
-                                                                                    No hay detalles de productos
-                                                                                </h3>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div> 
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    <div>
-                                                </div>                            
-                                            </div>
+                                            </section>
                                         </div>
-                                    </div>
-                                </section>
-                            </div>
-                        </div> 
+                                    </div> 
                                 </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Importe
+                        </h3>
+                    </div>
+                    <div class="panel-body">   
+                        <div id="totales-general" style='display:none;'>
+                            <table class="table table-striped table-bordered table-condensed table-hover">
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3" >Sub Total</th>
+                                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Descuentos</th>
+                                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Valor Venta</th>
+                                            <th><h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >I.G.V. 18%</th>
+                                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Total Soles</th>
+                                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Total Dolares</th>
+                                            <th><h4 id="total_dolares">s/. 0.00</h4><input type="hidden" name="tota_dolares" id="tota_dolares"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Forma de:</th>
+                                            <th>
+                                            <h4><input type="text" name="forma_de" id="forma_de" class="form-control"></h4>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Plazo de Oferta:</th>
+                                            <th>
+                                            <h4><input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control"></h4>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Observacion:</th>
+                                            <th>
+                                            <textarea name="observacion_condicion" id="observacion_condicion" class="form-control"></textarea>
+                                            </th>
+                                        </tr>
+                                        
+                                    </tfoot>
+                            </table>                            
+                        </div>
+                    </div>                     
+                </div>
+            </div>
+        </div>
+    </div>
                             </div>
                         </div>
                     </div>
