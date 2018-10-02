@@ -233,71 +233,114 @@
                                             </section>
                                         </div>
                                     </div> 
+                                    <div class="content" id="totales-general" style='display:none;'>
+                                        <div class="row">
+                                            <div class="col-sm-7">
+                                                <div class="panel panel-default panel-shadow"> 
+                                                    <div class="panel-body">
+                                                        <div class="row">   
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Subtotal</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="subtotal">    </h4>
+                                                                        <input type="hidden" name="subtotal" id="subtotal">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1 hidden-xs text-center p-t-xs"> 
+                                                                <i class="fa fa-minus m-t-lg"> 
+                                                                </i>  
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Descuento</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 id="descuentos" class="form-control">    </h4>
+                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Valor Venta</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="valorVenta">    </h4>
+                                                                        <input type="hidden" name="valorVenta" id="valorVenta">
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </div> 
+                                                        <hr>    
+                                                        <div class="row">   
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> IGV %</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="igv">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="igv" id="igv" >
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Soles</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="total">    </h4>
+                                                                        <input type="hidden" name="precio_subtotal" id="precio_subtotal">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Dolares</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="total_dolares">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="tota_dolares" id="tota_dolares">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                        </div>  
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="panel panel-default panel-shadow bg-gray-c">
+                                                    <div class="panel-body">    
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Forma de Pago:</label>
+                                                                    <input type="text" name="forma_de" id="forma_de" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Plazo de Oferta</label>
+                                                                    <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Observaciones
+                                                                    </label>
+                                                                    <textarea name="" id="" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
                                 </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Importe
-                        </h3>
-                    </div>
-                    <div class="panel-body">   
-                        <div id="totales-general" style='display:none;'>
-                            <table class="table table-striped table-bordered table-condensed table-hover">
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="3" >Sub Total</th>
-                                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Descuentos</th>
-                                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Valor Venta</th>
-                                            <th><h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >I.G.V. 18%</th>
-                                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Total Soles</th>
-                                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Total Dolares</th>
-                                            <th><h4 id="total_dolares">s/. 0.00</h4><input type="hidden" name="tota_dolares" id="tota_dolares"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Forma de:</th>
-                                            <th>
-                                            <h4><input type="text" name="forma_de" id="forma_de" class="form-control"></h4>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Plazo de Oferta:</th>
-                                            <th>
-                                            <h4><input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control"></h4>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Observacion:</th>
-                                            <th>
-                                            <textarea name="observacion_condicion" id="observacion_condicion" class="form-control"></textarea>
-                                            </th>
-                                        </tr>
-                                        
-                                    </tfoot>
-                            </table>                            
-                        </div>
-                    </div>                     
-                </div>
-            </div>
-        </div>
-    </div>
                             </div>
                         </div>
                     </div>
