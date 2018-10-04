@@ -110,11 +110,11 @@
                             Ingresar Nombre del Servicio
                         </h3>
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-6">
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
+                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del servicio...">
                                 <samp class="input-group-btn">
                                     <button type="button" id="bt_add_tablero" class="btn btn-primary">
                                         Agregar
@@ -126,19 +126,23 @@
                      </div>
                       <div class="col-lg-3">
                     
-                    <a target="_blak" href="{{route('tarea-create')}}"> <button class="btn btn-success">Nueva Tarea</button></a>
+                    <a  href="{{route('tarea-create')}}"> <button class="btn btn-success">Nueva Tarea</button></a>
+                    </div>
+                    </div>
+                      <div class="col-lg-3">
+                    <a  href="{{route('proforma-create')}}"> <button class="btn btn-success">Nueva Tarea</button></a>
                     </div>
                     </div>
 
 
 
-                        <div class="col-lg-8">
+                        <div class="col-lg-5">
                         <div class="form-group" id="producto-oculto" style='display:none;'>
                             <label class="control-label">Tareas</label>
                             <select name="idTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
                                 <option value="">Seleccione Servicio</option>
                                 @foreach($servicios as $ser)
-                            <option value="{{$ser->nombre_tarea}}_{{$ser->nombre_tarea}}">{{$ser->nombre_tarea}}
+                            <option value="{{$ser->idTarea}}_{{$ser->tarea}}">{{$ser->tarea}}
                              </option>
                                 @endforeach
                             </select>                    
@@ -160,7 +164,7 @@
                                             <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
                                         </div>                               
                                     </div> -->
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Descripcion</label>
                                             <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
@@ -176,7 +180,7 @@
                                             <div id="select-pro" ></div>
                                         </div>
                                     </div> 
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-2">
                                         <div class="form-group label-floating">
                                         <label class="control-label"></label>
                                             <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
@@ -295,6 +299,7 @@
         $('#pdescuento').click(function (){
             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
         });
+
         // Actualizar
        
 
@@ -472,15 +477,14 @@
         tarea=document.getElementById('pidTarea').value.split('_');
         var idT=tarea[0];
         var pname=tarea[1];
-        var pdescripcion=$("#descripcionp ").val();
+        var pdescripcion=$("#descripcionp").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
         var sel=$('#prod-selec').val();
-        
         // console.log(descuento);
         nomTablero=$('#prod-selec').val();
         var filas;
-        // console.log(idProd,pname);
+        console.log(pdescripcion);
         if(tablero.length>=0 && nomTablero!="" && idT!="" && pname!=""  && nomTablero!=""  ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
@@ -492,10 +496,7 @@
                         for (const fil in filaob) {
                             if (filaob.hasOwnProperty(fil)) {
                                 if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idTarea']==idT && filaob[fil]['nomTablero']==tablero[key]['nombre']){
-                                    var su=parseInt(pdescripcion);
-                                    
-                                    
-                                    
+                                    var su=pdescripcion;
                                     filaob[fil]['descripcionP']=su;
                                     fila();
                                     boolfila=true;
@@ -503,9 +504,10 @@
                                 }                
                             }
                         }
+
                         if(boolfila==false){
                             console.log("produc nuevoo",contp);
-                            var dat={idProducto:idT,producto:pname,descripcionP:pdescripcion,nomTablero:nomTablero,posiP:contp,fila:""};
+                var dat={idTarea:idT,producto:pname,descripcionP:pdescripcion,nomTablero:nomTablero,posiP:contp,fila:""};
                             filaob.push(dat);
                             fila();
                             contp++;
@@ -533,11 +535,12 @@
                 if (tablero.hasOwnProperty(key)) {
                     // $("#detalle_"+tablero[key]['nombre']).load();
                     for (const fila in filaob) {
-                        if (filaob.hasOwnProperty(fila)) {                            
-                            var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                        if (filaob.hasOwnProperty(fila)) {     
+                            //var cantidad=parseFloat(filaob[fila]['descripcionP']);
+                            
                             var precio=parseFloat(filaob[fila]['prec_uniP']);
                             
-                            var subt=(cantidad*precio-cantidad);
+                            
                             if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
                                 filas=
                                     '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+

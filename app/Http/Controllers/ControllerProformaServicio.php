@@ -79,7 +79,7 @@ class ControllerProformaServicio extends Controller
         
         $servicios=DB::table('Tarea')
         ->distinct()
-        ->select('idTarea','nombre_tarea')
+        ->select('idTarea','nombre_tarea as tarea')
         ->groupBy('idTarea','nombre_tarea')
         ->get();
 
