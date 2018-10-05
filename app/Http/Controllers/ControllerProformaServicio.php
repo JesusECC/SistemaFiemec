@@ -66,7 +66,7 @@ class ControllerProformaServicio extends Controller
         ->where('estado','=','activo')
         ->get();
 
-       /* $servicios=DB::table('Servicios as s')
+    /* $servicios=DB::table('Servicios as s')
         ->select('s.idServicios', DB::raw('DISTINCT(s.nombre_servicio) as tarea'))
         ->get();*/
 
@@ -77,10 +77,10 @@ class ControllerProformaServicio extends Controller
       ->groupBy('user_id')
       ->get();*/
         
-        $servicios=DB::table('Servicios')
+        $servicios=DB::table('Tarea')
         ->distinct()
-        ->select('nombre_servicio')
-        ->groupBy('nombre_servicio')
+        ->select('idTarea','nombre_tarea as tarea')
+        ->groupBy('idTarea','nombre_tarea')
         ->get();
 
         $clientes=DB::table('Cliente_Proveedor as cp')
@@ -172,7 +172,7 @@ class ControllerProformaServicio extends Controller
         }
     }
 
-}
+    }
 
 
 

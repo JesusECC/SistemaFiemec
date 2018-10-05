@@ -3,7 +3,7 @@
 namespace SistemaFiemec\Http\Controllers;
 
 use Illuminate\Http\Request;
-use SistemaFiemec\Servicios;
+use SistemaFiemec\Tipotarea;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
@@ -23,25 +23,28 @@ class ControllerTarea extends Controller
     
     public function create()
     {
-        
- return view("proforma.cliente.create");
+
+     return view("proforma.tarea.create");
 
     }
-  
-
-
- public function store(Request $request){
-  
-                  $tarea=new Clientes;
-                  $tarea->tipo_documento='DNI';
-               
-                  
-                
-                  $Cliente->save();
  
-            
-            return redirect::to('proforma/cliente');
-          }
+ public function store(Request $request){
+
+//dd($request);        
+$nombre_tarea=$request->get('nombre_tarea');
+
+foreach ($nombre_tarea as $key) {
+ 
+	$detalle = new Tipotarea();
+	$detalle->nombre_tarea=$key;
+	$detalle->save();
+}
+         return Redirect::to('proforma/servicio/create');
+     }
+          
 
 
 }
+
+
+

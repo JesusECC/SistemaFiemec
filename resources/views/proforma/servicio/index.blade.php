@@ -1,7 +1,7 @@
 @extends ('layouts.admin')
 @section ('contenido')
 <div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Buscar Proformas <a href="{{route('tablero-create')}}"> <button class="btn btn-success">Nuevo</button></a></h3>
+	<h3> Buscar Proformas <a href="{{route('servicio-create')}}"> <button class="btn btn-success">Nuevo</button></a></h3>
 	
 @include('proforma.proforma.search')
 </div>
@@ -44,8 +44,8 @@
                        </div>
 
 					
-					<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
-					</a>
+					<!--<a href="{{URL::action('ControllerProformaUnitaria@show',$prof->idProforma)}}"><button class="btn btn-primary">Ver Proforma</button>
+					</a>-->
 					<a href="{{route('tablero-edit',$prof->idProforma)}}"><button class="btn btn-primary">Editar</button>
 					</a>
 					

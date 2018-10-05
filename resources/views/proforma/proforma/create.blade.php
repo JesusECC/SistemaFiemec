@@ -500,7 +500,9 @@
         var descuento=$('#pdescuento').val();
         var filas;
         if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
-            document.getElementById('totales-general').style.display = 'block';
+
+            if(pcant!=0){
+                document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
             bool=true;
@@ -525,6 +527,11 @@
                 contp++;            
             }
             valoresFinales();            
+            }else{
+alert("La cantidad no puede ser '0' ");
+
+
+            }
         }else{
             alert("Ingresar Datos del Producto!! o datos del tipo de cambio");
         }

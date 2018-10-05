@@ -30,6 +30,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::resource('proforma/config','ControllerConfiguracion');
     Route::resource('proforma/familia','ControllerFamilia');
     Route::resource('dashboard/dashboard-admin','ControllerDashboard');
+   Route::resource('proforma/tarea','ControllerTarea');
 
 
     //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
@@ -108,6 +109,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('servicios/',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
 
 
+
     //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
 
     // $this->post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -120,6 +122,10 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('cliente/{idCliente}/edit',['as'=>'clientes-edit','uses'=>'ControllerClientes@edit']);
     Route::get('cliente/show/{idCliente}',['as'=>'clientes-show','uses'=>'ControllerClientes@show']);
     // Route::get('/home', 'HomeController@index')->name('home');
+
+
+    
+    Route::get('tarea/create',['as'=>'tarea-create','uses'=>'ControllerTarea@create']);
 });   
 Auth::routes();
 

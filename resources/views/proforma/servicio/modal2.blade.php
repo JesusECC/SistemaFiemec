@@ -20,8 +20,8 @@
 
 
 <div class="form-group">
-  <label for="nombre_moneda">Nombre de Tarea</label>
-  <input type="text" name="nombre_moneda" class="form-control" placeholder="nombre..."> 
+  <label for="nombre_serviciot">Nombre de Tarea</label>
+  <input type="text" name="nombre_serviciot" class="form-control" placeholder="nombre..."> 
 </div>
 
 
