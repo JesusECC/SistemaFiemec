@@ -1,57 +1,79 @@
 @extends ('layouts.admin')
 @section ('contenido')
-<div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Control de Trabajadores <a href="empleado/create"> <button class="btn btn-success">Nuevo</button></a></h3></h3>
-	
-	@include('proforma.empleado.search')
-</div>
-<div class='row'>
-	<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-		<div class="table-responsive">
-			<table class=" table table-striped table-bordered table-condensed table-hover">
-				<thead>
-					<th>Tipo Documento</th>
-					<th>Nro Documento</th>
-					<th>Nombres</th>
-                    <th>Cargo</th>
-                    <th>Telefono/Celular</th>
-					 
-					  <th>Correo</th>
-	                
-	                  <th>Estado</th>
-				</thead>
-
-	
-				@foreach ($Empleados as $empl)
-				
-				<tr>
-
-					
-					<td>{{$empl->tipo_documento}}</td>
-					<td>{{$empl->nro_documento}}</td>
-					<td>{{$empl->nombres}} {{$empl->paterno}} {{$empl->paterno}}</td>
-					<td>{{$empl->cargo}}</td>
-					<td>{{$empl->telefono}} / {{$empl->celular}}</td>
-					
-					<td>{{$empl->correo}}</td>
-					<td>{{$empl->estado}}</td>
-					
-					<td>
-					<a href="{{URL::action('ControllerEmpleados@show',$empl->idEmpleado)}}"><button class="btn btn-info">ver</button>
-					</a>
-					<td>
-					<a href="{{URL::action('ControllerEmpleados@edit',$empl->idEmpleado)}}"><button class="btn btn-info">editar</button>
-					</a>
-					<a href="" data-target="#modal-delete-{{$empl->idEmpleado}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
-					</td>
-				</tr>
-				@include('proforma.empleado.modal')
-             @endforeach
-			</table>
-		</div>
-		{{$Empleados->render()}}
-	</div>
-</div>
-
+<section class="content-header">
+	<h1 style="margin-top: 55px;">
+		Panel de Administrador
+		<small>Version 2.3.0</small>
+    </h1>
+    <ol class="breadcrumb" style="margin-top: 55px;">
+    	<li>
+    		<a href="#">
+    			<i class="fas fa-dolly"></i> Empleados</a>
+    	</li>
+    	<li class="active">Lista Fiemec</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header with-border" style="padding: 10px !important">
+					<h4>
+						<strong style="font-weight: 400">
+							<i class="fas fa-list-ul"></i> Listado De Empleados Fiemec
+						</strong>
+					</h4>
+					<div class="ibox-title-buttons pull-right">
+						<a href="{{route('empelado-create')}}" style="text-decoration: none !important">
+							<button class="btn btn-block btn-success" style="background-color: #18A689 !important;">
+								<i class="fas fa-plus-circle"></i> Nuevo Empleado
+							</button></a>
+					</div>
+				</div>
+                <!-- /.box-header -->
+				<div class="box-body">
+					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%;font-size: 11px !important">
+				       <thead>
+				            <tr>
+				                <th>N° Nombre</th>
+				                 <th>N° Direccion</th>
+				                 <th>N° Telefono</th>
+				                 <th>N° Cargo</th>
+				               
+				            </tr>
+				        </thead>
+				        <tbody>
+				        	@foreach($Empleados as $emp)
+				        	<tr>
+				        		<td>
+				        			{{$emp->nombre}}
+				        		</td>
+                               <td>
+				        			{{$emp->direccion}}
+				        		</td>
+				        		 <td>
+				        			{{$emp->fono}}
+				        		</td>
+                            
+				        		<td>
+				        			{{$emp->cargo}}
+				        		</td>
+				        		<td align="center">
+				        			<a  href=""  data-target="#modal-show-{{$emp->idEmpleado}}"  data-toggle="modal" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="left" title="Ver Producto"><i class="far fa-eye"></i> </a>
+									<a href="{{route('empleado-edit',$emp->idEmpleado)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
+									<a href="" data-target="#modal-delete-{{$emp->idEmpleado}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> </a>
+								</td>
+                            </tr>
+                            @include('proforma.empleado.modal')
+				        		
+							@endforeach
+				        </tbody>
+    				</table>
+    				{{$Empleados->render()}}
+				</div>
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+</section><!-- /.content -->
 @endsection
 

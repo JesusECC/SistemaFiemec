@@ -357,13 +357,7 @@
           </div><!-- /.row -->
 </section><!-- /.content -->
 
-
-
-
-
-
-    <!-- {!!Form::close()!!} -->
-
+ <!-- {!!Form::close()!!} -->
 
 @push('scripts')
 <script>
