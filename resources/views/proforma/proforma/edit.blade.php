@@ -1,5 +1,20 @@
 @extends ('layouts.admin')
 @section ('contenido')
+<section class="content-header">
+    <h1 style="margin-top: 55px;">
+        Panel de Administrador
+        <small>Version 2.3.0</small>
+    </h1>
+    <ol class="breadcrumb" style="margin-top: 55px;">
+        <li>
+            <a href="#">
+                <i class="far fa-edit"></i> Proforma</a>
+        </li>
+        <li class="active">Editar Proforma Unitaria</li>
+    </ol>
+</section>
+
+
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	<h3>Nueva Proforma </h3>
