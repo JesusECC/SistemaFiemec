@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
-                    {!!Form::open(array('url'=>'proforma/producto','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
+                    {!!Form::open(array('url'=>'proforma/producto','method'=>'POST','autocomplete'=>'off'))!!}
 
                     {{Form::token()}}
                 <div class="box-body bg-gray-c">
@@ -199,14 +199,14 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
-                                                                            <thead style="background-color:#A9D0F5">
-                                                                                <th>Producto</th>
-                                                                                <th>Descripción</th>
-                                                                                <th>Cant.</th>
-                                                                                <th>P. Unit.</th>
-                                                                                <th>Descuento</th>
-                                                                                <th>Importe</th>
-                                                                                <th></th>
+                                                                            <thead style="background-color:#A9D0F5;text-align: center;" >
+                                                                                <th class="text-center">Producto</th>
+                                                                                <th class="text-center">Descripción</th>
+                                                                                <th class="text-center">Cant.</th>
+                                                                                <th class="text-center">P. Unit.</th>
+                                                                                <th class="text-center">Desc.</th>
+                                                                                <th class="text-center">Importe</th>
+                                                                                <th class="text-center">Opcción</th>
                                                                             </thead>
                                                                             <tbody id="tablero_unitario">
                                                                                 <tr>
@@ -357,13 +357,7 @@
           </div><!-- /.row -->
 </section><!-- /.content -->
 
-
-
-
-
-
-    <!-- {!!Form::close()!!} -->
-
+ <!-- {!!Form::close()!!} -->
 
 @push('scripts')
 <script>
@@ -500,7 +494,9 @@
         var descuento=$('#pdescuento').val();
         var filas;
         if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
-            document.getElementById('totales-general').style.display = 'block';
+
+            if(pcant!=0){
+                document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
             bool=true;
@@ -525,6 +521,11 @@
                 contp++;            
             }
             valoresFinales();            
+            }else{
+alert("La cantidad no puede ser '0' ");
+
+
+            }
         }else{
             alert("Ingresar Datos del Producto!! o datos del tipo de cambio");
         }
@@ -540,29 +541,32 @@
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                     var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                     filas=
-                        '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                            '<td> '+ 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%;">'+
+                            '<td class="text-center"> '+ 
+                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                             '</td>'+
-                            '<td> '+ 
-                                '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+                            '<td class="text-center"> '+ 
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                             '</td>'+
-                            '<td> '+ 
-                                '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                            '<td  class="text-center"> '+ 
+                                '<input style="width:40px !important;" width="40px" type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
                             '</td>'+
-                            '<td> '+   
-                                '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                            '<td class="text-center"> '+   
+                                '<input style="width:60px !important;" width="40px" type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
                             '</td>'+
-                            '<td> '+   
-                                '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                            '<td class="text-center"> '+   
+                                '<input style="width:60px !important;" width="40px" type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
                             '</td>'+
-                            '<td> '+   
-                                '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
+                            '<td class="text-center"> '+   
+                                '<input style="width:40px !important;" width="40px" type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
                             '</td>'+
-                            '<td>'+
-                                '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
-                                        '<i class="fas fa-trash"></i>'+
-                                '</button>'+
+                            '<td class="text-center">'+
+                                '<center>'+
+                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
+                                            '<i class="fas fa-trash"></i>'+
+                                    '</button>'+                                
+                                '</center>'+
+
                             '</td>'+
                         '</tr>';  
                     filaob[fila]['fila']=filas;

@@ -53,6 +53,14 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('proforma/tablero/pdf/{idProforma}','ControllerProformaTableros@pdf');
     //Route::get('proforma/tablero/pdf2/{idProforma}','ControllerProformaTableros@pdf2');
 
+//---------------------Rutas empelado-------------------
+Route::get('empleados',['as'=>'empelado','uses'=>'ControllerEmpleados@index']);
+    Route::get('empleados/create',['as'=>'empelado-create','uses'=>'ControllerEmpleados@create']);
+    Route::post('empleados/',['as'=>'empelado-store','uses'=>'ControllerEmpleados@store']);
+    Route::get('empleados/{idEmpleado}/edit',['as'=>'empleado-edit','uses'=>'ControllerEmpleados@edit']);
+Route::get('empleados/show/{idEmpleado}',['as'=>'empleado-show','uses'=>'ControllerEmpleados@show']);
+
+
 
     //Se crea las rutas para productos 
     Route::get('productos',['as'=>'producto','uses'=>'ControllerProducto@index']);

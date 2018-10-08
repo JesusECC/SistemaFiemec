@@ -92,28 +92,7 @@
 	<label for="correo">correo</label>
 	<input type="text" name="correo" class="form-control" required value="{{$Empleado->correo}}">	
 </div>
-	@foreach($detalleempleado as $e)
-
-<div class="form-group">
-	<label for="cargo">cargo</label>
-	<input type="text" name="cargo" class="form-control" required value="{{$e->cargo}}">	
-</div>
-
-<div class="form-group">
-	<label for="sueldo">sueldo</label>
-	<input type="text" name="sueldo" class="form-control" required value="{{$e->sueldo}}">	
-</div>
-
-<div class="form-group">
-	<label for="fecha_inicio">Fecha de inicio</label>
-	<input type="date" name="fecha_inicio" class="form-control" required value="{{$e->fecha_inicio}}">	
-</div>
-
-<div class="form-group">
-	<label for="fecha_fin">fecha de fin</label>
-	<input type="text" name="fecha_fin" class="form-control" required value="{{$e->fecha_fin}}">	
-</div>
-@endforeach
+	
 <div class="from-group">
 	<button class="btn btn-primary" type="submit">guardar</button>
 	

@@ -29,9 +29,8 @@
 					<td>{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}</td>
 					<td>{{$prof->nombre}}</td>
 					
-					
-					
-					<td>
+										
+				<td>
 						<div class="btn-group">
                        <button type="button" class="btn btn-primary">PDF</button>
                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
