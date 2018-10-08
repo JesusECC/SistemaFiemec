@@ -162,37 +162,24 @@ class ControllerProformaTableros extends Controller
 
 
     public function pdf($id){
+        $tablero=DB::table('Tableros as t')
+        ->distinct()
+        ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
+        ->where('dpt.idProforma','=',$id)
+        ->get(['t.nombre_tablero','estadoT']);
 
-$proforma=DB::table('Proforma as p')
-    ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.subtotal')
-    ->where('p.idProforma','=',$id)
-    ->first();
-/*
-    $detalles=DB::table('Detalle_proforma as dpr')
-    ->join('Tableros as ta','ta.idTableros','=','dpr.idTableros')
-    ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->distinct()
-    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP','ta.nombre_tablero','dpr.idTableros as tablero')
-    ->where('dpr.idProforma','=',$id)
-    ->get();
-*/
-    $tableros=DB::table('Tableros as t')
-    ->join('Detalle_proforma as d','t.idTableros','=','d.idTableros')
-    ->join('Proforma as p','d.idProforma','=','p.idProforma')
-    ->join('Producto as pr','pr.idProducto','=','d.idProducto')
-    ->distinct()
-    ->select('t.idTableros','p.idProforma',DB::raw('CONCAT(pr.nombre_producto,"  ",pr.marca_producto," | ",pr.descripcion_producto) as producto'),'t.nombre_tablero as nombre')
-    ->where('p.idProforma','=',$id)
-    ->get();
+        $proforma=DB::table('Proforma as p')
+        ->join('Detalle_proforma_tableros as dePT','p.idProforma','=','dePT.idProforma')
+        ->join('Producto as pd','pd.idProducto','=','dePT.idProducto')
+        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+        ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP')
+        ->where('p.idProforma','=',$id)
+         ->get();
 
-    //dd($tableros);
-
-
-    $pdf=PDF::loadView('proforma/tablero/pdf',['proforma'=>$proforma,"tableros"=>$tableros]);
-    return $pdf->stream('proforma.pdf');
-
-
+        // dd($tablero,$proforma);
+        $pdf=PDF::loadView('proforma/tablero/pdf',['proforma'=>$proforma,"tablero"=>$tablero]);
+        return $pdf->stream('proforma.pdf');
     }
 
     public function edit($id)

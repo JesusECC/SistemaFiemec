@@ -1103,3 +1103,42 @@ fila=
 </script>
 @endpush
 @endsection
+
+// *************************************************************************************************************
+// proformas pdf
+@php
+$tab=$tableros;
+$count=0;
+$xidt=[];
+$xnomtab=[];
+
+foreach($tableros as $t){
+  foreach($tab as $ta){
+    if($t->idProforma==$ta->idProforma)
+      {
+        $xidt[$count]=$t->idTableros;
+        $xnomtab[$count]=$t->nombre;
+      }
+    }
+    $count++;
+  }
+ $idt=array_unique($xidt);
+ $nomtab=array_unique($xnomtab);
+ $bool=true;
+ $val;
+@endphp
+
+@foreach($tableros as $ta)
+  @foreach($idt as $tx)
+  @if($bool==true)
+    {{$ta->nombre.' hola'}}
+    <br>
+    {{$bool==false}}
+  @endif
+    @if($ta->idTableros == $tx)
+      {{$ta->producto}}
+      <br>
+    @endif
+  @endforeach
+  {{$bool=true}}
+@endforeach

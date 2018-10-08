@@ -118,84 +118,24 @@ footer {
 </style>
 <body>
   <header class="clearfix">  
-    <table width="100%" style="margin-top: -20px;"> 
-          <tr align="center" valign="middle"> 
-            <th colspan="5" align="left">
-                <img src="img/img-pdf.png" alt="" >
-            </th>
-            <th colspan="5" valign="middle" >
-                <img src="img/dir-pdf.png" alt="" >
-            </th>
-          </tr>
-          <th colspan="10" class="cotizacion" align="center">
-            <div class="proforma">
-           COTIZACIÓN N° {{$proforma->serie_proforma}}  F000-{{$proforma->idProforma}} 
-        </div>
-    </th>     
-    </table>
-    <div class="datos"> 
-      <div id="company">
-        <div><span>EMAIL</span> <a href="{{$proforma->email}}">{{$proforma->email}}</a></div>
-        <div><span>FECHA</span> {{$proforma->fecha_hora}}</div>
-        
-      </div>
-      <div id="project" class="clearfix">
-        <div><span>CLIENTE</span> {{$proforma->nombre}}</div>
-        <div><span>DOCUMENTO</span> {{$proforma->ndoc}}</div>
-        <div><span>DIRECCIÓN</span> {{$proforma->direccion}}</div>
-      </div>
-    </div>
+   
   </header> 
   <main>
  
-@php
-$tab=$tableros;
-$count=0;
-$xidt=[];
-$xnomtab=[];
 
-foreach($tableros as $t){
-  foreach($tab as $ta){
-    if($t->idProforma==$ta->idProforma)
-      {
-        $xidt[$count]=$t->idTableros;
-        $xnomtab[$count]=$t->nombre;
-      }
-    }
-    $count++;
-  }
- $idt=array_unique($x);
- $nomtab=array_unique($xnomtab);
- $bool=true;
- $val;
-@endphp
-
-@foreach($tableros as $ta)
-  @foreach($xi as $tx)
-  @if($bool==true)
-    {{$ta->nombre.' hola'}}
+  
+    @foreach($tablero as $t)
+    {{ $t->nombre_tablero }}
     <br>
-    {{$bool==false}}
-  @endif
-    @if($ta->idTableros == $tx)
-      {{$ta->producto}}
-      <br>
-    @endif
-  @endforeach
-  {{$bool=true}}
-@endforeach
+      @foreach($proforma as $p)
+        @if($t->nombre_tablero==$p->nombre_tablero )      
+          {{ $p->nombre_producto }}
+        <br>
+        @endif
+      @endforeach
+    @endforeach
 
 
-
-    <h5 style="font-size: 12px !important;line-height:1px">Forma de pago: {{$proforma->forma_de}}</h5>
-    <h5 style="font-size: 12px !important;line-height:1px">Condición de venta: {{$proforma->observacion_condicion}} </h5>
-    <h5 style="font-size: 12px !important;line-height:1px">Plazo de oferta {{$proforma->plazo_oferta}}  </h5>
-    <br>
-    <h4 style="font-size: 13px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
-     <h5 style="font-size: 11px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
-                        <h5 style="font-size: 11px !important;line-height:1px">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
-                        <h5 style="font-size: 11px !important;line-height:1px">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
-                        <h5 style="font-size: 11px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>
 
   </main>
   <footer>  
