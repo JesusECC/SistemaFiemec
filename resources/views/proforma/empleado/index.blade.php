@@ -59,9 +59,9 @@
 				        			{{$emp->cargo}}
 				        		</td>
 				        		<td align="center">
-				        			<a  href=""  data-target="#modal-show-{{$emp->idEmpleado}}"  data-toggle="modal" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="left" title="Ver Producto"><i class="far fa-eye"></i> </a>
-									<a href="{{route('empleado-edit',$emp->idEmpleado)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
-									<a href="" data-target="#modal-delete-{{$emp->idEmpleado}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> </a>
+				        			<a  href=""  data-target="#modal-show-{{$emp->id}}"  data-toggle="modal" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="left" title="Ver Producto"><i class="far fa-eye"></i> </a>
+									<a href="{{route('empleado-edit',$emp->id)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
+									<a href="" data-target="#modal-delete-{{$emp->id}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> </a>
 								</td>
                             </tr>
                             @include('proforma.empleado.modal')

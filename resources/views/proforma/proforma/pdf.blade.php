@@ -145,6 +145,7 @@ footer {
   bottom: 0;
   border-top: 1px solid #C1CED9;
   padding: 8px 0;
+  
 }
 
 </style>

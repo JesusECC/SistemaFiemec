@@ -26,13 +26,12 @@ class ControllerEmpleados extends Controller
        $Empleados=DB::table('Empleado as e')
        //->join('users as us','e.idEmpleado','=','us.idEmp')
        ->select(db::raw('CONCAT(e.nombres," ",e.paterno," ",e.paterno) as nombre'),'e.cargo','e.direccion',
-        db::raw('CONCAT(e.telefono," / ",e.celular) as fono'),'e.idEmpleado')
+        db::raw('CONCAT(e.telefono," / ",e.celular) as fono'),'e.id')
         ->where('e.nombres','LIKE','%'.$query.'%')
        ->where('e.estado','=','activo')
        
-       ->orderby('idEmpleado','asc')
-       
-
+       ->orderby('e.id','asc')
+      
        ->paginate(10);
        return view('proforma.empleado.index',["Empleados"=>$Empleados,"searchText"=>$query]);
     }

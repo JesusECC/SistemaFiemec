@@ -330,7 +330,7 @@
                                                                     <label for="" class="control-label">
                                                                         Observaciones
                                                                     </label>
-                                                                    <textarea name="" id="" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                    <textarea name="observacion_proforma" id="observacion" cols="30" rows="2" class="form-control">Ninguna</textarea>
                                                                 </div>
                                                             </div>
 
@@ -458,7 +458,7 @@
         var forma=$("#forma_de").val();
         var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
-        var observacion=$("#observacion_condicion").val();
+        var observacion=$("#observacion").val();
         
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
             var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp,simbolo:simbolo}];
