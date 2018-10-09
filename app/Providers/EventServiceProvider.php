@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'SistemaFiemec\Events\Event' => [
             'SistemaFiemec\Listeners\EventListener',
         ],
+        'SistemaFiemec\Events\App\Events\Logined' =>[
+           'SistemaFiemec\Listeners\App\Listeners\LastLoginListener',
+        ]
     ];
 
     /**

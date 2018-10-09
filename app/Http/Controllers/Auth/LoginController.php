@@ -1,10 +1,10 @@
 <?php
 
 namespace SistemaFiemec\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
 use SistemaFiemec\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use SistemaFiemec\Events\App\Events\Logined;
 class LoginController extends Controller
 {
     /*
@@ -26,7 +26,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/login';
-
+      
     /**
      * Create a new controller instance.
      *
@@ -35,5 +35,11 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    
+
+    protected function authenticated(Request $request, $user)
+    {
+        event(new Logined());
     }
 }
