@@ -13,273 +13,334 @@
         <li class="active">Editar Proforma Unitaria</li>
     </ol>
 </section>
-
-
-<div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	<h3>Nueva Proforma </h3>
-    <hr />
-	@if (count($errors)>0)
-	<div class="alert-alert-danger">
-		<ul>
-			@foreach ($errors->all() as $error)
-			    <li>{{$error}}</li>
-			@endforeach 
-		</ul>	
-    </div>
-    @endif
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-10">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Datos de Cliente
-                        </h3>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box" style="border-top: 3px solid #18A689">
+                <div class="box-header with-border" style="padding: 10px !important">
+                    <h4>
+                        <strong style="font-weight: 400">
+                            <i class="fas fa-dolly"></i> Datos de Proforma Fiemec
+                        </strong>                        
+                    </h4>
+                    @if(count($errors)>0)
+                    <div class="alert-alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach 
+                        </ul>   
                     </div>
-                    <div class="panel-body">        
-                        <div class="row">
-                            
-                            <div class="col-lg-12">
-                                <div class="form-group label-floating">
-                                    <label for="nombreclie">Nombre y Apellido</label>
-                                    <input type="text" disabled name="nombreclie" id="nombreclie" class="form-control">
-                                </div>                               
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group label-floating">
-                                    <label for="cdireccion">Direccion</label>
-                                    <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control">
-                                </div>                               
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group label-floating">
-                                    <label for="nro_documento">Numero de Documento</label>
-                                    <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control">
-                                </div>                               
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group label-floating">
-                                    <label for="cotizador">Nombre del Cotizador</label>
-                                    <input type="text" disabled name="cotizador" id="cotizador" class="form-control">
-                                </div>                               
-                            </div>
-                        </div>
-                    </div>            
+                    @endif
+                    <div class="ibox-title-buttons pull-right">
+                        <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
+                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('proformas')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+                    </div>
                 </div>
-            </div> 
-            <div class="col-lg-2">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Tipo de Cambio
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="col-lg-12">
-                            <div class="from-group">
-                                <label for="simbolo">Simbolo</label>
-                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" >                                                
-                            </div>                                        
-                        </div>
-
-                        <div class="col-lg-12" >                                            
-                            <div class="from-group">
-                                <label for="valorcambio">Valor</label>
-                                <input type="text" disabled id="valorcambio" class="form-control">                    
-                            </div>
-                        </div>
-                    </div>         
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Ingresar Producto
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group" id="producto-oculto" >
-                            <label class="control-label">Producto</label>
-                            <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                <option value="">Seleccione Producto</option>
-                                @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
-                                @endforeach
-                            </select>                    
-                        </div>
-                        <div class="card" id="producto-crear-oculto" >
-                            <div class="card-header">
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Descripcion</label>
-                                            <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
-                                        </div>
-                                    </div> 
-                                    <div class="col-lg-2">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">P. UNIT.</label>
-                                            <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
-                                        </div>
-                                    </div> 
-                                    <div class="col-lg-1">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Cantidad</label>
-                                            <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
-                                        </div>
-                                    </div> 
-                                    <div class="col-sm-2">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Descuento %</label>
-                                            <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
+                <div class="box-body">
+<!--
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default panel-shadow">
+                                        <div class="panel-body">
+                                    
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <div class="form-group label-floating">
-                                        <label class="control-label"></label>
-                                            <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="panel panel-default panel-shadow">
+                                        <div class="panel-body">
+                                    
                                         </div>
-                                    </div>                        
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                    
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+-->
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important">Cliente</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="" class="control-label">Nombre y Apellidos de Cliente</label>
+                                                <input type="text" disabled name="nombreclie" id="nombreclie" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="" class="control-label">Dirección Cliente</label>
+                                                <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <label for="" class="control-label"> Documento</label>
+                                                <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label for="" class="control-label">Empleado </label>
+                                                <input type="text" disabled name="cotizador" id="cotizador" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important">
+                                            Tipo de Cambio
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label for="" class="control-label">Símbolo</label>
+                                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" >
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="" class="control-label">Valor</label>
+                                                <input type="text" disabled id="valorcambio" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body" id="agregar_producto" style="display:none !important">
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important">
+                                            Agregar Producto
+                                        </label>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true" style="font-size: 10px !important">
+                                                    <option value="">Seleccione Producto</option>
+                                                    @foreach($productos as $producto)
+                                                        <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                                    @endforeach
+                                                </select>     
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  placeholder="Ingrese una Descripción" >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">S/.</span>
+                                                <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled placeholder="Precio Unitario">
+                                            </div>                                            
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" placeholder="Cant.">
+                                            </div>                                            
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" placeholder="Desc.">
+                                            </div>                                            
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <button type="button" id="bt_add_produc" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
+                                            </div>  
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="row" id="quitar_btn" style="display: block;">
+                                        <div class="col-md-12">
+                                            <div class="from-group ">
+                                                <button id="btnagregar" style="margin: 20px;" class="btn btn-success " type="button">
+                                                    <i class="fas fa-cart-plus"></i>Agregar Productos</button>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div id="tablerosn">
+                                        <div id="Tablero_unitaria">
+                                            <section class="content" style="min-height:0px !important">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="box">
+                                                            <div class="box-header with-border" style="padding:5px !important;">
+                                                            <p> Proforma Unitaria </p>
+                                                                <div class="box-tools pull-right">
+                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
+                                                                            <thead style="background-color:#A9D0F5;text-align: center;" >
+                                                                                <th class="text-center">Producto</th>
+                                                                                <th class="text-center">Descripción</th>
+                                                                                <th class="text-center">Cant.</th>
+                                                                                <th class="text-center">P. Unit.</th>
+                                                                                <th class="text-center">Desc.</th>
+                                                                                <th class="text-center">Importe</th>
+                                                                                <th class="text-center">Opcción</th>
+                                                                            </thead>
+                                                                            <tbody id="tablero_unitario">
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>                            
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="content" id="totales-general" style='display:none;'>
+                                        <div class="row">
+                                            <div class="col-sm-7">
+                                                <div class="panel panel-default panel-shadow"> 
+                                                    <div class="panel-body">
+                                                        <div class="row">   
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Subtotal</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="subtotal">    </h4>
+                                                                        <input type="hidden" name="subtotal" id="subtotal">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1 hidden-xs text-center mr-t-1"> 
+                                                                <i class="fa fa-minus "> 
+                                                                </i>  
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Descuento</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 id="descuentos" class="form-control">    </h4>
+                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Valor Venta</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="valorVenta">    </h4>
+                                                                        <input type="hidden" name="valorVenta" id="valorVenta">
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </div> 
+                                                        <hr>    
+                                                        <div class="row">   
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> IGV %</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="igv">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="igv" id="igv" >
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Soles</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="total">    </h4>
+                                                                        <input type="hidden" name="precio_subtotal" id="precio_subtotal">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for=" " class="control-label"> Total Dolares</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="total_dolares">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="tota_dolares" id="tota_dolares" value="">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                        </div>  
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="panel panel-default panel-shadow bg-gray-c">
+                                                    <div class="panel-body">    
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Forma de Pago:</label>
+                                                                    <input type="text" name="forma_de" id="forma_de" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Plazo de Oferta</label>
+                                                                    <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Observaciones
+                                                                    </label>
+                                                                    <textarea name="" id="" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>                                                                     
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Concepto
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div id="tablerosn">
-                            <div id="Tablero_unitaria">
-                                <section class="content" style="min-height:0px !important">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="box">
-                                                <div class="box-header with-border" style="padding:5px !important;">
-                                                <p> Proforma Unitaria </p>
-                                                    <div class="box-tools pull-right">
-                                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                        <button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="box-body">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
-                                                                <thead style="background-color:#A9D0F5">
-                                                                    <th>Producto</th>
-                                                                    <th>Descripción</th>
-                                                                    <th>Cant.</th>
-                                                                    <th>P. Unit.</th>
-                                                                    <th>Descuento</th>
-                                                                    <th>Importe</th>
-                                                                    <th></th>
-                                                                </thead>
-                                                                <tbody id="tablero_unitario">
-                                                                </tbody>                                                               
-                                                            </table>
-                                                        </div>
-                                                    <div>
-                                                </div>                            
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
-                        </div>                
-                    </div>            
-                </div>
-            </div>            
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Importe
-                        </h3>
-                    </div>
-                    <div class="panel-body">   
-                        <div id="totales-general" style='display:none;'>
-                            <table class="table table-striped table-bordered table-condensed table-hover">
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="3" >Sub Total</th>
-                                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Descuentos</th>
-                                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Valor Venta</th>
-                                            <th><h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >I.G.V. 18%</th>
-                                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Total Soles</th>
-                                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Total Dolares</th>
-                                            <th><h4 id="total_dolares">s/. 0.00</h4><input type="hidden" name="tota_dolares" id="tota_dolares"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Forma de:</th>
-                                            <th>
-                                            <h4><input type="text" name="forma_de" id="forma_de" class="form-control"></h4>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Plazo de Oferta:</th>
-                                            <th>
-                                            <h4><input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control"></h4>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Observacion:</th>
-                                            <th>
-                                            <textarea name="observacion_condicion" id="observacion_condicion" class="form-control"></textarea>
-                                            </th>
-                                        </tr>
-                                        
-                                    </tfoot>
-                            </table>                            
-                        </div>
-                    </div>                     
+                <div class="box-footer">
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">  
-    <div style="margin-top: 20px" class="from-group ">
-        <button class="btn btn-primary" id="save" type="button">Guardar</button>
-        <button class="btn btn-danger" type="reset">Limpiar</button>
-        <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
-    </div>
-    </div>
-</div>
+</section>
+
 @push('scripts')
 <script>
     $(document).ready(function(){
@@ -288,6 +349,10 @@
         });
         $('#save').click(function(){
             saveProforma();
+        });
+        $('#btnagregar').click(function(){
+            agregarprorducto();
+        
         });
         // boton agregar producto
         $('#bt_add_produc').click(function(){
@@ -336,6 +401,11 @@
 
     $("#idTipo_moneda").change(cambioMoneda);
     asignarValores();
+
+    function agregarprorducto(){
+        document.getElementById('agregar_producto').style.display ='block';
+        document.getElementById('quitar_btn').style.display='none';
+    } 
 
     function MostrarCliente(){
        
@@ -444,26 +514,26 @@
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                     var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                     filas=
-                        '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                            '<td> '+ 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%;">'+
+                            '<td class="text-center"> '+ 
+                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                             '</td>'+
-                            '<td> '+ 
-                                '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+                            '<td class="text-center"> '+ 
+                                '<input style="width:40px !important;" type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                             '</td>'+
-                            '<td> '+ 
-                                '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                            '<td  class="text-center"> '+ 
+                                '<input type="number" style="width:40px !important;" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
                             '</td>'+
-                            '<td> '+   
-                                '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                            '<td  class="text-center"> '+   
+                                '<input type="number" style="width:60px !important;" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
                             '</td>'+
-                            '<td> '+   
-                                '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                            '<td  class="text-center"> '+   
+                                '<input type="number"  style="width:40px !important;" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
                             '</td>'+
-                            '<td> '+   
-                                '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
+                            '<td  class="text-center"> '+   
+                                '<input type="number" style="width:60px !important;" width="40px" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
                             '</td>'+
-                            '<td>'+
+                            '<td  class="text-center">'+
                                 '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
                                         '<i class="fas fa-trash"></i>'+
                                 '</button>'+
@@ -475,6 +545,7 @@
             }                    
         }
     }    
+
     function detalleFilas(){
         // mantiene en la vista las filas cuando se agrega una nueva tabla
         var fil='';
