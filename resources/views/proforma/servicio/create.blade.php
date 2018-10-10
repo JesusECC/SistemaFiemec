@@ -1,197 +1,278 @@
 @extends ('layouts.admin')
 @section ('contenido')
-<div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	<h3>Nueva Proforma de tableros</h3>
-    <hr />
-	@if (count($errors)>0)
-	<div class="alert-alert-danger">
-		<ul>
-			@foreach ($errors->all() as $error)
-			    <li>{{$error}}</li>
-			@endforeach 
-		</ul>	
-    </div>
-    @endif
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-9">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Datos de Cliente
-                        </h3>
+<section class="content-header">
+    <h1 style="margin-top: 55px;">
+        Panel de Administrador
+        <small>Version 2.3.0</small>
+    </h1>
+    <ol class="breadcrumb" style="margin-top: 55px;">
+        <li>
+            <a href="#">
+                <i class="fas fa-file-signature"></i> Proforma</a>
+        </li>
+        <li class="active">Lista de Proformas Unitarias</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box" style="border-top: 3px solid #18A689">
+                <!--box header-->
+                <div class="box-header with-border" style="padding: 10px !important">
+                    <h4>
+                        <strong style="font-weight: 400">
+                            <i class="fas fa-dolly"></i> Nueva Proforma de Servicios
+                        </strong>
+                    </h4>
+                    @if(count($errors)>0)
+                    <div class="alert-alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach 
+                        </ul>   
                     </div>
-                    <div class="panel-body">        
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Nombre del Cliente</label>
-                                    <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
-                                        <option value="">Seleccione Cliente</option>
-                                        @foreach($clientes as $cliente)
-                                            <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
-                                        @endforeach
-                                    </select> 
-                                    <button type="button" id="bt_add_Cliente" class="btn btn-primary">Agregar Cliente</button>
-                                </div>                               
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group label-floating">
-                                    <label for="cdireccion">Direccion</label>
-                                    <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="direccion">
-                                </div>                               
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group label-floating">
-                                    <label for="nro_documento">Numero de Documento</label>
-                                    <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="numero documento">
-                                </div>  
-                                 </div>  
-                                <div class="col-lg-3">
-                                <div class="form-group label-floating">
-                                    <label for="cliente_empleado">Cliente Representante</label>
-                                    <input type="text"  name="cliente_empleado" id="cliente_empleado" class="form-control" placeholder="ingrese nombre ">
-                                </div>                               
-                            </div>                             
-                            </div>
-                        </div>
-                    </div>            
+                    @endif
+                    <div class="ibox-title-buttons pull-right">
+                        <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
+                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('servicios')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+                    </div>
                 </div>
-             
-            <div class="col-lg-3">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Tipo de Cambio
-                        </h3>
-                    </div>
-                    <div class="panel-body">         
-                        <div class="col-lg-6">
-                            <label>Tipo de cambio</label>
-                            <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
-                                <option value=""></option>
-                                @foreach($monedas as $mo)                
-                                    <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
-                                @endforeach  
-                            </select>
-                        </div>
+                <!--.finde box header-->
+                    {!!Form::open(array('url'=>'proforma/servicios','method'=>'POST','autocomplete'=>'off'))!!}
 
-                        <div class="col-lg-4">
-                            <div class="from-group">
-                                <label for="simbolo">Simbolo</label>
-                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" >                                                
-                            </div>                                        
-                        </div>
-
-                        <div class="col-lg-4" >                                            
-                            <div class="from-group">
-                                <label for="valorcambio">Valor</label>
-                                <input type="text" disabled id="valorcambio" class="form-control">                    
+                    {{Form::token()}}
+                <div class="box-body bg-gray-c">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important">
+                                        Datos de Cliente
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
+                                                    <option value="">Seleccione Cliente</option>
+                                                    @foreach($clientes as $cliente)
+                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                                                    @endforeach
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="button" id="bt_add_Cliente" class="btn btn-create"><i class="fas fa-user-plus"></i>Agregar Cliente</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="Dirección">
+                                            </div>
+                                                
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="Número de Documento">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text"  name="cliente_empleado" id="cliente_empleado"  class="form-control" placeholder="Ingrese Nombre del Empleado">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="from-group">
-                                <label for="igv_tipocambio">IGV</label>
-                                <input type="text" disabled id="igv_tipocambio" class="form-control">                                
-                            </div>                                        
-                        </div>
-                    </div>         
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Ingresar Nombre del Servicio
-                        </h3>
-                    </div>
-                    <div class="col-lg-6">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del servicio...">
-                                <samp class="input-group-btn">
-                                    <button type="button" id="bt_add_tablero" class="btn btn-primary">
-                                        Agregar
-                                    </button>
-                                </samp>
+                        <div class="col-md-4">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important">
+                                            Tipo de Moneda
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Moneda</option>
+                                                    @foreach($monedas as $mo)                
+                                                        <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
+                                                    @endforeach  
+                                                </select>                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" placeholder="Simbolo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" disabled id="valorcambio" class="form-control" placeholder="Cambio">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" disabled id="igv_tipocambio" class="form-control" placeholder="% IGV">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                     </div>
-                      <div class="col-lg-3">
-                    
-                    <a  href="{{route('tarea-create')}}"> <button class="btn btn-success">Nueva Tarea</button></a>
-                    </div>
-                    </div>
-                      <div class="col-lg-3">
-                    <a  href="{{route('proforma-create')}}"> <button class="btn btn-success">Nueva Tarea</button></a>
-                    </div>
-                    </div>
-
-
-
-                        <div class="col-lg-5">
-                        <div class="form-group" id="producto-oculto" style='display:none;'>
-                            <label class="control-label">Tareas</label>
-                            <select name="idTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
-                                <option value="">Seleccione Servicio</option>
-                                @foreach($servicios as $ser)
-                            <option value="{{$ser->idTarea}}_{{$ser->tarea}}">{{$ser->tarea}}
-                             </option>
-                                @endforeach
-                            </select>                    
-                        </div>
-                        </div>
-
-                    
-                        <!-- {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
-                        @csrf -->
-                        <div class="card" id="producto-crear-oculto" style='display:none;'>
-                            <div class="card-header">
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <!-- <div class="col-lg-12">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Nombre de Producto</label>
-                                            <input type="hidden" id="idProd" name="idProd" disabled>
-                                            <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
-                                        </div>                               
-                                    </div> -->
-                                    <div class="col-lg-3">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Descripcion</label>
-                                            <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important">
+                                            Ingresar el Nombre del Servicio
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="text" id="NomTablerop" class="form-control" name="NomTablerop"  placeholder="Ingresar nombre del servicio...">
+                                                </div>
                                         </div>
-                                    </div> 
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <button type="button" id="bt_add_tablero" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <a  href="{{route('tarea-create')}}"> 
+                                                <button class="btn btn-success">Nueva Tarea</button>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <a  href="{{route('proforma-create')}}"> 
+                                                <button class="btn btn-success">Nueva Tarea</button>
+                                            </a>
+                                        </div>
+                                    </div>
 
-                
-                                   
-                                    <div class="col-sm-2">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Nom.Tablero</label>
-                                            <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
-                                            <div id="select-pro" ></div>
+                                    <div class="row" id="producto-oculto" style='display:none;'>
+                                        <div class="col-sm-4">
+                                            <div class="form-group" >
+                                                <label class="control-label">Tareas</label>
+                                                <select name="idTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
+                                                    <option value="">Seleccione Servicio</option>
+                                                    @foreach($servicios as $ser)
+                                                <option value="{{$ser->idTarea}}_{{$ser->tarea}}">{{$ser->tarea}}
+                                                </option>
+                                                    @endforeach
+                                                </select>                    
+                                            </div>
                                         </div>
-                                    </div> 
-                                    <div class="col-sm-2">
-                                        <div class="form-group label-floating">
-                                        <label class="control-label"></label>
-                                            <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Descripción</label>
+                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp" >
+
+                                            </div>
                                         </div>
-                                    </div>                        
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Nombre Tablero</label>
+                                                <div id="select-pro" ></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label"></label>
+                                                <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+                            <div class="panel-footer">
+                                    <div id="tablerosn">
+                                        <div id="Tablero_unitaria">
+                                            <section class="content" style="min-height:0px !important">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="box">
+                                                            <div class="box-header with-border" style="padding:5px !important;">
+                                                            <p> Proforma Unitaria </p>
+                                                                <div class="box-tools pull-right">
+                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
+                                                                            <thead style="background-color:#A9D0F5;text-align: center;" >
+                                                                                <th class="text-center">Producto</th>
+                                                                                <th class="text-center">Descripción</th>
+                                                                                <th class="text-center">Cant.</th>
+                                                                                <th class="text-center">P. Unit.</th>
+                                                                                <th class="text-center">Desc.</th>
+                                                                                <th class="text-center">Importe</th>
+                                                                                <th class="text-center">Opcción</th>
+                                                                            </thead>
+                                                                            <tbody id="tablero_unitario">
+                                                                                <tr>
+                                                                                    <th colspan="7" align="text-center"> 
+                                                                                        <div class="panel panel-transparent panel-dashed tip-sales text-center" >
+                                                                                            <div class="row">
+                                                                                                <div class="col-sm-8 col-sm-push-2">
+                                                                                            <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
+                                                                                            <h3 class="ich m-t-none">
+                                                                                                No hay detalles de productos
+                                                                                            </h3>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                <div>
+                                                            </div>                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div> 
+
+
+
+
+
+
+
+
+
+<!--DUDA-->
+
+
+
+                   
             <!-- <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -253,17 +334,13 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">  
-    <div style="margin-top: 20px" class="from-group ">
-
-        <button class="btn btn-primary" id="save" type="button">Guardar</button>
-        <button class="btn btn-danger" type="reset">Limpiar</button>
-        <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
-
-
-    </div>
-
-    </div>
+    <div class="box-footer">
+                    <div class="text-right">
+                        <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
+                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('servicios')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+                    </div>
+                </div>
 
 
     <!-- {!!Form::close()!!} -->
@@ -343,10 +420,9 @@
 
     }
     function mostrarcampos(){
-        document.getElementById('producto-crear-oculto').style.display = 'block';
+        
         document.getElementById('producto-oculto').style.display = 'block';
-        // $("#producto-crear-oculto").style.display='block';
-        // $("#producto-oculto").style.display='block';
+ 
     } 
 
     function saveProforma(){

@@ -1,5 +1,6 @@
 @extends ('layouts.admin')
 @section ('contenido')
+<!--primera parte de la vista panel brand-->
 <section class="content-header">
 	<h1 style="margin-top: 55px;">
 		Panel de Administrador
@@ -13,6 +14,8 @@
     	<li class="active">Lista de Proformas Unitarias</li>
     </ol>
 </section>
+<!--fin de la primera parte de la vista panel brand-->
+<!-- cuerpo del box-->
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
@@ -83,7 +86,7 @@
             </div><!-- /.col -->
           </div><!-- /.row -->
 </section><!-- /.content -->
-
+<!--fin del cuerpo del box-->
 
 
 @endsection
