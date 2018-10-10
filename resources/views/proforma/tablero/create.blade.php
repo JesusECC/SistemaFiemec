@@ -1,99 +1,166 @@
 @extends ('layouts.admin')
 @section ('contenido')
+<section class="content-header">
+    <h1 style="margin-top: 55px;">
+        Panel de Administrador
+        <small>Version 2.3.0</small>
+    </h1>
+    <ol class="breadcrumb" style="margin-top: 55px;">
+        <li>
+            <a href="#">
+                <i class="fas fa-file-signature"></i> Proforma</a>
+        </li>
+        <li class="active">Nueva Proforma Tableros</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box" style="border-top: 3px solid #18A689">
+                <div class="box-header with-border" style="padding: 10px !important">
+                    <h4>
+                        <strong style="font-weight: 400">
+                            <i class="fas fa-dolly"></i> Datos Proforma Tableros Fiemec
+                        </strong>
+                    </h4>
+                    @if(count($errors)>0)
+                    <div class="alert-alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach 
+                        </ul>   
+                    </div>
+                    @endif
+                    <div class="ibox-title-buttons pull-right">
+                        <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
+                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('proformas')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                    {!!Form::open(array('url'=>'tablero-create','method'=>'POST','autocomplete'=>'off'))!!}
+
+                    {{Form::token()}}
+                <div class="box-body bg-gray-c">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important">
+                                            Cliente
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
+                                                    <option value="">Seleccione Cliente</option>
+                                                    @foreach($clientes as $cliente)
+                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                                                    @endforeach
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="button" id="bt_add_Cliente" class="btn btn-create"><i class="fas fa-user-plus"></i> Nuevo</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="Dirección del cliente">
+                                            </div>
+                                                
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="Número de Documento">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text"  name="cliente_empleado" id="cliente_empleado"  class="form-control" placeholder="Ingrese Nombre del Empleado">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important">
+                                            Tipo de Moneda
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Moneda</option>
+                                                    @foreach($monedas as $mo)                
+                                                        <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
+                                                    @endforeach  
+                                                </select>                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" placeholder="Simbolo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" disabled id="valorcambio" class="form-control" placeholder="Cambio">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" disabled id="igv_tipocambio" class="form-control" placeholder="% IGV">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+</section><!-- /.content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	<h3>Nueva Proforma de tableros</h3>
-    <hr />
-	@if (count($errors)>0)
-	<div class="alert-alert-danger">
-		<ul>
-			@foreach ($errors->all() as $error)
-			    <li>{{$error}}</li>
-			@endforeach 
-		</ul>	
-    </div>
-    @endif
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-9">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Datos de Cliente
-                        </h3>
-                    </div>
-                    <div class="panel-body">        
-                        <div class="row">
-                            <div class="col-lg-10">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Nombre del Cliente</label>
-                                    <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
-                                        <option value="">Seleccione Cliente</option>
-                                        @foreach($clientes as $cliente)
-                                            <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
-                                        @endforeach
-                                    </select> 
-                                    <button type="button" id="bt_add_Cliente" class="btn btn-primary">Agregar Cliente</button>
-                                </div>                               
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group label-floating">
-                                    <label for="cdireccion">Direccion</label>
-                                    <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="direccion">
-                                </div>                               
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group label-floating">
-                                    <label for="nro_documento">Numero de Documento</label>
-                                    <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="numero documento">
-                                </div>                               
-                            </div>
-                        </div>
-                    </div>            
-                </div>
-            </div> 
-            <div class="col-lg-3">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Tipo de Cambio
-                        </h3>
-                    </div>
-                    <div class="panel-body">         
-                        <div class="col-lg-6">
-                            <label>Tipo de cambio</label>
-                            <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
-                                <option value=""></option>
-                                @foreach($monedas as $mo)                
-                                    <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
-                                @endforeach  
-                            </select>
-                        </div>
 
-                        <div class="col-lg-4">
-                            <div class="from-group">
-                                <label for="simbolo">Simbolo</label>
-                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" >                                                
-                            </div>                                        
-                        </div>
 
-                        <div class="col-lg-4" >                                            
-                            <div class="from-group">
-                                <label for="valorcambio">Valor</label>
-                                <input type="text" disabled id="valorcambio" class="form-control">                    
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="from-group">
-                                <label for="igv_tipocambio">IGV</label>
-                                <input type="text" disabled id="igv_tipocambio" class="form-control">                                
-                            </div>                                        
-                        </div>
-                    </div>         
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
