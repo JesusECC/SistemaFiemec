@@ -60,10 +60,13 @@
 									</div>
                                         </div>
                                         <div class="col-sm-8">
-														<div class="form-group">
-															<input type="text" disabled disabled name="nombres" class="form-control" required value="{{$Empleado->nombres.' '.$Empleado->paterno.' '.$Empleado->materno}}">
-														</div>													
-													</div>
+											<div class="form-group">
+												<input type="text" disabled disabled name="nombres" class="form-control" required value="{{$Empleado->nombres.' '.$Empleado->paterno.' '.$Empleado->materno}}">
+											</div>													
+										</div>
+
+                                         
+
                                     </div>
                                 </div>
                                   </div>
@@ -148,7 +151,47 @@
                         <div class="col-md-4">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body">
-                                    
+                                 <div class="box-body">
+					<table class="table table-striped table-bordered table-hover" style="width:100%;font-size: 11px !important">
+						<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+														Control de Sesiones
+													</label>
+				       <thead>
+				            <tr>
+				                
+				                <th>Código</th>
+				                <th>Nombre</th>
+				                
+				               
+				            </tr>
+				        </thead>
+				        <tbody>
+				        	@foreach($sesiones as $se)
+				        	<tr>
+				        		<td>
+				        			{{$se->last_login}}
+				        		</td>
+				        		<td>
+				        			{{$se->id}}
+				        		</td>		
+							</tr>
+							
+							@endforeach
+				        </tbody>
+    				</table>
+				</div>  
+
+
+
+
+
+
+
+
+
+
+
+
                                 </div>
                             </div>                            
                         </div>
@@ -156,7 +199,7 @@
 						
 
 <!-------------------------------------------------------------acaaaaaaaaaaa-------------------------------------------------------------->
-				<div class="box-body bg-gray-c">
+				
 															
 									</div>
 									

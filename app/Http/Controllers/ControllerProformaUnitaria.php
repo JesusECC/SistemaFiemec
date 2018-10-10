@@ -69,6 +69,7 @@ public function create()
 
 public function store(Request $request)
 {
+    // dd($request);
     try{
         $nomTablero;
         $idclie;
@@ -83,6 +84,7 @@ public function store(Request $request)
         $clienteemp;
         $observacion;
         $simbolo;
+        $iduser;
 // [{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldola:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,
 //     forma:forma,plazo:plazo,observacion:observacion}];
            
@@ -99,10 +101,11 @@ public function store(Request $request)
             $clienteemp=$dato['clienteemp'];
             $observacion=$dato['observacion'];
             $simbolo=$dato['simbolo'];
+            $iduser=$dato['userid'];
         }
         $idProforma=DB::table('Proforma')->insertGetId(
             ['idCliente'=>$idclie,
-            // 'idEmpleado'=>$request->,           
+            'idEmpleado'=>$iduser,           
             'idTipo_moneda'=>$idTipoCam,
             'serie_proforma'=>'PU365122018',
             // 'fecha_hora'=>$mytime->toDateTimeString(),
@@ -125,6 +128,7 @@ public function store(Request $request)
             'estado'=>1
             ]
         );
+
         foreach($request->filas as $fila){
             $detalleProforma=new DetalleProforma;
             // $detalleProforma->idDetalle_proforma=$fila[''];	

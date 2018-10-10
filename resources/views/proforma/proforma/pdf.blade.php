@@ -235,6 +235,7 @@ footer {
       <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5> 
       <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$proforma->observacion_proforma}} </h5>
     </div>
+     <div class="hidden-xs">{{ Auth::user()->name}}</div>
     <div style="width: 50%;float: right;">
       <h4 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
       <h5 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
