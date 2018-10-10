@@ -10,7 +10,7 @@
             <a href="#">
                 <i class="fas fa-file-signature"></i> Proforma</a>
         </li>
-        <li class="active">Lista de Proformas Unitarias</li>
+        <li class="active">Nuevo Proforma Unitarias</li>
     </ol>
 </section>
 <section class="content">

@@ -342,5 +342,12 @@ class ControllerProformaTableros extends Controller
         }
         
     }
+        public function destroy($id)
+    {
+        $producto=Proforma::findOrFail($id);
+        $producto->estado=0;
+        $producto->update();
+        return Redirect::to('proformas');
+    }
 }
 
