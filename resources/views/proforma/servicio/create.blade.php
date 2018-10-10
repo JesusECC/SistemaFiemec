@@ -53,7 +53,6 @@
                                         Datos de Cliente
                                         </label>
                                     </div>
-                                   
                                     <div class="row">
                                         <div class="col-sm-9">
                                             <div class="form-group">
@@ -199,7 +198,53 @@
                                         </div>
 
                                     </div>
-
+                                </div>
+                                <div class="panel-footer">
+                                    <div id="tablerosn" style="color: #f5f5f5 !important;">
+                                        div
+                                        <section class="content" style="min-height:0px !important">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="box">
+                                                        <div class="box-header with-border" style="padding:5px !important;">
+                                                        <p> Proforma de Servicio: </p>
+                                                            <div class="box-tools pull-right">
+                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
+                                                                        <thead style="background-color:#A9D0F5;text-align: center;color: black !important" >
+                                                                            <th class="text-center">Tarea</th>
+                                                                            <th class="text-center">Descripción</th>
+                                                                            <th class="text-center">Opciones</th>
+                                                                        </thead>
+                                                                        <tbody id="tablero_unitario">
+                                                                            <tr>
+                                                                                <th colspan="7" align="text-center"> 
+                                                                                    <div class="panel panel-transparent panel-dashed tip-sales text-center" >
+                                                                                        <div class="row">
+                                                                                             <div class="col-sm-8 col-sm-push-2">
+                                                                                        <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
+                                                                                        <h3 class="ich m-t-none">
+                                                                                            No hay detalles de servicios
+                                                                                        </h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div> 
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            <div>
+                                                        </div>                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -209,57 +254,8 @@
         </div>
     </div>
 </section>
-                            <div class="panel-footer">
-                                    <div id="tablerosn">
-                                        <div id="Tablero_unitaria">
-                                            <section class="content" style="min-height:0px !important">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="box">
-                                                            <div class="box-header with-border" style="padding:5px !important;">
-                                                            <p> Proforma Unitaria </p>
-                                                                <div class="box-tools pull-right">
-                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="box-body">
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
-                                                                            <thead style="background-color:#A9D0F5;text-align: center;" >
-                                                                                <th class="text-center">Producto</th>
-                                                                                <th class="text-center">Descripción</th>
-                                                                                <th class="text-center">Cant.</th>
-                                                                                <th class="text-center">P. Unit.</th>
-                                                                                <th class="text-center">Desc.</th>
-                                                                                <th class="text-center">Importe</th>
-                                                                                <th class="text-center">Opcción</th>
-                                                                            </thead>
-                                                                            <tbody id="tablero_unitario">
-                                                                                <tr>
-                                                                                    <th colspan="7" align="text-center"> 
-                                                                                        <div class="panel panel-transparent panel-dashed tip-sales text-center" >
-                                                                                            <div class="row">
-                                                                                                <div class="col-sm-8 col-sm-push-2">
-                                                                                            <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
-                                                                                            <h3 class="ich m-t-none">
-                                                                                                No hay detalles de productos
-                                                                                            </h3>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div> 
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                <div>
-                                                            </div>                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
-                                    </div> 
+
+
 
 
 
@@ -482,41 +478,35 @@
                     }
                 }
                 //if que compara e inserta la tabla contenedora de los produtos vacia.
-                if(bool==false ){  
-                    table='<div id="'+nomTablero+'_'+cont+'">'+
+                if(bool==false )
+                {  
+                    table='<div id="'+nomTablero+'_'+cont+'" style="color: #f5f5f5 !important;">'+
                                 '<section class="content" style="min-height:0px !important">'+
                                     '<div class="row">'+
                                         '<div class="col-md-12">'+
                                             '<div class="box">'+
                                                 '<div class="box-header with-border" style="padding:5px !important;">'+
-                                                '<p> Servico: ' +nomTablero.replace(/_/gi," ")+'</p>'+
+                                                    '<p>Proforma de Servico: ' +nomTablero.replace(/_/gi," ")+'</p>'+
                                                     '<div class="box-tools pull-right">'+
-
                                                         '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
-                                                        '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
-                                                                        '<i class="fa fa-times"></i>'+
-                                                                '</button>'+
                                                     '</div>'+
                                                 '</div>'+
                                                 '<div class="box-body">'+
                                                     '<div class="row">'+
                                                         '<div class="col-md-12">'+
                                                             '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
-                                                                '<thead style="background-color:#A9D0F5">'+
+                                                                '<thead style="background-color:#A9D0F5;color: black !important;">'+
                                                                     '<th>Tarea</th>'+
                                                                     '<th>Descripción</th>'+
-                                                                    
-                                                                    
-                                                                    //'<th></th>'+
+                                                                    '<th>Opciones</th>'+
                                                                 '</thead>'+
                                                                 '<tbody id="detalle_'+nomTablero+'">'+
                                                                 '</tbody>'+ 
                                                                 '<tfoot>'+
                                                                     '<th></th>'+
-                                                                    '<th>Costo total del servicio</th>'+
-                                                                    
-                                                                    
-                                                                    '<th><h4 id="total_'+nomTablero+'"></h4><input type="number" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                    '<th style="color:black !important;">Costo total del servicio</th>'+
+                                                                    '<th style="color:black !important;"><h4 id="total_'+nomTablero+'"></h4>'+
+                                                                    '<input style="color:black !important;" type="number" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
                                                                     '</th>'+
                                                                 '</tfoot>'+
                                                             '</table>'+
