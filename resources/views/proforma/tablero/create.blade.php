@@ -470,7 +470,7 @@
                 }
                 //if que compara e inserta la tabla contenedora de los produtos vacia.
                 if(bool==false ){  
-                    table='<div id="'+nomTablero+'_'+cont+'">'+
+                    table='<div id="'+nomTablero+'_'+cont+'" style="color:white;">'+
                                 '<section class="content" style="min-height:0px !important">'+
                                     '<div class="row">'+
                                         '<div class="col-md-12">'+
