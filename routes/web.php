@@ -107,6 +107,7 @@ Route::get('empleados/show/{idEmpleado}',['as'=>'empleado-show','uses'=>'Control
     Route::get('proforma/bandejas/pdf2/{idProforma}','ControllerBandejas@pdf2');
     Route::get('bandejas/show/{id}',['as'=>'bandejas-show','uses'=>'ControllerBandejas@show']);
     Route::delete('bandejas/eliminar/{id}',['as'=>'bandejas-eliminar','uses'=>'ControllerBandejas@destroy']);
+    
 
     //rutas servicios
 
@@ -115,8 +116,10 @@ Route::get('empleados/show/{idEmpleado}',['as'=>'empleado-show','uses'=>'Control
     Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);
     Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProformaServicio@create']);
     Route::post('servicios/',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
-
-
+    Route::get('servicios/show/{id}',['as'=>'servicio-show','uses'=>'ControllerProformaServicio@show']);
+    Route::get('servicios/edit/{id}',['as'=>'servicios-edit','uses'=>'ControllerProformaServicio@edit']);
+    Route::get('servicios/pdf/{idProforma}','ControllerProformaServicio@pdf');
+    Route::get('servicios/pdf2/{idProforma}','ControllerProformaServicio@pdf2');
 
     //Route::post('proforma/proforma','ControllerProformaUnitaria@store');
 
