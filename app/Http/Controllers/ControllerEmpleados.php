@@ -77,7 +77,14 @@ class ControllerEmpleados extends Controller
 
   public function edit($id)
   {
-    return view("proforma.empleado.edit",["Empleado"=>Empleados::findOrFail($id)]);
+    $sesiones=DB::table('Sesiones as s')
+    ->join('users as u','u.id','=','s.idUser')
+    ->join('Empleado as e','e.id','=','u.idEmp')
+    ->select('e.id','s.last_login','u.id','u.admin')
+    ->where('e.id','=',$id)
+    ->distinct()
+    ->get();
+    return view("proforma.empleado.edit",["sesiones"=>$sesiones,"Empleado"=>Empleados::findOrFail($id)]);
   }
   public function update(Request $request,$id){
     $Empleado= Empleados::find($id);
@@ -97,14 +104,18 @@ class ControllerEmpleados extends Controller
     $Empleado->sueldo=$request->get('sueldo');
     $Empleado->fecha_inicio=$request->get('fecha_inicio');
     $Empleado->fecha_fin=$request->get('fecha_fin');
-    if (Input::hasFile('fotoE')){
+
+ if (Input::hasFile('fotoE')){
       $file=Input::file('fotoE');
       $file->move(public_path().'/fotos/empleados/',$file->getClientOriginalName());
       $producto->fotoCEP=$file->getClientOriginalName();
     }
     $Empleado->update();
     return redirect::to('proforma/empleado');
-  }
+    }
+
+
+
   public function show($id)
   {
     $Empleado=DB::table('Empleado as e')

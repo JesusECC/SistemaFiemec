@@ -125,6 +125,7 @@ public function store(Request $request)
             'estado'=>1
             ]
         );
+
         foreach($request->filas as $fila){
             $detalleProforma=new DetalleProforma;
             // $detalleProforma->idDetalle_proforma=$fila[''];	
