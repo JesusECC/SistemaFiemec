@@ -16,11 +16,6 @@
     {!!Form::open(array('url'=>'proforma/tarea','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
 
     {{Form::token()}}
-
-
-
-
-
 <div class="form-group">
 	<label for="nombre_serviciot">Nombre tarea</label>
 	<input type="text" name="nombre_serviciot" class="form-control" placeholder="nombre...">	

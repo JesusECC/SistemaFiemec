@@ -142,41 +142,33 @@
                                         </label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                                <div class="form-group">
+                                        <div class="col-sm-12">
+                                                <div class="input-group">
                                                     <input type="text" id="NomTablerop" class="form-control" name="NomTablerop"  placeholder="Ingresar nombre del servicio...">
+                                                    <samp class="input-group-btn">
+                                                        <button type="button" id="bt_add_tablero" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
+                                                    </samp>
                                                 </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <button type="button" id="bt_add_tablero" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a  href="{{route('tarea-create')}}"> 
-                                                <button class="btn btn-success">Nueva Tarea</button>
-                                            </a>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a  href="{{route('proforma-create')}}"> 
-                                                <button class="btn btn-success">Nueva Tarea</button>
-                                            </a>
-                                        </div>
                                     </div>
-
-                                    <div class="row" id="producto-oculto" style='display:none;'>
+                                    <div class="row" id="producto-oculto" style='display:none;margin-top:20px'>
                                         <div class="col-sm-4">
                                             <div class="form-group" >
                                                 <label class="control-label">Tareas</label>
                                                 <select name="idTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
                                                     <option value="">Seleccione Servicio</option>
-                                                    @foreach($servicios as $ser)
-                                                <option value="{{$ser->idTarea}}_{{$ser->tarea}}">{{$ser->tarea}}
-                                                </option>
-                                                    @endforeach
+                                                        @foreach($servicios as $ser)
+                                                    <option value="{{$ser->idTarea}}_{{$ser->tarea}}">{{$ser->tarea}}
+                                                    </option>
+                                                        @endforeach
                                                 </select>                    
                                             </div>
-                                        </div>
+                                        </div> 
+                                        <div class="col-sm-1" style="margin-top:24px">
+                                            <a  href="{{route('tarea-create')}}"> 
+                                                 <button class="btn btn-success" type="button" ><i class="fas fa-plus"></i> Tarea</button>
+                                            </a>                                                  
+                                        </div>                                       
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Descripción</label>
@@ -190,7 +182,7 @@
                                                 <div id="select-pro" ></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-1">
                                             <div class="form-group">
                                                 <label for="" class="control-label"></label>
                                                 <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
@@ -214,7 +206,7 @@
                                                         </div>
                                                         <div class="box-body">
                                                             <div class="row">
-                                                                <div class="col-md-12">
+                                                                <div class="col-md-12 table-responsive">
                                                                     <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
                                                                         <thead style="background-color:#A9D0F5;text-align: center;color: black !important" >
                                                                             <th class="text-center">Tarea</th>
@@ -244,6 +236,113 @@
                                                 </div>
                                             </div>
                                         </section>
+                                    </div>
+                                    <div class="content" id="totales-general" style='display:none;'>
+                                        <div class="row">
+                                            <div class="col-sm-7">
+                                                <div class="panel panel-default panel-shadow"> 
+                                                    <div class="panel-body">
+                                                        <div class="row">   
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Subtotal</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="subtotal">    </h4>
+                                                                        <input type="hidden" name="subtotal" id="subtotal">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1 hidden-xs text-center p-t-xs"> 
+                                                                <i class="fa fa-minus m-t-lg"> 
+                                                                </i>  
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Descuento</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 id="descuentos" class="form-control">    </h4>
+                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Valor Venta</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="valorVenta">    </h4>
+                                                                        <input type="hidden" name="valorVenta" id="valorVenta">
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </div> 
+                                                        <hr>    
+                                                        <div class="row">   
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> IGV %</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="igv">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="igv" id="igv" >
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Soles</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="total">    </h4>
+                                                                        <input type="hidden" name="precio_subtotal" id="precio_subtotal">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Dolares</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="total_dolares">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="tota_dolares" id="tota_dolares">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                        </div>  
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="panel panel-default panel-shadow bg-gray-c">
+                                                    <div class="panel-body">    
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Forma de Pago:</label>
+                                                                    <input type="text" name="forma_de" id="forma_de" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Plazo de Oferta</label>
+                                                                    <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Observaciones
+                                                                    </label>
+                                                                    <textarea name="observacion_proforma" id="observacion" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                        
                                     </div> 
                                 </div>
                             </div>
@@ -254,95 +353,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-<!--DUDA-->
-
-
-
-                   
-            <!-- <div class="col-lg-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Datos del Vendedor
-                        </h3>
-                    </div>
-                    <div class="panel-body">              
-                    </div>            
-                </div>
-            </div> -->
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Concepto
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div id="tablerosn">
-                            
-                        </div>                
-                    </div>            
-                </div>
-            </div>            
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Importe
-                        </h3>
-                    </div>
-                    <div class="panel-body">   
-                        <div id="totales-general" style='display:none;'>
-                            <table class="table table-striped table-bordered table-condensed table-hover">
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="3" >Sub Total</th>
-                                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <th colspan="3" >I.G.V. 18%</th>
-                                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Total</th>
-                                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
-                                        </tr>
-                                    </tfoot>
-                            </table>                            
-                        </div>
-                    </div>                     
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="box-footer">
-                    <div class="text-right">
-                        <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
-                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('servicios')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
-                    </div>
-                </div>
-
-
-    <!-- {!!Form::close()!!} -->
-
-</div>
 @include('proforma.servicio.modal2')
 @push('scripts')
 <script>
@@ -493,7 +503,7 @@
                                                 '</div>'+
                                                 '<div class="box-body">'+
                                                     '<div class="row">'+
-                                                        '<div class="col-md-12">'+
+                                                        '<div class="col-md-12 table-responsive">'+
                                                             '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
                                                                 '<thead style="background-color:#A9D0F5;color: black !important;">'+
                                                                     '<th>Tarea</th>'+
@@ -611,15 +621,15 @@
                             if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
                                 filas=
                                     '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                                        '<td> '+ 
+                                        '<td style="color:black !important;"> '+ 
                                             '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                                         '</td>'+
-                                        '<td> '+ 
+                                        '<td style="color:black !important;"> '+ 
                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                                         '</td>'+
                                         
                                        
-                                        '<td>'+
+                                        '<td style="color:black !important;">'+
                                             '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
                                                     '<i class="fas fa-trash"></i>'+
                                             '</button>'+
@@ -645,7 +655,7 @@
                     selectop+='<option value="'+tablero[pro]['nombre']+'">'+tablero[pro]['nombre'].replace(/_/gi," ")+'</option>';                            
                 }
             }
-            var selec='<select name="prod-selec" id="prod-selec"  >'+
+            var selec='<select name="prod-selec" id="prod-selec"  class="form-control input-sm" >'+
                             // '<option value="">Seleccione...</option>'+
                             selectop+
                       '</select>';

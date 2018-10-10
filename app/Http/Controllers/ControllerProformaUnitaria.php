@@ -180,7 +180,7 @@ public function pdf($id){
 
     $detalles=DB::table('Detalle_proforma as dpr')
     ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
+    ->select(DB::raw('CONCAT(pro.codigo_producto," ",pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
     ->where('dpr.idProforma','=',$id)
     ->get();
 

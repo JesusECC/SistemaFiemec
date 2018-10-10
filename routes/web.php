@@ -50,7 +50,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('tableros/edit/{id}',['as' => 'tablero-edit','uses'=>'ControllerProformaTableros@edit']);
     Route::post('tableros/edit/update',['as' => 'tablero-update','uses'=>'ControllerProformaTableros@update']);
     Route::delete('tableros/eliminar/{id}',['as'=>'tablero-eliminar','uses'=>'ControllerProformaTableros@destroy']);
-    Route::get('proforma/tablero/pdf/{idProforma}','ControllerProformaTableros@pdf');
+    Route::get('proforma/tablero/pdf/{idProforma}',['as'=>'tablero-pdf','uses'=>'ControllerProformaTableros@pdf']);
     //Route::get('proforma/tablero/pdf2/{idProforma}','ControllerProformaTableros@pdf2');
 
 //---------------------Rutas empelado-------------------
