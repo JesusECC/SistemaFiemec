@@ -34,7 +34,7 @@
       <header class="main-header navbar-fixed-top">
 
         <!-- Logo -->
-        <a href="{{ route('fiemec')}}" class="logo">
+        <a href="{{ route('fiemec')}}" class="logo" style="text-decoration: none !important;">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>HE</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -55,7 +55,7 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li>
                
-                <a href="#" ><i class="fas fa-cogs" data-toggle="modal" data-target="#create"></i></a>
+                <a href=""><i class="fas fa-cogs" data-toggle="modal" data-target="#create"></i></a>
               </li>
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -90,16 +90,24 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
-                    
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="img/avatar.png" alt="" class="img-circle">
+            </div>
+            <div class="pull-left info">
+              <span>{{ Auth::user()->name}}</span> 
+            </div>
+          </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header"></li>
+            <li class="header">MENU DE NAVEGACIÓN</li>
             <li class="treeview">
               <a href="{{ route('fiemec')}}">
                 <i class="fas fa-tachometer-alt"></i>
                 <span> Panel de Control</span>
               </a>
             </li>
+            <!--
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>
@@ -111,6 +119,7 @@
                 <li><a href="almacen/categoria"><i class="fa fa-circle-o"></i> Categorías</a></li>
               </ul>
             </li>
+          -->
             <li class="treeview">
               <a href="#">
                 <i class="fas fa-dolly"></i>
@@ -118,8 +127,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{ route('producto')}}"><i class="fa fa-circle-o"></i> Fiemec </a></li>
-                <li><a href="{{ route('catalogo')}}"><i class="fa fa-circle-o"></i> Catálogo</a></li>
+                <li><a href="{{ route('producto')}}"><i class="fas fa-circle-notch"></i> Fiemec </a></li>
+                <li><a href="{{ route('catalogo')}}"><i class="fas fa-circle-notch"></i> Catálogo</a></li>
               </ul>
             </li>            
             <li class="treeview">
@@ -129,10 +138,10 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{ route('proforma')}}"><i class="fa fa-circle-o"></i> Productos</a></li>
-                <li><a href="{{ route('tablero')}}"><i class="fa fa-circle-o"></i> Tableros</a></li>
-                <li><a href="{{ route('servicio')}}"><i class="fa fa-circle-o"></i> Servicios</a></li>
-                <li><a href="{{ route('bandejas')}}"><i class="fa fa-circle-o"></i> Bandejas</a></li>
+                <li><a href="{{ route('proforma')}}"><i class="fas fa-circle-notch"></i> Productos</a></li>
+                <li><a href="{{ route('tablero')}}"><i class="fas fa-circle-notch"></i> Tableros</a></li>
+                <li><a href="{{ route('servicio')}}"><i class="fas fa-circle-notch"></i> Servicios</a></li>
+                <li><a href="{{ route('bandejas')}}"><i class="fas fa-circle-notch"></i> Bandejas</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -148,11 +157,11 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="ventas/venta"><i class="fa fa-circle-o"></i> Usuarios</a></li>
-                <li><a href="ventas/cliente"><i class="fa fa-circle-o"></i> Clientes</a></li>
-                <li><a href="ventas/cliente"><i class="fa fa-circle-o"></i> Proforma de Productos</a></li>
-                <li><a href="ventas/cliente"><i class="fa fa-circle-o"></i> Proforma de Servicios</a></li>
-                <li><a href="{{ route('tablero')}}"><i class="fa fa-circle-o"></i> Proforma de Tableros</a></li>
+                <li><a href="ventas/venta"><i class="fas fa-circle-notch"></i> Usuarios</a></li>
+                <li><a href="ventas/cliente"><i class="fas fa-circle-notch"></i> Clientes</a></li>
+                <li><a href="ventas/cliente"><i class="fas fa-circle-notch"></i> Proforma de Productos</a></li>
+                <li><a href="ventas/cliente"><i class="fas fa-circle-notch"></i> Proforma de Servicios</a></li>
+                <li><a href="{{ route('tablero')}}"><i class="fas fa-circle-notch"></i> Proforma de Tableros</a></li>
               </ul>
             </li>
                        
@@ -162,7 +171,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="configuracion/usuario"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                <li><a href="configuracion/usuario"><i class="fas fa-circle-notch"></i> Usuarios</a></li>
                 
               </ul>
             </li>
@@ -174,7 +183,7 @@
             </li>
             <li>
               <a href="#">
-                <i class="fa fa-info-circle"></i> <span>Acerca De...</span>
+                <i class="fa fa-info-circle"></i> <span>Acerca De Sistema</span>
                 <small class="label pull-right bg-yellow">IT</small>
               </a>
             </li>
@@ -191,7 +200,7 @@
       <!--Fin-Contenido-->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
+          <b>Version</b> 1.0.0
         </div>
         <strong>Copyright &copy; 2018 <a href="www.incanatoit.com">KMT ADVANCE SYSTEMS</a>.</strong> All rights reserved.
       </footer>
@@ -209,10 +218,14 @@
 
     <script src="{{asset("https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")}}"></script>
     <script src="{{asset("https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js")}}"></script>
-    
+
     <script type="text/javascript">
-  $(document).ready(function() {
+    $(document).ready(function() {
                      $('#example').DataTable({
+                          "paging":   false,
+                          "info":     false,
+
+
                          "tableTools": {
                              "sRowSelect": "multi",
                              "aButtons": [
@@ -221,7 +234,6 @@
                                      "sButtonText": "Borrar selección"
                                  }]
                          },
-                         "pagingType": "simple_numbers",
 //Actualizo las etiquetas de mi tabla para mostrarlas en español
                          "language": {
                              "lengthMenu": "Mostrar _MENU_ registros.",

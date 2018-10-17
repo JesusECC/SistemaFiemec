@@ -32,7 +32,7 @@
 							
 							<div class="row">
 								<div class="col-md-3 col-sm-12">
-									<a href="{{ route('proforma')}}" class="widget widget-stats bg-gradient-yellow inverse-mode">
+									<a href="{{ route('proforma')}}" class="widget widget-stats bg-gradient-yellow inverse-mode" >
 										<div class="widget-stats-left">
 											<div class="widget-stats-title">
 												<i class="fas fa-clipboard-list"  style="font-size:50px"></i>
@@ -107,7 +107,7 @@
 																<ul class="widget widget-list m-b-0 no-bg inverse-mode">
 																	<li>
 																		<!-- BEGIN widget-list-container -->
-																		<a href="{{ route('proforma-create')}}" class="widget-list-container">
+																		<a href="{{ route('proforma-create')}}" class="widget-list-container" style="text-decoration: none;">
 																			<div class="widget-list-media icon p-l-0">
 																				<i class="bg-gradient-yellow fas fa-clipboard-list"></i>
 																			</div>
@@ -119,7 +119,7 @@
 																	</li>
 																	<li>
 																		<!-- BEGIN widget-list-container -->
-																		<a href="{{ route('tablero-create')}}" class="widget-list-container">
+																		<a href="{{ route('tablero-create')}}" class="widget-list-container" style="text-decoration: none;">
 																			<div class="widget-list-media icon p-l-0">
 																				<i class=" bg-gradient-blue far fa-window-restore "></i>
 																			</div>
@@ -140,7 +140,7 @@
 																<ul class="widget widget-list m-b-0 no-bg inverse-mode">
 																	<li>
 																		<!-- BEGIN widget-list-container -->
-																		<a href="{{ route('servicio-create')}}" class="widget-list-container">
+																		<a href="{{ route('servicio-create')}}" class="widget-list-container" style="text-decoration: none;">
 																			<div class="widget-list-media icon p-l-0">
 																				<i class="bg-gradient-purple fas fa-wrench" style="color: white !important"></i>
 																			</div>
@@ -152,7 +152,7 @@
 																	</li>
 																	<li>
 																		<!-- BEGIN widget-list-container -->
-																		<a href="{{ route('bandejas-create')}}"  class="widget-list-container">
+																		<a href="{{ route('bandejas-create')}}"  class="widget-list-container" style="text-decoration: none;">
 																			<div class="widget-list-media icon p-l-0">
 																				<i class=" bg-gradient-red  far fa-hdd "></i>
 																			</div>

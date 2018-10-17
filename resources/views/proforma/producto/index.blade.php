@@ -71,6 +71,16 @@
 							@include('proforma.producto.modal-producto')
 							@endforeach
 				        </tbody>
+				        <tfoot>
+				            <tr>
+				                <th>N° Serie</th>
+				                <th>Código</th>
+				                <th>Nombre</th>
+				                <th>Marca</th>
+				                <th>Precio</th>
+				                <th>Opciones</th>
+				            </tr>
+				        </tfoot>
     				</table>
     				{{$productos->render()}}
 				</div>

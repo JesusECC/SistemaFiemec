@@ -193,7 +193,6 @@
                                 </div>
                                 <div class="panel-footer">
                                     <div id="tablerosn" style="color: #f5f5f5 !important;">
-                                        div
                                         <section class="content" style="min-height:0px !important">
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -513,7 +512,7 @@
                                                                 '<tbody id="detalle_'+nomTablero+'">'+
                                                                 '</tbody>'+ 
                                                                 '<tfoot>'+
-                                                                    '<th></th>'+
+                                                                    '<th ></th>'+
                                                                     '<th style="color:black !important;">Costo total del servicio</th>'+
                                                                     '<th style="color:black !important;"><h4 id="total_'+nomTablero+'"></h4>'+
                                                                     '<input style="color:black !important;" type="number" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+

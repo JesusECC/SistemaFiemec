@@ -35,7 +35,7 @@
                     <div class="ibox-title-buttons pull-right">
                         <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
                         <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('proformas')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('tableros')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -131,209 +131,239 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-                </div>
-              </div><!-- /.box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-</section><!-- /.content -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Ingresar Nombre de Tablero
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
-                                <samp class="input-group-btn">
-                                    <button type="button" id="bt_add_tablero" class="btn btn-primary">
-                                        Agregar
-                                    </button>
-                                </samp>
-                            </div>
-                        </div>
-                        <div class="form-group" id="producto-oculto" style='display:none;'>
-                            <label class="control-label">Producto</label>
-                            <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                <option value="">Seleccione Producto</option>
-                                @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
-                                @endforeach
-                            </select>                    
-                        </div>
-                        <!-- {!!Form::open(array(route('tablero-store'),'method'=>'POST','autocomplete'=>'off'))!!}
-                        @csrf -->
-                        <div class="card" id="producto-crear-oculto" style='display:none;'>
-                            <div class="card-header">
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <!-- <div class="col-lg-12">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Nombre de Producto</label>
-                                            <input type="hidden" id="idProd" name="idProd" disabled>
-                                            <input type="text" id="Productoname" class="form-control" name="Productoname" disabled>
-                                        </div>                               
-                                    </div> -->
-                                    <div class="col-lg-4">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Descripcion</label>
-                                            <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
-                                            <!-- <textarea rows="4" cols="50">
-                                            
-                                            </textarea> -->
-                                        </div>
-                                    </div> 
-                                    <div class="col-lg-2">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">P. UNIT.</label>
-                                            <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
-                                        </div>
-                                    </div> 
-                                    <div class="col-lg-1">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Cantidad</label>
-                                            <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
-                                        </div>
-                                    </div> 
-                                    <div class="col-sm-2">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Descuento %</label>
-                                            <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important;">
+                                            Ingresar el Nombre de Tablero
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
+                                                <samp class="input-group-btn">
+                                                    <button id="bt_add_tablero" class="btn btn-primary" >
+                                                        <i class="fas fa-plus"></i> Agregar
+                                                    </button>
+                                                </samp>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Nom.Tablero</label>
-                                            <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
-                                            <div id="select-pro" ></div>
+                                    <div class="row" id="producto-oculto" style="display:none;margin-top:20px">
+                                        <div class="col-sm-12">
+                                            <div class="">
+                                                <label for="" class="control-label">Producto</label>
+                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                                    <option value="" selected="" disabled="">Seleccione Producto</option>
+                                                    @foreach($productos as $producto)
+                                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                                    @endforeach
+                                                </select> 
+                                            </div>
                                         </div>
+                                        <div class="col-lg-3" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descripcion</label>
+                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">P. UNIT.</label>
+                                                <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-1" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cantidad</label>
+                                                <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descuento %</label>
+                                                <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="margin-top:20px">
+                                            <div class="form-group">
+                                                <label class="control-label">Nom.Tablero</label>
+                                                <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
+                                                <div id="select-pro" ></div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-1" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                            <label class="control-label"></label>
+                                                <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+                                            </div>
+                                        </div>                                                                                 
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div id="tablerosn" style="color: #f5f5f5 !important;">
+                                        <section class="content" style="min-height:0px !important">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="box">
+                                                        <div class="box-header with-border" style="padding:5px !important;">
+                                                        <p> Proforma de Tablero: </p>
+                                                            <div class="box-tools pull-right">
+                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12 table-responsive">
+                                                                    <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
+                                                                        <thead style="background-color:#A9D0F5;text-align: center;color: black !important" >
+                                                                            <th class="text-center">Tarea</th>
+                                                                            <th class="text-center">Descripción</th>
+                                                                            <th class="text-center">Opciones</th>
+                                                                        </thead>
+                                                                        <tbody id="tablero_unitario">
+                                                                            <tr>
+                                                                                <th colspan="7" align="text-center"> 
+                                                                                    <div class="panel panel-transparent panel-dashed tip-sales text-center" >
+                                                                                        <div class="row">
+                                                                                             <div class="col-sm-8 col-sm-push-2">
+                                                                                        <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
+                                                                                        <h3 class="ich m-t-none">
+                                                                                            No hay detalles de servicios
+                                                                                        </h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div> 
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            <div>
+                                                        </div>                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="content" id="totales-general" style='display:none;'>
+                                        <div class="row">
+                                            <div class="col-sm-7">
+                                                <div class="panel panel-default panel-shadow"> 
+                                                    <div class="panel-body">
+                                                        <div class="row">   
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Subtotal</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="subtotal">    </h4>
+                                                                        <input type="hidden" name="subtotal" id="subtotal">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1 hidden-xs text-center p-t-xs"> 
+                                                                <i class="fa fa-minus m-t-lg"> 
+                                                                </i>  
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Descuento</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 id="descuentos" class="form-control">    </h4>
+                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Valor Venta</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="valorVenta">    </h4>
+                                                                        <input type="hidden" name="valorVenta" id="valorVenta">
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </div> 
+                                                        <hr>    
+                                                        <div class="row">   
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> IGV %</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="igv">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="igv" id="igv" >
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Soles</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="total">    </h4>
+                                                                        <input type="hidden" name="precio_subtotal" id="precio_subtotal">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Dolares</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="total_dolares">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="tota_dolares" id="tota_dolares">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                        </div>  
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="panel panel-default panel-shadow bg-gray-c">
+                                                    <div class="panel-body">    
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Forma de Pago:</label>
+                                                                    <input type="text" name="forma_de" id="forma_de" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Plazo de Oferta</label>
+                                                                    <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Observaciones
+                                                                    </label>
+                                                                    <textarea name="observacion_proforma" id="observacion" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                        
                                     </div> 
-                                    <div class="col-sm-1">
-                                        <div class="form-group label-floating">
-                                        <label class="control-label"></label>
-                                            <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
-                                        </div>
-                                    </div>                        
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-lg-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Datos del Vendedor
-                        </h3>
-                    </div>
-                    <div class="panel-body">              
-                    </div>            
-                </div>
-            </div> -->
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Concepto
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div id="tablerosn">
-                            
-                        </div>                
-                    </div>            
-                </div>
-            </div>            
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Importe
-                        </h3>
-                    </div>
-                    <div class="panel-body">   
-                        <div id="totales-general" style='display:none;'>
-                            <table class="table table-striped table-bordered table-condensed table-hover">
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="3" >Sub Total</th>
-                                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Descuentos</th>
-                                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Valor Venta</th>
-                                            <th><h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >I.G.V. 18%</th>
-                                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="3" >Total</th>
-                                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
-                                        </tr>
-                                    </tfoot>
-                            </table>                            
-                        </div>
-                    </div>                     
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">  
-    <div style="margin-top: 20px" class="from-group ">
-
-        <button class="btn btn-primary" id="save" type="button">Guardar</button>
-        <button class="btn btn-danger" type="reset">Limpiar</button>
-        <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
-
-
-    </div>
-
-    </div>
-
-
-    <!-- {!!Form::close()!!} -->
-
-</div>
+    </div><!-- /.row -->
+</section><!-- /.content -->
 
 @push('scripts')
 <script>
@@ -470,7 +500,7 @@
                 }
                 //if que compara e inserta la tabla contenedora de los produtos vacia.
                 if(bool==false ){  
-                    table='<div id="'+nomTablero+'_'+cont+'" style="color:white;">'+
+                    table='<div id="'+nomTablero+'_'+cont+'" style="color: #f5f5f5 !important;">'+
                                 '<section class="content" style="min-height:0px !important">'+
                                     '<div class="row">'+
                                         '<div class="col-md-12">'+
@@ -487,9 +517,9 @@
                                                 '</div>'+
                                                 '<div class="box-body">'+
                                                     '<div class="row">'+
-                                                        '<div class="col-md-12">'+
-                                                            '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
-                                                                '<thead style="background-color:#A9D0F5">'+
+                                                        '<div class="col-md-12 table-responsive">'+
+                                                            '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover" >'+
+                                                                '<thead style="background-color:#A9D0F5;color: black !important;">'+
                                                                     '<th>Producto</th>'+
                                                                     '<th>Descripción</th>'+
                                                                     '<th>Cant.</th>'+
@@ -501,12 +531,13 @@
                                                                 '<tbody id="detalle_'+nomTablero+'">'+
                                                                 '</tbody>'+ 
                                                                 '<tfoot>'+
-                                                                    '<th>Total</th>'+
+                                                                    '<th style="color:black !important;" >Total</th>'+
                                                                     '<th></th>'+
                                                                     '<th></th>'+
                                                                     '<th></th>'+
                                                                     '<th></th>'+
-                                                                    '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                    '<th style="color:black !important;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
                                                                     '</th>'+
                                                                 '</tfoot>'+
                                                             '</table>'+
@@ -612,25 +643,25 @@
                             if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
                                 filas=
                                     '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                                        '<td> '+ 
+                                        '<td style="color:black !important;"> '+ 
                                             '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                                         '</td>'+
-                                        '<td> '+ 
+                                        '<td style="color:black !important;"> '+ 
                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                                         '</td>'+
-                                        '<td> '+ 
+                                        '<td style="color:black !important;"> '+ 
                                             '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
                                         '</td>'+
-                                        '<td> '+   
+                                        '<td style="color:black !important;"> '+   
                                             '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
                                         '</td>'+
-                                        '<td> '+   
+                                        '<td style="color:black !important;"> '+   
                                             '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
                                         '</td>'+
-                                        '<td> '+   
+                                        '<td style="color:black !important;"> '+   
                                             '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+
                                         '</td>'+
-                                        '<td>'+
+                                        '<td style="color:black !important;">'+
                                             '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
                                                     '<i class="fas fa-trash"></i>'+
                                             '</button>'+
@@ -655,7 +686,7 @@
                     selectop+='<option value="'+tablero[pro]['nombre']+'">'+tablero[pro]['nombre'].replace(/_/gi," ")+'</option>';                            
                 }
             }
-            var selec='<select name="prod-selec" id="prod-selec"  >'+
+            var selec='<select name="prod-selec" id="prod-selec" class="form-control input-sm" >'+
                             // '<option value="">Seleccione...</option>'+
                             selectop+
                       '</select>';
@@ -855,3 +886,172 @@
 </script>
 @endpush
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Ingresar Nombre de Tablero
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
+                                <samp class="input-group-btn">
+                                    <button type="button" id="bt_add_tablero" class="btn btn-primary">
+                                        Agregar
+                                    </button>
+                                </samp>
+                            </div>
+                        </div>
+                        <div class="form-group" id="producto-oculto" style='display:none;'>
+                            <label class="control-label">Producto</label>
+                            <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                <option value="">Seleccione Producto</option>
+                                @foreach($productos as $producto)
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                @endforeach
+                            </select>                    
+                        </div>
+                        <div class="card" id="producto-crear-oculto" style='display:none;'>
+                            <div class="card-header">
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Descripcion</label>
+                                            <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">P. UNIT.</label>
+                                            <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-1">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Cantidad</label>
+                                            <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Descuento %</label>
+                                            <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Nom.Tablero</label>
+                                            
+                                            <div id="select-pro" ></div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-1">
+                                        <div class="form-group label-floating">
+                                        <label class="control-label"></label>
+                                            <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+                                        </div>
+                                    </div>                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Concepto
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="tablerosn">
+                            
+                        </div>                
+                    </div>            
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Importe
+                        </h3>
+                    </div>
+                    <div class="panel-body">   
+                        <div id="totales-general" style='display:none;'>
+                            <table class="table table-striped table-bordered table-condensed table-hover">
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3" >Sub Total</th>
+                                            <th><h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Descuentos</th>
+                                            <th><h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Valor Venta</th>
+                                            <th><h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >I.G.V. 18%</th>
+                                            <th><h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" >Total</th>
+                                            <th><h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal"></th>
+                                        </tr>
+                                    </tfoot>
+                            </table>                            
+                        </div>
+                    </div>                     
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">  
+    <div style="margin-top: 20px" class="from-group ">
+
+        <button class="btn btn-primary" id="save" type="button">Guardar</button>
+        <button class="btn btn-danger" type="reset">Limpiar</button>
+        <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
+
+
+    </div>
+
+    </div>
+    -->
