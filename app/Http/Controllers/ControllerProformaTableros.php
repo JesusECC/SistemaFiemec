@@ -131,11 +131,8 @@ class ControllerProformaTableros extends Controller
             foreach ($request->tableros as $tablero) {
                 $nombre=$tablero['nombre'];
                 $est=$tablero['estado'];
-                $idTablero=DB::table('Tableros')->insertGetId(
-                    ['nombre_tablero'=>$nombre,
-                    'estadoT'=>$est,
-                    ]
-                );
+                $idTablero=DB::table('Tableros')->insertGetId(['nombre_tablero'=>$nombre,'estadoT'=>$est,]);
+                
                 foreach($request->filas as $fila){
                     if($fila['nomTablero']==$tablero['nombre']){
                         $detalleProforma=new ProformaDetalleTableros;

@@ -5,9 +5,13 @@ namespace SistemaFiemec\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SistemaFiemec\Empleados;
-
+use SistemaFiemec\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use SistemaFiemec\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 use DB;
 
@@ -24,11 +28,11 @@ class ControllerEmpleados extends Controller
     {
        $query=trim($request->get('searchText'));
        $Empleados=DB::table('Empleado as e')
-       //->join('users as us','e.idEmpleado','=','us.idEmp')
-       ->select(db::raw('CONCAT(e.nombres," ",e.paterno," ",e.paterno) as nombre'),'e.cargo','e.direccion',
-        db::raw('CONCAT(e.telefono," / ",e.celular) as fono'),'e.id')
+       ->join('users as us','e.id','=','us.idEmp')
+       ->join('Cargo as ca','ca.idCargo','=','us.idCargo')
+       ->select(db::raw('CONCAT(e.nombres," ",e.paterno," ",e.paterno) as nombre'),'e.direccion',db::raw('CONCAT(e.telefono," / ",e.celular) as fono'),'e.id','ca.nombre_cargo')
         ->where('e.nombres','LIKE','%'.$query.'%')
-       ->where('e.estado','=','activo')
+       ->where('e.estado','=',1)
        
        ->orderby('e.id','asc')
       
@@ -38,41 +42,90 @@ class ControllerEmpleados extends Controller
 }
     public function create()
     {
+
+      $cargo=db::table('Cargo')
+      ->where('estado','=',1)
+      ->get();
+
         
- return view("proforma.empleado.create");
+ return view("proforma.empleado.create",["cargo"=>$cargo]);
 
     }
-  
 
+ public function store(Request $request)
+ {     
+ 
+try{
+        $cargo;
+        $documento;
+        $nombre;
+        $paterno;
+        $materno;
+        $fechanac;
+        $sexo;
+        $telefono;
+        $celular;
+        $direccion;
+        $email;
+        $sueldo;
+        $fechaini;
+        $fechafin;
+//var dat=[{cargo:cargo,documento:documento,nombre:nombre,paterno:paterno,
+//materno:materno,fechanac:fechanac,sexo:sexo,telefono:telefono,celular:celular,
+//direccion:direccion,email:email,sueldo:sueldo,fechaini:fechaini,fechafin:fechafin}];
+           
+        foreach ($request->datos as $dato) {
+            $cargo=$dato['cargo'];
+            $documento=$dato['documento'];
+            $nombre=$dato['nombre'];
+            $paterno=$dato['paterno'];
+            $materno=$dato['materno'];
+            $fechanac=$dato['fechanac'];
+            $sexo=$dato['sexo'];
+            $telefono=$dato['telefono'];
+            $celular=$dato['celular'];
+            $direccion=$dato['direccion'];
+            $email=$dato['email'];
+            $sueldo=$dato['sueldo'];
+            $fechaini=$dato['fechaini'];
+            $fechafin=$dato['fechafin'];
+            
+        }
+        $idEmpleado=DB::table('Empleado')->insertGetId(
+            ['tipo_documento'=>'DNI',
+            'nro_documento'=>$documento,           
+            'fecha_nacimiento'=>$fechanac,
+            'nombres'=>$nombre,
+            'paterno'=>$paterno,
+            'materno'=>$materno,
+            'sexo'=>$sexo,
+            'telefono'=>$telefono,
+            'celular'=>$celular,
+            'correo'=>$email,
+            'direccion'=>$direccion,
+            'sueldo'=>$sueldo,
+            'fecha_inicio'=>$fechaini,
+            'fecha_fin'=>$fechafin,
+            'estado'=>1
+            ]
+        );
 
- public function store(Request $request){     
-  $Empleado=new Empleados;
-  $Empleado->tipo_documento='DNI';
-  $Empleado->nro_documento=$request->get('nro_documento');
-  $Empleado->nombres=$request->get('nombres');
-  $Empleado->materno=$request->get('materno');
-  $Empleado->paterno=$request->get('paterno');
-  $Empleado->fecha_nacimiento=$request->get('fecha_nacimiento');
-  $Empleado->sexo=$request->get('sexo');
-  $Empleado->telefono=$request->get('telefono');
-  $Empleado->celular=$request->get('celular');
-  $Empleado->usuario=$request->get('usuario');
-  $Empleado->contraseña=$request->get('contraseña');
-  $Empleado->direccion=$request->get('telefono');
-  $Empleado->correo=$request->get('correo');
-  $Empleado->estado='activo';
-  $Empleado->cargo=$request->get('cargo');
-  $Empleado->sueldo=$request->get('sueldo');
-  $Empleado->fecha_inicio=$request->get('fecha_inicio');
-  $Empleado->fecha_fin=$request->get('fecha_fin');
-   
-  if (Input::hasFile('fotoE')){
-    $file=Input::file('fotoE');
-    $file->move(public_path().'/fotos/empleados/',$file->getClientOriginalName());
-    $producto->fotoCEP=$file->getClientOriginalName();
-  }                  
-  $Empleado->save();  
-  return redirect::to('proforma/empleado');
+            $user=new User;  
+            $user->idEmp=$idEmpleado;
+            $user->idCargo=$cargo;
+            $user->name=$nombre; 
+            $user->paterno=$paterno; 
+            $user->materno=$materno;  
+            $user->password=Hash::make($documento); 
+            $user->admin=1;
+            $user->email=$email;  
+            $user->save();            
+        
+            return ['data' =>'empleados','veri'=>true];
+        }catch(Exception $e){
+            return ['data' =>$e,'veri'=>false];
+        }
+
 }
 
   public function edit($id)

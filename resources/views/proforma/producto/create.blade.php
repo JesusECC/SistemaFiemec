@@ -153,9 +153,9 @@
       					 }
 					}
              
-      				document.getElementById('files').addEventListener('change', archivo, false);
+      		document.getElementById('files').addEventListener('change', archivo, false);
 
-					</script>
+					                </script>
 								</div>
 							</div>
 						</div>
@@ -168,9 +168,9 @@
 						<button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('productos')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
 					</div>
 				</div>
-              </div><!-- /.box -->
-              {!!Form::close()!!}
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-</section><!-- /.content -->
+            </div>
+            {!!Form::close()!!}
+        </div>
+    </div>
+</section>
 @endsection
