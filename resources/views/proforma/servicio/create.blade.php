@@ -257,22 +257,13 @@
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">
-                                                                    <label for="" class="control-label">Descuento</label>
+                                                                  
                                                                     <div class="input-group ">
-                                                                        <h4 id="descuentos" class="form-control">    </h4>
-                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
+                                                                    <button type="button" id="sumar" class="btn btn-primary">Sumar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-4">
-                                                                <div class="form-group display-flex dec">
-                                                                    <label for="" class="control-label">Valor Venta</label>
-                                                                    <div class="input-group ">
-                                                                        <h4 class="form-control" id="valorVenta">    </h4>
-                                                                        <input type="hidden" name="valorVenta" id="valorVenta">
-                                                                    </div>
-                                                                </div>
-                                                            </div>                                                            
+                                                                                                                     
                                                         </div> 
                                                         <hr>    
                                                         <div class="row">   
@@ -282,7 +273,7 @@
                                                                     <div class="input-group ">
                                                                         <h4 class="form-control" id="igv">    
                                                                         </h4>
-                                                                        <input type="hidden" name="igv" id="igv" >
+                                                                        <input type="hidden" disable name="igv" id="igv" >
                                                                     </div> 
                                                                    
                                                                 </div>  
@@ -292,22 +283,12 @@
                                                                     <label for="    " class="control-label"> Total Soles</label>
                                                                     <div class="input-group ">
                                                                         <h4 class="form-control" id="total">    </h4>
-                                                                        <input type="hidden" name="precio_subtotal" id="precio_subtotal">
+                                                                        <input type="hidden" name="total" id="total">
                                                                     </div> 
                                                                    
                                                                 </div>  
                                                             </div>
-                                                            <div class="col-sm-4">
-                                                                <div class="form-group display-flex dec">  
-                                                                    <label for="    " class="control-label"> Total Dolares</label>
-                                                                    <div class="input-group date">
-                                                                        <h4 class="form-control" id="total_dolares">    
-                                                                        </h4>
-                                                                        <input type="hidden" name="tota_dolares" id="tota_dolares">
-                                                                    </div> 
-                                                                   
-                                                                </div>  
-                                                            </div>
+                                                            
                                                         </div>  
                                                     </div>  
                                                 </div>
@@ -362,13 +343,18 @@
             valoresFinales();
         });
         $('#save').click(function(){
-            // console.log("asd");
-            saveProforma();
+            // console.log("asd");            
+            saveProforma();            
         });
         $('#bt_add_produc').click(function(){
             agregarProductosTablero();
             valoresFinales();
            
+        });
+        $('#sumar').click(function(){
+            sumar();
+            igv();
+            total();
         });
         $('#Pcantidad').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
@@ -384,11 +370,14 @@
         });
 
         // Actualizar
-       
 
     });
     $("#idClientes").change(MostrarCliente);
     $("#idTipo_moneda").change(mostrarTipoCambio);
+    $("#subtotal").change(function(){
+        igv();
+        total();
+    });
     var tablero=[];
     var filaob=[];
     var cont=0;
@@ -399,10 +388,7 @@
     var idcliente;
     var totalt;
     var valorventa;
-  /*  $("#pidProducto").change(MostarProducto);*/
-    
 
-    //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
     function MostrarCliente(){
         // cdireccion/cnro_documentoidClientes
         Cliente=document.getElementById('idClientes').value.split('_');
@@ -557,7 +543,6 @@
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
         var sel=$('#prod-selec').val();
-        // console.log(descuento);
         nomTablero=$('#prod-selec').val();
         var filas;
         console.log(pdescripcion);
@@ -673,7 +658,6 @@
         var fil;
         if(tablero.length>0){
             for (var keyt in tablero) {
-                //  $("#detalle_"+tablero[keyt]['nombre']).load();
                 $("#detalle_"+tablero[keyt]['nombre']).val('');  
                 for (var key in filaob) {                   
                     if (filaob.hasOwnProperty(key)) {
@@ -690,122 +674,26 @@
         }
         // subTotalTable();
     }
-    function subTotalTable(){
-        // funcion para realizar la suma del sub total de todos los tableros que se declaran
-        var sub=0;
-        if(tablero.length>0){
-            for (const key in tablero) {
-                if (tablero.hasOwnProperty(key)) {
-                    for (const fila in filaob) {
-                        if (filaob.hasOwnProperty(fila)) {
-                            if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
-                                // (cantidad*precio)-((cantidad*precio)*(cantidad*(descuento/100)));
-                                var precio=parseFloat(filaob[fila]['prec_uniP']);
-                                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                                
-                                sub+=(cantidad*precio-cantidad);
-                                // console.log(sub,"---");
-                            }                            
-                        }
-                    }   
-                    // console.log(sub);
-                    $("#total_"+tablero[key]['nombre']).html(sub);                 
-                }
-                sub=0;
-            }            
-        }
-    }
-    function subTotal(){
-        // la suma de tosos los tableros        
-        var sub=0;        
-        for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                
-                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                sub+=cantidad*precio;
-                // console.log(sub);                        
-            }
-        }
-        // console.log(sub);
-        $("#subtotal").html("s/. " + sub.toFixed(2));
-    }
-    function descuentos(){
-        var desc=0;
-        for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-               
-                desc+=((precio*cantidad));                       
-            }
-        }
-        $("#descuentos").html("s/. "+desc.toFixed(2));
-    }
-    function valorVenta(){
-        var venta=0;        
-        for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                
-                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                venta+=(cantidad*precio-cantidad);
-                // console.log(sub);                        
-            }
-        }
-        valorventa=venta.toFixed(2);
-        // console.log(sub);
-        $("#valorVenta").html("s/. " + venta.toFixed(2));
-    }
+    
     function igv(){
-        var venta=0;   
-        var ig=0;     
-        for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                
-                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                venta+=(cantidad*precio-cantidad);
-                // console.log(sub);                        
-            }
-        }
+        var venta=subtotal;
         ig=venta*0.18;
+        v=console.log(venta);
         // console.log(sub);
         $("#igv").html("s/. " + ig.toFixed(2));
     }
     function total(){
-        var venta=0;   
-        var igv=0;  
-        var tota=0;   
-        for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                
-                // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                venta+=(cantidad*precio-cantidad);
-                // console.log(sub);                        
-            }
-        }
-        igv=venta*0.18;
-        tota=venta+igv;
-        totalt=tota.toFixed(2);
-        // console.log(sub);
+        var igv=subtotal*0.18;
+        var tota=0;        
+        tota=subtotal+igv;
         $("#total").html("s/. " + tota.toFixed(2));
     }
     function valoresFinales(){
         if(filaob.length>0){
             detalleFilas();
         }
-        subTotal();
-        subTotalTable();
-        descuentos();
-        valorVenta();
-        igv();
-        total();
+        // igv();
+        // total();
     }
     function eliminar(index){
         // elimina las filas de un tablero especifico 
@@ -851,6 +739,16 @@
         if (0<tablero.length && 0<filaob){
             
         }
+    }
+    function sumar(){
+        var t=0;
+        for (const key in tablero) {
+            if (tablero.hasOwnProperty(key)) {
+                t+=parseFloat($("#precio_subtotal_"+tablero[key]['nombre']).val());                              
+            }
+        }
+        subtotal=t;
+        $("#subtotal").html("s/. " + t);
     }
 </script>
 @endpush
