@@ -15,9 +15,7 @@
     </div>
  </div>
 
-    {!!Form::open(array('url'=>'proforma/tarea','method'=>'POST','autocomplete'=>'off'))!!}
-
-    {{Form::token()}}
+  {!!Form::open(array('url'=>'proforma/tarea','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
 
 
 
@@ -86,9 +84,10 @@
 </div>
 
     
+ {!!Form::close()!!}
    
 
-{!!Form::close()!!}
+
 
 
 @push('scripts')

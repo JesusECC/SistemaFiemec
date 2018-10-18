@@ -133,9 +133,9 @@ try{
     $sesiones=DB::table('Sesiones as s')
     ->join('users as u','u.id','=','s.idUser')
     ->join('Empleado as e','e.id','=','u.idEmp')
-    ->select('e.id','s.last_login','u.id','u.admin')
+    ->select('e.id','u.last_login_at','u.id','u.admin')
     ->where('e.id','=',$id)
-    ->distinct()
+    //->distinct()
     ->get();
     return view("proforma.empleado.edit",["sesiones"=>$sesiones,"Empleado"=>Empleados::findOrFail($id)]);
   }

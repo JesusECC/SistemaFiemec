@@ -60,9 +60,9 @@
 				        			<div class="pull-right box-tools">
 				        				<a  href="{{route('proforma-show',$prof->idProforma)}}" class="btn btn-primary btn-xs"  title="Ver Producto"><i class="far fa-eye"></i> Ver </a>
 				        				<a href="{{route('proforma-edit',$prof->idProforma)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> Editar </a>
-				        				<a href="" data-target="#modal-delete-{{$prof->idProforma}}" class="btn btn-danger btn-xs" data-toggle="modal" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> Eliminar</a>
+				        				<a href="" data-target="#modal-delete-{{$prof->idProforma}}" class="btn btn-danger btn-xs" data-toggle="modal" title="Eliminar Proforma"><i class="fas fa-trash-alt"></i> Eliminar</a>
 				        				<div class="btn-group">
-				        					<button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+				        					<button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" saria-expanded="true">
 				        						<i class="far fa-file-pdf" title="PDF"></i>
 				        					</button>
 				        					<ul class="dropdown-menu pull-right" role="menu">

@@ -116,7 +116,7 @@
                             <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                 <option value="">Seleccione Producto</option>
                                 @foreach($productos as $producto)
-                                    <option value="{{ $producto->idProducto }}_{{ $producto->productos }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->productos2}}</option>
+                                    <option value="{{ $producto->idProducto }}_{{ $producto->productos}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->productos2}}</option>
                                 @endforeach
                             </select>                    
                         </div>
