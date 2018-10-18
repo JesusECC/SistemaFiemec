@@ -38,10 +38,6 @@
                         <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('tableros')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
                     </div>
                 </div>
-                <!-- /.box-header -->
-                    {!!Form::open(array('url'=>'tablero-create','method'=>'POST','autocomplete'=>'off'))!!}
-
-                    {{Form::token()}}
                 <div class="box-body bg-gray-c">
                     <div class="row">
                         <div class="col-md-8">

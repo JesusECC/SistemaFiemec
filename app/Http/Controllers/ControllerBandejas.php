@@ -126,7 +126,7 @@ public function store(Request $request)
             // 'garantia'=>$request->,
             // 'observacion_condicion'=>$request->,
             'cliente_empleado'=>$clienteemp,
-            'observacion_proforma'=>$observacion,
+            'observacion_condicion'=>$observacion,
             'incluye'=>$incluye,
             'plaza_fabricacion'=>$plazofabri,
             'estado'=>'activo'
