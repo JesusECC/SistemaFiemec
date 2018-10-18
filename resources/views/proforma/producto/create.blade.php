@@ -49,12 +49,10 @@
 								<div class="panel-body">
 									
 										
-										
-										<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
-											Tipo Producto
-										</label>
+								<div class="row">
+									<div class="col-sm-6">				
 										<div class="form-group">
-												<select id="e" name="marca_producto" class="form-control">
+												<select id="a" name="marca_producto" class="form-control">
 												 <option value="" disabled selected >Selecione Tipo de Producto</option>
 												<option value="CABB">ABB</option>
 												<option value="Cschneider">Schneider</option>
@@ -63,36 +61,50 @@
 												<option value="Accesorios">Accesorios</option>
 												
 												</select>
-											</div> 	
-									
-								
+										</div>
+									</div>	
+
+								<div class="col-sm-6">
+
+                                      <div class="form-group label-floating">                                       
+                                      <select required name="idFamilia" class="form-control selectpicker" id="b" data-live-search="true">
+
+                                 <option value="" disabled selected>Seleccione Familia</option>
+                                      @foreach($familia as $fa)
+                                               
+                                <option value="{{$fa->idFamilia}}_{{$fa->nombre_familia}}">{{$fa->nombre_familia}}</option>
+                                               @endforeach  
+                                           </select>
+                                        </div> 
+                                    </div> 
+								</div>
 
 									<div class="row">
 										<div class="col-sm-4">
 											<div class="form-group">
-												<input id="a" type="text" name="serie_producto" class="form-control" {{old('serie_producto')}} placeholder="Número Serie ...">	
+												<input id="c" type="text" name="serie_producto" class="form-control" {{old('serie_producto')}} placeholder="Número Serie ...">	
 											</div> 												
 										</div>
 										<div class="col-sm-4">
 											<div class="form-group">
-												<input id="b" type="text" name="codigo_pedido" class="form-control" {{old('codigo_pedido')}} placeholder="Código Pedido ...">	
+												<input id="d" type="text" name="codigo_pedido" class="form-control" {{old('codigo_pedido')}} placeholder="Código Pedido ...">	
 											</div>													
 										</div>
 										<div class="col-sm-4">
 											<div class="form-group">
-												<input id="c" type="text" name="codigo_producto" class="form-control" {{old('odigo_producto')}} placeholder="Código Producto ...">	
+												<input id="e" type="text" name="codigo_producto" class="form-control" {{old('odigo_producto')}} placeholder="Código Producto ...">	
 											</div> 												
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-8">
 											<div class="form-group">
-												<input id="d" type="text" name="nombre_producto" class="form-control"  {{old('nombre_producto')}} placeholder="Nombre Producto ...">	
+												<input id="f" type="text" name="nombre_producto" class="form-control"  {{old('nombre_producto')}} placeholder="Nombre Producto ...">	
 											</div>												
 										</div>
 										<div class="col-sm-4">
 											<div class="form-group">
-												   <select id="e" name="marca_producto" class="form-control" placeholder="ingresa tipo producto" >
+												   <select id="g" name="marca_producto" class="form-control" placeholder="ingresa tipo producto" >
 												     <option value="" disabled selected>Seleccione Marca</option>
 												    <option value="FIEMEC">FIEMEC</option>
 													<option value="ABB">ABB</option>
@@ -104,17 +116,17 @@
 									<div class="row">
 										<div class="col-sm-4">
 											<div class="form-group">
-												<input id="f" type="text" name="stock" class="form-control" placeholder="Stock ...">	
+												<input id="h" type="text" name="stock" class="form-control" placeholder="Stock ...">	
 											</div>   												
 										</div>
 										<div class="col-sm-4">
 											<div class="form-group">
-												<input id="g" type="text" name="precio_unitario" class="form-control" placeholder="Precio ...">	
+												<input id="i" type="text" name="precio_unitario" class="form-control" placeholder="Precio ...">	
 											</div>  												
 										</div>
 										<div class="col-sm-4">
 											<div class="from-group">
-												<select id="h" name="categoria_producto" class="form-control" >
+												<select id="j" name="categoria_producto" class="form-control" >
 													    <option value="" disabled selected>Seleccione Categoria</option>
 														<option value="Catalogo">Catalogo</option>
 														<option value="Producto Fiemec">Producto Fiemec</option>
@@ -123,9 +135,14 @@
 										</div>											
 									</div>
 									<div class="row">
-										<div class="col-sm-12">
+										<div class="col-sm-9">
 											<div class="form-group">
-												<input id="i" type="text" name="descripcion_producto" class="form-control" placeholder="Descripción...">
+												<input id="k" type="text" name="descripcion_producto" class="form-control" placeholder="Descripción...">
+											</div>	
+										</div>
+										<div class="col-sm-9">
+											<div class="form-group">
+									<button  type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Consultar</button>
 											</div>	
 										</div>
 									</div>
@@ -192,23 +209,19 @@
 										</label>
 			                			<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
             		<thead style="background-color:#A9D0F5">
-            			<th>opciones</th>
-            			<th>N serie</th>
-            			<th>Cod Pedido</th>
-            			<th>Cod Producto</th>
-            			<th>Nombre Producto</th>
-            			<th>Marca</th>
-            			<th>Tipo</th>
-            			<th>Familia</th>
-            			<th>Stock</th>
-            			<th>Precio</th>
-            			<th>Categoria</th>
-            			<th>descripcion</th>
-            			<th>Precio Unitario</th>
-            			
-
-            			
-            		</thead>
+            			<th>opciones</th>       
+                        <th>Tipo</th>
+                        <th>Familia</th>                      
+                        <th>N serie</th>
+                        <th>Cod Pedido</th>
+                        <th>Cod Producto</th>
+                        <th>Nombre Producto</th>
+                        <th>Marca</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Categoria</th>
+                        <th>descripcion</th>
+               		</thead>
             		<tfoot>
             			
             			<th></th>
@@ -222,12 +235,8 @@
             			<th></th>
             			<th></th>
             			<th></th>
-            			<th></th>
-            			<th></th>
-
-            			
-            			
-
+            			<th></th>            			
+            		
             		</tfoot>
             		
             	</table>
@@ -251,6 +260,8 @@
 
 
 @push('scripts')
+
+
 <script>
 $(document).ready(function(){
     $('#bt_add').click(function(){
@@ -263,26 +274,57 @@ var cont=0;
 
 $("#guardar").show();
 
+$("#a").change(cambiaropcion);
+
+function cambiaropcion(){
+        tipoP=$("#a").val();
+
+       if(tipoP=="Bandejas"){
+            $('#d').attr("disabled", true);
+            $('#h').attr("disabled", true);
+            $('#i').attr("disabled", true);
+        }
+      else if(tipoP=="Tableros"){
+            $('#d').attr("disabled", true);
+            $('#h').attr("disabled", true);
+            $('#i').attr("disabled", true);
+        }
+        else if(tipoP=="Accesorios"){
+            $('#d').attr("disabled", true);
+            $('#h').attr("disabled", true);
+            $('#i').attr("disabled", true);
+        }
+        else{
+           $('#d').attr("disabled", false);
+           $('#h').attr("disabled", false); 
+           $('#i').attr("disabled", false);  
+        }
+   }
+
 function agregar()
 {
+
+	datosFamilia=document.getElementById('b').value.split('_');
     
-    numserie=$("#a").val();
-    codpedido=$("#b").val();
-    codproducto=$("#c").val();
-    nomproducto=$("#d").val();
-    stock=$("#e").val();
-    precio=$("#f").val();
-    cat=$("#g").val();
-    descripcion=$("#h").val();
-    tipoP=$("#i").val();
-    familia=$("#j").val();
+    idFamilia=datosFamilia[0];
+    tipoP=$("#a").val();
+    familia=$("#b option:selected").text();
+    numserie=$("#c").val();
+    codpedido=$("#d").val();
+    codproducto=$("#e").val();
+    nomproducto=$("#f").val();
+    marca=$("#g").val();
+    stock=$("#h").val();
+    precio=$("#i").val();
+    cat=$("#j").val();
+    descripcion=$("#k").val();
    
 
-    if(tarea!="")
+    if(idFamilia!="")
     {
        
 
-       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td>  <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td> <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td> <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td> <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td> <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td> <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td> <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td> <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="tipo_producto[]" value="'+tipoP+'">'+tipoP+'</td> <td><input type="hidden" name="idFamilia[]" value="'+idFamilia+'">'+idFamilia+'</td> <td><input type="hidden" name="serie_producto[]" value="'+numserie+'">'+numserie+'</td>  <td><input type="hidden" name="codigo_pedido[]" value="'+codpedido+'">'+codpedido+'</td> <td><input type="hidden" name="codigo_producto[]" value="'+codproducto+'">'+codproducto+'</td> <td><input type="hidden" name="nombre_producto[]" value="'+nomproducto+'">'+nomproducto+'</td> <td><input type="hidden" name="marca_producto[]" value="'+marca+'">'+marca+'</td> <td><input type="hidden" name="stock[]" value="'+stock+'">'+stock+'</td> <td><input type="hidden" name="precio_unitario[]" value="'+precio+'">'+precio+'</td> <td><input type="hidden" name="categoria_producto[]" value="'+cat+'">'+cat+'</td> <td><input type="hidden" name="descripcion[]" value="'+descripcion+'">'+descripcion+'</td>  </tr>';
        cont++;
        limpiar();
        evaluar();
@@ -298,7 +340,17 @@ function agregar()
 
    
     function limpiar(){
-        $("#pnombre_tarea").val("");
+        $("#a").val("");
+      
+        $("#c").val("");
+        $("#d").val("");
+        $("#e").val("");
+        $("#f").val("");
+        $("#g").val("");
+        $("#h").val("");
+        $("#i").val("");
+        $("#j").val("");
+        $("#k").val("");
         
     }
 

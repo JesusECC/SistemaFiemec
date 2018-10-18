@@ -21,7 +21,7 @@ class Producto extends Model
     	'descripcion_producto',
     	'precio_unitario',
     	'foto',
-        'familia',
+        'idFamilia',
         'tipo_producto',
     	'categoria_producto',
     	'fecha_sistema',
