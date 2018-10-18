@@ -20,7 +20,7 @@
 				<div class="box-header with-border" style="padding: 10px !important">
 					<h4>
 						<strong style="font-weight: 400">
-							<i class="fas fa-list-ul"></i> Lista de Productos Fiemec
+							<i class="fas fa-list-ul"></i> Lista de Proforma Bandejas Fiemec
 						</strong>
 					</h4>
 					<div class="ibox-title-buttons pull-right">
@@ -53,10 +53,26 @@
 				        		<td>
 				        			{{$prof->nombre}}
 				        		</td>
-				        		<td align="center">
-				        			<a  href="{{route('bandejas-show',$prof->idProforma)}}"  class="btn btn-primary btn-xs" title="Ver Bandejas"><i class="far fa-eye"></i> </a>
-									<a href="{{route('producto-edit',$prof->idProforma)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
-									<a href="" data-target="#modal-delete-{{$prof->idProforma}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Anular Bandeja"><i class="fas fa-trash-alt"></i> </a>
+				        		<td align="center" style="width: 220px">
+				        			<div class="pull-right box-tools">
+				        			<a  href="{{route('bandejas-show',$prof->idProforma)}}"  class="btn btn-primary btn-xs" title="Ver Bandejas"><i class="far fa-eye"></i> Ver </a>
+
+									<a href="{{route('producto-edit',$prof->idProforma)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Proforma"></i>Editar </a>
+
+									<a href="" data-target="#modal-delete-{{$prof->idProforma}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Anular Proforma"><i class="fas fa-trash-alt"></i>Eliminar</a>
+
+									<div class="btn-group">
+				        					<button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" saria-expanded="true">
+				        						<i class="far fa-file-pdf" title="PDF"></i>
+				        					</button>
+				        					<ul class="dropdown-menu pull-right" role="menu">
+				        						<li>
+				        			<a target="_blank" href="{{URL::action('ControllerBandejas@pdf',$prof->idProforma)}}"><i class="far fa-file-pdf"></i> PDF Soles</a>
+
+				        			<a target="_blank" href="{{URL::action('ControllerBandejas@pdf2',$prof->idProforma)}}"> <i class="far fa-file-pdf"></i> PDF Dolares</a>
+				        			</li>
+				        					</ul>
+				        				</div>	
 								</td>
 							</tr>
 							@include('proforma.bandejas.modal')
