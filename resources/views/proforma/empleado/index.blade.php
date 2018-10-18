@@ -54,10 +54,10 @@
 				        		 <td>
 				        			{{$emp->fono}}
 				        		</td>
-                            
-				        		<td>
-				        			{{$emp->cargo}}
+                            <td>
+				        			{{$emp->nombre_cargo}}
 				        		</td>
+				        		
 				        		<td align="center">
 				        			<a  href=""  data-target="#modal-show-{{$emp->id}}"  data-toggle="modal" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="left" title="Ver Producto"><i class="far fa-eye"></i> </a>
 									<a href="{{route('empleado-edit',$emp->id)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
