@@ -6,6 +6,7 @@ namespace SistemaFiemec\Http\Controllers;
 use Illuminate\Http\Request;
 use SistemaFiemec\Empleados;
 use SistemaFiemec\User;
+use SistemaFiemec\UserCargo;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SistemaFiemec\Http\Controllers\Controller;
@@ -29,8 +30,9 @@ class ControllerEmpleados extends Controller
        $query=trim($request->get('searchText'));
        $Empleados=DB::table('Empleado as e')
        ->join('users as us','e.id','=','us.idEmp')
-       ->join('Cargo as ca','ca.idCargo','=','us.idCargo')
-       ->select(db::raw('CONCAT(e.nombres," ",e.paterno," ",e.paterno) as nombre'),'e.direccion',db::raw('CONCAT(e.telefono," / ",e.celular) as fono'),'e.id','ca.nombre_cargo')
+       ->join('User_Cargo as uc','uc.idUser','=','us.id')
+       ->join('Cargo as ca','ca.idCargo','=','uc.idCargo')
+       ->select(db::raw('CONCAT(e.nombres," ",e.paterno," ",e.paterno) as nombre'),'e.direccion',db::raw('CONCAT(e.telefono," / ",e.celular) as fono'),'e.id','ca.nombre_cargo','us.email')
         ->where('e.nombres','LIKE','%'.$query.'%')
        ->where('e.estado','=',1)
        
@@ -70,6 +72,9 @@ try{
         $sueldo;
         $fechaini;
         $fechafin;
+        $pw;
+        $emaill;
+
 //var dat=[{cargo:cargo,documento:documento,nombre:nombre,paterno:paterno,
 //materno:materno,fechanac:fechanac,sexo:sexo,telefono:telefono,celular:celular,
 //direccion:direccion,email:email,sueldo:sueldo,fechaini:fechaini,fechafin:fechafin}];
@@ -89,6 +94,8 @@ try{
             $sueldo=$dato['sueldo'];
             $fechaini=$dato['fechaini'];
             $fechafin=$dato['fechafin'];
+            $pass=$dato['pass'];
+            $emaill=$dato['emaill'];
             
         }
         $idEmpleado=DB::table('Empleado')->insertGetId(
@@ -109,17 +116,30 @@ try{
             'estado'=>1
             ]
         );
+$idUser=DB::table('users')->insertGetId(
+            [
 
-            $user=new User;  
-            $user->idEmp=$idEmpleado;
-            $user->idCargo=$cargo;
-            $user->name=$nombre; 
-            $user->paterno=$paterno; 
-            $user->materno=$materno;  
-            $user->password=Hash::make($documento); 
-            $user->admin=1;
-            $user->email=$email;  
-            $user->save();            
+            'idEmp'=>$idEmpleado,
+            'name'=>$nombre, 
+            'paterno'=>$paterno, 
+            'materno'=>$materno,  
+            'password'=>Hash::make($pass), 
+            'admin'=>1,
+            'email'=>$emaill  
+            
+            ]
+            );
+
+
+            $ucargo=new UserCargo;
+            $ucargo->idUser=$idUser;
+            $ucargo->idCargo=$cargo;
+            $ucargo->save();
+
+
+
+
+
         
             return ['data' =>'empleados','veri'=>true];
         }catch(Exception $e){
@@ -130,17 +150,26 @@ try{
 
   public function edit($id)
   {
-    $empleados=DB::table('Empleado as s')
-    ->join('users as u','u.id','=','s.idUser')
-    ->join('Empleado as e','e.id','=','u.idEmp')
-    ->select('e.id','u.last_login_at','u.id','u.admin')
+     $cargo=db::table('Cargo')
+      ->where('estado','=',1)
+      ->get();
+      
+       $user=db::table('users')
+      ->where('admin','=',1)
+      ->get();
+    
+    $Empleados=DB::table('Empleado as e')
+    ->join('users as us','e.id','=','us.idEmp')
+       ->join('User_Cargo as uc','uc.idUser','=','us.id')
+       ->join('Cargo as ca','ca.idCargo','=','uc.idCargo')
+    ->select('us.email','e.correo','e.tipo_documento','e.nro_documento','e.direccion','e.fecha_nacimiento','e.sexo','e.sueldo','e.fecha_inicio','e.fecha_fin','e.nombres','e.paterno','e.paterno','e.direccion','e.telefono','e.celular','e.id')
     ->where('e.id','=',$id)
     ->get();
-    return view("proforma.empleado.edit",["sesiones"=>$sesiones,"Empleado"=>Empleados::findOrFail($id)]);
+    return view("proforma.empleado.edit",["user"=>$user,"cargo"=>$cargo,"Empleado"=>Empleados::findOrFail($id)]);
   }
   public function update(Request $request)
   {
-    try{
+   /* try{
         $cargo;
         $documento;
         $nombre;
@@ -235,7 +264,7 @@ try{
                 return ['data' =>'proformas','veri'=>true];
             }catch(Exception $e){
                 return ['data' =>$e,'veri'=>false];
-            }
+            }*/
     
 
     }

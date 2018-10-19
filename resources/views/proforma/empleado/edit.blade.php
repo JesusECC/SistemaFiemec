@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-sm-8">
 											<div class="form-group">
-												<input type="text" disabled disabled name="nombres" class="form-control" required value="{{$Empleado->nombres.' '.$Empleado->paterno.' '.$Empleado->materno}}">
+												<input type="text"     name="nombres" class="form-control" required value="{{$Empleado->nombres.' '.$Empleado->paterno.' '.$Empleado->materno}}">
 											</div>								
 										  </div>
 	                                     </div>
@@ -79,7 +79,7 @@
 														<div class="row">
 													<div class="col-sm-4">
 														<div class="form-group">
-															<input type="text" disabled name="nro_documento" class="form-control" required value="{{$Empleado->nro_documento}}">
+															<input type="text"   name="nro_documento" class="form-control" required value="{{$Empleado->nro_documento}}">
 														</div> 												
 													</div>
 													
@@ -91,28 +91,28 @@
 																<div class="input-group-addon">
 																	<i class="far fa-calendar-alt"></i>
 																</div>
-																<input type="date" disabled name="fecha_nacimiento" class="form-control" required value="{{$Empleado->fecha_nacimiento}}">
+																<input type="date"   name="fecha_nacimiento" class="form-control" required value="{{$Empleado->fecha_nacimiento}}">
 															</div>
 														</div>												
 													</div>
 													<div class="col-sm-3">
 														<div class="form-group">
-															<input type="text" disabled disabled name="sexo" class="form-control" required value="{{$Empleado->sexo}}">
+															<input type="text"     name="sexo" class="form-control" required value="{{$Empleado->sexo}}">
 														</div>		
 													</div>
 													<div class="col-sm-4">
-														<input type="text" disabled name="telefono" class="form-control" required value="{{$Empleado->telefono}}">	
+														<input type="text"   name="telefono" class="form-control" required value="{{$Empleado->telefono}}">	
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-sm-5">
 														<div class="form-group">
-															<input type="text" disabled name="celular" class="form-control" required value="{{$Empleado->celular}}">	
+															<input type="text"   name="celular" class="form-control" required value="{{$Empleado->celular}}">	
 														</div>   												
 													</div>
 													<div class="col-sm-7">
 														<div class="form-group">
-															<input type="text" disabled name="correo" class="form-control" required value="{{$Empleado->correo}}">	
+															<input type="text"   name="correo" class="form-control" required value="{{$Empleado->correo}}">	
 														</div>  												
 													</div>										
 												</div>
@@ -124,29 +124,29 @@
 												<div class="row">
 													<div class="col-md-12">
 														<div class="form-group">
-															<input type="text" disabled name="Departamento" class="form-control" required value="{{$Empleado->direccion}}">
+															<input type="text"   name="Departamento" class="form-control" required value="{{$Empleado->direccion}}">
 														</div>														
 													</div>
 
 												</div>
 												<div class="row">
-													<div class="col-md-6">
+													
+													<div class="col-md-4">
 														<div class="form-group">
-															<input type="text" disabled name="Distrito" class="form-control" required value="{{$Empleado->cargo}}">
+															<input type="text"   name="Distrito" class="form-control" required value="{{$Empleado->direccion}}">
 														</div>
 													</div>													
-													<div class="col-md-6">
+													<div class="col-md-4">
 														<div class="form-group">
-															<input type="text" disabled name="Direccion" class="form-control" required value="{{$Empleado->sueldo}}">
+															<input type="text"   name="Direccion" class="form-control" required value="{{$Empleado->sueldo}}">
 														</div>
 													</div>						
 									             </div>
 											</div>
-                                        
-                                    </div>                                    
+                                         </div>                                    
+                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                           </div>
                         <div class="col-md-4">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body">
@@ -156,36 +156,31 @@
 														Utlima Sesiones
 													</label>
 				       <div class="row">
-    				                    <div class="col-sm-12
-    				                 ">
+    				                    <div class="col-sm-12">
 											<div class="form-group">
-												<input type="text" disabled name="last_login_at" class="form-control" required value="{{$sesiones->last_login_at}}">
-											</div>													
+										<input type="text"   name="email" class="form-control" required value="{{$Empleado->email}}">
+											</div>								
 										</div>
+
+                                        <div class="col-sm-12">
+											<div class="form-group">
+											<input type="text" name="Direccion" class="form-control" required value="{{$Empleado->sueldo}}">
+											</div>								
 										</div>
-				</div>  
-                </div>                 
-
-                </div>                            
-                </div>
 
 
-
-
-
-                    </div>
-						
-
-
-				
-															
-									</div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+							           </div>
+				                      </div>  
+                                     </div>                 
+                                    </div>                            
+                                   </div>
+                                  </div>
+                                 </div>
+							    </div>
+							   </div>
+						      </div>
+					         </div>
+				            </div>
 
 				<div class="box-footer">
 					<div class="text-right">

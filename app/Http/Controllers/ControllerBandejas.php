@@ -281,6 +281,130 @@ public function pdf2($id){
 
 
 }
+public function edit($id)
+    {
+        //
+        $productos=DB::table('Producto as po')
+        ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
+        ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.marca_producto," ",po.nombre_producto," ",po.descripcion_producto) as product'))
+        ->where('po.estado','=','activo')
+        ->where('po.tipo_producto','=','bandejas')
+        ->get();
+         
+         $medidas=DB::table('Medidas')
+         ->where('estadoM','=','activo')
+         ->get();
+
+        $proforma=DB::table('Proforma as p')
+        ->join('Detalle_bandejas as deP','p.idProforma','=','deP.idProforma')
+        ->join('Medidas as m','m.idMedidas','=','deP.idMedidas')
+        ->join('Producto as pd','pd.idProducto','=','deP.idProducto')
+        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.estadoDB','deP.descuento','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','m.medida',DB::raw('CONCAT(deP.espesor) as med'),'m.precio',DB::raw('CONCAT(pd.marca_producto," ",pd.nombre_producto," ",pd.descripcion_producto) as produ'))
+        ->where('deP.idProforma','=',$id)
+        ->get();
+    
+        // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
+        return view("proforma.bandejas.edit",["medidas"=>$medidas,"productos"=>$productos,'proforma'=>$proforma]);
+
+
+    }
+    public function update(Request $request)
+    {
+        //
+        try{
+            $nomTablero;
+            $idclie;
+            $valorv;
+            $tota;
+            $tableros;
+            $idTipoCam;
+            $valorcambio;
+            $totaldolares;
+            $forma;
+            $plazo;
+            $observacion;
+            $idProforma;
+    // [{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldola:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,
+    //     forma:forma,plazo:plazo,observacion:observacion}];
+    // nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,
+    // valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion
+               
+            foreach ($request->datos as $dato) {
+                $idProforma=$dato['idProforma'];
+                // $idclie=$dato['idcliente'];
+                $valorv=$dato['valorVenta'];
+                $tota=$dato['total'];
+                // $idTipoCam=$dato['idTipoCambio'];
+                // $valorcambio=$dato['valorTipoCambio'];
+                //$nomTablero=$dato['nomTablero'];
+                $totaldolares=$dato['totaldolares'];
+                $forma=$dato['forma'];
+                $plazo=$dato['plazo'];
+                $observacion=$dato['observacion'];
+            }
+                Proforma::where('idProforma',$idProforma)
+                ->update([
+                    // 'idCliente'=>$idclie,
+                // 'idEmpleado'=>$request->,           
+                // 'idTipo_moneda'=>$idTipoCam,
+                'serie_proforma'=>'PU365122018',
+                // 'fecha_hora'=>$mytime->toDateTimeString(),
+                'igv'=>'18',
+                'subtotal'=>$valorv,
+                'precio_total'=>$tota,
+                // 'tipocambio'=>$valorcambio,
+                'precio_totalC'=>$totaldolares,
+                // 'descripcion_proforma'=>$observacion, //preguntar
+                'tipo_proforma'=>'unitaria',
+                // 'caracteristicas_proforma'=>$request->, preguntar
+                'forma_de'=>$forma,
+                // 'plaza_fabricacion'=>$request->,
+                'plazo_oferta'=>$plazo,
+                // 'garantia'=>$request->,
+                // 'observacion_condicion'=>$request->,
+                'observacion_proforma'=>$observacion,
+                'estado'=>1
+                ]);
+            foreach($request->filas as $fila){
+                if ($fila['estado']==1 || $fila['estado']==0) {
+                    DetalleBandejas::where('idProforma',$idProforma)
+                    ->where('idDetalle_bandejas',$fila['idDetalleProforma'])
+                    ->update([
+                    // $detalleProforma->idDetalle_proforma=$fila[''];  
+                    'idProducto'=>$fila['idProducto'],
+                    // 'idProforma'=>$idProforma,
+                    // 'idTableros'=>$idTablero,
+                    'cantidad'=>$fila['cantidadP'],
+                    'precio_venta'=>$fila['prec_uniP'],
+                    // texto_precio_venta=>$fila['' 
+                    // observacion_detalleP=>$fila[''   
+                    'descuento'=>$fila['descuentoP'],
+                    'descripcionDP'=>$fila['descripcionP'],
+                    'estadoDB'=>$fila['estado']
+                    ]);
+                }else if($fila['estado']==2){
+                    $Detallebandejas=new DetalleBandejas;
+                    // $detalleProforma->idDetalle_proforma=$fila[''];  
+                    $Detallebandejas->idProducto=$fila['idProducto'];
+                    $Detallebandejas->idProforma=$idProforma;
+                    // $detalleProforma->idTableros=$idTablero;
+                    $Detallebandejas->cantidad=$fila['cantidadP'];
+                    $Detallebandejas->precio_venta=$fila['prec_uniP'];  
+                    // $detalleProforma->texto_precio_venta=$fila[''];  
+                    // $detalleProforma->observacion_detalleP=$fila[''];    
+                    $Detallebandejas->descuento=$fila['descuentoP'];    
+                    $Detallebandejas->descripcionDP=$fila['descripcionP'];
+                    $Detallebandejas->estadoDP=1;
+                    $Detallebandejas->save();
+                }
+                
+            }
+                return ['data' =>'proformas','veri'=>true];
+            }catch(Exception $e){
+                return ['data' =>$e,'veri'=>false];
+            }
+    }
     public function destroy($id)
     {
         $producto=Proforma::findOrFail($id);

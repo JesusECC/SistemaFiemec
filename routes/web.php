@@ -94,6 +94,8 @@
     Route::get('proforma/bandejas/pdf2/{idProforma}','ControllerBandejas@pdf2');
     Route::get('bandejas/show/{id}',['as'=>'bandejas-show','uses'=>'ControllerBandejas@show']);
     Route::delete('bandejas/eliminar/{id}',['as'=>'bandejas-eliminar','uses'=>'ControllerBandejas@destroy']);
+    Route::get('bandejas/editar/{id}',['as'=>'bandejas-edit','uses'=>'ControllerBandejas@edit']);
+    Route::post('bandejas/editar/modificar',['as' => 'bandejas-update','uses'=>'ControllerBandejas@update']); 
     
     //Se crea rutas servicios
      Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);

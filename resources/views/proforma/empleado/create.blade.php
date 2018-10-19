@@ -45,7 +45,7 @@
 <div class="box-body bg-gray-c">
                     <div class="row">
 
-                       <div class="col-md-12">
+                       <div class="col-md-8">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body">
                                     <div class="form-group">
@@ -184,14 +184,42 @@
                                  </div>
                              </div>
                           </div>
+<div class="col-md-4">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">
+                                 <div class="box-body">
+          
+            <label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+                            Cuenta de Usuario
+                          </label>
+                              <div class="row"> 
+                                 <div class="col-sm-12">
+                                     <div class="form-group">
+                                       <label for="sueldo">Usuario</label>
+                                        <input type="text" name="email" id="emaill" class="form-control" placeholder="Ingrese el sueldo">
+                                      </div>  
+                                 </div>
+                                        
+                                  
+                                 <div class="col-sm-12">
+                                     <div class="form-group">
+                                                <label for="fecha_inicio">Contraseña</label>
+                                                <input type="text" name="password" id="pw" class="form-control" placeholder="Ingrese Fecha Inicio"> 
+                                            </div>  
+                                        </div>
+                            <div style="margin-top: 20px" class="from-group ">
 
-                     
-<div style="margin-top: 20px" class="from-group ">
-
-    <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
-    <button class="btn btn-danger" type="reset">Limpiar</button>
+                          <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
+                           <button class="btn btn-danger" type="reset">Limpiar</button>
     
              </div>
+                                    </div>
+                               </div>  
+                           </div>                 
+                      </div>                            
+                </div>
+                     
+                        
 
 </section>
 <!--{!!Form::close()!!}-->
@@ -232,9 +260,13 @@
         var sueldo=$("#su").val();
         var fechaini=$("#fecini").val();
         var fechafin=$("#fecfin").val();
+        
+        var pass=$("#pw").val();
+        var emaill=$("#emaill").val();
+
 
         if(cargo!='' && documento!=''){
-            var dat=[{cargo:cargo,documento:documento,nombre:nombre,paterno:paterno,materno:materno,fechanac:fechanac,sexo:sexo,telefono:telefono,celular:celular,direccion:direccion,email:email,sueldo:sueldo,fechaini:fechaini,fechafin:fechafin}];
+            var dat=[{cargo:cargo,documento:documento,nombre:nombre,paterno:paterno,materno:materno,fechanac:fechanac,sexo:sexo,telefono:telefono,celular:celular,direccion:direccion,email:email,sueldo:sueldo,fechaini:fechaini,fechafin:fechafin,pass:pass,emaill:emaill}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {datos:dat}, //datos que se envian a traves de ajax

@@ -38,6 +38,7 @@
 				                <th>N° Nombre</th>
 				                 <th>N° Direccion</th>
 				                 <th>N° Telefono</th>
+				                  <th>N° Correo</th>
 				                 <th>N° Cargo</th>
 				               
 				            </tr>
@@ -54,7 +55,10 @@
 				        		 <td>
 				        			{{$emp->fono}}
 				        		</td>
-                            <td>
+				        		 <td>
+				        			{{$emp->email}}
+				        		</td>
+                                 <td>
 				        			{{$emp->nombre_cargo}}
 				        		</td>
 				        		

@@ -57,7 +57,7 @@
 				        			<div class="pull-right box-tools">
 				        			<a  href="{{route('bandejas-show',$prof->idProforma)}}"  class="btn btn-primary btn-xs" title="Ver Bandejas"><i class="far fa-eye"></i> Ver </a>
 
-									<a href="{{route('producto-edit',$prof->idProforma)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Proforma"></i>Editar </a>
+									<a href="{{route('bandejas-edit',$prof->idProforma)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Proforma"></i>Editar </a>
 
 									<a href="" data-target="#modal-delete-{{$prof->idProforma}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Anular Proforma"><i class="fas fa-trash-alt"></i>Eliminar</a>
 

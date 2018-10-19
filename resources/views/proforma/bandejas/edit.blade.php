@@ -8,9 +8,9 @@
     <ol class="breadcrumb" style="margin-top: 55px;">
         <li>
             <a href="#">
-                <i class="fas fa-file-signature"></i> Proforma</a>
+                <i class="far fa-edit"></i> Proforma</a>
         </li>
-        <li class="active">Nueva Proforma Bandejas</li>
+        <li class="active">Editar Proforma Unitaria</li>
     </ol>
 </section>
 <section class="content">
@@ -20,8 +20,8 @@
                 <div class="box-header with-border" style="padding: 10px !important">
                     <h4>
                         <strong style="font-weight: 400">
-                            <i class="fas fa-dolly"></i> Datos Proforma Tableros Fiemec
-                        </strong>
+                            <i class="fas fa-dolly"></i> Datos de Proforma Fiemec
+                        </strong>                        
                     </h4>
                     @if(count($errors)>0)
                     <div class="alert-alert-danger">
@@ -38,88 +38,58 @@
                         <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('bandejas')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
                     </div>
                 </div>
-                <div class="box-body bg-gray-c">
+                <div class="box-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <label for="" class="control-label" style="color: #676a6c !important">
-                                            Cliente
-                                        </label>
+                                        <label for="" class="control-label" style="color: #676a6c !important">Cliente</label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-9 ">
-                                            <div class="form-group ">
-                                                <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
-                                                    <option value="">Seleccione Cliente</option>
-                                                    @foreach($clientes as $cliente)
-                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
-                                                    @endforeach
-                                                </select> 
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="" class="control-label">Nombre y Apellidos de Cliente</label>
+                                                <input type="text" disabled name="nombreclie" id="nombreclie" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <button type="button" id="bt_add_Cliente" class="btn btn-create"><i class="fas fa-user-plus"></i> Nuevo</button>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="Dirección del cliente">
-                                            </div>
-                                                
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="Número de Documento">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="" class="control-label">Dirección Cliente</label>
+                                                <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text"  name="cliente_empleado" id="cliente_empleado"  class="form-control" placeholder="Ingrese Nombre del Empleado">
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <label for="" class="control-label"> Documento</label>
+                                                <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label for="" class="control-label">Empleado </label>
+                                                <input type="text" disabled name="cotizador" id="cotizador" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="" class="control-label" style="color: #676a6c !important">
-                                            Tipo de Moneda
+                                            Tipo de Cambio
                                         </label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
-                                                    <option value="" disabled="" selected="">Moneda</option>
-                                                    @foreach($monedas as $mo)                
-                                                        <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
-                                                    @endforeach  
-                                                </select>                                                
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label for="" class="control-label">Símbolo</label>
+                                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" >
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" placeholder="Simbolo">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" disabled id="valorcambio" class="form-control" placeholder="Cambio">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" disabled id="igv_tipocambio" class="form-control" placeholder="% IGV">
+                                            <div class="col-sm-6">
+                                                <label for="" class="control-label">Valor</label>
+                                                <input type="text" disabled id="valorcambio" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -130,122 +100,122 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-shadow">
-                                <div class="panel-body">
+                                <div class="panel-body" id="agregar_producto" style="display:none !important">
                                     <div class="form-group">
-                                        <label for="" class="control-label" style="color: #676a6c !important;">
-                                            Ingresar Bandejas
+                                        <label for="" class="control-label" style="color: #676a6c !important">
+                                            Agregar Producto
                                         </label>
                                     </div>
-                                    <div class="row"  style="margin-top:20px">
+                                    <div class="row" >
                                         <div class="col-sm-6">
-                                            <div class="" id="producto-oculto">
+                                            <div class="form-group">
                                                 <label for="" class="control-label">Producto</label>
-                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                                    <option value="" selected="" disabled="">Seleccione Producto</option>
+                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true" style="font-size: 10px !important">
+                                                    <option value="">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
-                                                   <option value="{{ $producto->idProducto }}_{{ $producto->productos }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->productos2}}</option>
+                                                        <option value="{{ $producto->idProducto}}_{{ $producto->product}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->product }}</option>
                                                     @endforeach
-                                                </select> 
+                                                </select>     
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <div class="form-group label-floating">
-                                                <label for="" class="control-label">Espesor</label>
-                                                <input type="number"  id="pespesor" class="form-control" name="pespesor"  >  
+                                            <label for="" class="control-label">Espesor</label>
+                                            <div class="form-group">
+                                                <input type="number"  id="espesor" class="form-control" name="espesor"  placeholder="Ingrese espesor" >
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
+                                            <label for="" class="control-label">Medidas</label>
                                             <div class="form-group">
-                                                <label for="" class="control-label">Medidas</label>
-                                                <select name="idMedidas" class="form-control selectpicker" id="pidMedidas" data-live-search="true">
+                                                <select name="pidProducto" class="form-control selectpicker" id="pidMedidas" data-live-search="true" style="font-size: 10px !important">
                                                     <option value="">Seleccione Medidas</option>
                                                     @foreach($medidas as $me)
-                                                        <option value="{{$me->idMedidas}}_{{$me->precio}}_{{ $me->medida}}">{{$me->medida}}</option>
+                                                        <option value="{{ $me->idMedidas}}_{{ $me->precio}}_{{ $me->medida}}">{{ $me->medida}}</option>
                                                     @endforeach
-                                                </select>                                                    
+                                                </select>     
                                             </div>
                                         </div>
-                                        <div class="col-lg-4" style="margin-top:20px">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Descripcion</label>
-                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
-                                            </div>
-                                        </div> 
-                                        <div class="col-lg-2" style="margin-top:20px">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">P. UNIT.</label>
-                                                <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
-                                            </div>
-                                        </div> 
-                                        <div class="col-lg-2" style="margin-top:20px">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Cantidad</label>
-                                                 <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
-                                            </div>
-                                        </div> 
-                                        <div class="col-sm-2" style="margin-top:20px">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Descuento %</label>
-                                                <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-sm-4">
+                                        <label for="" class="control-label">Descripcion</label>
+                                            <div class="form-group">
+                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  placeholder="Ingrese una Descripción" >
                                             </div>
                                         </div>
-                                        <div class="col-sm-1" style="margin-top:24px">
-                                            <div class="form-group label-floating">
-                                            <label class="control-label"></label>
-                                                <button type="button" id="bt_add_produc" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Agregar</button>
-                                            </div>
-                                        </div>                                                                                 
+                                        <div class="col-sm-2">
+                                            <label for="" class="control-label">Precio</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">S/.</span>
+                                                <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled placeholder="Precio Unitario">
+                                            </div>                                            
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label for="" class="control-label">Cantidad</label>
+                                            <div class="form-group">
+                                                <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" placeholder="Cant.">
+                                            </div>                                            
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label for="" class="control-label">Descuento</label>
+                                            <div class="form-group">
+                                                <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" placeholder="Desc.">
+                                            </div>                                            
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <button type="button" id="bt_add_produc" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
+                                            </div>  
+                                        </div> 
                                     </div>
                                 </div>
+                                <div class="row" id="quitar_btn" style="display: block;">
+                                        <div class="col-md-12">
+                                            <div class="from-group ">
+                                                <button id="btnagregar" style="margin: 20px;" class="btn btn-success " type="button">
+                                                    <i class="fas fa-cart-plus"></i>Agregar Productos</button>
+                                            </div>
+                                        </div>
+                                </div>
                                 <div class="panel-footer">
-                                    <div id="tablerosn" style="color: #f5f5f5 !important;">
-                                        <section class="content" style="min-height:0px !important">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="box">
-                                                        <div class="box-header with-border" style="padding:5px !important;">
-                                                        <p> Proforma de Bandejas: </p>
-                                                            <div class="box-tools pull-right">
-                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <div id="tablerosn">
+                                        <div id="Tablero_unitaria">
+                                            <section class="content" style="min-height:0px !important">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="box">
+                                                            <div class="box-header with-border" style="padding:5px !important;">
+                                                            <p> Proforma Unitaria </p>
+                                                                <div class="box-tools pull-right">
+                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
+                                                                            <thead style="background-color:#A9D0F5;text-align: center;" >
+                                                                                <th class="text-center">Producto</th>
+                                                                                <th class="text-center">Medidas</th>
+                                                                                <th class="text-center">Descripción</th>
+                                                                                <th class="text-center">Cant.</th>
+                                                                                
+                                                                                <th class="text-center">P. Unit.</th>
+                                                                                <th class="text-center">Desc.</th>
+                                                                                <th class="text-center">Importe</th>
+                                                                                <th class="text-center">Opcción</th>
+                                                                            </thead>
+                                                                            <tbody id="tablero_unitario">
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>                            
                                                             </div>
                                                         </div>
-                                                        <div class="box-body">
-                                                            <div class="row">
-                                                                <div class="col-md-12 table-responsive">
-                                                                    <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
-                                                                        <thead style="background-color:#A9D0F5;text-align: center;color: black !important" >
-                                                                            <th>Producto</th>
-                                                                            <th>Medidas</th>
-                                                                            <th>Descr.</th>
-                                                                            <th>Cant.</th>
-                                                                            <th>P. Unit.</th>
-                                                                            <th>Desc</th>
-                                                                            <th>Importe</th>
-                                                                            <th>Opciones</th>
-                                                                        </thead>
-                                                                        <tbody id="tablero_unitario">
-                                                                            <tr>
-                                                                                <th colspan="8" align="text-center"> 
-                                                                                    <div class="panel panel-transparent panel-dashed tip-sales text-center" >
-                                                                                        <div class="row">
-                                                                                             <div class="col-sm-8 col-sm-push-2">
-                                                                                        <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
-                                                                                        <h3 class="ich m-t-none">
-                                                                                            No hay detalles de Bandejas
-                                                                                        </h3>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div> 
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            <div>
-                                                        </div>                            
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </section>
+                                            </section>
+                                        </div>
                                     </div>
                                     <div class="content" id="totales-general" style='display:none;'>
                                         <div class="row">
@@ -257,19 +227,21 @@
                                                                 <div class="form-group display-flex dec">
                                                                     <label for="" class="control-label">Subtotal</label>
                                                                     <div class="input-group date">
-                                                                        <h4 id="subtotal">s/. 0.00</h4><input type="hidden" name="subtotal" id="subtotal">
+                                                                        <h4 class="form-control" id="subtotal">    </h4>
+                                                                        <input type="hidden" name="subtotal" id="subtotal">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-1 hidden-xs text-center p-t-xs"> 
-                                                                <i class="fa fa-minus m-t-lg"> 
+                                                            <div class="col-sm-1 hidden-xs text-center mr-t-1"> 
+                                                                <i class="fa fa-minus "> 
                                                                 </i>  
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">
                                                                     <label for="" class="control-label">Descuento</label>
                                                                     <div class="input-group ">
-                                                                        <h4 id="descuentos">s/. 0.00</h4><input type="hidden" name="descuentos" id="descuentos">
+                                                                        <h4 id="descuentos" class="form-control">    </h4>
+                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -277,7 +249,8 @@
                                                                 <div class="form-group display-flex dec">
                                                                     <label for="" class="control-label">Valor Venta</label>
                                                                     <div class="input-group ">
-                                                                        <h4 id="valorVenta">s/. 0.00</h4><input type="hidden" name="valorVenta" id="valorVenta"></th>
+                                                                        <h4 class="form-control" id="valorVenta">    </h4>
+                                                                        <input type="hidden" name="valorVenta" id="valorVenta">
                                                                     </div>
                                                                 </div>
                                                             </div>                                                            
@@ -289,7 +262,8 @@
                                                                     <label for="    " class="control-label"> IGV %</label>
                                                                     <div class="input-group ">
                                                                         <h4 class="form-control" id="igv">    
-                                                                        <h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv">
+                                                                        </h4>
+                                                                        <input type="hidden" name="igv" id="igv" >
                                                                     </div> 
                                                                    
                                                                 </div>  
@@ -298,16 +272,19 @@
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> Total Soles</label>
                                                                     <div class="input-group ">
-                                                                        <h4 id="total">s/. 0.00</h4><input type="hidden" name="precio_subtotal" id="precio_subtotal">
+                                                                        <h4 class="form-control" id="total">    </h4>
+                                                                        <input type="hidden" name="precio_subtotal" id="precio_subtotal">
                                                                     </div> 
                                                                    
                                                                 </div>  
                                                             </div>
                                                             <div class="col-sm-4">
                                                                 <div class="form-group display-flex dec">  
-                                                                    <label for="    " class="control-label"> Total Dolares</label>
+                                                                    <label for=" " class="control-label"> Total Dolares</label>
                                                                     <div class="input-group date">
-                                                                        <h4 id="total_dolares">s/. 0.00</h4><input type="hidden" name="tota_dolares" id="tota_dolares">
+                                                                        <h4 class="form-control" id="total_dolares">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="tota_dolares" id="tota_dolares" value="">
                                                                     </div> 
                                                                    
                                                                 </div>  
@@ -337,23 +314,7 @@
                                                                     <label for="" class="control-label">
                                                                         Observaciones
                                                                     </label>
-                                                                    <textarea name="observacion_condicion" id="observacion_condicion" class="form-control"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label for="" class="control-label">
-                                                                        Incluye
-                                                                    </label>
-                                                                    <textarea name="incluye" id="incluye" class="form-control"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label for="" class="control-label">
-                                                                        Plaza de Fabricación
-                                                                    </label>
-                                                                    <textarea name="plaza_fabricacion" id="plaza_fabricacion" class="form-control"></textarea>
+                                                                    <textarea name="" id="" cols="30" rows="2" class="form-control">Ninguna</textarea>
                                                                 </div>
                                                             </div>
 
@@ -362,16 +323,18 @@
                                                 </div>
                                             </div>
                                         </div>                                        
-                                    </div> 
+                                    </div>                                                                     
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="box-footer">
+                </div>
             </div>
         </div>
-    </div><!-- /.row -->
-</section><!-- /.content -->
+    </div>
+</section>
 
 @push('scripts')
 <script>
@@ -382,11 +345,14 @@
         $('#save').click(function(){
             saveProforma();
         });
+        $('#btnagregar').click(function(){
+            agregarprorducto();
+        
+        });
         // boton agregar producto
         $('#bt_add_produc').click(function(){
             agregarProductosTablero();
-            valoresFinales();
-           
+            valoresFinales();           
         });
         $('#Pcantidad').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
@@ -401,11 +367,16 @@
             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
         });
         // Actualizar
-       
-
+        // asignarValores();
     });
     $("#idClientes").change(MostrarCliente);
     $("#idTipo_moneda").change(mostrarTipoCambio);
+    
+    var pro={!! $proforma !!};
+    var editarval=true;
+    
+    
+    // console.log(pro);
     var tablero=[];
     var filaob=[];
     var cont=0;
@@ -414,16 +385,23 @@
     var subtotal=0;
     var nomTablero='unitaria';
     var idcliente;
-    var idmedidas;
     var totalt;
     var valorventa;
     var tipocam;
     var simbolo;
     var totaldolares=0;
+    var idtipocam;
+    var idProforma;
     $("#pidProducto").change(MostarProducto);
-    $("#idMedidas").change(MostrarMedida);
+     $("#pidMedidas").change(MostrarMedida);
     $("#idTipo_moneda").change(cambioMoneda);
-    
+    asignarValores();
+
+    function agregarprorducto(){
+        document.getElementById('agregar_producto').style.display ='block';
+        document.getElementById('quitar_btn').style.display='none';
+    } 
+
     function MostrarCliente(){
        
         Cliente=document.getElementById('idClientes').value.split('_');
@@ -431,20 +409,16 @@
         $("#cdireccion").val(Cliente[1]);
         $("#cnro_documento").val(Cliente[2]);
     }
-
-    function MostarProducto(){
-        Producto=document.getElementById('pidProducto').value.split('_');
-        
-        $("#pdescuento").val(Producto[3]);
-        
-    }
-    
     function MostrarMedida(){
         Medidas=document.getElementById('pidMedidas').value.split('_');
         idmedidas=Medidas[0];
         $("#precio_uni").val(Medidas[1]);
         }
-
+    function MostarProducto(){
+        Producto=document.getElementById('pidProducto').value.split('_');
+        //$("#precio_uni").val(Producto[2]);
+        $("#pdescuento").val(Producto[3]);
+    }
     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         $("#simbolo").val(tipoCambio[2]);
@@ -452,6 +426,8 @@
         $("#igv_tipocambio").val(tipoCambio[3]+ " %");
         tipocam=tipoCambio[1];
         simbolo=tipoCambio[2];
+        idtipocam=tipoCambio[0];
+        valorcambio=tipoCambio[1];
 
     }
     function mostrarcampos(){
@@ -461,24 +437,16 @@
 
     function saveProforma(){
         // se enviar los datos al controlador proforma tableros
-        tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
-        var idtipocam=tipoCambio[0];
-        var valorcambio=tipoCambio[1];
-        var vVenta=$("#valorVenta").val();
-        var tl=$("#total").val();
+        // tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         var forma=$("#forma_de").val();
-        var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_condicion").val();
-        var incluye=$("#incluye").val();
-        var plazofabri=$("#plaza_fabricacion").val();
-        
-        if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,incluye:incluye,plazofabri:plazofabri,clienteemp:clienteemp}];
-            $.ajax({
+        if(valorventa>0 && totalt>0 ){
+            var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion}];
+           $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
-                url:   'guardar', //archivo que recibe la peticion
+                url:   'modificar', //archivo que recibe la peticion
                 type:  'post', //método de envio
                 dataType: "json",//tipo de dato que envio 
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
@@ -503,24 +471,23 @@
         var pname=Producto[1];
         var mname=Medidas[2];
         var pdescripcion=$("#descripcionp ").val();
+        var esp=$('#espesor').val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
-        var pesp=$('#pespesor').val();
-        /*var pcant=$('#Pcantidad').val();*/
         var descuento=$('#pdescuento').val();
         var filas;
-        if(nomTablero!="" && idMed!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && pesp!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
+        if(nomTablero!="" && idProd!="" && idMed!="" && pname!="" && puni!="" && pcant!="" && descuento!=""  ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
             bool=true;
-for (const fil in filaob) {
-if (filaob.hasOwnProperty(fil)) {
- if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['idMedidas']==idMed){
-                         var es=parseInt(pesp);
+            for (const fil in filaob) {
+                if (filaob.hasOwnProperty(fil)) {
+                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['idMedidas']==idMed){
+                        var es=parseInt(esp);
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
-                        filaob[fil]['espesorP']=es;
+                        filaob[fil]['espesor']=es;
                         filaob[fil]['cantidadP']=su;
                         filaob[fil]['descuentoP']=des;
                         filaob[fil]['descripcionP']=pdescripcion;
@@ -531,7 +498,7 @@ if (filaob.hasOwnProperty(fil)) {
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,idMedidas:idMed,medida:mname,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,espesorP:pesp,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+                var dat={idProducto:idProd,idMedidas:idMed,medida:mname,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,espesor:esp,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:2,idDetalleProforma:''};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -546,78 +513,139 @@ if (filaob.hasOwnProperty(fil)) {
         if(filaob.length>0){
             var filas;
             for (const fila in filaob) {
-                if (filaob.hasOwnProperty(fila)) {   
-                    var espesor=parseFloat(filaob[fila]['espesorP']);
+                if (filaob.hasOwnProperty(fila)) {                            
                     var cantidad=parseFloat(filaob[fila]['cantidadP']);
                     var precio=parseFloat(filaob[fila]['prec_uniP']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                     var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                     filas=
-                        '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                            '<td> '+ 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%;">'+
+                            '<td class="text-center"> '+ 
+                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                             '</td>'+
                             '<td> '+ 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idMedidas']+'">'+filaob[fila]['medida']+' | Con un espesor de '+
+                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idMedidas']+'">'+filaob[fila]['medida']+'mm con un espesor de '+
 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesorP']+'">'+filaob[fila]['espesorP']+'mm'+
+                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+'mm'+
                             '</td>'+
-                            '<td> '+ 
-                                '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
-
-                                
+                            '<td class="text-center"> '+ 
+                                '<input style="width:40px !important;" type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                             '</td>'+
-                            '<td> '+ 
-                                '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
+                            
+                            '<td  class="text-center"> '+ 
+                                '<input type="number" style="width:40px !important;" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
                             '</td>'+
-                            '<td> '+   
-                                '<input type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+filaob[fila]['prec_uniP']+
+                            '<td  class="text-center"> '+   
+                                '<input type="number" style="width:60px !important;" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
                             '</td>'+
-                            '<td> '+   
-                                '<input type="hidden" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+filaob[fila]['descuentoP']+
+                            '<td  class="text-center"> '+   
+                                '<input type="number"  style="width:40px !important;" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
                             '</td>'+
-                            '<td> '+   
-                                '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2) +' '+ 
+                            '<td  class="text-center"> '+   
+                                '<input type="number" style="width:60px !important;" width="40px" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
                             '</td>'+
-                            '<td>'+
+                            '<td  class="text-center">'+
                                 '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
                                         '<i class="fas fa-trash"></i>'+
                                 '</button>'+
                             '</td>'+
                         '</tr>';  
                     filaob[fila]['fila']=filas;
-                    filas="";   
-
-                    limpiar();                               
+                    filas="";                                  
                 }
             }                    
         }
     }    
 
-
-
-     function limpiar(){
-        $("#Pcantidad").val("");
-       
-        
-        $("#descripcionp").val("");
-    } 
     function detalleFilas(){
         // mantiene en la vista las filas cuando se agrega una nueva tabla
         var fil='';
         for (var key in filaob) {                   
             if (filaob.hasOwnProperty(key)) {
+                if (filaob[key]['estado']==1 || filaob[key]['estado']==2  ) {
                     fil+=filaob[key]['fila'];
+                }
+                    
             }
         }
         $('#tablero_unitario').html(fil);
         fil='';
     }
+    
+    function asignarValores(){
+        var pro={!! $proforma !!};
+        var nombreClie;
+        var apellidoP;
+        var apellidoM;
+        var direccion;
+        var documento;
+        var cotiza;
+        var formade;
+        var plazpOf;
+        var obser;
+        // var descuento;
+        console.log(pro);
+        if (editarval==true) {
+            for (const key in pro) {
+                if (pro.hasOwnProperty(key)) {
+                    idProforma=pro[key]['idProforma'];
+                    nombreClie=pro[key]['nombres_Rs'];
+                    apellidoP=pro[key]['paterno'];
+                    apellidoM=pro[key]['materno'];
+                    direccion=pro[key]['Direccion'];
+                    documento=pro[key]['nro_documento'];
+                    var idProd=pro[key]['idProducto'];
+                    var pname=pro[key]['produ'];
+                    var pdescripcion;
+                    tipocam=pro[key]['tipocambio'];
+                    simbolo=pro[key]['simboloP'];
+                    cotiza=pro[key]['cliente_empleado'];
+                    if(pro[key]['descripcionDP']==null){
+                        pdescripcion='';
+                    }else{
+                        pdescripcion=pro[key]['descripcionDP'];
+                    }
+                    var puni=pro[key]['precio_venta'];
+                    var pcant=pro[key]['cantidad'];
+                    var me=pro[key]['medida'];
+                    var esp=pro[key]['med'];
+                    var descuento=pro[key]['descuento'];     
+                    var estado=parseInt(pro[key]['estadoDB']);  
+                    var idDetalleProforma=pro[key]['idDetalle_bandejas'];
+                    formade=pro[key]['forma_de'];
+                    plazpOf=pro[key]['plazo_oferta'];
+                    obser=pro[key]['observacion_proforma']; 
+                    console.log(estado);
+                    var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,espesor:esp,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
+                    filaob.push(dat);  
+                    fila();
+                    contp++;               
+                }
+            }
+            document.getElementById('totales-general').style.display = 'block';
+            console.log(filaob);
+            valoresFinales(); 
+            editarval=false;
+            // cotizador
+            $("#nombreclie").val(nombreClie+" "+apellidoP+" "+apellidoM);
+            $("#cdireccion").val(direccion);
+            $("#cnro_documento").val(documento);
+            $("#cotizador").val(cotiza);
+
+            $("#simbolo").val(simbolo);
+            $("#valorcambio").val(tipocam);
+            $("#forma_de").val(formade);
+            $("#plazo_oferta").val(plazpOf);
+            $("#observacion_condicion").val(obser);
+
+            
+        }
+    }
     function subTotal(){
         // la suma de tosos los tableros        
         var sub=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -629,7 +657,7 @@ if (filaob.hasOwnProperty(fil)) {
     function descuentos(){
         var desc=0;
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -641,7 +669,7 @@ if (filaob.hasOwnProperty(fil)) {
     function valorVenta(){
         var venta=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -655,7 +683,7 @@ if (filaob.hasOwnProperty(fil)) {
         var venta=0;   
         var ig=0;     
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -665,23 +693,26 @@ if (filaob.hasOwnProperty(fil)) {
         ig=venta*0.18;
         $("#igv").html("s/. " + ig.toFixed(2));
     }
+    var boolean_dolar=false;
     function total(){
         var venta=0;   
         var igv=0;  
         var tota=0;   
         
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                boolean_dolar=true;
             }
         }
         igv=venta*0.18;
         tota=venta+igv;
         totalt=tota.toFixed(2);
         totaldolares=(tota/tipocam).toFixed(2);
+        // console.log($("#total").html("s/. " + tota.toFixed(2)));    
         $("#total").html("s/. " + tota.toFixed(2));
     }
     function valoresFinales(){
@@ -696,13 +727,17 @@ if (filaob.hasOwnProperty(fil)) {
         cambioMoneda();
     }
     function cambioMoneda(){
-        if(filaob.length>0){
+        console.log(contp);
+        if(filaob.length>0 && boolean_dolar!=true){
             if("$"==simbolo){    
                 totaldolares=(totalt/tipocam).toFixed(2);        
                 $("#total_dolares").html(simbolo+" " + totaldolares);
             }else{
                 $("#total_dolares").html(0);
             }
+        }else{
+            $("#total_dolares").val(0);
+            $("#tota_dolares").val(0);
         }
     }
     function eliminar(index){
@@ -711,10 +746,12 @@ if (filaob.hasOwnProperty(fil)) {
             if (filaob.hasOwnProperty(key)) {
                 if(index==filaob[key]['posiP']){
                     $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
-                    filaob.splice(key,1);                      
+                    // filaob.splice(key,1);         
+                    filaob[key]['estado']=0;  
                 }
             }
         } 
+        console.log(filaob);
         valoresFinales();
     }    
     function ocultar(){
