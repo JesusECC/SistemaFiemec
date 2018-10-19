@@ -164,7 +164,7 @@
 										</div>
 										</div>
 				</div>  
-                </div>                 VOY A DOMRIR 15 MINN
+                </div>                 
 
                 </div>                            
                 </div>
