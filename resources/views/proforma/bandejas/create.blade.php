@@ -555,32 +555,32 @@ if (filaob.hasOwnProperty(fil)) {
                     var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                     filas=
                         '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                            '<td> '+ 
+                            '<td style="color: black !important;"> '+ 
                                 '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                             '</td>'+
-                            '<td> '+ 
+                            '<td style="color: black !important;> '+ 
                                 '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idMedidas']+'">'+filaob[fila]['medida']+' | Con un espesor de '+
 
                                 '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesorP']+'">'+filaob[fila]['espesorP']+' mm'+
                             '</td>'+
-                            '<td> '+ 
+                            '<td style="color: black !important;> '+ 
                                 '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
 
                                 
                             '</td>'+
-                            '<td> '+ 
+                            '<td style="color: black !important;> '+ 
                                 '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                             '</td>'+
-                            '<td> '+   
+                            '<td style="color: black !important;> '+   
                                 '<input type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+filaob[fila]['prec_uniP']+
                             '</td>'+
-                            '<td> '+   
+                            '<td style="color: black !important;> '+   
                                 '<input type="hidden" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+filaob[fila]['descuentoP']+
                             '</td>'+
-                            '<td> '+   
+                            '<td style="color: black !important;> '+   
                                 '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2) +' '+ 
                             '</td>'+
-                            '<td>'+
+                            '<td style="color: black !important;>'+
                                 '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
                                         '<i class="fas fa-trash"></i>'+
                                 '</button>'+
