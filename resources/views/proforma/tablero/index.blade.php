@@ -35,7 +35,7 @@
 					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%;font-size: 11px !important">
 				       <thead>
 				            <tr>
-								<th>fecha</th>
+								<th>Fecha</th>
 								<th>Comprobante</th>
 								<th>Nombre</th>
 								<th>opciones</th>

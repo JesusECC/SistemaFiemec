@@ -663,7 +663,7 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                boolean_dolar=true;
+                totaldolares=(tota/tipocam).toFixed(2);
             }
         }
         igv=venta*0.18;

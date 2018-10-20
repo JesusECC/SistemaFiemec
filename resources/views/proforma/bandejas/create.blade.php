@@ -30,6 +30,7 @@
                                 <li>{{$error}}</li>
                             @endforeach 
                         </ul>   
+                        
                     </div>
                     @endif
                     <div class="ibox-title-buttons pull-right">
@@ -157,7 +158,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Medidas</label>
-                                                <select name="idMedidas" class="form-control selectpicker" id="pidMedidas" data-live-search="true">
+                                                <select name="idMedidas" class="form-control selectpicker" id="idMedidas" data-live-search="true">
                                                     <option value="">Seleccione Medidas</option>
                                                     @foreach($medidas as $me)
                                                         <option value="{{$me->idMedidas}}_{{$me->precio}}_{{ $me->medida}}">{{$me->medida}}</option>
@@ -440,7 +441,7 @@
     }
     
     function MostrarMedida(){
-        Medidas=document.getElementById('pidMedidas').value.split('_');
+        Medidas=document.getElementById('idMedidas').value.split('_');
         idmedidas=Medidas[0];
         $("#precio_uni").val(Medidas[1]);
         }
@@ -560,7 +561,7 @@ if (filaob.hasOwnProperty(fil)) {
                             '<td> '+ 
                                 '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idMedidas']+'">'+filaob[fila]['medida']+' | Con un espesor de '+
 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesorP']+'">'+filaob[fila]['espesorP']+'mm'+
+                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesorP']+'">'+filaob[fila]['espesorP']+' mm'+
                             '</td>'+
                             '<td> '+ 
                                 '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+

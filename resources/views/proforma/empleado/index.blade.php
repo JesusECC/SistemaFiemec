@@ -24,7 +24,7 @@
 						</strong>
 					</h4>
 					<div class="ibox-title-buttons pull-right">
-						<a href="{{route('empelado-create')}}" style="text-decoration: none !important">
+						<a href="{{route('empleado-create')}}" style="text-decoration: none !important">
 							<button class="btn btn-block btn-success" style="background-color: #18A689 !important;">
 								<i class="fas fa-plus-circle"></i> Nuevo Empleado
 							</button></a>

@@ -281,12 +281,6 @@ class ControllerProformaTableros extends Controller
                 // 'observacion_proforma'=>$observacion,
                 'estado'=>1
                 ]);
-
-
-
-
-
-
             foreach ($request->tableros as $tablero) {
                 $nombre=$tablero['nombre'];
                 $est=$tablero['estado'];

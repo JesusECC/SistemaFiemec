@@ -44,9 +44,9 @@
     Route::get('proforma/tablero/pdf/{idProforma}',['as'=>'tablero-pdf','uses'=>'ControllerProformaTableros@pdf']);
 
      //Se crea las Rutas empelado
-    Route::get('empleados',['as'=>'empelado','uses'=>'ControllerEmpleados@index']);
-    Route::get('empleados/create',['as'=>'empelado-create','uses'=>'ControllerEmpleados@create']);
-    Route::post('empleados/guardar',['as'=>'empelado-store','uses'=>'ControllerEmpleados@store']);
+    Route::get('empleados',['as'=>'empleado','uses'=>'ControllerEmpleados@index']);
+    Route::get('empleados/create',['as'=>'empleado-create','uses'=>'ControllerEmpleados@create']);
+    Route::post('empleados/guardar',['as'=>'empleado-store','uses'=>'ControllerEmpleados@store']);
     Route::get('empleados/{idEmpleado}/edit',['as'=>'empleado-edit','uses'=>'ControllerEmpleados@edit']);
     Route::get('empleados/show/{idEmpleado}',['as'=>'empleado-show','uses'=>'ControllerEmpleados@show']);
 
