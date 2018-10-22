@@ -40,16 +40,9 @@
     				{{Form::token()}}
 				<div class="box-body bg-gray-c">
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-12">
 							<div class="nav-tabs-custom">
-								<ul class="nav nav-tabs">
-									<li class="active">
-										<a href="#dni" data-toggle="tab"  style="font-size: 13px;color: #676a6c">DNI</a>
-									</li>
-									<li>
-										<a href="#ruc" data-toggle="tab" style="font-size: 13px;color: #676a6c">RUC</a>
-									</li>
-								</ul>
+								
 								<div class="tab-content">
 									<div class="active tab-pane" id="dni">
 										<div class="panel panel-default panel-shadow">
@@ -60,12 +53,23 @@
 													</label>
 												</div>
 												<div class="row">
+													<div class="col-sm-4">				
+										<div class="form-group">
+												<select id="tipo_documento" name="tipo_documento" class="form-control">
+												 <option value="" disabled selected >Selecione Tipo de Documento</option>
+												<option value="DNI">DNI</option>
+												<option value="RUC">RUC</option>
+												
+												
+												</select>
+										</div>
+									</div>	
 													<div class="col-sm-4">
 														<div class="form-group">
-															<input type="text" name="nro_documento" class="form-control" placeholder="Ingrese DNI..."  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
+															<input type="text" name="nro_documento" class="form-control" placeholder="Ingrese numero de Documento..."  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
 														</div> 												
 													</div>
-													<div class="col-sm-8">
+													<div class="col-sm-4">
 														<div class="form-group">
 															<input type="text" name="nombres_RS" class="form-control" placeholder="Ingrese Nombre" {{old('nombres_RS')}}>
 														</div>													

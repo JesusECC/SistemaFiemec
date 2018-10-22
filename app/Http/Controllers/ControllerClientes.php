@@ -29,7 +29,7 @@ class ControllerClientes extends Controller
        $query=trim($request->get('searchText'));
        $clientes=DB::table('Cliente_Proveedor')
        ->where('nombres_Rs','LIKE','%'.$query.'%')
-       ->where('tipo_persona','=','Cliente persona')
+       ->where('estado','=','activo')
        ->orderby('idCliente','asc')
        ->paginate(10);
 
@@ -63,7 +63,7 @@ class ControllerClientes extends Controller
  public function store(Request $request){
   
                   $Cliente=new Clientes;
-                  $Cliente->tipo_documento='DNI';
+                  $Cliente->tipo_documento=$request->get('tipo_documento');
                   $Cliente->nro_documento=intval($request->get('nro_documento'));
                   $Cliente->nombres_Rs=$request->get('nombres_RS');                  
                   $Cliente->paterno=$request->get('paterno');

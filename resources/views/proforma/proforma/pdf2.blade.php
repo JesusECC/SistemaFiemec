@@ -163,7 +163,8 @@ footer {
         <div><span>ASESOR COMERCIAL :</span><span style="font-size: 0.7em;color: black">-----</span></div>
       </div>
       <div id="project" class="clearfix">
-        <div><span>CLIENTE :</span> <span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->nombre}}</span></div>
+       
+        <div><span>CLIENTE :</span> <span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->nombres_Rs.' '.$proforma->paterno.' '.$proforma->materno}}</span></div>
         <div><span>RUC / DNI :</span> <span style="font-size: 0.7em;color: black">{{$proforma->ndoc}}</span></div>
         <div><span>DIRECCIÓN :</span> <span class="direccion" style="font-size: 0.7em;color: black">{{$proforma->direccion}}</span> </div>
       </div>
