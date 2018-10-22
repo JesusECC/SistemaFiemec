@@ -20,6 +20,10 @@ class ProformaDetalleTableros extends Model
       'texto_precio_venta',
       'descuento',
       'descripcionDP',
+      'estadoDP',
+      'simboloDPT',
+      'cambioDPT',
+
 
    ];
 

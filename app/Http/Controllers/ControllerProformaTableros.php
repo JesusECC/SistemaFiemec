@@ -97,9 +97,10 @@ class ControllerProformaTableros extends Controller
             $idTipoCam;
             $valorcambio;
             $forma;
-        $plazo;
-        $clienteemp;
-        $observacion;
+            $plazo;
+            $clienteemp;
+            $observacion;
+            $simbolo;
             $iduser;
             // idTipoCambio:idtipocam,valorTipoCambio:valorcambio
             foreach ($request->datos as $dato) {
@@ -112,6 +113,7 @@ class ControllerProformaTableros extends Controller
             $plazo=$dato['plazo'];
             $clienteemp=$dato['clienteemp'];
             $observacion=$dato['observacion'];
+            $simbolo=$dato['simbolo'];
             $iduser=$dato['userid'];
             }	
             $idProforma=DB::table('Proforma')->insertGetId(
@@ -125,7 +127,7 @@ class ControllerProformaTableros extends Controller
                 'precio_total'=>$tota,
                 'tipocambio'=>$valorcambio,
                 // 'precio_totalC'=>$request->,
-                // 'descripcion_proforma'=>$request->,
+                 'simboloP'=>$simbolo,
                 'tipo_proforma'=>'Tablero',
                'forma_de'=>$forma,
             'plazo_oferta'=>$plazo,
@@ -150,10 +152,12 @@ class ControllerProformaTableros extends Controller
                         $detalleProforma->idTableros=$idTablero;
                         $detalleProforma->cantidad=$fila['cantidadP'];
                         $detalleProforma->precio_venta=$fila['prec_uniP'];	
-                        // $detalleProforma->texto_precio_venta=$fila[''];	
-                        // $detalleProforma->observacion_detalleP=$fila[''];	
+                       	
                         $detalleProforma->descuento=$fila['descuentoP'];	
                         $detalleProforma->descripcionDP=$fila['descripcionP'];
+                        
+                        $detalleProforma->simboloDPT=$simbolo;
+                        $detalleProforma->cambioDPT=$valorcambio;
                         $detalleProforma->estadoDP=1;
                         $detalleProforma->save();
                     }
@@ -198,6 +202,9 @@ class ControllerProformaTableros extends Controller
     }
     public function show($id){
 
+
+public function pdf2($id){
+
         $td=DB::table('Proforma as p')
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('users as u','u.id','=','p.idEmpleado')
@@ -223,7 +230,12 @@ class ControllerProformaTableros extends Controller
 
         // dd($tablero,$proforma,$p);
 
+
         return view("proforma.tablero.show",['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
+
+        $pdf=PDF::loadView('proforma/tablero/pdf',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
+        return $pdf->stream('proforma.pdf');
+
     }
     public function edit($id)
     {
