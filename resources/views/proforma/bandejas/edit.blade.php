@@ -314,7 +314,7 @@
                                                                     <label for="" class="control-label">
                                                                         Observaciones
                                                                     </label>
-                                                                    <textarea name="" id="" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                    <textarea name="observacion_proforma" id="observacion_proforma" cols="30" rows="2" class="form-control">Ninguna</textarea>
                                                                 </div>
                                                             </div>
 
@@ -440,7 +440,7 @@
         // tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         var forma=$("#forma_de").val();
         var plazo=$("#plazo_oferta").val();
-        var observacion=$("#observacion_condicion").val();
+        var observacion=$("#observacion_proforma").val();
         if(valorventa>0 && totalt>0 ){
             var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion}];
            $.ajax({
@@ -617,7 +617,7 @@
                     plazpOf=pro[key]['plazo_oferta'];
                     obser=pro[key]['observacion_proforma']; 
                     console.log(estado);
-                    var dat={idProducto:idProd,producto:pname,medida:me,descripcionP:pdescripcion,prec_uniP:puni,espesor:esp,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
+                    var dat={idProducto:idProd,idMedidas:idMed,producto:pname,medida:me,descripcionP:pdescripcion,prec_uniP:puni,espesor:esp,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
                     filaob.push(dat);  
                     fila();
                     contp++;               
@@ -637,7 +637,7 @@
             $("#valorcambio").val(tipocam);
             $("#forma_de").val(formade);
             $("#plazo_oferta").val(plazpOf);
-            $("#observacion_condicion").val(obser);
+            $("#observacion_proforma").val(obser);
 
             
         }

@@ -43,15 +43,34 @@ public function create(){
 
 public function store(Request $request)
 {
-    
-$moneda=new Moneda;
-$moneda->nombre_moneda=$request->get('nombre_moneda'); //enviando valor a cada uno de los compos del modelo
-$moneda->tipo_cambio=$request->get('tipo_cambio');
-$moneda->simbolo=$request->get('simbolo');
-$moneda->estado='activo';
-$moneda->get();
+   
+try{
+        $nombre;
+        $simbolo;
+        $valor;
+ //var dat=[{nombre:nombre,simbolo:simbolo,valor:valor}];
+           
+        foreach ($request->datos as $dato) {
+            $nombre=$dato['nombre'];
+            $simbolo=$dato['simbolo'];
+            $valor=$dato['valor'];
+          
+            
+        }
+       
+            $ucargo=new UserCargo;
+            
+            $ucargo->nombre_moneda=$nombre;
+            $ucargo->simbolo=$simbolo;
+            $ucargo->tipo_cambio=$valor;
+            $ucargo->save();
 
-return Redirect::to('proforma/config');
+        
+            return ['data' =>'configuraciones','veri'=>true];
+        }catch(Exception $e){
+            return ['data' =>$e,'veri'=>false];
+        }
+
 }
 
 public function edit($id){

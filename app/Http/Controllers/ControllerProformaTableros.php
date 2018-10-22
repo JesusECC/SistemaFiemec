@@ -233,6 +233,7 @@ class ControllerProformaTableros extends Controller
             $idProforma;
             $idclie;
             $valorv;
+            $nombre;
             $tota;
             $tableros;
             $idTipoCam;

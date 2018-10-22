@@ -587,12 +587,11 @@
             $("#cdireccion").val(direccion);
             $("#cnro_documento").val(documento);
             $("#cotizador").val(cotiza);
-
             $("#simbolo").val(simbolo);
             $("#valorcambio").val(tipocam);
             $("#forma_de").val(formade);
             $("#plazo_oferta").val(plazpOf);
-            $("#observacion").val(obser);
+            $("#observacion_proforma").val(obser);
 
             
         }

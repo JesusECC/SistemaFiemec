@@ -57,6 +57,14 @@
     Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
     Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
 
+    //rutas marca
+    Route::get('marcas',['as'=>'marca','uses'=>'ControllerMarca@index']);
+    Route::get('marcas/create',['as'=>'marca-create','uses'=>'ControllerMarca@create']);
+    Route::post('marcas/guardar',['as'=>'marca-store','uses'=>'ControllerMarca@store']);
+    Route::get('marcas/{idMarca}/edit',['as'=>'marca-edit','uses'=>'ControllerMarca@edit']);
+
+
+
     //se crea las rutas para catalago 
     Route::get('catalogo',['as'=>'catalogo','uses'=>'ControllerCatalogo@index']);
     Route::get('catalogo/show/{idProducto}',['as'=>'catalogo-show','uses'=>'ControllerCatalogo@show']);
@@ -71,9 +79,8 @@
     //Se crea rutas para tipodecambio
     Route::get('configuraciones',['as'=>'config','uses'=>'ControllerConfiguracion@index']);
     Route::get('configuraciones/create',['as'=>'config-create','uses'=>'ControllerConfiguracion@create']);
-    Route::post('configuraciones/',['as'=>'config-store','uses'=>'ControllerConfiguracion@store']);
-    Route::get('configuraciones/{idFamilia}/edit',['as'=>'config-edit','uses'=>'ControllerConfiguracion@edit']);
-
+    Route::post('configuraciones/guardar',['as'=>'config-store','uses'=>'ControllerConfiguracion@store']);
+    Route::get('configuraciones/{idTipo_moneda}/edit',['as'=>'config-edit','uses'=>'ControllerConfiguracion@edit']);
 
     //Se crea rutas de proforma
     Route::post('proformas/guardar',['as' => 'proforma-store','uses'=>'ControllerProformaUnitaria@store']);

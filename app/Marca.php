@@ -4,19 +4,17 @@ namespace SistemaFiemec;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Familia extends Model
+class Marca extends Model
 {
-    protected $table = 'Familia';
-    protected $primaryKey = 'idFamilia';
+   protected $table = 'Marca';
+    protected $primaryKey = 'idMarca';
     public $timestamps=false;
 
 
     protected $filleable = [
     	
-    	'nombre_familia',
-    	'descuento_familia',
-      'estado',
-      'idMarca',
+    	'nombre_proveedor',
+    	
       
      
    ];
@@ -25,5 +23,3 @@ class Familia extends Model
      
    ];
 }
-
-

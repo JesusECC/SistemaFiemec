@@ -33,7 +33,7 @@ class ControllerBandejas extends Controller
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
-    ->where('p.estado','=','activo')
+    ->where('p.estado','=',1)
     ->where('tipo_proforma','=','bandeja')
     ->orderBy('p.idProforma','desc')
      
@@ -300,7 +300,7 @@ public function edit($id)
         ->join('Medidas as m','m.idMedidas','=','deP.idMedidas')
         ->join('Producto as pd','pd.idProducto','=','deP.idProducto')
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
-        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.estadoDB','deP.descuento','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','m.medida','deP.espesor','m.precio',DB::raw('CONCAT(pd.marca_producto," ",pd.nombre_producto," ",pd.descripcion_producto) as produ'))
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idMedidas','deP.idProforma','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.estadoDB','deP.descuento','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','m.medida','deP.espesor','m.precio',DB::raw('CONCAT(pd.marca_producto," ",pd.nombre_producto," ",pd.descripcion_producto) as produ'))
         ->where('deP.idProforma','=',$id)
         ->get();
     
@@ -356,7 +356,7 @@ public function edit($id)
                 // 'tipocambio'=>$valorcambio,
                 'precio_totalC'=>$totaldolares,
                 // 'descripcion_proforma'=>$observacion, //preguntar
-                'tipo_proforma'=>'unitaria',
+                'tipo_proforma'=>'bandeja',
                 // 'caracteristicas_proforma'=>$request->, preguntar
                 'forma_de'=>$forma,
                 // 'plaza_fabricacion'=>$request->,
@@ -373,6 +373,7 @@ public function edit($id)
                     ->update([
                     // $detalleProforma->idDetalle_proforma=$fila[''];  
                     'idProducto'=>$fila['idProducto'],
+                    'idMedidas'=>$fila['idMedidas'],
                     // 'idProforma'=>$idProforma,
                     // 'idTableros'=>$idTablero,
                     'cantidad'=>$fila['cantidadP'],
@@ -387,7 +388,9 @@ public function edit($id)
                     $Detallebandejas=new DetalleBandejas;
                     // $detalleProforma->idDetalle_proforma=$fila[''];  
                     $Detallebandejas->idProducto=$fila['idProducto'];
+                    
                     $Detallebandejas->idProforma=$idProforma;
+                    $Detallebandejas->idMedidas=$fila['idMedidas'];
                     // $detalleProforma->idTableros=$idTablero;
                     $Detallebandejas->cantidad=$fila['cantidadP'];
                     $Detallebandejas->precio_venta=$fila['prec_uniP'];  
@@ -395,12 +398,12 @@ public function edit($id)
                     // $detalleProforma->observacion_detalleP=$fila[''];    
                     $Detallebandejas->descuento=$fila['descuentoP'];    
                     $Detallebandejas->descripcionDP=$fila['descripcionP'];
-                    $Detallebandejas->estadoDP=1;
+                    $Detallebandejas->estadoDB=1;
                     $Detallebandejas->save();
                 }
                 
             }
-                return ['data' =>'proformas','veri'=>true];
+                return ['data' =>'bandejas','veri'=>true];
             }catch(Exception $e){
                 return ['data' =>$e,'veri'=>false];
             }

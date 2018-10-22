@@ -8,9 +8,9 @@
     <ol class="breadcrumb" style="margin-top: 55px;">
     	<li>
     		<a href="#">
-    			<i class="fas fa-dolly"></i> Moneda</a>
+    			<i class="fas fa-dolly"></i> Empleados</a>
     	</li>
-    	<li class="active">Lista Cambio</li>
+    	<li class="active">Lista Fiemec</li>
     </ol>
 </section>
 <section class="content">
@@ -20,13 +20,13 @@
 				<div class="box-header with-border" style="padding: 10px !important">
 					<h4>
 						<strong style="font-weight: 400">
-							<i class="fas fa-list-ul"></i> Lista de Tipo de Monedas
+							<i class="fas fa-list-ul"></i> Listado De Empleados Fiemec
 						</strong>
 					</h4>
 					<div class="ibox-title-buttons pull-right">
-						<a href="{{route('config-create')}}" style="text-decoration: none !important">
+						<a href="{{route('marca-create')}}" style="text-decoration: none !important">
 							<button class="btn btn-block btn-success" style="background-color: #18A689 !important;">
-								<i class="fas fa-plus-circle"></i> Nuevo Tipo de Moneda
+								<i class="fas fa-plus-circle"></i> Nuevo Empleado
 							</button></a>
 					</div>
 				</div>
@@ -35,44 +35,42 @@
 					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%;font-size: 11px !important">
 				       <thead>
 				            <tr>
-				                <th>Nombre</th>
-				                <th>Simbolo</th>
-				                <th>Valor</th>
-				                <th>Opciones</th>
+				                <th>Marca</th>
+				                 <th>Familia</th>
+				                 <th>Descuento</th>
+				                 
+				               
 				            </tr>
 				        </thead>
 				        <tbody>
-				        	@foreach($monedas as $mo)
+				        	@foreach($marcas as $m)
 				        	<tr>
 				        		<td>
-				        			{{$mo->nombre_moneda}}
+				        			{{$m->nombre_proveedor}}
 				        		</td>
-				        		<td>
-				        			{{$mo->simbolo}}
+                               <td>
+				        			{{$m->nombre_familia}}
 				        		</td>
-				        		<td>
-				        			{{$mo->tipo_cambio}}
+				        		 <td>
+				        			{{$m->descuento_familia}}
 				        		</td>
-				        	
-				        		</td>
+				       
 				        		<td align="center">
-				        			
-									<a href="{{route('config-edit',$mo->idTipo_moneda)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
-									<a href="" data-target="#modal-delete-{{$mo->idTipo_moneda}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> </a>
+				      
+									<a href="{{route('marca-edit',$m->idMarca)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
+									
 								</td>
-							</tr>
-							@include('proforma.config.modal')
-							
+                            </tr>
+                           
+				        		
 							@endforeach
 				        </tbody>
-				        
     				</table>
-    				{{$monedas->render()}}
+    				{{$marcas->render()}}
 				</div>
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
 </section><!-- /.content -->
 @endsection
-
 
