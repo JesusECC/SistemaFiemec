@@ -231,7 +231,12 @@ public function pdf2($id){
         // dd($tablero,$proforma,$p);
 
 
+
         return view("proforma.tablero.show",['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
+
+        $pdf=PDF::loadView('proforma/tablero/pdf',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
+        return $pdf->stream('proforma.pdf');
+
 
         $pdf=PDF::loadView('proforma/tablero/pdf',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
         return $pdf->stream('proforma.pdf');
