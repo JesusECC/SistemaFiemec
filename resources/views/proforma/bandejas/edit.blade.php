@@ -595,6 +595,7 @@
                     direccion=pro[key]['Direccion'];
                     documento=pro[key]['nro_documento'];
                     var idProd=pro[key]['idProducto'];
+                    var idMed=pro[key]['idMedidas'];
                     var pname=pro[key]['produ'];
                     var pdescripcion;
                     tipocam=pro[key]['tipocambio'];
@@ -607,8 +608,8 @@
                     }
                     var puni=pro[key]['precio_venta'];
                     var pcant=pro[key]['cantidad'];
+                    var esp=pro[key]['espesor'];
                     var me=pro[key]['medida'];
-                    var esp=pro[key]['med'];
                     var descuento=pro[key]['descuento'];     
                     var estado=parseInt(pro[key]['estadoDB']);  
                     var idDetalleProforma=pro[key]['idDetalle_bandejas'];
@@ -616,7 +617,7 @@
                     plazpOf=pro[key]['plazo_oferta'];
                     obser=pro[key]['observacion_proforma']; 
                     console.log(estado);
-                    var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,espesor:esp,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
+                    var dat={idProducto:idProd,producto:pname,medida:me,descripcionP:pdescripcion,prec_uniP:puni,espesor:esp,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
                     filaob.push(dat);  
                     fila();
                     contp++;               

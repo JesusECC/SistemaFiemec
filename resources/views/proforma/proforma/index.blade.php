@@ -29,7 +29,7 @@
 					<div class="ibox-title-buttons pull-right">
 						<a href="{{route('proforma-create')}}" style="text-decoration: none !important">
 							<button class="btn btn-block btn-success" style="background-color: #18A689 !important;">
-								<i class="fas fa-plus-circle"></i> Nuevo Producto
+								<i class="fas fa-plus-circle"></i> Nuevo Proforma
 							</button></a>
 					</div>
 				</div>

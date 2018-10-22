@@ -160,8 +160,8 @@ $idUser=DB::table('users')->insertGetId(
     
     $Empleados=DB::table('Empleado as e')
     ->join('users as us','e.id','=','us.idEmp')
-       ->join('User_Cargo as uc','uc.idUser','=','us.id')
-       ->join('Cargo as ca','ca.idCargo','=','uc.idCargo')
+    ->join('User_Cargo as uc','uc.idUser','=','us.id')
+    ->join('Cargo as ca','ca.idCargo','=','uc.idCargo')
     ->select('us.email','e.correo','e.tipo_documento','e.nro_documento','e.direccion','e.fecha_nacimiento','e.sexo','e.sueldo','e.fecha_inicio','e.fecha_fin','e.nombres','e.paterno','e.paterno','e.direccion','e.telefono','e.celular','e.id')
     ->where('e.id','=',$id)
     ->get();

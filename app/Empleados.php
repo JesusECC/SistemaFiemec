@@ -8,7 +8,7 @@ class Empleados extends Model
 {
    
     protected $table='Empleado';
-    protected $primarykey='idEmpleado';
+    protected $primarykey='id';
     public $timestamps=false;
 
 

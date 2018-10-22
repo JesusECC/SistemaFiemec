@@ -64,7 +64,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
-                                            <button type="button" id="bt_add_Cliente" class="btn btn-create"><i class="fas fa-user-plus"></i> Nuevo</button>
+                                            <button type="button" id="bt_add_Cliente" class="btn btn-create"><a style="color: white!important;text-decoration: none" href="{{url('cliente/create')}}"><i class="fas fa-user-plus"></i> Add Cliente</button></a>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text"  name="cliente_empleado" id="cliente_empleado"  class="form-control" placeholder="Ingrese Nombre del Empleado">
+                                                <input type="text"  name="cliente_empleado" id="cliente_empleado"  class="form-control" placeholder="Ingrese nombre del representante">
                                             </div>
                                         </div>
                                     </div>

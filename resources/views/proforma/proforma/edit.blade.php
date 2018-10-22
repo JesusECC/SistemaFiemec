@@ -290,7 +290,7 @@
                                                                     <label for="" class="control-label">
                                                                         Observaciones
                                                                     </label>
-                                                                    <textarea name="" id="" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                    <textarea name="observacion_proforma" id="observacion_proforma" cols="30" rows="2" class="form-control">Ninguna</textarea>
                                                                 </div>
                                                             </div>
 
@@ -369,7 +369,6 @@
     var idtipocam;
     var idProforma;
     $("#pidProducto").change(MostarProducto);
-
     $("#idTipo_moneda").change(cambioMoneda);
     asignarValores();
 
@@ -411,7 +410,7 @@
         // tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         var forma=$("#forma_de").val();
         var plazo=$("#plazo_oferta").val();
-        var observacion=$("#observacion_condicion").val();
+        var observacion=$("#observacion_proforma").val();
         if(valorventa>0 && totalt>0 ){
             var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion}];
            $.ajax({
@@ -594,7 +593,7 @@
             $("#valorcambio").val(tipocam);
             $("#forma_de").val(formade);
             $("#plazo_oferta").val(plazpOf);
-            $("#observacion_condicion").val(obser);
+            $("#observacion").val(obser);
 
             
         }

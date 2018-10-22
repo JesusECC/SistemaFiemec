@@ -611,8 +611,6 @@
                                         '<td style="color:black !important;"> '+ 
                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                                         '</td>'+
-                                        
-                                       
                                         '<td style="color:black !important;">'+
                                             '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
                                                     '<i class="fas fa-trash"></i>'+

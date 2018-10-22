@@ -234,7 +234,7 @@ footer {
       <h5 style="font-size: 10px !important;line-height:0.5px;">Forma de pago: {{$proforma->forma_de}}</h5>
       <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5> 
       <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$proforma->observacion_proforma}} </h5>
-      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">{{ Auth::user()->name}}</h5>
+      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Asesor:{{$proforma->name}}</h5>
     </div>
      
     <div style="width: 50%;float: right;">

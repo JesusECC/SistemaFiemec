@@ -188,6 +188,8 @@ footer {
 
           @foreach($detalles as $det)
           
+
+
           <tr class="principal"> 
             <td>{{$i++}}</td>
             <td class="principal" style="font-size: 11px !important;">{{$det->producto.' | '.$det->descripcionDP}}</td>
@@ -196,6 +198,7 @@ footer {
             <td class="principal" align="center" >{{$det->descuento}} % </td>
             <td class="principal" align="center" >{{$det->simboloDP.' '.round((($det->precio_venta*$det->cantidad)-(($det->cantidad*$det->precio_venta)*($det->descuento/100)))/$det->cambioDP,2)}}</td>
           </tr>
+  
           @endforeach
           
         </tbody>
