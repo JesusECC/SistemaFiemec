@@ -255,8 +255,8 @@ border-collapse: collapse;
 
 </style>
 <body>
-  <header class="clearfix">  
-    <table width="100%" style="margin-top: -20px;"> 
+  <header class="clearfix" style="margin-top: -20px;">  
+    <table width="100%" > 
           <tr align="center" valign="middle"> 
             <th colspan="5" align="left">
                 <img src="img/img-pdf2.jpg" alt="" width="230px">
@@ -375,29 +375,23 @@ border-collapse: collapse;
     </table>
   </div>
 </div>
-
-
-        
-     
-   
-
-
-
   </main>
   <footer>  
-    <div style="width: 50%;float: left;display: inline-block !important;vertical-align: middle;border-right:  2px solid #C1CED9">
-      
-      <h5 style="font-size: 10px !important;line-height:0.5px;">Forma de pago: {{$td->forma_de}}</h5>
-      <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$td->plazo_oferta}}  </h5> 
-      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$td->observacion_proforma}} </h5>
-      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$proforma->name}}</h5>
-    </div>
+   
+     
     <div style="width: 50%;float: right;">
       <h4 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
       <h5 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
       <h5 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
       <h5 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
       <h5 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">Cta. Corriente  detracciones BN :   00-088-006879</h5>
+    </div>
+    <div style="width: 50%;float: right;display: inline-block !important;vertical-align: middle;border-right:  2px solid #C1CED9">
+
+      <h5 style="font-size: 10px !important;line-height:0.5px;">Forma de pago: {{$td->forma_de}}</h5>
+      <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$td->plazo_oferta}}  </h5> 
+      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$td->observacion_proforma}} </h5>
+      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$td->nameE}}</h5>
     </div>
   </footer>
 </body>

@@ -407,6 +407,7 @@
     var idcliente;
     var totalt;
     var valorventa;
+    var iduser={!! Auth::user()->id !!}
     $("#pidProducto").change(MostarProducto);
     
 
@@ -448,11 +449,16 @@
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         var idtipocam=tipoCambio[0];
         var valorcambio=tipoCambio[1];
-        var vVenta=$("#valorVenta").val();
+        var vVenta=$("#valorVenta").val();        
         var tl=$("#total").val();
+         var forma=$("#forma_de").val();
+        var clienteemp=$("#cliente_empleado").val();
+        var plazo=$("#plazo_oferta").val();
+        var observacion=$("#observacion").val();
         console.log(tablero,filaob);
+        console.log(iduser);
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio}];
+            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,userid:iduser,clienteemp:clienteemp}];
             // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},

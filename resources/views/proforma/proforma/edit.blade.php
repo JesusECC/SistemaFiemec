@@ -407,11 +407,13 @@
     function saveProforma(){
         // se enviar los datos al controlador proforma tableros
         // tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
+        var simbolo=$("#simbolo").val();
+        var valorcambio=$("#valorcambio").val();
         var forma=$("#forma_de").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion_proforma").val();
         if(valorventa>0 && totalt>0 ){
-            var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion}];
+            var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,simbolo:simbolo,valorcambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion}];
            $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax

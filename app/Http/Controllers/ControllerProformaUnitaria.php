@@ -238,7 +238,7 @@ public function pdf($id){
             $valorv;
             $tota;
             $tableros;
-            $idTipoCam;
+            $simbolo;
             $valorcambio;
             $totaldolares;
             $forma;
@@ -250,6 +250,8 @@ public function pdf($id){
                 $idProforma=$dato['idProforma'];
                 $valorv=$dato['valorVenta'];
                 $tota=$dato['total'];
+                $simbolo=$dato['simbolo'];
+                $valorcambio=$dato['valorcambio'];
                 $nomTablero=$dato['nomTablero'];
                 $totaldolares=$dato['totaldolares'];
                 $forma=$dato['forma'];
@@ -260,6 +262,8 @@ public function pdf($id){
                 ->update([
                 'serie_proforma'=>'PU365122018',
                 'igv'=>'18',
+                'simboloP'=>$simbolo,
+                'tipocambio'=>$valorcambio,
                 'subtotal'=>$valorv,
                 'precio_total'=>$tota,
                 'precio_totalC'=>$totaldolares,
@@ -289,6 +293,8 @@ public function pdf($id){
                     $detalleProforma->precio_venta=$fila['prec_uniP'];	
                     $detalleProforma->descuento=$fila['descuentoP'];	
                     $detalleProforma->descripcionDP=$fila['descripcionP'];
+                    $detalleProforma->cambioDP=$valorcambio;
+                    $detalleProforma->simboloDP=$simbolo;
                     $detalleProforma->estadoDP=1;
                     $detalleProforma->save();
                 }

@@ -879,7 +879,7 @@ var editarval=true;
                                                                      '<th></th>'+
                                                                      '<th></th>'+
                                                                      '<th></th>'+
-                                                                     '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                     '<th  style="color:black !important;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
                                                                      '</th>'+
                                                                  '</tfoot>'+
                                                              '</table>'+
@@ -1037,7 +1037,7 @@ var editarval=true;
                                                      '<div class="row">'+
                                                          '<div class="col-md-12">'+
                                                              '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
-                                                                 '<thead style="background-color:#A9D0F5">'+
+                                                                 '<thead style="background-color:#A9D0F5;color: black !important;">'+
                                                                      '<th>Producto</th>'+
                                                                      '<th>Descripción</th>'+
                                                                      '<th>Cant.</th>'+
@@ -1049,12 +1049,12 @@ var editarval=true;
                                                                  '<tbody id="detalle_'+nomTablero+'">'+
                                                                  '</tbody>'+ 
                                                                  '<tfoot>'+
-                                                                     '<th>Total</th>'+
+                                                                     '<th style="color:black !important;" >Total</th>'+
                                                                      '<th></th>'+
                                                                      '<th></th>'+
                                                                      '<th></th>'+
                                                                      '<th></th>'+
-                                                                     '<th><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                     '<th>< h4 id="total_'+nomTablero+'">s/. 0.00</h4><input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
                                                                      '</th>'+
                                                                  '</tfoot>'+
                                                              '</table>'+
