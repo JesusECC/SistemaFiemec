@@ -200,7 +200,7 @@ class ControllerProformaTableros extends Controller
         $pdf=PDF::loadView('proforma/tablero/pdf',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
         return $pdf->stream('proforma.pdf');
     }
-    public function show($id){
+    
 
 
 public function pdf2($id){
