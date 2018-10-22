@@ -28,7 +28,7 @@ class ControllerProformaTableros extends Controller
     $query=trim($request->get('searchText'));
     $proformas=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
+    ->select('p.idProforma','p.fecha_hora','cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno','p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('tipo_proforma','=','tablero')
     ->where('p.estado','=',1)
@@ -68,9 +68,8 @@ class ControllerProformaTableros extends Controller
         ->get();
 
         $clientes=DB::table('Cliente_Proveedor as cp')
-         ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
-        ->where('tipo_persona','=','Cliente persona')
-        ->orwhere('tipo_persona','=','Cliente Empresa')
+         ->select('cp.idCliente','cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
+        ->where('estado','=','activo')
         ->get();
         return view('proforma.tablero.create',["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
     }

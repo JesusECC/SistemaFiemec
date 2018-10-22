@@ -32,11 +32,7 @@
                         </ul>   
                     </div>
                     @endif
-                    <div class="ibox-title-buttons pull-right">
-                        <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
-                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('tableros')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
-                    </div>
+                    
                 </div>
                 <div class="box-body bg-gray-c">
                     <div class="row">
@@ -54,7 +50,7 @@
                                                 <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
                                                     <option value="">Seleccione Cliente</option>
                                                     @foreach($clientes as $cliente)
-                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombres_Rs.' '.$cliente->paterno.' '.$cliente->materno}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -345,7 +341,11 @@
                                                                 </div>
                                                             </div>
 
+                    
+
+
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,8 +358,18 @@
                 </div>
             </div>
         </div>
-    </div><!-- /.row -->
-</section><!-- /.content -->
+    
+    
+                    </div>
+                 <div class="box-footer">
+
+<div class="ibox-title-buttons pull-right">
+                        <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
+                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('tableros')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+                    </div>
+                    </div>   
+</section>
 
 @push('scripts')
 <script>

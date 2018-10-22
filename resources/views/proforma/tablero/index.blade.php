@@ -51,7 +51,7 @@
 				        			{{$prof->serie_proforma.' /  F000-'.$prof->idProforma}}
 				        		</td>
 				        		<td>
-				        			{{$prof->nombre}}
+				        			{{$prof->nombres_Rs.' '.$prof->paterno.' '.$prof->materno}}
 				        		</td>
 				        		<td align="center" style="width: 220px">
 				        			<div class="pull-right box-tools">
