@@ -105,9 +105,9 @@
                       <div class="col-sm-6"></div>
                       <div class="col-sm-6"></div>
                     </div>
-                    <div class="row">
+                    <div class="row" >
                       <div class="col-sm-12" style="color: white">
-                        <table  class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                        <table  class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="color: black">
                           <thead>
                             <tr role="row">
                               <th>Item</th>
@@ -171,7 +171,7 @@
               </div> 
               <div class="col-sm-3">
                 <div class="table-responsive">
-                  <table class="table">
+                  <table class="table" style="color: black">
                     <tbody>
                       <tr>
                         <th>Sub Total</th>
