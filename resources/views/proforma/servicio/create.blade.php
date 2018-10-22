@@ -425,7 +425,7 @@
         var valorcambio=tipoCambio[1];
         var vVenta=$("#valorVenta").val();
         var tl=$("#total").val();
-        console.log(tablero,filaob);
+        // console.log(tablero,filaob);
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
             var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio}];
             // console.log(dat,tablero,filaob);
@@ -540,13 +540,10 @@
         var idT=tarea[0];
         var pname=tarea[1];
         var pdescripcion=$("#descripcionp").val();
-        var puni=$('#precio_uni').val();
-        var pcant=$('#Pcantidad').val();
-        var sel=$('#prod-selec').val();
         nomTablero=$('#prod-selec').val();
         var filas;
-        console.log(pdescripcion);
-        if(tablero.length>=0 && nomTablero!="" && idT!="" && pname!=""  && nomTablero!=""  ){
+        // console.log(pdescripcion);
+        if(tablero.length>=0 && nomTablero!="" && idT!="" && pname!=""){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
