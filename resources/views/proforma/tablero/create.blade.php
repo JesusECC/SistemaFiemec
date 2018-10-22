@@ -148,7 +148,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row" id="producto-oculto" style="display:none;margin-top:20px">
+                                    <div class="row" id="producto-crear-oculto" style="display:none;margin-top:20px">
                                         <div class="col-sm-12">
                                             <div class="">
                                                 <label for="" class="control-label">Producto</label>
@@ -368,6 +368,7 @@
         $('#bt_add_tablero').click(function(){
             agregarTablero();
             valoresFinales();
+            mostrarcampos();
         });
         $('#save').click(function(){
             // console.log("asd");
@@ -417,6 +418,7 @@
         $("#cdireccion").val(Cliente[1]);
         $("#cnro_documento").val(Cliente[2]);
     }
+
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
         // $("#idProd").val(Producto[0]);
@@ -435,7 +437,7 @@
     }
     function mostrarcampos(){
         document.getElementById('producto-crear-oculto').style.display = 'block';
-        document.getElementById('producto-oculto').style.display = 'block';
+        //document.getElementById('producto-oculto').style.display = 'block';
         // $("#producto-crear-oculto").style.display='block';
         // $("#producto-oculto").style.display='block';
     } 

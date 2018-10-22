@@ -1,6 +1,6 @@
 @extends ('layouts.admin')
 @section ('contenido')
-<!--<section class="content-header">
+<section class="content-header">
     <h1 style="margin-top: 55px;">
         Panel de Administrador
         <small>Version 2.3.0</small>
@@ -62,7 +62,7 @@
                                         <div class="form-group">
                                             <div class="col-md-4">
                                                 <label for="" class="control-label"> Documento</label>
-                                                <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control">
+                                                <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="numero documento">
                                             </div>
                                             <div class="col-md-8">
                                                 <label for="" class="control-label">Empleado </label>
@@ -97,7 +97,185 @@
                             </div>
                         </div>
                     </div>
+                    <!--Tablero-->
                     <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-default panel-shadow">
+                                <div class="panel-body">                                  
+                                    <div class="form-group">
+                                        <label for="" class="control-label" style="color: #676a6c !important;">
+                                            Ingresar el Nombre de Tablero
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
+                                                 <samp class="input-group-btn">
+                                                     <button type="button" id="bt_add_tablero" class="btn btn-primary">
+                                                         Agregar
+                                                     </button>
+                                                 </samp>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="producto-oculto" style="margin-top:20px">
+                                        <div class="col-sm-12">
+                                            <div class="">
+                                                <label for="" class="control-label">Producto</label>
+                                                 <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                                     <option value="">Seleccione Producto</option>
+                                                     @foreach($productos as $producto)
+                                                         <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                                     @endforeach
+                                                 </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descripcion</label>
+                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">P. UNIT.</label>
+                                                <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-1" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cantidad</label>
+                                                <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descuento %</label>
+                                                <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="margin-top:20px">
+                                            <div class="form-group">
+                                                <label class="control-label">Nom.Tablero</label>
+                                                <input type="text" id="NomTablero" class="form-control" name="NomTablero" >
+                                                <div id="select-pro" ></div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-1" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                            <label class="control-label"></label>
+                                                <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
+                                            </div>
+                                        </div>                                                                                 
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div id="tablerosn" style="color: #f5f5f5 !important;">
+                                    </div>
+                                    <div class="content" id="totales-general" style='display:none;'>
+                                        <div class="row">
+                                            <div class="col-sm-7">
+                                                <div class="panel panel-default panel-shadow"> 
+                                                    <div class="panel-body">
+                                                        <div class="row">   
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Subtotal</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="subtotal">    </h4>
+                                                                        <input type="hidden" name="subtotal" id="subtotal">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1 hidden-xs text-center p-t-xs"> 
+                                                                <i class="fa fa-minus m-t-lg"> 
+                                                                </i>  
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Descuento</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 id="descuentos" class="form-control">    </h4>
+                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Valor Venta</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="valorVenta">    </h4>
+                                                                        <input type="hidden" name="valorVenta" id="valorVenta">
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </div> 
+                                                        <hr>    
+                                                        <div class="row">   
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> IGV %</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="igv">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="igv" id="igv" >
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Soles</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="total">    </h4>
+                                                                        <input type="hidden" name="precio_subtotal" id="precio_subtotal">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Dolares</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="total_dolares">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="tota_dolares" id="tota_dolares">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                        </div>  
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="panel panel-default panel-shadow bg-gray-c">
+                                                    <div class="panel-body">    
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Forma de Pago:</label>
+                                                                    <input type="text" name="forma_de" id="forma_de" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Plazo de Oferta</label>
+                                                                    <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!--<div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body" id="agregar_producto" style="display:none !important">
@@ -308,15 +486,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="box-footer">
                 </div>
             </div>
         </div>
     </div>
-</section>-->
-
+</section>
+<!--
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <h3>Nueva Proforma de tableros</h3>
@@ -533,7 +711,7 @@
              <button style="margin-left: 300px" class="btn btn-success " type="button"><a style="color: white!important" href="">volver</a></button>
          </div>
      </div>
- </div>
+ </div>-->
 
  @push('scripts')
  <script>    
@@ -983,25 +1161,25 @@ var editarval=true;
                              if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
                                  filas=
                                      '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                                         '<td> '+ 
+                                         '<td style="color:black !important;"> '+ 
                                              '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
                                          '</td>'+
-                                         '<td> '+ 
+                                         '<td style="color:black !important;"> '+ 
                                              '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                                          '</td>'+
-                                         '<td> '+ 
+                                         '<td style="color:black !important;"> '+ 
                                              '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
                                          '</td>'+
-                                         '<td> '+   
+                                         '<td style="color:black !important;"> '+   
                                              '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
                                          '</td>'+
-                                         '<td> '+   
+                                         '<td style="color:black !important;"> '+   
                                              '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
                                          '</td>'+
-                                         '<td> '+   
+                                         '<td style="color:black !important;"> '+   
                                              '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+
                                          '</td>'+
-                                         '<td>'+
+                                         '<td style="color:black !important;">'+
                                              '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
                                                      '<i class="fas fa-trash"></i>'+
                                              '</button>'+
