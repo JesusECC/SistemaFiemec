@@ -176,9 +176,8 @@
               </ul>
             </li>
              <li>
-              <a href="#">
-                <i class="fa fa-plus-square"></i> <span>Ayuda</span>
-                <small class="label pull-right bg-red">PDF</small>
+              <a href="{{route('ajustes')}}">
+                <i class="far fa-sun"></i> <span>Ajustes</span>
               </a>
             </li>
             <li>

@@ -45,7 +45,7 @@
 									</div>-->
 								</div>
 								<div class="box-body">
-									<img src="{{asset('fotos/productos/'.$pro->foto)}}">
+									<img src="{{asset('fotos/productos/'.$pro->foto)}}" ">
 									<br>
 									<div class="row">
 										<div class="col-sm-6">
@@ -78,7 +78,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="box-footer" style="text-align: center;">
+								<div class="box-footer" style="text-align: center;" >
 									<a  href=""  data-target="#modal-show-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-primary btn-sm text-center" style="background-color: #18A689;border:1px solid #18A689"><i class="far fa-eye"></i> Ver</a>
 								</div>
 							</div>

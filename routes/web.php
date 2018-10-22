@@ -113,6 +113,10 @@
     Route::get('cliente/{idCliente}/edit',['as'=>'clientes-edit','uses'=>'ControllerClientes@edit']);
     Route::get('cliente/show/{idCliente}',['as'=>'clientes-show','uses'=>'ControllerClientes@show']);
     Route::get('tarea/create',['as'=>'tarea-create','uses'=>'ControllerTarea@create']);
+
+
+    //se crea rutas para ajsutes
+    Route::get('Ajustes',['as'=>'ajustes','uses'=>'ControllerAjustes@index']);
 });   
 Auth::routes();
 

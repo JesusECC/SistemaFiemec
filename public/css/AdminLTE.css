@@ -5290,3 +5290,10 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
     margin-bottom: 0;
     line-height: 1.3;
 }
+a.list-group-item, button.list-group-item {
+    color: #555 !important;
+}
+a.list-group-item .list-group-item-heading, button.list-group-item .list-group-item-heading {
+    color: #333 !important;
+    font-size: 14px;
+}
