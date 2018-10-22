@@ -43,6 +43,7 @@
     Route::delete('tableros/eliminar/{id}',['as'=>'tablero-eliminar','uses'=>'ControllerProformaTableros@destroy']);
     Route::get('tableros/show/{idProforma}',['as'=>'tablero-show','uses'=>'ControllerProformaTableros@show']);
     Route::get('proforma/tablero/pdf/{idProforma}',['as'=>'tablero-pdf','uses'=>'ControllerProformaTableros@pdf']);
+    Route::get('proforma/tablero/pdf2/{idProforma}',['as'=>'tablero-pdf2','uses'=>'ControllerProformaTableros@pdf2']);
 
      //Se crea las Rutas empelado
     Route::get('empleados',['as'=>'empleado','uses'=>'ControllerEmpleados@index']);
