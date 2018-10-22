@@ -29,7 +29,7 @@
     <div class="limiter">
         
         <div class="container-login100" style="background-image: url('img/Modificacion4.png')!important;background-repeat: no-repeat;background-position: center;">
-            <div class="wrap">
+            <div class="wrap" style="margin-top: -100px !important">
 
                     @yield('content')
                
