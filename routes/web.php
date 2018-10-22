@@ -1,4 +1,4 @@
-<?php
+.0+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +38,10 @@
     Route::get('tableros/create',['as' => 'tablero-create','uses'=>'ControllerProformaTableros@create']);
     Route::post('tableros/guardar',['as' => 'tablero-store','uses'=>'ControllerProformaTableros@store']);
     Route::get('tableros/buscartext',['as' => 'tablero-buscartext','uses'=>'ControllerProformaTableros@buscarProducto']);
-    Route::get('tableros/edit/{id}',['as' => 'tablero-edit','uses'=>'ControllerProformaTableros@edit']);
+    Route::get('tableros/edit/{id}',['as'=>'tablero-edit','uses'=>'ControllerProformaTableros@edit']);
     Route::post('tableros/edit/update',['as' => 'tablero-update','uses'=>'ControllerProformaTableros@update']);
     Route::delete('tableros/eliminar/{id}',['as'=>'tablero-eliminar','uses'=>'ControllerProformaTableros@destroy']);
+    Route::get('tableros/show/{idProforma}',['as'=>'tablero-show','uses'=>'ControllerProformaTableros@show']);
     Route::get('proforma/tablero/pdf/{idProforma}',['as'=>'tablero-pdf','uses'=>'ControllerProformaTableros@pdf']);
     Route::get('proforma/tablero/pdf2/{idProforma}',['as'=>'tablero-pdf2','uses'=>'ControllerProformaTableros@pdf2']);
 

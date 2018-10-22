@@ -55,7 +55,7 @@
 				        		</td>
 				        		<td align="center" style="width: 220px">
 				        			<div class="pull-right box-tools">
-				        				<a  href="{{route('proforma-show',$prof->idProforma)}}" class="btn btn-primary btn-xs"  title="Ver Producto"><i class="far fa-eye"></i> Ver </a>
+				        				<a  href="{{route('tablero-show',$prof->idProforma)}}" class="btn btn-primary btn-xs"  title="Ver Producto"><i class="far fa-eye"></i> Ver </a>
 				        				<a href="{{route('tablero-edit',$prof->idProforma)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> Editar </a>
 				        				<a href="" data-target="#modal-delete-{{$prof->idProforma}}" class="btn btn-danger btn-xs" data-toggle="modal" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> Eliminar</a>
 				        				<div class="btn-group">

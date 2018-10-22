@@ -200,6 +200,8 @@ class ControllerProformaTableros extends Controller
         $pdf=PDF::loadView('proforma/tablero/pdf',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
         return $pdf->stream('proforma.pdf');
     }
+    public function show($id){
+
 
 public function pdf2($id){
 
@@ -228,8 +230,17 @@ public function pdf2($id){
 
         // dd($tablero,$proforma,$p);
 
+
         $pdf=PDF::loadView('proforma/tablero/pdf2',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
         return $pdf->stream('proforma.pdf2');
+
+
+        return view("proforma.tablero.show",['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
+
+        $pdf=PDF::loadView('proforma/tablero/pdf',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
+        return $pdf->stream('proforma.pdf');
+
+
     }
     public function edit($id)
     {
