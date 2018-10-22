@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-                    <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                    <form method="POST" class="login100-form validate-form" action="{{ route('login') }}" aria-label="{{ __('Login') }}"  style="background-position: center !important;">
                         @csrf
-                        <span>
-                        <img src="{{asset('img/LogoFiemecFinal.png')}}" style="margin-bottom: 30px;margin-left: 80px;">
+                        <span >
+                            <center ><img src="{{asset('img/LogoFiemecFinal.png')}}" style="margin-bottom:  15px !important;"></center> 
                         </span>
                         <div class="wrap-input100 validate-input">
                             <input id="email" type="email" class="input100 form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Ingrese Correo">

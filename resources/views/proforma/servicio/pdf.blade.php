@@ -190,6 +190,7 @@ foreach($tableros as $t){
     <h5 style="font-size: 12px !important;line-height:1px">Forma de pago: {{$proforma->forma_de}}</h5>
     <h5 style="font-size: 12px !important;line-height:1px">Condición de venta: {{$proforma->observacion_condicion}} </h5>
     <h5 style="font-size: 12px !important;line-height:1px">Plazo de oferta {{$proforma->plazo_oferta}}  </h5>
+    <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$proforma->name}}</h5>
     <br>
     <h4 style="font-size: 13px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
      <h5 style="font-size: 11px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>

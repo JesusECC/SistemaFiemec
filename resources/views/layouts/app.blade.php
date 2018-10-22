@@ -28,14 +28,11 @@
 <body>
     <div class="limiter">
         
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <div class="login100-pic js-tilt" data-tilt>
-                    <img src="{{asset('img/usuario.png')}}" alt="IMG">
-                </div>
-                <div >
+        <div class="container-login100" style="background-image: url('img/Modificacion4.png')!important;background-repeat: no-repeat;background-position: center;">
+            <div class="wrap">
+
                     @yield('content')
-                </div>                
+               
             </div>
         </div>
     </div>

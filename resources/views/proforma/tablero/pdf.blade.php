@@ -256,7 +256,7 @@ border-collapse: collapse;
 </style>
 <body>
   <header class="clearfix">  
-    <table width="100%"> 
+    <table width="100%" style="margin-top: -20px;"> 
           <tr align="center" valign="middle"> 
             <th colspan="5" align="left">
                 <img src="img/img-pdf2.jpg" alt="" width="230px">
@@ -386,9 +386,11 @@ border-collapse: collapse;
   </main>
   <footer>  
     <div style="width: 50%;float: left;display: inline-block !important;vertical-align: middle;border-right:  2px solid #C1CED9">
+      
       <h5 style="font-size: 10px !important;line-height:0.5px;">Forma de pago: {{$td->forma_de}}</h5>
       <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$td->plazo_oferta}}  </h5> 
       <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$td->observacion_proforma}} </h5>
+      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$proforma->name}}</h5>
     </div>
     <div style="width: 50%;float: right;">
       <h4 style="font-size: 10px !important;line-height:1px;margin-left: 5px;">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>

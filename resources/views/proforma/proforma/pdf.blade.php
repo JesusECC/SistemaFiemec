@@ -150,7 +150,7 @@ footer {
 
 </style>
 <body>
-  <header class="clearfix">  
+  <header class="clearfix" style="margin-top: -20px;">  
     <table width="100%"> 
           <tr align="center" valign="middle"> 
             <th colspan="5" align="left">
@@ -231,10 +231,11 @@ footer {
   </main>
   <footer> 
     <div style="width: 50%;float: left;display: inline-block !important;vertical-align: middle;border-right:  2px solid #C1CED9">
+
       <h5 style="font-size: 10px !important;line-height:0.5px;">Forma de pago: {{$proforma->forma_de}}</h5>
       <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5> 
       <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$proforma->observacion_proforma}} </h5>
-      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Asesor:{{$proforma->name}}</h5>
+      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$proforma->name}}</h5>
     </div>
      
     <div style="width: 50%;float: right;">
