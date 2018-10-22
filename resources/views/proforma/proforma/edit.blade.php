@@ -322,8 +322,7 @@
             saveProforma();
         });
         $('#btnagregar').click(function(){
-            agregarprorducto();
-        
+            agregarprorducto();        
         });
         // boton agregar producto
         $('#bt_add_produc').click(function(){
@@ -439,9 +438,9 @@
         var idProd=Producto[0];
         var pname=Producto[1];
         var pdescripcion=$("#descripcionp ").val();
-        var puni=$('#precio_uni').val();
-        var pcant=$('#Pcantidad').val();
-        var descuento=$('#pdescuento').val();
+        var puni=parseFloat($('#precio_uni').val());
+        var pcant=parseInt($('#Pcantidad').val());
+        var descuento=parseFloat($('#pdescuento').val());
         var filas;
         if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!=""  ){
             document.getElementById('totales-general').style.display = 'block';
@@ -602,7 +601,7 @@
         // la suma de tosos los tableros        
         var sub=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -614,7 +613,7 @@
     function descuentos(){
         var desc=0;
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -626,7 +625,7 @@
     function valorVenta(){
         var venta=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -640,7 +639,7 @@
         var venta=0;   
         var ig=0;     
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
@@ -657,7 +656,7 @@
         var tota=0;   
         
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1) {
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2) {
                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var descuento=parseFloat(filaob[fila]['descuentoP']);
