@@ -47,7 +47,7 @@
                   <center><strong>Cliente</strong></center> 
                 <address>
                   <strong style="font-weight: 400 !important;">
-                    Nombre: {{$td->ncliente}}
+                    Nombre: {{$td->nombres_Rs.' '.$td->paterno.' '.$td->materno}}
                   </strong>
                   <br>
                   <strong style="font-weight: 400 !important;">
