@@ -72,7 +72,7 @@ padding-left: 15px;
 {
   color: #5D6975;
   text-align: left;
-  width: 200px;
+  width: 100px;
   margin-right: 10px;
   display: inline-block;
   font-size: 0.6em;
@@ -278,7 +278,7 @@ border-collapse: collapse;
         <div><span>CLIENTE EMPLEADO :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$td->cliente_empleado}}</span></div>
       </div>
       <div id="project" class="clearfix">
-        <div><span>CLIENTE :</span> <span class="cliente" style="font-size: 0.7em;color: black">{{$td->nombres_Rs.' '.$td->paterno.' '.$td->materno}}</span></div>
+        <div><span>CLIENTE :</span> <span class="cliente" style="font-size: 0.7em;color: black">{{$td->ncliente}}</span></div>
         <div><span>RUC / DNI :</span> <span style="font-size: 0.7em;color: black">{{$td->nro_documento}}</span></div>
         <div><span>DIRECCIÓN :</span> <span class="direccion" style="font-size: 0.7em;color: black">{{$td->direccion}}</span> </div>
       </div>
