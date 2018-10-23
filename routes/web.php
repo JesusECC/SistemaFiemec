@@ -32,7 +32,6 @@
 
     Route::get('servicio/create',['as'=> 'servicio-create','uses' =>'ControllerProformaServicio@create']);
 
-
     // Se crea las rutas para tableros
     Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
     Route::get('tableros/create',['as' => 'tablero-create','uses'=>'ControllerProformaTableros@create']);
