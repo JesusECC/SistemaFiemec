@@ -318,7 +318,7 @@ border-collapse: collapse;
                     <td class="principal" align="center" >{{$p->cantidad}}</td>
                     <td class="principal"  align="center">S/.{{$p->precio_venta}}</td>
                     <td class="principal" align="center" >{{$p->descuento}} % </td>
-                    <td class="principal" align="center" >S/.{{($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}</td>
+                    <td class="principal" align="center" ><!--S/.{{($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}--></td>
                   </tr>
                   {{$sub+=($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}
                   {{$igv=$p->igv}}
