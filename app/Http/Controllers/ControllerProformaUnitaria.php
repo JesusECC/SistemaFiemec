@@ -168,7 +168,7 @@ public function pdf($id){
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','cp.idCliente','=','p.idCliente')
     ->join('users as u','u.id','=','p.idEmpleado')
-    ->select('p.idEmpleado','p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.observacion_proforma','cp.correo as email','cp.nro_documento as ndoc','p.subtotal','p.cliente_empleado','u.name')
+    ->select('p.idEmpleado','p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.observacion_proforma','cp.correo as email','cp.nro_documento as ndoc','p.subtotal','p.cliente_empleado','u.name',DB::raw('CONCAT(u.name," ",u.paterno,"",u.materno)as nameE'))
     ->where('p.idProforma','=',$id)
     ->first();
 
@@ -189,7 +189,7 @@ public function pdf($id){
 
         $proforma=DB::table('Proforma as p')
         ->join('Cliente_Proveedor as cp','cp.idCliente','=','p.idCliente')       
-        ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.tipocambio','p.simboloP','p.subtotal')
+        ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.tipocambio','p.simboloP','p.subtotal','p.cliente_empleado')
         ->where('p.idProforma','=',$id)
         ->first();
 

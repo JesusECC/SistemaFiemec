@@ -160,7 +160,7 @@ footer {
       <div id="company">
         <div><span>EMAIL :</span> <span><a href="{{$proforma->email}}">{{$proforma->email}}</a></span></div>
         <div><span>FECHA :</span> <span style="font-size: 0.7em;color: black">{{$proforma->fecha_hora}}</span></div>
-        <div><span>ASESOR COMERCIAL :</span><span style="font-size: 0.7em;color: black">-----</span></div>
+        <div><span>CLIENTE REPRESENTANTE :</span><span style="font-size: 0.7em;color: black">{{$proforma->cliente_empleado}}</span></div>
       </div>
       <div id="project" class="clearfix">
        
