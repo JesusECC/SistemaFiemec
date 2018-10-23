@@ -316,9 +316,9 @@ border-collapse: collapse;
                     <td>{{$i++}}</td>
                     <td class="principal" style="font-size: 11px !important;"> {{ $p->producto.' | '.$p->descripcionDP }}</td>
                     <td class="principal" align="center" >{{$p->cantidad}}</td>
-                    <td class="principal"  align="center">S/.{{$p->precio_venta}}</td>
+                    <td class="principal"  align="center">{{$p->simboloDPT}}{{round($p->precio_venta/$p->cambioDPT,2)}}</td>
                     <td class="principal" align="center" >{{$p->descuento}} % </td>
-                    <td class="principal" align="center" >S/.{{($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}</td>
+                    <td class="principal" align="center" >{{$p->simboloDPT}}{{round((($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)))/$p->cambioDPT,2)}}</td>
                   </tr>
                   {{$sub+=($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}
                   {{$igv=$p->igv}}
@@ -329,7 +329,7 @@ border-collapse: collapse;
                     <tr style="font-weight: bold;">
                       <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
                       <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
-                      <td align="center" style="border-right: 1px solid #323639"> S/.{{$sub}}</td>
+                      <td align="center" style="border-right: 1px solid #323639"> {{$td->simboloP}}{{round($sub/$td->tipocambio,2)}}</td>
                     </tr>
 
                 </tfoot>
@@ -358,17 +358,17 @@ border-collapse: collapse;
       @endforeach
         <tr>
           <th style="width: 50%;">Sub Total</th>
-          <td>s/.{{$sub_tableros}}</td>
+          <td>{{$p->simboloDPT}}{{round($sub_tableros/$p->cambioDPT,2)}}</td>
           <td style="background-color:white !important;"></td>
         </tr>
         <tr>
           <th style="width: 50%;">IGV</th>
-          <td>S/.{{round(($sub_tableros)*($igv_tableros/100),2)}}</td>
+          <td>{{$p->simboloDPT}}{{round(($sub_tableros)*($igv_tableros/100)/$p->cambioDPT,2)}}</td>
           <td style="background-color:white !important;"></td>
         </tr>
         <tr>
           <th style="width: 50%;">Precio Total</th>
-          <td>S/. {{round($pt,2)}}</td>
+          <td>{{$p->simboloDPT}} {{round($pt/$p->cambioDPT,2)}}</td>
           <td style="background-color:white !important;"></td>
         </tr>
       </tbody>
