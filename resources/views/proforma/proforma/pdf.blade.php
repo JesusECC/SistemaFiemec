@@ -64,7 +64,7 @@
 {
   color: #5D6975;
   text-align: left;
-  width: 100px;
+  width: 200px;
   margin-right: 10px;
   display: inline-block;
   font-size: 0.6em;
@@ -170,7 +170,7 @@ footer {
       <div id="company">
         <div><span>EMAIL :</span> <span><a href="{{$proforma->email}}">{{$proforma->email}}</a></span></div>
         <div><span>FECHA :</span> <span style="font-size: 0.7em;color: black">{{$proforma->fecha_hora}}</span></div>
-        <div><span>CLIENTE EMPLEADO :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->cliente_empleado}}</span></div>
+        <div><span>CLIENTE REPRESENTANTE :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->cliente_empleado}}</span></div>
       </div>
       <div id="project" class="clearfix">
         <div><span>CLIENTE :</span> <span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->nombres_Rs.' '.$proforma->paterno.' '.$proforma->materno}}</span></div>
@@ -218,7 +218,7 @@ footer {
             <tr style="font-weight: bold;">
               <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
               <td colspan="1" style="border-left:1px solid #323639; ">IGV 18%</td>
-              <td align="center" style="border-right: 1px solid #323639"> S/. {{round(($proforma->precio_total)*($proforma->igv/100),2)}}</td>
+              <td align="center" style="border-right: 1px solid #323639"> S/. {{round(($proforma->subtotal)*($proforma->igv/100),2)}}</td>
             </tr>
             <tr style="font-weight: bold;">  
               <td colspan="4" style="background-color: white !important"></td>
@@ -235,7 +235,7 @@ footer {
       <h5 style="font-size: 10px !important;line-height:0.5px;">Forma de pago: {{$proforma->forma_de}}</h5>
       <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5> 
       <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$proforma->observacion_proforma}} </h5>
-      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$proforma->name}}</h5>
+      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$proforma->nameE}}</h5>
     </div>
      
     <div style="width: 50%;float: right;">

@@ -139,10 +139,10 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true"  style="font-size: 10px !important">
-                                                    <option value=""  style="font-size: 10px !important">Seleccione Producto</option>
+                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true"  style="font-size: 12px !important">
+                                                    <option value=""  style="font-size: 12px !important">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
-                                                        <option value="{{ $producto->idProducto }}_{{ $producto->productos}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->tipo_producto}}" style="font-size: 10px !important">{{ $producto->productos }}</option>
+                                                        <option value="{{ $producto->idProducto }}_{{ $producto->productos}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->tipo_producto}}" style="font-size: 12px !important">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->marca_producto .' | '.$producto->descripcion_producto }}</option>
                                                     @endforeach
                                                 </select>                                                 
                                             </div>

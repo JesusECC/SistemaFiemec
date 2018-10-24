@@ -275,7 +275,7 @@ border-collapse: collapse;
       <div id="company">
         <div><span>EMAIL :</span> <span><a href="{{$td->correo}}">{{$td->correo}}</a></span></div>
         <div><span>FECHA :</span> <span style="font-size: 0.7em;color: black">{{$td->fecha_hora}}</span></div>
-        <div><span>CLIENTE EMPLEADO :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$td->cliente_empleado}}</span></div>
+        <div><span>CLIENTE REPRESENTANTE :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$td->cliente_empleado}}</span></div>
       </div>
       <div id="project" class="clearfix">
         <div><span>CLIENTE :</span> <span class="cliente" style="font-size: 0.7em;color: black">{{$td->nombres_Rs.' '.$td->paterno.' '.$td->materno}}</span></div>
