@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use SistemaFiemec\Http\Requests;
 use SistemaFiemec\Proforma;
 use SistemaFiemec\DetalleProforma;
+use SistemaFiemec\DetalleServicio;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SistemaFiemec\Http\Requests\RequestFormProforma;
@@ -29,8 +30,8 @@ class ControllerProformaServicio extends Controller
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
     ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
-    ->where('p.estado','=','activo')
-    ->where('p.tipo_proforma','=','servicios')
+    ->where('p.estado','=',1)
+    ->where('p.tipo_proforma','=','Servicios')
     ->orderBy('p.idProforma','desc')
      
         ->paginate(7);           
@@ -113,13 +114,13 @@ class ControllerProformaServicio extends Controller
             $tableros;
             $idTipoCam;
             $valorcambio;
-            // idTipoCambio:idtipocam,valorTipoCambio:valorcambio
+            // idcliente,total,idTipoCambio,valorTipoCambio
             foreach ($request->datos as $dato) {
-            $idclie=$dato['idcliente'];
-            $valorv=$dato['valorVenta'];
-            $tota=$dato['total'];
-            $idTipoCam=$dato['idTipoCambio'];
-            $valorcambio=$dato['valorTipoCambio'];
+                $idclie=$dato['idcliente'];
+                $tota=$dato['total'];
+                $idTipoCam=$dato['idTipoCambio'];
+                $valorcambio=$dato['valorTipoCambio'];
+                $valorv=$dato['subtotal'];
             }   
             $idProforma=DB::table('Proforma')->insertGetId(
                 ['idCliente'=>$idclie,
@@ -133,7 +134,7 @@ class ControllerProformaServicio extends Controller
                 'tipocambio'=>$valorcambio,
                 // 'precio_totalC'=>$request->,
                 // 'descripcion_proforma'=>$request->,
-                'tipo_proforma'=>'Tablero',
+                'tipo_proforma'=>'Servicios',
                 // 'caracteristicas_proforma'=>$request->,
                 // 'forma_de'=>$request->,
                 // 'plaza_fabricacion'=>$request->,
@@ -141,34 +142,39 @@ class ControllerProformaServicio extends Controller
                 // 'garantia'=>$request->,
                 // 'observacion_condicion'=>$request->,
                 // 'observacion_proforma'=>$request->,
-                'estado'=>'activo'
+                'estado'=>1
                 ]
             );
             foreach ($request->tableros as $tablero) {
                 $nombre=$tablero['nombre'];
-                $idTablero=DB::table('Tableros')->insertGetId(
-                    ['nombre_tablero'=>$nombre]
+                $idServicio=DB::table('Servicios')->insertGetId(
+                    [
+                        'nombre_servicio'=>$nombre,
+                        'estadoT'=>'activo' 
+                    ]
                 );
                 foreach($request->filas as $fila){
                     if($fila['nomTablero']==$tablero['nombre']){
-                        $detalleProforma=new DetalleProforma;
+                        $DetalleServicio=new DetalleServicio;
                         // $detalleProforma->idDetalle_proforma=$fila[''];  
-                        $detalleProforma->idProducto=$fila['idProducto'];
-                        $detalleProforma->idProforma=$idProforma;
-                        $detalleProforma->idTableros=$idTablero;
-                        $detalleProforma->cantidad=$fila['cantidadP'];
-                        $detalleProforma->precio_venta=$fila['prec_uniP'];  
-                        // $detalleProforma->texto_precio_venta=$fila[''];  
-                        // $detalleProforma->observacion_detalleP=$fila[''];    
-                        $detalleProforma->descuento=$fila['descuentoP'];    
-                        $detalleProforma->descripcionDP=$fila['descripcionP'];
-                        $detalleProforma->save();
+                        $DetalleServicio->idTarea=$fila['idTarea'];
+                        $DetalleServicio->idProforma=$idProforma;
+                        $DetalleServicio->idServicios=$idServicio;
+                        // $DetalleServicio->cantidad=$fila['cantidadP'];
+                        // $DetalleServicio->precio_venta=$fila['prec_uniP'];  
+                        // $DetalleServicio->texto_precio_venta=$fila[''];  
+                        // $DetalleServicio->observacion_detalleP=$fila[''];    
+                        // $DetalleServicio->descuento=$fila['descuentoP'];    
+                        $DetalleServicio->descripcionDP=$fila['descripcionP'];
+                        $DetalleServicio->descripcionDP=1;
+                        
+                        $DetalleServicio->save();
                     }
                 }
             }
-            return ['data' =>'tableros'];
+            return ['data' =>'servicios','veri'=>true];
         }catch(Exception $e){
-            return ['data' =>$e];
+            return ['data' =>$e,'veri'=>false];
         }
     }
 

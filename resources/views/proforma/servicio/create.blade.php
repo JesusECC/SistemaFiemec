@@ -40,9 +40,6 @@
                     </div>
                 </div>
                 <!--.finde box header-->
-                    {!!Form::open(array('url'=>'proforma/servicios','method'=>'POST','autocomplete'=>'off'))!!}
-
-                    {{Form::token()}}
                 <div class="box-body bg-gray-c">
                     <div class="row">
                         <div class="col-md-8">
@@ -354,7 +351,7 @@
         $('#sumar').click(function(){
             sumar();
             igv();
-            total();
+            totaltt();
         });
         $('#Pcantidad').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
@@ -376,7 +373,7 @@
     $("#idTipo_moneda").change(mostrarTipoCambio);
     $("#subtotal").change(function(){
         igv();
-        total();
+        totaltt();
     });
     var tablero=[];
     var filaob=[];
@@ -422,21 +419,24 @@
         // console.log(idcliente);
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         var idtipocam=tipoCambio[0];
-        var valorcambio=tipoCambio[1];
-        var vVenta=$("#valorVenta").val();
-        var tl=$("#total").val();
+        var valorcambio=parseFloat(tipoCambio[1]);
+        // var vVenta=$("#valorVenta").val();
+        // var tl=$("#total").val();
+        console.log(totalt,idtipocam,valorcambio,idcliente);
+        console.log("-------------");
+        console.log(idtipocam,valorcambio,tablero,filaob);
         // console.log(tablero,filaob);
-        if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio}];
+        if( totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
+            var dat=[{idcliente:idcliente,subtotal:subtotal,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio}];
             // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
-                url:   'guardar', //archivo que recibe la peticion
+                url:   'save', //archivo que recibe la peticion
                 type:  'post', //método de envio
                 dataType: "json",//tipo de dato que envio 
                 beforeSend: function () {
-                    // console.log()
+                    console.log("Procesando, espere por favor...");
                         // $("#resultado").html("Procesando, espere por favor...");
                 },
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
@@ -451,7 +451,7 @@
                 }
             });
         }else {
-            alert('ingrese productos al tablero!!');
+            alert('ingrese productos al tablero!!1111111111');
         }
     }
 
@@ -673,15 +673,16 @@
     function igv(){
         var venta=subtotal;
         ig=venta*0.18;
-        v=console.log(venta);
+        // v=console.log(venta);
         // console.log(sub);
         $("#igv").html("s/. " + ig.toFixed(2));
     }
-    function total(){
+    function totaltt(){
         var igv=subtotal*0.18;
         var tota=0;        
-        tota=subtotal+igv;
-        $("#total").html("s/. " + tota.toFixed(2));
+        totalt=subtotal+igv;
+        $("#total").html("s/. " + totalt.toFixed(2));
+        console.log(totalt);
     }
     function valoresFinales(){
         if(filaob.length>0){

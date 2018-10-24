@@ -22,15 +22,16 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::resource('proforma/cliente','ControllerClientes');
     Route::resource('proforma/proveedor','ControllerProveedor');
     Route::resource('proforma/empresa','ControllerEmpresa');
-    Route::resource('proforma/servicio','ControllerProformaServicio');
+    // Route::resource('proforma/servicio','ControllerProformaServicio');
     Route::resource('proforma/config','ControllerConfiguracion');
     Route::resource('proforma/familia','ControllerFamilia');
     Route::resource('dashboard/dashboard-admin','ControllerDashboard');
     Route::resource('proforma/tarea','ControllerTarea');
 
-    //Se crea las rutas para servicios 
-
-    Route::get('servicio/create',['as'=> 'servicio-create','uses' =>'ControllerProformaServicio@create']);
+    // //Se crea las rutas para servicios "
+    // Route::get('servicio',['as'=> 'servicio','uses' =>'ControllerProformaServicio@create']);
+    // Route::get('servicio/create',['as'=> 'servicio-create','uses' =>'ControllerProformaServicio@create']);
+    // Route::post('servicio/save',['as'=> 'servicio-save','uses' =>'ControllerProformaServicio@store']);"
 
     // Se crea las rutas para tableros
     Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
@@ -108,7 +109,7 @@ Route::middleware(['auth','admin'])->group(function () {
     //Se crea rutas servicios
      Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);
     Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProformaServicio@create']);
-    Route::post('servicios/',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
+    Route::post('servicios/save',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
     Route::get('servicios/show/{id}',['as'=>'servicio-show','uses'=>'ControllerProformaServicio@show']);
     Route::get('servicios/edit/{id}',['as'=>'servicios-edit','uses'=>'ControllerProformaServicio@edit']);
     Route::get('servicios/pdf/{idProforma}','ControllerProformaServicio@pdf');
