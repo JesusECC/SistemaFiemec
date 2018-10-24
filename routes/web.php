@@ -12,7 +12,7 @@
 */
 
 
-    Route::middleware(['auth','admin'])->group(function () {
+Route::middleware(['auth','admin'])->group(function () {
 
     Route::get('/', 'MainController@index');
     Route::get('fiemec',['as' => 'fiemec','uses'=> 'MainController@index']);
