@@ -35,6 +35,8 @@ class ControllerProducto extends Controller
            ->orderby('idProducto','asc')
            ->paginate(10);
 
+           $moneda
+
            return view('proforma.producto.index',["productos"=>$productos,"searchText"=>$query]);
         }
        } 
