@@ -52,19 +52,21 @@ public function create()
     ->get();
 
     $monedas=DB::table('Tipo_moneda')
-    ->where('estado','=','activo')
+    ->where('estado','=',1)
+    ->get();
+
+     $representante=DB::table('Cliente_Representante')
+    ->where('estadoCE','=',1)
     ->get();
 
     $clientes=DB::table('Cliente_Proveedor as cp')
     ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
-    ->where('estado','=','activo')
-    
-
+    ->where('estado','=',1)
     ->get();
 
     $json=json_encode($clientes);
 
- return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,'json'=>$json]);
+ return view("proforma.proforma.create",["representante"=>$representante,"productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,'json'=>$json]);
 }
 
 public function store(Request $request)
@@ -168,7 +170,8 @@ public function pdf($id){
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','cp.idCliente','=','p.idCliente')
     ->join('users as u','u.id','=','p.idEmpleado')
-    ->select('p.idEmpleado','p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.observacion_proforma','cp.correo as email','cp.nro_documento as ndoc','p.subtotal','p.cliente_empleado','u.name',DB::raw('CONCAT(u.name," ",u.paterno,"",u.materno)as nameE'))
+    ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')
+    ->select('p.idEmpleado','p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.observacion_proforma','cp.correo as email','cp.nro_documento as ndoc','p.subtotal','p.cliente_empleado','u.name',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
     ->where('p.idProforma','=',$id)
     ->first();
 
@@ -188,8 +191,10 @@ public function pdf($id){
     public function pdf2($id){
 
         $proforma=DB::table('Proforma as p')
-        ->join('Cliente_Proveedor as cp','cp.idCliente','=','p.idCliente')       
-        ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.tipocambio','p.simboloP','p.subtotal','p.cliente_empleado')
+        ->join('Cliente_Proveedor as cp','cp.idCliente','=','p.idCliente') 
+        ->join('users as u','u.id','=','p.idEmpleado')
+        ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')      
+        ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.tipocambio','p.simboloP','p.subtotal',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'p.cliente_empleado','cr.nombre_RE')
         ->where('p.idProforma','=',$id)
         ->first();
 

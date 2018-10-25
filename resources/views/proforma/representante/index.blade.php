@@ -24,7 +24,7 @@
 						</strong>
 					</h4>
 					<div class="ibox-title-buttons pull-right">
-						<a href="{{route('representante-create')}}" style="text-decoration: none !important">
+						<a href="{{url('proforma/representante/create')}}" style="text-decoration: none !important">
 							<button class="btn btn-block btn-success" style="background-color: #18A689 !important;">
 								<i class="fas fa-plus-circle"></i> Nuevo Representante
 							</button></a>
@@ -36,9 +36,12 @@
 				       <thead>
 				            <tr>
 							    <th>Tipo Documento</th>
+							    <th>Nombre Cliente</th>
 				                <th>Documento</th>
-								<th>Nombre</th>
+				                
+								<th>Nombre Representante</th>
 								<th>Telefono</th>
+								<th>Opciones</th>
 								
 								
 				               
@@ -48,12 +51,18 @@
 				        	@foreach($representantes as $re)
 				        	<tr>
 							    <td>{{$re->tipo_doc}}</td>
+								<td>{{$re->nombres_Rs}}</td>
 								<td>{{$re->nro_doc_RE}}</td>
-								<td>{{$re->nombre_Rs}}</td>
+								<td>{{$re->nombre_RE}}</td>
 								<td>{{$re->telefonoRE.' / '.$re->CelularRE}}</td>
+								<td align="center">
+				        			
+									<a href="{{URL::action('ControllerClienteRE@edit',$re->idCR)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
+									<a href="" data-target="#modal-delete-{{$re->idCR}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> </a>
+								</td>
 								
 							</tr>
-						
+						    @include('proforma.representante.modal')
 							@endforeach
 				        </tbody>
     				</table>

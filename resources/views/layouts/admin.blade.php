@@ -83,7 +83,7 @@
           </div>
         </nav>
       </header>
-      @include('modal')
+     
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -144,11 +144,18 @@
               </ul>
             </li>
             <li class="treeview">
-              <a href="{{route ('clientes')}}">
+              <a href="#">
                 <i class="fas fa-users"></i>
-                <span>Cliente</span>
+                <span>Clientes</span>
+                 <i class="fa fa-angle-left pull-right"></i>
               </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ route('clientes')}}"><i class="fas fa-circle-notch"></i> Cliente</a></li>
+                <li><a href="{{ url('proforma/representante')}}"><i class="fas fa-circle-notch"></i> Representante</a></li>
+                
+              </ul>
             </li>
+            
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-clipboard-list"></i>
@@ -198,7 +205,7 @@
       <!--Fin-Contenido-->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 1.0.0
+          <b>Version</b> 2.3.0
         </div>
         <strong>Copyright &copy; 2018 <a href="www.incanatoit.com">KMT ADVANCE SYSTEMS</a>.</strong> All rights reserved.
       </footer>

@@ -22,9 +22,12 @@ class ControllerClienteRE extends Controller
     if($request)
     {
        $query=trim($request->get('searchText'));
-       $representantes=DB::table('Cliente_Representante')
+       $representantes=DB::table('Cliente_Representante as cr')
+       ->join('Cliente_Proveedor as cp','cr.idCliente','=','cp.idCliente')
+       ->select('cp.nombres_Rs','cp.paterno','cp.materno','cr.tipo_doc','cr.nro_doc_RE','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','cr.idCR')
        ->where('nombre_RE','LIKE','%'.$query.'%')
-       ->orderby('idCE','asc')
+       ->where('estadoCE','=',1)
+       ->orderby('idCR','asc')
        ->paginate(10);
 
        return view('proforma.representante.index',["representantes"=>$representantes,"searchText"=>$query]);
@@ -47,13 +50,14 @@ class ControllerClienteRE extends Controller
 
 
  public function store(Request $request){
-  
+              
                   $representante=new ClienteRE;
-                  $representante->nombre_RE=$request->get('nombre_RE');
                   $representante->idCliente=intval($request->get('idCliente'));
+                  $representante->tipo_doc=$request->get('tipo_doc');
                   $representante->nro_doc_RE=$request->get('nro_doc_RE');
-                  $representante->CelularRE=$request->get('CelularRE');                  
+                  $representante->nombre_RE=$request->get('nombre_RE');                                  
                   $representante->telefonoRE=$request->get('telefonoRE');
+                  $representante->CelularRE=$request->get('CelularRE');
                   $representante->estadoCE=1;
                   $representante->save();
               
@@ -67,19 +71,24 @@ class ControllerClienteRE extends Controller
 
   public function edit($id)
     {
-        return view("proforma.representante.edit",["representante"=>ClienteRE::findOrFail($id)]);
+      $cliente=DB::table('Cliente_Proveedor')
+      ->where('estado','=',1)
+      ->get();
+        return view("proforma.representante.edit",["cliente"=>$cliente,"representante"=>ClienteRE::findOrFail($id)]);
     }
 
    
     public function update(Request $request,$id)
     {
-
+               
                   $representante=ClienteRE::Find($id);
-                  $representante->nombre_RE=$request->get('nombre_RE');
+                  
                   $representante->idCliente=intval($request->get('idCliente'));
+                  $representante->tipo_doc=$request->get('tipo_doc');
                   $representante->nro_doc_RE=$request->get('nro_doc_RE');
-                  $representante->CelularRE=$request->get('CelularRE');                  
+                  $representante->nombre_RE=$request->get('nombre_RE');                                  
                   $representante->telefonoRE=$request->get('telefonoRE');
+                   $representante->CelularRE=$request->get('CelularRE');
                   $representante->update();
  
             

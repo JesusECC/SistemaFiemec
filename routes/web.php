@@ -20,9 +20,10 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::resource('proforma/empleado','ControllerEmpleados');
     Route::resource('proforma/producto','ControllerProducto');
     Route::resource('proforma/cliente','ControllerClientes');
+    Route::resource('proforma/representante','ControllerClienteRE');
     Route::resource('proforma/proveedor','ControllerProveedor');
     Route::resource('proforma/empresa','ControllerEmpresa');
-    // Route::resource('proforma/servicio','ControllerProformaServicio');
+    
     Route::resource('proforma/config','ControllerConfiguracion');
     Route::resource('proforma/familia','ControllerFamilia');
     Route::resource('dashboard/dashboard-admin','ControllerDashboard');
@@ -78,12 +79,11 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('familias/{idFamilia}/edit',['as'=>'familia-edit','uses'=>'ControllerFamilia@edit']);
 
 
-    //Se crea rutas para tipodecambio
+   /** //Se crea rutas para tipodecambio
     Route::get('configuraciones',['as'=>'config','uses'=>'ControllerConfiguracion@index']);
     Route::get('configuraciones/create',['as'=>'config-create','uses'=>'ControllerConfiguracion@create']);
     Route::post('configuraciones/guardar',['as'=>'config-store','uses'=>'ControllerConfiguracion@store']);
-    Route::get('configuraciones/{idTipo_moneda}/edit',['as'=>'config-edit','uses'=>'ControllerConfiguracion@edit']);
-
+    Route::get('configuraciones/{idTipo_moneda}/edit',['as'=>'config-edit','uses'=>'ControllerConfiguracion@edit']);*/
     //Se crea rutas de proforma
     Route::post('proformas/guardar',['as' => 'proforma-store','uses'=>'ControllerProformaUnitaria@store']);
     Route::get('proformas',['as'=>'proforma','uses'=>'ControllerProformaUnitaria@index']);
@@ -124,11 +124,11 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('tarea/create',['as'=>'tarea-create','uses'=>'ControllerTarea@create']);
 
     //Se crea rutas Representante
-    Route::get('representante',['as'=>'representante','uses'=>'ControllerClienteRE@index']);
+    /*Route::get('representante',['as'=>'representante','uses'=>'ControllerClienteRE@index']);
     Route::get('representante/create',['as'=>'representante-create','uses'=>'ControllerClienteRE@create']);
     Route::post('representante/',['as'=>'representante-store','uses'=>'ControllerClienteRE@store']);
     Route::get('representante/{idCE}/edit',['as'=>'representante-edit','uses'=>'ControllerClienteRE@edit']);
-
+*/
     //se crea rutas para ajsutes
     Route::get('Ajustes',['as'=>'ajustes','uses'=>'ControllerAjustes@index']);
 });   

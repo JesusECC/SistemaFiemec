@@ -29,7 +29,7 @@ class ControllerClientes extends Controller
        $query=trim($request->get('searchText'));
        $clientes=DB::table('Cliente_Proveedor')
        ->where('nombres_Rs','LIKE','%'.$query.'%')
-       ->where('estado','=','activo')
+       ->where('estado','=',1)
        ->orderby('idCliente','asc')
        ->paginate(10);
 
@@ -77,7 +77,7 @@ class ControllerClientes extends Controller
                   $Cliente->cuenta_1=$request->get('cuenta_1');
                   $Cliente->cuenta_2=$request->get('cuenta_2');
                   $Cliente->cuenta_3=$request->get('cuenta_3');
-                  $Cliente->estado='activo';
+                  $Cliente->estado=1;
                   $Cliente->Departamento=$request->get('Departamento');
                   $Cliente->Distrito=$request->get('Distrito');
                   $Cliente->Direccion=$request->get('Direccion');
@@ -117,7 +117,6 @@ class ControllerClientes extends Controller
                   $Cliente->cuenta_1=$request->get('cuenta_1');
                   $Cliente->cuenta_2=$request->get('cuenta_2');
                   $Cliente->cuenta_3=$request->get('cuenta_3');
-                  $Cliente->estado='activo';
                   $Cliente->Departamento=$request->get('Departamento');
                   $Cliente->Distrito=$request->get('Distrito');
                   $Cliente->Direccion=$request->get('Direccion');
@@ -131,7 +130,7 @@ class ControllerClientes extends Controller
     public function destroy($id)
     {
         $producto=Clientes::findOrFail($id);
-        $producto->estado='inactivo';
+        $producto->estado=0;
         $producto->update();
         return Redirect::to('proforma/cliente');
 

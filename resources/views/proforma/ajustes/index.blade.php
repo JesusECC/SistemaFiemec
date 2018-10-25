@@ -48,7 +48,7 @@
 					                        <h4 class="list-group-item-heading">Configuración Familia</h4>
 					                        <p class="list-group-item-text">Creación, modificación.</p>
 					                    </a>
-					                    <a class="list-group-item" href="{{url('config')}}">
+					                    <a class="list-group-item" href="{{url('proforma/config')}}">
 					                        <h4 class="list-group-item-heading">Configuración Tipo Cambio</h4>
 					                        <p class="list-group-item-text">Creación, modificación.</p>
 					                    </a>

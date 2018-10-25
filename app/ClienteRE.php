@@ -14,7 +14,12 @@ class ClienteRE extends Model
     protected $filleable = [
     	
         'nombre_RE',
-        'idCliente'  
+        'idCliente',
+        'estadoCE',
+        'telefonoRE',
+        'CelularRE',
+        'nro_doc_RE',
+        'tipo_doc'  
    ];
 
    protected $guarded =[

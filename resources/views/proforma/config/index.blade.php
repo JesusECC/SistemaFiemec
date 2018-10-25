@@ -24,7 +24,7 @@
 						</strong>
 					</h4>
 					<div class="ibox-title-buttons pull-right">
-						<a href="{{route('config-create')}}" style="text-decoration: none !important">
+						<a href="{{url('proforma/config/create')}}" style="text-decoration: none !important">
 							<button class="btn btn-block btn-success" style="background-color: #18A689 !important;">
 								<i class="fas fa-plus-circle"></i> Nuevo Tipo de Moneda
 							</button></a>
@@ -56,8 +56,8 @@
 				        	
 				        		</td>
 				        		<td align="center">
-				        			
-									<a href="{{route('config-edit',$mo->idTipo_moneda)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
+				        			<a href="{{URL::action('ControllerConfiguracion@edit',$mo->idTipo_moneda)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
+									
 									<a href="" data-target="#modal-delete-{{$mo->idTipo_moneda}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> </a>
 								</td>
 							</tr>
