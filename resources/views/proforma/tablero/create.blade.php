@@ -75,7 +75,12 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text"  name="cliente_empleado" id="cliente_empleado"  class="form-control" placeholder="Ingrese Nombre del Empleado">
+                                                <select required name="cliente_empleado" class="form-control selectpicker" id="cliente_empleado" data-live-search="true">
+                                                    <option value="">Seleccione Representante</option>
+                                                    @foreach($representante as $re)
+                                                    <option value="{{$re->idCR}}">{{$re->nombre_RE}}</option>
+                                                    @endforeach
+                                                </select> 
                                             </div>
                                         </div>
                                     </div>

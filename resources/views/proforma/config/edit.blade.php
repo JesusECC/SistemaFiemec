@@ -18,25 +18,83 @@
     {!!Form::model($moneda,['method'=>'PATCH','route'=>['config.update',$moneda->idTipo_moneda]])!!}
     {{Form::token()}}
 
+<div class="box-body bg-gray-c">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="nav-tabs-custom">
+                                
+                                <div class="tab-content">
+                                    <div class="active tab-pane" id="dni">
+                                        <div class="panel panel-default panel-shadow">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+                                                        Datos Generales
+                                                    </label>
+                                                </div>
+                                <div class="row">
+                                                
+                                        
 
-<div class="form-group">
-	<label for="nombre_moneda">Nombre de Moneda</label>
-	<input type="text" name="nombre_moneda" class="form-control" required value="{{$moneda->nombre_moneda}}">	
-</div>
-<div class="form-group">
-	<label for="simbolo">Simbolo</label>
-	<input type="text" name="simbolo" class="form-control" required value="{{$moneda->simbolo}}">	
-</div>
-<div class="form-group">
-	<label for="tipo_cambio">Valor de la Moneda</label>
-	<input type="text" name="tipo_cambio" class="form-control" required value="{{$moneda->tipo_cambio}}">	
-</div>
-
-<div class="from-group">
-	<button class="btn btn-primary" type="submit">guardar</button>
-	
-
-</div>
+                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+                                                        Impuesto
+                                                    </label>
+                                                            <input type="number" name="impuesto" class="form-control"  value="{{$moneda->impuesto}}">
+                                                        </div>                                              
+                                                    </div>  
+                                    
+                                    
+                                                    
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                             <label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+                                                        Nombre Moneda
+                                                    </label>
+                                                            <input type="text" name="nombre_moneda" class="form-control" value="{{$moneda->nombre_moneda}}">
+                                                        </div>                                                  
+                                                    </div>
+                                                
+                                                
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                             <label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+                                                        Simbolo
+                                                    </label>
+                                                            <input type="text" name="simbolo" class="form-control" value="{{$moneda->simbolo}}">
+                                                        </div>                                              
+                                                    </div>
+                                                        
+                                                        
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                             <label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+                                                        Valor
+                                                    </label>
+                                                            <input type="text" name="tipo_cambio" class="form-control" value="{{$moneda->tipo_cambio}}">
+                                                        </div>                                              
+                                                    </div>
+                                                    </div>                                              
+                                            </div>
+                                        </div>                                      
+                                    </div>
+                                    <div class="tab-pane" id="ruc">
+                                        RUC
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="text-right">
+                        <button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
+                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+                        
+                    </div>
+                </div>
+              </div><!-- /.box -->
 {!!Form::close()!!}
 
 

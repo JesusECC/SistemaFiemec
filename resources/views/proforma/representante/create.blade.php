@@ -55,7 +55,7 @@
 								<div class="row">
 												<div class="col-sm-5">
                                             <div class="form-group">
-                                                <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
+                                                <select required name="idCliente" class="form-control selectpicker" id="idCliente" data-live-search="true">
                                                     <option value="">Seleccione Cliente</option>
                                                     @foreach($cliente as $cli)
                                                     <option value="{{$cli->idCliente}}">{{$cli->nombres_Rs.' '.$cli->paterno.' '.$cli->materno}}</option>
@@ -65,8 +65,8 @@
                                         </div>
 										<div class="col-sm-3">				
 										<div class="form-group">
-												<select id="tipo_documento" name="tipo_documento" class="form-control">
-												 <option value="" disabled selected >Selecione Tipo de Documento</option>
+												<select id="tipo_doc" name="tipo_doc" class="form-control">
+												 <option value="" disabled selected >Tipo de Documento</option>
 												<option value="DNI">DNI</option>
 												<option value="RUC">RUC</option>
 												
@@ -77,7 +77,7 @@
 
 									<div class="col-sm-4">
 														<div class="form-group">
-															<input type="text" name="nro_documento" class="form-control" placeholder="Ingrese numero de Documento..."  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
+															<input type="number" name="nro_doc_RE" class="form-control" placeholder="Ingrese numero de Documento"  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
 														</div> 												
 													</div>	
 									</div>
@@ -85,20 +85,20 @@
 													
 													<div class="col-sm-6">
 														<div class="form-group">
-															<input type="text" name="nombres_RS" class="form-control" placeholder="Ingrese Nombre" {{old('nombres_RS')}}>
+															<input type="text" name="nombre_RE" class="form-control" placeholder="Ingrese Nombre Completo" {{old('nombres_RS')}}>
 														</div>													
 													</div>
 												
 												
 													<div class="col-sm-3">
 														<div class="form-group">
-															<input type="text" name="paterno" class="form-control" placeholder="Ingrese Apellido Paterno" {{old('paterno')}}>
+															<input type="number" name="telefonoRE" class="form-control" placeholder="Ingrese Telefono" {{old('paterno')}}>
 														</div> 												
 													</div>
 														
 													<div class="col-sm-3">
 														<div class="form-group">
-															<input type="text" name="paterno" class="form-control" placeholder="Ingrese Apellido Paterno" {{old('paterno')}}>
+															<input type="number" name="CelularRE" class="form-control" placeholder="Ingrese Celular" {{old('paterno')}}>
 														</div> 												
 													</div>
 													</div>												
@@ -117,7 +117,7 @@
 					<div class="text-right">
 			    		<button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
 						<button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-						<button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{route('clientes')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+						
 					</div>
 				</div>
               </div><!-- /.box -->

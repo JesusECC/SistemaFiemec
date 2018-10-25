@@ -1,6 +1,6 @@
-<div class="modal fade in" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-delete-{{$cli->idCliente}}" style="padding-left: 17px;border-radius:0px !important;">
+<div class="modal fade in" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-delete-{{$re->idCR}}" style="padding-left: 17px;border-radius:0px !important;">
  
-{{Form::Open(array('action'=>array('ControllerClientes@destroy',$cli->idCliente),'method'=>'delete'))}}
+{{Form::Open(array('action'=>array('ControllerClienteRE@destroy',$re->idCR),'method'=>'delete'))}}
 
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -15,7 +15,7 @@
               <div class="panel panel-transparent text-center p-md">
                 <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
                 <h3 class="m-t-none m-b-sm text-warning">Advertencia</h3>
-                <p class="p-text-delete">Al eliminar el siguiente Cliente <span style="color: red">{{$cli->nombres_Rs.' '.$cli->paterno.' '.$cli->materno }}</span>  no volvera a verlo en la lista </p>
+                <p class="p-text-delete">siguiente Representante <span style="color: red">{{$re->nombre_RE}}</span>  no volvera a verlo en la lista </p>
               </div>
             </div>
             <h3>¿Desea eliminar al cliente?</h3>

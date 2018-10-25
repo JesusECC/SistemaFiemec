@@ -24,7 +24,7 @@ class ControllerConfiguracion extends Controller
        $query=trim($request->get('searchText'));
        $monedas=DB::table('Tipo_moneda')
        ->where('nombre_moneda','LIKE','%'.$query.'%')
-       ->where('estado','=','activo')
+       ->where('estado','=',1)
        ->paginate(10);
 
        return view('proforma.config.index',["monedas"=>$monedas,"searchText"=>$query]);
@@ -43,34 +43,14 @@ public function create(){
 
 public function store(Request $request)
 {
-   
-try{
-        $nombre;
-        $simbolo;
-        $valor;
- //var dat=[{nombre:nombre,simbolo:simbolo,valor:valor}];
-           
-        foreach ($request->datos as $dato) {
-            $nombre=$dato['nombre'];
-            $simbolo=$dato['simbolo'];
-            $valor=$dato['valor'];
-          
-            
-        }
-       
-            $ucargo=new UserCargo;
-            
-            $ucargo->nombre_moneda=$nombre;
-            $ucargo->simbolo=$simbolo;
-            $ucargo->tipo_cambio=$valor;
-            $ucargo->save();
+$moneda=new Moneda;
+$moneda->nombre_moneda=$request->get('nombre_moneda'); //enviando valor a cada uno de los compos del modelo
+$moneda->tipo_cambio=$request->get('tipo_cambio');
+$moneda->simbolo=$request->get('simbolo');
+$moneda->estado=1;
+$moneda->save();
 
-        
-            return ['data' =>'configuraciones','veri'=>true];
-        }catch(Exception $e){
-            return ['data' =>$e,'veri'=>false];
-        }
-
+return Redirect::to('proforma/config');
 }
 
 public function edit($id){
@@ -84,7 +64,6 @@ $moneda=Moneda::find($id);
 $moneda->nombre_moneda=$request->get('nombre_moneda'); //enviando valor a cada uno de los compos del modelo
 $moneda->tipo_cambio=$request->get('tipo_cambio');
 $moneda->simbolo=$request->get('simbolo');
-$moneda->estado='activo';
 $moneda->update();
 
 return Redirect::to('proforma/config');
@@ -94,7 +73,7 @@ public function destroy($id)
 
 {
  $moneda=Moneda::findOrFail($id);
- $moneda->estado='eliminado';
+ $moneda->estado=0;
  $moneda->update();
  return Redirect::to('proforma/config');
 
