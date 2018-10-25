@@ -14,6 +14,7 @@ class Marca extends Model
     protected $filleable = [
     	
     	'nombre_proveedor',
+      'estadoMa',
     	
       
      

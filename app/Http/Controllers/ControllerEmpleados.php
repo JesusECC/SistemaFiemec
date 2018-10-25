@@ -283,8 +283,8 @@ $idUser=DB::table('users')->insertGetId(
 
   public function destroy($id)
   {
-    $Empleado=Empleado::findOrFail($id);
-    $Empleado->estado='inactivo';
+    $Empleado=Empleados::findOrFail($id);
+    $Empleado->estado=0;
     $Empleado->update();
     return Redirect::to('proforma/empleado');
 

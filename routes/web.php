@@ -23,7 +23,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::resource('proforma/representante','ControllerClienteRE');
     Route::resource('proforma/proveedor','ControllerProveedor');
     Route::resource('proforma/empresa','ControllerEmpresa');
-    
+    Route::resource('proforma/marca','ControllerMarca');
     Route::resource('proforma/config','ControllerConfiguracion');
     Route::resource('proforma/familia','ControllerFamilia');
     Route::resource('dashboard/dashboard-admin','ControllerDashboard');
@@ -59,7 +59,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('productos/create',['as'=>'producto-create','uses'=>'ControllerProducto@create']);
     Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
     Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
-
+/*
     //rutas marca
     Route::get('marcas',['as'=>'marca','uses'=>'ControllerMarca@index']);
     Route::get('marcas/create',['as'=>'marca-create','uses'=>'ControllerMarca@create']);
@@ -67,7 +67,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('marcas/{idMarca}/edit',['as'=>'marca-edit','uses'=>'ControllerMarca@edit']);
 
 
-
+*/
     //se crea las rutas para catalago 
     Route::get('catalogo',['as'=>'catalogo','uses'=>'ControllerCatalogo@index']);
     Route::get('catalogo/show/{idProducto}',['as'=>'catalogo-show','uses'=>'ControllerCatalogo@show']);
