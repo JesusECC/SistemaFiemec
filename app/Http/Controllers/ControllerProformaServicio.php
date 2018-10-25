@@ -23,38 +23,23 @@ class ControllerProformaServicio extends Controller
     }
     public function index(Request $request)
     {
-    if ($request)
-    {
-    $query=trim($request->get('searchText'));
-    $servicios=DB::table('Proforma as p')
-    ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
-    ->where('p.idProforma','LIKE','%'.$query.'%')
-    ->where('p.estado','=',1)
-    ->where('p.tipo_proforma','=','Servicios')
-    ->orderBy('p.idProforma','desc')
-     
-        ->paginate(7);           
+        if ($request)
+        {
+            $query=trim($request->get('searchText'));
+            $servicios=DB::table('Proforma as p')
+            ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
+            ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
+            ->where('p.idProforma','LIKE','%'.$query.'%')
+            ->where('p.estado','=',1)
+            ->where('p.tipo_proforma','=','Servicios')
+            ->orderBy('p.idProforma','desc')
+            
+            ->paginate(7);           
             return view('proforma.servicio.index',["servicios"=>$servicios,"searchText"=>$query]);
         }
     }
     public function create()
     {
-        // Textos completos 
-        // idProducto--
-        // idFamilia
-        // serie_producto--
-        // codigo_pedido--
-        // codigo_producto--
-        // nombre_producto--
-        // marca_producto-
-        // stock--
-        // descripcion_producto--
-        // precio_unitario--
-        // foto--
-        // categoria_producto--
-        // fecha_sistema--
-        // estado--
         $productos=DB::table('Producto as po')
         ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
         ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto',
@@ -66,17 +51,6 @@ class ControllerProformaServicio extends Controller
         $monedas=DB::table('Tipo_moneda')
         ->where('estado','=','activo')
         ->get();
-
-    /* $servicios=DB::table('Servicios as s')
-        ->select('s.idServicios', DB::raw('DISTINCT(s.nombre_servicio) as tarea'))
-        ->get();*/
-
-    /*  $picks = DB::table('picks')
-      ->distinct()
-      ->select('user_id')
-      ->where('weeknum', '=', 1)
-      ->groupBy('user_id')
-      ->get();*/
         
         $servicios=DB::table('Tarea')
         ->distinct()
@@ -124,7 +98,7 @@ class ControllerProformaServicio extends Controller
             }   
             $idProforma=DB::table('Proforma')->insertGetId(
                 ['idCliente'=>$idclie,
-                // 'idEmpleado'=>$request->,           
+                 'idEmpleado'=>2,           
                 'idTipo_moneda'=>$idTipoCam,
                 'serie_proforma'=>'PU365122019',
                 // 'fecha_hora'=>$mytime->toDateTimeString(),
@@ -178,7 +152,76 @@ class ControllerProformaServicio extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        //
+        $clientes=DB::table('Cliente_Proveedor as cp')
+        ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
+        ->where('tipo_persona','=','Cliente persona')
+        ->orwhere('tipo_persona','=','Cliente Empresa')
+        ->where('idCliente','=',$id)
+        ->get();
+
+        $servicios=DB::table('Producto as po')
+        ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
+        ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema')
+        ->where('po.estado','=','activo')
+        ->get();
+
+        $proforma=DB::table('Proforma as p')
+        ->join('Detalle_proforma_tableros as dePT','p.idProforma','=','dePT.idProforma')
+        ->join('Producto as pd','pd.idProducto','=','dePT.idProducto')
+        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+        ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP')
+        ->where('p.idProforma','=',$id)
+        ->get();
+        // proforma
+        'idProforma',
+        'idCliente',
+        'idEmpleado',
+        'idTipo_moneda',
+        'cliente_empleado',
+        'serie_proforma',
+        'fecha_hora',
+        'igv',
+        'subtotal',
+        'precio_total',
+        'tipocambio',
+        'simboloP',
+        'precio_totalC',
+        'descripcion_proforma',
+        'tipo_proforma',
+        'caracteristicas_proforma',
+        'forma_de',
+        'plaza_fabricacion',
+        'plazo_oferta',
+        'garantia',
+        'observacion_condicion',
+        'observacion_proforma',
+        'estado',
+        'idestado',
+        'incluye'
+
+        $clientes',=DB::table('Cliente_Proveedor as cp')
+        ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
+        ->where('tipo_persona','=','Cliente persona')
+        ->orwhere('tipo_persona','=','Cliente Empresa')
+        ->get();
+
+        $tablero=DB::table('Tableros as t')
+        ->distinct()
+        ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
+        ->where('dpt.idProforma','=',$id)
+        ->get(['t.nombre_tablero','estadoT']);
+
+
+        
+        // 'dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP'
+        // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
+        return view("proforma.tablero.edit",['tablero'=>$tablero,"clientes"=>$clientes,'proforma'=>$proforma]);
     }
+}
 
 
 
