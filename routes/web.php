@@ -123,6 +123,11 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('cliente/show/{idCliente}',['as'=>'clientes-show','uses'=>'ControllerClientes@show']);
     Route::get('tarea/create',['as'=>'tarea-create','uses'=>'ControllerTarea@create']);
 
+    //Se crea rutas Representante
+    Route::get('representante',['as'=>'representante','uses'=>'ControllerClienteRE@index']);
+    Route::get('representante/create',['as'=>'representante-create','uses'=>'ControllerClienteRE@create']);
+    Route::post('representante/',['as'=>'representante-store','uses'=>'ControllerClienteRE@store']);
+    Route::get('representante/{idCE}/edit',['as'=>'representante-edit','uses'=>'ControllerClienteRE@edit']);
 
     //se crea rutas para ajsutes
     Route::get('Ajustes',['as'=>'ajustes','uses'=>'ControllerAjustes@index']);

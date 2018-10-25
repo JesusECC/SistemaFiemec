@@ -8,9 +8,9 @@
     <ol class="breadcrumb" style="margin-top: 55px;">
     	<li>
     		<a href="#">
-    		<i class="fas fa-user-plus"></i> Clientes</a>
+    		<i class="fas fa-user-edit"></i> Clientes</a>
     	</li>
-    	<li class="active">Nuevo Cliente</li>
+    	<li class="active">Editar Cliente</li>
     </ol>
 </section>
 <section class="content">
@@ -20,7 +20,7 @@
 				<div class="box-header with-border" style="padding: 10px !important">
 					<h4>
 						<strong style="font-weight: 400">
-							<i class="fas fa-users"></i> Datos Cliente
+							<i class="fas fa-users"></i> Editar Datos Cliente
 						</strong>
 					</h4>
 				    @if(count($errors)>0)
@@ -32,17 +32,22 @@
 						</ul>	
 				    </div>
 				    @endif
-
 				</div>
                 <!-- /.box-header -->
-                	{!!Form::open(array('url'=>'proforma/cliente','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
-
-    				{{Form::token()}}
+                	{!!Form::model($Cliente,['method'=>'PATCH','route'=>['cliente.update',$Cliente->idCliente]])!!}
+					{{Form::token()}}
 				<div class="box-body bg-gray-c">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-8">
 							<div class="nav-tabs-custom">
-								
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a href="#dni" data-toggle="tab"  style="font-size: 13px;color: #676a6c">DNI</a>
+									</li>
+									<li>
+										<a href="#ruc" data-toggle="tab" style="font-size: 13px;color: #676a6c">RUC</a>
+									</li>
+								</ul>
 								<div class="tab-content">
 									<div class="active tab-pane" id="dni">
 										<div class="panel panel-default panel-shadow">
@@ -53,37 +58,26 @@
 													</label>
 												</div>
 												<div class="row">
-													<div class="col-sm-4">				
-										<div class="form-group">
-												<select id="tipo_documento" name="tipo_documento" class="form-control">
-												 <option value="" disabled selected >Selecione Tipo de Documento</option>
-												<option value="DNI">DNI</option>
-												<option value="RUC">RUC</option>
-												
-												
-												</select>
-										</div>
-									</div>	
 													<div class="col-sm-4">
 														<div class="form-group">
-															<input type="text" name="nro_documento" class="form-control" placeholder="Ingrese numero de Documento..."  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
+															<input type="text" name="nro_documento" class="form-control" required value="{{$Cliente->nro_documento}}">
 														</div> 												
 													</div>
-													<div class="col-sm-4">
+													<div class="col-sm-8">
 														<div class="form-group">
-															<input type="text" name="nombres_RS" class="form-control" placeholder="Ingrese Nombre" {{old('nombres_RS')}}>
+															<input type="text" name="nombres_Rs" class="form-control" required value="{{$Cliente->nombres_Rs}}">
 														</div>													
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-sm-6">
 														<div class="form-group">
-															<input type="text" name="paterno" class="form-control" placeholder="Ingrese Apellido Paterno" {{old('paterno')}}>
+															<input type="text" name="paterno" class="form-control" required value="{{$Cliente->paterno}}" {{old('paterno')}}>
 														</div> 												
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group">
-															<input type="text" name="materno" class="form-control" placeholder="Ingrese Apellido Materno" {{old('materno')}}>
+															<input type="text" name="materno" class="form-control" required value="{{$Cliente->materno}}" {{old('materno')}}>	
 														</div>
 													</div>
 												</div>
@@ -94,32 +88,36 @@
 																<div class="input-group-addon">
 																	<i class="far fa-calendar-alt"></i>
 																</div>
-																<input type="date" class="form-control pull-right" name="fecha_nacimiento">	
+																<input type="date" name="fecha_nacimiento" class="form-control" required value="{{$Cliente->fecha_nacimiento}}">
 															</div>
 														</div>												
 													</div>
 													<div class="col-sm-3">
 														<div class="form-group">
-														    <select name="sexo" class="form-control">
-														    	<option value="" disabled selected>Sexo</option>
-														    	<option value="Masculino">Masculino</option>
-																<option value="Femenino">Femenino</option>
+															<select name="sexo" class="form-control">
+																@if($Cliente->sexo=='hombre')
+															   <option value="hombre" selected>Hombre</option>
+															   <option value="mujer">Mujer</option>	
+															   @elseif($Cliente->sexo=='mujer')
+															   <option value="hombre">Hombre</option>
+															   <option value="mujer" selected>Mujer</option>
+															   @endif
 															</select>													
 														</div>
 													</div>
 													<div class="col-sm-4">
-														<input type="text" name="telefono" class="form-control" placeholder="Ingrese Teléfono">
+														<input type="text" name="telefono" class="form-control" required value="{{$Cliente->telefono}}">	
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-sm-5">
 														<div class="form-group">
-															<input type="text" name="celular" class="form-control" placeholder="Ingrese Celular">	
+															<input type="text" name="celular" class="form-control" required value="{{$Cliente->celular}}">	
 														</div>   												
 													</div>
 													<div class="col-sm-7">
 														<div class="form-group">
-															<input type="email" name="correo" class="form-control" placeholder="Ingrese Correo">	
+															<input type="text" name="correo" class="form-control" required value="{{$Cliente->correo}}">	
 														</div>  												
 													</div>										
 												</div>
@@ -131,25 +129,25 @@
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
-															<input type="text" name="Departamento" class="form-control" placeholder="Ingrese Departamento">	
-														</div>
-														
+															<input type="text" name="Departamento" class="form-control" required value="{{$Cliente->Departamento}}">
+														</div>														
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
-															<input type="text" name="Distrito" class="form-control" placeholder="Ingrese Distrito">	
+															<input type="text" name="Distrito" class="form-control" required value="{{$Cliente->Distrito}}">
 														</div>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
-															<input type="text" name="Direccion" class="form-control" placeholder="Ingrese Direccion">
+															<input type="text" name="Direccion" class="form-control" required value="{{$Cliente->Direccion}}">
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
-															<input type="text" name="Referencia" class="form-control" placeholder="Ingrese la referencia">
+															<input type="text" name="Referencia" class="form-control" required value="{{$Cliente->Referencia}}">
+															
 														</div>
 													</div>
 												</div>
@@ -161,17 +159,17 @@
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-group">
-															<input type="text" name="cuenta_1" class="form-control" placeholder="Ingrese la cuenta">
+															<input type="text" name="cuenta_1" class="form-control" required value="{{$Cliente->cuenta_1}}">
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="form-group">
-															<input type="text" name="cuenta_2" class="form-control" placeholder="Ingrese la cuenta">
+															<input type="text" name="cuenta_2" class="form-control" required value="{{$Cliente->cuenta_2}}">
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="form-group">
-															<input type="text" name="cuenta_3" class="form-control" placeholder="Ingrese la cuenta">
+															<input type="text" name="cuenta_3" class="form-control" required value="{{$Cliente->cuenta_3}}">
 														</div>
 													</div>
 												</div>
