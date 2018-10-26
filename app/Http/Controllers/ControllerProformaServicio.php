@@ -162,6 +162,38 @@ class ControllerProformaServicio extends Controller
         }
     }
 
+public function show($id){
+
+        $td=DB::table('Proforma as p')
+        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+        ->join('users as u','u.id','=','p.idEmpleado')
+
+        ->select('u.id',DB::raw('CONCAT(u.name,u.paterno,u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion')
+        ->where('idProforma','=',$id)
+        ->first();
+
+        $tablero=DB::table('Servicios as s')
+        ->distinct()
+        ->join('Detalle_proforma_servicios as dps','s.idServicios','=','dpt.idServicios')
+        ->where('dps.idProforma','=',$id)
+        ->get(['s.nombre_servicio','estadoT']);
+
+        $proforma=DB::table('Proforma as p')
+        ->join('Detalle_proforma_servicios as dePS','p.idProforma','=','dePS.idProforma')
+        ->join('Producto as pd','pd.idProducto','=','dePS.idProducto')
+       ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+        ->join('idServicios as s','s.idServicios','=','dePS.idServicios')
+        
+        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.codigo_producto," ",pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','s.idServicios','s.nombre_tablero','s.estadoT','dePS.idDetalle_proforma','dePS.idProducto','dePS.idProforma','dePS.idServicios','dePS.cantidad','dePS.precio_venta','dePS.texto_precio_venta','dePS.descuento','dePS.descripcionDP','dePS.estadoDP')
+        ->where('p.idProforma','=',$id)
+        ->get();
+
+        // dd($tablero,$proforma,$p);
+
+        return view("proforma.servicio.show",['td'=>$td,'proforma'=>$proforma,"servicio"=>$servicio]);
+    }
+
+
     public function edit($id)
     {
         //

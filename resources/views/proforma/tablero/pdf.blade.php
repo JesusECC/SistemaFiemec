@@ -274,11 +274,10 @@ border-collapse: collapse;
         <div><span style="color: black !important;font-weight: bold;">REPRESENTANTE :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$td->nombre_RE .' | Tlf: '.$td->telefonoRE.' / '.$td->CelularRE}}</span></div>
       </div>
     </div>
-      <div id="project" class="clearfix">
+    <div id="project" class="clearfix">
         <div><span style="color: black !important;font-weight: bold;">CLIENTE :</span> <span class="cliente" style="font-size: 11px !important;color: black">{{$td->nombres_Rs.' '.$td->paterno.' '.$td->materno}}</span></div>
         <div><span style="color: black !important;font-weight: bold;">RUC / DNI :</span> <span style="font-size: 11px !important;color: black">{{$td->nro_documento}}</span></div>
         <div><span style="color: black !important;font-weight: bold;">DIRECCIÓN :</span> <span class="direccion" style="font-size: 11px !important;color: black">{{$td->direccion}}</span> </div>
-      </div>
     </div>
   </header> 
   <main>
@@ -300,7 +299,7 @@ border-collapse: collapse;
                     <th class="principal" style="width: 460px !important">Producto</th>
                     <th class="principal" >Cant. </th>
                     <th class="principal" >Precio</th>
-                    <th class="principal" >Desc. </th>
+                    <th class="principal" >Desc. % </th>
                     <th class="principal" >Valor V.</th>
                   </tr>
                 </thead>
@@ -326,9 +325,9 @@ border-collapse: collapse;
                 </tbody>
                 <tfoot>
                     <tr style="font-weight: bold;">
-                      <td colspan="5" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
-                      <td colspan="1" style="border:1px solid #323639; ">Subtotal</td>
-                      <td align="center" style="border: 1px solid #323639"> S/.{{$sub}}</td>
+                      <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
+                      <td colspan="2" style="border:1px solid #323639; ">Subtotal</td>
+                      <td colspan="2" align="center" style="border: 1px solid #323639"> S/.{{$sub}}</td>
                     </tr>
 
                 </tfoot>
