@@ -8,9 +8,9 @@
     <ol class="breadcrumb" style="margin-top: 55px;">
     	<li>
     		<a href="#">
-    			<i class="fas fa-dolly"></i> Empleados</a>
+    			<i class="fas fa-dolly"></i> Marcas</a>
     	</li>
-    	<li class="active">Lista Fiemec</li>
+    	<li class="active">Lista de Marcas</li>
     </ol>
 </section>
 <section class="content">
@@ -20,14 +20,19 @@
 				<div class="box-header with-border" style="padding: 10px !important">
 					<h4>
 						<strong style="font-weight: 400">
-							<i class="fas fa-list-ul"></i> Listado De Empleados Fiemec
+							<i class="fas fa-list-ul"></i> Listado De Marcas
 						</strong>
 					</h4>
 					<div class="ibox-title-buttons pull-right">
-						<a href="{{route('marca-create')}}" style="text-decoration: none !important">
+						<a href="{{url('proforma/marca/create')}}" style="text-decoration: none !important">
 							<button class="btn btn-block btn-success" style="background-color: #18A689 !important;">
-								<i class="fas fa-plus-circle"></i> Nuevo Empleado
+								<i class="fas fa-plus-circle"></i> Nueva Marca
 							</button></a>
+							<a href="{{url('proforma/familia/create')}}" style="text-decoration: none !important">
+							<button class="btn btn-block btn-success" style="margin-top: 15px">
+								<i class="fas fa-plus-circle"></i>Asignar Familias
+							</button></a>
+
 					</div>
 				</div>
                 <!-- /.box-header -->
@@ -36,10 +41,7 @@
 				       <thead>
 				            <tr>
 				                <th>Marca</th>
-				                 <th>Familia</th>
-				                 <th>Descuento</th>
-				                 
-				               
+                                <th>Opciones</th>
 				            </tr>
 				        </thead>
 				        <tbody>
@@ -48,16 +50,12 @@
 				        		<td>
 				        			{{$m->nombre_proveedor}}
 				        		</td>
-                               <td>
-				        			{{$m->nombre_familia}}
-				        		</td>
-				        		 <td>
-				        			{{$m->descuento_familia}}
-				        		</td>
+                               
 				       
 				        		<td align="center">
 				      
-									<a href="{{route('marca-edit',$m->idMarca)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
+									<a href="{{URL::action('ControllerMarca@edit',$m->idMarca)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Marca"></i> </a>
+									<a href="" data-target="#modal-delete-{{$m->idMarca}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Marca"><i class="fas fa-trash-alt"></i> </a>
 									
 								</td>
                             </tr>

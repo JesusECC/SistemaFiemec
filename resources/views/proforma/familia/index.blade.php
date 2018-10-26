@@ -1,52 +1,82 @@
 @extends ('layouts.admin')
 @section ('contenido')
-<div class='col-lg-8 col-sm-8 col-xs-12'>
-	<h3> Tipo de Cambio <a href="familias/create"> <button class="btn btn-success">Nuevo</button></a></h3></h3>
-	
-	@include('proforma.familia.search')
-</div>
-<div class='row'>
-	<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-		<div class="table-responsive">
-			<table class=" table table-striped table-bordered table-condensed table-hover">
-				<thead>
-					
-					
-					<th>Nombre</th>
-					<th>Valor de Descuento</th>
-					
-                    
-	              		
-				</thead>
+<section class="content-header">
+	<h1 style="margin-top: 55px;">
+		Panel de Administrador
+		<small>Version 2.3.0</small>
+    </h1>
+    <ol class="breadcrumb" style="margin-top: 55px;">
+    	<li>
+    		<a href="#">
+    			<i class="fas fa-dolly"></i> Familia</a>
+    	</li>
+    	<li class="active">Lista Familia</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header with-border" style="padding: 10px !important">
+					<h4>
+						<strong style="font-weight: 400">
+							<i class="fas fa-list-ul"></i> Lista de Familias
+						</strong>
+					</h4>
+					<div class="ibox-title-buttons pull-right">
+						<a href="{{url('proforma/familia/create')}}" style="text-decoration: none !important">
+							<button class="btn btn-block btn-success" style="background-color: #18A689 !important;">
+								<i class="fas fa-plus-circle"></i> Nuevo de Familia
+							</button></a>
+					</div>
+				</div>
+                <!-- /.box-header -->
+				<div class="box-body">
+					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%;font-size: 11px !important">
+				       <thead>
+				            <tr>
+				            	<th>Marca</th>
+				                <th>Nombre</th>
+				                <th>Descuento</th>
+				                <th>Opciones</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				        	@foreach($familias as $fa)
+				        	<tr>
+				        		<td>
+				        			{{$fa->nombre_proveedor}}
+				        		</td>
+				        		<td>
+				        			{{$fa->nombre_familia}}
+				        		</td>
+				        		<td>
+				        			{{$fa->descuento_familia}}
 
-	
-				@foreach ($familias as $fa)
-				
-				<tr>
-
-					
-					
-					<td>{{$fa->nombre_familia}}</td>
-					
-					<td>{{$fa->descuento_familia}}%</td>
-					
-					
-					
-					
-					<td>
-					<a href="{{URL::action('ControllerFamilia@edit',$fa->idFamilia)}}"><button class="btn btn-info">editar</button>
-					</a>
-					<a href="" data-target="#modal-delete-{{$fa->idFamilia}}" data-toggle="modal"><button class="btn btn-danger">eliminar</button></a>
-					</td>
-					
-				</tr>
-				@include('proforma.familia.modal')
-             @endforeach
-			</table>
-		</div>
-		{{$familias->render()}}
-	</div>
-</div>
-
+				        		</td>
+				        		
+				        	
+				        		</td>
+		<td align="center">
+		    <a href="{{URL::action('ControllerFamilia@edit',$fa->idFamilia)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> 
+		    </a>
+									
+			<a href="" data-target="#modal-delete-{{$fa->idFamilia}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> 
+			</a>
+		</td>
+							</tr>
+							@include('proforma.familia.modal')
+							
+							@endforeach
+				        </tbody>
+				        
+    				</table>
+    				{{$familias->render()}}
+				</div>
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+</section><!-- /.content -->
 @endsection
+
 

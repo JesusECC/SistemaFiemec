@@ -36,18 +36,16 @@
 					            </div>
 					            <div class="ibox-content no-padding">
 					                <div class="list-group">
-					                    <a class="list-group-item" href="lista_tm_cajas.php">
+					                    <a class="list-group-item" href="{{url('proforma/marca')}}">
 					                        <h4 class="list-group-item-heading">Configuración Marca</h4>
 					                        <p class="list-group-item-text">Creación, modificación.</p>
 					                    </a>
-					                    <a class="list-group-item" href="lista_tm_almacenes.php">
-					                        <h4 class="list-group-item-heading">Configuración Descuento</h4>
+					                    <a class="list-group-item" href="{{url('proforma/familia')}}">
+					                        <h4 class="list-group-item-heading">Configuración Familia y Descuento</h4>
 					                        <p class="list-group-item-text">Creación, modificación.</p>
 					                    </a>
-					                    <a class="list-group-item" href="lista_tm_mesas.php">
-					                        <h4 class="list-group-item-heading">Configuración Familia</h4>
-					                        <p class="list-group-item-text">Creación, modificación.</p>
-					                    </a>
+					                    
+					                    
 					                    <a class="list-group-item" href="{{url('proforma/config')}}">
 					                        <h4 class="list-group-item-heading">Configuración Tipo Cambio</h4>
 					                        <p class="list-group-item-text">Creación, modificación.</p>

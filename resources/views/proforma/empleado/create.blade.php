@@ -64,7 +64,7 @@
                              <div class="col-sm-4">
                                   <div class="form-group">
                                    <label for="nombres">Nombres</label>
-                                        <input type="text" name="nombres" id="nombre" class="form-control" placeholder="Ingrese Nombres"> 
+                                        <input type="text" name="nombres_Rs" id="nombre" class="form-control" placeholder="Ingrese Nombres"> 
                                    </div>                                                  
                              </div>
                              

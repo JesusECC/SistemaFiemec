@@ -46,9 +46,12 @@ class ControllerProducto extends Controller
        $familia=db::table('Familia')
        ->where('estado','=','activo')
        ->get();
+       $marca=db::table('Marca')
+        ->where('estadoMA','=',1)
+        ->get();
 
 
-        return view('proforma.producto.create',["familia"=>$familia]);
+        return view('proforma.producto.create',["marca"=>$marca,"familia"=>$familia]);
     }
 
     

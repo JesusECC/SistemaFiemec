@@ -64,8 +64,10 @@
 				        					</button>
 				        					<ul class="dropdown-menu pull-right" role="menu">
 				        						<li>
+				        							
 				        							<a target="_blank" href="{{URL::action('ControllerProformaTableros@pdf',$prof->idProforma)}}"><i class="far fa-file-pdf"></i> PDF Soles</a>
-				        							<a target="_blank" href="{{URL::action('ControllerProformaTableros@pdf2',$prof->idProforma)}}"> <i class="far fa-file-pdf"></i> PDF Dolares</a>
+				        							<a target="_blank" href="{{URL::action('ControllerProformaTableros@pdf2',$prof->idProforma)}}"> <i class="far fa-file-pdf"></i> PDF Tipo de Cambio</a>
+				        							<a target="_blank" href="{{URL::action('ControllerProformaTableros@pdf3',$prof->idProforma)}}"> <i class="far fa-file-pdf"></i> PDF sin Precio Unitario</a>
 				        						</li>
 				        					</ul>
 				        				</div>

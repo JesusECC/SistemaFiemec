@@ -45,7 +45,7 @@
 									</div>-->
 								</div>
 								<div class="box-body">
-									<img src="{{asset('fotos/productos/'.$pro->foto)}}" ">
+									<img src="{{asset('img/'.$pro->foto)}}"  alt="180px" width="180px">
 									<br>
 									<div class="row">
 										<div class="col-sm-6">
