@@ -56,6 +56,7 @@ class ControllerProformaServicio extends Controller
         ->distinct()
         ->select('idTarea','nombre_tarea as tarea')
         ->groupBy('idTarea','nombre_tarea')
+        ->where('estado','=',1)
         ->get();
 
         $clientes=DB::table('Cliente_Proveedor as cp')
