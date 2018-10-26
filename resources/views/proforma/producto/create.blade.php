@@ -55,7 +55,7 @@
 												<select id="a" name="marca_producto" class="form-control">
 												 <option value="" disabled selected >Selecione Tipo de Producto</option>
 												<option value="CABB">ABB</option>
-												<option value="Cschneider">Schneider</option>
+												<option value="CSHE">Schneider</option>
 												<option value="Bandejas">Bandejas</option>
 												<option value="Tableros">Tableros</option>
 												<option value="Accesorios">Accesorios</option>
@@ -103,15 +103,18 @@
 											</div>												
 										</div>
 										<div class="col-sm-4">
-											<div class="form-group">
-												   <select id="g" name="marca_producto" class="form-control" placeholder="ingresa tipo producto" >
-												     <option value="" disabled selected>Seleccione Marca</option>
-												    <option value="FIEMEC">FIEMEC</option>
-													<option value="ABB">ABB</option>
-													<option value="Schneider">Schneider</option>
-												</select>													
-											</div>
-										</div>
+
+                                      <div class="form-group label-floating">                                       
+                                      <select required name="idFamilia" class="form-control selectpicker" id="b" data-live-search="true">
+
+                                 <option value="" disabled selected>Seleccione Marca</option>
+                                      @foreach($marca as $fa)
+                                               
+                                <option value="{{$fa->idMarca}}_{{$fa->nombre_proveedor}}">{{$fa->nombre_proveedor}}</option>
+                                               @endforeach  
+                                           </select>
+                                        </div> 
+                                    </div>
 									</div>
 									<div class="row">
 										<div class="col-sm-4">

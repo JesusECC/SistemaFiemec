@@ -50,13 +50,13 @@ class ControllerProformaTableros extends Controller
         ->get();
         
         $monedas=DB::table('Tipo_moneda')
-        ->where('estado','=','activo')
+        ->where('estado','=',1)
         ->get();
 
-         $representante=DB::table('Cliente_Representante')
+        $representante=DB::table('Cliente_Representante')
          ->where('estadoCE','=',1)
           ->get();
-
+          
         $clientes=DB::table('Cliente_Proveedor as cp')
          ->select('cp.idCliente','cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
         ->where('estado','=',1)
