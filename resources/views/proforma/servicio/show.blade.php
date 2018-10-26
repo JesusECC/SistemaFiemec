@@ -123,11 +123,10 @@
                             @if($s->nombre_servicio==$p->nombre_servicio)
                             <tr role="row" class="odd">
                               <td align="center">{{$i++}}</td>
-                              <td align="center">{{ $p->descripcion_tarea}}</td>
+                              <td align="center">{{ $p->nombre_tarea}}</td>
                               <td align="center" >{{$p->descuento}} % </td>
                             </tr>
-                          {{$sub+=($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}
-                          {{$igv=$p->igv}}
+                         
                             @endif
                           @endforeach
                           </tbody>
@@ -160,7 +159,7 @@
               <div class="col-sm-9" style="color: white">
                 <p style="color: black !important;">Forma de:  {{$td->forma_de}}</p>
                 <p style="color: black !important;">Plazo de Oferta:  {{$td->plazo_oferta}}</p>
-                <p style="color: black !important;">Observaciones:  {{$td->observacion_condicion}}</p>
+                <p style="color: black !important;">Observaciones:  {{$td->observacion_proforma}}</p>
                 <p style="color: black !important;">Realizado por : {{$td->nameE}}</p>
               </div> 
               <div class="col-sm-3">
