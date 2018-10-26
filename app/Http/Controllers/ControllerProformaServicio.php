@@ -49,7 +49,7 @@ class ControllerProformaServicio extends Controller
         ->get();
         
         $monedas=DB::table('Tipo_moneda')
-        ->where('estado','=','activo')
+        ->where('estado','=',1)
         ->get();
         
         $servicios=DB::table('Tarea')
@@ -59,10 +59,11 @@ class ControllerProformaServicio extends Controller
         ->get();
 
         $clientes=DB::table('Cliente_Proveedor as cp')
-         ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
+         ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno','cp.Direccion','cp.Departamento','cp.Distrito','cp.nro_documento')
         ->where('tipo_persona','=','Cliente persona')
         ->orwhere('tipo_persona','=','Cliente Empresa')
         ->get();
+        // dd($clientes);
         return view('proforma.servicio.create',["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"servicios"=>$servicios]);
     }
     public function buscarProducto(Request $request)
@@ -88,6 +89,10 @@ class ControllerProformaServicio extends Controller
             $tableros;
             $idTipoCam;
             $valorcambio;
+            $iduser;
+            $formaPago;
+            $plazoOferta;
+            $observaciones;
             // idcliente,total,idTipoCambio,valorTipoCambio
             foreach ($request->datos as $dato) {
                 $idclie=$dato['idcliente'];
@@ -95,11 +100,16 @@ class ControllerProformaServicio extends Controller
                 $idTipoCam=$dato['idTipoCambio'];
                 $valorcambio=$dato['valorTipoCambio'];
                 $valorv=$dato['subtotal'];
+                $iduser=$dato['iduser'];
+                $formaPago=$dato['formaPago'];
+                $plazoOferta=$dato['plazoOferta'];
+                $observaciones=$dato['observaciones'];
             }   
             $idProforma=DB::table('Proforma')->insertGetId(
                 ['idCliente'=>$idclie,
-                 'idEmpleado'=>2,           
+                 'idEmpleado'=>$iduser,           
                 'idTipo_moneda'=>$idTipoCam,
+                'cliente_empleado'=>3,
                 'serie_proforma'=>'PU365122019',
                 // 'fecha_hora'=>$mytime->toDateTimeString(),
                 'igv'=>'18',
@@ -110,12 +120,12 @@ class ControllerProformaServicio extends Controller
                 // 'descripcion_proforma'=>$request->,
                 'tipo_proforma'=>'Servicios',
                 // 'caracteristicas_proforma'=>$request->,
-                // 'forma_de'=>$request->,
+                'forma_de'=> $formaPago,
                 // 'plaza_fabricacion'=>$request->,
-                // 'plazo_oferta'=>$request->,
+                'plazo_oferta'=>$plazoOferta,
                 // 'garantia'=>$request->,
                 // 'observacion_condicion'=>$request->,
-                // 'observacion_proforma'=>$request->,
+                'observacion_proforma'=>$observaciones,
                 'estado'=>1
                 ]
             );
@@ -130,17 +140,17 @@ class ControllerProformaServicio extends Controller
                 foreach($request->filas as $fila){
                     if($fila['nomTablero']==$tablero['nombre']){
                         $DetalleServicio=new DetalleServicio;
-                        // $detalleProforma->idDetalle_proforma=$fila[''];  
-                        $DetalleServicio->idTarea=$fila['idTarea'];
+                        // $detalleProforma->idDetalle_proforma=$fila[''];                          
                         $DetalleServicio->idProforma=$idProforma;
                         $DetalleServicio->idServicios=$idServicio;
+                        $DetalleServicio->idTarea=$fila['idTarea'];
                         // $DetalleServicio->cantidad=$fila['cantidadP'];
                         // $DetalleServicio->precio_venta=$fila['prec_uniP'];  
                         // $DetalleServicio->texto_precio_venta=$fila[''];  
                         // $DetalleServicio->observacion_detalleP=$fila[''];    
                         // $DetalleServicio->descuento=$fila['descuentoP'];    
                         $DetalleServicio->descripcionDP=$fila['descripcionP'];
-                        $DetalleServicio->descripcionDP=1;
+                        $DetalleServicio->estadoDP=1;
                         
                         $DetalleServicio->save();
                     }
@@ -177,33 +187,33 @@ class ControllerProformaServicio extends Controller
         ->where('p.idProforma','=',$id)
         ->get();
         // proforma
-        'idProforma',
-        'idCliente',
-        'idEmpleado',
-        'idTipo_moneda',
-        'cliente_empleado',
-        'serie_proforma',
-        'fecha_hora',
-        'igv',
-        'subtotal',
-        'precio_total',
-        'tipocambio',
-        'simboloP',
-        'precio_totalC',
-        'descripcion_proforma',
-        'tipo_proforma',
-        'caracteristicas_proforma',
-        'forma_de',
-        'plaza_fabricacion',
-        'plazo_oferta',
-        'garantia',
-        'observacion_condicion',
-        'observacion_proforma',
-        'estado',
-        'idestado',
-        'incluye'
+        // 'idProforma',
+        // 'idCliente',
+        // 'idEmpleado',
+        // 'idTipo_moneda',
+        // 'cliente_empleado',
+        // 'serie_proforma',
+        // 'fecha_hora',
+        // 'igv',
+        // 'subtotal',
+        // 'precio_total',
+        // 'tipocambio',
+        // 'simboloP',
+        // 'precio_totalC',
+        // 'descripcion_proforma',
+        // 'tipo_proforma',
+        // 'caracteristicas_proforma',
+        // 'forma_de',
+        // 'plaza_fabricacion',
+        // 'plazo_oferta',
+        // 'garantia',
+        // 'observacion_condicion',
+        // 'observacion_proforma',
+        // 'estado',
+        // 'idestado',
+        // 'incluye'
 
-        $clientes',=DB::table('Cliente_Proveedor as cp')
+        $clientes=DB::table('Cliente_Proveedor as cp')
         ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
         ->where('tipo_persona','=','Cliente persona')
         ->orwhere('tipo_persona','=','Cliente Empresa')

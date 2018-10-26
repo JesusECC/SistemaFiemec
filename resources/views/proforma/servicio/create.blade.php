@@ -56,7 +56,7 @@
                                                 <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
                                                     <option value="">Seleccione Cliente</option>
                                                     @foreach($clientes as $cliente)
-                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                                                        <option value="{{$cliente->idCliente}}_{{$cliente->Direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombres_Rs }}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -311,7 +311,7 @@
                                                                     <label for="" class="control-label">
                                                                         Observaciones
                                                                     </label>
-                                                                    <textarea name="observacion_proforma" id="observacion" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                    <textarea name="observacion_proforma" id="observacion_proforma" cols="30" rows="2" class="form-control">Ninguna</textarea>
                                                                 </div>
                                                             </div>
 
@@ -385,6 +385,7 @@
     var idcliente;
     var totalt;
     var valorventa;
+    var iduser={!! Auth::user()->id !!}
 
     function MostrarCliente(){
         // cdireccion/cnro_documentoidClientes
@@ -401,7 +402,7 @@
         // descuentoP -->para emostar el 
     }*/
     function mostrarTipoCambio(){
-        // {{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}
+       
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         $("#simbolo").val(tipoCambio[2]);
         $("#valorcambio").val(tipoCambio[1]);
@@ -422,12 +423,15 @@
         var valorcambio=parseFloat(tipoCambio[1]);
         // var vVenta=$("#valorVenta").val();
         // var tl=$("#total").val();
+        var formaPago=$("#forma_de").val();
+        var plazoOferta=$("#plazo_oferta").val();
+        var observaciones=$("#observacion_proforma").val();
         console.log(totalt,idtipocam,valorcambio,idcliente);
         console.log("-------------");
         console.log(idtipocam,valorcambio,tablero,filaob);
         // console.log(tablero,filaob);
         if( totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,subtotal:subtotal,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio}];
+            var dat=[{idcliente:idcliente,iduser:iduser,subtotal:subtotal,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,formaPago:formaPago,plazoOferta:plazoOferta,observaciones:observaciones}];
             // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},

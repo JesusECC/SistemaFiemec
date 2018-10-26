@@ -363,6 +363,7 @@
     var idcliente;
     var totalt;
     var valorventa;
+    var iduser={!! Auth::user()->id !!}
 
     function MostrarCliente(){
         // cdireccion/cnro_documentoidClientes

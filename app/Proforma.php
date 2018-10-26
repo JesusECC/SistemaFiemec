@@ -15,6 +15,7 @@ class Proforma extends Model
     	'idCliente',
     	'idEmpleado',
         'idTipo_moneda',
+        'cliente_empleado',
     	'serie_proforma',
     	'num_proforma',
     	'fecha_hora',
@@ -34,7 +35,6 @@ class Proforma extends Model
         'observacion_condicion',
         'observacion_proforma',
         'estado',
-        'cliente_empleado',
         'incluye',
     	
    ];
