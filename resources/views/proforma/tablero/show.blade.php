@@ -10,7 +10,7 @@
         <a href="#">
           <i class="fas fa-clipboard-check"></i> Proforma</a>
       </li>
-      <li class="active"> Proformas Unitarias</li>
+      <li class="active"> Proformas Tablero</li>
     </ol>
 </section>
 <section class="content">
@@ -29,7 +29,7 @@
         <div class="box-header with-border" style="padding: 10px !important">
           <h4>
             <strong style="font-weight: 400">
-              <i class="fas fa-list-ul"></i> Proforma Unitaria
+              <i class="fas fa-list-ul"></i> Proforma Tablero
             </strong>
           </h4>
         </div><!-- /.box-header -->
