@@ -391,7 +391,7 @@ border-collapse: collapse;
       <h5 style="font-size: 10px !important;line-height:0.5px;">Forma de pago: {{$td->forma_de}}</h5>
       <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$td->plazo_oferta}}  </h5> 
       <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$td->observacion_proforma}} </h5>
-      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por: {{$td->nameE.' | Tlf: '.$td->telefono.' / '.$td->celular}}</h5>
+      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por: {{$td->nameE}}</h5>
     </div>
   </footer>
 </body>
