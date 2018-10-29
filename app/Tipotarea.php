@@ -15,6 +15,9 @@ class Tipotarea extends Model
     	
     	'nombre_tarea',
     	'descripcion_tarea',
+      'estado',
+      'precioT',
+      'item'
       
      
    ];

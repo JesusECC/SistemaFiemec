@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 use SistemaFiemec\Tipotarea;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-
-
-
 use Carbon\Carbon;
 use Response;
 use Illuminate\Support\Collection;
@@ -20,6 +17,17 @@ class ControllerTarea extends Controller
     {
 
     }
+    public function index(Request $request)
+    {
+    if($request)
+    {
+       $query=trim($request->get('searchText'));
+       $tareas=DB::table('Tarea')
+       ->where('estado','=',1)
+       ->paginate(10);
+       return view('proforma.tarea.index',["tareas"=>$tareas,"searchText"=>$query]);
+    }
+}
     
     public function create()
     {
@@ -30,17 +38,49 @@ class ControllerTarea extends Controller
  
  public function store(Request $request){
 
-//dd($request);        
-$nombre_tarea=$request->get('nombre_tarea');
 
-foreach ($nombre_tarea as $key) {
+$nombre_tarea=$request->get('nombre_tarea');
+$precioT=$request->get('precioT');
+
+//dd($nombre_tarea,$precioT);  
+
+$cont=0;
+
+while ($cont<count($nombre_tarea)) {
  
-	$detalle = new Tipotarea();
-	$detalle->nombre_tarea=$key;
-	$detalle->save();
+    $tarea = new Tipotarea();
+    $tarea->nombre_tarea=$nombre_tarea[$cont];
+    $tarea->precioT=$precioT[$cont];
+    $tarea->estado=1;
+    $tarea->save();
+
+    $cont=$cont+1;
 }
-         return Redirect::to('proforma/servicio/create');
+
+
+         return Redirect::to('proforma/tarea');
      }
+
+     public function edit()
+    {
+
+     return view("proforma.tarea.edit",["tarea"=>Tipotarea::findOrFail($id)]);
+
+    }
+ 
+ public function update(Request $request,$id){
+
+//dd($request);        
+
+
+    $tarea =Tipotarea::find($id);
+    $tarea->nombre_tarea=$request->get('nombre_tarea');
+    $tarea->precioT=$request->get('precioT');
+    $tarea->update();
+
+         return Redirect::to('proforma/tarea');
+     }
+          
           
 
 

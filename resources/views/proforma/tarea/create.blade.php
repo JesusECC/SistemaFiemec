@@ -30,14 +30,21 @@
                                         </label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <input type="text" id="pnombre_tarea" class="form-control" placeholder="Ingrese nueva tarea">
                                                     
                                                 
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input type="number" id="pprecioT" class="form-control" placeholder="Ingrese precio">
+                                                    
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
                                             <button type="button" id="bt_add" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
                                         </div>
                                     
@@ -57,12 +64,14 @@
             		<thead style="background-color:#A9D0F5">
             			<th>opciones</th>
             			<th>Tareas</th>
+                        <th>Precio</th>
             			
             		</thead>
             		<tfoot>
             			
             			<th></th>
             			<th></th>
+                        <th></th>
             			
             			
 
@@ -107,13 +116,13 @@ function agregar()
 {
     
     tarea=$("#pnombre_tarea").val();
+    precio=$("#pprecioT").val();
    
 
     if(tarea!="")
     {
        
-
-       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td> </tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="nombre_tarea[]" value="'+tarea+'">'+tarea+'</td> <td><input type="hidden" name="precioT[]" value="'+precio+'">'+precio+'</td></tr>';
        cont++;
        limpiar();
        evaluar();
