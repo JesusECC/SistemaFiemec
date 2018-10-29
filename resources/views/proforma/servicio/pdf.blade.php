@@ -1,7 +1,9 @@
+<!--pdf servicio-->
+
 <html>
 <head>
   <meta charset="UTF-8">
-  <title> </title>
+  <title>{{$td->serie_proforma}}  F000-{{$td->idProforma}}</title>
 </head>
 <style type="text/css"> 
   .clearfix:after 
@@ -19,14 +21,21 @@
   {
     border-radius: 5px;
     border: 1px inset black;
-    background-color:#1C4C6D;
+    background-color:#00709A;
     padding: 2.5px;
     margin-top: 6px;
     margin-bottom: 6px;
   }
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+
+position: relative;
+min-height: 1px;
+padding-right: 15px;
+padding-left: 15px;
+
+}
 .datos
 {
-  margin-top: 10px;
   display: table;
   height: auto;
   width: 100%;
@@ -39,18 +48,45 @@
 #company span {
   color: #5D6975;
   text-align: left;
-  width: 80px;
+  width: 110px;
   margin-right: 10px;
   display: inline-block;
-  font-size: 0.8em;
+  font-size: 9px;
 }
 #project span {
   color: #5D6975;
   text-align: left;
-  width: 80px;
+  width: 60px;
   margin-right: 10px;
   display: inline-block;
-  font-size: 0.8em;
+  font-size: 9px;
+}
+#project span.direccion
+{
+  color: #5D6975;
+  text-align: left;
+  width: 300px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 9px;
+}
+#project span.cliente
+{
+  color: #5D6975;
+  text-align: left;
+  width: 200px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 9px;
+}
+#company span.cliente
+{
+  color: #5D6975;
+  text-align: left;
+  width: 230px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 9px;
 }
 #project {
   float: left;
@@ -58,7 +94,7 @@
   width: 50%;
 }
     #main-container{
-        margin-top: 15px;
+        margin-top: 0px;
       }
 
 #project div,
@@ -71,136 +107,301 @@ table.principal{
     width: 100%;
 }
 
-th.principal, td.principal{
-    padding: 5px;
+th.principal{
+    padding: 2px;
+
+}
+th.principal
+{
+  font-size: 12px !important;
 }
 td.principal
 {
-    border-bottom:  1px solid #323639;
+    border-bottom:  1px solid #7D7D7D;
+    font-size: 11px !important;
 }
-table tbody tr:nth-child(2n-1) td {
-  background: #F5F5F5;
-} 
-table tfoot tr:nth-child(2n-1) td {
-  background: #F5F5F5;
-  }
+
 table tfoot td {
   background: #FFFFFF;
   border-bottom: none;
-  white-space: nowrap; 
   border-top: 1px solid #323639; 
-  padding: 5px;
+  padding: 2px;
+  font-size: 11px !important;
 }
 
 thead.principal{
-    background-color: #072F3E;
+    background-color: #7D7D7D;
     border-bottom: solid 5px #323639;
     color: white;
     text-align: center;
 }
 td.foot
 {
-      background-color: #072F3E;
+    background-color: #072F3E;
     border-bottom: solid 5px #323639;
     color: white;
     text-align: center;
 }
 footer {
-  color: #5D6975;
+  color: black;
   width: 100%;
-  height: 30px;
+  height: 82px !important;
   position: absolute;
   bottom: 0;
-  border-top: 1px solid #C1CED9;
-  padding: 8px 0;
-  text-align: center;
+  border-top: 1px dashed #C1CED9;
+  padding: 2px 0;
+ 
 }
+
+.box {
+position: relative;
+border-radius: 3px;
+background: #ffffff;
+border-top: 3px solid #d2d6de;
+margin-bottom: 20px;
+width: 100%;
+box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.box-header.with-border {
+
+border-bottom: 1px solid #f4f4f4;
+
+}
+.box-header {
+
+color: #444;
+display: block;
+padding: 20px;
+position: relative;
+
+}
+p {
+
+margin: 0 0 10px;
+
+}
+.box-body {
+
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+border-bottom-right-radius: 3px;
+border-bottom-left-radius: 3px;
+padding: 10px;
+
+}
+.row {
+
+margin-right: -20px;
+margin-left: -20px;
+
+}
+.col-xs-6 {
+
+width: 50%;
+
+}
+.col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+
+float: left;
+
+}
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+
+position: relative;
+min-height: 1px;
+padding-right: 15px;
+padding-left: 15px;
+
+}
+.lead {
+
+font-size: 21px;
+
+}
+.lead {
+
+margin-bottom: 20px;
+font-size: 16px;
+font-weight: 300;
+line-height: 1.4;
+
+}
+.table-responsive {
+
+min-height: .01%;
+overflow-x: auto;
+
+}
+.table {
+
+width: 100%;
+max-width: 100%;
+margin-bottom: 20px;
+
+}
+table {
+
+background-color: transparent;
+
+}
+table {
+
+border-spacing: 0;
+border-collapse: collapse;
+
+}
+
 </style>
 <body>
-  <header class="clearfix">  
-    <table width="100%" style="margin-top: -20px;"> 
+  <header class="clearfix" style="margin-top: -20px;margin-bottom: 20px">  
+    <table width="100%" > 
           <tr align="center" valign="middle"> 
             <th colspan="5" align="left">
-                <img src="img/img-pdf.png" alt="" >
+                <img src="img/LogoFinal24.png" alt="" width="230px">
             </th>
-            <th colspan="5" valign="middle" >
-                <img src="img/dir-pdf.png" alt="" >
+            <th colspan="5" align="right"  >
+                <img src="img/dir-pdf.png" alt="" width="200px">
             </th>
           </tr>
           <th colspan="10" class="cotizacion" align="center">
             <div class="proforma">
-           COTIZACIÓN N° {{$proforma->serie_proforma}}  F000-{{$proforma->idProforma}} 
-        </div>
-    </th>     
+           COTIZACIÓN N° {{$td->serie_proforma}}  F000-{{$td->idProforma}} 
+            </div>
+          </th>     
     </table>
-    <div class="datos"> 
+    <div class="datos" > 
       <div id="company">
-        <div><span>EMAIL</span> <a href="{{$proforma->email}}">{{$proforma->email}}</a></div>
-        <div><span>FECHA</span> {{$proforma->fecha_hora}}</div>
+        <div><span style="color: black !important;font-weight: bold;">EMAIL :</span> <span style="font-size: 11px !important;"><a href="{{$td->correo}}">{{$td->correo}}</a></span></div>
+        <div><span style="color: black !important;font-weight: bold;"> FECHA :</span> <span style="font-size: 11px !important;color: black">{{$td->fecha_hora}}</span></div>
         
       </div>
-      <div id="project" class="clearfix">
-        <div><span>CLIENTE</span> {{$proforma->nombre}}</div>
-        <div><span>DOCUMENTO</span> {{$proforma->ndoc}}</div>
-        <div><span>DIRECCIÓN</span> {{$proforma->direccion}}</div>
-      </div>
+    </div>
+    <div id="project" class="clearfix">
+        <div><span style="color: black !important;font-weight: bold;">CLIENTE :</span> <span class="cliente" style="font-size: 11px !important;color: black">{{$td->nombres_Rs.' '.$td->paterno.' '.$td->materno}}</span></div>
+        <div><span style="color: black !important;font-weight: bold;">RUC / DNI :</span> <span style="font-size: 11px !important;color: black">{{$td->nro_documento}}</span></div>
+        <div><span style="color: black !important;font-weight: bold;">DIRECCIÓN :</span> <span class="direccion" style="font-size: 11px !important;color: black">{{$td->direccion}}</span> </div>
     </div>
   </header> 
-  <main>
- 
-@php
-$tab=$tableros;
-$count=0;
-$xidt=[];
-$xnomtab=[];
-
-foreach($tableros as $t){
-  foreach($tab as $ta){
-    if($t->idProforma==$ta->idProforma)
-      {
-        $xidt[$count]=$t->idTableros;
-        $xnomtab[$count]=$t->nombre;
-      }
-    }
-    $count++;
-  }
- $idt=array_unique($x);
- $nomtab=array_unique($xnomtab);
- $bool=true;
- $val;
-@endphp
-
-@foreach($tableros as $ta)
-  @foreach($xi as $tx)
-  @if($bool==true)
-    {{$ta->nombre.' hola'}}
-    <br>
-    {{$bool==false}}
-  @endif
-    @if($ta->idTableros == $tx)
-      {{$ta->producto}}
-      <br>
-    @endif
+<main>
+<div class="col-xs-12">
+<table class="principal" >
+  <tr style="border-bottom: 2px solid #7D7D7D !important">
+    <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
+      Item
+    </td>
+    <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
+      Descripción
+    </td>
+    <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
+      
+    </td>
+  </tr>
+  @foreach($servicio as $s)
+  <tr>
+    <td colspan="3" style="background-color: #E5EAEA;border: 1px;font-size: 12px;text-align: center; ">
+      Servicio {{$s->nombre_servicio }}
+    </td>
+  </tr>
+  {{$i=1}}
+  {{$sub=0}}
+  {{$igv=0}}
+  {{$precio=0}}
+  @foreach($proforma as $p)
+    @if($s->nombre_servicio==$p->nombre_servicio)
+  <tr>
+    <td colspan="1" style="border: 1px solid black;font-size: 11px">
+      {{$i++}}
+    </td>
+    <td colspan="1" style="border: 1px solid black;font-size: 11px">
+      {{ $p->nombre_tarea }}
+    </td>
+    <td colspan="1" style="border: 1px solid black;font-size: 11px">
+    </td>
+  </tr>
+      @endif
+    @endforeach
+          <tr>
+            <td colspan="1"></td>
+            <td colspan="1" style="text-align: right;border-top: 1px solid black;font-size: 10px">
+                COSTO DIRECTO   
+            </td>
+            <td colspan="1" style="text-align: center;font-size: 11px;">
+               {{round($sub,2)}}
+            </td>
+          </tr>
   @endforeach
-  {{$bool=true}}
-@endforeach
+<tr>
+    <td colspan="3" style="color: white;height: 10px">espacio</td>
+</tr>
+<tr>
+  <td colspan="1">
+      NOTA
+    </td>
+    <td colspan="1" style="font-size: 10px">
+      NO ESTA CONSIDERADO, OTRO TRABAJO ADICIONAL QUE NO ESTE COOMPRENDIDO EN LA PRESENTE OFERTA NO ESTA CONSIDERADO PICADO DE OBSTRUCCIONES
+    </td>
+    <td colspan="1"></td>
+</tr>
+        {{$sub_tableros=0}}
+      {{$igv_tableros=0}}
+      {{$pt=0}}
+      @foreach($proforma as $p)
+        {{$sub_tableros=$p->subtotal}}
+        {{$igv_tableros=$p->igv}}
+        {{$pt=$p->precio_total}}
+      @endforeach
+  <tr>
+    <td colspan="1" style="border-top: 1px solid black">
+    </td>
+    <td colspan="1" style="text-align: right;border-top: 1px solid black;font-size: 10px">
+      SUBTOTAL S/.
+    </td>
+    <td colspan="1" style="text-align: center;font-size: 11px;border-top: 1px solid black"> 
+      {{$sub_tableros}}
+    </td>
+  </tr>
+  <tr>
+    <td colspan="1" >
+    </td>
+    <td colspan="1" style="text-align: right;font-size: 10px">
+      IGV % S/.
+    </td>
+    <td colspan="1" style="text-align: center;font-size: 11px"> 
+      {{round(($sub_tableros)*($igv_tableros/100),2)}} 
+    </td>
+  </tr>
+  <tr>
+    <td colspan="1" >
+    </td>
+    <td colspan="1" style="text-align: right;font-size: 10px">
+      TOTAL S/.
+    </td>
+    <td colspan="1" style="text-align: center;font-size: 11px"> 
+      {{round($pt,2)}}
+    </td>
+  </tr>
+</table>
+</div>
+</main>
+  <footer> 
+        <div style="width: 65%;float: initial;display: block;">
 
-
-
-    <h5 style="font-size: 12px !important;line-height:1px">Forma de pago: {{$proforma->forma_de}}</h5>
-    <h5 style="font-size: 12px !important;line-height:1px">Condición de venta: {{$proforma->observacion_condicion}} </h5>
-    <h5 style="font-size: 12px !important;line-height:1px">Plazo de oferta {{$proforma->plazo_oferta}}  </h5>
-    <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$proforma->name}}</h5>
-    <br>
-    <h4 style="font-size: 13px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
-     <h5 style="font-size: 11px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
-                        <h5 style="font-size: 11px !important;line-height:1px">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
-                        <h5 style="font-size: 11px !important;line-height:1px">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
-                        <h5 style="font-size: 11px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>
-
-  </main>
-  <footer>  
-    La factura fue creada en una computadora y es válida sin la firma y el sello
+          <h5 style="font-size: 8px !important;line-height:0.3cm;">Realizado por:{{$td->nameE}}</h5>
+          <h5 style="font-size: 8px !important;line-height:1px">Forma de pago: {{$td->forma_de}}</h5>
+          <h5 style="font-size: 8px !important;line-height:1px">Plazo de oferta {{$td->plazo_oferta}}  </h5>
+          <h5 style="font-size: 8px !important;line-height:10px">Condición de venta: {{$td->observacion_proforma}} </h5>
+    </div>
+<div style="width: 35%; float: right;display: block;">
+          <h4 style="font-size: 8px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: </h4>
+          <h4 style="font-size: 8px !important;line-height:1px">20546979611</h4>
+          <h5 style="font-size: 8px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584 </h5>
+          <h5 style="font-size: 8px !important;line-height:1px">BBVA Soles (CCI): 011-339-000100014584-95</h5>
+          <h5 style="font-size: 8px !important;line-height:1px">BCP Soles:  192-2324867-0-03  </h5>
+          <h5 style="font-size: 8px !important;line-height:1px">BCP Soles (CCI): 002192002324867003385</h5>
+          <h5 style="font-size: 8px !important;line-height:1px">BCP Dolares :   192-2288918-1-91  </h5>
+          <h5 style="font-size: 8px !important;line-height:1px">BCP Dolares (CCI): 00219200228891819137</h5>
+          <h5 style="font-size: 8px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>          
+        </div> 
   </footer>
 </body>
 </html>

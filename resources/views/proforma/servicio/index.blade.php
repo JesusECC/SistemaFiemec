@@ -54,11 +54,10 @@
 				        			{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}
 				        		</td>
 				        		<td>
-<<<<<<< HEAD
 									{{$prof->nombres_Rs}}
-=======
+
 									{{$prof->nombres_Rs.''.$prof->paterno.''.$prof->materno}}
->>>>>>> bac668108298274b402aadcb78dbbf25942341bf
+
 				        		</td>
 				        		<td align="center" style="width: 220px">
 				        			<div class="pull-right box-tools">
@@ -72,8 +71,7 @@
 				        					</button>
 				        					<ul class="dropdown-menu pull-right" role="menu">
 				        						<li>
-				        							<a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf',$prof->idProforma)}}"><i class="far fa-file-pdf"></i> PDF Soles</a>
-				        							<a target="_blank" href="{{URL::action('ControllerProformaUnitaria@pdf2',$prof->idProforma)}}"> <i class="far fa-file-pdf"></i> PDF Dolares</a>
+				        							<a target="_blank" href="{{URL::action('ControllerProformaServicio@pdf',$prof->idProforma)}}"><i class="far fa-file-pdf"></i> PDF Soles</a>
 				        						</li>
 				        					</ul>
 				        				</div>
