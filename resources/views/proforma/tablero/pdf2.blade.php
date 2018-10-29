@@ -25,12 +25,10 @@
     margin-bottom: 6px;
   }
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-
 position: relative;
 min-height: 1px;
 padding-right: 15px;
 padding-left: 15px;
-
 }
 .datos
 {
@@ -42,7 +40,6 @@ padding-left: 15px;
   float: right;
   width: 50%;
 }
-
 #company span {
   color: #5D6975;
   text-align: left;
@@ -94,7 +91,6 @@ padding-left: 15px;
     #main-container{
         margin-top: 0px;
       }
-
 #project div,
 #company div {       
 }
@@ -104,10 +100,8 @@ table.principal{
     border-collapse: collapse;
     width: 100%;
 }
-
 th.principal{
     padding: 2px;
-
 }
 th.principal
 {
@@ -118,7 +112,6 @@ td.principal
     border-bottom:  1px solid #7D7D7D;
     font-size: 11px !important;
 }
-
 table tfoot td {
   background: #FFFFFF;
   border-bottom: none;
@@ -126,7 +119,6 @@ table tfoot td {
   padding: 2px;
   font-size: 11px !important;
 }
-
 thead.principal{
     background-color: #7D7D7D;
     border-bottom: solid 5px #323639;
@@ -150,7 +142,6 @@ footer {
   padding: 2px 0;
  
 }
-
 .box {
 position: relative;
 border-radius: 3px;
@@ -161,92 +152,64 @@ width: 100%;
 box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .box-header.with-border {
-
 border-bottom: 1px solid #f4f4f4;
-
 }
 .box-header {
-
 color: #444;
 display: block;
 padding: 20px;
 position: relative;
-
 }
 p {
-
 margin: 0 0 10px;
-
 }
 .box-body {
-
 border-top-left-radius: 0;
 border-top-right-radius: 0;
 border-bottom-right-radius: 3px;
 border-bottom-left-radius: 3px;
 padding: 10px;
-
 }
 .row {
-
 margin-right: -20px;
 margin-left: -20px;
-
 }
 .col-xs-6 {
-
 width: 50%;
-
 }
 .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-
 float: left;
-
 }
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-
 position: relative;
 min-height: 1px;
 padding-right: 15px;
 padding-left: 15px;
-
 }
 .lead {
-
 font-size: 21px;
-
 }
 .lead {
-
 margin-bottom: 20px;
 font-size: 16px;
 font-weight: 300;
 line-height: 1.4;
-
 }
 .table-responsive {
-
 min-height: .01%;
 overflow-x: auto;
-
 }
 .table {
-
 width: 100%;
 max-width: 100%;
 margin-bottom: 20px;
-
 }
 table {
-
 background-color: transparent;
-
 }
 table {
-
 border-spacing: 0;
 border-collapse: collapse;
-
 }
 </style>
 <body>
@@ -309,13 +272,13 @@ border-collapse: collapse;
                 {{$precio=0}}
                 @foreach($proforma as $p)
                   @if($t->nombre_tablero==$p->nombre_tablero)
-                  {{$precio= (round((($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)))/$p->cambioDPT,2))}}
+                  {{$precio= (round((($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)))/$p->tipocambio,2))}}
                   <tr class="principal"> 
                     <td class="principal" style="border:1px solid #323639;text-align: center !important;" >{{$i++}}</td>
                     <td class="principal" width="10" style="border:1px solid #323639;text-align: center !important;"> {{$p->codigo_producto}}</td>
                     <td class="principal" style="border:1px solid #323639;text-align: center !important;" > {{ $p->producto.' | '.$p->descripcionDP }}</td>
                     <td class="principal" width="10" style="border:1px solid #323639;text-align: center !important;">{{$p->cantidad}}</td>
-                    <td class="principal" style="width: 60px !important;border:1px solid #323639;text-align: center;">{{$p->simboloDPT}} {{round($p->precio_venta/$p->cambioDPT,2)}}</td>
+                    <td class="principal" style="width: 60px !important;border:1px solid #323639;text-align: center;">{{$p->simboloDPT}} {{round($p->precio_venta/$p->tipocambio,2)}}</td>
                     <td class="principal" align="center" width="10" style="border:1px solid #323639;text-align: center;">{{$p->descuento}} % </td>
                     <td class="principal" align="center" width="30" style="border:1px solid #323639;text-align: center;">{{$p->simboloDPT}} {{$precio}}</td>
                   </tr>

@@ -98,6 +98,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('servicios/edit/{id}',['as'=>'servicios-edit','uses'=>'ControllerProformaServicio@edit']);
     Route::get('servicios/pdf/{idProforma}','ControllerProformaServicio@pdf');
     Route::get('servicios/pdf2/{idProforma}','ControllerProformaServicio@pdf2');
+    Route::delete('servicios/eliminar/{id}',['as'=>'servicios-eliminar','uses'=>'ControllerProformaServicio@destroy']);
 
     //Se crea rutas cliente
     Route::get('cliente',['as'=>'clientes','uses'=>'ControllerClientes@index']);

@@ -421,6 +421,7 @@
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         var idtipocam=tipoCambio[0];
         var valorcambio=parseFloat(tipoCambio[1]);
+        var simcam=tipoCambio[2];
         // var vVenta=$("#valorVenta").val();
         // var tl=$("#total").val();
         var formaPago=$("#forma_de").val();
@@ -431,7 +432,7 @@
         console.log(idtipocam,valorcambio,tablero,filaob);
         // console.log(tablero,filaob);
         if( totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,iduser:iduser,subtotal:subtotal,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,formaPago:formaPago,plazoOferta:plazoOferta,observaciones:observaciones}];
+            var dat=[{idcliente:idcliente,iduser:iduser,subtotal:subtotal,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,simbolo:$simcam,formaPago:formaPago,plazoOferta:plazoOferta,observaciones:observaciones}];
             // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
