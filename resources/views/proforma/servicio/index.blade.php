@@ -54,7 +54,11 @@
 				        			{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}
 				        		</td>
 				        		<td>
+<<<<<<< HEAD
 									{{$prof->nombres_Rs}}
+=======
+									{{$prof->nombres_Rs.''.$prof->paterno.''.$prof->materno}}
+>>>>>>> bac668108298274b402aadcb78dbbf25942341bf
 				        		</td>
 				        		<td align="center" style="width: 220px">
 				        			<div class="pull-right box-tools">

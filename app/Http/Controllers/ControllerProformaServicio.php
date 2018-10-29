@@ -178,23 +178,23 @@ public function show($id)
         ->where('idProforma','=',$id)
         ->first();
 
-        $tablero=DB::table('Servicios as s')
+        $servicio=DB::table('Servicios as s')
         ->distinct()
-        ->join('Detalle_proforma_servicios as dps','s.idServicios','=','dpt.idServicios')
+        ->join('Detalle_proforma_servicios as dps','s.idServicios','=','dps.idServicios')
         ->where('dps.idProforma','=',$id)
         ->get(['s.nombre_servicio','estadoT']);
 
         $proforma=DB::table('Proforma as p')
         ->join('Detalle_proforma_servicios as dePS','p.idProforma','=','dePS.idProforma')
-        ->join('Producto as ta','ta.idProducto','=','dePS.idProducto')
-       ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
-        ->join('idServicios as s','s.idServicios','=','dePS.idServicios')
+        ->join('Tarea as pd','pd.idTarea','=','dePS.idTarea')
+        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+        ->join('Servicios as s','s.idServicios','=','dePS.idServicios')
         
-        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(ta.codigo_producto," ",ta.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT','dePS.idDetalle_proforma','dePS.idProducto','dePS.idProforma','dePS.idServicios','dePS.cantidad','dePS.precio_venta','dePS.texto_precio_venta','dePS.descuento','dePS.descripcionDP','dePS.estadoDP')
+        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.descripcion_tarea','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT','dePS.idDetalle_proforma','dePS.idTarea','dePS.idProforma','dePS.idServicios','dePS.texto_precio_venta','dePS.descuento','dePS.descripcionDP','dePS.estadoDP','pd.nombre_tarea','s.costo')
         ->where('p.idProforma','=',$id)
         ->get();
 
-        // dd($tablero,$proforma,$p);
+        //dd($servicio,$proforma,$td,$id);
 
         return view("proforma.servicio.show",['td'=>$td,'proforma'=>$proforma,"servicio"=>$servicio]);
     }
