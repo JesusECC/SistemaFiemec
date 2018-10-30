@@ -161,7 +161,7 @@
                                                 <label for="" class="control-label">Tarea</label>
                                                 <select name="pidTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Tarea</option>
-                                                    @foreach($tareas as $ta)
+                                                    @foreach($tarea as $ta)
                                                     <option value="{{ $ta->idTarea }}_{{ $ta->nombre_tarea }}_{{ $ta->precioT }}">{{$ta->nombre_tarea}}</option>
                                                     @endforeach
                                                 </select> 
@@ -169,7 +169,7 @@
                                         </div>
                                         <div class="col-sm-2" style="margin-top:20px">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Unidades</label>
+                                                <label class="control-label">Unidadess</label>
                                                 <input type="text" id="pdescuento" class="form-control" name="pdescuento" step="any" >
                                             </div>
                                         </div>
@@ -472,12 +472,11 @@
         var simbolo=$("#simbolo").val();
         var vVenta=$("#valorVenta").val();        
         var tl=$("#total").val();
-         var forma=$("#forma_de").val();
+        var forma=$("#forma_de").val();
         var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion").val();
-        console.log(tablero,filaob);
-        console.log(iduser);
+        
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
             var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,simbolo:simbolo,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,userid:iduser,clienteemp:clienteemp}];
             // console.log(dat,tablero,filaob);
@@ -599,20 +598,20 @@
         
     }
     function agregarProductosTablero(){    
-        Producto=document.getElementById('pidTarea').value.split('_');
-        var idProd=Producto[0];
-        var pname=Producto[1];
+        Tarea=document.getElementById('pidTarea').value.split('_');
+        var idTa=Tarea[0];
+        var tname=Tarea[1];
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var pit=$('#pitem').val();
         var pcant=$('#Pcantidad').val();
         var sel=$('#prod-selec').val();
         var descuento=$('#pdescuento').val();
-        // console.log(descuento);
+        
         nomTablero=$('#prod-selec').val();
         var filas;
-        // console.log(idProd,pname);
-        if(tablero.length>=0 && nomTablero!="" && pit!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!="" ){
+        
+        if(tablero.length>=0 && nomTablero!="" && pit!="" && idTa!="" && tname!="" && puni!="" && pcant!="" && nomTablero!="" ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
@@ -622,7 +621,7 @@
                         bool=true;
                         for (const fil in filaob) {
                             if (filaob.hasOwnProperty(fil)) {
-                                if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['nomTablero']==tablero[key]['nombre']){
+                                if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idTarea']==idTa && filaob[fil]['nomTablero']==tablero[key]['nombre']){
 
                                     var su=parseInt(pcant);
                                     var des=descuento;
@@ -638,7 +637,7 @@
                         }
                         if(boolfila==false){
                           // console.log("produc nuevoo",contp); 
-                            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:1,itemP:pit,fila:""};
+                            var dat={idTarea:idTa,tarea:tname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:1,itemP:pit,fila:""};
                             filaob.push(dat);
                             fila();
                             contp++;
@@ -679,7 +678,7 @@
                                         '</td>'+
 
                                         '<td style="color:black !important;"> '+ 
-                                            '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+                                            '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idTarea']+'">'+filaob[fila]['tarea']+
                                         '</td>'+
                                         '<td style="color:black !important;"> '+ 
                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+

@@ -53,7 +53,15 @@ class ControllerProformaServicio extends Controller
         $monedas=DB::table('Tipo_moneda')
         ->where('estado','=',1)
         ->get();
-        
+
+        $representante=DB::table('Cliente_Representante')
+        ->where('estadoCE','=',1)
+        ->get();
+
+        $tarea=DB::table('Tarea')
+        ->where('estado','=',1)
+        ->get();
+
         $servicios=DB::table('Tarea')
         ->distinct()
         ->select('idTarea','nombre_tarea as tarea')
@@ -62,12 +70,12 @@ class ControllerProformaServicio extends Controller
         ->get();
 
         $clientes=DB::table('Cliente_Proveedor as cp')
-         ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno','cp.Direccion','cp.Departamento','cp.Distrito','cp.nro_documento')
+         ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,cp.Departamento,cp.Distrito) as direccion'),'cp.nro_documento')
         ->where('tipo_persona','=','Cliente persona')
         ->orwhere('tipo_persona','=','Cliente Empresa')
         ->get();
         // dd($clientes);
-        return view('proforma.servicio.create',["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"servicios"=>$servicios]);
+        return view('proforma.servicio.create',["tarea"=>$tarea,"representante"=>$representante,"productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"servicios"=>$servicios]);
     }
     public function buscarProducto(Request $request)
     {
@@ -103,11 +111,11 @@ class ControllerProformaServicio extends Controller
                 $tota=$dato['total'];
                 $idTipoCam=$dato['idTipoCambio'];
                 $valorcambio=$dato['valorTipoCambio'];
-                $valorv=$dato['subtotal'];
-                $iduser=$dato['iduser'];
-                $formaPago=$dato['formaPago'];
-                $plazoOferta=$dato['plazoOferta'];
-                $observaciones=$dato['observaciones'];
+                $valorv=$dato['valorVenta'];
+                $iduser=$dato['userid'];
+                $formaPago=$dato['forma'];
+                $plazoOferta=$dato['plazo'];
+                $observaciones=$dato['observacion'];
                 $simbolo=$dato['simbolo'];
             }
             $idProforma=DB::table('Proforma')->insertGetId(
@@ -135,14 +143,10 @@ class ControllerProformaServicio extends Controller
                 'estado'=>1
                 ]
             );
-            foreach ($request->Servicios as $tablero) {
+            foreach ($request->tableros as $tablero) {
                 $nombre=$tablero['nombre'];
-                $idServicio=DB::table('Servicios')->insertGetId(
-                    [
-                        'nombre_servicio'=>$nombre,
-                        'estadoT'=>1 //los estados permitidos son 0 eliminacion logica, 1 activo, 2 nuevo en editar  
-                    ]
-                );
+                $est=$tablero['estado'];
+                $idServicio=DB::table('Servicios')->insertGetId(['nombre_servicio'=>$nombre,'estadoT'=>$est,]);
                 foreach($request->filas as $fila){
                     if($fila['nomTablero']==$tablero['nombre']){
                         $DetalleServicio=new DetalleServicio;
@@ -150,11 +154,12 @@ class ControllerProformaServicio extends Controller
                         $DetalleServicio->idProforma=$idProforma;
                         $DetalleServicio->idServicios=$idServicio;
                         $DetalleServicio->idTarea=$fila['idTarea'];
-                        // $DetalleServicio->cantidad=$fila['cantidadP'];
-                        // $DetalleServicio->precio_venta=$fila['prec_uniP'];  
+                        $DetalleServicio->cantidad=$fila['cantidadP'];
+                        $DetalleServicio->item=$fila['itemP'];
+                        $DetalleServicio->precio_venta=$fila['prec_uniP'];  
                         // $DetalleServicio->texto_precio_venta=$fila[''];  
                         // $DetalleServicio->observacion_detalleP=$fila[''];    
-                        // $DetalleServicio->descuento=$fila['descuentoP'];    
+                        $DetalleServicio->descuento=$fila['descuentoP'];    
                         $DetalleServicio->descripcionDP=$fila['descripcionP'];
                         $DetalleServicio->estadoDP=1;
                         

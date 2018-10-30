@@ -18,6 +18,9 @@ class DetalleServicio extends Model
         'idServicios',
         'idTarea',
         'texto_precio_venta',
+        'cantidad',
+        'descuento',
+        'item',
         'descuento',
         'descripcionDP',
         'estadoDP'

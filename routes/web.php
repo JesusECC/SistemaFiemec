@@ -93,7 +93,7 @@ Route::middleware(['auth','admin'])->group(function () {
     //Se crea rutas servicios
      Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);
     Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProformaServicio@create']);
-    Route::post('servicios/save',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
+    Route::post('servicios/guardar',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
     Route::get('servicios/show/{id}',['as'=>'servicio-show','uses'=>'ControllerProformaServicio@show']);
     Route::get('servicios/edit/{id}',['as'=>'servicios-edit','uses'=>'ControllerProformaServicio@edit']);
     Route::get('servicios/pdf/{idProforma}','ControllerProformaServicio@pdf');
