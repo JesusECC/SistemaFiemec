@@ -50,6 +50,10 @@
 					                        <h4 class="list-group-item-heading">Configuración Tipo Cambio</h4>
 					                        <p class="list-group-item-text">Creación, modificación.</p>
 					                    </a>
+					                    <a class="list-group-item" href="{{url('proforma/cargo')}}">
+					                        <h4 class="list-group-item-heading">Configuración Cargo/Ocupacion</h4>
+					                        <p class="list-group-item-text">Creación, modificación.</p>
+					                    </a>
 					                </div>
 					            </div>
 					        </div>

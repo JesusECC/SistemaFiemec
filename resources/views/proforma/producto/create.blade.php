@@ -52,10 +52,10 @@
 								<div class="row">
 									<div class="col-sm-6">				
 										<div class="form-group">
+                      <label>Tipo Producto</label>
 												<select id="a" name="marca_producto" class="form-control">
 												 <option value="" disabled selected >Selecione Tipo de Producto</option>
-												<option value="CABB">ABB</option>
-												<option value="CSHE">Schneider</option>
+												<option value="CAS">Catalogo</option>
 												<option value="Bandejas">Bandejas</option>
 												<option value="Tableros">Tableros</option>
 												<option value="Accesorios">Accesorios</option>
@@ -65,8 +65,8 @@
 									</div>	
 
 								<div class="col-sm-6">
-
-                                      <div class="form-group label-floating">                                       
+                    <div class="form-group label-floating">  
+                    <label>Nombre de Familia</label>                                     
                                       <select required name="idFamilia" class="form-control selectpicker" id="b" data-live-search="true">
 
                                  <option value="" disabled selected>Seleccione Familia</option>
@@ -82,16 +82,19 @@
 									<div class="row">
 										<div class="col-sm-4">
 											<div class="form-group">
+                        <label>Serie Producto</label>  
 												<input id="c" type="text" name="serie_producto" class="form-control" {{old('serie_producto')}} placeholder="Número Serie ...">	
 											</div> 												
 										</div>
 										<div class="col-sm-4">
 											<div class="form-group">
+                        <label>Codigo Pedido</label>
 												<input id="d" type="text" name="codigo_pedido" class="form-control" {{old('codigo_pedido')}} placeholder="Código Pedido ...">	
 											</div>													
 										</div>
 										<div class="col-sm-4">
 											<div class="form-group">
+                        <label>Codigo Producto</label>
 												<input id="e" type="text" name="codigo_producto" class="form-control" {{old('odigo_producto')}} placeholder="Código Producto ...">	
 											</div> 												
 										</div>
@@ -99,18 +102,19 @@
 									<div class="row">
 										<div class="col-sm-8">
 											<div class="form-group">
+                        <label>Nombre Producto</label>
 												<input id="f" type="text" name="nombre_producto" class="form-control"  {{old('nombre_producto')}} placeholder="Nombre Producto ...">	
 											</div>												
 										</div>
 										<div class="col-sm-4">
-
-                                      <div class="form-group label-floating">                                       
-                                      <select required name="idFamilia" class="form-control selectpicker" id="b" data-live-search="true">
+                                      <div class="form-group label-floating"> 
+                                      <label>Marca Producto</label>                                      
+                                      <select required name="idFamilia" class="form-control selectpicker" id="g" data-live-search="true">
 
                                  <option value="" disabled selected>Seleccione Marca</option>
                                       @foreach($marca as $fa)
                                                
-                                <option value="{{$fa->idMarca}}_{{$fa->nombre_proveedor}}">{{$fa->nombre_proveedor}}</option>
+                                <option value="{{$fa->idMarca}}">{{$fa->nombre_proveedor}}</option>
                                                @endforeach  
                                            </select>
                                         </div> 
@@ -119,18 +123,21 @@
 									<div class="row">
 										<div class="col-sm-4">
 											<div class="form-group">
+                        <label>Stock</label> 
 												<input id="h" type="text" name="stock" class="form-control" placeholder="Stock ...">	
 											</div>   												
 										</div>
 										<div class="col-sm-4">
 											<div class="form-group">
+                        <label>Precio</label> 
 												<input id="i" type="text" name="precio_unitario" class="form-control" placeholder="Precio ...">	
 											</div>  												
 										</div>
 										<div class="col-sm-4">
 											<div class="from-group">
+                        <label>Categoria</label> 
 												<select id="j" name="categoria_producto" class="form-control" >
-													    <option value="" disabled selected>Seleccione Categoria</option>
+													    <option value="" disabled selected>Categoria</option>
 														<option value="Catalogo">Catalogo</option>
 														<option value="Producto Fiemec">Producto Fiemec</option>
 												</select>
@@ -140,6 +147,7 @@
 									<div class="row">
 										<div class="col-sm-9">
 											<div class="form-group">
+                        <label>Descripcion</label> 
 												<input id="k" type="text" name="descripcion_producto" class="form-control" placeholder="Descripción...">
 											</div>	
 										</div>
@@ -159,14 +167,14 @@
 										<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
 											Imagen Producto Fiemec
 										</label>
-			                			<input id="" type="file" id="files" name="foto[]" class="form-control">
+			                			<input  type="file" id="files" name="foto[]" class="form-control">
 										<br>
 										<output id="list">
 										</output>
 									</div>
-                                    <div class="col-sm-4" >
+                  <div class="col-sm-4" >
 								
-                                        </div>
+                 </div>
 									<div class="col-sm-3" >
 										<center>
                                     <button  type="button" id="bt_add" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Producto</button>
@@ -224,6 +232,7 @@
                         <th>Precio</th>
                         <th>Categoria</th>
                         <th>descripcion</th>
+                        <th>foto</th>
                		</thead>
             		<tfoot>
             			
@@ -238,7 +247,8 @@
             			<th></th>
             			<th></th>
             			<th></th>
-            			<th></th>            			
+            			<th></th>   
+                  <th></th>         			
             		
             		</tfoot>
             		
@@ -321,13 +331,14 @@ function agregar()
     precio=$("#i").val();
     cat=$("#j").val();
     descripcion=$("#k").val();
+    foto=$("#files").val();
    
 
-    if(idFamilia!="")
+    if(idFamilia!="" && foto!="" && marca!="" && cat!="")
     {
        
 
-       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="tipo_producto[]" value="'+tipoP+'">'+tipoP+'</td> <td><input type="hidden" name="idFamilia[]" value="'+idFamilia+'">'+idFamilia+'</td> <td><input type="hidden" name="serie_producto[]" value="'+numserie+'">'+numserie+'</td>  <td><input type="hidden" name="codigo_pedido[]" value="'+codpedido+'">'+codpedido+'</td> <td><input type="hidden" name="codigo_producto[]" value="'+codproducto+'">'+codproducto+'</td> <td><input type="hidden" name="nombre_producto[]" value="'+nomproducto+'">'+nomproducto+'</td> <td><input type="hidden" name="marca_producto[]" value="'+marca+'">'+marca+'</td> <td><input type="hidden" name="stock[]" value="'+stock+'">'+stock+'</td> <td><input type="hidden" name="precio_unitario[]" value="'+precio+'">'+precio+'</td> <td><input type="hidden" name="categoria_producto[]" value="'+cat+'">'+cat+'</td> <td><input type="hidden" name="descripcion[]" value="'+descripcion+'">'+descripcion+'</td>  </tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="tipo_producto[]" value="'+tipoP+'">'+tipoP+'</td> <td><input type="hidden" name="idFamilia[]" value="'+idFamilia+'">'+idFamilia+'</td> <td><input type="hidden" name="serie_producto[]" value="'+numserie+'">'+numserie+'</td>  <td><input type="hidden" name="codigo_pedido[]" value="'+codpedido+'">'+codpedido+'</td> <td><input type="hidden" name="codigo_producto[]" value="'+codproducto+'">'+codproducto+'</td> <td><input type="hidden" name="nombre_producto[]" value="'+nomproducto+'">'+nomproducto+'</td> <td><input type="hidden" name="marca_producto[]" value="'+marca+'">'+marca+'</td> <td><input type="hidden" name="stock[]" value="'+stock+'">'+stock+'</td> <td><input type="hidden" name="precio_unitario[]" value="'+precio+'">'+precio+'</td> <td><input type="hidden" name="categoria_producto[]" value="'+cat+'">'+cat+'</td> <td><input type="hidden" name="descripcion[]" value="'+descripcion+'">'+descripcion+'</td> <td><input type="hidden" name="foto[]" value="'+foto+'">'+foto+'</td> </tr>';
        cont++;
        limpiar();
        evaluar();
@@ -336,7 +347,7 @@ function agregar()
     }
     else
     {
-        alert("erros al ingresar el detale del ingreso, revise los datos del articulo");
+        alert("error al ingresar el producto, revise los datos del producto");
     }
 }
 

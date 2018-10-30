@@ -57,7 +57,7 @@ class ControllerProducto extends Controller
     
     public function store(Request $request)
     {
-
+dd($request);
      $idFamilia=$request->get('idFamilia');
      $serie_producto=$request->get('serie_producto');
      $codigo_pedido=$request->get('codigo_pedido');
@@ -69,6 +69,7 @@ class ControllerProducto extends Controller
      $descripcion_producto=$request->get('descripcion_producto');
      $precio_unitario=$request->get('precio_unitario');
      $categoria_producto=$request->get('categoria_producto');
+     $foto=$request->get('foto');
 
 $cont = 0;
 
@@ -86,6 +87,7 @@ while ($cont<count($idFamilia)) {
     $Producto->descripcion_producto=$descripcion_producto[$cont];
     $Producto->precio_unitario=$precio_unitario[$cont];
     $Producto->categoria_producto=$categoria_producto[$cont];
+    $Producto->foto=$foto[$cont];
     $Producto->estado='activo';
 
     $Producto->save();

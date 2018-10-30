@@ -100,8 +100,8 @@
                                                 <label>Sexo</label>
                                          <select name="sexo" id="sex" class="form-control">
                                                   <option ></option>
-                                                  <option value="Hombre">Hombre</option>
-                                                  <option value="Mujer">Mujer</option>
+                                                  <option value="Marculino">Marculino</option>
+                                                  <option value="Femenino">Femenino</option>
             
                                          </select>
 
