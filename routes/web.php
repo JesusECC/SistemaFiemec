@@ -28,6 +28,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::resource('proforma/familia','ControllerFamilia');
     Route::resource('dashboard/dashboard-admin','ControllerDashboard');
     Route::resource('proforma/tarea','ControllerTarea');
+    Route::resource('proforma/cargo','ControllerCargo');
 
     // Se crea las rutas para tableros
     Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tipotarea extends Model
 {
-    protected $table = 'Tarea';
-    protected $primaryKey = 'idTarea';
+    protected $table='Tarea';
+    protected $primaryKey='idTarea';
     public $timestamps=false;
 
 

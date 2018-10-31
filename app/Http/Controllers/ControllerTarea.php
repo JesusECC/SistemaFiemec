@@ -61,7 +61,7 @@ while ($cont<count($nombre_tarea)) {
          return Redirect::to('proforma/tarea');
      }
 
-     public function edit()
+     public function edit($id)
     {
 
      return view("proforma.tarea.edit",["tarea"=>Tipotarea::findOrFail($id)]);
@@ -69,11 +69,9 @@ while ($cont<count($nombre_tarea)) {
     }
  
  public function update(Request $request,$id){
+       
 
-//dd($request);        
-
-
-    $tarea =Tipotarea::find($id);
+    $tarea=Tipotarea::find($id);
     $tarea->nombre_tarea=$request->get('nombre_tarea');
     $tarea->precioT=$request->get('precioT');
     $tarea->update();
@@ -82,7 +80,14 @@ while ($cont<count($nombre_tarea)) {
      }
           
           
+public function destroy($id)
+    {
+        $tarea=Tipotarea::findOrFail($id);
+        $tarea->estado=0;
+        $tarea->update();
+        return Redirect::to('proforma/tarea');
 
+    }
 
 }
 

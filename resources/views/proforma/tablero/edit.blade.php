@@ -65,7 +65,7 @@
                                                 <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="numero documento">
                                             </div>
                                             <div class="col-md-8">
-                                                <label for="" class="control-label">Empleado </label>
+                                                <label for="" class="control-label">Representante </label>
                                                 <input type="text" disabled name="cotizador" id="cotizador" class="form-control">
                                             </div>
                                         </div>
@@ -373,7 +373,7 @@ var editarval=true;
                     var pdescripcion;
                     tipocam=pro[key]['tipocambio'];
                     simbolo=pro[key]['simboloP'];
-                    cotiza=pro[key]['cliente_empleado'];
+                    cotiza=pro[key]['nombre_RE'];
                     if(pro[key]['descripcionDP']==null){
                         pdescripcion='';
                     }else{

@@ -36,6 +36,10 @@
 					            </div>
 					            <div class="ibox-content no-padding">
 					                <div class="list-group">
+					                	<a class="list-group-item" href="{{url('proforma/tarea')}}">
+					                        <h4 class="list-group-item-heading">Configuración Tarea</h4>
+					                        <p class="list-group-item-text">Creación, modificación.</p>
+					                    </a>
 					                    <a class="list-group-item" href="{{url('proforma/marca')}}">
 					                        <h4 class="list-group-item-heading">Configuración Marca</h4>
 					                        <p class="list-group-item-text">Creación, modificación.</p>
@@ -43,9 +47,7 @@
 					                    <a class="list-group-item" href="{{url('proforma/familia')}}">
 					                        <h4 class="list-group-item-heading">Configuración Familia y Descuento</h4>
 					                        <p class="list-group-item-text">Creación, modificación.</p>
-					                    </a>
-					                    
-					                    
+					                    </a>						              
 					                    <a class="list-group-item" href="{{url('proforma/config')}}">
 					                        <h4 class="list-group-item-heading">Configuración Tipo Cambio</h4>
 					                        <p class="list-group-item-text">Creación, modificación.</p>

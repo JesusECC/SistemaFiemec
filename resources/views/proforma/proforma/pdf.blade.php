@@ -271,7 +271,7 @@ border-collapse: collapse;
       <div id="company">
         <div><span style="color: black !important;font-weight: bold;">EMAIL :</span> <span style="font-size: 11px !important;"><a href="{{$proforma->email}}">{{$proforma->email}}</a></span></div>
         <div><span style="color: black !important;font-weight: bold;"> FECHA :</span> <span style="font-size: 11px !important;color: black">{{$proforma->fecha_hora}}</span></div>
-        <div><span style="color: black !important;font-weight: bold;">REPRESENTANTE :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->nombre_RE}}</span></div>
+        <div><span style="color: black !important;font-weight: bold;">REPRESENTANTE :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$proforma->nombre_RE.' | Telf. '.$proforma->telefonoRE.' / '.$proforma->CelularRE}}</span></div>
       </div>
     </div>
     <div id="project" class="clearfix">
@@ -287,8 +287,9 @@ border-collapse: collapse;
         <thead class="principal"> 
           <tr class="principal"> 
             <th class="principal">Item</th>
-            <th class="principal">Cod.</th>
+            
             <th class="principal" style="width: 460px !important">Producto</th>
+            <th class="principal" >Desc.</th>
             <th class="principal" >Cant. </th>
             <th class="principal" >Precio</th>
             <th class="principal" >Desc. %</th>
@@ -303,8 +304,9 @@ border-collapse: collapse;
           
           <tr class="principal"> 
             <td class="principal" align="center" style="border: 1px solid black">{{$i++}}</td>
-            <td class="principal" align="center" style="border: 1px solid black" >{{$det->codigo_producto}}</td>
-            <td class="principal" style="font-size: 11px !important;border: 1px solid black"> {{$det->producto.' | '.$det->descripcionDP}} </td>
+            
+            <td class="principal" style="font-size: 11px !important;border: 1px solid black">COD: {{$det->codigo_producto.' ||-|| '.$det->nombre_producto.' | '.$det->nombre_proveedor.' | '.$det->descripcion_producto}} </td>
+             <td class="principal" align="center" style="border: 1px solid black" >{{$det->descripcionDP}}</td>
             <td class="principal" align="center" style="border: 1px solid black" >{{$det->cantidad}}</td>
             <td class="principal"  align="center" style="border: 1px solid black">S/.{{$det->precio_venta}}</td>
             <td class="principal" align="center" style="border: 1px solid black">{{$det->descuento}} % </td>
@@ -313,6 +315,7 @@ border-collapse: collapse;
           @endforeach
           
         </tbody>
+
         <tfoot>
             <tr style="font-weight: bold;">
               <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
@@ -330,6 +333,7 @@ border-collapse: collapse;
               <td colspan="2" align="center" style="border: 1px solid #323639;border-bottom: 1px solid #323639">S/. {{round($proforma->precio_total,2)}}</td>
             </tr> 
         </tfoot>
+
       </table>
     </div>
   </main>
@@ -339,7 +343,7 @@ border-collapse: collapse;
       <h5 style="font-size: 10px !important;line-height:0.5px;">Forma de pago: {{$proforma->forma_de}}</h5>
       <h5 style="font-size: 10px !important;line-height:2pt;">Plazo de oferta {{$proforma->plazo_oferta}}  </h5> 
       <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Condición de venta: {{$proforma->observacion_proforma}} </h5>
-      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$proforma->nameE}}</h5>
+      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$proforma->nameE.' | Telf. '.$proforma->telefonoU.' / '.$proforma->celularU}}</h5>
     </div>
      
     <div style="width: 50%;float: right;">

@@ -57,8 +57,9 @@ class ControllerProducto extends Controller
     
     public function store(Request $request)
     {
-dd($request);
+   dd($request);
      $idFamilia=$request->get('idFamilia');
+     $idMarca=$request->get('idMarca');
      $serie_producto=$request->get('serie_producto');
      $codigo_pedido=$request->get('codigo_pedido');
      $codigo_producto=$request->get('codigo_producto');
@@ -71,12 +72,14 @@ dd($request);
      $categoria_producto=$request->get('categoria_producto');
      $foto=$request->get('foto');
 
+
 $cont = 0;
 
 while ($cont<count($idFamilia)) {
 
     $Producto = new Producto();
     $Producto->idFamilia=$idFamilia[$cont];
+    $Producto->idMarca=$idMarca[$cont];
     $Producto->serie_producto=$serie_producto[$cont];
     $Producto->codigo_pedido=$codigo_pedido[$cont];
     $Producto->codigo_producto=$codigo_producto[$cont];

@@ -112,8 +112,9 @@
                                                 <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true" style="font-size: 10px !important">
                                                     <option value="">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
-                                                        <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                                        <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->tipo_producto}}">{{ $producto->nombre_producto.'|'.$producto->nombre_producto.'|'.$producto->marca_producto.'|'.$producto->descripcion_producto }}</option>
                                                     @endforeach
+                                                    
                                                 </select>     
                                             </div>
                                         </div>
@@ -371,6 +372,17 @@
     $("#idTipo_moneda").change(cambioMoneda);
     asignarValores();
 
+
+function cambiaropcion(){
+        Producto=document.getElementById('pidProducto').value.split('_');
+        var tipo_producto=Producto[4];
+       if(tipo_producto=="Tableros"){
+            $('#precio_uni').attr("disabled", false);
+        }
+        else{
+           $('#precio_uni').attr("disabled", true); 
+        }
+   }
     function agregarprorducto(){
         document.getElementById('agregar_producto').style.display ='block';
         document.getElementById('quitar_btn').style.display='none';
@@ -387,6 +399,7 @@
         Producto=document.getElementById('pidProducto').value.split('_');
         $("#precio_uni").val(Producto[2]);
         $("#pdescuento").val(Producto[3]);
+        cambiaropcion();
     }
     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');

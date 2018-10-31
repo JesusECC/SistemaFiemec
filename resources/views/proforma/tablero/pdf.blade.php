@@ -287,11 +287,12 @@ border-collapse: collapse;
         <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
           Item
         </td>
-        <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-          Cod.
-        </td>
+        
         <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
           Producto
+        </td>
+        <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
+          Descripcion.
         </td>
         <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
           Cant.
@@ -320,8 +321,9 @@ border-collapse: collapse;
           @if($t->nombre_tablero==$p->nombre_tablero)
             <tr>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$i++}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->codigo_producto}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{ $p->producto.' | '.$p->descripcionDP }}</td>
+             
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">COD: {{$p->codigo_producto.' ||-|| '.$p->producto}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->descripcionDP}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->cantidad}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->precio_venta}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->descuento}} % </td>

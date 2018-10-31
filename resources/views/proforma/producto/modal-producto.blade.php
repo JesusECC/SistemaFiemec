@@ -13,7 +13,7 @@
 	  	</div>
 	  	<div class="row">	
 	  		<div class="col-lg-4">
-	  			<img src="{{asset('fotos/productos/'.$pro->foto)}}" alt="{{$pro->nombre_producto}}" class="img-responsive img-thumbnail">
+	  			<img src="{{asset('img/'.$pro->foto)}}" alt="{{$pro->nombre_producto}}" class="img-responsive img-thumbnail">
 	  		</div><!--final de columna de foto-->
 	  		<div class="col-lg-8">
 	  			<p>

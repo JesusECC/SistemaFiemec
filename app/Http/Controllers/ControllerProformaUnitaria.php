@@ -171,13 +171,14 @@ public function pdf($id){
     ->join('Cliente_Proveedor as cp','cp.idCliente','=','p.idCliente')
     ->join('users as u','u.id','=','p.idEmpleado')
     ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')
-    ->select('p.idEmpleado','p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.observacion_proforma','cp.correo as email','cp.nro_documento as ndoc','p.subtotal','p.cliente_empleado','u.name',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
+    ->select('p.idEmpleado','p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.observacion_proforma','cp.correo as email','cp.nro_documento as ndoc','p.subtotal','p.cliente_empleado','u.name',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU')
     ->where('p.idProforma','=',$id)
     ->first();
 
     $detalles=DB::table('Detalle_proforma as dpr')
     ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
-    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'pro.codigo_producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
+    ->join('Marca as m','m.idMarca','=','pro.idMarca')
+    ->select('pro.nombre_producto','m.nombre_proveedor','pro.descripcion_producto','pro.codigo_producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
     ->where('dpr.idProforma','=',$id)
     ->get();
 
@@ -216,7 +217,7 @@ public function pdf($id){
         //
         $productos=DB::table('Producto as po')
         ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
-        ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema')
+        ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema','po.tipo_producto')
         ->where('po.estado','=','activo')
         ->get();
 

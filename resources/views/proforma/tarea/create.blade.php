@@ -65,7 +65,7 @@
                                                 </div>
                                             </div>
                                             <div class="row" style="margin-top: 20px">
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <input type="number" id="pprecioT" class="form-control" placeholder="Ingrese precio">   
                                                     </div>
@@ -105,8 +105,10 @@
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
                     <div class="from-group">
                         <input name"_token" value="{{ csrf_token() }}" type="hidden">
-                        <button class="btn btn-primary" type="submit">guardar</button>
-                        <button class="btn btn-danger" type="reset">cancelar</button>
+                        <button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
+                       <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('proforma/tarea')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+                    </div>
                     </div>
                 </div> 
             </div>
