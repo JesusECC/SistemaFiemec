@@ -47,7 +47,8 @@ public function create()
 {
     $productos=DB::table('Producto as po')
     ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
-    ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.codigo_producto," | ",po.nombre_producto," | ",po.marca_producto," | ",descripcion_producto) as productos'),'po.tipo_producto','po.codigo_producto','po.nombre_producto','po.marca_producto','descripcion_producto')
+    ->join('Marca as ma','ma.idMarca','=','po.idMarca')
+    ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.codigo_producto," | ",po.nombre_producto," | ",ma.nombre_proveedor," | ",descripcion_producto) as productos'),'po.tipo_producto','po.codigo_producto','po.nombre_producto','ma.nombre_proveedor','descripcion_producto')
     ->where('po.estado','=','activo')
     ->get();
 

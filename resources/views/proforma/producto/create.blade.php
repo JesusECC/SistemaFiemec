@@ -335,7 +335,7 @@ function agregar()
     foto=$("#files").val();
    
 
-    if(idFamilia!="" && foto!="" && marca!="" && cat!="")
+    if(idFamilia!="" && marca!="" && cat!="")
     {
        
 

@@ -147,7 +147,7 @@
                                                 <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true"  style="font-size: 12px !important">
                                                     <option value=""  style="font-size: 12px !important">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
-                                                        <option value="{{ $producto->idProducto }}_{{ $producto->productos}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->tipo_producto}}" style="font-size: 12px !important">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->marca_producto .' | '.$producto->descripcion_producto }}</option>
+                                                        <option value="{{ $producto->idProducto }}_{{ $producto->productos}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->tipo_producto}}" style="font-size: 12px !important">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->nombre_proveedor .' | '.$producto->descripcion_producto }}</option>
                                                     @endforeach
                                                 </select>                                                 
                                             </div>
@@ -413,8 +413,8 @@
 
     function cambiaropcion(){
         Producto=document.getElementById('pidProducto').value.split('_');
-        var tipo_producto=Producto[4];
-       if(tipo_producto=="TABLERO"){
+        var precio_unitario=Producto[2];
+       if(precio_unitario==0.00 || precio_unitario==null){
             $('#precio_uni').attr("disabled", false);
         }
         else{

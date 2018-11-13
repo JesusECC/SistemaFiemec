@@ -57,7 +57,7 @@ class ControllerProducto extends Controller
     
     public function store(Request $request)
     {
-   dd($request);
+   
      $idFamilia=$request->get('idFamilia');
      $idMarca=$request->get('idMarca');
      $serie_producto=$request->get('serie_producto');

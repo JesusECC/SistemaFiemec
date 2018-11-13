@@ -138,7 +138,7 @@
                                         </label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-10">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
                                                 <samp class="input-group-btn">
@@ -146,6 +146,12 @@
                                                         <i class="fas fa-plus"></i> Agregar
                                                     </button>
                                                 </samp>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                
+                                                <input type="number"  id="canTT" class="form-control" placeholder="Cant. Tab">
                                             </div>
                                         </div>
                                     </div>
@@ -423,7 +429,16 @@
     var iduser={!! Auth::user()->id !!}
     $("#pidProducto").change(MostarProducto);
     
-
+  function cambiaropcion(){
+        Producto=document.getElementById('pidProducto').value.split('_');
+        var tipo_producto=Producto[4];
+       if(tipo_producto=="Tableros"){
+            $('#precio_uni').attr("disabled", false);
+        }
+        else{
+           $('#precio_uni').attr("disabled", true); 
+        }
+   }
     //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
     function MostrarCliente(){
         // cdireccion/cnro_documentoidClientes
@@ -502,12 +517,13 @@
     var bool;
     function agregarTablero(){    
         var tabl=$("#NomTablerop").val();
+        var cantt=$("#canTT").val();
         nomTablero=tabl.replace(/ /gi,"_");  
         bool=false;  
         if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
             mostrarcampos();
             // fila();
-            if(tablero.length>=0 && nomTablero!=""){
+            if(tablero.length>=0 && nomTablero!="" && cantt!=""){
                 //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
                 for (const key in tablero) {
                     if (tablero.hasOwnProperty(key)) {
@@ -567,7 +583,7 @@
                                     '</div>'+
                                 '</section>'+
                             '</div>';
-                var ta={nombre:nomTablero,posi:cont,tablero:table,estado:1};
+                var ta={nombre:nomTablero,posi:cont,tablero:table,estado:1,cantt:cantt};
                 tablero.push(ta);                        
                 } cont++;       
             }

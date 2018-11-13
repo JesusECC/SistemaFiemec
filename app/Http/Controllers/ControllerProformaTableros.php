@@ -92,6 +92,7 @@ class ControllerProformaTableros extends Controller
             $observacion;
             $simbolo;
             $iduser;
+            $cantt;
             // idTipoCambio:idtipocam,valorTipoCambio:valorcambio
             foreach ($request->datos as $dato) {
             $idclie=$dato['idcliente'];
@@ -131,7 +132,8 @@ class ControllerProformaTableros extends Controller
             foreach ($request->tableros as $tablero) {
                 $nombre=$tablero['nombre'];
                 $est=$tablero['estado'];
-                $idTablero=DB::table('Tableros')->insertGetId(['nombre_tablero'=>$nombre,'estadoT'=>$est,]);
+                $cantt=$tablero['cantt'];
+                $idTablero=DB::table('Tableros')->insertGetId(['nombre_tablero'=>$nombre,'estadoT'=>$est,'cantidadTab'=>$cantt]);
                 
                 foreach($request->filas as $fila){
                     if($fila['nomTablero']==$tablero['nombre']){
