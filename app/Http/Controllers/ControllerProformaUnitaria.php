@@ -174,6 +174,7 @@ public function pdf($id){
     ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')
     ->select('p.idEmpleado','p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.observacion_proforma','cp.correo as email','cp.nro_documento as ndoc','p.subtotal','p.cliente_empleado','u.name',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU')
     ->where('p.idProforma','=',$id)
+
     ->first();
 
     $detalles=DB::table('Detalle_proforma as dpr')
@@ -181,6 +182,7 @@ public function pdf($id){
     ->join('Marca as m','m.idMarca','=','pro.idMarca')
     ->select('pro.nombre_producto','m.nombre_proveedor','pro.descripcion_producto','pro.codigo_producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
     ->where('dpr.idProforma','=',$id)
+    ->where('dpr.estadoDP','=',1)
     ->get();
 
     $pdf=PDF::loadView('proforma/proforma/pdf',['proforma'=>$proforma,"detalles"=>$detalles]);
@@ -229,6 +231,7 @@ public function pdf($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_proforma','deP.idProducto','deP.idProforma','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.cambioDP','deP.estadoDP','deP.descuento','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion')
         ->where('deP.idProforma','=',$id)
+        ->where('deP.estadoDP','=',1)
         ->get();
     
         // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);

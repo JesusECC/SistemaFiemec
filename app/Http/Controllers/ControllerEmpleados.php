@@ -32,7 +32,7 @@ class ControllerEmpleados extends Controller
        ->join('users as us','e.id','=','us.idEmp')
        ->join('User_Cargo as uc','uc.idUser','=','us.id')
        ->join('Cargo as ca','ca.idCargo','=','uc.idCargo')
-       ->select(db::raw('CONCAT(e.nombres," ",e.paterno," ",e.paterno) as nombre'),'e.direccion',db::raw('CONCAT(e.telefono," / ",e.celular) as fono'),'e.id','ca.nombre_cargo','us.email')
+       ->select(db::raw('CONCAT(e.nombres," ",e.paterno," ",e.paterno) as nombre'),'e.direccion','e.fecha_nacimiento','e.tipo_documento','e.nro_documento',db::raw('CONCAT(e.telefono," / ",e.celular) as fono'),'e.id','ca.nombre_cargo','us.email')
         ->where('e.nombres','LIKE','%'.$query.'%')
        ->where('e.estado','=',1)
        

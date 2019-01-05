@@ -69,6 +69,7 @@
 								</td>
                             </tr>
                             @include('proforma.empleado.modal')
+                            @include('proforma.empleado.show')
 				        		
 							@endforeach
 				        </tbody>

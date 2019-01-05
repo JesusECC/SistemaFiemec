@@ -464,7 +464,7 @@ function cambiaropcion(){
             bool=true;
             for (const fil in filaob) {
                 if (filaob.hasOwnProperty(fil)) {
-                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd){
+                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd || filaob[fil]['estado']==0){
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
                         filaob[fil]['cantidadP']=su;
@@ -715,9 +715,9 @@ function cambiaropcion(){
         for (var key in filaob) {
             if (filaob.hasOwnProperty(key)) {
                 if(index==filaob[key]['posiP']){
-                    $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
-                    // filaob.splice(key,1);         
+                    $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();        
                     filaob[key]['estado']=0;  
+                    //filaob.splice(key,1);
                 }
             }
         } 
