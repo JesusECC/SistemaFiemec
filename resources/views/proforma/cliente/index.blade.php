@@ -20,7 +20,7 @@
 				<div class="box-header with-border" style="padding: 10px !important">
 					<h4>
 						<strong style="font-weight: 400">
-							<i class="fas fa-list-ul"></i> Lista de Productos Fiemec
+							<i class="fas fa-list-ul"></i> Listado de Clientes Fiemec
 						</strong>
 					</h4>
 					<div class="ibox-title-buttons pull-right">
