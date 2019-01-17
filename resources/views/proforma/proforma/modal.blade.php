@@ -16,7 +16,7 @@
                 <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
                 <h3 class="m-t-none m-b-sm text-warning">Advertencia</h3>
                       
-                <p class="p-text-delete">Al eliminar el siguiente producto <span style="color: red">{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}</span>  no volvera a verlo en la lista </p>
+                <p class="p-text-delete">Al eliminar la siguiente proforma <span style="color: red">{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}</span>  no volvera a verlo en la lista </p>
               </div>
             </div>
             <h3>¿Desea eliminar la proforma?</h3>

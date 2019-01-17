@@ -20,7 +20,7 @@
                 <div class="box-header with-border" style="padding: 10px !important">
                     <h4>
                         <strong style="font-weight: 400">
-                            <i class="fas fa-dolly"></i> Datos Productos Fiemec
+                            <i class="fas fa-dolly"></i> Datos Proformas Fiemec
                         </strong>
                     </h4>
                     @if(count($errors)>0)

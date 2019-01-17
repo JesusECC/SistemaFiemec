@@ -46,7 +46,7 @@ public function create()
 {
  $productos=DB::table('Producto as po')
  ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
- ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto," | ",po.marca_producto," | ",descripcion_producto) as productos'),DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto," | ",po.descripcion_producto) as productos2'))
+ ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema','po.nombre_producto','po.codigo_producto','po.marca_producto','descripcion_producto',DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto," | ",po.marca_producto) as productos2'))
  ->where('po.tipo_producto','=','bandejas')
  ->where('po.estado','=','activo')
  ->get();
@@ -56,17 +56,13 @@ public function create()
  ->get();
 
  $monedas=DB::table('Tipo_moneda')
- ->where('estado','=','activo')
+ ->where('estado','=','1')
  ->get();
 
  $clientes=DB::table('Cliente_Proveedor as cp')
- ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
-->where('tipo_persona','=','Cliente persona')
-->orwhere('tipo_persona','=','Cliente Empresa')
-
- ->get();
-
-
+ ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
+->where('cp.estado','=','1')
+->get();
 
  return view("proforma.bandejas.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"medidas"=>$medidas]);
 }

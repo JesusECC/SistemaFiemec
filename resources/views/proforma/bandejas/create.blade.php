@@ -55,7 +55,7 @@
                                                 <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
                                                     <option value="">Seleccione Cliente</option>
                                                     @foreach($clientes as $cliente)
-                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombre}}</option>
+                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombres_Rs}} {{$cliente->paterno}} {{$cliente->materno}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -138,13 +138,13 @@
                                         </label>
                                     </div>
                                     <div class="row"  style="margin-top:20px">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-8">
                                             <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Producto</label>
                                                 <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
-                                                   <option value="{{ $producto->idProducto }}_{{ $producto->productos }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->productos2}}</option>
+                                                   <option value="{{ $producto->idProducto }}_{{ $producto->productos2 }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{$producto->codigo_producto}} | {{$producto->nombre_producto}} | {{ $producto->marca_producto}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -155,29 +155,88 @@
                                                 <input type="number"  id="pespesor" class="form-control" name="pespesor"  >  
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                             <div class="form-group">
-                                                <label for="" class="control-label">Medidas</label>
-                                                <select name="idMedidas" class="form-control selectpicker" id="idMedidas" data-live-search="true">
-                                                    <option value="">Seleccione Medidas</option>
-                                                    @foreach($medidas as $me)
-                                                        <option value="{{$me->idMedidas}}_{{$me->precio}}_{{ $me->medida}}">{{$me->medida}}</option>
-                                                    @endforeach
-                                                </select>                                                    
+                                                <label for="" class="control-label">Alto</label>
+                                                 <input type="number"  id="palto" class="form-control" name="palto"  >                                                   
                                             </div>
                                         </div>
+
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Ancho 1</label>
+                                                 <input type="number"  id="pancho1" class="form-control" name="pancho1">                                                   
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Ancho 2</label>
+                                                 <input type="number"  id="pancho2" class="form-control" name="pancho2">                                                   
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Ancho 3</label>
+                                                 <input type="number"  id="pancho3" class="form-control" name="pancho3">                                                   
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Ancho 4</label>
+                                                 <input type="number"  id="pancho4" class="form-control" name="pancho4">                                                   
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Largo</label>
+                                                 <input type="number"  id="plargo" class="form-control" name="plargo">                                                   
+                                            </div>
+                                        </div>
+                                         
+                                         <div class="col-sm-4">
+                                            <div class="" id="producto-oculto">
+                                                <label for="" class="control-label">Galvanizado</label>
+                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                                    <option value="" selected="" disabled="">Seleccione Tipo de Galvanizado</option>
+                                                    
+                                                   <option value=""></option>
+                                                   
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Precio Gal.</label>
+                                                 <input type="number"  id="ppreciog" class="form-control" name="ppreciog">                                                   
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-4">
+                                            <div class="" id="producto-oculto">
+                                                <label for="" class="control-label">Pintado</label>
+                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                                    <option value="" selected="" disabled="">Seleccione tipo de Pintado</option>
+                                                    
+                                                   <option value=""></option>
+                                                   
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Precio Pin.</label>
+                                                 <input type="number"  id="ppreciog" class="form-control" name="ppreciog">                                                   
+                                            </div>
+                                        </div>
+
+
                                         <div class="col-lg-4" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Descripcion</label>
                                                 <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
                                             </div>
                                         </div> 
-                                        <div class="col-lg-2" style="margin-top:20px">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">P. UNIT.</label>
-                                                <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
-                                            </div>
-                                        </div> 
+                                        
                                         <div class="col-lg-2" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Cantidad</label>
@@ -190,7 +249,7 @@
                                                 <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
                                             </div>
                                         </div>
-                                        <div class="col-sm-1" style="margin-top:24px">
+                                        <div class="col-sm-1" style="margin-top:45px">
                                             <div class="form-group label-floating">
                                             <label class="control-label"></label>
                                                 <button type="button" id="bt_add_produc" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Agregar</button>
