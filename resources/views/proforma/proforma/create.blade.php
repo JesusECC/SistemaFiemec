@@ -77,14 +77,11 @@
                                                 <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="Número de Documento">
                                             </div>
                                         </div>
+
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <select required name="cliente_empleado" class="form-control selectpicker" id="cliente_empleado" data-live-search="true">
-                                                    <option value="">Seleccione Representante</option>
-                                                    @foreach($representante as $re)
-                                                    <option value="{{$re->idCR}}">{{$re->nombre_RE}}</option>
-                                                    @endforeach
-                                                </select> 
+                                                <select required name="cliente_empleado" class="form-control " id="cliente_empleado" >
+                                               </select> 
                                             </div>
                                         </div>
                                     </div>
@@ -138,7 +135,7 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="" class="control-label" style="color: #676a6c !important">
-                                            Busqueda de producto
+                                        Busqueda de producto
                                         </label>
                                     </div>
                                     <div class="row">
@@ -361,7 +358,18 @@
  <!-- {!!Form::close()!!} -->
 
 @push('scripts')
+
 <script>
+
+
+    var selectCliente = document.getElementById('idClientes');
+    selectCliente.addEventListener('change',function(){
+        var selectedOption = this.options[selectCliente.selectedIndex];
+        var selctedid=selectedOption.value.split('_');
+        representante(selctedid[0]);
+        
+    });
+
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
             valoresFinales();
@@ -449,6 +457,41 @@
         document.getElementById('producto-crear-oculto').style.display = 'block';
         document.getElementById('producto-oculto').style.display = 'block';
     } 
+
+
+    function representante(idCliente){
+        console.log(idCliente,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{cliente:idCliente}, //datos que se envian a traves de ajax
+            url:'cli', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var representante=response.cliente;
+                    var va;
+                    console.log(representante);
+                    va='<option value="" disabled="" selected="">Seleccione</option>'
+                    for(const i in representante){
+                        va+='<option value="'+representante[i]['idCR']+'">'+representante[i]['nombre_RE']+'</option>';                 
+                    }
+                    $("#cliente_empleado").html(va); 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
 
     function saveProforma(){
         // se enviar los datos al controlador proforma tableros
@@ -648,6 +691,10 @@ alert("La cantidad no puede ser '0' ");
         ig=venta*0.18;
         $("#igv").html("s/. " + ig.toFixed(2));
     }
+
+    
+
+
     function total(){
         var venta=0;   
         var igv=0;  

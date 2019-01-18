@@ -56,11 +56,12 @@ public function create()
     ->where('estado','=',1)
     ->get();
 
-     $representante=DB::table('Cliente_Representante')
+     $representante=DB::table('Cliente_Representante') 
     ->where('estadoCE','=',1)
     ->get();
 
     $clientes=DB::table('Cliente_Proveedor as cp')
+
     ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
     ->where('estado','=',1)
     ->get();
@@ -321,5 +322,15 @@ public function pdf($id){
         $producto->estado=0;
         $producto->update();
         return Redirect::to('proformas');
+    }
+
+    public function representante(Request $request)
+    {
+        $idCliente=$request->get('cliente');
+        $cliente=DB::table('Cliente_Representante')
+        ->where('idCliente','=',$idCliente)
+        ->get();
+        // dd($request);
+        return ['cliente' =>$cliente,'veri'=>true];
     }
 }
