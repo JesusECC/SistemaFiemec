@@ -909,11 +909,31 @@
         var venta=0;   
         var ig=0;     
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
+           var promedio=parseFloat(filaob[fila]['promed']);
+
+            if (filaob.hasOwnProperty(fila) && promedio==1) {
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                var tram=parseFloat(filaob[fila]['tramo']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var descuento=parseFloat(filaob[fila]['descuentoP']);
-                venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+                
+                venta+=((((precioga+preciope)*tram)+preciota)-10)*cantidad; 
+
+                      
+            }else if(filaob.hasOwnProperty(fila) && promedio==2){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                venta+=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
+ 
+
             }
         }
         ig=venta*0.18;
@@ -927,11 +947,31 @@
         var tota=0;   
         
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
+           var promedio=parseFloat(filaob[fila]['promed']);
+
+            if (filaob.hasOwnProperty(fila) && promedio==1) {
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                var tram=parseFloat(filaob[fila]['tramo']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var descuento=parseFloat(filaob[fila]['descuentoP']);
-                venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+                
+                venta+=((((precioga+preciope)*tram)+preciota)-10)*cantidad; 
+
+                      
+            }else if(filaob.hasOwnProperty(fila) && promedio==2){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                venta+=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
+ 
+
             }
         }
         igv=venta*0.18;
