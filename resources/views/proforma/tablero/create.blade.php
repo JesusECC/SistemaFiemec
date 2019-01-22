@@ -599,6 +599,7 @@
                                                                     '<th>P. Unit.</th>'+
                                                                     '<th>Descuento</th>'+
                                                                     '<th>Importe</th>'+
+                                                                    '<th>Quitar</th>'+
                                                                     //'<th></th>'+
                                                                 '</thead>'+
                                                                 '<tbody id="detalle_'+nomTablero+'">'+
@@ -611,8 +612,20 @@
                                                                     '<th></th>'+
                                                                     '<th style="color:black !important;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
                                                                     '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                    '<th></th>'+
                                                                     '</th>'+
                                                                 '</tfoot>'+
+                                                                '<tfoot>'+
+                                                                    '<th style="color:black !important;" >Total</th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th style="color:black !important;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
+                                                                    '</th>'+
+                                                                '</tfoot>'+
+                                                                
                                                             '</table>'+
                                                         '</div>'+
                                                     '<div>'+
@@ -653,7 +666,7 @@
         var pcant=$('#Pcantidad').val();
         var sel=$('#prod-selec').val();
         var descuento=$('#pdescuento').val();
-        // console.log(descuento);
+        var cantt=$("#canTT").val();
         nomTablero=$('#prod-selec').val();
         var filas;
         // console.log(idProd,pname);
@@ -681,7 +694,7 @@
                         }
                         if(boolfila==false){
                             console.log("produc nuevoo",contp);
-                            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:1,fila:""};
+                            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,cantidadT:cantt,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:1,fila:""};
                             filaob.push(dat);
                             fila();
                             contp++;
@@ -712,6 +725,8 @@
                             var cantidad=parseFloat(filaob[fila]['cantidadP']);
                             var precio=parseFloat(filaob[fila]['prec_uniP']);
                             var descuento=parseFloat(filaob[fila]['descuentoP']);
+                            var cantidadTab=parseFloat(filaob[fila]['cantidadT']);
+
                             var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                             if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
                                 filas=
@@ -807,7 +822,9 @@
                                 var precio=parseFloat(filaob[fila]['prec_uniP']);
                                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                                var cantidadTab=parseFloat(filaob[fila]['cantidadT']);
                                 sub+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+
                                 // console.log(sub,"---");
                             }                            
                         }
@@ -819,6 +836,8 @@
             }            
         }
     }
+
+    
     function subTotal(){
         // la suma de tosos los tableros        
         var sub=0;        
@@ -910,6 +929,7 @@
         valorVenta();
         igv();
         total();
+        
     }
     function eliminar(index){
         // elimina las filas de un tablero especifico 

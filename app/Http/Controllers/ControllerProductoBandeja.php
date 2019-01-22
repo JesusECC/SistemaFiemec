@@ -34,7 +34,7 @@ class ControllerProductoBandeja extends Controller
        ->orderby('promedio','asc')
        ->paginate(10);
 
-       return view('proforma.producto.productobandeja.index',["producto"=>$producto,"searchText"=>$query]);
+       return view('proforma.producto.productobandejas.index',["producto"=>$producto,"searchText"=>$query]);
 
 
     }

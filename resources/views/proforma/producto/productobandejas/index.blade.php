@@ -42,7 +42,7 @@
 				            </tr>
 				        </thead>
 				        <tbody>
-				        	@foreach($productos as $pro)
+				        	@foreach($producto as $pro)
 				        	<tr>
 				        		<td>
 				        			{{$pro->idProducto}}
@@ -70,7 +70,7 @@
 				            </tr>
 				        </tfoot>
     				</table>
-    				{{$productos->render()}}
+    				{{$producto->render()}}
 				</div>
               </div><!-- /.box -->
             </div><!-- /.col -->
