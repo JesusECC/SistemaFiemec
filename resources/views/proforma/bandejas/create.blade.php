@@ -710,8 +710,8 @@
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                      
                     if(promedio==1){
-                    var subt2=(((precioga+preciope)*tram)+preciota)-10;
-                    var subt=((((precioga+preciope)*tram)+preciota)-10)*cantidad;
+                    var subt2=(((precioga+preciope)*tram)+preciota);
+                    var subt=(((precioga+preciope)*tram)+preciota)*cantidad;
                     
                     filas=
                         '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
@@ -985,7 +985,6 @@
             detalleFilas();
         }
         subTotal();
-       
         valorVenta();
         igv();
         total();
