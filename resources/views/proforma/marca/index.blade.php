@@ -59,7 +59,7 @@
 									
 								</td>
                             </tr>
-                           
+                           @include('proforma.marca.modal')
 				        		
 							@endforeach
 				        </tbody>

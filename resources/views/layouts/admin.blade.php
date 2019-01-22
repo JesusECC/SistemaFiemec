@@ -207,10 +207,17 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.3.0
         </div>
-        <strong>Copyright &copy; 2018 <a href="www.incanatoit.com">KMT ADVANCE SYSTEMS</a>.</strong> All rights reserved.
+        <strong>
+          <span class="pi-header-block pi-header-block-txt">
+            <script type="text/javascript">
+              copyright=new Date();
+              update=copyright.getFullYear();
+              document.write("  © Copyright –  MANTIS CODE 2018 - " + update + " " );
+            </script> 
+          </span>
+        </strong> All rights reserved.
       </footer>
-</div>
-      
+
     <!-- jQuery 2.1.4 -->
     <!-- jQuery 2.1.4 -->
     <script src="{{asset("js/jQuery-2.1.4.min.js")}}"></script>

@@ -24,6 +24,7 @@ class ControllerMarca extends Controller
     {
        $query=trim($request->get('searchText'));
        $marcas=DB::table('Marca')
+       ->where('nombre_proveedor','LIKE','%'.$query.'%')
        ->where('estadoMa','=',1)
        ->paginate(10);
        return view('proforma.marca.index',["marcas"=>$marcas,"searchText"=>$query]);
@@ -65,7 +66,7 @@ return Redirect::to('proforma/marca');
   public function destroy($id)
   {
     $Empleado=Marca::findOrFail($id);
-    $Empleado->estadoMa=1;
+    $Empleado->estadoMa=0;
     $Empleado->update();
     return Redirect::to('proforma/marca');
 
