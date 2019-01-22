@@ -60,6 +60,22 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
     Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
 
+
+     Route::resource('proforma/producto/productobandeja','ControllerProductoBandeja');
+
+    //Se crea las rutas para productos-Bandeja 
+    /*    Route::get('producto/productobandeja',['as'=>'productobandeja','uses'=>'ControllerProductoBandeja@index']);
+
+        Route::get('producto/productobandejas/create',['as'=>'productobandejas-create','uses'=>'ControllerProductoBandeja@create']);
+      Route::post('producto/productobandejas',['as'=>'productobandejas-store','uses'=>'ControllerProductoBandeja@store']);
+      
+    */
+       // Route::get('productosbandeja/{idEmpleado}/edit',['as'=>'empleado-edit','uses'=>'ControllerEmpleados@edit']);
+
+
+
+
+
     //se crea las rutas para catalago 
     Route::get('catalogo',['as'=>'catalogo','uses'=>'ControllerCatalogo@index']);
     Route::get('catalogo/show/{idProducto}',['as'=>'catalogo-show','uses'=>'ControllerCatalogo@show']);
