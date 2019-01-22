@@ -155,7 +155,7 @@
                 
               </ul>
             </li>
-            
+            <!--
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-clipboard-list"></i>
@@ -170,7 +170,7 @@
                 <li><a href="{{ route('tablero')}}"><i class="fas fa-circle-notch"></i> Proforma de Tableros</a></li>
               </ul>
             </li>
-                       
+               -->        
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-folder"></i> <span>Acceso</span>
