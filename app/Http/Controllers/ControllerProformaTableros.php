@@ -438,5 +438,15 @@ public function pdf2($id){
         $producto->update();
         return Redirect::to('tableros');
     }
+
+    public function representante(Request $request)
+    {
+        $idCliente=$request->get('cliente');
+        $cliente=DB::table('Cliente_Representante')
+        ->where('idCliente','=',$idCliente)
+        ->get();
+        // dd($request);
+        return ['cliente' =>$cliente,'veri'=>true];
+    }
 }
 

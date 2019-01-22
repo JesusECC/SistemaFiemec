@@ -78,9 +78,10 @@
                                                 <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="Número de Documento">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text"  name="cliente_empleado" id="cliente_empleado"  class="form-control" placeholder="Ingrese Nombre del Empleado">
+                                                <select required name="cliente_empleado" class="form-control " id="cliente_empleado" >
+                                               </select> 
                                             </div>
                                         </div>
                                     </div>
@@ -138,43 +139,53 @@
                                         </label>
                                     </div>
                                     <div class="row"  style="margin-top:20px">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-8">
                                             <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Producto</label>
                                                 <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
-                                                   <option value="{{ $producto->idProducto }}_{{ $producto->productos2 }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{$producto->codigo_producto}} | {{$producto->nombre_producto}} | {{ $producto->marca_producto}}</option>
+                                                   <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->promedio}}">{{$producto->codigo_producto}} | {{$producto->nombre_producto}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
                                         </div>
+
                                         <div class="col-sm-2">
                                             <div class="form-group label-floating">
-                                                <label for="" class="control-label">Espesor</label>
-                                                <input type="number"  id="pespesor" class="form-control" name="pespesor"  >  
+                                                <label for="" class="control-label">Acc. %</label>
+                                                <input type="text"  id="pacc" class="form-control" name="pacc"  >  
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="" class="control-label">Accesorios</label>
-                                                <select name="pacc" class="form-control selectpicker" id="pacc" data-live-search="true">
-                                                    <option value="" selected="" disabled="">Seleccione Accesorio</option>
-                                                    
-                                                   <option value=""></option>
-                                                   
-                                                </select>                                                   
+                                        <div class="col-sm-2">
+                                            <div class="form-group label-floating">
+                                                <label for="" class="control-label">Espesor</label>
+                                                <input type="text"  id="pespesor" class="form-control" name="pespesor"  >  
                                             </div>
                                         </div>
                                          
-                                         <div class="col-sm-4">
+                                         <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Tramo</label> 
+                                                 <select name="ptramo" class="form-control selectpicker" id="ptramo" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Tramo</option>
+                                                    <option value="2.4">2400mm</option>
+                                                    <option value="3">3000mm</option>
+                                                   
+                                                </select>                                                  
+                                            </div>
+                                        </div>
+                                          
+
+                                         <div class="col-sm-3">
                                             <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Galvanizado</label>
-                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                                    <option value="" selected="" disabled="">Seleccione Tipo de Galvanizado</option>
-                                                    
-                                                   <option value=""></option>
+                                                <select name="pgalvanizado" class="form-control selectpicker" id="pgalvanizado" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Galvanizado</option>
+                                                    @foreach($galvanizado as $gal)                
+                                                        <option value="{{$gal->idGalvanizado}}_{{$gal->nombreGalvanizado}}">{{$gal->nombreGalvanizado}}</option>
+                                                    @endforeach  
                                                    
                                                 </select> 
                                             </div>
@@ -186,30 +197,70 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Pintado</label>
-                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                                    <option value="" selected="" disabled="">Seleccione tipo de Pintado</option>
-                                                    
-                                                   <option value=""></option>
-                                                   
+                                                <select name="ppintado" class="form-control selectpicker" id="ppintado" data-live-search="true">
+                                                    <option value="" selected="" disabled="">Seleccione Tipo de Pintado</option value="" disabled="" selected="">Seleccione Pintado</option>
+                                                    @foreach($pintado as $pin)                
+                                                        <option value="{{$pin->idPintado}}">{{$pin->nombrePintado}}</option>
+                                                    @endforeach
                                                 </select> 
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Precio Pin.</label>
-                                                 <input type="number"  id="ppreciog" class="form-control" name="ppreciog">                                                   
+                                                 <input type="number"  id="ppreciop" class="form-control" name="ppreciop"> 
                                             </div>
                                         </div>
 
-
-                                        
-                                        <div class="col-sm-2" style="margin-top:20px">
+                                        <div class="col-lg-4" style="margin-top:20px">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Promedio %</label>
-                                                <input type="number" id="ppromedio" class="form-control" name="ppromedio" step="any" >
+                                                <label class="control-label">Medidas</label>
+                                                <input type="text"  id="medidasp" class="form-control" name="medidasp"  >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3" style="margin-top:20px">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Dimenciones</label> 
+                                                 <select name="pdimencion" class="form-control selectpicker" id="pdimencion" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Dimenciones</option>
+                                                    <option value="unds">Unidades</option>
+                                                    <option value="mtrs">Metros</option>
+                                                    <option value="cm">Centimentros</option>
+                                                    <option value="mm">Milimetros</option>
+                                                </select>                                                  
+                                            </div>
+                                        </div>
+                                         
+
+                                         <div class="col-lg-3" style="margin-top:20px">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Tapa</label> 
+                                                  <select name="ptapa" class="form-control selectpicker" id="ptapa" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Tapa</option>
+                                                    <option value="Con tapa" >Con tapa</option>
+                                                    <option value="Sin Tapa" >Sin tapa</option>
+                                                </select>                                                        
+                                            </div>
+                                        </div>
+
+                                         <div class="col-lg-2" style="margin-top:20px">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Precio de Tapa</label>
+                                                 <input type="number"  id="ppreciot" class="form-control" name="ppreciot">                                                   
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="margin-top:19px">
+                                            <div class="" id="producto-oculto">
+                                                <label for="" class="control-label">Promedio</label>
+                                                    <select name="ppromedio" class="form-control selectpicker" id="ppromedio" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Promedio</option>
+                                                    <option value="1" >Menos 10%</option>
+                                                    <option value="2" >Mas 10%</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-2" style="margin-top:20px">
@@ -219,6 +270,8 @@
                                             </div>
                                         </div> 
                                         
+                                         
+
                                         <div class="col-lg-6" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Descripcion</label>
@@ -240,7 +293,7 @@
                                                 <div class="col-md-12">
                                                     <div class="box">
                                                         <div class="box-header with-border" style="padding:5px !important;">
-                                                        <p> Proforma de Bandejas: </p>
+                                                        <p> Proforma de Bandejas </p>
                                                             <div class="box-tools pull-right">
                                                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                             </div>
@@ -250,13 +303,12 @@
                                                                 <div class="col-md-12 table-responsive">
                                                                     <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
                                                                         <thead style="background-color:#A9D0F5;text-align: center;color: black !important" >
+                                                                            
                                                                             <th>Producto</th>
-                                                                            <th>Medidas</th>
-                                                                            <th>Descr.</th>
+                                                                            <th>Unds.</th>
                                                                             <th>Cant.</th>
                                                                             <th>P. Unit.</th>
-                                                                            <th>Desc</th>
-                                                                            <th>Importe</th>
+                                                                            <th>total</th>
                                                                             <th>Opciones</th>
                                                                         </thead>
                                                                         <tbody id="tablero_unitario">
@@ -323,8 +375,7 @@
                                                             <div class="col-sm-4">
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> IGV %</label>
-                                                                    <div class="input-group ">
-                                                                        <h4 class="form-control" id="igv">    
+                                                                    <div class="input-group ">   
                                                                         <h4 id="igv">s/. 0.00</h4><input type="hidden" name="igv" id="igv">
                                                                     </div> 
                                                                    
@@ -410,7 +461,18 @@
 </section><!-- /.content -->
 
 @push('scripts')
+
 <script>
+
+
+    var selectCliente = document.getElementById('idClientes');
+    selectCliente.addEventListener('change',function(){
+        var selectedOption = this.options[selectCliente.selectedIndex];
+        var selctedid=selectedOption.value.split('_');
+        representante(selctedid[0]);
+        
+    });
+
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
             valoresFinales();
@@ -450,15 +512,27 @@
     var subtotal=0;
     var nomTablero='unitaria';
     var idcliente;
-    var idmedidas;
     var totalt;
     var valorventa;
     var tipocam;
     var simbolo;
     var totaldolares=0;
+    var iduser={!! Auth::user()->id !!}
     $("#pidProducto").change(MostarProducto);
-    $("#idMedidas").change(MostrarMedida);
+
     $("#idTipo_moneda").change(cambioMoneda);
+
+    function cambiaropcion(){
+        Producto=document.getElementById('pidProducto').value.split('_');
+        var precio_unitario=Producto[2];
+       if(precio_unitario==0.00 || precio_unitario==null){
+            $('#precio_uni').attr("disabled", false);
+        }
+        else{
+           $('#precio_uni').attr("disabled", true); 
+        }
+   }
+
     
     function MostrarCliente(){
        
@@ -467,20 +541,11 @@
         $("#cdireccion").val(Cliente[1]);
         $("#cnro_documento").val(Cliente[2]);
     }
-
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
-        
-        $("#pdescuento").val(Producto[3]);
-        
+        $("#pacc").val(Producto[4]);
+        cambiaropcion();
     }
-    
-    function MostrarMedida(){
-        Medidas=document.getElementById('idMedidas').value.split('_');
-        idmedidas=Medidas[0];
-        $("#precio_uni").val(Medidas[1]);
-        }
-
     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
         $("#simbolo").val(tipoCambio[2]);
@@ -495,6 +560,41 @@
         document.getElementById('producto-oculto').style.display = 'block';
     } 
 
+
+    function representante(idCliente){
+        console.log(idCliente,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{cliente:idCliente}, //datos que se envian a traves de ajax
+            url:'cli', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var representante=response.cliente;
+                    var va;
+                    console.log(representante);
+                    va='<option value="" disabled="" selected="">Seleccione</option>'
+                    for(const i in representante){
+                        va+='<option value="'+representante[i]['idCR']+'">'+representante[i]['nombre_RE']+'</option>';                 
+                    }
+                    $("#cliente_empleado").html(va); 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+
     function saveProforma(){
         // se enviar los datos al controlador proforma tableros
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
@@ -505,12 +605,11 @@
         var forma=$("#forma_de").val();
         var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
-        var observacion=$("#observacion_condicion").val();
-        var incluye=$("#incluye").val();
-        var plazofabri=$("#plaza_fabricacion").val();
-        
+        var observacion=$("#observacion").val();
+        console.log(iduser);
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,incluye:incluye,plazofabri:plazofabri,clienteemp:clienteemp}];
+            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp,simbolo:simbolo,userid:iduser}];
+            // var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
@@ -534,29 +633,37 @@
     var bool;
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
+        Galvanizado=document.getElementById('pgalvanizado').value.split('_');
         var idProd=Producto[0];
-        var idMed=Medidas[0];
         var pname=Producto[1];
-        var mname=Medidas[2];
+        var idGal=Galvanizado[0];
+        var gname=Galvanizado[1];
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
+        var preciog=$('#ppreciog').val();
+        var preciop=$('#ppreciop').val();
+        var preciot=$('#ppreciot').val();
+        var tra=$('#ptramo').val();
+        var pro=$('#ppromedio').val();
         var pcant=$('#Pcantidad').val();
-        var pesp=$('#pespesor').val();
-        /*var pcant=$('#Pcantidad').val();*/
+        var med=$('#medidasp').val();
+        var tap=$('#ptapa').val();
+        var esp=$('#pespesor').val();
+        var dim=$('#pdimencion').val();
         var descuento=$('#pdescuento').val();
         var filas;
-        if(nomTablero!="" && idMed!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && pesp!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
-            document.getElementById('totales-general').style.display = 'block';
+        if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
+
+            if(pcant!=0){
+                document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
             bool=true;
-for (const fil in filaob) {
-if (filaob.hasOwnProperty(fil)) {
- if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['idMedidas']==idMed){
-                         var es=parseInt(pesp);
+            for (const fil in filaob) {
+                if (filaob.hasOwnProperty(fil)) {
+                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd){
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
-                        filaob[fil]['espesorP']=es;
                         filaob[fil]['cantidadP']=su;
                         filaob[fil]['descuentoP']=des;
                         filaob[fil]['descripcionP']=pdescripcion;
@@ -567,72 +674,147 @@ if (filaob.hasOwnProperty(fil)) {
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,idMedidas:idMed,medida:mname,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,espesorP:pesp,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:""};
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,fila:""};
                 filaob.push(dat);
                 fila();
                 contp++;            
             }
             valoresFinales();            
+            }else{
+            
+            alert("La cantidad no puede ser '0' ");
+
+
+            }
         }else{
             alert("Ingresar Datos del Producto!! o datos del tipo de cambio");
         }
     }
+
     function fila(){
         // realiza la insercion de las filas agregadas actualizando los importes y las cantidaddes
         if(filaob.length>0){
             var filas;
             for (const fila in filaob) {
-                if (filaob.hasOwnProperty(fila)) {   
-                    var espesor=parseFloat(filaob[fila]['espesorP']);
+                if (filaob.hasOwnProperty(fila)) {                            
                     var cantidad=parseFloat(filaob[fila]['cantidadP']);
                     var precio=parseFloat(filaob[fila]['prec_uniP']);
+                    var precioga=parseFloat(filaob[fila]['prec_gal']);
+                    var preciope=parseFloat(filaob[fila]['prec_pin']);
+                    var preciota=parseFloat(filaob[fila]['prec_tap']);
+                    var tram=parseFloat(filaob[fila]['tramo']);
+                    var promedio=parseFloat(filaob[fila]['promed']);
+                    var medidas=parseFloat(filaob[fila]['medi']);
+                    var tapas=parseFloat(filaob[fila]['tapa']);
+                    var dimenciones=parseFloat(filaob[fila]['dimencion']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
-                    var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                     
+                    if(promedio==1){
+                    var subt2=(((precioga+preciope)*tram)+preciota)-10;
+                    var subt=((((precioga+preciope)*tram)+preciota)-10)*cantidad;
+                    
                     filas=
-                        '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                            '<td style="color: black !important;"> '+ 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
-                            '</td>'+
-                            '<td style="color: black !important;> '+ 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idMedidas']+'">'+filaob[fila]['medida']+' | Con un espesor de '+
+                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
+                            '<td class="text-center"> '+ 
+                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+ ' de ' +
 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesorP']+'">'+filaob[fila]['espesorP']+' mm'+
-                            '</td>'+
-                            '<td style="color: black !important;> '+ 
-                                '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medi']+'">'+filaob[fila]['medi']+' fabricado en plancha galvanizada LAC/LAF acabado '+
 
-                                
+                               '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idGalvanizado']+'">'+filaob[fila]['galvanizado']+', Espesor de '+
+
+                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de'+
+
+                                '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tramo']+'">'+filaob[fila]['tramo']+' metros. Fabricado bajo la norma NEMA V-1 y recomendacion de la NFPA-70. '+
+
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+'. '+
+
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+
                             '</td>'+
-                            '<td style="color: black !important;> '+ 
-                                '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
+
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimencion']+'">'+filaob[fila]['dimencion']+
                             '</td>'+
-                            '<td style="color: black !important;> '+   
-                                '<input type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+filaob[fila]['prec_uniP']+
+                            
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                             '</td>'+
-                            '<td style="color: black !important;> '+   
-                                '<input type="hidden" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+filaob[fila]['descuentoP']+
+
+                            '<td class="text-center"> '+   
+                                '<input style="width:60px !important;" width="40px" type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+subt2.toFixed(2)+'" >'+subt2.toFixed(2)+
                             '</td>'+
-                            '<td style="color: black !important;> '+   
-                                '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2) +' '+ 
+                            
+                            '<td class="text-center"> '+   
+                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2)+
                             '</td>'+
-                            '<td style="color: black !important;>'+
-                                '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
-                                        '<i class="fas fa-trash"></i>'+
-                                '</button>'+
+                            '<td class="text-center">'+
+                                '<center>'+
+                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
+                                            '<i class="fas fa-trash"></i>'+
+                                    '</button>'+                                
+                                '</center>'+
+
                             '</td>'+
                         '</tr>';  
                     filaob[fila]['fila']=filas;
                     filas="";   
-
                     limpiar();                               
+                }else if(promedio==2){
+
+                var subt2=(((precioga+preciope)*tram)+preciota)+10;
+                var subt=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
+                    
+                    filas=
+                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
+                            '<td class="text-center"> '+ 
+                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+ ' de ' +
+
+                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medi']+'">'+filaob[fila]['medi']+' fabricado en plancha galvanizada LAC/LAF acabado '+
+
+                               '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idGalvanizado']+'">'+filaob[fila]['galvanizado']+', Espesor de '+
+
+                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de'+
+
+                                '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tramo']+'">'+filaob[fila]['tramo']+' metros. Fabricado bajo la norma NEMA V-1 y recomendacion de la NFPA-70. '+
+
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+'. '+
+
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+
+                            '</td>'+
+
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimencion']+'">'+filaob[fila]['dimencion']+
+                            '</td>'+
+                            
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
+                            '</td>'+
+
+                            '<td class="text-center"> '+   
+                                '<input style="width:60px !important;" width="40px" type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+subt2.toFixed(2)+'" >'+subt2.toFixed(2)+
+                            '</td>'+
+                            
+                            '<td class="text-center"> '+   
+                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2)+
+                            '</td>'+
+                            '<td class="text-center">'+
+                                '<center>'+
+                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
+                                            '<i class="fas fa-trash"></i>'+
+                                    '</button>'+                                
+                                '</center>'+
+
+                            '</td>'+
+                        '</tr>';  
+                    filaob[fila]['fila']=filas;
+                    filas="";   
+                    limpiar();   
                 }
-            }                    
-        }
-    }    
+            }
+         }                    
+     }
+}   
 
-
-
-     function limpiar(){
+    function limpiar(){
         $("#Pcantidad").val("");
        
         
@@ -650,39 +832,75 @@ if (filaob.hasOwnProperty(fil)) {
         fil='';
     }
     function subTotal(){
-        // la suma de tosos los tableros        
-        var sub=0;        
+        // la suma de tosos los tableros
+         
+
+        var sub=0;  
+
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
+
+            var promedio=parseFloat(filaob[fila]['promed']);
+
+            if (filaob.hasOwnProperty(fila) && promedio==1) {
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                var tram=parseFloat(filaob[fila]['tramo']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var descuento=parseFloat(filaob[fila]['descuentoP']);
-                sub+=cantidad*precio;              
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+                
+                sub+=((((precioga+preciope)*tram)+preciota)-10)*cantidad; 
+
+                      
+            }else if(filaob.hasOwnProperty(fila) && promedio==2){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                sub+=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
+ 
+
             }
+
         }
         $("#subtotal").html("s/. " + sub.toFixed(2));
     }
-    function descuentos(){
-        var desc=0;
-        for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var descuento=parseFloat(filaob[fila]['descuentoP']);
-                desc+=((precio*(descuento/100)*cantidad));                       
-            }
-        }
-        $("#descuentos").html("s/. "+desc.toFixed(2));
-    }
+
+
     function valorVenta(){
         var venta=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila)) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
+            var promedio=parseFloat(filaob[fila]['promed']);
+
+            if (filaob.hasOwnProperty(fila) && promedio==1) {
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                var tram=parseFloat(filaob[fila]['tramo']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var descuento=parseFloat(filaob[fila]['descuentoP']);
-                venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+                
+                venta+=((((precioga+preciope)*tram)+preciota)-10)*cantidad; 
+
+                      
+            }else if(filaob.hasOwnProperty(fila) && promedio==2){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                venta+=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
+ 
+
             }
+
         }
         valorventa=venta.toFixed(2);
         $("#valorVenta").html("s/. " + venta.toFixed(2));
@@ -701,6 +919,8 @@ if (filaob.hasOwnProperty(fil)) {
         ig=venta*0.18;
         $("#igv").html("s/. " + ig.toFixed(2));
     }
+
+    
     function total(){
         var venta=0;   
         var igv=0;  
@@ -725,7 +945,7 @@ if (filaob.hasOwnProperty(fil)) {
             detalleFilas();
         }
         subTotal();
-        descuentos();
+       
         valorVenta();
         igv();
         total();
@@ -762,6 +982,7 @@ if (filaob.hasOwnProperty(fil)) {
 </script>
 @endpush
 @endsection
+
 
 
 

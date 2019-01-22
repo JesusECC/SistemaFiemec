@@ -584,6 +584,7 @@ alert("La cantidad no puede ser '0' ");
                     var cantidad=parseFloat(filaob[fila]['cantidadP']);
                     var precio=parseFloat(filaob[fila]['prec_uniP']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
+
                     var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                     filas=
                         '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%;">'+
@@ -693,8 +694,6 @@ alert("La cantidad no puede ser '0' ");
     }
 
     
-
-
     function total(){
         var venta=0;   
         var igv=0;  

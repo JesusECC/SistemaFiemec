@@ -46,9 +46,19 @@ public function create()
 {
  $productos=DB::table('Producto as po')
  ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
- ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema','po.nombre_producto','po.codigo_producto','po.marca_producto','descripcion_producto',DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto," | ",po.marca_producto) as productos2'))
+ ->select('po.promedio','po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema','po.nombre_producto','po.codigo_producto','po.marca_producto','descripcion_producto',DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto," | ",po.marca_producto) as productos2'))
  ->where('po.tipo_producto','=','bandejas')
+ ->orwhere('po.tipo_producto','=','accesorios')
  ->where('po.estado','=','activo')
+ ->get();
+
+ $accesorios=DB::table('Accesorios')
+ ->get();
+
+ $galvanizado=DB::table('Galvanizado')
+ ->get();
+
+  $pintado=DB::table('Pintado')
  ->get();
 
  $medidas=DB::table('Medidas')
@@ -59,12 +69,16 @@ public function create()
  ->where('estado','=','1')
  ->get();
 
+ $representante=DB::table('Cliente_Representante') 
+    ->where('estadoCE','=',1)
+    ->get();
+
  $clientes=DB::table('Cliente_Proveedor as cp')
  ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
 ->where('cp.estado','=','1')
 ->get();
 
- return view("proforma.bandejas.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"medidas"=>$medidas]);
+ return view("proforma.bandejas.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"medidas"=>$medidas,"accesorios"=>$accesorios,"galvanizado"=>$galvanizado,"pintado"=>$pintado,"representante"=>$representante]);
 }
 
 public function store(Request $request)
@@ -412,5 +426,15 @@ public function edit($id)
         return Redirect::to('bandejas');
 
 
+    }
+
+    public function representante(Request $request)
+    {
+        $idCliente=$request->get('cliente');
+        $cliente=DB::table('Cliente_Representante')
+        ->where('idCliente','=',$idCliente)
+        ->get();
+        // dd($request);
+        return ['cliente' =>$cliente,'veri'=>true];
     }
 }

@@ -42,6 +42,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('proforma/tablero/pdf/{idProforma}',['as'=>'tablero-pdf','uses'=>'ControllerProformaTableros@pdf']);
     Route::get('proforma/tablero/pdf2/{idProforma}',['as'=>'tablero-pdf2','uses'=>'ControllerProformaTableros@pdf2']);
     Route::get('proforma/tablero/pdf3/{idProforma}',['as'=>'tablero-pdf3','uses'=>'ControllerProformaTableros@pdf3']);
+    Route::post('tableros/cli',['as'=>'clientes-representante','uses'=>'ControllerProformaTableros@representante']);
    
    
 
@@ -90,6 +91,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::delete('bandejas/eliminar/{id}',['as'=>'bandejas-eliminar','uses'=>'ControllerBandejas@destroy']);
     Route::get('bandejas/editar/{id}',['as'=>'bandejas-edit','uses'=>'ControllerBandejas@edit']);
     Route::post('bandejas/editar/modificar',['as' => 'bandejas-update','uses'=>'ControllerBandejas@update']); 
+    Route::post('bandejas/cli',['as'=>'clientes-representante','uses'=>'ControllerBandejas@representante']);
     
     //Se crea rutas servicios
      Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);
