@@ -64,10 +64,13 @@ Route::middleware(['auth','admin'])->group(function () {
      
 
     //Se crea las rutas para productos-Bandeja 
-Route::get('productobandejas',['as'=>'productobandeja','uses'=>'ControllerProductoBandeja@index']);
-Route::get('producto/productobandejas/create',['as'=>'productobandejas-create','uses'=>'ControllerProductoBandeja@create']);
+Route::get('productobandejas',['as'=>'productobandejas','uses'=>'ControllerProductoBandeja@index']);
+Route::get('productobandejas/create',['as'=>'productobandejas-create','uses'=>'ControllerProductoBandeja@create']);
 Route::post('producto/productobandejas',['as'=>'productobandejas-store','uses'=>'ControllerProductoBandeja@store']);
-      
+Route::get('producto/{idProducto}/edit',['as'=>'productobandejas-edit','uses'=>'ControllerProductoBandeja@edit']);    
+//Route::post('productobandejas/edit/update',['as' => 'productobandejas-update','uses'=>'ControllerProductoBandeja@update']);
+
+
     
        // Route::get('productosbandeja/{idEmpleado}/edit',['as'=>'empleado-edit','uses'=>'ControllerEmpleados@edit']);
 
@@ -109,7 +112,7 @@ Route::post('producto/productobandejas',['as'=>'productobandejas-store','uses'=>
     Route::post('bandejas/cli',['as'=>'clientes-representante','uses'=>'ControllerBandejas@representante']);
     
     //Se crea rutas servicios
-     Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);
+    Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);
     Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProformaServicio@create']);
     Route::post('servicios/guardar',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
     Route::get('servicios/show/{id}',['as'=>'servicio-show','uses'=>'ControllerProformaServicio@show']);

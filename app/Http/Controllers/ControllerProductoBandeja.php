@@ -31,7 +31,9 @@ class ControllerProductoBandeja extends Controller
        $query=trim($request->get('searchText'));
        $producto=DB::table('Producto')
        ->where('nombre_producto','LIKE','%'.$query.'%')
-       ->orderby('promedio','asc')
+       ->where('tipo_producto','=','accesorios')
+        ->orwhere('tipo_producto','=','bandejas')
+       ->orderby('idProducto','asc')
        ->paginate(10);
 
        return view('proforma.producto.productobandejas.index',["producto"=>$producto,"searchText"=>$query]);
@@ -76,20 +78,38 @@ public function store(Request $request){
             return redirect::to('producto/productobandejas');
           }
 
+
+
+
 public function edit($id)
     {
         
-       
+        return view("proforma.producto.productobandejas.edit",["productobandejas"=>Producto::findOrFail($id)]);
     }
+
+
+
 
         public function update(Request $request,$id)
     {
+                 $productobandejas=Producto::Find($id);
+                  $productobandejas->nombre_producto=$request->get('nombre_producto');
+                  $productobandejas->promedio=$request->get('promedio');
+                   
+                  $productobandejas->update();
+ 
+            
+            return redirect::to('producto/productobandejas');
 
     }
 
-    public function destroy($id)
+  public function destroy($id)
     {
-        
+        $productobandejas=Producto::findOrFail($id);
+        $productobandejas->estado=0;
+        $productobandejas->update();
+        return Redirect::to('producto/productobandejas');
+
 
     }
 

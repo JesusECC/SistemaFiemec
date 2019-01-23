@@ -38,35 +38,48 @@
 				    @endif
 
 				</div>
-                <!-- /.box-header -->
+                <!-- /.box-header  productobandejas-create-->
                 	{!!Form::open(array('url'=>'producto/productobandejas','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
 
     				{{Form::token()}}
-				<div class="box-body bg-gray-c">
-					<div class="row">
-						<div class="col-md-8">
-							<div class="panel panel-default panel-shadow">
-								<div class="panel-body">
-									
+					<div class="box-body bg-gray-c">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="nav-tabs-custom">
 										
-					
-							
-									<div class="row">
+										<div class="tab-content">
+											<div class="active tab-pane" id="dni">
+												<div class="panel panel-default panel-shadow">
+													<div class="panel-body">
+														<div class="form-group">
+															<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
+																Registro de Bandejas -  Accessorios
+															</label>
+														</div>
+														
 										<div class="col-sm-4">
 											<div class="form-group">
-                        <label>Nombre Accesorio</label>  
-												<input type="text" name="nombre_producto" id="nombre_producto" class="form-control" placeholder="Nombre del Color">	
+                       					 <label>Nombre Accesorio</label>  
+												<input type="text" name="nombre_producto" id="nombre_producto" class="form-control" placeholder="Nombre del Accesorio">	
 											</div> 												
 										</div>
 										<div class="col-sm-4">
 											<div class="form-group">
-                        <label>Promedio</label>
+                      				  		<label>Promedio</label>
 												<input  type="number" id="promedio" name="promedio" class="form-control"  placeholder="Promedio">	
-											</div>													
-                    </div>
-                <div class="box-footer">
+											</div>					
+														
+														</div>
+													</div>
+												</div>										
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
                   <div class="text-right">
-                      <button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Agregar</button>
+                     	<button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
                     <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
                    
                   </div>
@@ -75,5 +88,5 @@
               {!!Form::close()!!}
             </div><!-- /.col -->
           </div><!-- /.row -->
-</section>
+</section><!-- /.content -->
 @endsection

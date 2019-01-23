@@ -25,7 +25,8 @@ class Producto extends Model
         'tipo_producto',
     	'categoria_producto',
     	'fecha_sistema',
-    	'estado', 
+    	'estado',
+        'promedio',
    ];
 
    protected $guarded =[

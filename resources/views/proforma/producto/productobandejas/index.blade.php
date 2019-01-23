@@ -20,7 +20,7 @@
 				<div class="box-header with-border" style="padding: 10px !important">
 					<h4>
 						<strong style="font-weight: 400">
-							<i class="fas fa-list-ul"></i> Lista de Productos-Bandejas Fiemec
+							<i class="fas fa-list-ul"></i> Lista de Accesorios y Bandejas Fiemec
 						</strong>
 					</h4>
 					<div class="ibox-title-buttons pull-right">
@@ -35,7 +35,7 @@
 					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%;font-size: 11px !important">
 				       <thead>
 				            <tr>
-				                <th>N° Serie</th>
+				                <th>ID</th>
 				                <th>Nombre</th>
 				                <th>Promedio</th>
 				               
@@ -48,27 +48,20 @@
 				        			{{$pro->idProducto}}
 				        		</td>
 				        		<td>
-				        			{{$pro->codigo_producto}}
+				        			{{$pro->nombre_producto}}
 				        		</td>
 				        		<td>
 				        			{{$pro->promedio}}
 				        		</td>
 				        		<td align="center">
-									<a href="{{route('producto-edit',$pro->idProducto)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> </a>
-									<a href="" data-target="#modal-delete-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Producto"><i class="fas fa-trash-alt"></i> </a>
+									<a href="{{route('productobandejas-edit',$pro->idProducto)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Bandeja o Accesorio"></i> </a>
+									<a href="" data-target="#modal-delete-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Bandeja o Accesorio"><i class="fas fa-trash-alt"></i> </a>
 								</td>
 							</tr>
 							@include('proforma.producto.modal')
 							@endforeach
 				        </tbody>
-				        <tfoot>
-				            <tr>
-				                <th>N° Serie</th>
-				                <th>Nombre</th>
-				                <th>Promedio</th>
-				                <th>Opciones</th>
-				            </tr>
-				        </tfoot>
+				        
     				</table>
     				{{$producto->render()}}
 				</div>
