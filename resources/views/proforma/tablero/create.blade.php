@@ -604,29 +604,31 @@
                                                                 '</thead>'+
                                                                 '<tbody id="detalle_'+nomTablero+'">'+
                                                                 '</tbody>'+ 
-                                                                '<tfoot>'+
-                                                                    '<th style="color:black !important;" >Total</th>'+
-                                                                    '<th></th>'+
-                                                                    '<th></th>'+
-                                                                    '<th></th>'+
-                                                                    '<th></th>'+
-                                                                    '<th style="color:black !important;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
-                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                                    '<th></th>'+
-                                                                    '</th>'+
-                                                                '</tfoot>'+
-                                                                '<tfoot>'+
-                                                                    '<th style="color:black !important;" >Total</th>'+
-                                                                    '<th></th>'+
-                                                                    '<th></th>'+
-                                                                    '<th></th>'+
-                                                                    '<th></th>'+
-                                                                    '<th style="color:black !important;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
-                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                                    '</th>'+
-                                                                '</tfoot>'+
-                                                                
+
+                                                                '<tr>'+
+                                                                    '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
+                                                                    '<td style="border-right:1px solid white !important;"></th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
+                                                                     '</td>'+
+
+                                                                     
+                                                                '</tr>'+
+                                                                     '<tr>'+
+                                                                     '<th style="color:black !important; border-right:1px solid white !important;" >Total x Cant. de tableros</th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                     '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                          '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+ 
+                                                                     '</td>'+
+                                                                     '</tr>'+
                                                             '</table>'+
+
                                                         '</div>'+
                                                     '<div>'+
                                                 '</div>'+                                
@@ -812,6 +814,7 @@
     function subTotalTable(){
         // funcion para realizar la suma del sub total de todos los tableros que se declaran
         var sub=0;
+        var sub2=0;
         if(tablero.length>0){
             for (const key in tablero) {
                 if (tablero.hasOwnProperty(key)) {
@@ -824,15 +827,18 @@
                                 var descuento=parseFloat(filaob[fila]['descuentoP']);
                                 var cantidadTab=parseFloat(filaob[fila]['cantidadT']);
                                 sub+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                                sub2+=((cantidad*precio)-((precio*(descuento/100)*cantidad)))*cantidadTab;
 
                                 // console.log(sub,"---");
                             }                            
                         }
                     }   
                     // console.log(sub);
-                    $("#total_"+tablero[key]['nombre']).html("s/. " + sub);                 
+                    $("#total_"+tablero[key]['nombre']).html("s/. " + sub.toFixed(2));
+                    $("#total2_"+tablero[key]['nombre']).html("s/. " + sub2.toFixed(2));                 
                 }
                 sub=0;
+                sub2=0;
             }            
         }
     }

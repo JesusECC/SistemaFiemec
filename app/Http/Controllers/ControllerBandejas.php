@@ -98,6 +98,8 @@ public function store(Request $request)
         $observacion;
         $incluye;
         $plazofabri;
+        $iduser;
+        $garantias;
 // [{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldola:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,
 //     forma:forma,plazo:plazo,observacion:observacion}];
            
@@ -115,12 +117,14 @@ public function store(Request $request)
             $observacion=$dato['observacion'];
             $incluye=$dato['incluye'];
             $plazofabri=$dato['plazofabri'];
+            $garantias=$dato['garantias'];
+            $iduser=$dato['userid'];
         }
         $idProforma=DB::table('Proforma')->insertGetId(
             ['idCliente'=>$idclie,
-            // 'idEmpleado'=>$request->,           
+            'idEmpleado'=>$iduser,          
             'idTipo_moneda'=>$idTipoCam,
-            'serie_proforma'=>'BU365122018',
+            'serie_proforma'=>'BU365122019',
             // 'fecha_hora'=>$mytime->toDateTimeString(),
             'igv'=>'18',
             'subtotal'=>$valorv,
@@ -133,31 +137,36 @@ public function store(Request $request)
             'forma_de'=>$forma,
             // 'plaza_fabricacion'=>$request->,
             'plazo_oferta'=>$plazo,
-            // 'garantia'=>$request->,
+            'garantia'=>$garantias,
             // 'observacion_condicion'=>$request->,
             'cliente_empleado'=>$clienteemp,
             'observacion_condicion'=>$observacion,
             'incluye'=>$incluye,
             'plaza_fabricacion'=>$plazofabri,
-            'estado'=>'activo'
+            'estado'=>1,
             ]
         );
         foreach($request->filas as $fila){
-            $detalleProforma=new DetalleBandejas;
-            // $detalleProforma->idDetalle_proforma=$fila[''];	
+            $detalleProforma=new DetalleBandejas;	
             $detalleProforma->idProducto=$fila['idProducto'];
             $detalleProforma->idProforma=$idProforma;
-            $detalleProforma->idMedidas=$fila['idMedidas'];
-            // $detalleProforma->idTableros=$idTablero;
+            $detalleProforma->idGalvanizado=$fila['idGalvanizado'];  
+            $detalleProforma->idPintura=$fila['idPintado'];
+            $detalleProforma->espesor=$fila['espesor'];
             $detalleProforma->cantidad=$fila['cantidadP'];
-            $detalleProforma->precio_venta=$fila['prec_uniP'];	
-            // $detalleProforma->texto_precio_venta=$fila[''];	
-            // $detalleProforma->observacion_detalleP=$fila[''];	
-            $detalleProforma->descuento=$fila['descuentoP'];
-            $detalleProforma->espesor=$fila['espesorP'];	
-
+            $detalleProforma->precioGal=$fila['prec_gal'];
+            $detalleProforma->precioPin=$fila['prec_pin'];
+            $detalleProforma->precioTap=$fila['prec_tap'];
+            $detalleProforma->tramo=$fila['tramo'];
             $detalleProforma->descripcionDP=$fila['descripcionP'];
-            $detalleProforma->estadoDB=1;
+            $detalleProforma->estadoDB=1;	
+            $detalleProforma->medidas=$fila['medi'];	
+            $detalleProforma->dimenciones=$fila['dimencion'];
+            $detalleProforma->tapa=$fila['tapa'];
+            	
+
+            
+            
 
             $detalleProforma->save();            
         }
@@ -253,15 +262,19 @@ public function store(Request $request)
 public function pdf($id){
 
     $proforma=DB::table('Proforma as p')
-    ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma')
+    ->join('Cliente_Proveedor as cp','cp.idcliente','=','p.idcliente')
+    ->join('users as u','u.id','=','p.idEmpleado')
+    ->join('Empleado as em','em.id','=','u.idEmp')
+    ->join('Cliente_Representante as cr','cr.idCR','=','cp.idCliente')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno', DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye')
     ->where('p.idProforma','=',$id)
     ->first();
 
     $detalles=DB::table('Detalle_bandejas as db')
     ->join('Producto as pro','db.idProducto','=','pro.idProducto')
-    ->join('Medidas as m','db.idMedidas','=','m.idMedidas')
-    ->select(DB::raw('CONCAT(pro.marca_producto," | ",pro.codigo_producto," | ",pro.nombre_producto," de ",m.medida," con espesor de plancha de ",db.espesor,"mm | ",pro.descripcion_producto) as productos'),'db.cantidad','db.descuento','db.precio_venta','db.descripcionDP','m.medida','db.espesor')
+    ->join('Galvanizado as gal','gal.idGalvanizado','=','db.idGalvanizado')
+    ->join('Pintado as pin','pin.idPintado','=','db.idPintura')
+    ->select('db.idGalvanizado','pin.idPintado','pro.marca_producto','pro.codigo_producto','pro.nombre_producto','pro.descripcion_producto','db.descripcionDP','db.espesor','gal.nombreGalvanizado','pin.nombrePintado','db.espesor','db.cantidad','db.precioGal','db.precioPin','db.precioTap','db.tramo','db.medidas','db.descripcionDP','db.dimenciones','db.tapa')
     ->where('db.idProforma','=',$id)
     ->get();
 

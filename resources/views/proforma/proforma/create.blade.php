@@ -415,6 +415,7 @@
     var simbolo;
     var totaldolares=0;
     var iduser={!! Auth::user()->id !!}
+    
     $("#pidProducto").change(MostarProducto);
 
     $("#idTipo_moneda").change(cambioMoneda);

@@ -200,7 +200,7 @@
                                         <div class="col-sm-3">
                                             <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Pintado</label>
-                                                <select name="ppintado" class="form-control selectpicker" id="ppintado" data-live-search="true">
+                                                <select name="idPintado" class="form-control selectpicker" id="idPintado" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Tipo de Pintado</option value="" disabled="" selected="">Seleccione Pintado</option>
                                                     @foreach($pintado as $pin)                
                                                         <option value="{{$pin->idPintado}}">{{$pin->nombrePintado}}</option>
@@ -242,7 +242,7 @@
                                                   <select name="ptapa" class="form-control selectpicker" id="ptapa" data-live-search="true">
                                                     <option value="" disabled="" selected="">Seleccione Tapa</option>
                                                     <option value="Con tapa" >Con tapa</option>
-                                                    <option value="Sin Tapa" >Sin tapa</option>
+                                                    <option value="Sin tapa" >Sin tapa</option>
                                                 </select>                                                        
                                             </div>
                                         </div>
@@ -415,10 +415,35 @@
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Plaza de Fabricación de bandejas
+                                                                    </label>
+                                                                    <input type="text" name="plaza_fabricacion" id="plaza_fabricacion" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
                                                                     <label for="" class="control-label">Plazo de Oferta</label>
                                                                     <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
                                                                 </div>
                                                             </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Garantia
+                                                                    </label>
+                                                                    <input type="text" name="garantia" id="garantia" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Forma de entrega
+                                                                    </label>
+                                                                    <textarea name="incluye" id="incluye" class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="" class="control-label">
@@ -427,22 +452,8 @@
                                                                     <textarea name="observacion_condicion" id="observacion_condicion" class="form-control"></textarea>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label for="" class="control-label">
-                                                                        Incluye
-                                                                    </label>
-                                                                    <textarea name="incluye" id="incluye" class="form-control"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label for="" class="control-label">
-                                                                        Plaza de Fabricación
-                                                                    </label>
-                                                                    <textarea name="plaza_fabricacion" id="plaza_fabricacion" class="form-control"></textarea>
-                                                                </div>
-                                                            </div>
+                                                            
+                                                            
 
                                                         </div>
                                                     </div>
@@ -472,6 +483,7 @@
         representante(selctedid[0]);
         
     });
+    
 
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
@@ -605,10 +617,13 @@
         var forma=$("#forma_de").val();
         var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
-        var observacion=$("#observacion").val();
+        var plazoF=$("#plaza_fabricacion").val();
+        var incl=$("#incluye").val();
+        var observacion=$("#observacion_condicion").val();
+        var garant=$("#garantia").val();
         console.log(iduser);
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp,simbolo:simbolo,userid:iduser}];
+            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,incluye:incl,plazofabri:plazoF,clienteemp:clienteemp,garantias:garant,simbolo:simbolo,userid:iduser}];
             // var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -641,6 +656,7 @@
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var preciog=$('#ppreciog').val();
+        var idPin=$('#idPintado').val();
         var preciop=$('#ppreciop').val();
         var preciot=$('#ppreciot').val();
         var tra=$('#ptramo').val();
@@ -652,7 +668,7 @@
         var dim=$('#pdimencion').val();
         var descuento=$('#pdescuento').val();
         var filas;
-        if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
+        if(nomTablero!="" && idProd!="" && pname!="" && med!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
 
             if(pcant!=0){
                 document.getElementById('totales-general').style.display = 'block';
@@ -661,12 +677,15 @@
             bool=true;
             for (const fil in filaob) {
                 if (filaob.hasOwnProperty(fil)) {
-                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd){
+                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['medidasp']==med){
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
+                        var descr=parseFloat(pdescripcion);
+                        var medid=parseFloat(med);
                         filaob[fil]['cantidadP']=su;
                         filaob[fil]['descuentoP']=des;
-                        filaob[fil]['descripcionP']=pdescripcion;
+                        filaob[fil]['descripcionP']=descr;
+                        filaob[fil]['medidasp']=medid;
                         fila();
                         boolfila=true;                
                     }                
@@ -674,7 +693,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,fila:""};
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,idPintado:idPin,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,fila:""};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -705,110 +724,80 @@
                     var tram=parseFloat(filaob[fila]['tramo']);
                     var promedio=parseFloat(filaob[fila]['promed']);
                     var medidas=parseFloat(filaob[fila]['medi']);
-                    var tapas=parseFloat(filaob[fila]['tapa']);
+                    var tapas=String(filaob[fila]['tapa']);
                     var dimenciones=parseFloat(filaob[fila]['dimencion']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                      
-                    if(promedio==1){
+                if(promedio==1 && tapas=='Con tapa'){
+
                     var subt2=(((precioga+preciope)*tram)+preciota);
                     var subt=(((precioga+preciope)*tram)+preciota)*cantidad;
-                    
-                    filas=
-                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
-                            '<td class="text-center"> '+ 
-                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+ ' de ' +
 
-                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medi']+'">'+filaob[fila]['medi']+' fabricado en plancha galvanizada LAC/LAF acabado '+
+                }else if(promedio==1 && tapas=='Sin tapa'){
 
-                               '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idGalvanizado']+'">'+filaob[fila]['galvanizado']+', Espesor de '+
+                    var subt2=((precioga+preciope)*tram);
+                    var subt=((precioga+preciope)*tram)*cantidad;
 
-                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de'+
+                }else if(promedio==2 && tapas=='Con tapa'){
 
-                                '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tramo']+'">'+filaob[fila]['tramo']+' metros. Fabricado bajo la norma NEMA V-1 y recomendacion de la NFPA-70. '+
+                    var subt2=(((precioga+preciope)*tram)+preciota);
+                    var subt=(((precioga+preciope)*tram)+preciota)*cantidad;
 
-                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+'. '+
+                }else if(promedio==2 && tapas=='Sin tapa'){
 
-                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+
-                            '</td>'+
+                    var subt2=((precioga+preciope)*tram);
+                    var subt=((precioga+preciope)*tram)*cantidad;
 
-                            '<td  class="text-center"> '+ 
-                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimencion']+'">'+filaob[fila]['dimencion']+
-                            '</td>'+
-                            
-                            '<td  class="text-center"> '+ 
-                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
-                            '</td>'+
-
-                            '<td class="text-center"> '+   
-                                '<input style="width:60px !important;" width="40px" type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+subt2.toFixed(2)+'" >'+subt2.toFixed(2)+
-                            '</td>'+
-                            
-                            '<td class="text-center"> '+   
-                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2)+
-                            '</td>'+
-                            '<td class="text-center">'+
-                                '<center>'+
-                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
-                                            '<i class="fas fa-trash"></i>'+
-                                    '</button>'+                                
-                                '</center>'+
-
-                            '</td>'+
-                        '</tr>';  
-                    filaob[fila]['fila']=filas;
-                    filas="";   
-                    limpiar();                               
-                }else if(promedio==2){
-
-                var subt2=(((precioga+preciope)*tram)+preciota)+10;
-                var subt=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
-                    
-                    filas=
-                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
-                            '<td class="text-center"> '+ 
-                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+ ' de ' +
-
-                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medi']+'">'+filaob[fila]['medi']+' fabricado en plancha galvanizada LAC/LAF acabado '+
-
-                               '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idGalvanizado']+'">'+filaob[fila]['galvanizado']+', Espesor de '+
-
-                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de'+
-
-                                '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tramo']+'">'+filaob[fila]['tramo']+' metros. Fabricado bajo la norma NEMA V-1 y recomendacion de la NFPA-70. '+
-
-                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+'. '+
-
-                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+
-                            '</td>'+
-
-                            '<td  class="text-center"> '+ 
-                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimencion']+'">'+filaob[fila]['dimencion']+
-                            '</td>'+
-                            
-                            '<td  class="text-center"> '+ 
-                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
-                            '</td>'+
-
-                            '<td class="text-center"> '+   
-                                '<input style="width:60px !important;" width="40px" type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+subt2.toFixed(2)+'" >'+subt2.toFixed(2)+
-                            '</td>'+
-                            
-                            '<td class="text-center"> '+   
-                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2)+
-                            '</td>'+
-                            '<td class="text-center">'+
-                                '<center>'+
-                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
-                                            '<i class="fas fa-trash"></i>'+
-                                    '</button>'+                                
-                                '</center>'+
-
-                            '</td>'+
-                        '</tr>';  
-                    filaob[fila]['fila']=filas;
-                    filas="";   
-                    limpiar();   
                 }
+                
+                
+                    
+                    filas=
+                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
+                            '<td class="text-center"> '+ 
+                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+ ' de ' +
+
+                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medi']+'">'+filaob[fila]['medi']+' fabricado en plancha galvanizada LAC/LAF acabado '+
+
+                               '<input style="width: 70px !important;" type="hidden" name="idgal_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idGalvanizado']+'">'+filaob[fila]['galvanizado']+', Espesor de '+
+
+                               '<input  type="hidden" name="esp_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de'+
+
+                                '<input  type="hidden" name="tram_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tramo']+'">'+filaob[fila]['tramo']+' metros. Fabricado bajo la norma NEMA V-1 y recomendacion de la NFPA-70. '+
+
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+'. '+
+
+                                '<input  type="hidden" name="tap_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+
+                            '</td>'+
+
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="dem_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimencion']+'">'+filaob[fila]['dimencion']+
+                            '</td>'+
+                            
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="cant_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
+                            '</td>'+
+
+                            '<td class="text-center"> '+   
+                                '<input style="width:60px !important;" width="40px" type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+subt2.toFixed(2)+'" >'+subt2.toFixed(2)+
+                            '</td>'+
+                            
+                            '<td class="text-center"> '+   
+                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2)+
+                            '</td>'+
+                            '<td class="text-center">'+
+                                '<center>'+
+                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
+                                            '<i class="fas fa-trash"></i>'+
+                                    '</button>'+                                
+                                '</center>'+
+
+                            '</td>'+
+                        '</tr>';  
+                    filaob[fila]['fila']=filas;
+                    filas="";   
+                    limpiar(); 
+
             }
          }                    
      }
@@ -849,7 +838,7 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var preciota=parseFloat(filaob[fila]['prec_tap']);
                 
-                sub+=((((precioga+preciope)*tram)+preciota)-10)*cantidad; 
+                sub+=((((precioga+preciope)*tram)+preciota))*cantidad; 
 
                       
             }else if(filaob.hasOwnProperty(fila) && promedio==2){
@@ -861,7 +850,7 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var preciota=parseFloat(filaob[fila]['prec_tap']);
     
-                sub+=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
+                sub+=((((precioga+preciope)*tram)+preciota))*cantidad;
  
 
             }
