@@ -33,11 +33,7 @@
                         
                     </div>
                     @endif
-                    <div class="ibox-title-buttons pull-right">
-                        <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
-                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('bandejas')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
-                    </div>
+                    
                 </div>
                 <div class="box-body bg-gray-c">
                     <div class="row">
@@ -466,6 +462,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="box-footer">
+                    <div class="ibox-title-buttons pull-right">
+                        <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
+                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('proformas')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div><!-- /.row -->
@@ -667,6 +670,8 @@
         var esp=$('#pespesor').val();
         var dim=$('#pdimencion').val();
         var descuento=$('#pdescuento').val();
+        var cambioB=$('#valorcambio').val();
+        var simboloB=$('#simbolo').val();
         var filas;
         if(nomTablero!="" && idProd!="" && pname!="" && med!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
 
@@ -693,7 +698,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,idPintado:idPin,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,fila:""};
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,idPintado:idPin,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,simbolocambio:simboloB,fila:""};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -749,9 +754,7 @@
                     var subt=((precioga+preciope)*tram)*cantidad;
 
                 }
-                
-                
-                    
+                                   
                     filas=
                         '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
                             '<td class="text-center"> '+ 
@@ -829,8 +832,9 @@
         for (const fila in filaob) {
 
             var promedio=parseFloat(filaob[fila]['promed']);
+            var tapas=String(filaob[fila]['tapa']);
 
-            if (filaob.hasOwnProperty(fila) && promedio==1) {
+            if (filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Con tapa') {
 
                 var precioga=parseFloat(filaob[fila]['prec_gal']);
                 var preciope=parseFloat(filaob[fila]['prec_pin']);
@@ -841,7 +845,7 @@
                 sub+=((((precioga+preciope)*tram)+preciota))*cantidad; 
 
                       
-            }else if(filaob.hasOwnProperty(fila) && promedio==2){
+            }else if(filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Sin tapa'){
 
                 var precioga=parseFloat(filaob[fila]['prec_gal']);
                 var preciope=parseFloat(filaob[fila]['prec_pin']);
@@ -850,7 +854,31 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var preciota=parseFloat(filaob[fila]['prec_tap']);
     
-                sub+=((((precioga+preciope)*tram)+preciota))*cantidad;
+                sub+=((precioga+preciope)*tram)*cantidad;
+ 
+
+            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Con tapa'){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                sub+=((((precioga+preciope)*tram)+preciota))*cantidad; 
+ 
+
+            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Sin tapa'){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                sub+=((precioga+preciope)*tram)*cantidad;
  
 
             }
@@ -863,9 +891,10 @@
     function valorVenta(){
         var venta=0;        
         for (const fila in filaob) {
+            var tapas=String(filaob[fila]['tapa']);
             var promedio=parseFloat(filaob[fila]['promed']);
 
-            if (filaob.hasOwnProperty(fila) && promedio==1) {
+             if (filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Con tapa') {
 
                 var precioga=parseFloat(filaob[fila]['prec_gal']);
                 var preciope=parseFloat(filaob[fila]['prec_pin']);
@@ -873,10 +902,10 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var preciota=parseFloat(filaob[fila]['prec_tap']);
                 
-                venta+=((((precioga+preciope)*tram)+preciota)-10)*cantidad; 
+                venta+=((((precioga+preciope)*tram)+preciota))*cantidad; 
 
                       
-            }else if(filaob.hasOwnProperty(fila) && promedio==2){
+            }else if(filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Sin tapa'){
 
                 var precioga=parseFloat(filaob[fila]['prec_gal']);
                 var preciope=parseFloat(filaob[fila]['prec_pin']);
@@ -885,7 +914,31 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var preciota=parseFloat(filaob[fila]['prec_tap']);
     
-                venta+=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
+                venta+=((precioga+preciope)*tram)*cantidad;
+ 
+
+            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Con tapa'){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                venta+=((((precioga+preciope)*tram)+preciota))*cantidad;
+ 
+
+            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Sin tapa'){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                venta+=((precioga+preciope)*tram)*cantidad;
  
 
             }
@@ -898,9 +951,10 @@
         var venta=0;   
         var ig=0;     
         for (const fila in filaob) {
+            var tapas=String(filaob[fila]['tapa']);
            var promedio=parseFloat(filaob[fila]['promed']);
 
-            if (filaob.hasOwnProperty(fila) && promedio==1) {
+             if (filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Con tapa') {
 
                 var precioga=parseFloat(filaob[fila]['prec_gal']);
                 var preciope=parseFloat(filaob[fila]['prec_pin']);
@@ -908,10 +962,10 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var preciota=parseFloat(filaob[fila]['prec_tap']);
                 
-                venta+=((((precioga+preciope)*tram)+preciota)-10)*cantidad; 
+                venta+=((((precioga+preciope)*tram)+preciota))*cantidad; 
 
                       
-            }else if(filaob.hasOwnProperty(fila) && promedio==2){
+            }else if(filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Sin tapa'){
 
                 var precioga=parseFloat(filaob[fila]['prec_gal']);
                 var preciope=parseFloat(filaob[fila]['prec_pin']);
@@ -920,7 +974,31 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var preciota=parseFloat(filaob[fila]['prec_tap']);
     
-                venta+=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
+                venta+=((precioga+preciope)*tram)*cantidad;
+ 
+
+            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Con tapa'){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+               venta+=((((precioga+preciope)*tram)+preciota))*cantidad;
+ 
+
+            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Sin tapa'){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                venta+=((precioga+preciope)*tram)*cantidad;
  
 
             }
@@ -936,9 +1014,10 @@
         var tota=0;   
         
         for (const fila in filaob) {
+            var tapas=String(filaob[fila]['tapa']);
            var promedio=parseFloat(filaob[fila]['promed']);
 
-            if (filaob.hasOwnProperty(fila) && promedio==1) {
+             if (filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Con tapa') {
 
                 var precioga=parseFloat(filaob[fila]['prec_gal']);
                 var preciope=parseFloat(filaob[fila]['prec_pin']);
@@ -946,10 +1025,10 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var preciota=parseFloat(filaob[fila]['prec_tap']);
                 
-                venta+=((((precioga+preciope)*tram)+preciota)-10)*cantidad; 
+                venta+=((((precioga+preciope)*tram)+preciota))*cantidad; 
 
                       
-            }else if(filaob.hasOwnProperty(fila) && promedio==2){
+            }else if(filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Sin tapa'){
 
                 var precioga=parseFloat(filaob[fila]['prec_gal']);
                 var preciope=parseFloat(filaob[fila]['prec_pin']);
@@ -958,7 +1037,31 @@
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
                 var preciota=parseFloat(filaob[fila]['prec_tap']);
     
-                venta+=((((precioga+preciope)*tram)+preciota)+10)*cantidad;
+                venta+=((precioga+preciope)*tram)*cantidad;
+ 
+
+            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Con tapa'){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                venta+=((((precioga+preciope)*tram)+preciota))*cantidad;
+ 
+
+            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Sin tapa'){
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+    
+                venta+=((precioga+preciope)*tram)*cantidad;
  
 
             }

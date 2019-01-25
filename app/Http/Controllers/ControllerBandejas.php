@@ -31,13 +31,12 @@ class ControllerBandejas extends Controller
     $query=trim($request->get('searchText'));
     $proformas=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),'p.serie_proforma','p.igv','p.precio_total')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno','p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('p.estado','=',1)
     ->where('tipo_proforma','=','bandeja')
     ->orderBy('p.idProforma','desc')
-     
-    	->paginate(7);           
+    ->paginate(7);           
             return view('proforma.bandejas.index',["proformas"=>$proformas,"searchText"=>$query]);
         }
     }
@@ -163,6 +162,8 @@ public function store(Request $request)
             $detalleProforma->medidas=$fila['medi'];	
             $detalleProforma->dimenciones=$fila['dimencion'];
             $detalleProforma->tapa=$fila['tapa'];
+            $detalleProforma->cambioBandejas=$fila['tipocambio'];    
+            $detalleProforma->simboloBandejas=$fila['simbolocambio'];
             	
 
             
@@ -242,15 +243,19 @@ public function store(Request $request)
    public function show($id)
    {
     $proforma=DB::table('Proforma as p')
-    ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC')
+    ->join('Cliente_Proveedor as cp','cp.idcliente','=','p.idcliente')
+    ->join('users as u','u.id','=','p.idEmpleado')
+    ->join('Empleado as em','em.id','=','u.idEmp')
+    ->join('Cliente_Representante as cr','cr.idCR','=','cp.idCliente')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma')
     ->where('p.idProforma','=',$id)
     ->first();
 
     $detalles=DB::table('Detalle_bandejas as db')
     ->join('Producto as pro','db.idProducto','=','pro.idProducto')
-    ->join('Medidas as m','db.idMedidas','=','m.idMedidas')
-    ->select(DB::raw('CONCAT(pro.nombre_producto," | ",pro.codigo_producto," | ",pro.marca_producto," | ",pro.descripcion_producto) as productos'),'db.cantidad','db.descuento','db.precio_venta','db.descripcionDP','m.medida','db.espesor')
+    ->join('Galvanizado as gal','gal.idGalvanizado','=','db.idGalvanizado')
+    ->join('Pintado as pin','pin.idPintado','=','db.idPintura')
+    ->select('db.idGalvanizado','pin.idPintado','pro.marca_producto','pro.codigo_producto','pro.nombre_producto','pro.descripcion_producto','db.descripcionDP','db.espesor','gal.nombreGalvanizado','pin.nombrePintado','db.espesor','db.cantidad','db.precioGal','db.precioPin','db.precioTap','db.tramo','db.medidas','db.descripcionDP','db.dimenciones','db.tapa')
     ->where('db.idProforma','=',$id)
     ->get();
     
@@ -266,7 +271,7 @@ public function pdf($id){
     ->join('users as u','u.id','=','p.idEmpleado')
     ->join('Empleado as em','em.id','=','u.idEmp')
     ->join('Cliente_Representante as cr','cr.idCR','=','cp.idCliente')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno', DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma')
     ->where('p.idProforma','=',$id)
     ->first();
 
@@ -279,28 +284,33 @@ public function pdf($id){
     ->get();
 
     $pdf=PDF::loadView('proforma/bandejas/pdf',['proforma'=>$proforma,"detalles"=>$detalles]);
-    return $pdf->stream('proforma.pdf');
+    return $pdf->stream('proformas.pdf');
     
 
 }
 public function pdf2($id){
 
-    $proforma=DB::table('Proforma as p')
-    ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-    
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','cp.correo as email','cp.nro_documento as ndoc','p.tipocambio','p.simboloP','p.subtotal')
+   $proforma=DB::table('Proforma as p')
+    ->join('Cliente_Proveedor as cp','cp.idcliente','=','p.idcliente')
+    ->join('users as u','u.id','=','p.idEmpleado')
+    ->join('Empleado as em','em.id','=','u.idEmp')
+    ->join('Cliente_Representante as cr','cr.idCR','=','cp.idCliente')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma','p.tipocambio','p.simboloP')
     ->where('p.idProforma','=',$id)
     ->first();
 
     $detalles=DB::table('Detalle_bandejas as db')
     ->join('Producto as pro','db.idProducto','=','pro.idProducto')
-    ->select(DB::raw('CONCAT(pro.nombre_producto,"  ",pro.marca_producto," | ",pro.descripcion_producto) as producto'),'db.cantidad','db.descuento','db.precio_venta','db.descripcionDP','db.estadoDB')
+    ->join('Galvanizado as gal','gal.idGalvanizado','=','db.idGalvanizado')
+    ->join('Pintado as pin','pin.idPintado','=','db.idPintura')
+    ->select('db.idGalvanizado','pin.idPintado','pro.marca_producto','pro.codigo_producto','pro.nombre_producto','pro.descripcion_producto','db.descripcionDP','db.espesor','gal.nombreGalvanizado','pin.nombrePintado','db.espesor','db.cantidad','db.precioGal','db.precioPin','db.precioTap','db.tramo','db.medidas','db.descripcionDP','db.dimenciones','db.tapa','db.cambioBandejas','db.simboloBandejas')
     ->where('db.idProforma','=',$id)
     ->get();
 
+
     $pdf=PDF::loadView('proforma/bandejas/pdf2',['proforma'=>$proforma,"detalles"=>$detalles]);
-    return $pdf->stream('proforma.pdf');
-    //return $pdf->download('Lista de requerimientos.pdf');
+    return $pdf->stream('proformas.pdf');
+   
 
 
 }
@@ -434,11 +444,9 @@ public function edit($id)
     public function destroy($id)
     {
         $producto=Proforma::findOrFail($id);
-        $producto->estado='cancelada';
+        $producto->estado=0;
         $producto->update();
         return Redirect::to('bandejas');
-
-
     }
 
     public function representante(Request $request)

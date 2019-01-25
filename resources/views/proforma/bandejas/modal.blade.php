@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-delete-{{$prof->idProforma}}" style="padding-left: 17px;border-radius:0px !important;">
  
-{{Form::Open(['route' => ['proforma-eliminar', $prof->idProforma], 'method' => 'delete'])}}
+{{Form::Open(['route' => ['bandejas-eliminar', $prof->idProforma], 'method' => 'delete'])}}
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header mh-p" style="border:1px solid #EC5565 !important;">

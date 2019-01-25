@@ -51,7 +51,7 @@
 				        			{{$prof->serie_proforma.' /  f000-'.$prof->idProforma}}
 				        		</td>
 				        		<td>
-				        			{{$prof->nombre}}
+				        			{{$prof->nombres_Rs.' '.$prof->paterno.' '.$prof->materno}}
 				        		</td>
 				        		<td align="center" style="width: 220px">
 				        			<div class="pull-right box-tools">
@@ -65,16 +65,15 @@
 				        					<button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" saria-expanded="true">
 				        						<i class="far fa-file-pdf" title="PDF"></i>
 				        					</button>
-				        					<ul class="dropdown-menu pull-right" role="menu">
-				        						<li>
-				        			<a target="_blank" href="{{URL::action('ControllerBandejas@pdf',$prof->idProforma)}}"><i class="far fa-file-pdf"></i> PDF Soles</a>
-
-				        			<a target="_blank" href="{{URL::action('ControllerBandejas@pdf2',$prof->idProforma)}}"> <i class="far fa-file-pdf"></i> PDF Dolares</a>
+				        		<ul class="dropdown-menu pull-right" role="menu">
+				        			<li>
+				        			    <a target="_blank" href="{{URL::action('ControllerBandejas@pdf',$prof->idProforma)}}"><i class="far fa-file-pdf"></i> PDF Soles</a>
+				        				<a target="_blank" href="{{URL::action('ControllerBandejas@pdf2',$prof->idProforma)}}"> <i class="far fa-file-pdf"></i> PDF Dolares</a>
 				        			</li>
-				        					</ul>
-				        				</div>	
-								</td>
-							</tr>
+				        		</ul>
+				        	</div>	
+							</td>
+						</tr>
 							@include('proforma.bandejas.modal')
 							@endforeach
 				        </tbody>

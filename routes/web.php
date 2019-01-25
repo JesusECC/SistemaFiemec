@@ -59,25 +59,6 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('productos/create',['as'=>'producto-create','uses'=>'ControllerProducto@create']);
     Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
     Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
-
-
-     
-
-    //Se crea las rutas para productos-Bandeja 
-Route::get('productobandejas',['as'=>'productobandejas','uses'=>'ControllerProductoBandeja@index']);
-Route::get('productobandejas/create',['as'=>'productobandejas-create','uses'=>'ControllerProductoBandeja@create']);
-Route::post('producto/productobandejas',['as'=>'productobandejas-store','uses'=>'ControllerProductoBandeja@store']);
-Route::get('producto/{idProducto}/edit',['as'=>'productobandejas-edit','uses'=>'ControllerProductoBandeja@edit']);    
-//Route::post('productobandejas/edit/update',['as' => 'productobandejas-update','uses'=>'ControllerProductoBandeja@update']);
-
-
-    
-       // Route::get('productosbandeja/{idEmpleado}/edit',['as'=>'empleado-edit','uses'=>'ControllerEmpleados@edit']);
-
-
-
-
-
     //se crea las rutas para catalago 
     Route::get('catalogo',['as'=>'catalogo','uses'=>'ControllerCatalogo@index']);
     Route::get('catalogo/show/{idProducto}',['as'=>'catalogo-show','uses'=>'ControllerCatalogo@show']);
@@ -103,13 +84,14 @@ Route::get('producto/{idProducto}/edit',['as'=>'productobandejas-edit','uses'=>'
     Route::post('bandejas/guardar',['as' => 'bandejas-store','uses'=>'ControllerBandejas@store']);
     Route::get('bandejas',['as'=>'bandejas','uses'=>'ControllerBandejas@index']);
     Route::get('bandejas/create',['as'=>'bandejas-create','uses'=>'ControllerBandejas@create']);
-    Route::get('proforma/bandejas/pdf/{idProforma}','ControllerBandejas@pdf');
-    Route::get('proforma/bandejas/pdf2/{idProforma}','ControllerBandejas@pdf2');
     Route::get('bandejas/show/{id}',['as'=>'bandejas-show','uses'=>'ControllerBandejas@show']);
     Route::delete('bandejas/eliminar/{id}',['as'=>'bandejas-eliminar','uses'=>'ControllerBandejas@destroy']);
     Route::get('bandejas/editar/{id}',['as'=>'bandejas-edit','uses'=>'ControllerBandejas@edit']);
     Route::post('bandejas/editar/modificar',['as' => 'bandejas-update','uses'=>'ControllerBandejas@update']); 
     Route::post('bandejas/cli',['as'=>'clientes-representante','uses'=>'ControllerBandejas@representante']);
+    Route::get('proforma/bandejas/pdf/{idProforma}',['as'=>'bandeja-pdf','uses'=>'ControllerBandejas@pdf']);
+    Route::get('proforma/bandejas/pdf2/{idProforma}',['as'=>'bandeja-pdf2','uses'=>'ControllerBandejas@pdf2']);
+    
     
     //Se crea rutas servicios
     Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);

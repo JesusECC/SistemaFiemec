@@ -29,7 +29,9 @@ class DetalleBandejas extends Model
       'descuento',
       'medidas',
       'descripcionDP',
-      'estadoDB'
+      'estadoDB',
+      'cambioBandejas',
+      'simboloBandejas'
 
    ];
 
