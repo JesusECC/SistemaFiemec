@@ -138,7 +138,7 @@
                                         </label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-10">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
                                                 <samp class="input-group-btn">
@@ -147,6 +147,9 @@
                                                     </button>
                                                 </samp>
                                             </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="radio" name="subtitulo" id="subtitulo" value="Sub titulo"> Sub titulo
                                         </div>
                                     </div>
                                     <div class="row" id="producto-crear-oculto" style="display:none;margin-top:20px">
@@ -205,6 +208,25 @@
                                                 <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
                                             </div>
                                         </div>                                                                                 
+                                    </div>
+                                    <div class="row" id="subtitulos" style="display:none;margin-top:20px">
+                                        <div class="col-sm-2" style="margin-top:20px">
+                                            <div class="form-group">
+                                                <label class="control-label">Nom.Tablero</label>
+                                                <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
+                                                <div id="select-pro" ></div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="subtitle" id="subtitle" placeholder="Ingresar sub titulo">
+                                                <samp class="input-group-btn">
+                                                    <button id="bt_add_tablero" class="btn btn-primary" >
+                                                        <i class="fas fa-plus"></i> Agregar
+                                                    </button>
+                                                </samp>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel-footer">
@@ -405,6 +427,13 @@
         $('#Pcantidad').click(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
         });
+
+        $('#subtitulo').click(function(){
+            console.log("aaaa");
+            document.getElementById('producto-crear-oculto').style.display = 'none';
+            document.getElementById('subtitulos').style.display = 'block';
+            ListaSelect();
+        });
        /* $('#pdescuento').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
         });
@@ -458,6 +487,7 @@
     }
     function mostrarcampos(){
         document.getElementById('producto-crear-oculto').style.display = 'block';
+        document.getElementById('subtitulos').style.display = 'none';
         //document.getElementById('producto-oculto').style.display = 'block';
         // $("#producto-crear-oculto").style.display='block';
         // $("#producto-oculto").style.display='block';
