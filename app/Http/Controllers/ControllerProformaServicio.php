@@ -286,6 +286,15 @@ public function pdf($id)
         $proforma->update();
         return Redirect::to('servicio');
     }
+    public function representante(Request $request)
+    {
+        $idCliente=$request->get('cliente');
+        $cliente=DB::table('Cliente_Representante')
+        ->where('idCliente','=',$idCliente)
+        ->get();
+        // dd($request);
+        return ['cliente' =>$cliente,'veri'=>true];
+    }
 }
 
 

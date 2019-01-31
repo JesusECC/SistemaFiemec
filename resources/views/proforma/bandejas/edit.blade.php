@@ -107,61 +107,144 @@
                                         </label>
                                     </div>
                                     <div class="row" >
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Producto</label>
-                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true" style="font-size: 10px !important">
-                                                    <option value="">Seleccione Producto</option>
+                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
+                                                    <option value="" selected="" disabled="">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
-                                                        <option value="{{ $producto->idProducto}}_{{ $producto->product}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->product }}</option>
+                                                        <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->promedio}}">{{$producto->codigo_producto}} | {{$producto->nombre_producto}}</option>
                                                     @endforeach
                                                 </select>     
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label for="" class="control-label">Espesor</label>
-                                            <div class="form-group">
-                                                <input type="number"  id="espesor" class="form-control" name="espesor"  placeholder="Ingrese espesor" >
+                                            <div class="form-group label-floating">
+                                                <label for="" class="control-label">Acc. %</label>
+                                                <input type="text"  id="pacc" class="form-control" name="pacc"  >  
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <label for="" class="control-label">Medidas</label>
+
+                                        <div class="col-sm-2">
+                                            <div class="form-group label-floating">
+                                                <label for="" class="control-label">Espesor</label>
+                                                <input type="text"  id="pespesor" class="form-control" name="pespesor"  >  
+                                            </div>
+                                        </div>
+                                         
+                                         <div class="col-lg-2">
                                             <div class="form-group">
-                                                <select name="pidProducto" class="form-control selectpicker" id="pidMedidas" data-live-search="true" style="font-size: 10px !important">
-                                                    <option value="">Seleccione Medidas</option>
-                                                    @foreach($medidas as $me)
-                                                        <option value="{{ $me->idMedidas}}_{{ $me->precio}}_{{ $me->medida}}">{{ $me->medida}}</option>
+                                                <label for="" class="control-label">Tramo</label> 
+                                                 <select name="ptramo" class="form-control selectpicker" id="ptramo" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Tramo</option>
+                                                    <option value="2.4">2400mm</option>
+                                                    <option value="3">3000mm</option>
+                                                   
+                                                </select>                                                  
+                                            </div>
+                                        </div>
+                                          
+
+                                         <div class="col-sm-3">
+                                            <div class="" id="producto-oculto">
+                                                <label for="" class="control-label">Galvanizado</label>
+                                                <select name="pgalvanizado" class="form-control selectpicker" id="pgalvanizado" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Galvanizado</option>
+                                                    @foreach($galvanizado as $gal)                
+                                                        <option value="{{$gal->idGalvanizado}}_{{$gal->nombreGalvanizado}}">{{$gal->nombreGalvanizado}}</option>
+                                                    @endforeach  
+                                                   
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Precio Gal.</label>
+                                                 <input type="number"  id="ppreciog" class="form-control" name="ppreciog">                                                   
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-3">
+                                            <div class="" id="producto-oculto">
+                                                <label for="" class="control-label">Pintado</label>
+                                                <select name="idPintado" class="form-control selectpicker" id="idPintado" data-live-search="true">
+                                                    <option value="" selected="" disabled="">Seleccione Tipo de Pintado</option value="" disabled="" selected="">Seleccione Pintado</option>
+                                                    @foreach($pintado as $pin)                
+                                                        <option value="{{$pin->idPintado}}">{{$pin->nombrePintado}}</option>
                                                     @endforeach
-                                                </select>     
+                                                </select> 
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-sm-4">
-                                        <label for="" class="control-label">Descripcion</label>
+                                        <div class="col-lg-2">
                                             <div class="form-group">
-                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  placeholder="Ingrese una Descripción" >
+                                                <label for="" class="control-label">Precio Pin.</label>
+                                                 <input type="number"  id="ppreciop" class="form-control" name="ppreciop"> 
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <label for="" class="control-label">Precio</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">S/.</span>
-                                                <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled placeholder="Precio Unitario">
-                                            </div>                                            
+
+                                        <div class="col-lg-4" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Medidas</label>
+                                                <input type="text"  id="medidasp" class="form-control" name="medidasp"  >
+                                            </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <label for="" class="control-label">Cantidad</label>
+
+                                        <div class="col-lg-3" style="margin-top:20px">
                                             <div class="form-group">
-                                                <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" placeholder="Cant.">
-                                            </div>                                            
+                                                <label for="" class="control-label">Dimenciones</label> 
+                                                 <select name="pdimencion" class="form-control selectpicker" id="pdimencion" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Dimenciones</option>
+                                                    <option value="unds">Unidades</option>
+                                                    <option value="mtrs">Metros</option>
+                                                    <option value="cm">Centimentros</option>
+                                                    <option value="mm">Milimetros</option>
+                                                </select>                                                  
+                                            </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <label for="" class="control-label">Descuento</label>
+                                         
+
+                                         <div class="col-lg-3" style="margin-top:20px">
                                             <div class="form-group">
-                                                <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" placeholder="Desc.">
-                                            </div>                                            
+                                                <label for="" class="control-label">Tapa</label> 
+                                                  <select name="ptapa" class="form-control selectpicker" id="ptapa" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Tapa</option>
+                                                    <option value="Con tapa" >Con tapa</option>
+                                                    <option value="Sin tapa" >Sin tapa</option>
+                                                </select>                                                        
+                                            </div>
                                         </div>
+
+                                         <div class="col-lg-2" style="margin-top:20px">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Precio de Tapa</label>
+                                                 <input type="number"  id="ppreciot" class="form-control" name="ppreciot">                                                   
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="margin-top:19px">
+                                            <div class="" id="producto-oculto">
+                                                <label for="" class="control-label">Promedio</label>
+                                                    <select name="ppromedio" class="form-control selectpicker" id="ppromedio" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Promedio</option>
+                                                    <option value="1" >Menos 10%</option>
+                                                    <option value="2" >Mas 10%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cantidad</label>
+                                                 <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
+                                            </div>
+                                        </div> 
+                                        
+                                         
+
+                                        <div class="col-lg-6" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descripcion</label>
+                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
+                                            </div>
+                                        </div> 
                                         <div class="col-sm-2">
                                             <div class="form-group">
                                                 <button type="button" id="bt_add_produc" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
@@ -185,7 +268,7 @@
                                                     <div class="col-md-12">
                                                         <div class="box">
                                                             <div class="box-header with-border" style="padding:5px !important;">
-                                                            <p> Proforma Unitaria </p>
+                                                            <p> Proforma Bandejas </p>
                                                                 <div class="box-tools pull-right">
                                                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                                 </div>
@@ -194,17 +277,15 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
-                                                                            <thead style="background-color:#A9D0F5;text-align: center;" >
-                                                                                <th class="text-center">Producto</th>
-                                                                                <th class="text-center">Medidas</th>
-                                                                                <th class="text-center">Descripción</th>
-                                                                                <th class="text-center">Cant.</th>
-                                                                                
-                                                                                <th class="text-center">P. Unit.</th>
-                                                                                <th class="text-center">Desc.</th>
-                                                                                <th class="text-center">Importe</th>
-                                                                                <th class="text-center">Opcción</th>
-                                                                            </thead>
+                                                                             <thead style="background-color:#A9D0F5;text-align: center;color: black !important" >
+                                                                            
+                                                                            <th>Producto</th>
+                                                                            <th>Unds.</th>
+                                                                            <th>Cant.</th>
+                                                                            <th>P. Unit.</th>
+                                                                            <th>total</th>
+                                                                            <th>Opciones</th>
+                                                                        </thead>
                                                                             <tbody id="tablero_unitario">
                                                                             </tbody>
                                                                         </table>
@@ -297,10 +378,18 @@
                                                 <div class="panel panel-default panel-shadow bg-gray-c">
                                                     <div class="panel-body">    
                                                         <div class="row">
-                                                            <div class="col-sm-12">
+                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="" class="control-label">Forma de Pago:</label>
                                                                     <input type="text" name="forma_de" id="forma_de" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Plaza de Fabricación de bandejas
+                                                                    </label>
+                                                                    <input type="text" name="plaza_fabricacion" id="plaza_fabricacion" class="form-control">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-12">
@@ -312,9 +401,26 @@
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="" class="control-label">
+                                                                        Garantia
+                                                                    </label>
+                                                                    <input type="text" name="garantia" id="garantia" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Forma de entrega
+                                                                    </label>
+                                                                    <textarea name="incluye" id="incluye" class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
                                                                         Observaciones
                                                                     </label>
-                                                                    <textarea name="observacion_proforma" id="observacion_proforma" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                    <textarea name="observacion_condicion" id="observacion_condicion" class="form-control"></textarea>
                                                                 </div>
                                                             </div>
 
@@ -416,8 +522,8 @@
         }
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
-        //$("#precio_uni").val(Producto[2]);
-        $("#pdescuento").val(Producto[3]);
+        $("#pacc").val(Producto[4]);
+        cambiaropcion();
     }
     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
@@ -466,24 +572,41 @@
     var bool;
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
+        Galvanizado=document.getElementById('pgalvanizado').value.split('_');
         var idProd=Producto[0];
-        var idMed=Medidas[0];
         var pname=Producto[1];
-        var mname=Medidas[2];
+        var idGal=Galvanizado[0];
+        var gname=Galvanizado[1];
         var pdescripcion=$("#descripcionp ").val();
         var esp=$('#espesor').val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
         var descuento=$('#pdescuento').val();
+        var pdescripcion=$("#descripcionp ").val();
+        var puni=$('#precio_uni').val();
+        var preciog=$('#ppreciog').val();
+        var idPin=$('#idPintado').val();
+        var preciop=$('#ppreciop').val();
+        var preciot=$('#ppreciot').val();
+        var tra=$('#ptramo').val();
+        var pro=$('#ppromedio').val();
+        var pcant=$('#Pcantidad').val();
+        var med=$('#medidasp').val();
+        var tap=$('#ptapa').val();
+        var esp=$('#pespesor').val();
+        var dim=$('#pdimencion').val();
+        var descuento=$('#pdescuento').val();
+        var cambioB=$('#valorcambio').val();
+        var simboloB=$('#simbolo').val();
         var filas;
-        if(nomTablero!="" && idProd!="" && idMed!="" && pname!="" && puni!="" && pcant!="" && descuento!=""  ){
+        if(nomTablero!="" && idProd!=""  && pname!=""   ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
             var boolfila=false;
             bool=true;
             for (const fil in filaob) {
                 if (filaob.hasOwnProperty(fil)) {
-                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['idMedidas']==idMed){
+                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd ){
                         var es=parseInt(esp);
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
@@ -498,7 +621,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,idMedidas:idMed,medida:mname,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,espesor:esp,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:2,idDetalleProforma:''};
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,idPintado:idPin,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medidas:med,tapa:tap,espesor:esp,descuentoP:descuento,dimenciones:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,simbolocambio:simboloB,fila:"",estado:2,idDetalleProforma:''};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -516,33 +639,70 @@
                 if (filaob.hasOwnProperty(fila)) {                            
                     var cantidad=parseFloat(filaob[fila]['cantidadP']);
                     var precio=parseFloat(filaob[fila]['prec_uniP']);
+                    var precioga=parseFloat(filaob[fila]['prec_gal']);
+                    var preciope=parseFloat(filaob[fila]['prec_pin']);
+                    var preciota=parseFloat(filaob[fila]['prec_tap']);
+                    var tram=parseFloat(filaob[fila]['tramo']);
+                    var promedio=parseFloat(filaob[fila]['promedi']);
+                    var medidas=parseFloat(filaob[fila]['medi']);
+                    var tapas=String(filaob[fila]['tapa']);
+                    var dimenciones=parseFloat(filaob[fila]['dimencion']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
-                    var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+
+                    
+
+                   if(promedio==1 && tapas=='Con tapa'){
+
+                    var subt2=(((precioga+preciope)*tram)+preciota)-((((precioga+preciope)*tram)+preciota)*0.1);
+                    var subt=((((precioga+preciope)*tram)+preciota)-((((precioga+preciope)*tram)+preciota)*0.1))*cantidad;
+
+                }else if(promedio==1 && tapas=='Sin tapa'){
+
+                    var subt2=((precioga+preciope)*tram)-((((precioga+preciope)*tram)+preciota)*0.1);
+                    var subt=(((precioga+preciope)*tram)-(((precioga+preciope)*tram)*0.1))*cantidad;
+
+                }else if(promedio==2 && tapas=='Con tapa'){
+
+                    var subt2=(((precioga+preciope)*tram)+preciota)+((((precioga+preciope)*tram)+preciota)*0.1);
+                    var subt=((((precioga+preciope)*tram)+preciota)+((((precioga+preciope)*tram)+preciota)*0.1))*cantidad;
+
+                }else if(promedio==2 && tapas=='Sin tapa'){
+
+                    var subt2=((precioga+preciope)*tram)+((((precioga+preciope)*tram)+preciota)*0.1);
+                    var subt=(((precioga+preciope)*tram)+(((precioga+preciope)*tram)*0.1))*cantidad;
+
+
+                }
+
+               
                     filas=
                         '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%;">'+
                             '<td class="text-center"> '+ 
-                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
-                            '</td>'+
-                            '<td> '+ 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idMedidas']+'">'+filaob[fila]['medida']+'mm con un espesor de '+
+                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+ ' de ' +
 
-                                '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+'mm'+
+                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medidas']+'">'+filaob[fila]['medidas']+' fabricado en plancha galvanizada LAC/LAF acabado '+
+
+                               '<input style="width: 70px !important;" type="hidden" name="idgal_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idGalvanizado']+'">'+filaob[fila]['galvanizado']+', Espesor de '+
+
+                               '<input  type="hidden" name="esp_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de '+
+
+                                '<input  type="hidden" name="tram_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tramo']+'">'+filaob[fila]['tramo']+' metros. Fabricado bajo la norma NEMA V-1 y recomendacion de la NFPA-70. '+
+
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+'. '+
+
+                                '<input  type="hidden" name="tap_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+
                             '</td>'+
-                            '<td class="text-center"> '+ 
-                                '<input style="width:40px !important;" type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+                            '<td  class="text-center"> '+   
+                                '<input type="hidden" style="width:60px !important;" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimenciones']+'" >'+filaob[fila]['dimenciones']+
                             '</td>'+
-                            
                             '<td  class="text-center"> '+ 
-                                '<input type="number" style="width:40px !important;" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                                '<input type="hidden" style="width:40px !important;" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                             '</td>'+
-                            '<td  class="text-center"> '+   
-                                '<input type="number" style="width:60px !important;" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                             '<td class="text-center"> '+   
+                                '<input style="width:60px !important;" width="40px" type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+subt2.toFixed(2)+'" >'+subt2.toFixed(2)+
                             '</td>'+
-                            '<td  class="text-center"> '+   
-                                '<input type="number"  style="width:40px !important;" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
-                            '</td>'+
-                            '<td  class="text-center"> '+   
-                                '<input type="number" style="width:60px !important;" width="40px" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
+                            '<td class="text-center"> '+   
+                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2)+
                             '</td>'+
                             '<td  class="text-center">'+
                                 '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
@@ -595,29 +755,41 @@
                     direccion=pro[key]['Direccion'];
                     documento=pro[key]['nro_documento'];
                     var idProd=pro[key]['idProducto'];
-                    var idMed=pro[key]['idMedidas'];
-                    var pname=pro[key]['produ'];
+                    var idGal=pro[key]['idGalvanizado'];
+                    var pname=pro[key]['nombre_producto'];
+                    var gname=pro[key]['nombreGalvanizado'];
                     var pdescripcion;
                     tipocam=pro[key]['tipocambio'];
                     simbolo=pro[key]['simboloP'];
-                    cotiza=pro[key]['cliente_empleado'];
+                    cotiza=pro[key]['nombre_RE'];
                     if(pro[key]['descripcionDP']==null){
                         pdescripcion='';
                     }else{
                         pdescripcion=pro[key]['descripcionDP'];
                     }
                     var puni=pro[key]['precio_venta'];
+                    var preciog=pro[key]['precioGal'];
+                    var precicp=pro[key]['precioPin'];
+                    var precict=pro[key]['precioTap'];
                     var pcant=pro[key]['cantidad'];
+                    var prom=pro[key]['promed'];
                     var esp=pro[key]['espesor'];
-                    var me=pro[key]['medida'];
+                    var me=pro[key]['medidas'];
+                    var tra=pro[key]['tramo'];
+                    var tap=pro[key]['tapa'];
+                    var dim=pro[key]['dimenciones'];
                     var descuento=pro[key]['descuento'];     
                     var estado=parseInt(pro[key]['estadoDB']);  
                     var idDetalleProforma=pro[key]['idDetalle_bandejas'];
                     formade=pro[key]['forma_de'];
                     plazpOf=pro[key]['plazo_oferta'];
-                    obser=pro[key]['observacion_proforma']; 
+                    plazFa=pro[key]['plaza_fabricacion'];
+                    obser=pro[key]['observacion_proforma'];
+                    garan=pro[key]['garantia']; 
+                    inc=pro[key]['incluye']; 
+                    obc=pro[key]['observacion_condicion']; 
                     console.log(estado);
-                    var dat={idProducto:idProd,idMedidas:idMed,producto:pname,medida:me,descripcionP:pdescripcion,prec_uniP:puni,espesor:esp,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
+                    var dat={idProducto:idProd,idGalvanizado:idGal,producto:pname,galvanizado:gname,medidas:me,descripcionP:pdescripcion,prec_uniP:puni,espesor:esp,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma,tramo:tra,tapa:tap,dimenciones:dim,prec_gal:preciog,prec_pin:precicp,prec_tap:precict,promedi:prom};
                     filaob.push(dat);  
                     fila();
                     contp++;               
@@ -638,6 +810,10 @@
             $("#forma_de").val(formade);
             $("#plazo_oferta").val(plazpOf);
             $("#observacion_proforma").val(obser);
+            $("#plaza_fabricacion").val(plazFa);
+            $("#garantia").val(garan);
+            $("#incluye").val(inc);
+            $("#observacion_condicion").val(obc);
 
             
         }
@@ -646,27 +822,63 @@
         // la suma de tosos los tableros        
         var sub=0;        
         for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
+            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2 && promedio==1 && tapas=='Con tapa') {
+
+                var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                var tram=parseFloat(filaob[fila]['tramo']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var descuento=parseFloat(filaob[fila]['descuentoP']);
-                sub+=cantidad*precio;              
+                var preciota=parseFloat(filaob[fila]['prec_tap']);
+                
+                
+                sub+=(((precioga+preciope)*tram)+preciota)-((((precioga+preciope)*tram)+preciota)*0.1)*cantidad;
+                
+                              
+            }else if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2 && promedio==1 && tapas=='Sin tapa') {
+
+               var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                
+                
+                
+                sub+=((precioga+preciope)*tram)*cantidad;
+
+
+            }else if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2 && promedio==2 && tapas=='Con tapa') {
+
+               var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                
+                
+                
+                sub+=((precioga+preciope)*tram)*cantidad;
+
+
+            }else if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2 && promedio==2 && tapas=='Sin tapa') {
+
+               var precioga=parseFloat(filaob[fila]['prec_gal']);
+                var preciope=parseFloat(filaob[fila]['prec_pin']);
+                var tram=parseFloat(filaob[fila]['tramo']);
+                var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                
+                
+                
+                sub+=((precioga+preciope)*tram)*cantidad;
+
+
             }
+
         }
+
         $("#subtotal").html("s/. " + sub.toFixed(2));
     }
-    function descuentos(){
-        var desc=0;
-        for (const fila in filaob) {
-            if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']==1 || filaob[fila]['estado']==2) {
-                var precio=parseFloat(filaob[fila]['prec_uniP']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var descuento=parseFloat(filaob[fila]['descuentoP']);
-                desc+=((precio*(descuento/100)*cantidad));                       
-            }
-        }
-        $("#descuentos").html("s/. "+desc.toFixed(2));
-    }
+
+
+   
     function valorVenta(){
         var venta=0;        
         for (const fila in filaob) {

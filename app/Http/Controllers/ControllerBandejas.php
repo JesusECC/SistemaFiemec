@@ -99,6 +99,7 @@ public function store(Request $request)
         $plazofabri;
         $iduser;
         $garantias;
+        $simbolo;
 // [{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldola:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,
 //     forma:forma,plazo:plazo,observacion:observacion}];
            
@@ -118,6 +119,7 @@ public function store(Request $request)
             $plazofabri=$dato['plazofabri'];
             $garantias=$dato['garantias'];
             $iduser=$dato['userid'];
+            $simbolo=$dato['simbolo'];
         }
         $idProforma=DB::table('Proforma')->insertGetId(
             ['idCliente'=>$idclie,
@@ -137,7 +139,7 @@ public function store(Request $request)
             // 'plaza_fabricacion'=>$request->,
             'plazo_oferta'=>$plazo,
             'garantia'=>$garantias,
-            // 'observacion_condicion'=>$request->,
+            'simboloP'=>$simbolo,
             'cliente_empleado'=>$clienteemp,
             'observacion_condicion'=>$observacion,
             'incluye'=>$incluye,
@@ -164,6 +166,7 @@ public function store(Request $request)
             $detalleProforma->tapa=$fila['tapa'];
             $detalleProforma->cambioBandejas=$fila['tipocambio'];    
             $detalleProforma->simboloBandejas=$fila['simbolocambio'];
+            $detalleProforma->promed=$fila['promed'];
             	
 
             
@@ -318,27 +321,50 @@ public function edit($id)
     {
         //
         $productos=DB::table('Producto as po')
-        ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
-        ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.marca_producto," ",po.nombre_producto," ",po.descripcion_producto) as product'))
-        ->where('po.estado','=','activo')
-        ->where('po.tipo_producto','=','bandejas')
-        ->get();
-         
-         $medidas=DB::table('Medidas')
-         ->where('estadoM','=','activo')
-         ->get();
+ ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
+ ->select('po.promedio','po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema','po.nombre_producto','po.codigo_producto','po.marca_producto','descripcion_producto',DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto," | ",po.marca_producto) as productos2'))
+ ->where('po.tipo_producto','=','bandejas')
+ ->orwhere('po.tipo_producto','=','accesorios')
+ ->where('po.estado','=','activo')
+ ->get();
+  $accesorios=DB::table('Accesorios')
+ ->get();
 
-        $proforma=DB::table('Proforma as p')
-        ->join('Detalle_bandejas as deP','p.idProforma','=','deP.idProforma')
-        ->join('Medidas as m','m.idMedidas','=','deP.idMedidas')
-        ->join('Producto as pd','pd.idProducto','=','deP.idProducto')
-        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
-        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idMedidas','deP.idProforma','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.estadoDB','deP.descuento','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','m.medida','deP.espesor','m.precio',DB::raw('CONCAT(pd.marca_producto," ",pd.nombre_producto," ",pd.descripcion_producto) as produ'))
+ $galvanizado=DB::table('Galvanizado')
+ ->get();
+
+  $pintado=DB::table('Pintado')
+ ->get();
+
+ $medidas=DB::table('Medidas')
+ ->where('estadoM','=','activo')
+ ->get();
+
+ $monedas=DB::table('Tipo_moneda')
+ ->where('estado','=','1')
+ ->get();
+
+ $representante=DB::table('Cliente_Representante') 
+    ->where('estadoCE','=',1)
+    ->get();
+
+ $clientes=DB::table('Cliente_Proveedor as cp')
+ ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
+->where('cp.estado','=','1')
+->get();
+         
+$proforma=DB::table('Proforma as p')
+->join('Detalle_bandejas as deP','p.idProforma','=','deP.idProforma')
+->join('Galvanizado as gal','gal.idGalvanizado','=','deP.idGalvanizado')
+->join('Producto as pd','pd.idProducto','=','deP.idProducto')
+->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+->join('Cliente_Representante as ce','ce.idCliente','=','clp.idCliente')
+->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.estadoDB','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','deP.espesor','pd.marca_producto','pd.nombre_producto','pd.descripcion_producto','gal.nombreGalvanizado','deP.medidas','deP.tramo','deP.tapa','deP.dimenciones','deP.precioGal','deP.precioPin','deP.precioTap','deP.promed','ce.nombre_RE','p.incluye')
         ->where('deP.idProforma','=',$id)
         ->get();
     
         // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
-        return view("proforma.bandejas.edit",["medidas"=>$medidas,"productos"=>$productos,'proforma'=>$proforma]);
+return view("proforma.bandejas.edit",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"medidas"=>$medidas,"accesorios"=>$accesorios,"galvanizado"=>$galvanizado,"pintado"=>$pintado,"representante"=>$representante,"proforma"=>$proforma]);
 
 
     }

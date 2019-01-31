@@ -254,6 +254,7 @@
                                                 <label for="" class="control-label">Promedio</label>
                                                     <select name="ppromedio" class="form-control selectpicker" id="ppromedio" data-live-search="true">
                                                     <option value="" disabled="" selected="">Seleccione Promedio</option>
+                                                    <option value="0" >Sin Promedio</option>
                                                     <option value="1" >Menos 10%</option>
                                                     <option value="2" >Mas 10%</option>
                                                 </select>
@@ -624,9 +625,10 @@
         var incl=$("#incluye").val();
         var observacion=$("#observacion_condicion").val();
         var garant=$("#garantia").val();
+        var simbolop=$("#simbolo").val();
         console.log(iduser);
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,incluye:incl,plazofabri:plazoF,clienteemp:clienteemp,garantias:garant,simbolo:simbolo,userid:iduser}];
+            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,incluye:incl,plazofabri:plazoF,clienteemp:clienteemp,garantias:garant,simbolo:simbolop,userid:iduser}];
             // var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -733,25 +735,26 @@
                     var dimenciones=parseFloat(filaob[fila]['dimencion']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                      
-                if(promedio==1 && tapas=='Con tapa'){
+                 if(promedio==1 && tapas=='Con tapa'){
 
-                    var subt2=(((precioga+preciope)*tram)+preciota);
-                    var subt=(((precioga+preciope)*tram)+preciota)*cantidad;
+                    var subt2=(((precioga+preciope)*tram)+preciota)-((((precioga+preciope)*tram)+preciota)*0.1);
+                    var subt=((((precioga+preciope)*tram)+preciota)-((((precioga+preciope)*tram)+preciota)*0.1))*cantidad;
 
                 }else if(promedio==1 && tapas=='Sin tapa'){
 
-                    var subt2=((precioga+preciope)*tram);
-                    var subt=((precioga+preciope)*tram)*cantidad;
+                    var subt2=((precioga+preciope)*tram)-(((precioga+preciope)*tram)*0.1);
+                    var subt=(((precioga+preciope)*tram)-(((precioga+preciope)*tram)*0.1))*cantidad;
 
                 }else if(promedio==2 && tapas=='Con tapa'){
 
-                    var subt2=(((precioga+preciope)*tram)+preciota);
-                    var subt=(((precioga+preciope)*tram)+preciota)*cantidad;
+                    var subt2=(((precioga+preciope)*tram)+preciota)+((((precioga+preciope)*tram)+preciota)*0.1);
+                    var subt=((((precioga+preciope)*tram)+preciota)+((((precioga+preciope)*tram)+preciota)*0.1))*cantidad;
 
                 }else if(promedio==2 && tapas=='Sin tapa'){
 
-                    var subt2=((precioga+preciope)*tram);
-                    var subt=((precioga+preciope)*tram)*cantidad;
+                    var subt2=((precioga+preciope)*tram)+(((precioga+preciope)*tram)*0.1);
+                    var subt=(((precioga+preciope)*tram)+(((precioga+preciope)*tram)*0.1))*cantidad;
+
 
                 }
                                    

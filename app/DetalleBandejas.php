@@ -31,7 +31,8 @@ class DetalleBandejas extends Model
       'descripcionDP',
       'estadoDB',
       'cambioBandejas',
-      'simboloBandejas'
+      'simboloBandejas',
+      'promed'
 
    ];
 
