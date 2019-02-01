@@ -210,14 +210,14 @@
                                             <div class="form-group">
                                                 <label class="control-label">Nom.Tablero</label>
                                                 <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
-                                                <div id="select-pro" ></div>
+                                                <div id="select-subtitle" ></div>
                                             </div>
                                         </div> 
                                         <div class="col-sm-10">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="subtitle" id="subtitle" placeholder="Ingresar sub titulo">
                                                 <samp class="input-group-btn">
-                                                    <button id="bt_add_tablero" class="btn btn-primary" >
+                                                    <button id="bt_add_subtitle" class="btn btn-primary" >
                                                         <i class="fas fa-plus"></i> Agregar
                                                     </button>
                                                 </samp>
@@ -431,13 +431,15 @@
         $('#Pcantidad').click(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
         });
-
+        //logica para colocar los subtitulos
         $('#subtitulo').click(function(){
             console.log("aaaa");
             document.getElementById('producto-crear-oculto').style.display = 'none';
             document.getElementById('subtitulos').style.display = 'block';
             ListaSelect();
         });
+
+        
        /* $('#pdescuento').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
         });
@@ -499,7 +501,6 @@
 
 
     function representante(idCliente){
-        console.log(idCliente,'-----');
       $.ajax({
             headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data:{cliente:idCliente}, //datos que se envian a traves de ajax
@@ -688,22 +689,22 @@
                 if (tablero.hasOwnProperty(key)) {
                     if(tablero[key]['nombre']==nomTablero){
                         bool=true;
-                        for (const fil in filaob) {
-                            if (filaob.hasOwnProperty(fil)) {
-                                if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idTarea']==idTa && filaob[fil]['nomTablero']==tablero[key]['nombre']){
+                        // for (const fil in filaob) {
+                        //     if (filaob.hasOwnProperty(fil)) {
+                        //         if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idTarea']==idTa && filaob[fil]['nomTablero']==tablero[key]['nombre']){
 
-                                    var su=parseInt(pcant);
-                                    var des=descuento;
-                                    filaob[fil]['cantidadP']=su;
-                                    filaob[fil]['descuentoP']=des;
-                                    filaob[fil]['descripcionP']=pdescripcion;
-                                    filaob[fil]['itemP']=pit;
-                                    fila();
-                                    boolfila=true;
-                                    console.log("Actualizar producto");                      
-                                }                
-                            }
-                        }
+                        //             var su=parseInt(pcant);
+                        //             var des=descuento;
+                        //             filaob[fil]['cantidadP']=su;
+                        //             filaob[fil]['descuentoP']=des;
+                        //             filaob[fil]['descripcionP']=pdescripcion;
+                        //             filaob[fil]['itemP']=pit;
+                        //             fila();
+                        //             boolfila=true;
+                        //             console.log("Actualizar producto");                      
+                        //         }                
+                        //     }
+                        // }
                         if(boolfila==false){
                           // console.log("produc nuevoo",contp); 
                             var dat={idTarea:idTa,tarea:tname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:1,itemP:pit,fila:""};
@@ -781,7 +782,7 @@
     }    
     function ListaSelect(){
         // realiza el listado de todas los tableros que se añaden
-        var tab;    
+            
         var selectop;
         if(tablero.length>0){
             for (const pro in tablero) {
@@ -793,13 +794,24 @@
                             // '<option value="">Seleccione...</option>'+
                             selectop+
                       '</select>';
-            $('#select-pro').html(selec);
+            
+            listarTableros('select-pro',selec);
+            listarTableros('select-subtitle',selec);
+            
+            
+
+        }
+    }
+    //funcion para realizar la lista de tableros
+    function listarTableros(idiv,selec){
+        var tab;
+        $('#'+idiv).html(selec);
             for (var keyt in tablero) {
                 tab+=tablero[keyt]['tablero'];
             }
-            $('#tablerosn').html(tab);
-        }
+        $('#tablerosn').html(tab);
     }
+
     function detalleFilas(){
         // mantiene en la vista las filas cuando se agrega una nueva tabla
         // var dat={idProducto:idProd,producto:pname,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp};
@@ -986,6 +998,22 @@
             
         }
     }
+
+    $('#bt_add_subtitle').click(function(){
+        var nomt=$("#prod-selec").val();
+        var subtitl=$("#subtitle").val();
+        var tname=subtitl;
+        console.log(tname);
+        var dat={idTarea:'.',tarea:tname,descripcionP:'.',prec_uniP:'.',cantidadP:'.',descuentoP:'.',nomTablero:nomt,posiP:'.',estado:1,itemP:'.',fila:""};
+        console.log(dat);
+        filaob.push(dat);
+        fila();
+        contp++;
+        console.log(filaob);
+        valoresFinales();
+        document.getElementById('producto-crear-oculto').style.display = 'block';
+        document.getElementById('subtitulos').style.display = 'none';
+        });
 </script>
 @endpush
 @endsection
