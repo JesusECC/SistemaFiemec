@@ -296,7 +296,7 @@ border-collapse: collapse;
             <th class="principal" >Valor V.</th>
           </tr>
         </thead>
-        <tbody >
+        
           
           {{$i=1}}
 
@@ -332,7 +332,7 @@ border-collapse: collapse;
               <td colspan="2" style="border:1px solid #323639;border-bottom: 1px solid #323639;">Total</td>
               <td colspan="2" align="center" style="border: 1px solid #323639;border-bottom: 1px solid #323639">S/. {{round($proforma->precio_total,2)}}</td>
             </tr> 
-        </tfoot>
+        
 
       </table>
     </div>
