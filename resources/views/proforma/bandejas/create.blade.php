@@ -674,8 +674,9 @@
         var descuento=$('#pdescuento').val();
         var cambioB=$('#valorcambio').val();
         var simboloB=$('#simbolo').val();
+        var proacc=$('#pacc').val();
         var filas;
-        if(nomTablero!="" && idProd!="" && pname!="" && med!="" && puni!="" && pcant!="" && descuento!="" && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
+        if(nomTablero!="" && idProd!=""  && pcant!=""  && typeof(tipocam)!='undefined' && tipocam!='null' && tipocam!='' ){
 
             if(pcant!=0){
                 document.getElementById('totales-general').style.display = 'block';
@@ -700,7 +701,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,idPintado:idPin,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,simbolocambio:simboloB,fila:""};
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,idPintado:idPin,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,porcentajeacc:proacc,simbolocambio:simboloB,fila:""};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -734,29 +735,13 @@
                     var tapas=String(filaob[fila]['tapa']);
                     var dimenciones=parseFloat(filaob[fila]['dimencion']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
-                     
-                 if(promedio==1 && tapas=='Con tapa'){
-
-                    var subt2=(((precioga+preciope)*tram)+preciota)-((((precioga+preciope)*tram)+preciota)*0.1);
-                    var subt=((((precioga+preciope)*tram)+preciota)-((((precioga+preciope)*tram)+preciota)*0.1))*cantidad;
-
-                }else if(promedio==1 && tapas=='Sin tapa'){
-
-                    var subt2=((precioga+preciope)*tram)-(((precioga+preciope)*tram)*0.1);
-                    var subt=(((precioga+preciope)*tram)-(((precioga+preciope)*tram)*0.1))*cantidad;
-
-                }else if(promedio==2 && tapas=='Con tapa'){
-
-                    var subt2=(((precioga+preciope)*tram)+preciota)+((((precioga+preciope)*tram)+preciota)*0.1);
-                    var subt=((((precioga+preciope)*tram)+preciota)+((((precioga+preciope)*tram)+preciota)*0.1))*cantidad;
-
-                }else if(promedio==2 && tapas=='Sin tapa'){
-
-                    var subt2=((precioga+preciope)*tram)+(((precioga+preciope)*tram)*0.1);
-                    var subt=(((precioga+preciope)*tram)+(((precioga+preciope)*tram)*0.1))*cantidad;
+                    var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
 
 
-                }
+                           var subt2=(precioga*tram)*(procentaje/100);
+
+                           var subt=((precioga*tram)*(procentaje/100))*cantidad;     
+                
                                    
                     filas=
                         '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+

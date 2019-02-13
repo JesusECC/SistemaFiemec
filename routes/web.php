@@ -112,6 +112,13 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('cliente/show/{idCliente}',['as'=>'clientes-show','uses'=>'ControllerClientes@show']);
     Route::get('tarea/create',['as'=>'tarea-create','uses'=>'ControllerTarea@create']);
     Route::post('proformas/cli',['as'=>'clientes-representante','uses'=>'ControllerProformaUnitaria@representante']);
+
+
+
+
+    //bandejas producto
+
+     
     
     //se crea rutas para ajsutes
     Route::get('Ajustes',['as'=>'ajustes','uses'=>'ControllerAjustes@index']);
