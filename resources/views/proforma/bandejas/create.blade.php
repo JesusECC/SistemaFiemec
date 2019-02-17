@@ -166,6 +166,7 @@
                                                 <label for="" class="control-label">Tramo</label> 
                                                  <select name="ptramo" class="form-control selectpicker" id="ptramo" data-live-search="true">
                                                     <option value="" disabled="" selected="">Seleccione Tramo</option>
+                                                    <option value="">sin tramo</option>
                                                     <option value="2.4">2400mm</option>
                                                     <option value="3">3000mm</option>
                                                    
@@ -737,11 +738,47 @@
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                     var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
 
+                    
+                    if(procentaje==0 && precioga>0){
+
+                        var subt2=precioga;
+
+                        var subt=precioga*cantidad;
+
+                    }else if(tapas=="Sin tapa" && precioga>0){
 
                            var subt2=(precioga*tram)*(procentaje/100);
 
-                           var subt=((precioga*tram)*(procentaje/100))*cantidad;     
-                
+                           var subt=((precioga*tram)*(procentaje/100))*cantidad; 
+
+                    }else if(tapas=="Con tapa" && precioga>0){
+
+                           var subt2=(((precioga*tram)*(procentaje/100))+preciota);
+
+                           var subt=(((precioga*tram)*(procentaje/100))+preciota)*cantidad; 
+
+                    }
+
+
+                    else if(procentaje==0 && preciope>0){
+
+                        var subt2=preciope;
+
+                        var subt=preciope*cantidad;
+
+                    }else if(tapas=="Sin tapa" && preciope>0){
+
+                           var subt2=(preciope*tram)*(procentaje/100);
+
+                           var subt=((preciope*tram)*(procentaje/100))*cantidad; 
+
+                     }else if(tapas=="Con tapa" && preciope>0){
+
+                           var subt2=(((preciope*tram)*(procentaje/100))+preciota);
+
+                           var subt=(((preciope*tram)*(procentaje/100))+preciota)*cantidad; 
+                           
+                     }      
                                    
                     filas=
                         '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
