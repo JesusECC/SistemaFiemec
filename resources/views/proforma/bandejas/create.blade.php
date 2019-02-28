@@ -745,11 +745,23 @@
 
                         var subt=(((precioga*tram)*(procentaje/100)+preciota)-(((precioga*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
 
-                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==2){
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==2){
 
-                        var subt2=((preciope*tram)*(procentaje/100))+((preciope*tram)*(procentaje/100)*0.1);
+                        var subt2=((precioga*tram)*(procentaje/100)+preciota)+(((precioga*tram)*(procentaje/100)+preciota)*0.1);
 
-                        var subt=(((preciope*tram)*(procentaje/100))+((preciope*tram)*(procentaje/100)*0.1))*cantidad;
+                        var subt=(((precioga*tram)*(procentaje/100)+preciota)+(((precioga*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==1){
+
+                        var subt2=((precioga*tram)*(procentaje/100))-(((precioga*tram)*(procentaje/100))*0.1);
+
+                        var subt=(((precioga*tram)*(procentaje/100))-(((precioga*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==2){
+
+                        var subt2=((precioga*tram)*(procentaje/100))+(((precioga*tram)*(procentaje/100))*0.1);
+
+                        var subt=(((precioga*tram)*(procentaje/100))+(((precioga*tram)*(procentaje/100))*0.1))*cantidad;
 
                 }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa'){
 
@@ -757,11 +769,29 @@
 
                         var subt=(((precioga*tram)*(procentaje/100))+preciota)*cantidad;
 
-                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa'){
+                }else if(precioga>0 && promedio==1 && tapas=='Con tapa'){
 
-                        var subt2=(preciope*tram)*(procentaje/100);
+                        var subt2=(precioga+preciota)-((precioga+preciota)*0.1);
 
-                        var subt=((preciope*tram)*(procentaje/100))*cantidad;
+                        var subt=((precioga+preciota)-((precioga+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2 && tapas=='Con tapa'){
+
+                        var subt2=(precioga+preciota)+((precioga+preciota)*0.1);
+
+                        var subt=((precioga+preciota)((precioga+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==1 && tapas=='Sin tapa'){
+
+                        var subt2=(precioga)-(precioga*0.1);
+
+                        var subt=((precioga)-(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2 && tapas=='Sin tapa'){
+
+                        var subt2=(precioga)+(precioga*0.1);
+
+                        var subt=((precioga)+(precioga*0.1))*cantidad;
 
                 }else if(precioga>0 && procentaje>0 && tram>0){
 
@@ -769,23 +799,35 @@
 
                         var subt=((precioga*tram)*(procentaje/100))*cantidad;
 
-                }else if(preciope>0 && procentaje>0 && tram>0){
+                }else if(precioga>0 && promedio==1){
 
-                        var subt2=(preciope*tram)*(procentaje/100);
+                        var subt2=(precioga-(precioga*0.1));
 
-                        var subt=((preciope*tram)*(procentaje/100))*cantidad;
+                        var subt=(precioga-(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2){
+
+                        var subt2=(precioga+(precioga*0.1));
+
+                        var subt=(precioga+(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && tapas=='Con tapa'){
+
+                        var subt2=precioga+preciota;
+
+                        var subt=(precioga+preciota)*cantidad;
+
+                }else if(precioga>0 && tapas=='Sin tapa'){
+
+                        var subt2=precioga;
+
+                        var subt=precioga*cantidad;
 
                 }else if(precioga>0){
 
                         var subt2=precioga;
 
                         var subt=precioga*cantidad;
-
-                }else if(preciope>0){
-
-                        var subt2=preciope;
-
-                        var subt=preciope*cantidad;
 
                 }
                                    
@@ -842,8 +884,8 @@
 
     function limpiar(){
        
-        $("#ppreciog").val("");
-        $("#ppreciop").val("");
+       // $("#ppreciog").val("");
+       // $("#ppreciop").val("");
         $("#Pcantidad").val("");
         $("#descripcionp").val("");
     } 
