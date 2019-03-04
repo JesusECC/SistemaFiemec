@@ -200,7 +200,7 @@
                                                 <select name="idPintado" class="form-control selectpicker" id="idPintado" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Tipo de Pintado</option value="" disabled="" selected="">Seleccione Pintado</option>
                                                     @foreach($pintado as $pin)                
-                                                        <option value="{{$pin->idPintado}}_{{$pin->nombrePintado}}_{{$pin->tipoP}}">{{$pin->nombrePintado}} {{$pin->tipoP}}</option>
+                                                        <option value="{{$pin->idPintado}}_{{$pin->nombrePintado}}_{{$pin->tipoP}}">{{$pin->nombrePintado}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
