@@ -20,6 +20,7 @@ class DetalleBandejas extends Model
       'precioGal',
       'precioPin',
       'precioTap',
+      'preciouniB',
       'tramo',
       'dimenciones',
       'tapa',

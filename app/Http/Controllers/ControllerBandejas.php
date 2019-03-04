@@ -147,6 +147,9 @@ public function store(Request $request)
             'estado'=>1,
             ]
         );
+
+       
+
         foreach($request->filas as $fila){
             $detalleProforma=new DetalleBandejas;	
             $detalleProforma->idProducto=$fila['idProducto'];
@@ -158,6 +161,7 @@ public function store(Request $request)
             $detalleProforma->precioGal=$fila['prec_gal'];
             $detalleProforma->precioPin=$fila['prec_pin'];
             $detalleProforma->precioTap=$fila['prec_tap'];
+            $detalleProforma->preciouniB=$fila['preuni'];
             $detalleProforma->tramo=$fila['tramo'];
             $detalleProforma->descripcionDP=$fila['descripcionP'];
             $detalleProforma->estadoDB=1;	

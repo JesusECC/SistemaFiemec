@@ -92,8 +92,9 @@
             </div>
             <div class="row" style="padding-left:  30px !important;padding-right: 30px !important">
               <div class="col-12 table-responsive">
+                <th colspan="6" style="text-align: center;color: black;padding: 5px ; font-size: 13px; background-color: grey !important;">Fabricado en plancha galvanizada LAC/LAF, Diseño Constructivo segun norma NEMA VE-1 y recomendacion de la NFPA-70.</th>
                 <table class="table table-striped">
-                     <th colspan="6" style="text-align: center;color: black;padding: 5px ; font-size: 13px; background-color: grey !important;">Fabricado en plancha galvanizada LAC/LAF, Diseño Constructivo segun norma NEMA VE-1 y recomendacion de la NFPA-70.</th>
+                     
         </tr>
                   <thead>
                     <tr>
@@ -106,14 +107,28 @@
                   </thead>
                   <tbody>
                     @foreach($detalles as $det)
+
+                    if($det->precioGal>0){
                         <tr>
                             <td>{{$det->nombre_producto}} {{$det->medidas}}, acabado en {{$det->nombreGalvanizado}}, Espesor de {{$det->espesor}} y tramo de {{$det->tramo}} metros. {{$det->descripcionDP}}, {{$det->tapa}} </td>
                             <td>{{$det->dimenciones}}</td>
                             <td>{{$det->cantidad}}</td>
-                            <td>{{(((($det->precioGal + $det->precioPin)*$det->tramo)+$det->precioTap)-10)}}</td>
+                            <td>{{(((($det->precioGal)*$det->tramo)+$det->precioTap))}}</td>
                             <td>{{(((($det->precioGal + $det->precioPin)*$det->tramo)+$det->precioTap)-10)*$det->cantidad}}</td>
                         </tr>
+                      }else{
+
+                      <td>{{$det->nombre_producto}} {{$det->medidas}}, acabado en {{$det->nombreGalvanizado}}, Espesor de {{$det->espesor}} y tramo de {{$det->tramo}} metros. {{$det->descripcionDP}}, {{$det->tapa}} </td>
+                            <td>{{$det->dimenciones}}</td>
+                            <td>{{$det->cantidad}}</td>
+                            <td>{{(((($det->precioGal))+$det->precioTap))}}</td>
+                            <td>{{(((($det->precioGal + $det->precioPin)*$det->tramo)+$det->precioTap)-10)*$det->cantidad}}</td>
+
+
+
+                    }
                         @endforeach
+                      }
                   </tbody>
                 </table>
               </div>
