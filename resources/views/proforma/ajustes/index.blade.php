@@ -62,9 +62,7 @@
 					    </div>
 					    <div class="col-sm-4">
 					        <div class="ibox">
-					            <div class="ibox-title">
-					                <h5><i class="fa fa-desktop"></i> Sistema</h5>
-					            </div>
+					            
 					            <div class="ibox-content no-padding">
 					                <div class="list-group">
 					                    <a class="list-group-item" href="?c=Config&amp;a=IndexDE">

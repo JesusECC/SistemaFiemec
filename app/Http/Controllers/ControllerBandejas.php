@@ -57,7 +57,7 @@ public function create()
  $galvanizado=DB::table('Galvanizado')
  ->get();
 
-  $pintado=DB::table('Pintado')
+$pintado=DB::table('Pintado')
  ->get();
 
  $medidas=DB::table('Medidas')

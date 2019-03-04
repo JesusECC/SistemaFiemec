@@ -181,7 +181,7 @@
                                                 <select name="pgalvanizado" class="form-control selectpicker" id="pgalvanizado" data-live-search="true">
                                                     <option value="" disabled="" selected="">Seleccione Galvanizado</option>
                                                     @foreach($galvanizado as $gal)                
-                                                        <option value="{{$gal->idGalvanizado}}_{{$gal->nombreGalvanizado}}">{{$gal->nombreGalvanizado}}</option>
+                                                        <option value="{{$gal->idGalvanizado}}_{{$gal->nombreGalvanizado}}_{{$gal->tipoG}}">{{$gal->nombreGalvanizado}}</option>
                                                     @endforeach  
                                                    
                                                 </select> 
@@ -190,7 +190,7 @@
                                         <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Precio Gal.</label>
-                                                 <input type="number"  id="ppreciog" class="form-control" name="ppreciog">                                                   
+                                                 <input type="number" id="ppreciog" class="form-control" name="ppreciog">                                                   
                                             </div>
                                         </div>
                                         
@@ -200,7 +200,7 @@
                                                 <select name="idPintado" class="form-control selectpicker" id="idPintado" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Tipo de Pintado</option value="" disabled="" selected="">Seleccione Pintado</option>
                                                     @foreach($pintado as $pin)                
-                                                        <option value="{{$pin->idPintado}}">{{$pin->nombrePintado}}</option>
+                                                        <option value="{{$pin->idPintado}}_{{$pin->nombrePintado}}_{{$pin->tipoP}}">{{$pin->nombrePintado}} {{$pin->tipoP}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -208,7 +208,7 @@
                                         <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Precio Pin.</label>
-                                                 <input type="number"  id="ppreciop" class="form-control" name="ppreciop"> 
+                                                 <input type="number" id="ppreciop" class="form-control" name="ppreciop"> 
                                             </div>
                                         </div>
 
@@ -247,7 +247,7 @@
                                          <div class="col-lg-2" style="margin-top:20px">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Precio de Tapa</label>
-                                                 <input type="number"  id="ppreciot" class="form-control" name="ppreciot">                                                   
+                                                 <input type="number" disabled id="ppreciot" class="form-control" name="ppreciot">                                                   
                                             </div>
                                         </div>
                                         <div class="col-sm-2" style="margin-top:19px">
@@ -465,6 +465,7 @@
                     </div>
                 </div>
                 <div class="box-footer">
+
                     <div class="ibox-title-buttons pull-right">
                         <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
                         <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
@@ -536,19 +537,53 @@
     var totaldolares=0;
     var iduser={!! Auth::user()->id !!}
     $("#pidProducto").change(MostarProducto);
-
+    $("#pgalvanizado").change(cambiaropcion);
+    $("#idPintado").change(cambiaropcion2);
+    $("#ptapa").change(cambiaropcion3);
     $("#idTipo_moneda").change(cambioMoneda);
 
     function cambiaropcion(){
-        Producto=document.getElementById('pidProducto').value.split('_');
-        var precio_unitario=Producto[2];
-       if(precio_unitario==0.00 || precio_unitario==null){
-            $('#precio_uni').attr("disabled", false);
+        Gal=document.getElementById('pgalvanizado').value.split('_');
+        var tipo_gal=Gal[2];
+        
+
+       if(tipo_gal=1){
+
+            $('#ppreciop').attr("disabled", true);
+            $('#ppreciog').attr("disabled", false);
+            $("#ppreciop").val("");              
         }
-        else{
-           $('#precio_uni').attr("disabled", true); 
+       }
+
+    function cambiaropcion2(){
+       
+        Pin=document.getElementById('idPintado').value.split('_');
+        var tipo_pin=Pin[2];
+
+       if(tipo_pin=2){
+
+            $('#ppreciog').attr("disabled", true);
+            $('#ppreciop').attr("disabled", false);
+            $("#ppreciog").val("");
+                      
         }
-   }
+       }
+
+    function cambiaropcion3(){
+       
+        Pin=document.getElementById('ptapa').value;
+        //var tipo_pin=Pin[2];
+
+       if(Pin=='Sin tapa'){
+
+            $('#ppreciot').attr("disabled", true); 
+            $("#ppreciot").val("");             
+        }else{
+
+            $('#ppreciot').attr("disabled", false);
+                                 
+        }
+       }
 
     
     function MostrarCliente(){
@@ -561,7 +596,8 @@
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
         $("#pacc").val(Producto[4]);
-        cambiaropcion();
+        $('#pacc').attr("disabled", true);
+        
     }
     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
@@ -655,10 +691,12 @@
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
         Galvanizado=document.getElementById('pgalvanizado').value.split('_');
+        Pintura=document.getElementById('idPintado').value.split('_');
         var idProd=Producto[0];
         var pname=Producto[1];
         var idGal=Galvanizado[0];
         var gname=Galvanizado[1];
+        var pinname=Pintura[1];
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var preciog=$('#ppreciog').val();
@@ -702,7 +740,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,idPintado:idPin,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,porcentajeacc:proacc,simbolocambio:simboloB,fila:""};
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,idPintado:idPin,galvanizado:gname,pinturas:pinname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,porcentajeacc:proacc,simbolocambio:simboloB,fila:""};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -737,7 +775,8 @@
                     var dimenciones=parseFloat(filaob[fila]['dimencion']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                     var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
-
+        
+        if(precioga>0){
                     
                 if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
 
@@ -769,17 +808,11 @@
 
                         var subt=(((precioga*tram)*(procentaje/100))+preciota)*cantidad;
 
-                }else if(precioga>0 && promedio==1 && tapas=='Con tapa'){
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Sin tapa'){
 
-                        var subt2=(precioga+preciota)-((precioga+preciota)*0.1);
+                        var subt2=((precioga*tram)*(procentaje/100));
 
-                        var subt=((precioga+preciota)-((precioga+preciota)*0.1))*cantidad;
-
-                }else if(precioga>0 && promedio==2 && tapas=='Con tapa'){
-
-                        var subt2=(precioga+preciota)+((precioga+preciota)*0.1);
-
-                        var subt=((precioga+preciota)((precioga+preciota)*0.1))*cantidad;
+                        var subt=((precioga*tram)*(procentaje/100))*cantidad;
 
                 }else if(precioga>0 && promedio==1 && tapas=='Sin tapa'){
 
@@ -792,6 +825,18 @@
                         var subt2=(precioga)+(precioga*0.1);
 
                         var subt=((precioga)+(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==1 && tapas=='Con tapa'){
+
+                        var subt2=(precioga+preciota)-((precioga+preciota)*0.1);
+
+                        var subt=((precioga+preciota)-((precioga+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2 && tapas=='Con tapa'){
+
+                        var subt2=(precioga+preciota)+((precioga+preciota)*0.1);
+
+                        var subt=((precioga+preciota)+((precioga+preciota)*0.1))*cantidad;
 
                 }else if(precioga>0 && procentaje>0 && tram>0){
 
@@ -830,8 +875,8 @@
                         var subt=precioga*cantidad;
 
                 }
-                                   
-                    filas=
+
+                filas=
                         '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
                             '<td class="text-center"> '+ 
                                 '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+ ' de ' +
@@ -877,15 +922,166 @@
                     filas="";   
                     limpiar(); 
 
+
+
+            }else if(preciope>0){
+
+                if(preciope>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
+
+                        var subt2=((preciope*tram)*(procentaje/100)+preciota)-(((preciope*tram)*(procentaje/100)+preciota)*0.1);
+
+                        var subt=(((preciope*tram)*(procentaje/100)+preciota)-(((preciope*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==2){
+
+                        var subt2=((preciope*tram)*(procentaje/100)+preciota)+(((preciope*tram)*(procentaje/100)+preciota)*0.1);
+
+                        var subt=(((preciope*tram)*(procentaje/100)+preciota)+(((preciope*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==1){
+
+                        var subt2=((preciope*tram)*(procentaje/100))-(((preciope*tram)*(procentaje/100))*0.1);
+
+                        var subt=(((preciope*tram)*(procentaje/100))-(((preciope*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==2){
+
+                        var subt2=((preciope*tram)*(procentaje/100))+(((preciope*tram)*(procentaje/100))*0.1);
+
+                        var subt=(((preciope*tram)*(procentaje/100))+(((preciope*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Con tapa'){
+
+                        var subt2=((preciope*tram)*(procentaje/100)+preciota);
+
+                        var subt=(((preciope*tram)*(procentaje/100))+preciota)*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa'){
+
+                        var subt2=((preciope*tram)*(procentaje/100));
+
+                        var subt=((preciope*tram)*(procentaje/100))*cantidad;
+
+                }else if(preciope>0 && promedio==1 && tapas=='Sin tapa'){
+
+                        var subt2=(preciope)-(preciope*0.1);
+
+                        var subt=((preciope)-(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==2 && tapas=='Sin tapa'){
+
+                        var subt2=(preciope)+(preciope*0.1);
+
+                        var subt=((preciope)+(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==1 && tapas=='Con tapa'){
+
+                        var subt2=(preciope+preciota)-((preciope+preciota)*0.1);
+
+                        var subt=((preciope+preciota)-((preciope+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==2 && tapas=='Con tapa'){
+
+                        var subt2=(preciope+preciota)+((preciope+preciota)*0.1);
+
+                        var subt=((preciope+preciota)+((preciope+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0){
+
+                        var subt2=(preciope*tram)*(procentaje/100);
+
+                        var subt=((preciope*tram)*(procentaje/100))*cantidad;
+
+                }else if(preciope>0 && promedio==1){
+
+                        var subt2=(preciope-(preciope*0.1));
+
+                        var subt=(preciope-(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==2){
+
+                        var subt2=(preciope+(preciope*0.1));
+
+                        var subt=(preciope+(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && tapas=='Con tapa'){
+
+                        var subt2=preciope+preciota;
+
+                        var subt=(preciope+preciota)*cantidad;
+
+                }else if(preciope>0 && tapas=='Sin tapa'){
+
+                        var subt2=preciope;
+
+                        var subt=preciope*cantidad;
+
+                }else if(preciope>0){
+
+                        var subt2=preciope;
+
+                        var subt=preciope*cantidad;
+
+                }
+
+                filas=
+                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
+                            '<td class="text-center"> '+ 
+                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+ ' de ' +
+
+                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medi']+'">'+filaob[fila]['medi']+' fabricado en plancha galvanizada LAC/LAF acabado  con pintura'+
+
+                               '<input style="width: 70px !important;" type="hidden" name="idgal_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idPintado']+'">'+filaob[fila]['pinturas']+', Espesor de '+
+
+                               '<input  type="hidden" name="esp_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de'+
+
+                                '<input  type="hidden" name="tram_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tramo']+'">'+filaob[fila]['tramo']+' metros. Fabricado bajo la norma NEMA V-1 y recomendacion de la NFPA-70. '+
+
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+'. '+
+
+                                '<input  type="hidden" name="tap_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+
+                            '</td>'+
+
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="dem_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimencion']+'">'+filaob[fila]['dimencion']+
+                            '</td>'+
+                            
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="cant_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
+                            '</td>'+
+
+                            '<td class="text-center"> '+   
+                                '<input style="width:60px !important;" width="40px" type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+subt2.toFixed(2)+'" >'+subt2.toFixed(2)+
+                            '</td>'+
+                            
+                            '<td class="text-center"> '+   
+                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2)+
+                            '</td>'+
+                            '<td class="text-center">'+
+                                '<center>'+
+                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
+                                            '<i class="fas fa-trash"></i>'+
+                                    '</button>'+                                
+                                '</center>'+
+
+                            '</td>'+
+                        '</tr>';  
+                    filaob[fila]['fila']=filas;
+                    filas="";   
+                    limpiar(); 
+                 }else if(precioga>0 && preciope>0){
+
+                    alert('salio');
+                 }
             }
          }                    
      }
-}   
 
+}
     function limpiar(){
        
-       // $("#ppreciog").val("");
-       // $("#ppreciop").val("");
+        //$("#ppreciog").val("");
+        //$("#pgalvanizado").val("");
         $("#Pcantidad").val("");
         $("#descripcionp").val("");
     } 
@@ -904,122 +1100,352 @@
         // la suma de tosos los tableros
          
 
-        var sub=0;  
+        var subt=0;  
 
         for (const fila in filaob) {
 
-            var promedio=parseFloat(filaob[fila]['promed']);
-            var tapas=String(filaob[fila]['tapa']);
+            var precioga=parseFloat(filaob[fila]['prec_gal']);
+            var preciope=parseFloat(filaob[fila]['prec_pin']);
 
-            if (filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Con tapa') {
+            if (precioga>0 && filaob.hasOwnProperty(fila)) {
 
-                var precioga=parseFloat(filaob[fila]['prec_gal']);
-                var preciope=parseFloat(filaob[fila]['prec_pin']);
-                var tram=parseFloat(filaob[fila]['tramo']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var preciota=parseFloat(filaob[fila]['prec_tap']);
-                
-                sub+=((((precioga+preciope)*tram)+preciota))*cantidad; 
+                    var precio=parseFloat(filaob[fila]['prec_uniP']);
+                    var precioga=parseFloat(filaob[fila]['prec_gal']);
+                    var preciope=parseFloat(filaob[fila]['prec_pin']);
+                    var preciota=parseFloat(filaob[fila]['prec_tap']);
+                    var tram=parseFloat(filaob[fila]['tramo']);
+                    var promedio=parseFloat(filaob[fila]['promed']);
+                    var medidas=parseFloat(filaob[fila]['medi']);
+                    var tapas=String(filaob[fila]['tapa']);
+                    var dimenciones=parseFloat(filaob[fila]['dimencion']);
+                    var descuento=parseFloat(filaob[fila]['descuentoP']);
+                    var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
 
-                      
-            }else if(filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Sin tapa'){
+                    
+                if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
 
-                var precioga=parseFloat(filaob[fila]['prec_gal']);
-                var preciope=parseFloat(filaob[fila]['prec_pin']);
-                
-                var tram=parseFloat(filaob[fila]['tramo']);
+                        subt+=(((precioga*tram)*(procentaje/100)+preciota)-(((precioga*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==2){
+
+                        subt+=(((precioga*tram)*(procentaje/100)+preciota)+(((precioga*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==1){
+
+                        subt+=(((precioga*tram)*(procentaje/100))-(((precioga*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==2){
+
+                        subt+=(((precioga*tram)*(procentaje/100))+(((precioga*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa'){
+
+                        subt+=(((precioga*tram)*(procentaje/100))+preciota)*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Sin tapa'){
+
+                        subt+=((precioga*tram)*(procentaje/100))*cantidad;
+
+                }else if(precioga>0 && promedio==1 && tapas=='Sin tapa'){
+
+                        subt+=((precioga)-(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2 && tapas=='Sin tapa'){
+
+                        subt+=((precioga)+(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==1 && tapas=='Con tapa'){
+
+                        subt+=((precioga+preciota)-((precioga+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2 && tapas=='Con tapa'){
+
+                        subt+=((precioga+preciota)+((precioga+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0){
+
+                        subt+=((precioga*tram)*(procentaje/100))*cantidad;
+
+                }else if(precioga>0 && promedio==1){
+
+                        subt+=(precioga-(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2){
+
+                        subt+=(precioga+(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && tapas=='Con tapa'){
+
+                        subt+=(precioga+preciota)*cantidad;
+
+                }else if(precioga>0 && tapas=='Sin tapa'){
+
+                        subt+=precioga*cantidad;
+
+                }else if(precioga>0){
+
+                        subt+=precioga*cantidad;
+
+                }
+
+            }else if (preciope>0 && filaob.hasOwnProperty(fila)) {
+
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var preciota=parseFloat(filaob[fila]['prec_tap']);
-    
-                sub+=((precioga+preciope)*tram)*cantidad;
- 
+                    var precio=parseFloat(filaob[fila]['prec_uniP']);
+                    var precioga=parseFloat(filaob[fila]['prec_gal']);
+                    var preciope=parseFloat(filaob[fila]['prec_pin']);
+                    var preciota=parseFloat(filaob[fila]['prec_tap']);
+                    var tram=parseFloat(filaob[fila]['tramo']);
+                    var promedio=parseFloat(filaob[fila]['promed']);
+                    var medidas=parseFloat(filaob[fila]['medi']);
+                    var tapas=String(filaob[fila]['tapa']);
+                    var dimenciones=parseFloat(filaob[fila]['dimencion']);
+                    var descuento=parseFloat(filaob[fila]['descuentoP']);
+                    var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
 
-            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Con tapa'){
 
-                var precioga=parseFloat(filaob[fila]['prec_gal']);
-                var preciope=parseFloat(filaob[fila]['prec_pin']);
-                
-                var tram=parseFloat(filaob[fila]['tramo']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var preciota=parseFloat(filaob[fila]['prec_tap']);
-    
-                sub+=((((precioga+preciope)*tram)+preciota))*cantidad; 
- 
+                if(preciope>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
 
-            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Sin tapa'){
+                        subt+=(((preciope*tram)*(procentaje/100)+preciota)-(((preciope*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
 
-                var precioga=parseFloat(filaob[fila]['prec_gal']);
-                var preciope=parseFloat(filaob[fila]['prec_pin']);
-                
-                var tram=parseFloat(filaob[fila]['tramo']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var preciota=parseFloat(filaob[fila]['prec_tap']);
-    
-                sub+=((precioga+preciope)*tram)*cantidad;
- 
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==2){
 
+                        subt+=(((preciope*tram)*(procentaje/100)+preciota)+(((preciope*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==1){
+
+                        subt+=(((preciope*tram)*(procentaje/100))-(((preciope*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==2){
+
+                        subt+=(((preciope*tram)*(procentaje/100))+(((preciope*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Con tapa'){
+
+                        subt+=(((preciope*tram)*(procentaje/100))+preciota)*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa'){
+
+                        subt+=((preciope*tram)*(procentaje/100))*cantidad;
+
+                }else if(preciope>0 && promedio==1 && tapas=='Sin tapa'){
+
+                        subt+=((preciope)-(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==2 && tapas=='Sin tapa'){
+
+                        subt+=((preciope)+(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==1 && tapas=='Con tapa'){
+
+                        subt+=((preciope+preciota)-((preciope+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==2 && tapas=='Con tapa'){
+
+                        subt+=((preciope+preciota)+((preciope+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0){
+
+                        subt+=((preciope*tram)*(procentaje/100))*cantidad;
+
+                }else if(preciope>0 && promedio==1){
+
+                        subt+=(preciope-(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==2){
+
+                        subt+=(preciope+(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && tapas=='Con tapa'){
+
+                        subt+=(preciope+preciota)*cantidad;
+
+                }else if(preciope>0 && tapas=='Sin tapa'){
+
+                        subt+=preciope*cantidad;
+
+                }else if(preciope>0){
+
+                        subt+=preciope*cantidad;
+
+                }
             }
-
         }
-        $("#subtotal").html("s/. " + sub.toFixed(2));
+        $("#subtotal").html("s/. " + subt.toFixed(2));
     }
 
 
     function valorVenta(){
         var venta=0;        
         for (const fila in filaob) {
-            var tapas=String(filaob[fila]['tapa']);
-            var promedio=parseFloat(filaob[fila]['promed']);
+           var precioga=parseFloat(filaob[fila]['prec_gal']);
+            var preciope=parseFloat(filaob[fila]['prec_pin']);
 
-             if (filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Con tapa') {
+            if (precioga>0 && filaob.hasOwnProperty(fila)) {
 
-                var precioga=parseFloat(filaob[fila]['prec_gal']);
-                var preciope=parseFloat(filaob[fila]['prec_pin']);
-                var tram=parseFloat(filaob[fila]['tramo']);
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var preciota=parseFloat(filaob[fila]['prec_tap']);
-                
-                venta+=((((precioga+preciope)*tram)+preciota))*cantidad; 
+                    var precio=parseFloat(filaob[fila]['prec_uniP']);
+                    var precioga=parseFloat(filaob[fila]['prec_gal']);
+                    var preciope=parseFloat(filaob[fila]['prec_pin']);
+                    var preciota=parseFloat(filaob[fila]['prec_tap']);
+                    var tram=parseFloat(filaob[fila]['tramo']);
+                    var promedio=parseFloat(filaob[fila]['promed']);
+                    var medidas=parseFloat(filaob[fila]['medi']);
+                    var tapas=String(filaob[fila]['tapa']);
+                    var dimenciones=parseFloat(filaob[fila]['dimencion']);
+                    var descuento=parseFloat(filaob[fila]['descuentoP']);
+                    var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
 
-                      
-            }else if(filaob.hasOwnProperty(fila) && promedio==1 && tapas=='Sin tapa'){
+                    
+                if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
 
-                var precioga=parseFloat(filaob[fila]['prec_gal']);
-                var preciope=parseFloat(filaob[fila]['prec_pin']);
-                
-                var tram=parseFloat(filaob[fila]['tramo']);
+                        venta+=(((precioga*tram)*(procentaje/100)+preciota)-(((precioga*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==2){
+
+                        venta+=(((precioga*tram)*(procentaje/100)+preciota)+(((precioga*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==1){
+
+                        venta+=(((precioga*tram)*(procentaje/100))-(((precioga*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==2){
+
+                        venta+=(((precioga*tram)*(procentaje/100))+(((precioga*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa'){
+
+                        venta+=(((precioga*tram)*(procentaje/100))+preciota)*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Sin tapa'){
+
+                        venta+=((precioga*tram)*(procentaje/100))*cantidad;
+
+                }else if(precioga>0 && promedio==1 && tapas=='Sin tapa'){
+
+                        venta+=((precioga)-(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2 && tapas=='Sin tapa'){
+
+                        venta+=((precioga)+(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==1 && tapas=='Con tapa'){
+
+                        venta+=((precioga+preciota)-((precioga+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2 && tapas=='Con tapa'){
+
+                        venta+=((precioga+preciota)+((precioga+preciota)*0.1))*cantidad;
+
+                }else if(precioga>0 && procentaje>0 && tram>0){
+
+                        venta+=((precioga*tram)*(procentaje/100))*cantidad;
+
+                }else if(precioga>0 && promedio==1){
+
+                        venta+=(precioga-(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && promedio==2){
+
+                        venta+=(precioga+(precioga*0.1))*cantidad;
+
+                }else if(precioga>0 && tapas=='Con tapa'){
+
+                        venta+=(precioga+preciota)*cantidad;
+
+                }else if(precioga>0 && tapas=='Sin tapa'){
+
+                        venta+=precioga*cantidad;
+
+                }else if(precioga>0){
+
+                        venta+=precioga*cantidad;
+
+                }
+
+            }else if (preciope>0 && filaob.hasOwnProperty(fila)) {
+
                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var preciota=parseFloat(filaob[fila]['prec_tap']);
-    
-                venta+=((precioga+preciope)*tram)*cantidad;
- 
+                    var precio=parseFloat(filaob[fila]['prec_uniP']);
+                    var precioga=parseFloat(filaob[fila]['prec_gal']);
+                    var preciope=parseFloat(filaob[fila]['prec_pin']);
+                    var preciota=parseFloat(filaob[fila]['prec_tap']);
+                    var tram=parseFloat(filaob[fila]['tramo']);
+                    var promedio=parseFloat(filaob[fila]['promed']);
+                    var medidas=parseFloat(filaob[fila]['medi']);
+                    var tapas=String(filaob[fila]['tapa']);
+                    var dimenciones=parseFloat(filaob[fila]['dimencion']);
+                    var descuento=parseFloat(filaob[fila]['descuentoP']);
+                    var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
 
-            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Con tapa'){
 
-                var precioga=parseFloat(filaob[fila]['prec_gal']);
-                var preciope=parseFloat(filaob[fila]['prec_pin']);
-                
-                var tram=parseFloat(filaob[fila]['tramo']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var preciota=parseFloat(filaob[fila]['prec_tap']);
-    
-                venta+=((((precioga+preciope)*tram)+preciota))*cantidad;
- 
+                if(preciope>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
 
-            }else if(filaob.hasOwnProperty(fila) && promedio==2 && tapas=='Sin tapa'){
+                        venta+=(((preciope*tram)*(procentaje/100)+preciota)-(((preciope*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
 
-                var precioga=parseFloat(filaob[fila]['prec_gal']);
-                var preciope=parseFloat(filaob[fila]['prec_pin']);
-                
-                var tram=parseFloat(filaob[fila]['tramo']);
-                var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                var preciota=parseFloat(filaob[fila]['prec_tap']);
-    
-                venta+=((precioga+preciope)*tram)*cantidad;
- 
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==2){
 
+                        venta+=(((preciope*tram)*(procentaje/100)+preciota)+(((preciope*tram)*(procentaje/100)+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==1){
+
+                        venta+=(((preciope*tram)*(procentaje/100))-(((preciope*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa' && promedio==2){
+
+                        venta+=(((preciope*tram)*(procentaje/100))+(((preciope*tram)*(procentaje/100))*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Con tapa'){
+
+                        venta+=(((preciope*tram)*(procentaje/100))+preciota)*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0 && tapas=='Sin tapa'){
+
+                        venta+=((preciope*tram)*(procentaje/100))*cantidad;
+
+                }else if(preciope>0 && promedio==1 && tapas=='Sin tapa'){
+
+                        venta+=((preciope)-(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==2 && tapas=='Sin tapa'){
+
+                        venta+=((preciope)+(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==1 && tapas=='Con tapa'){
+
+                        venta+=((preciope+preciota)-((preciope+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==2 && tapas=='Con tapa'){
+
+                        venta+=((preciope+preciota)+((preciope+preciota)*0.1))*cantidad;
+
+                }else if(preciope>0 && procentaje>0 && tram>0){
+
+                        venta+=((preciope*tram)*(procentaje/100))*cantidad;
+
+                }else if(preciope>0 && promedio==1){
+
+                        venta+=(preciope-(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && promedio==2){
+
+                        venta+=(preciope+(preciope*0.1))*cantidad;
+
+                }else if(preciope>0 && tapas=='Con tapa'){
+
+                        venta+=(preciope+preciota)*cantidad;
+
+                }else if(preciope>0 && tapas=='Sin tapa'){
+
+                        venta+=preciope*cantidad;
+
+                }else if(preciope>0){
+
+                        venta+=preciope*cantidad;
+
+                }
             }
-
         }
         valorventa=venta.toFixed(2);
         $("#valorVenta").html("s/. " + venta.toFixed(2));
