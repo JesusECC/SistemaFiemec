@@ -370,6 +370,7 @@ border-collapse: collapse;
         {{$sub_tableros=$p->subtotal}}
         {{$igv_tableros=$p->igv}}
         {{$pt=$p->precio_total}}
+        {{$txt=$p->totalxtab}}
       @endforeach
       <tr>
         <td colspan="1" style="border-top: 1px solid black">
@@ -402,11 +403,33 @@ border-collapse: collapse;
         </td>
       </tr>
       <tr>
+        <td colspan="1">
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          SUBTOTALxCantTab S/.
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          {{round($txt,2)}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          IGV % S/.
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          {{round($txt*0.18,2)}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">
+        </td>
         <td colspan="5" style="text-align: right;font-size: 10px">
           TOTALxCantTab S/.
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{round($sub2,2)}}
+          {{round($txt+($txt*0.18),2)}}
         </td>
       </tr>
       </table>

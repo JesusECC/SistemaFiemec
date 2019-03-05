@@ -158,7 +158,7 @@
                                                 <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
-                                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->marca_producto.' | '.$producto->descripcion_producto}}</option>
+                                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->producto2}}">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->marca_producto.' | '.$producto->descripcion_producto}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -287,7 +287,7 @@
                                                         </div> 
                                                         <hr>    
                                                         <div class="row">   
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> IGV %</label>
                                                                     <div class="input-group ">
@@ -298,7 +298,7 @@
                                                                    
                                                                 </div>  
                                                             </div>
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> Total Soles</label>
                                                                     <div class="input-group ">
@@ -308,7 +308,17 @@
                                                                    
                                                                 </div>  
                                                             </div>
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total x tableros</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="total2">    </h4>
+                                                                        <input type="hidden" name="preciototaltab" id="preciototaltab">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> Total Dolares</label>
                                                                     <div class="input-group date">
@@ -429,6 +439,7 @@
     var nomTablero;
     var idcliente;
     var totalt;
+    var totalt2;
     var valorventa;
     var iduser={!! Auth::user()->id !!}
     $("#pidProducto").change(MostarProducto);
@@ -519,14 +530,15 @@
         var simbolo=$("#simbolo").val();
         var vVenta=$("#valorVenta").val();        
         var tl=$("#total").val();
-         var forma=$("#forma_de").val();
+        var tl2=$("#total2").val();
+        var forma=$("#forma_de").val();
         var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion").val();
         console.log(tablero,filaob);
         console.log(iduser);
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,simbolo:simbolo,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,userid:iduser,clienteemp:clienteemp}];
+            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,total2:totalt2,simbolo:simbolo,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,userid:iduser,clienteemp:clienteemp}];
             // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -662,7 +674,7 @@
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
         var idProd=Producto[0];
-        var pname=Producto[1];
+        var pname=Producto[4];
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
@@ -740,16 +752,16 @@
                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                                         '</td>'+
                                         '<td style="color:black !important;"> '+ 
-                                            '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                                            '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                                         '</td>'+
                                         '<td style="color:black !important;"> '+   
-                                            '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                                            '<input type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+filaob[fila]['prec_uniP']+
                                         '</td>'+
                                         '<td style="color:black !important;"> '+   
-                                            '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                                            '<input type="hidden" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+filaob[fila]['descuentoP']+
                                         '</td>'+
                                         '<td style="color:black !important;"> '+   
-                                            '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+
+                                            '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+subt+
                                         '</td>'+
                                         '<td style="color:black !important;">'+
                                             '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
@@ -925,6 +937,32 @@
         // console.log(sub);
         $("#total").html("s/. " + tota.toFixed(2));
     }
+
+    function totalxtableros(){
+        var venta=0;   
+        var igv=0;  
+        var tota=0;   
+        for (const fila in filaob) {
+            if (filaob.hasOwnProperty(fila)) {
+               var precio=parseFloat(filaob[fila]['prec_uniP']);
+               var cantidad=parseFloat(filaob[fila]['cantidadP']);
+               var descuento=parseFloat(filaob[fila]['descuentoP']);
+               var cantidadTab=parseFloat(filaob[fila]['cantidadT']);
+
+
+                
+                venta+=((cantidad*precio)-((precio*(descuento/100)*cantidad)))*cantidadTab;
+                        
+            }
+        }
+
+        
+        tota=venta;
+        totalt2=tota.toFixed(2);
+
+        $("#total2").html("s/. " + tota.toFixed(2));
+    }
+
     function valoresFinales(){
         if(filaob.length>0){
             detalleFilas();
@@ -935,6 +973,7 @@
         valorVenta();
         igv();
         total();
+        totalxtableros();
         
     }
     function eliminar(index){

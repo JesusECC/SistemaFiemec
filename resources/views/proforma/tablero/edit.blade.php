@@ -108,7 +108,7 @@
                                         </label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-10">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
                                                  <samp class="input-group-btn">
@@ -116,6 +116,12 @@
                                                          Agregar
                                                      </button>
                                                  </samp>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                
+                                                <input type="number"  id="canTT" class="form-control" placeholder="Cant. Tab">
                                             </div>
                                         </div>
                                     </div>
@@ -345,6 +351,8 @@ var editarval=true;
         document.getElementById('agregar_producto').style.display ='block';
         document.getElementById('quitar_btn').style.display='none';
     } 
+
+
     function asignarValores(){
         var pro={!! $proforma !!};
         var tabl={!! $tablero !!};
@@ -411,14 +419,16 @@ var editarval=true;
         }         
          for (const tab in tabl) {
              nomTablero=tabl[tab]['nombre_tablero'];
+             cantxtabs=tabl[tab]['cantidadTab'];
              var esta=tabl[tab]['estadoT'];
+            var cxt=tabl[tab]['cantidadTab'];
              table='<div id="'+nomTablero+'_'+cont+'">'+
                                  '<section class="content" style="min-height:0px !important">'+
                                      '<div class="row">'+
                                          '<div class="col-md-12">'+
                                              '<div class="box">'+
                                                  '<div class="box-header with-border" style="padding:5px !important;">'+
-                                                 '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
+                                                 '<p> Tablero ' +nomTablero.replace(/_/gi," ")+"<br> Cantidad Tab: "+cantxtabs+'</p>'+
                                                      '<div class="box-tools pull-right">'+
  
                                                          '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
@@ -438,19 +448,30 @@ var editarval=true;
                                                                      '<th>P. Unit.</th>'+
                                                                      '<th>Descuento</th>'+
                                                                      '<th>Importe</th>'+
-                                                                     //'<th></th>'+
+                                                                     '<th>Quitar</th>'+
                                                                  '</thead>'+
                                                                  '<tbody id="detalle_'+nomTablero+'">'+
                                                                  '</tbody>'+ 
-                                                                 '<tfoot>'+
-                                                                     '<th>Total</th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th  style="color:black !important;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                                     '</th>'+
-                                                                 '</tfoot>'+
+                                                                 '<tr>'+
+                                                                    '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
+                                                                    '<td style="border-right:1px solid white !important;"></th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
+                                                                     '</td>'+
+                                                                '</tr>'+
+                                                                '<tr>'+
+                                                                     '<th style="color:black !important; border-right:1px solid white !important;" >Total x Cant. de tableros</th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                     '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                          '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+ 
+                                                                     '</td>'+
+                                                                     '</tr>'+
                                                              '</table>'+
                                                          '</div>'+
                                                      '<div>'+
@@ -466,6 +487,7 @@ var editarval=true;
              cont++;
          }
          nomTablero="";
+
          ListaSelect();
          // console.log(pro); 
          for (const dtp in pro) {
@@ -482,9 +504,10 @@ var editarval=true;
              var pcant=pro[dtp]['cantidad'];
              var descuento=pro[dtp]['descuento'];
              var nomTabl=pro[dtp]['nombre_tablero'];
+             var cantiTabl=pro[dtp]['cantidadTab'];
              var idDetaTab=pro[dtp]['idDetalle_tableros'];
              var estado=pro[dtp]['estadoDP'];
-             var dat={idDetalleTablero:idDetaTab,idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,posiP:contp,estado:estado,fila:""};
+             var dat={idDetalleTablero:idDetaTab,idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,cantidadTa:cantiTabl,posiP:contp,estado:estado,fila:""};
              filaob.push(dat);
              fila();
              contp++;
@@ -568,7 +591,7 @@ var editarval=true;
      var bool;
      function agregarTablero(){    
          var tabl=$("#NomTablerop").val();
-         
+         var cantt=$("#canTT").val();
          nomTablero=tabl.replace(/ /gi,"_"); 
          console.log(nomTablero); 
          bool=false;  
@@ -576,7 +599,7 @@ var editarval=true;
              // mostrarcampos(tabl);
              // fila();
              console.log(tablero);
-             if(tablero.length>=0 && nomTablero!=""){
+             if(tablero.length>=0 && nomTablero!="" && cantt!=""){
                  //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
                  for (const key in tablero) {
                      if (tablero.hasOwnProperty(key)) {
@@ -594,7 +617,7 @@ var editarval=true;
                                          '<div class="col-md-12">'+
                                              '<div class="box">'+
                                                  '<div class="box-header with-border" style="padding:5px !important;">'+
-                                                 '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
+                                                 '<p> Tablero ' +nomTablero.replace(/_/gi," ")+"<br> Cantidad Tab: "+cantt+'</p>'+
                                                      '<div class="box-tools pull-right">'+
  
                                                          '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
@@ -618,15 +641,28 @@ var editarval=true;
                                                                  '</thead>'+
                                                                  '<tbody id="detalle_'+nomTablero+'">'+
                                                                  '</tbody>'+ 
-                                                                 '<tfoot>'+
-                                                                     '<th style="color:black !important;" >Total</th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th>< h4 id="total_'+nomTablero+'">s/. 0.00</h4><input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                                     '</th>'+
-                                                                 '</tfoot>'+
+                                                                  '<tr>'+
+                                                                    '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
+                                                                    '<td style="border-right:1px solid white !important;"></th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
+                                                                     '</td>'+
+
+                                                                     
+                                                                '</tr>'+
+                                                                 '<tr>'+
+                                                                     '<th style="color:black !important; border-right:1px solid white !important;" >Total x Cant. de tableros</th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                     '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                          '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+ 
+                                                                     '</td>'+
+                                                                     '</tr>'+
                                                              '</table>'+
                                                          '</div>'+
                                                      '<div>'+
@@ -668,6 +704,7 @@ var editarval=true;
          var pcant=$('#Pcantidad').val();
          var sel=$('#prod-selec').val();
          var descuento=$('#pdescuento').val();
+         var cantiTabl=$('#canTT').val();
          // console.log(descuento);
          nomTablero=$('#prod-selec').val();
          var filas;
@@ -685,8 +722,10 @@ var editarval=true;
                                  if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['nomTablero']==tablero[key]['nombre']){
                                      var su=parseInt(pcant);
                                      var des=parseInt(descuento);
+                                     var cxtb=parseInt(cantiTabl);
                                      filaob[fil]['cantidadP']=su;
                                      filaob[fil]['descuentoP']=des;
+                                     filaob[fil]['cantidadTa']=cxtb;
                                      filaob[fil]['descripcionP']=pdescripcion;
                                      filaob[fil]['estado']=1;
                                      fila();
@@ -697,7 +736,7 @@ var editarval=true;
                          }
                          if(boolfila==false){
                              console.log("produc nuevoo",contp);
-                             var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:2,fila:""};
+                             var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,cantidadTa:cantiTabl,posiP:contp,estado:2,fila:""};
                              filaob.push(dat);
                              fila();
                              contp++;
@@ -728,7 +767,10 @@ var editarval=true;
                              var cantidad=parseFloat(filaob[fila]['cantidadP']);
                              var precio=parseFloat(filaob[fila]['prec_uniP']);
                              var descuento=parseFloat(filaob[fila]['descuentoP']);
+                             var cantidadTab=parseFloat(filaob[fila]['cantidadTa']);
+
                              var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                             
                              if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
                                  filas=
                                      '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
@@ -816,6 +858,7 @@ var editarval=true;
      function subTotalTable(){
          // funcion para realizar la suma del sub total de todos los tableros que se declaran
          var sub=0;
+         var sub2=0;
          if(tablero.length>0){
              for (const key in tablero) {
                  if (tablero.hasOwnProperty(key) && tablero[key]['estado']!=0) {
@@ -826,15 +869,20 @@ var editarval=true;
                                  var precio=parseFloat(filaob[fila]['prec_uniP']);
                                  var cantidad=parseFloat(filaob[fila]['cantidadP']);
                                  var descuento=parseFloat(filaob[fila]['descuentoP']);
+                                 var cantidadTab=parseFloat(filaob[fila]['cantidadTa']);
+
                                  sub+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                                 sub2+=((cantidad*precio)-((precio*(descuento/100)*cantidad)))*cantidadTab;
                                  // console.log(sub,"---");
                              }                            
                          }
                      }   
                      // console.log(sub);
-                     $("#total_"+tablero[key]['nombre']).html("s/. " + sub);                 
+                     $("#total_"+tablero[key]['nombre']).html("s/. " + sub);
+                     $("#total2_"+tablero[key]['nombre']).html("s/. " + sub2);                 
                  }
                  sub=0;
+                 sub2=0;
              }            
          }
      }

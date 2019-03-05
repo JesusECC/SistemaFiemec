@@ -267,6 +267,7 @@ border-collapse: collapse;
             </div>
           </th>     
     </table>
+
     <div class="datos" > 
       <div id="company">
         <div><span style="color: black !important;font-weight: bold;">EMAIL :</span> <span style="font-size: 11px !important;"><a href="{{$td->correo}}">{{$td->correo}}</a></span></div>
@@ -280,64 +281,72 @@ border-collapse: collapse;
         <div><span style="color: black !important;font-weight: bold;">DIRECCIÓN :</span> <span class="direccion" style="font-size: 11px !important;color: black">{{$td->direccion}}</span> </div>
     </div>
   </header> 
-  <main>
-    <div class="col-xs-12"> 
-      <table class="principal">
-      <tr style="border-bottom: 2px solid #7D7D7D !important" >
-        <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-          Item
-        </td>
-        <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-          Cod.
-        </td>
-        <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-          Producto
-        </td>
-        <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-          Cant.
-        </td>
-        <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-          Precio
-        </td>
-        <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-          Desc. %
-        </td>
-        <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-          Valor V.
-        </td>
-      </tr> 
+
+  <main> 
+    <div id="main-container"> 
+      <table class="principal" width="100%"> 
+        <thead class="principal"> 
+          <tr class="principal"> 
+            <th class="principal">Item</th>
+            
+            <th class="principal" style="width: 460px !important">Producto</th>
+            <th class="principal" >Desc.</th>
+            <th class="principal" >Cant. </th>
+            <th class="principal" >Precio</th>
+            <th class="principal" >Desc. %</th>
+            <th class="principal" >Valor V.</th>
+          </tr>
+        </thead>
+
       @foreach($tablero as $t)
       <tr>
         <td colspan="7" style="background-color: #E5EAEA;border: 1px;font-size: 12px ;text-align: center;">
-          Tablero {{$t->nombre_tablero }}
+          Tablero:  {{$t->nombre_tablero.'  ||  Canttidad de Tab: '.$t->cantidadTab }}
+        
         </td>
+        
       </tr>
       {{$i=1}}
       {{$sub=0}}
+      {{$sub2=0}}
+      {{$sub3=0}}
       {{$igv=0}}
       {{$precio=0}}
         @foreach($proforma as $p)
           @if($t->nombre_tablero==$p->nombre_tablero)
             <tr>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$i++}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->codigo_producto}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{ $p->producto.' | '.$p->descripcionDP }}</td>
+             
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">COD: {{$p->codigo_producto.' ||-|| '.$p->producto}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->descripcionDP}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->cantidad}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"></td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"></td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"></td>
             </tr>
             {{$sub+=($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}
+            {{$sub2+=(($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)))*$p->cantidadTab}}
             {{$igv=$p->igv}}
+
+            
           @endif
-        @endforeach 
+        @endforeach
         <tr>
           <td colspan="1"></td>
           <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
-              COSTO DIRECTO S/.
+              Precio unitario S/.
           </td>
           <td colspan="1" style="text-align: center;font-size: 11px;">
              {{round($sub,2)}}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1"></td>
+          <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
+               Total S/.
+          </td>
+          <td colspan="1" style="text-align: center;font-size: 11px;">
+             {{round($sub2,2)}}
           </td>
         </tr>
       @endforeach
@@ -355,10 +364,13 @@ border-collapse: collapse;
       {{$sub_tableros=0}}
       {{$igv_tableros=0}}
       {{$pt=0}}
+      
       @foreach($proforma as $p)
+
         {{$sub_tableros=$p->subtotal}}
         {{$igv_tableros=$p->igv}}
         {{$pt=$p->precio_total}}
+        {{$txt=$p->totalxtab}}
       @endforeach
       <tr>
         <td colspan="1" style="border-top: 1px solid black">
@@ -388,6 +400,36 @@ border-collapse: collapse;
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px"> 
           {{round($pt,2)}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          SUBTOTALxCantTab S/.
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          {{round($txt,2)}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          IGV % S/.
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          {{round($txt*0.18,2)}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          TOTALxCantTab S/.
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          {{round($txt+($txt*0.18),2)}}
         </td>
       </tr>
       </table>

@@ -25,10 +25,12 @@
     margin-bottom: 6px;
   }
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+
 position: relative;
 min-height: 1px;
 padding-right: 15px;
 padding-left: 15px;
+
 }
 .datos
 {
@@ -40,6 +42,7 @@ padding-left: 15px;
   float: right;
   width: 50%;
 }
+
 #company span {
   color: #5D6975;
   text-align: left;
@@ -91,6 +94,7 @@ padding-left: 15px;
     #main-container{
         margin-top: 0px;
       }
+
 #project div,
 #company div {       
 }
@@ -100,8 +104,10 @@ table.principal{
     border-collapse: collapse;
     width: 100%;
 }
+
 th.principal{
     padding: 2px;
+
 }
 th.principal
 {
@@ -112,6 +118,7 @@ td.principal
     border-bottom:  1px solid #7D7D7D;
     font-size: 11px !important;
 }
+
 table tfoot td {
   background: #FFFFFF;
   border-bottom: none;
@@ -119,6 +126,7 @@ table tfoot td {
   padding: 2px;
   font-size: 11px !important;
 }
+
 thead.principal{
     background-color: #7D7D7D;
     border-bottom: solid 5px #323639;
@@ -142,6 +150,7 @@ footer {
   padding: 2px 0;
  
 }
+
 .box {
 position: relative;
 border-radius: 3px;
@@ -152,65 +161,94 @@ width: 100%;
 box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .box-header.with-border {
+
 border-bottom: 1px solid #f4f4f4;
+
 }
 .box-header {
+
 color: #444;
 display: block;
 padding: 20px;
 position: relative;
+
 }
 p {
+
 margin: 0 0 10px;
+
 }
 .box-body {
+
 border-top-left-radius: 0;
 border-top-right-radius: 0;
 border-bottom-right-radius: 3px;
 border-bottom-left-radius: 3px;
 padding: 10px;
+
 }
 .row {
+
 margin-right: -20px;
 margin-left: -20px;
+
 }
 .col-xs-6 {
+
 width: 50%;
+
 }
 .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+
 float: left;
+
 }
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+
 position: relative;
 min-height: 1px;
 padding-right: 15px;
 padding-left: 15px;
+
 }
 .lead {
+
 font-size: 21px;
+
 }
 .lead {
+
 margin-bottom: 20px;
 font-size: 16px;
 font-weight: 300;
 line-height: 1.4;
+
 }
 .table-responsive {
+
 min-height: .01%;
 overflow-x: auto;
+
 }
 .table {
+
 width: 100%;
 max-width: 100%;
 margin-bottom: 20px;
+
 }
 table {
+
 background-color: transparent;
+
 }
 table {
+
 border-spacing: 0;
 border-collapse: collapse;
+
 }
+
 </style>
 <body>
   <header class="clearfix" style="margin-top: -20px;margin-bottom: 20px">  
@@ -229,6 +267,7 @@ border-collapse: collapse;
             </div>
           </th>     
     </table>
+
     <div class="datos" > 
       <div id="company">
         <div><span style="color: black !important;font-weight: bold;">EMAIL :</span> <span style="font-size: 11px !important;"><a href="{{$td->correo}}">{{$td->correo}}</a></span></div>
@@ -237,131 +276,166 @@ border-collapse: collapse;
       </div>
     </div>
     <div id="project" class="clearfix">
-      <div><span style="color: black !important;font-weight: bold;">CLIENTE :</span> <span class="cliente" style="font-size: 11px !important;color: black">{{$td->nombres_Rs.' '.$td->paterno.' '.$td->materno}}</span></div>
-      <div><span style="color: black !important;font-weight: bold;">RUC / DNI :</span> <span style="font-size: 11px !important;color: black">{{$td->nro_documento}}</span></div>
-      <div><span style="color: black !important;font-weight: bold;">DIRECCIÓN :</span> <span class="direccion" style="font-size: 11px !important;color: black">{{$td->direccion}}</span> </div>
+        <div><span style="color: black !important;font-weight: bold;">CLIENTE :</span> <span class="cliente" style="font-size: 11px !important;color: black">{{$td->nombres_Rs.' '.$td->paterno.' '.$td->materno}}</span></div>
+        <div><span style="color: black !important;font-weight: bold;">RUC / DNI :</span> <span style="font-size: 11px !important;color: black">{{$td->nro_documento}}</span></div>
+        <div><span style="color: black !important;font-weight: bold;">DIRECCIÓN :</span> <span class="direccion" style="font-size: 11px !important;color: black">{{$td->direccion}}</span> </div>
     </div>
   </header> 
-  <main>
-    <div class="col-xs-12"> 
-        <table class="principal"> 
-          <tr style="border-bottom: 2px solid #7D7D7D !important" >
-            <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-              Item
-            </td>
-            <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-              Cod.
-            </td>
-            <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-              Producto
-            </td>
-            <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-              Cant.
-            </td>
-            <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-              Precio
-            </td>
-            <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-              Desc. %
-            </td>
-            <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-              Valor V.
-            </td>
-          </tr>  
-          @foreach($tablero as $t)
-          <tr>
-            <td colspan="7" style="background-color: #E5EAEA;border: 1px;font-size: 12px ;text-align: center;">
-              Tablero {{$t->nombre_tablero }}
-            </td>
+
+  <main> 
+    <div id="main-container"> 
+      <table class="principal" width="100%"> 
+        <thead class="principal"> 
+          <tr class="principal"> 
+            <th class="principal">Item</th>
+            
+            <th class="principal" style="width: 460px !important">Producto</th>
+            <th class="principal" >Desc.</th>
+            <th class="principal" >Cant. </th>
+            <th class="principal" >Precio</th>
+            <th class="principal" >Desc. %</th>
+            <th class="principal" >Valor V.</th>
           </tr>
-              {{$i=1}}
-              {{$sub=0}}
-              {{$igv=0}}
-              {{$precio=0}}
-              @foreach($proforma as $p)
-                @if($t->nombre_tablero==$p->nombre_tablero)
-                {{$precio= (round((($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)))/$p->tipocambio,2))}} 
+        </thead>
+
+      @foreach($tablero as $t)
+      <tr>
+        <td colspan="7" style="background-color: #E5EAEA;border: 1px;font-size: 12px ;text-align: center;">
+          Tablero:  {{$t->nombre_tablero.'  ||  Canttidad de Tab: '.$t->cantidadTab }}
+        
+        </td>
+        
+      </tr>
+      {{$i=1}}
+      {{$sub=0}}
+      {{$sub2=0}}
+      {{$sub3=0}}
+      {{$igv=0}}
+      {{$precio=0}}
+        @foreach($proforma as $p)
+          @if($t->nombre_tablero==$p->nombre_tablero)
             <tr>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$i++}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->codigo_producto}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{ $p->producto.' | '.$p->descripcionDP }}</td>
+             
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">COD: {{$p->codigo_producto.' ||-|| '.$p->producto}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->descripcionDP}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->cantidad}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->simboloDPT}} {{round($p->precio_venta/$p->tipocambio,2)}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{round($p->precio_venta/$p->tipocambio,2)}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->descuento}} % </td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->simboloDPT}} {{$precio}}</td>
-            </tr> 
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{round((($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)))/$p->tipocambio,2)}}</td>
+            </tr>
             {{$sub+=($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}
-            {{$igv=$p->igv}}  
-                @endif
-              @endforeach
-          <tr>
-            <td colspan="1"></td>
-            <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
-                COSTO DIRECTO  {{$td->simboloP}} 
-            </td>
-            <td colspan="1" style="text-align: center;font-size: 11px;">
-              {{round($sub/$td->tipocambio,2)}}
-            </td>
-          </tr>              
-            @endforeach 
-          <tr>
-              <td colspan="7" style="color: white;height: 10px">espacio</td>
-          </tr> 
-          <tr>
-            <td colspan="1">
+            {{$sub2+=(($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)))*$p->cantidadTab}}
+            {{$igv=$p->igv}}
+
+            
+          @endif
+        @endforeach
+        <tr>
+          <td colspan="1"></td>
+          <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
+              Precio unitario 
+          </td>
+          <td colspan="1" style="text-align: center;font-size: 11px;">
+             ${{round($sub/$p->tipocambio,2)}}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1"></td>
+          <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
+               Total 
+          </td>
+          <td colspan="1" style="text-align: center;font-size: 11px;">
+             ${{round($sub2/$p->tipocambio,2)}}
+          </td>
+        </tr>
+      @endforeach
+      <tr>
+          <td colspan="7" style="color: white;height: 10px">espacio</td>
+      </tr> 
+      <tr>
+        <td colspan="1">
             NOTA
-            </td>
-            <td colspan="6" style="font-size: 10px">
+        </td>
+        <td colspan="6" style="font-size: 10px">
             NO ESTA CONSIDERADO, OTRO TRABAJO ADICIONAL QUE NO ESTE COOMPRENDIDO EN LA PRESENTE OFERTA NO ESTA CONSIDERADO PICADO DE OBSTRUCCIONES
-            </td>
-          </tr>
+        </td>
+      </tr>
       {{$sub_tableros=0}}
       {{$igv_tableros=0}}
       {{$pt=0}}
-      {{$subD=0}}
-      {{$totalD=0}}
-      {{$totalDO=0}}
+      
       @foreach($proforma as $p)
+
         {{$sub_tableros=$p->subtotal}}
         {{$igv_tableros=$p->igv}}
         {{$pt=$p->precio_total}}
-      @endforeach 
-      {{$subD=round($sub_tableros/$p->tipocambio,2)}}
-      {{$totalD=round($pt,2)}}
-      {{$totalDO=round($totalD/$p->tipocambio,2)}}
+        {{$txt=$p->totalxtab}}
+        {{$tc=$p->tipocambio}}
+      @endforeach
       <tr>
         <td colspan="1" style="border-top: 1px solid black">
         </td>
         <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
-          SUBTOTAL $
+          SUBTOTAL 
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px;border-top: 1px solid black"> 
-          {{$p->simboloDPT}} {{round($sub_tableros/$p->tipocambio,2)}}
+          ${{round($sub_tableros/$tc,2)}}
         </td>
       </tr>
       <tr>
         <td colspan="1" >
         </td>
         <td colspan="5" style="text-align: right;font-size: 10px">
-          IGV % $
+          IGV % 
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{$p->simboloDPT}} {{round(($subD)*($igv_tableros/100),2)}} 
+          ${{round((($sub_tableros)*($igv_tableros/100))/$tc,2)}} 
         </td>
       </tr>
       <tr>
         <td colspan="1" >
         </td>
         <td colspan="5" style="text-align: right;font-size: 10px">
-          TOTAL $
+          TOTAL 
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{$p->simboloDPT}} {{$totalDO}}
+          ${{round($pt/$tc,2)}}
         </td>
-      </tr>  
-        </table>
+      </tr>
+      <tr>
+        <td colspan="1">
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          SUBTOTALxCantTab 
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          ${{round($txt/$tc,2)}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          IGV % 
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          ${{round(($txt*0.18)/$tc,2)}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1">
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          TOTALxCantTab 
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          ${{round(($txt+($txt*0.18))/$tc,2)}}
+        </td>
+      </tr>
+      </table>
     </div>
-</main>
+  </main>
   <footer> 
         <div style="width: 50%;float: initial;display: block;">
           <h5 style="font-size: 10px !important;line-height:1px">Forma de pago: {{$td->forma_de}}</h5>
