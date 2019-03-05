@@ -1052,7 +1052,7 @@
                             '</td>'+
 
                             '<td class="text-center"> '+   
-                                '<input style="width:60px !important;" width="40px" type="text"  name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila][subt2.toFixed(2)]+'" >'+
+                                '<input style="width:60px !important;" width="40px" type="text"  name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila][subt2]+'" >'+
                             '</td>'+
                             
                             '<td class="text-center"> '+   
@@ -1070,9 +1070,6 @@
                     filaob[fila]['fila']=filas;
                     filas="";   
                     limpiar(); 
-                 }else if(precioga>0 && preciope>0){
-
-                    alert('salio');
                  }
             }
          }                    
