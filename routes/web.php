@@ -88,6 +88,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::delete('bandejas/eliminar/{id}',['as'=>'bandejas-eliminar','uses'=>'ControllerBandejas@destroy']);
     Route::get('bandejas/editar/{id}',['as'=>'bandejas-edit','uses'=>'ControllerBandejas@edit']);
     Route::post('bandejas/editar/modificar',['as' => 'bandejas-update','uses'=>'ControllerBandejas@update']); 
+
     Route::post('bandejas/cli',['as'=>'clientes-representante','uses'=>'ControllerBandejas@representante']);
     Route::get('proforma/bandejas/pdf/{idProforma}',['as'=>'bandeja-pdf','uses'=>'ControllerBandejas@pdf']);
     Route::get('proforma/bandejas/pdf2/{idProforma}',['as'=>'bandeja-pdf2','uses'=>'ControllerBandejas@pdf2']);

@@ -19,15 +19,6 @@
 
 {{Form::token()}}
 
-  <!--<div  class="col-lg-12">
-    <div style="margin-top: 20px" class="col-lg-9">
-       <img src="{{asset('img/ti.jpg')}}" width="600" height=190">
-    </div>
-     <div style="margin-top: 50px" class="col-lg-3">
-       <img src="{{asset('img/logo.jpg')}}" width="250" height=120">
-    </div>
-   
-</div>-->
                     <div style="margin-top: 15px" class="col-lg-9">
                         <div  class="panel panel-primary">
                             <div  class="panel-heading">

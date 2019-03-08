@@ -275,7 +275,7 @@ border-collapse: collapse;
       </div>
     </div>
     <div id="project" class="clearfix">
-        <div><span style="color: black !important;font-weight: bold;">CLIENTE :</span> <span class="cliente" style="font-size: 11px !important;color: black">{{$proforma->nombres_Rs.' '.$proforma->paterno.' '.$proforma->materno}}</span></div>
+        <div><span style="color: black !important;font-weight: bold;">CLIENTE :</span> <span class="cliente" style="font-size: 11px !important;color: black">{{$proforma->nombres_Rs.' '.$proforma->paternoC.' '.$proforma->maternoC}}</span></div>
         <div><span style="color: black !important;font-weight: bold;">RUC / DNI :</span> <span style="font-size: 11px !important;color: black">{{$proforma->ndoc}}</span></div>
         <div><span style="color: black !important;font-weight: bold;">DIRECCIÓN :</span> <span class="direccion" style="font-size: 11px !important;color: black">{{$proforma->Direccion}} {{$proforma->Departamento}} - {{$proforma->Distrito}}</span> </div>
     </div>

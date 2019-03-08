@@ -155,13 +155,10 @@ public function store(Request $request)
             $detalleProforma->idProducto=$fila['idProducto'];
             $detalleProforma->idProforma=$idProforma;
             $detalleProforma->idGalvanizado=$fila['idGalvanizado'];  
-            $detalleProforma->idPintura=$fila['idPintado'];
             $detalleProforma->espesor=$fila['espesor'];
             $detalleProforma->cantidad=$fila['cantidadP'];
             $detalleProforma->precioGal=$fila['prec_gal'];
-            $detalleProforma->precioPin=$fila['prec_pin'];
             $detalleProforma->precioTap=$fila['prec_tap'];
-            $detalleProforma->preciouniB=$fila['preuni'];
             $detalleProforma->tramo=$fila['tramo'];
             $detalleProforma->descripcionDP=$fila['descripcionP'];
             $detalleProforma->estadoDB=1;	
@@ -171,11 +168,6 @@ public function store(Request $request)
             $detalleProforma->cambioBandejas=$fila['tipocambio'];    
             $detalleProforma->simboloBandejas=$fila['simbolocambio'];
             $detalleProforma->promed=$fila['promed'];
-            	
-
-            
-            
-
             $detalleProforma->save();            
         }
         return ['data' =>'bandejas','veri'=>true];
@@ -278,7 +270,7 @@ public function pdf($id){
     ->join('users as u','u.id','=','p.idEmpleado')
     ->join('Empleado as em','em.id','=','u.idEmp')
     ->join('Cliente_Representante as cr','cr.idCR','=','cp.idCliente')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno as paternoC','cp.materno as maternoC','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma')
     ->where('p.idProforma','=',$id)
     ->first();
 
@@ -312,6 +304,8 @@ public function pdf2($id){
     ->join('Pintado as pin','pin.idPintado','=','db.idPintura')
     ->select('db.idGalvanizado','pin.idPintado','pro.marca_producto','pro.codigo_producto','pro.nombre_producto','pro.descripcion_producto','db.descripcionDP','db.espesor','gal.nombreGalvanizado','pin.nombrePintado','db.espesor','db.cantidad','db.precioGal','db.precioPin','db.precioTap','db.tramo','db.medidas','db.descripcionDP','db.dimenciones','db.tapa','db.cambioBandejas','db.simboloBandejas')
     ->where('db.idProforma','=',$id)
+
+    
     ->get();
 
 
@@ -324,145 +318,134 @@ public function pdf2($id){
 public function edit($id)
     {
         //
-        $productos=DB::table('Producto as po')
- ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
- ->select('po.promedio','po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.stock','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema','po.nombre_producto','po.codigo_producto','po.marca_producto','descripcion_producto',DB::raw('CONCAT(po.nombre_producto," | ",po.codigo_producto," | ",po.marca_producto) as productos2'))
- ->where('po.tipo_producto','=','bandejas')
- ->orwhere('po.tipo_producto','=','accesorios')
- ->where('po.estado','=','activo')
- ->get();
-  $accesorios=DB::table('Accesorios')
- ->get();
-
- $galvanizado=DB::table('Galvanizado')
- ->get();
-
-  $pintado=DB::table('Pintado')
- ->get();
-
- $medidas=DB::table('Medidas')
- ->where('estadoM','=','activo')
- ->get();
-
- $monedas=DB::table('Tipo_moneda')
- ->where('estado','=','1')
- ->get();
-
- $representante=DB::table('Cliente_Representante') 
-    ->where('estadoCE','=',1)
+    $productos=DB::table('Producto as po')
+    ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
+    ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema','po.tipo_producto','po.promedio')
+    ->where('po.tipo_producto','=','bandejas')
+    ->orwhere('po.tipo_producto','=','accesorios')
+    ->where('po.estado','=','activo')
     ->get();
 
- $clientes=DB::table('Cliente_Proveedor as cp')
- ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
-->where('cp.estado','=','1')
-->get();
-         
-$proforma=DB::table('Proforma as p')
-->join('Detalle_bandejas as deP','p.idProforma','=','deP.idProforma')
-->join('Galvanizado as gal','gal.idGalvanizado','=','deP.idGalvanizado')
-->join('Producto as pd','pd.idProducto','=','deP.idProducto')
-->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
-->join('Cliente_Representante as ce','ce.idCliente','=','clp.idCliente')
-->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.estadoDB','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','deP.espesor','pd.marca_producto','pd.nombre_producto','pd.descripcion_producto','gal.nombreGalvanizado','deP.medidas','deP.tramo','deP.tapa','deP.dimenciones','deP.precioGal','deP.precioPin','deP.precioTap','deP.promed','ce.nombre_RE','p.incluye')
-        ->where('deP.idProforma','=',$id)
-        ->get();
-    
-        // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
-return view("proforma.bandejas.edit",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"medidas"=>$medidas,"accesorios"=>$accesorios,"galvanizado"=>$galvanizado,"pintado"=>$pintado,"representante"=>$representante,"proforma"=>$proforma]);
+    $accesorios=DB::table('Accesorios')
+    ->get();
 
+    $galvanizado=DB::table('Galvanizado')
+    ->get();
+
+    $medidas=DB::table('Medidas')
+    ->where('estadoM','=','activo')
+    ->get();
+
+    $monedas=DB::table('Tipo_moneda')
+    ->where('estado','=','1')
+    ->get();
+
+    $proforma=DB::table('Proforma as p')
+    ->join('Detalle_bandejas as deP','p.idProforma','=','deP.idProforma')
+    ->join('Producto as pd','pd.idProducto','=','deP.idProducto')
+    ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+    ->join('Cliente_Representante as cr','cr.idCR','=','clp.idCliente')
+    ->join('Galvanizado as gal','gal.idGalvanizado','=','deP.idGalvanizado')
+    ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.cambioBandejas','deP.estadoDB','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','p.incluye','deP.espesor','deP.precioGal','deP.preciouniB','deP.precioTap','deP.tramo','deP.medidas','deP.dimenciones','deP.tapa','deP.cambioBandejas','deP.simboloBandejas','deP.promed','deP.tramo','deP.idGalvanizado','gal.nombreGalvanizado','pd.promedio','cr.nombre_RE')
+    ->where('deP.idProforma','=',$id)
+    ->get();
+    
+        
+    return view("proforma.bandejas.edit",["productos"=>$productos,'proforma'=>$proforma,"accesorios"=>$accesorios,'galvanizado'=>$galvanizado,'medidas'=>$medidas,'monedas'=>$monedas]);
 
     }
     public function update(Request $request)
     {
         //
         try{
-            $nomTablero;
-            $idclie;
             $valorv;
             $tota;
-            $tableros;
-            $idTipoCam;
-            $valorcambio;
             $totaldolares;
             $forma;
             $plazo;
             $observacion;
             $idProforma;
-    // [{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldola:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,
-    //     forma:forma,plazo:plazo,observacion:observacion}];
-    // nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,
-    // valorTipoCambio:tipocam,forma:forma,plazo:plazo,observacion:observacion
-               
+            $incluye;
+            $plazofabri;
+            $iduser;
+            $garantias;
+            $simbolo;
+            $valorcambio;
+     
             foreach ($request->datos as $dato) {
                 $idProforma=$dato['idProforma'];
-                // $idclie=$dato['idcliente'];
                 $valorv=$dato['valorVenta'];
                 $tota=$dato['total'];
-                // $idTipoCam=$dato['idTipoCambio'];
-                // $valorcambio=$dato['valorTipoCambio'];
-                //$nomTablero=$dato['nomTablero'];
+                $simbolo=$dato['simbolo'];
+                $valorcambio=$dato['valorcambio'];
                 $totaldolares=$dato['totaldolares'];
                 $forma=$dato['forma'];
                 $plazo=$dato['plazo'];
                 $observacion=$dato['observacion'];
-            }
+                $forma=$dato['forma'];
+                $incluye=$dato['incluy'];
+                $plazofabri=$dato['plazofabri'];
+                $garantias=$dato['garantias'];
+                
+            }        
+            
                 Proforma::where('idProforma',$idProforma)
                 ->update([
-                    // 'idCliente'=>$idclie,
-                // 'idEmpleado'=>$request->,           
-                // 'idTipo_moneda'=>$idTipoCam,
                 'serie_proforma'=>'PU365122018',
-                // 'fecha_hora'=>$mytime->toDateTimeString(),
                 'igv'=>'18',
                 'subtotal'=>$valorv,
                 'precio_total'=>$tota,
-                // 'tipocambio'=>$valorcambio,
                 'precio_totalC'=>$totaldolares,
-                // 'descripcion_proforma'=>$observacion, //preguntar
                 'tipo_proforma'=>'bandeja',
-                // 'caracteristicas_proforma'=>$request->, preguntar
                 'forma_de'=>$forma,
-                // 'plaza_fabricacion'=>$request->,
+                'plaza_fabricacion'=>$plazofabri,
                 'plazo_oferta'=>$plazo,
-                // 'garantia'=>$request->,
-                // 'observacion_condicion'=>$request->,
-                'observacion_proforma'=>$observacion,
+                'garantia'=>$garantias,
+                'incluye'=>$incluye,
+                'observacion_condicion'=>$observacion,
                 'estado'=>1
                 ]);
             foreach($request->filas as $fila){
                 if ($fila['estado']==1 || $fila['estado']==0) {
                     DetalleBandejas::where('idProforma',$idProforma)
-                    ->where('idDetalle_bandejas',$fila['idDetalleProforma'])
+                    ->where('idDetalle_bandejas',$fila['idDetalle_Bandeja'])
                     ->update([
-                    // $detalleProforma->idDetalle_proforma=$fila[''];  
                     'idProducto'=>$fila['idProducto'],
-                    'idMedidas'=>$fila['idMedidas'],
-                    // 'idProforma'=>$idProforma,
-                    // 'idTableros'=>$idTablero,
+                    'idProforma'=>$idProforma,
+                    'idGalvanizado'=>$fila['idGalvanizado'], 
+                    'espesor'=>$fila['espesor'],
                     'cantidad'=>$fila['cantidadP'],
-                    'precio_venta'=>$fila['prec_uniP'],
-                    // texto_precio_venta=>$fila['' 
-                    // observacion_detalleP=>$fila[''   
-                    'descuento'=>$fila['descuentoP'],
+                    'precioGal'=>$fila['prec_gal'],
+                    'precioTap'=>$fila['prec_tap'],
+                    'tramo'=>$fila['tramo'],
                     'descripcionDP'=>$fila['descripcionP'],
-                    'estadoDB'=>$fila['estado']
+                    'estadoDB'=>$fila['estado'], 
+                    'medidas'=>$fila['medi'],    
+                    'dimenciones'=>$fila['dimenciones'],
+                    'tapa'=>$fila['tapa'],   
+                    'promed'=>$fila['promed'],
                     ]);
+
                 }else if($fila['estado']==2){
-                    $Detallebandejas=new DetalleBandejas;
-                    // $detalleProforma->idDetalle_proforma=$fila[''];  
-                    $Detallebandejas->idProducto=$fila['idProducto'];
-                    
-                    $Detallebandejas->idProforma=$idProforma;
-                    $Detallebandejas->idMedidas=$fila['idMedidas'];
-                    // $detalleProforma->idTableros=$idTablero;
-                    $Detallebandejas->cantidad=$fila['cantidadP'];
-                    $Detallebandejas->precio_venta=$fila['prec_uniP'];  
-                    // $detalleProforma->texto_precio_venta=$fila[''];  
-                    // $detalleProforma->observacion_detalleP=$fila[''];    
-                    $Detallebandejas->descuento=$fila['descuentoP'];    
-                    $Detallebandejas->descripcionDP=$fila['descripcionP'];
-                    $Detallebandejas->estadoDB=1;
-                    $Detallebandejas->save();
+            $Detallebandejas=new DetalleBandejas;  
+            $Detallebandejas->idProducto=$fila['idProducto'];
+            $Detallebandejas->idProforma=$idProforma;
+            $Detallebandejas->idGalvanizado=$fila['idGalvanizado'];  
+            $Detallebandejas->espesor=$fila['espesor'];
+            $Detallebandejas->cantidad=$fila['cantidadP'];
+            $Detallebandejas->precioGal=$fila['prec_gal'];
+            $Detallebandejas->precioTap=$fila['prec_tap'];
+            $Detallebandejas->tramo=$fila['tramo'];
+            $Detallebandejas->descripcionDP=$fila['descripcionP'];
+            $Detallebandejas->estadoDB=1;   
+            $Detallebandejas->medidas=$fila['medi'];    
+            $Detallebandejas->dimenciones=$fila['dimenciones'];
+            $Detallebandejas->tapa=$fila['tapa'];
+            $Detallebandejas->cambioBandejas=$valorcambio;   
+            $Detallebandejas->simboloBandejas=$simbolo;
+            $Detallebandejas->promed=$fila['prome'];
+            $Detallebandejas->save(); 
+
                 }
                 
             }
