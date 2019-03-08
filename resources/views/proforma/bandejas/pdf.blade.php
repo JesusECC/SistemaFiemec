@@ -302,15 +302,14 @@ border-collapse: collapse;
           {{$i=1}}
 
           @foreach($detalles as $det)
-          
+
           <tr class="principal"> 
             <td class="principal" align="center" style="border: 1px solid black">{{$i++}}</td>
-            
             <td class="principal" style="font-size: 11px !important;border: 1px solid black">COD: {{$det->nombre_producto}} {{$det->medidas}}, acabado en {{$det->nombreGalvanizado}}, Espesor de {{$det->espesor}} y tramo de {{$det->tramo}} metros. {{$det->descripcionDP}}, {{$det->tapa}} </td>
              <td class="principal" align="center" style="border: 1px solid black" >{{$det->dimenciones}}</td>
             <td class="principal" align="center" style="border: 1px solid black" >{{$det->cantidad}}</td>
-            <td class="principal"  align="center" style="border: 1px solid black">S/.{{round(((($det->precioGal + $det->precioPin)*$det->tramo)+$det->precioTap),2)}}</td>
-            <td class="principal" align="center" style="border: 1px solid black">S/.{{round((((($det->precioGal + $det->precioPin)*$det->tramo)+$det->precioTap)*$det->cantidad),2)}}</td>
+            <td class="principal"  align="center" style="border: 1px solid black">S/.{{round($det->preciouniB,2)}}</td>
+            <td class="principal" align="center" style="border: 1px solid black">S/.{{round($det->preciouniB*$det->cantidad,2)}}</td>
            
           </tr>
           @endforeach

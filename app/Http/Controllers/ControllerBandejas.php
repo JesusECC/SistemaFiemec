@@ -158,6 +158,7 @@ public function store(Request $request)
             $detalleProforma->espesor=$fila['espesor'];
             $detalleProforma->cantidad=$fila['cantidadP'];
             $detalleProforma->precioGal=$fila['prec_gal'];
+            $detalleProforma->preciouniB=$fila['preciounit'];
             $detalleProforma->precioTap=$fila['prec_tap'];
             $detalleProforma->tramo=$fila['tramo'];
             $detalleProforma->descripcionDP=$fila['descripcionP'];
@@ -277,8 +278,7 @@ public function pdf($id){
     $detalles=DB::table('Detalle_bandejas as db')
     ->join('Producto as pro','db.idProducto','=','pro.idProducto')
     ->join('Galvanizado as gal','gal.idGalvanizado','=','db.idGalvanizado')
-    ->join('Pintado as pin','pin.idPintado','=','db.idPintura')
-    ->select('db.idGalvanizado','pin.idPintado','pro.marca_producto','pro.codigo_producto','pro.nombre_producto','pro.descripcion_producto','db.descripcionDP','db.espesor','gal.nombreGalvanizado','pin.nombrePintado','db.espesor','db.cantidad','db.precioGal','db.precioPin','db.precioTap','db.tramo','db.medidas','db.descripcionDP','db.dimenciones','db.tapa')
+    ->select('db.idGalvanizado','pro.marca_producto','pro.codigo_producto','pro.nombre_producto','pro.descripcion_producto','db.descripcionDP','gal.nombreGalvanizado','db.espesor','db.cantidad','db.precioGal','db.precioTap','db.tramo','db.medidas','db.descripcionDP','db.dimenciones','db.tapa','db.promed','db.preciouniB','pro.promedio')
     ->where('db.idProforma','=',$id)
     ->get();
 

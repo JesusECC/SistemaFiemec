@@ -651,7 +651,7 @@
                     var dimenciones=parseFloat(filaob[fila]['dimenciones']);
                     var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
                     
-                    if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
+                if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
 
                         var subt2=((precioga*tram)*(procentaje/100)+preciota)-(((precioga*tram)*(procentaje/100)+preciota)*0.1);
 
@@ -677,7 +677,7 @@
 
                 }else if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa'){
 
-                        var subt2=((precioga*tram)*(procentaje/100)+preciota);
+                        var subt2=(((precioga*tram)*(procentaje/100))+preciota);
 
                         var subt=(((precioga*tram)*(procentaje/100))+preciota)*cantidad;
 
