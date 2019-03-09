@@ -237,14 +237,6 @@ max-width: 100%;
 margin-bottom: 20px;
 
 }
-
-.label{
-
-text-align: center;
-color: black;
-
-}
-
 table {
 
 background-color: transparent;
@@ -283,22 +275,20 @@ border-collapse: collapse;
       </div>
     </div>
     <div id="project" class="clearfix">
-        <div><span style="color: black !important;font-weight: bold;">CLIENTE :</span> <span class="cliente" style="font-size: 11px !important;color: black">{{$proforma->nombres_Rs.' '.$proforma->paterno.' '.$proforma->materno}}</span></div>
+        <div><span style="color: black !important;font-weight: bold;">CLIENTE :</span> <span class="cliente" style="font-size: 11px !important;color: black">{{$proforma->nombres_Rs.' '.$proforma->paternoC.' '.$proforma->maternoC}}</span></div>
         <div><span style="color: black !important;font-weight: bold;">RUC / DNI :</span> <span style="font-size: 11px !important;color: black">{{$proforma->ndoc}}</span></div>
         <div><span style="color: black !important;font-weight: bold;">DIRECCIÓN :</span> <span class="direccion" style="font-size: 11px !important;color: black">{{$proforma->Direccion}} {{$proforma->Departamento}} - {{$proforma->Distrito}}</span> </div>
     </div>
   </header> 
 
   <main> 
-
     <div id="main-container"> 
-      
       <p style="text-align: center; color: black; font-size: 14px; border: 1px inset black; border-radius: 5px; " >Fabricado en plancha galvanizada LAC/LAF, Diseño Constructivo segun norma NEMA VE-1 y recomendacion de la NFPA-70.</p>
-
-       <table class="principal" width="100%"> 
+      <table class="principal" width="100%"> 
         <thead class="principal"> 
           <tr class="principal"> 
-            <th class="principal">Item</th> 
+            <th class="principal">Item</th>     
+
             <th class="principal" style="width: 460px !important">Producto</th>
             <th class="principal" >UND</th>
             <th class="principal" >Cant. </th>
@@ -312,15 +302,14 @@ border-collapse: collapse;
           {{$i=1}}
 
           @foreach($detalles as $det)
-          
+
           <tr class="principal"> 
             <td class="principal" align="center" style="border: 1px solid black">{{$i++}}</td>
-            
-            <td class="principal" style="font-size: 11px !important;border: 1px solid black"> {{$det->nombre_producto}} {{$det->medidas}}, acabado en {{$det->nombreGalvanizado}}, Espesor de {{$det->espesor}} y tramo de {{$det->tramo}} metros. {{$det->descripcionDP}}, {{$det->tapa}} </td>
+            <td class="principal" style="font-size: 11px !important;border: 1px solid black">COD: {{$det->nombre_producto}} {{$det->medidas}}, acabado en {{$det->nombreGalvanizado}}, Espesor de {{$det->espesor}} y tramo de {{$det->tramo}} metros. {{$det->descripcionDP}}, {{$det->tapa}} </td>
              <td class="principal" align="center" style="border: 1px solid black" >{{$det->dimenciones}}</td>
             <td class="principal" align="center" style="border: 1px solid black" >{{$det->cantidad}}</td>
-            <td class="principal"  align="center" style="border: 1px solid black">{{$det->simboloBandejas}} {{round((((($det->precioGal + $det->precioPin)*$det->tramo)+$det->precioTap)-10)*$det->cambioBandejas,2)}}</td>
-            <td class="principal" align="center" style="border: 1px solid black">{{$det->simboloBandejas}} {{round(((((($det->precioGal + $det->precioPin)*$det->tramo)+$det->precioTap)-10)*$det->cantidad)/$det->cambioBandejas,2)}}</td>
+            <td class="principal"  align="center" style="border: 1px solid black">{{$det->simboloBandejas}}{{round($det->preciouniB/$det->cambioBandejas,2)}}</td>
+            <td class="principal" align="center" style="border: 1px solid black">{{$det->simboloBandejas}}{{round(($det->preciouniB*$det->cantidad)/$det->cambioBandejas,2)}}</td>
            
           </tr>
           @endforeach
@@ -331,17 +320,17 @@ border-collapse: collapse;
             <tr style="font-weight: bold;">
               <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
               <td colspan="2" style="border:1px solid #323639;">Subtotal</td>
-              <td colspan="1" align="center" style="border: 1px solid #323639;">{{$det->simboloBandejas}} {{round($proforma->subtotal/$proforma->tipocambio,2)}}</td>
+              <td colspan="1" align="center" style="border: 1px solid #323639;">{{$proforma->simboloP}}{{round($proforma->subtotal/$det->cambioBandejas,2)}}</td>
             </tr>
             <tr style="font-weight: bold;">
               <td colspan="3" style="border-bottom: 1px solid white !important;border-top:none !important;"></td>
               <td colspan="2" style="border:1px solid #323639; ">IGV 18%</td>
-              <td colspan="1" align="center" style="border: 1px solid #323639">{{$det->simboloBandejas}} {{round(($proforma->subtotal)*($proforma->igv/100)/$proforma->tipocambio,2)}}</td>
+              <td colspan="1" align="center" style="border: 1px solid #323639">{{$proforma->simboloP}}{{round((($proforma->subtotal)*($proforma->igv/100))/$det->cambioBandejas,2)}}</td>
             </tr>
             <tr style="font-weight: bold;">  
               <td colspan="3" style="background-color: white !important"></td>
               <td colspan="2" style="border:1px solid #323639;border-bottom: 1px solid #323639;">Total</td>
-              <td colspan="1" align="center" style="border: 1px solid #323639;border-bottom: 1px solid #323639">{{$det->simboloBandejas}} {{round($proforma->precio_total/$proforma->tipocambio,2)}}</td>
+              <td colspan="1" align="center" style="border: 1px solid #323639;border-bottom: 1px solid #323639">{{$proforma->simboloP}}{{round($proforma->precio_total/$det->cambioBandejas,2)}}</td>
             </tr> 
         </tfoot>
 
