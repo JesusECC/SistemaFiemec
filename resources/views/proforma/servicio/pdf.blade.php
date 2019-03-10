@@ -273,6 +273,7 @@ border-collapse: collapse;
       <div id="company">
         <div><span style="color: black !important;font-weight: bold;">EMAIL :</span> <span style="font-size: 11px !important;"><a href="{{$td->correo}}">{{$td->correo}}</a></span></div>
         <div><span style="color: black !important;font-weight: bold;"> FECHA :</span> <span style="font-size: 11px !important;color: black">{{$td->fecha_hora}}</span></div>
+        <div><span style="color: black !important;font-weight: bold;">REPRESENTANTE :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$td->nombre_RE .' | Tlf: '.$td->telefonoRE.' / '.$td->CelularRE}}</span></div>
         
       </div>
     </div>
@@ -311,12 +312,10 @@ border-collapse: collapse;
     @if($s->nombre_servicio==$p->nombre_servicio)
   <tr>
     <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
-      {{$p->item2}}
-      {{$p->item}}
+      <h4 style="background-color: #E5EAEA">{{$p->item2}}</h4>{{$p->item}}
     </td>
-    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
-      {{ $p->subtitulo }}
-      {{ $p->nombre_tarea }}
+    <td colspan="1" style="border: 1px solid black;font-size: 11px">
+    <h4 style="text-align: center;background-color: #E5EAEA" > {{ $p->subtitulo}}</h4>{{ $p->nombre_tarea }}
     </td>
     <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
       {{$p->descripcionDP}}
@@ -330,7 +329,7 @@ border-collapse: collapse;
       {{$p->precio_venta}}
     </td>
     <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
-      {{$p->precio_venta*$p->cantidad}}
+       {{$p->precio_venta*$p->cantidad}}
     </td>
   </tr>
 
@@ -340,7 +339,7 @@ border-collapse: collapse;
           <tr>
             <td colspan="1"></td>
             <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
-                COSTO DIRECTO S/.  
+                SubTotal S/.  
             </td>
             <td colspan="1" style="text-align: center;font-size: 11px;">
                {{round($sub,2)}}
@@ -374,7 +373,7 @@ border-collapse: collapse;
       SUBTOTAL S/.
     </td>
     <td colspan="1" style="text-align: center;font-size: 11px;border-top: 1px solid black"> 
-      {{$sub_tableros}}
+      {{round($sub_tableros,2)}}
     </td>
   </tr>
   <tr>
@@ -403,17 +402,17 @@ border-collapse: collapse;
   <footer> 
         <div style="width: 65%;float: initial;display: block;">
 
-          <h5 style="font-size: 8px !important;line-height:0.3cm;">Realizado por:{{$td->nameE}}</h5>
+          <h5 style="font-size: 8px !important;line-height:0.3cm;">Realizado por:{{$td->name}} {{$td->up}} {{$td->um}}/ {{$td->celularU}}</h5>
           <h5 style="font-size: 8px !important;line-height:1px">Forma de pago: {{$td->forma_de}}</h5>
           <h5 style="font-size: 8px !important;line-height:1px">Plazo de oferta {{$td->plazo_oferta}}  </h5>
           <h5 style="font-size: 8px !important;line-height:10px">Condición de venta: {{$td->observacion_proforma}} </h5>
     </div>
 <div style="width: 50%; float: right;display: block;">
-          <h4 style="font-size: 12px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
-          <h5 style="font-size: 10px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
-          <h5 style="font-size: 10px !important;line-height:1px">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
-          <h5 style="font-size: 10px !important;line-height:1px">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
-          <h5 style="font-size: 10px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>           
+          <h4 style="font-size: 10px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
+          <h5 style="font-size: 8px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
+          <h5 style="font-size: 8px !important;line-height:1px">BCP Soles:   192-2324867-0-03      (CCI) 00219200232486700338</h5>
+          <h5 style="font-size: 8px !important;line-height:1px">BCP Dolares :   192-2288918-1-91   (CCI) 00219200228891819137</h5>
+          <h5 style="font-size: 8px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>           
         </div> 
   </footer>
 </body>

@@ -201,8 +201,8 @@ public function pdf($id)
         $td=DB::table('Proforma as p')
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('users as u','u.id','=','p.idEmpleado')
-
-        ->select('u.id',DB::raw('CONCAT(u.name,u.paterno,u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion')
+        ->join('Cliente_Representante as cr','cr.idCliente','=','clp.idCliente')
+        ->select('u.id','u.name','u.paterno as up','u.materno as um','u.celularU','clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
         ->where('idProforma','=',$id)
         ->first();
 
@@ -248,7 +248,7 @@ public function pdf($id)
         ->distinct()
         ->join('Detalle_proforma_servicios as dps','s.idServicios','=','dps.idServicios')
         ->where('s.estadoT','=',1)
-        ->where('dps.idServicios','=',$id)
+        ->where('dps.idProforma','=',$id)
         ->get(['s.nombre_servicio','s.estadoT']);
         
         $proforma=DB::table('Proforma as p')
@@ -256,7 +256,7 @@ public function pdf($id)
         ->join('Tarea as ta','ta.idTarea','=','deTS.idTarea')
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Servicios as s','s.idServicios','=','deTS.idServicios')
-        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','p.idestado','p.incluye','deTS.idDetalle_proforma','deTS.idProforma','deTS.idServicios','deTS.idTarea','deTS.texto_precio_venta','deTS.descuento','deTS.descripcionDP','deTS.estadoDP','ta.idTarea','ta.nombre_tarea','ta.descripcion_tarea','ta.estado','clp.idCliente','clp.nro_documento','clp.nombres_Rs','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT')
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','p.idestado','p.incluye','deTS.idDetalle_proforma','deTS.idProforma','deTS.idServicios','deTS.idTarea','deTS.descuento','deTS.descripcionDP','deTS.estadoDP','ta.nombre_tarea','ta.descripcion_tarea','ta.estado as est','clp.idCliente','clp.nro_documento','clp.nombres_Rs','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT')
         ->where('p.idProforma','=',$id)
         ->get();
         // dd($proforma);

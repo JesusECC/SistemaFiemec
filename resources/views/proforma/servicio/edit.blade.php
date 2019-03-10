@@ -8,21 +8,20 @@
     <ol class="breadcrumb" style="margin-top: 55px;">
         <li>
             <a href="#">
-                <i class="fas fa-file-signature"></i> Proforma</a>
+                <i class="far fa-edit"></i> Proforma</a>
         </li>
-        <li class="active">Lista de Proformas Unitarias</li>
+        <li class="active">Editar Proforma Tablero</li>
     </ol>
 </section>
 <section class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="box" style="border-top: 3px solid #18A689">
-                <!--box header-->
                 <div class="box-header with-border" style="padding: 10px !important">
                     <h4>
                         <strong style="font-weight: 400">
-                            <i class="fas fa-dolly"></i> Nueva Proforma de Servicios
-                        </strong>
+                            <i class="fas fa-dolly"></i> Datos de Proforma Fiemec
+                        </strong>                        
                     </h4>
                     @if(count($errors)>0)
                     <div class="alert-alert-danger">
@@ -36,179 +35,150 @@
                     <div class="ibox-title-buttons pull-right">
                         <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
                         <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('servicios')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+                        <a style="color: white!important;text-decoration: none" href="{{url('tableros')}}"><button  class="btn btn-success btn-sm " type="button"><i class="fas fa-reply-all"></i> Volver</button></a>
                     </div>
                 </div>
-                <!--.finde box header-->
-                <div class="box-body bg-gray-c">
+                <div class="box-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <label for="" class="control-label" style="color: #676a6c !important">
-                                        Datos de Cliente
-                                        </label>
+                                        <label for="" class="control-label" style="color: #676a6c !important">Cliente</label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <input type="text" disabled name="nomApe" id="nomApe" class="form-control">
-                                            </div>
-                                                
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" >
-                                            </div>
-                                                
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" >
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="" class="control-label">Nombre y Apellidos de Cliente</label>
+                                                <input type="text" disabled name="nombreclie" id="nombreclie" class="form-control" placeholder="nombreclie">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text"  name="cliente_empleado" id="cliente_empleado"  class="form-control" >
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="" class="control-label">Dirección Cliente</label>
+                                                <input type="text" disabled name="cdireccion" id="cdireccion" class="form-control" placeholder="direccion">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <label for="" class="control-label"> Documento</label>
+                                                <input type="text" disabled name="cnro_documento" id="cnro_documento" class="form-control" placeholder="numero documento">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label for="" class="control-label">Representante </label>
+                                                <input type="text" disabled name="cotizador" id="cotizador" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="" class="control-label" style="color: #676a6c !important">
-                                            Tipo de Moneda
+                                            Tipo de Cambio
                                         </label>
                                     </div>
-                                    <div class="row">                                        
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label for="" class="control-label">Símbolo</label>
                                                 <input type="text" disabled name="simbolo" id="simbolo" class="form-control" >
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" disabled id="valorcambio" class="form-control" >
+                                            <div class="col-sm-6">
+                                                <label for="" class="control-label">Valor</label>
+                                                <input type="text" disabled id="valorcambio" class="form-control">
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--Tablero-->
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-shadow">
-                                <div class="panel-body">
+                                <div class="panel-body">                                  
                                     <div class="form-group">
-                                        <label for="" class="control-label" style="color: #676a6c !important">
-                                            Ingresar el Nombre del Servicio
+                                        <label for="" class="control-label" style="color: #676a6c !important;">
+                                            Ingresar el Nombre de Tablero
                                         </label>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                                <div class="input-group">
-                                                    <input type="text" id="NomTablerop" class="form-control" name="NomTablerop"  placeholder="Ingresar nombre del servicio...">
-                                                    <samp class="input-group-btn">
-                                                        <button type="button" id="bt_add_tablero" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
-                                                    </samp>
-                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="row"  >
-                                        <div class="col-sm-4">
-                                            <div class="form-group" >
-                                                <label class="control-label">Tareas</label>
-                                                <select name="idTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
-                                                    <option value="">Seleccione Tarea</option>
-                                                        @foreach($Tareas as $tarea)
-                                                            <option value="{{$tarea->idTarea}}_{{$tarea->nombre_tarea}}">{{$tarea->nombre_tarea}}</option>
-                                                        @endforeach
-                                                </select>                    
-                                            </div>
-                                        </div> 
-                                        <div class="col-sm-1" style="margin-top:24px">
-                                            <a  href="{{route('tarea-create')}}"> 
-                                                 <button class="btn btn-success" type="button" ><i class="fas fa-plus"></i> Tarea</button>
-                                            </a>                                                  
-                                        </div>                                       
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="" class="control-label">Descripción</label>
-                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp" >
-
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="NomTablerop" id="NomTablerop" placeholder="Ingresar nombre del tablero...">
+                                                 <samp class="input-group-btn">
+                                                     <button type="button" id="bt_add_tablero" class="btn btn-primary">
+                                                         Agregar
+                                                     </button>
+                                                 </samp>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group">
-                                                <label for="" class="control-label">Nombre Tablero</label>
+                                                
+                                                <input type="number"  id="canTT" class="form-control" placeholder="Cant. Tab">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="producto-oculto" style="margin-top:20px">
+                                        <div class="col-sm-8" style="margin-top:20px">
+                                            <div class="">
+                                                <label for="" class="control-label">Tarea</label>
+                                                <select name="pidTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
+                                                    <option value="" selected="" disabled="">Seleccione Tarea</option>
+                                                    @foreach($Tareas as $ta)
+                                                    <option value="{{ $ta->idTarea }}_{{ $ta->nombre_tarea }}_{{ $ta->precioT }}">{{$ta->nombre_tarea}}</option>
+                                                    @endforeach
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-3" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descripcion</label>
+                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">P. UNIT.</label>
+                                                <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-1" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cantidad</label>
+                                                <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descuento %</label>
+                                                <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="margin-top:20px">
+                                            <div class="form-group">
+                                                <label class="control-label">Nom.Tablero</label>
+                                                <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
                                                 <div id="select-pro" ></div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <div class="form-group">
-                                                <label for="" class="control-label"></label>
+                                        </div> 
+                                        <div class="col-sm-1" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                            <label class="control-label"></label>
                                                 <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
                                             </div>
-                                        </div>
-
+                                        </div>                                                                                 
                                     </div>
                                 </div>
                                 <div class="panel-footer">
                                     <div id="tablerosn" style="color: #f5f5f5 !important;">
-                                        <section class="content" style="min-height:0px !important">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="box">
-                                                        <div class="box-header with-border" style="padding:5px !important;">
-                                                        <p> Proforma de Servicio: </p>
-                                                            <div class="box-tools pull-right">
-                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="box-body">
-                                                            <div class="row">
-                                                                <div class="col-md-12 table-responsive">
-                                                                    <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
-                                                                        <thead style="background-color:#A9D0F5;text-align: center;color: black !important" >
-                                                                            <th class="text-center">Tarea</th>
-                                                                            <th class="text-center">Descripción</th>
-                                                                            <th class="text-center">Opciones</th>
-                                                                        </thead>
-                                                                        <tbody id="tablero_unitario">
-                                                                            <tr>
-                                                                                <th colspan="7" align="text-center"> 
-                                                                                    <div class="panel panel-transparent panel-dashed tip-sales text-center" >
-                                                                                        <div class="row">
-                                                                                             <div class="col-sm-8 col-sm-push-2">
-                                                                                        <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
-                                                                                        <h3 class="ich m-t-none">
-                                                                                            No hay detalles de servicios
-                                                                                        </h3>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div> 
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            <div>
-                                                        </div>                            
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
                                     </div>
                                     <div class="content" id="totales-general" style='display:none;'>
                                         <div class="row">
@@ -231,13 +201,22 @@
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">
-                                                                  
+                                                                    <label for="" class="control-label">Descuento</label>
                                                                     <div class="input-group ">
-                                                                    <button type="button" id="sumar" class="btn btn-primary">Sumar</button>
+                                                                        <h4 id="descuentos" class="form-control">    </h4>
+                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                                                                                     
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Valor Venta</label>
+                                                                    <div class="input-group ">
+                                                                        <h4 class="form-control" id="valorVenta">    </h4>
+                                                                        <input type="hidden" name="valorVenta" id="valorVenta">
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                            
                                                         </div> 
                                                         <hr>    
                                                         <div class="row">   
@@ -247,7 +226,7 @@
                                                                     <div class="input-group ">
                                                                         <h4 class="form-control" id="igv">    
                                                                         </h4>
-                                                                        <input type="hidden" disable name="igv" id="igv" >
+                                                                        <input type="hidden" name="igv" id="igv" >
                                                                     </div> 
                                                                    
                                                                 </div>  
@@ -257,12 +236,22 @@
                                                                     <label for="    " class="control-label"> Total Soles</label>
                                                                     <div class="input-group ">
                                                                         <h4 class="form-control" id="total">    </h4>
-                                                                        <input type="hidden" name="total" id="total">
+                                                                        <input type="hidden" name="precio_subtotal" id="precio_subtotal">
                                                                     </div> 
                                                                    
                                                                 </div>  
                                                             </div>
-                                                            
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group display-flex dec">  
+                                                                    <label for="    " class="control-label"> Total Dolares</label>
+                                                                    <div class="input-group date">
+                                                                        <h4 class="form-control" id="total_dolares">    
+                                                                        </h4>
+                                                                        <input type="hidden" name="tota_dolares" id="tota_dolares">
+                                                                    </div> 
+                                                                   
+                                                                </div>  
+                                                            </div>
                                                         </div>  
                                                     </div>  
                                                 </div>
@@ -283,15 +272,6 @@
                                                                     <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label for="" class="control-label">
-                                                                        Observaciones
-                                                                    </label>
-                                                                    <textarea name="observacion_proforma" id="observacion" cols="30" rows="2" class="form-control">Ninguna</textarea>
-                                                                </div>
-                                                            </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -303,89 +283,77 @@
                         </div>
                     </div>
                 </div>
+                <div class="box-footer">
+                </div>
             </div>
         </div>
     </div>
 </section>
-@include('proforma.servicio.modal2')
-@push('scripts')
-<script>
-    
-    $(document).ready(function(){
-        $('#bt_add_tablero').click(function(){
-            agregarTablero();
-            valoresFinales();
+ @push('scripts')
+ <script>    
+     $(document).ready(function(){
+         $('#bt_add_tablero').click(function(){
+             agregarTablero();
+             valoresFinales();
+             
+         });
+         $('#save').click(function(){
+            // console.log("asd");
+            saveProforma();
         });
-        $('#save').click(function(){
-            // console.log("asd");            
-            saveProforma();            
+        $('#btnagregar').click(function(){
+            agregarprorducto();
+        
         });
         $('#bt_add_produc').click(function(){
             agregarProductosTablero();
-            valoresFinales();
-           
-        });
-        $('#sumar').click(function(){
-            sumar();
-            igv();
-            totaltt();
-        });
-        $('#Pcantidad').keyup(function (){
-            this.value = (this.value + '').replace(/[^0-9]/g, '1');
-        });
-        $('#Pcantidad').click(function (){
-            this.value = (this.value + '').replace(/[^0-9]/g, '1');
-        });
-        $('#pdescuento').keyup(function (){
-            this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
-        });
-        $('#pdescuento').click(function (){
-            this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
-        });
+            valoresFinales();           
+         });
+         $('#Pcantidad').keyup(function (){
+             this.value = (this.value + '').replace(/[^0-9]/g, '1');
+         });
+         $('#Pcantidad').click(function (){
+             this.value = (this.value + '').replace(/[^0-9]/g, '1');
+         });
+         $('#pdescuento').keyup(function (){
+             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
+         });
+         $('#pdescuento').click(function (){
+             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
+         });
+     });
+     $("#idClientes").change(MostrarCliente);
+     $("#idTipo_moneda").change(mostrarTipoCambio);
 
-        // Actualizar
-
-    });
-    $("#idClientes").change(MostrarCliente);
-    $("#idTipo_moneda").change(mostrarTipoCambio);
-    $("#subtotal").change(function(){
-        igv();
-        totaltt();
-    });
-    var editarval=true;
-    var tablero=[];
-    var filaob=[];
-    var cont=0;
-    var contp=0;
-    var table;
-    var subtotal=0;
-    var nomTablero;
-    var idcliente;
-    var totalt;
-    var valorventa;
-    var iduser={!! Auth::user()->id !!}
+var pro={!! $proforma !!};
+var editarval=true;
+     var tablero=[];
+     var filaob=[];
+     var cont=0;
+     var contp=0;
+     var table;
+     var subtotal=0;
+     var nomTablero;
+     var idcliente;
+     var totalt;
+     var valorventa;
+     var tipocam;
+     var simbolo;
+     var totaldolares=0;
+     var idProfo;
+     var idtipocam;
+     
+     $("#pidProducto").change(MostarProducto);
+     $("#idTipo_moneda").change(cambioMoneda);
+    // variables para asignar valores    
+    
     asignarValores();
-    function MostrarCliente(){
-        // cdireccion/cnro_documentoidClientes
-        Cliente=document.getElementById('idClientes').value.split('_');
-        idcliente=Cliente[0];
-        $("#cdireccion").val(Cliente[1]);
-        $("#cnro_documento").val(Cliente[2]);
-    }
-   /* function MostarProducto(){
-        Producto=document.getElementById('pidServicios').value.split('_');
-        // $("#idProd").val(Producto[0]);
-        // $("#Productoname").val(Producto[1]);
-        $("#precio_uni").val(Producto[1]);
-        // descuentoP -->para emostar el 
-    }*/
-    function mostrarTipoCambio(){
-        tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
-        $("#simbolo").val(tipoCambio[2]);
-        $("#valorcambio").val(tipoCambio[1]);
-        $("#igv_tipocambio").val(tipoCambio[3]+ " %");
+    function agregarprorducto(){
+        document.getElementById('agregar_producto').style.display ='block';
+        document.getElementById('quitar_btn').style.display='none';
+    } 
 
-    }
+
     function asignarValores(){
         var pro={!! $proforma !!};
         var tabl={!! $Servicios !!};
@@ -409,12 +377,12 @@
                     apellidoM=pro[key]['materno'];
                     direccion=pro[key]['Direccion'];
                     documento=pro[key]['nro_documento'];
-                    var idProd=pro[key]['idProducto'];
+                    var idProd=pro[key]['idTarea'];
                     var pname=pro[key]['nombre_producto'];
                     var pdescripcion;
                     tipocam=pro[key]['tipocambio'];
                     simbolo=pro[key]['simboloP'];
-                    cotiza=pro[key]['cliente_empleado'];
+                    cotiza=pro[key]['nombre_RE'];
                     if(pro[key]['descripcionDP']==null){
                         pdescripcion='';
                     }else{
@@ -435,9 +403,9 @@
                 }
             }
             editarval=false;
-            // document.getElementById('totales-general').style.display = 'block';
+            document.getElementById('totales-general').style.display = 'block';
             // cotizador
-            $("#nomApe").val(nombreClie+" "+apellidoP+" "+apellidoM);
+            $("#nombreclie").val(nombreClie+" "+apellidoP+" "+apellidoM);
             $("#cdireccion").val(direccion);
             $("#cnro_documento").val(documento);
             $("#cotizador").val(cotiza);
@@ -446,424 +414,635 @@
             $("#valorcambio").val(tipocam);
             $("#forma_de").val(formade);
             $("#plazo_oferta").val(plazpOf);
-            $("#observacion_condicion").val(obser);            
-        }         
-        for (const tab in tabl) {
-            nomTablero=tabl[tab]['nombre_tablero'];
-            var esta=tabl[tab]['estadoT'];
-            table='<div id="'+nomTablero+'_'+cont+'">'+
-                                '<section class="content" style="min-height:0px !important">'+
-                                    '<div class="row">'+
-                                        '<div class="col-md-12">'+
-                                            '<div class="box">'+
-                                                '<div class="box-header with-border" style="padding:5px !important;">'+
-                                                '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
-                                                    '<div class="box-tools pull-right">'+
-                                                         '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
-                                                        '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
-                                                                        '<i class="fa fa-times"></i>'+
-                                                                '</button>'+
-                                                    '</div>'+
-                                                '</div>'+
-                                                '<div class="box-body">'+
-                                                    '<div class="row">'+
-                                                        '<div class="col-md-12">'+
-                                                            '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
-                                                                '<thead style="background-color:#A9D0F5">'+
-                                                                    '<th>Producto</th>'+
-                                                                    '<th>Descripción</th>'+
-                                                                    '<th>Cant.</th>'+
-                                                                    '<th>P. Unit.</th>'+
-                                                                    '<th>Descuento</th>'+
-                                                                    '<th>Importe</th>'+
-                                                                    //'<th></th>'+
-                                                                '</thead>'+
-                                                                '<tbody id="detalle_'+nomTablero+'">'+
-                                                                '</tbody>'+ 
-                                                                '<tfoot>'+
-                                                                    '<th>Total</th>'+
-                                                                    '<th></th>'+
-                                                                    '<th></th>'+
-                                                                    '<th></th>'+
-                                                                    '<th></th>'+
-                                                                    '<th  style="color:black !important;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                                    '</th>'+
-                                                                '</tfoot>'+
-                                                            '</table>'+
-                                                        '</div>'+
-                                                    '<div>'+
-                                                '</div>'+                                
-                                            '</div>'+
-                                        '</div>'+
-                                    '</div>'+
-                                '</section>'+
-                            '</div>';
+            $("#observacion_condicion").val(obser);
+
             
-            var ta={nombre:nomTablero,posi:cont,tablero:table,estado:esta}
-            tablero.push(ta);
-            cont++;
-        }
-        nomTablero="";
-        ListaSelect();
-        // console.log(pro); 
-        for (const dtp in pro) {
-            idprofo=pro[dtp]['idProforma'];
-            var idProd=pro[dtp]['idProducto'];
-            var pname=pro[dtp]['nombre_producto'];
-            var pdescripcion
-            if(pro[dtp]['descripcionDP']==null){
-                pdescripcion='';
-            }else{
-                pdescripcion=pro[dtp]['descripcionDP'];
-            }
-            var puni=pro[dtp]['precio_venta'];
-            var pcant=pro[dtp]['cantidad'];
-            var descuento=pro[dtp]['descuento'];
-            var nomTabl=pro[dtp]['nombre_tablero'];
-            var idDetaTab=pro[dtp]['idDetalle_tableros'];
-            var estado=pro[dtp]['estadoDP'];
-            var dat={idDetalleTablero:idDetaTab,idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,posiP:contp,estado:estado,fila:""};
-            filaob.push(dat);
-            fila();
-            contp++;
-        }
-        valoresFinales();  
-        // console.log(pro); 
-    }
-    
-    
-    function saveProforma(){
-        // se enviar los datos al controlador proforma tableros
-        // console.log(idcliente);
+        }         
+         for (const tab in tabl) {
+             nomTablero=tabl[tab]['nombre_servicio'];
+             var esta=tabl[tab]['estadoT'];
+             table='<div id="'+nomTablero+'_'+cont+'">'+
+                                 '<section class="content" style="min-height:0px !important">'+
+                                     '<div class="row">'+
+                                         '<div class="col-md-12">'+
+                                             '<div class="box">'+
+                                                 '<div class="box-header with-border" style="padding:5px !important;">'+
+                                                 '<p> Servicio ' +nomTablero.replace(/_/gi," ")+
+                                                     '<div class="box-tools pull-right">'+
+ 
+                                                         '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
+                                                         '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
+                                                                         '<i class="fa fa-times"></i>'+
+                                                                 '</button>'+
+                                                     '</div>'+
+                                                 '</div>'+
+                                                 '<div class="box-body">'+
+                                                     '<div class="row">'+
+                                                         '<div class="col-md-12">'+
+                                                             '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
+                                                                 '<thead style="background-color:#A9D0F5">'+
+                                                                     '<th>Producto</th>'+
+                                                                     '<th>Descripción</th>'+
+                                                                     '<th>Cant.</th>'+
+                                                                     '<th>P. Unit.</th>'+
+                                                                     '<th>Descuento</th>'+
+                                                                     '<th>Importe</th>'+
+                                                                     '<th>Quitar</th>'+
+                                                                 '</thead>'+
+                                                                 '<tbody id="detalle_'+nomTablero+'">'+
+                                                                 '</tbody>'+ 
+                                                                 '<tr>'+
+                                                                    '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
+                                                                    '<td style="border-right:1px solid white !important;"></th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
+                                                                     '</td>'+
+                                                                '</tr>'+
+                                                                '<tr>'+
+                                                                     '<th style="color:black !important; border-right:1px solid white !important;" >Total x Cant. de tableros</th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                     '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                          '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+ 
+                                                                     '</td>'+
+                                                                     '</tr>'+
+                                                             '</table>'+
+                                                         '</div>'+
+                                                     '<div>'+
+                                                 '</div>'+                                
+                                             '</div>'+
+                                         '</div>'+
+                                     '</div>'+
+                                 '</section>'+
+                             '</div>';
+             
+             var ta={nombre:nomTablero,posi:cont,tablero:table,estado:esta}
+             tablero.push(ta);
+             cont++;
+         }
+         nomTablero="";
+
+         ListaSelect();
+         // console.log(pro); 
+         for (const dtp in pro) {
+             idprofo=pro[dtp]['idProforma'];
+             var idProd=pro[dtp]['idProducto'];
+             var pname=pro[dtp]['nombre_producto'];
+             var pdescripcion
+             if(pro[dtp]['descripcionDP']==null){
+                 pdescripcion='';
+             }else{
+                 pdescripcion=pro[dtp]['descripcionDP'];
+             }
+             var puni=pro[dtp]['precio_venta'];
+             var pcant=pro[dtp]['cantidad'];
+             var descuento=pro[dtp]['descuento'];
+             var nomTabl=pro[dtp]['nombre_tablero'];
+             var cantiTabl=pro[dtp]['cantidadTab'];
+             var idDetaTab=pro[dtp]['idDetalle_tableros'];
+             var estado=pro[dtp]['estadoDP'];
+             var dat={idDetalleTablero:idDetaTab,idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,cantidadTa:cantiTabl,posiP:contp,estado:estado,fila:""};
+             filaob.push(dat);
+             fila();
+             contp++;
+         }
+         valoresFinales();  
+         // console.log(pro); 
+     }
+ 
+     //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
+     function MostrarCliente(){
+         // cdireccion/cnro_documentoidClientes
+         Cliente=document.getElementById('idClientes').value.split('_');
+         idcliente=Cliente[0];
+         $("#cdireccion").val(Cliente[1]);
+         $("#cnro_documento").val(Cliente[2]);
+     }
+     function MostarProducto(){
+         Producto=document.getElementById('pidProducto').value.split('_');
+         // $("#idProd").val(Producto[0]);
+         // $("#Productoname").val(Producto[1]);
+         $("#precio_uni").val(Producto[2]);
+         $("#pdescuento").val(Producto[3]);
+         // descuentoP -->para emostar el 
+     }
+     function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
-        var idtipocam=tipoCambio[0];
-        var valorcambio=parseFloat(tipoCambio[1]);
-        var simbolo=tipoCambio[2];
-        // var vVenta=$("#valorVenta").val();
-        // var tl=$("#total").val();
-        console.log(totalt,idtipocam,valorcambio,idcliente);
-        console.log("-------------");simcam 
-        console.log(idtipocam,valorcambio,tablero,filaob);
-        // console.log(tablero,filaob);
-        if( totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,subtotal:subtotal,total:totalt,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,simbolo:simbolo}];
-            // console.log(dat,tablero,filaob);
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
-                url:   'save', //archivo que recibe la peticion
-                type:  'post', //método de envio
-                dataType: "json",//tipo de dato que envio 
-                beforeSend: function () {
-                    console.log("Procesando, espere por favor...");
-                        // $("#resultado").html("Procesando, espere por favor...");
-                },
-                success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                
-                    if(response.veri==true){
-                        var urlBase=window.location.origin;
-                        var url=urlBase+'/'+response.data;
-                        document.location.href=url;
-                    }else{
-                        alert("problemas al guardar la informacion");
-                    }
-                }
-            });
-        }else {
-            alert('ingrese productos al tablero!!1111111111');
-        }
-    }
+         $("#simbolo").val(tipoCambio[2]);
+         $("#valorcambio").val(tipoCambio[1]);
+         $("#igv_tipocambio").val(tipoCambio[3]+ " %");
+        tipocam=tipoCambio[1];
+        simbolo=tipoCambio[2];
+        idtipocam=tipoCambio[0];
+        valorcambio=tipoCambio[1];
+ 
+     }
+     // function mostrarcampos(){
+     //     document.getElementById('producto-crear-oculto').style.display = 'block';
+     //     document.getElementById('producto-oculto').style.display = 'block';
+     //     // $("#producto-crear-oculto").style.display='block';
+     //     // $("#producto-oculto").style.display='block';
+     // } 
+ 
+     function saveProforma(){
+         // se enviar los datos al controlador proforma tableros
+         // console.log(idcliente);
+         // tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
+         // var idtipocam=tipoCambio[0];
+         // var valorcambio=tipoCambio[1];
+         // var vVenta=$("#valorVenta").val();
+         // var tl=$("#total").val();
+         // console.log(tablero,filaob);
+         // if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
+             var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt}];
+             console.log(dat,tablero,filaob);
 
-    var bool;
-    function agregarTablero(){    
-        var tabl=$("#NomTablerop").val();
-        nomTablero=tabl.replace(/ /gi,"_");  
-        bool=false;  
-        if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
-            // fila();
-            if(tablero.length>=0 && nomTablero!=""){
-                //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
-                for (const key in tablero) {
-                    if (tablero.hasOwnProperty(key)) {
-                        if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
-                            bool=true; 
-                        }                                       
-                    }
-                }
-                //if que compara e inserta la tabla contenedora de los produtos vacia.
-                if(bool==false )
-                {  
-                    table='<div id="'+nomTablero+'_'+cont+'" style="color: #f5f5f5 !important;">'+
-                                '<section class="content" style="min-height:0px !important">'+
-                                    '<div class="row">'+
-                                        '<div class="col-md-12">'+
-                                            '<div class="box">'+
-                                                '<div class="box-header with-border" style="padding:5px !important;">'+
-                                                    '<p>Proforma de Servico: ' +nomTablero.replace(/_/gi," ")+'</p>'+
-                                                    '<div class="box-tools pull-right">'+
-                                                        '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
-                                                    '</div>'+
-                                                '</div>'+
-                                                '<div class="box-body">'+
-                                                    '<div class="row">'+
-                                                        '<div class="col-md-12 table-responsive">'+
-                                                            '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
-                                                                '<thead style="background-color:#A9D0F5;color: black !important;">'+
-                                                                    '<th>Tarea</th>'+
-                                                                    '<th>Descripción</th>'+
-                                                                    '<th>Opciones</th>'+
-                                                                '</thead>'+
-                                                                '<tbody id="detalle_'+nomTablero+'">'+
-                                                                '</tbody>'+ 
-                                                                '<tfoot>'+
-                                                                    '<th ></th>'+
-                                                                    '<th style="color:black !important;">Costo total del servicio</th>'+
-                                                                    '<th style="color:black !important;"><h4 id="total_'+nomTablero+'"></h4>'+
-                                                                    '<input style="color:black !important;" type="number" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                                    '</th>'+
-                                                                '</tfoot>'+
-                                                            '</table>'+
-                                                        '</div>'+
-                                                    '<div>'+
-                                                '</div>'+                                
-                                            '</div>'+
-                                        '</div>'+
-                                    '</div>'+
-                                '</section>'+
-                            '</div>';
-                var ta={nombre:nomTablero,posi:cont,tablero:table,estado:2}
-                tablero.push(ta);                        
-                } cont++;       
-            }
-            // console.log(table);
-            nomTablero="";
-            // realiza el listado de todas los tableros que se añaden
-            ListaSelect()
-            // mantiene en la vista las filas cuando se agrega una nueva tabla
-            detalleFilas();
-            // fila();
-            //nomtablero="";
-        }else{
-            // (tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!=''
-            if($("#simbolo").val()=='' && $("#valorcambio").val()=='' && $("#igv_tipocambio").val()==''){
-                alert("seleccione un tipo de Moneda");
-            }else if(tabl==''){
-                alert("ingrese nombre del Tablero");
-            }            
-        }
-        
-    }
-    function agregarProductosTablero(){    
-        tarea=document.getElementById('pidTarea').value.split('_');
-        var idT=tarea[0];
-        var pname=tarea[1];
-        var pdescripcion=$("#descripcionp").val();
-        nomTablero=$('#prod-selec').val();
-        var filas;
-        // console.log(pdescripcion);
-        if(tablero.length>=0 && nomTablero!="" && idT!="" && pname!=""){
-            // document.getElementById('totales-general').style.display = 'block';
-            var bool=false;
-            var boolfila=false;
-            for (const key in tablero) {
-                if (tablero.hasOwnProperty(key)) {
-                    if(tablero[key]['nombre']==nomTablero){
-                        bool=true;
-                        for (const fil in filaob) {
-                            if (filaob.hasOwnProperty(fil)) {
-                                if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idTarea']==idT && filaob[fil]['nomTablero']==tablero[key]['nombre']){
-                                    var su=pdescripcion;
-                                    filaob[fil]['descripcionP']=su;
-                                    fila();
-                                    boolfila=true;
-                                    console.log("Actualizar producto");                      
-                                }                
-                            }
-                        }
+             $.ajax({
+                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
+                 url:   'update', //archivo que recibe la peticion
+                 type:  'post', //método de envio
+                 dataType: "json",//tipo de dato que envio 
+                 beforeSend: function () {
+                     // console.log()
+                         // $("#resultado").html("Procesando, espere por favor...");
+                 },
+                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                 
+                     if(response.veri==true){
+                         var urlBase=window.location.origin;
+                         var url=urlBase+'/'+response.data;
+                         document.location.href=url;
+                     }else{
+                         alert("problemas al guardar la informacion");
+                     }
+                 }
+             });
+         // }else {
+         //     alert('ingrese productos al tablero!!');
+         // }
+     }
+     var bool;
+     function agregarTablero(){    
+         var tabl=$("#NomTablerop").val();
+         
+         nomTablero=tabl.replace(/ /gi,"_"); 
+         console.log(nomTablero); 
+         bool=false;  
+         // if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
+             // mostrarcampos(tabl);
+             // fila();
+             console.log(tablero);
+             if(tablero.length>=0 && nomTablero!="" && cantt!=""){
+                 //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
+                 for (const key in tablero) {
+                     if (tablero.hasOwnProperty(key)) {
+                         if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
+                             // tablero[key]['estado']=1;
+                             bool=true; 
+                         }                                       
+                     }
+                 }
+                 //if que compara e inserta la tabla contenedora de los produtos vacia.
+                 if(bool==false ){  
+                     table='<div id="'+nomTablero+'_'+cont+'">'+
+                                 '<section class="content" style="min-height:0px !important">'+
+                                     '<div class="row">'+
+                                         '<div class="col-md-12">'+
+                                             '<div class="box">'+
+                                                 '<div class="box-header with-border" style="padding:5px !important;">'+
+                                                 '<p> Tablero ' +nomTablero.replace(/_/gi," ")+
+                                                     '<div class="box-tools pull-right">'+
+ 
+                                                         '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
+                                                         '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
+                                                                         '<i class="fa fa-times"></i>'+
+                                                                 '</button>'+
+                                                     '</div>'+
+                                                 '</div>'+
+                                                 '<div class="box-body">'+
+                                                     '<div class="row">'+
+                                                         '<div class="col-md-12">'+
+                                                             '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
+                                                                 '<thead style="background-color:#A9D0F5;color: black !important;">'+
+                                                                     '<th>Producto</th>'+
+                                                                     '<th>Descripción</th>'+
+                                                                     '<th>Cant.</th>'+
+                                                                     '<th>P. Unit.</th>'+
+                                                                     '<th>Descuento</th>'+
+                                                                     '<th>Importe</th>'+
+                                                                     //'<th></th>'+
+                                                                 '</thead>'+
+                                                                 '<tbody id="detalle_'+nomTablero+'">'+
+                                                                 '</tbody>'+ 
+                                                                  '<tr>'+
+                                                                    '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
+                                                                    '<td style="border-right:1px solid white !important;"></th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
+                                                                     '</td>'+
 
-                        if(boolfila==false){
-                            console.log("produc nuevoo",contp);
-                            var dat={idTarea:idT,producto:pname,descripcionP:pdescripcion,nomTablero:nomTablero,posiP:contp,fila:"",estado:2};
-                            filaob.push(dat);
-                            fila();
-                            contp++;
-                            
+                                                                     
+                                                                '</tr>'+
+                                                                 '<tr>'+
+                                                                     '<th style="color:black !important; border-right:1px solid white !important;" >Total x Cant. de tableros</th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                    '<td style="border-right:1px solid white !important;"></td>'+
+                                                                     '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                          '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+ 
+                                                                     '</td>'+
+                                                                     '</tr>'+
+                                                             '</table>'+
+                                                         '</div>'+
+                                                     '<div>'+
+                                                 '</div>'+                                
+                                             '</div>'+
+                                         '</div>'+
+                                     '</div>'+
+                                 '</section>'+
+                             '</div>';
+                 var ta={nombre:nomTablero,posi:cont,tablero:table,estado:2 }
+                 tablero.push(ta);                        
+                 } cont++;       
+             }
 
-                        }
-                    }                    
-                }
-            }
-            // detalleFilas();
-            valoresFinales();
-            // console.log(filaob);            
-            nomtablero="";            
-        }else{
-            alert("Ingresar Datos del Producto!!");
-        }
-    }
+             console.log(table,filaob);
+             nomTablero="";
+             // realiza el listado de todas los tableros que se añaden
+             ListaSelect()
+             // mantiene en la vista las filas cuando se agrega una nueva tabla
+             detalleFilas();
+             // fila();
+             //nomtablero="";
+         // }else{
+         //     // (tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!=''
+         //     if($("#simbolo").val()=='' && $("#valorcambio").val()=='' && $("#igv_tipocambio").val()==''){
+         //         alert("seleccione un tipo de Moneda");
+         //     }else if(tabl==''){
+         //         alert("ingrese nombre del Tablero");
+         //     }            
+         // }
+         
+     }
+     function agregarProductosTablero(){    
+         Tarea=document.getElementById('pidTarea').value.split('_');
+         var idProd=Tarea[0];
+         var pname=Tarea[1];
+         var pdescripcion=$("#descripcionp ").val();
+         var puni=$('#precio_uni').val();
+         var pcant=$('#Pcantidad').val();
+         var sel=$('#prod-selec').val();
+         var descuento=$('#pdescuento').val();
+         var cantiTabl=$('#canTT').val();
+         // console.log(descuento);
+         nomTablero=$('#prod-selec').val();
+         var filas;
+         // console.log(idProd,pname);
+         if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!="" && descuento!="" ){
+             // document.getElementById('totales-general').style.display = 'block';
+             var bool=false;
+             var boolfila=false;
+             for (const key in tablero) {
+                 if (tablero.hasOwnProperty(key)) {
+                     if(tablero[key]['nombre']==nomTablero){
+                         bool=true;
+                         for (const fil in filaob) {
+                             if (filaob.hasOwnProperty(fil)) {
+                                 if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idTarea']==idProd && filaob[fil]['nomTablero']==tablero[key]['nombre']){
+                                     var su=parseInt(pcant);
+                                     var des=parseInt(descuento);
+                                     var cxtb=parseInt(cantiTabl);
+                                     filaob[fil]['cantidadP']=su;
+                                     filaob[fil]['descuentoP']=des;
+                                     filaob[fil]['cantidadTa']=cxtb;
+                                     filaob[fil]['descripcionP']=pdescripcion;
+                                     filaob[fil]['estado']=1;
+                                     fila();
+                                     boolfila=true;
+                                     console.log("Actualizar producto");                      
+                                 }                
+                             }
+                         }
+                         if(boolfila==false){
+                             console.log("produc nuevoo",contp);
+                             var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,cantidadTa:cantiTabl,posiP:contp,estado:2,fila:""};
+                             filaob.push(dat);
+                             fila();
+                             contp++;
+                             
+ 
+                         }
+                     }                    
+                 }
+             }
+             // detalleFilas();
+             valoresFinales();
+             // console.log(filaob);            
+             nomtablero="";            
+         }else{
+             alert("Ingresar Datos del Producto!!");
+         }
+     }
+     function fila(){
+         // realiza la insercion de las filas agregadas actualizando los importes y las cantidaddes
+         if(filaob.length>0){
+             var filas;
+             // console.log(filaob.length+ " --> ");
+             for (const key in tablero) {
+                 if (tablero.hasOwnProperty(key) && tablero[key]['estado']!=0) {
+                     // $("#detalle_"+tablero[key]['nombre']).load();
+                     for (const fila in filaob) {
+                         if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {                            
+                             var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                             var precio=parseFloat(filaob[fila]['prec_uniP']);
+                             var descuento=parseFloat(filaob[fila]['descuentoP']);
+                             var cantidadTab=parseFloat(filaob[fila]['cantidadTa']);
 
-    function fila(){
-        // realiza la insercion de las filas agregadas actualizando los importes y las cantidaddes
-        if(filaob.length>0){
-            var filas;
-            // console.log(filaob.length+ " --> ");
-            for (const key in tablero) {
-                if (tablero.hasOwnProperty(key)) {
-                    // $("#detalle_"+tablero[key]['nombre']).load();
-                    for (const fila in filaob) {
-                        if (filaob.hasOwnProperty(fila)) {     
-                            //var cantidad=parseFloat(filaob[fila]['descripcionP']);
-                            
-                            var precio=parseFloat(filaob[fila]['prec_uniP']);
-                            
-                            
-                            if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
-                                filas=
-                                    '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                                        '<td style="color:black !important;"> '+ 
-                                            '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
-                                        '</td>'+
-                                        '<td style="color:black !important;"> '+ 
-                                            '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
-                                        '</td>'+
-                                        '<td style="color:black !important;">'+
-                                            '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
-                                                    '<i class="fas fa-trash"></i>'+
-                                            '</button>'+
-                                        '</td>'+
-                                    '</tr>';  
-                                    filaob[fila]['fila']=filas;
-                                    filas="";
-                            }                                                         
-                        }
-                    }                    
-                }
-            }
-        }
-    } 
-
-    function ListaSelect(){
-        // realiza el listado de todas los tableros que se añaden
-        var tab;    
-        var selectop;
-        if(tablero.length>0){
-            for (const pro in tablero) {
-                if (tablero.hasOwnProperty(pro)) {
+                             var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                             
+                             if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
+                                 filas=
+                                     '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
+                                         '<td style="color:black !important;"> '+ 
+                                             '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+                                         '</td>'+
+                                         '<td style="color:black !important;"> '+ 
+                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+                                         '</td>'+
+                                         '<td style="color:black !important;"> '+ 
+                                             '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                                         '</td>'+
+                                         '<td style="color:black !important;"> '+   
+                                             '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                                         '</td>'+
+                                         '<td style="color:black !important;"> '+   
+                                             '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                                         '</td>'+
+                                         '<td style="color:black !important;"> '+   
+                                             '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+
+                                         '</td>'+
+                                         '<td style="color:black !important;">'+
+                                             '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
+                                                     '<i class="fas fa-trash"></i>'+
+                                             '</button>'+
+                                         '</td>'+
+                                     '</tr>';  
+                                     filaob[fila]['fila']=filas;
+                                     // console.log(filas);
+                                     filas="";
+                             }                                                         
+                         }
+                     }                    
+                 }
+             }
+         }
+     }    
+     function ListaSelect(){
+         // realiza el listado de todas los tableros que se añaden
+         var tab;    
+         var selectop;
+         if(tablero.length>0){
+             for (const pro in tablero) {
+                 if (tablero.hasOwnProperty(pro) && tablero[pro]['estado']!=0) {
                     selectop+='<option value="'+tablero[pro]['nombre']+'">'+tablero[pro]['nombre'].replace(/_/gi," ")+'</option>';                            
                 }
             }
-            var selec='<select name="prod-selec" id="prod-selec"  class="form-control input-sm" >'+
+            var selec='<select name="prod-selec" id="prod-selec" class="form-control input-sm" >'+
                             // '<option value="">Seleccione...</option>'+
                             selectop+
                       '</select>';
-            $('#select-pro').html(selec);
-            for (var keyt in tablero) {
-                tab+=tablero[keyt]['tablero'];
-            }
-            $('#tablerosn').html(tab);
-        }
-    }
+             $('#select-pro').html(selec);
+             for (var keyt in tablero) {
+                 if( tablero[keyt]['estado']!=0){
+                     tab+=tablero[keyt]['tablero'];
+                 }                
+             }
+             $('#tablerosn').html(tab);
+         }
+     }
+     function detalleFilas(){
+         // mantiene en la vista las filas cuando se agrega una nueva tabla
+         // var dat={idProducto:idProd,producto:pname,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp};
+         // fila(); 
+         var fil;
+         if(tablero.length>0){
+             for (var keyt in tablero) {
+                 //  $("#detalle_"+tablero[keyt]['nombre']).load();
+                 $("#detalle_"+tablero[keyt]['nombre']).val('');  
+                 for (var key in filaob) {                   
+                     if (filaob.hasOwnProperty(key) && filaob[key]['estado']!=0 ) {
+                         if(tablero[keyt]['nombre']==filaob[key]['nomTablero']){
+                             fil+=filaob[key]['fila'];
+                         }
+                     }
+                 }
+                 $('#detalle_'+tablero[keyt]['nombre']).html(fil);
+                 fil='';
+             }
+         }else{
+             $('#detalle_'+tablero[keyt]['nombre']).html('');
+         }
+         // subTotalTable();
+     }
+     function subTotalTable(){
+         // funcion para realizar la suma del sub total de todos los tableros que se declaran
+         var sub=0;
+         var sub2=0;
+         if(tablero.length>0){
+             for (const key in tablero) {
+                 if (tablero.hasOwnProperty(key) && tablero[key]['estado']!=0) {
+                     for (const fila in filaob) {
+                         if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
+                             if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
+                                 // (cantidad*precio)-((cantidad*precio)*(cantidad*(descuento/100)));
+                                 var precio=parseFloat(filaob[fila]['prec_uniP']);
+                                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                                 var cantidadTab=parseFloat(filaob[fila]['cantidadTa']);
 
-    function detalleFilas(){
-        // mantiene en la vista las filas cuando se agrega una nueva tabla
-        // var dat={idProducto:idProd,producto:pname,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp};
-        // fila(); 
-        var fil;
-        if(tablero.length>0){
-            for (var keyt in tablero) {
-                $("#detalle_"+tablero[keyt]['nombre']).val('');  
-                for (var key in filaob) {                   
-                    if (filaob.hasOwnProperty(key)) {
-                        if(tablero[keyt]['nombre']==filaob[key]['nomTablero']){
-                            fil+=filaob[key]['fila'];
-                        }
-                    }
-                }
-                $('#detalle_'+tablero[keyt]['nombre']).html(fil);
-                fil='';
+                                 sub+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                                 sub2+=((cantidad*precio)-((precio*(descuento/100)*cantidad)))*cantidadTab;
+                                 // console.log(sub,"---");
+                             }                            
+                         }
+                     }   
+                     // console.log(sub);
+                     $("#total_"+tablero[key]['nombre']).html("s/. " + sub);
+                     $("#total2_"+tablero[key]['nombre']).html("s/. " + sub2);                 
+                 }
+                 sub=0;
+                 sub2=0;
+             }            
+         }
+     }
+     function subTotal(){
+         // la suma de tosos los tableros        
+         var sub=0;        
+         for (const fila in filaob) {
+             if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
+                 var precio=parseFloat(filaob[fila]['prec_uniP']);
+                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                 // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 sub+=cantidad*precio;
+                 // console.log(sub);                        
+             }
+         }
+         // console.log(sub);
+         $("#subtotal").html("s/. " + sub.toFixed(2));
+     }
+     function descuentos(){
+         var desc=0;
+         for (const fila in filaob) {
+             if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
+                 var precio=parseFloat(filaob[fila]['prec_uniP']);
+                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                 desc+=((precio*(descuento/100)*cantidad));                       
+             }
+         }
+         $("#descuentos").html("s/. "+desc.toFixed(2));
+     }
+     function valorVenta(){
+         var venta=0;        
+         for (const fila in filaob) {
+             if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
+                 var precio=parseFloat(filaob[fila]['prec_uniP']);
+                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                 // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 // console.log(sub);                        
+             }
+         }
+         valorventa=venta.toFixed(2);
+         // console.log(sub);
+         $("#valorVenta").html("s/. " + venta.toFixed(2));
+     }
+     function igv(){
+         var venta=0;   
+         var ig=0;     
+         for (const fila in filaob) {
+             if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
+                 var precio=parseFloat(filaob[fila]['prec_uniP']);
+                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                 // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 // console.log(sub);                        
+             }
+         }
+         ig=venta*0.18;
+         // console.log(sub);
+         $("#igv").html("s/. " + ig.toFixed(2));
+     }
+     var boolean_dolar=false;
+     function total(){
+         var venta=0;   
+         var igv=0;  
+         var tota=0;   
+         for (const fila in filaob) {
+             if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
+                 var precio=parseFloat(filaob[fila]['prec_uniP']);
+                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                 // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 totaldolares=(tota/tipocam).toFixed(2);
+                 // console.log(sub);                        
+             }
+         }
+         igv=venta*0.18;
+         tota=venta+igv;
+         totalt=tota.toFixed(2);
+         totaldolares=(tota/tipocam).toFixed(2);
+         // console.log(sub);
+         $("#total").html("s/. " + tota.toFixed(2));
+     }
+     function valoresFinales(){
+         if(filaob.length>0){
+             detalleFilas();
+         }
+         subTotal();
+         subTotalTable();
+         descuentos();
+         valorVenta();
+         igv();
+         total();
+         cambioMoneda();
+     }
+    function cambioMoneda(){
+        console.log(contp);
+        if(filaob.length>0 && boolean_dolar!=true){
+            if("$"==simbolo){    
+                totaldolares=(totalt/tipocam).toFixed(2);        
+                $("#total_dolares").html(simbolo+" " + totaldolares);
+            }else{
+                $("#total_dolares").html(0);
             }
         }else{
-            $('#detalle_'+tablero[keyt]['nombre']).html('');
-        }
-        // subTotalTable();
-    }
-    
-    function igv(){
-        var venta=subtotal;
-        ig=venta*0.18;
-        // v=console.log(venta);
-        // console.log(sub);
-        $("#igv").html("s/. " + ig.toFixed(2));
-    }
-    function totaltt(){
-        var igv=subtotal*0.18;
-        var tota=0;        
-        totalt=subtotal+igv;
-        $("#total").html("s/. " + totalt.toFixed(2));
-        console.log(totalt);
-    }
-    function valoresFinales(){
-        if(filaob.length>0){
-            detalleFilas();
-        }
-        // igv();
-        // total();
-    }
-    function eliminar(index){
-        // elimina las filas de un tablero especifico 
-        // console.log(filaob,"eliminar",index);
-        for (var key in filaob) {
-            if (filaob.hasOwnProperty(key)) {
-                if(index==filaob[key]['posiP']){
-                    console.log(filaob[key]['nomTablero'],"eliminar");
-                    $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
-                    filaob.splice(key,1);
-                    // console.log(filaob);                            
-                }
-            }
-        } 
-        valoresFinales();
-    }
-    function eliminarTablero(a){
-    // elimina todo un tablero con todos los datos que contiene
-        for (const key in tablero) {
-            if (tablero.hasOwnProperty(key)) {
-                if(a==tablero[key]['posi']){
-                    //console.log(a);        
-                    //console.log(tablero);
-                    for (var k in filaob) {
-                        if (filaob.hasOwnProperty(k)) {
-                            if(tablero[key]['nombre']==filaob[k]['nomTablero']){
-                                // console.log("encontrado");
-                                filaob.splice(k,1);
-                            }
-                        }
-                    }   
-                    $("#"+tablero[key]['nombre']+'_'+tablero[key]['posi']).remove();                      
-                    tablero.splice(key,1);                 
-                }              
-            }
-        }
-        detalleFilas();
-        ListaSelect();
-        valoresFinales()
-    }
-    function ocultar(){
-        tablero.length>0
-        if (0<tablero.length && 0<filaob){
-            
+            $("#total_dolares").val(0);
+            $("#tota_dolares").val(0);
         }
     }
-    function sumar(){
-        var t=0;
-        for (const key in tablero) {
-            if (tablero.hasOwnProperty(key)) {
-                t+=parseFloat($("#precio_subtotal_"+tablero[key]['nombre']).val());                              
-            }
-        }
-        subtotal=t;
-        $("#subtotal").html("s/. " + t);
-    }
-</script>
-@endpush
-@endsection
+     function eliminar(index){
+         // elimina las filas de un tablero especifico 
+         // console.log(filaob,"eliminar",index);
+         for (var key in filaob) {
+             if (filaob.hasOwnProperty(key)) {
+                 if(index==filaob[key]['posiP']){
+                     console.log(filaob[key]['nomTablero'],"eliminar");
+                     $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
+                     // filaob.splice(key,1);
+                     filaob[key]['estado']=0;  
+                     // console.log(filaob);                            
+                 }
+             }
+         } 
+         valoresFinales();
+     }
+     function eliminarTablero(a){
+     // elimina todo un tablero con todos los datos que contiene
+         for (const key in tablero) {
+             if (tablero.hasOwnProperty(key)) {
+                 if(a==tablero[key]['posi']){
+                     //console.log(a);        
+                     //console.log(tablero);
+                     for (var k in filaob) {
+                         if (filaob.hasOwnProperty(k)) {
+                             if(tablero[key]['nombre']==filaob[k]['nomTablero']){
+                                 // console.log("encontrado");
+                                 // filaob.splice(k,1);
+                                 filaob[k]['estado']=0;  
+                             }
+                         }
+                     }   
+                     $("#"+tablero[key]['nombre']+'_'+tablero[key]['posi']).remove();                      
+                     // tablero.splice(key,1);     
+                     tablero[key]['estado']=0;              
+                 }              
+             }
+         }
+         detalleFilas();
+         ListaSelect();
+         valoresFinales()
+     }
+     function ocultar(){
+         tablero.length>0
+         if (0<tablero.length && 0<filaob){
+             
+         }
+     }
+ </script>
+ @endpush
+ @endsection
