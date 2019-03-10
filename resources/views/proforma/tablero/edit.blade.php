@@ -482,7 +482,7 @@ var editarval=true;
                                  '</section>'+
                              '</div>';
              
-             var ta={nombre:nomTablero,posi:cont,tablero:table,estado:esta}
+             var ta={nombre:nomTablero,posi:cont,tablero:table,cantTaB:cantxtabs,estado:esta}
              tablero.push(ta);
              cont++;
          }

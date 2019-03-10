@@ -10,7 +10,7 @@
             <a href="#">
                 <i class="fas fa-file-signature"></i> Proforma</a>
         </li>
-        <li class="active">Nueva Proforma Tableros</li>
+        <li class="active">Nueva Proforma Servicio</li>
     </ol>
 </section>
 <section class="content">
@@ -20,7 +20,7 @@
                 <div class="box-header with-border" style="padding: 10px !important">
                     <h4>
                         <strong style="font-weight: 400">
-                            <i class="fas fa-dolly"></i> Datos Proforma Tableros Fiemec
+                            <i class="fas fa-dolly"></i> Datos Proforma Servicios Fiemec
                         </strong>
                     </h4>
                     @if(count($errors)>0)
@@ -130,7 +130,7 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="" class="control-label" style="color: #676a6c !important;">
-                                            Ingresar el Nombre de Tablero
+                                            Ingresar el Nombre del Servicio
                                         </label>
                                     </div>
                                     <div class="row">
@@ -144,18 +144,34 @@
                                                 </samp>
                                             </div>
                                         </div>
+
                                         <div class="col-sm-2">
                                             <input type="radio" name="subtitulo" id="subtitulo" value="Sub titulo"> Sub titulo
                                         </div>
+
+
+                                        
                                     </div>
                                     <div class="row" id="producto-crear-oculto" style="display:none;margin-top:20px">
                                         <div class="col-lg-2" style="margin-top:20px">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Nom. Item</label>
+                                                <label class="control-label">Nom. Item de Subtitulo</label>
+                                                <input type="text" id="pitem2" class="form-control" name="pitem2" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Subtitulo</label>
+                                                <input type="text"  id="subti" class="form-control" name="subti"  >
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Nom. Item de Producto</label>
                                                 <input type="text" id="pitem" class="form-control" name="item" >
                                             </div>
                                         </div>
-                                         <div class="col-sm-8">
+                                         <div class="col-sm-8" style="margin-top:20px">
                                             <div class="">
                                                 <label for="" class="control-label">Tarea</label>
                                                 <select name="pidTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
@@ -232,7 +248,7 @@
                                                 <div class="col-md-12">
                                                     <div class="box">
                                                         <div class="box-header with-border" style="padding:5px !important;">
-                                                        <p> Proforma de Tablero: </p>
+                                                        <p> Proforma Servicio: </p>
                                                             <div class="box-tools pull-right">
                                                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                             </div>
@@ -242,9 +258,13 @@
                                                                 <div class="col-md-12 table-responsive">
                                                                     <table id="detalle_tablero_Principal" class="table table-striped table-bordered table-condensed table-hover">
                                                                         <thead style="background-color:#A9D0F5;text-align: center;color: black !important" >
-                                                                            <th class="text-center">Tarea</th>
-                                                                            <th class="text-center">Descripción</th>
-                                                                            <th class="text-center">Opciones</th>
+                                                                            <th class="text-center">Item</th>
+                                                                            <th class="text-center">Descripcion</th>
+                                                                            <th class="text-center">Detalles</th>
+                                                                            <th class="text-center">Unds.</th>
+                                                                            <th class="text-center">Cant.</th>
+                                                                            <th class="text-center">P. Unit.</th>
+                                                                            <th class="text-center">Importe</th>
                                                                         </thead>
                                                                         <tbody id="tablero_unitario">
                                                                             <tr>
@@ -600,7 +620,7 @@
                                         '<div class="col-md-12">'+
                                             '<div class="box">'+
                                                 '<div class="box-header with-border" style="padding:5px !important;">'+
-                                                '<p> Tablero ' +nomTablero.replace(/_/gi," ")+'</p>'+
+                                                '<p> Servicio ' +nomTablero.replace(/_/gi," ")+'</p>'+
                                                     '<div class="box-tools pull-right">'+
 
                                                         '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
@@ -621,12 +641,14 @@
                                                                     '<th>Cant.</th>'+
                                                                     '<th>P. Unit.</th>'+
                                                                     '<th>Importe</th>'+
+                                                                    '<th>Quitar</th>'+
                                                                     //'<th></th>'+
                                                                 '</thead>'+
                                                                 '<tbody id="detalle_'+nomTablero+'">'+
                                                                 '</tbody>'+ 
                                                                 '<tfoot>'+
                                                                     '<th style="color:black !important;" >Total</th>'+
+                                                                    '<th></th>'+
                                                                     '<th></th>'+
                                                                     '<th></th>'+
                                                                     '<th></th>'+
@@ -671,9 +693,11 @@
         Tarea=document.getElementById('pidTarea').value.split('_');
         var idTa=Tarea[0];
         var tname=Tarea[1];
-        var pdescripcion=$("#descripcionp ").val();
+        var pdescripcion=$("#descripcionp").val();
+        var subti=$("#subti").val();
         var puni=$('#precio_uni').val();
         var pit=$('#pitem').val();
+        var pit2=$('#pitem2').val();
         var pcant=$('#Pcantidad').val();
         var sel=$('#prod-selec').val();
         var descuento=$('#pdescuento').val();
@@ -689,25 +713,9 @@
                 if (tablero.hasOwnProperty(key)) {
                     if(tablero[key]['nombre']==nomTablero){
                         bool=true;
-                        // for (const fil in filaob) {
-                        //     if (filaob.hasOwnProperty(fil)) {
-                        //         if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idTarea']==idTa && filaob[fil]['nomTablero']==tablero[key]['nombre']){
-
-                        //             var su=parseInt(pcant);
-                        //             var des=descuento;
-                        //             filaob[fil]['cantidadP']=su;
-                        //             filaob[fil]['descuentoP']=des;
-                        //             filaob[fil]['descripcionP']=pdescripcion;
-                        //             filaob[fil]['itemP']=pit;
-                        //             fila();
-                        //             boolfila=true;
-                        //             console.log("Actualizar producto");                      
-                        //         }                
-                        //     }
-                        // }
                         if(boolfila==false){
                           // console.log("produc nuevoo",contp); 
-                            var dat={idTarea:idTa,tarea:tname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:1,itemP:pit,fila:""};
+                            var dat={idTarea:idTa,tarea:tname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,subtit:subti,estado:1,itemP:pit,itemP2:pit2,fila:""};
                             filaob.push(dat);
                             fila();
                             contp++;
@@ -744,25 +752,29 @@
                                     '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
 
                                     '<td style="color:black !important;"> '+ 
+                                            '<input type="hidden" disabled name="pit'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['itemP2']+'">'+filaob[fila]['itemP2']+'</br>'+
+
                                             '<input type="hidden" disabled name="pit'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['itemP']+'">'+filaob[fila]['itemP']+
                                         '</td>'+
 
                                         '<td style="color:black !important;"> '+ 
+                                            '<input type="hidden" style="font-size:5em" name="stit_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['subtit']+'">'+filaob[fila]['subtit']+'</br>'+
+
                                             '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idTarea']+'">'+filaob[fila]['tarea']+
                                         '</td>'+
-                                        '<td style="color:black !important;"> '+ 
+                                        '<td style="color:black !important;"> '+ '</br>'+
                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                                         '</td>'+
-                                        '<td style="color:black !important;"> '+   
+                                        '<td style="color:black !important;"> '+   '</br>'+
                                             '<input type="hidden" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+filaob[fila]['descuentoP']+
                                         '</td>'+
-                                        '<td style="color:black !important;"> '+ 
+                                        '<td style="color:black !important;"> '+ '</br>'+
                                             '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                                         '</td>'+
-                                        '<td style="color:black !important;"> '+   
+                                        '<td style="color:black !important;"> '+   '</br>'+
                                             '<input type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+filaob[fila]['prec_uniP']+
                                         '</td>'+
-                                        '<td style="color:black !important;"> '+   
+                                        '<td style="color:black !important;"> '+   '</br>'+
                                             '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+subt+
                                         '</td>'+
                                         '<td style="color:black !important;">'+
@@ -773,6 +785,7 @@
                                     '</tr>';  
                                     filaob[fila]['fila']=filas;
                                     filas="";
+                                    limpiar();
                             }                                                         
                         }
                     }                    
@@ -780,6 +793,13 @@
             }
         }
     }    
+    function limpiar(){
+       
+        //$("#ppreciog").val("");
+        
+        $("#pitem2").val("");
+        $("#subti").val("");
+    }
     function ListaSelect(){
         // realiza el listado de todas los tableros que se añaden
             
