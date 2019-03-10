@@ -20,8 +20,8 @@ class DetalleServicio extends Model
         'texto_precio_venta',
         'cantidad',
         'descuento',
-        'item',
-        'descuento',
+        'item2',
+        'subtitulo',
         'descripcionDP',
         'estadoDP'
    ];

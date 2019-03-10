@@ -190,7 +190,7 @@
                                         </div>
                                         <div class="col-lg-3" style="margin-top:20px">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Descripcion</label>
+                                                <label class="control-label">Detalles</label>
                                                 <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
                                             </div>
                                         </div> 

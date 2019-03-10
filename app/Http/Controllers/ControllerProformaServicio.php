@@ -124,21 +124,14 @@ class ControllerProformaServicio extends Controller
                 'idTipo_moneda'=>$idTipoCam,
                 'cliente_empleado'=>3,
                 'serie_proforma'=>'PU365122019',
-                // 'fecha_hora'=>$mytime->toDateTimeString(),
                 'igv'=>'18',
                 'subtotal'=>$valorv,
                 'precio_total'=>$tota,
                 'tipocambio'=>$valorcambio,
                 'simboloP'=>$simbolo,
-                // 'precio_totalC'=>$request->,
-                // 'descripcion_proforma'=>$request->,
                 'tipo_proforma'=>'Servicios',
-                // 'caracteristicas_proforma'=>$request->,
                 'forma_de'=> $formaPago,
-                // 'plaza_fabricacion'=>$request->,
                 'plazo_oferta'=>$plazoOferta,
-                // 'garantia'=>$request->,
-                // 'observacion_condicion'=>$request->,
                 'observacion_proforma'=>$observaciones,
                 'estado'=>1
                 ]
@@ -150,19 +143,17 @@ class ControllerProformaServicio extends Controller
                 foreach($request->filas as $fila){
                     if($fila['nomTablero']==$tablero['nombre']){
                         $DetalleServicio=new DetalleServicio;
-                        // $detalleProforma->idDetalle_proforma=$fila[''];                          
                         $DetalleServicio->idProforma=$idProforma;
                         $DetalleServicio->idServicios=$idServicio;
                         $DetalleServicio->idTarea=$fila['idTarea'];
                         $DetalleServicio->cantidad=$fila['cantidadP'];
                         $DetalleServicio->item=$fila['itemP'];
+                        $DetalleServicio->item2=$fila['itemP2'];
+                        $DetalleServicio->subtitulo=$fila['subtit'];
                         $DetalleServicio->precio_venta=$fila['prec_uniP'];  
-                        // $DetalleServicio->texto_precio_venta=$fila[''];  
-                        // $DetalleServicio->observacion_detalleP=$fila[''];    
                         $DetalleServicio->descuento=$fila['descuentoP'];    
                         $DetalleServicio->descripcionDP=$fila['descripcionP'];
                         $DetalleServicio->estadoDP=1;
-                        
                         $DetalleServicio->save();
                     }
                 }
@@ -227,8 +218,9 @@ public function pdf($id)
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Servicios as s','s.idServicios','=','dePS.idServicios')
         
-        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.descripcion_tarea','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT','dePS.idDetalle_proforma','dePS.idTarea','dePS.idProforma','dePS.idServicios','dePS.texto_precio_venta','dePS.descuento','dePS.descripcionDP','dePS.estadoDP','pd.nombre_tarea','s.costo')
+        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.descripcion_tarea','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT','dePS.idDetalle_proforma','dePS.idTarea','dePS.idProforma','dePS.idServicios','dePS.precio_venta','dePS.cantidad','dePS.descuento','dePS.descripcionDP','dePS.estadoDP','pd.nombre_tarea','s.costo','dePS.item','dePS.item2','dePS.subtitulo')
         ->where('p.idProforma','=',$id)
+        ->orderBy('dePS.item')
         ->get();
 
         //dd($servicio,$proforma,$td,$id);

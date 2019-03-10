@@ -145,10 +145,10 @@ td.foot
 footer {
   color: black;
   width: 100%;
-  height: 82px !important;
+  height: 60px !important;
   position: absolute;
   bottom: 0;
-  border-top: 1px dashed #C1CED9;
+  border-top: 1px solid #C1CED9;
   padding: 2px 0;
  
 }
@@ -282,48 +282,65 @@ border-collapse: collapse;
         <div><span style="color: black !important;font-weight: bold;">DIRECCIÓN :</span> <span class="direccion" style="font-size: 11px !important;color: black">{{$td->direccion}}</span> </div>
     </div>
   </header> 
-<main>
-<div class="col-xs-12">
-<table class="principal" >
-  <tr style="border-bottom: 2px solid #7D7D7D !important">
-    <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-      Item
-    </td>
-    <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-      Descripción
-    </td>
-    <td colspan="1"  style="border-bottom: solid 5px #323639 !important;background-color: #7D7D7D;color: white;text-align: center;">
-      
-    </td>
-  </tr>
+
+  <main> 
+    <div id="main-container"> 
+      <table class="principal" width="100%"> 
+        <thead class="principal"> 
+          <tr class="principal"> 
+            <th class="principal">Item</th>          
+            <th class="principal" style="width: 460px !important">Descripcion</th>
+            <th class="principal" >Detalles. </th>
+            <th class="principal" >Unds</th>
+            <th class="principal" >Cant.</th>
+            <th class="principal" >P. Unit.</th>
+            <th class="principal" >Importe</th>
+          </tr>
+        </thead>
   @foreach($servicio as $s)
   <tr>
-    <td colspan="3" style="background-color: #E5EAEA;border: 1px;font-size: 12px;text-align: center; ">
+    <td colspan="7" style="background-color: #E5EAEA;border: 1px;font-size: 12px;text-align: center; ">
       Servicio {{$s->nombre_servicio }}
     </td>
   </tr>
-  {{$i=1}}
+  
   {{$sub=0}}
   {{$igv=0}}
   {{$precio=0}}
   @foreach($proforma as $p)
     @if($s->nombre_servicio==$p->nombre_servicio)
   <tr>
-    <td colspan="1" style="border: 1px solid black;font-size: 11px">
-      {{$i++}}
+    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
+      {{$p->item2}}
+      {{$p->item}}
     </td>
-    <td colspan="1" style="border: 1px solid black;font-size: 11px">
+    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
+      {{ $p->subtitulo }}
       {{ $p->nombre_tarea }}
     </td>
-    <td colspan="1" style="border: 1px solid black;font-size: 11px">
+    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
+      {{$p->descripcionDP}}
+    </td>
+    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
+    </td>
+    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
+      {{$p->cantidad}}
+    </td>
+    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
+      {{$p->precio_venta}}
+    </td>
+    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
+      {{$p->precio_venta*$p->cantidad}}
     </td>
   </tr>
+
+  {{$sub+=($p->precio_venta*$p->cantidad)}}
       @endif
     @endforeach
           <tr>
             <td colspan="1"></td>
-            <td colspan="1" style="text-align: right;border-top: 1px solid black;font-size: 10px">
-                COSTO DIRECTO   
+            <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
+                COSTO DIRECTO S/.  
             </td>
             <td colspan="1" style="text-align: center;font-size: 11px;">
                {{round($sub,2)}}
@@ -331,13 +348,13 @@ border-collapse: collapse;
           </tr>
   @endforeach
 <tr>
-    <td colspan="3" style="color: white;height: 10px">espacio</td>
+    <td colspan="7" style="color: white;height: 10px">espacio</td>
 </tr>
 <tr>
   <td colspan="1">
       NOTA
     </td>
-    <td colspan="1" style="font-size: 10px">
+    <td colspan="6" style="font-size: 10px">
       NO ESTA CONSIDERADO, OTRO TRABAJO ADICIONAL QUE NO ESTE COOMPRENDIDO EN LA PRESENTE OFERTA NO ESTA CONSIDERADO PICADO DE OBSTRUCCIONES
     </td>
     <td colspan="1"></td>
@@ -353,7 +370,7 @@ border-collapse: collapse;
   <tr>
     <td colspan="1" style="border-top: 1px solid black">
     </td>
-    <td colspan="1" style="text-align: right;border-top: 1px solid black;font-size: 10px">
+    <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
       SUBTOTAL S/.
     </td>
     <td colspan="1" style="text-align: center;font-size: 11px;border-top: 1px solid black"> 
@@ -363,7 +380,7 @@ border-collapse: collapse;
   <tr>
     <td colspan="1" >
     </td>
-    <td colspan="1" style="text-align: right;font-size: 10px">
+    <td colspan="5" style="text-align: right;font-size: 10px">
       IGV % S/.
     </td>
     <td colspan="1" style="text-align: center;font-size: 11px"> 
@@ -373,7 +390,7 @@ border-collapse: collapse;
   <tr>
     <td colspan="1" >
     </td>
-    <td colspan="1" style="text-align: right;font-size: 10px">
+    <td colspan="5" style="text-align: right;font-size: 10px">
       TOTAL S/.
     </td>
     <td colspan="1" style="text-align: center;font-size: 11px"> 
@@ -391,16 +408,12 @@ border-collapse: collapse;
           <h5 style="font-size: 8px !important;line-height:1px">Plazo de oferta {{$td->plazo_oferta}}  </h5>
           <h5 style="font-size: 8px !important;line-height:10px">Condición de venta: {{$td->observacion_proforma}} </h5>
     </div>
-<div style="width: 35%; float: right;display: block;">
-          <h4 style="font-size: 8px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: </h4>
-          <h4 style="font-size: 8px !important;line-height:1px">20546979611</h4>
-          <h5 style="font-size: 8px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584 </h5>
-          <h5 style="font-size: 8px !important;line-height:1px">BBVA Soles (CCI): 011-339-000100014584-95</h5>
-          <h5 style="font-size: 8px !important;line-height:1px">BCP Soles:  192-2324867-0-03  </h5>
-          <h5 style="font-size: 8px !important;line-height:1px">BCP Soles (CCI): 002192002324867003385</h5>
-          <h5 style="font-size: 8px !important;line-height:1px">BCP Dolares :   192-2288918-1-91  </h5>
-          <h5 style="font-size: 8px !important;line-height:1px">BCP Dolares (CCI): 00219200228891819137</h5>
-          <h5 style="font-size: 8px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>          
+<div style="width: 50%; float: right;display: block;">
+          <h4 style="font-size: 12px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
+          <h5 style="font-size: 10px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
+          <h5 style="font-size: 10px !important;line-height:1px">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>
+          <h5 style="font-size: 10px !important;line-height:1px">BCP Dolares :   192-2288918-1-91     ( CCI) 00219200228891819137</h5>
+          <h5 style="font-size: 10px !important;line-height:1px">Cta. Corriente  detracciones BN :   00-088-006879</h5>           
         </div> 
   </footer>
 </body>
