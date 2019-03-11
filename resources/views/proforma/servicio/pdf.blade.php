@@ -300,7 +300,7 @@ border-collapse: collapse;
         </thead>
   @foreach($servicio as $s)
   <tr>
-    <td colspan="7" style="background-color: #E5EAEA;border: 1px;font-size: 12px;text-align: center; ">
+    <td colspan="7" style="background-color: #00709A;border: 1px;font-size: 12px;text-align: center;color: white; ">
       Servicio {{$s->nombre_servicio }}
     </td>
   </tr>
@@ -311,11 +311,11 @@ border-collapse: collapse;
   @foreach($proforma as $p)
     @if($s->nombre_servicio==$p->nombre_servicio)
   <tr>
-    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center; height: 5px !important">
-      <h4 style="background-color: #E5EAEA">{{$p->item2}}</h4>{{$p->item}}
+    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: middle; height: 5px !important">
+      <p style="background-color: #E5EAEA">{{$p->item2}}</p> <p>{{$p->item}}</p>
     </td>
     <td colspan="1" style="border: 1px solid black;font-size: 11px">
-    <h4 style="text-align: center;background-color: #E5EAEA" > {{ $p->subtitulo}}</h4>{{ $p->nombre_tarea }}
+    <p style="text-align: center;background-color: #E5EAEA" > {{ $p->subtitulo}}</p><p>{{ $p->nombre_tarea }}</p>
     </td>
     <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
       {{$p->descripcionDP}}
