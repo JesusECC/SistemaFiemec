@@ -721,7 +721,7 @@
             bool=true;
             for (const fil in filaob) {
                 if (filaob.hasOwnProperty(fil)) {
-                    if(filaob[fil]['nomTablero']==nomTablero){
+                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['estado']==0 ){
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
                         filaob[fil]['cantidadP']=su;
