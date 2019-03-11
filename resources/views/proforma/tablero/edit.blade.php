@@ -421,7 +421,7 @@ var editarval=true;
              nomTablero=tabl[tab]['nombre_tablero'];
              cantxtabs=tabl[tab]['cantidadTab'];
              var esta=tabl[tab]['estadoT'];
-            var cxt=tabl[tab]['cantidadTab'];
+            
              table='<div id="'+nomTablero+'_'+cont+'">'+
                                  '<section class="content" style="min-height:0px !important">'+
                                      '<div class="row">'+

@@ -347,7 +347,7 @@ var editarval=true;
         var formade;
         var plazpOf;
         var obser;
-         console.log(tabl);
+       //  console.log(tabl);
          console.log(pro);
         if (editarval==true) {
             for (const key in pro) {
