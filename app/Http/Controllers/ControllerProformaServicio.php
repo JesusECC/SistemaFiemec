@@ -217,13 +217,12 @@ public function pdf($id)
         ->join('Tarea as pd','pd.idTarea','=','dePS.idTarea')
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Servicios as s','s.idServicios','=','dePS.idServicios')
-        
         ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.descripcion_tarea','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT','dePS.idDetalle_proforma','dePS.idTarea','dePS.idProforma','dePS.idServicios','dePS.precio_venta','dePS.cantidad','dePS.descuento','dePS.descripcionDP','dePS.estadoDP','pd.nombre_tarea','s.costo','dePS.item','dePS.item2','dePS.subtitulo')
         ->where('p.idProforma','=',$id)
         ->orderBy('dePS.item')
         ->get();
 
-        //dd($servicio,$proforma,$td,$id);
+       
 
         $pdf=PDF::loadView('proforma/servicio/pdf',['td'=>$td,'proforma'=>$proforma,"servicio"=>$servicio]);
         return $pdf->stream('proforma.pdf');
@@ -258,18 +257,21 @@ public function pdf($id)
         ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','p.idestado','p.incluye','deTS.idDetalle_proforma','deTS.idProforma','deTS.idServicios','deTS.idTarea','deTS.descuento','deTS.descripcionDP','deTS.estadoDP','ta.nombre_tarea','ta.descripcion_tarea','ta.estado as est','clp.idCliente','clp.nro_documento','clp.nombres_Rs','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT')
         ->where('p.idProforma','=',$id)
         ->get();
-        // dd($proforma);
+        dd($proforma);
 
 
-        // 's.idServicios','s.nombre_servicio','s.estadoT'
-// 'clp.idCliente','clp.nro_documento','clp.nombres_Rs','clp.Direccion',
+    // 's.idServicios','s.nombre_servicio','s.estadoT'
+    // 'clp.idCliente','clp.nro_documento','clp.nombres_Rs','clp.Direccion',
     // 'ta.idTarea','ta.nombre_tarea','ta.descripcion_tarea','ta.estado', 
     // 'deTS.idDetalle_proforma','deTS.idProforma','deTS.idServicios','deTS.idTarea','deTS.texto_precio_venta','deTS.descuento','deTS.descripcionDP','deTS.estadoDP',  
     // 'p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','p.idestado','p.incluye',
-            // 'deTS.idDetalle_Servicios','deTS.idProducto','deTS.idProforma','deTS.idServicios','deTS.cantidad','deTS.precio_venta','deTS.texto_precio_venta','deTS.descuento','deTS.descripcionDP','deTS.estadoDP'
-        // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
+    // 'deTS.idDetalle_Servicios','deTS.idProducto','deTS.idProforma','deTS.idServicios','deTS.cantidad','deTS.precio_venta','deTS.texto_precio_venta','deTS.descuento','deTS.descripcionDP','deTS.estadoDP'
+    // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
+
         return view("proforma.servicio.edit",["clientes"=>$clientes,'proforma'=>$proforma,'Tareas'=>$Tareas,'Servicios'=>$Servicios]);
     }
+
+
     public function destroy($id)
     {
         $proforma=Proforma::findOrFail($id);

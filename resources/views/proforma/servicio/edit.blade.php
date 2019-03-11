@@ -347,8 +347,8 @@ var editarval=true;
         var formade;
         var plazpOf;
         var obser;
-       //  console.log(tabl);
-         console.log(pro);
+       //console.log(tabl);
+       //console.log(pro);
         if (editarval==true) {
             for (const key in pro) {
                 if (pro.hasOwnProperty(key)) {
@@ -358,8 +358,14 @@ var editarval=true;
                     apellidoM=pro[key]['materno'];
                     direccion=pro[key]['Direccion'];
                     documento=pro[key]['nro_documento'];
-                    var idProd=pro[key]['idTarea'];
-                    var pname=pro[key]['nombre_tarea'];
+                    var idProd=pro[key]['idProducto'];
+                    var pname=pro[key]['nombre_producto'];
+
+
+
+                    var idTar=pro[key]['idTarea'];
+                    var tname=pro[key]['nombre_tarea'];
+
                     var pdescripcion;
                     tipocam=pro[key]['tipocambio'];
                     simbolo=pro[key]['simboloP'];
@@ -458,7 +464,7 @@ var editarval=true;
          }
          nomTablero="";
          ListaSelect();
-         // console.log(pro); 
+        console.log(pro); 
          for (const dtp in pro) {
              idprofo=pro[dtp]['idProforma'];
              var idProd=pro[dtp]['idProducto'];
@@ -475,13 +481,14 @@ var editarval=true;
              var nomTabl=pro[dtp]['nombre_tablero'];
              var idDetaTab=pro[dtp]['idDetalle_tableros'];
              var estado=pro[dtp]['estadoDP'];
-             var dat={idDetalleTablero:idDetaTab,idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,posiP:contp,estado:estado,fila:""};
+             var dat={idDetalleProforma:idDetalleProforma,idDetalleTablero:idDetaTab,idProducto:idProd,producto:pname,idTarea:idTar,tarea:tname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,posiP:contp,estado:estado,fila:""};
              filaob.push(dat);
              fila();
              contp++;
          }
          valoresFinales();  
-         // console.log(pro); 
+         console.log(filaob);
+
      }
  
      //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
@@ -529,7 +536,7 @@ var editarval=true;
          // console.log(tablero,filaob);
          // if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
              var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt}];
-             console.log(dat,tablero,filaob);
+             //console.log(dat,tablero,filaob);
 
              $.ajax({
                  headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -561,12 +568,12 @@ var editarval=true;
          var tabl=$("#NomTablerop").val();
          
          nomTablero=tabl.replace(/ /gi,"_"); 
-         console.log(nomTablero); 
+         //console.log(nomTablero); 
          bool=false;  
          // if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
              // mostrarcampos(tabl);
              // fila();
-             console.log(tablero);
+             //console.log(tablero);
              if(tablero.length>=0 && nomTablero!=""){
                  //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
                  for (const key in tablero) {
@@ -632,7 +639,7 @@ var editarval=true;
                  } cont++;       
              }
 
-             console.log(table,filaob);
+             //console.log(table,filaob);
              nomTablero="";
              // realiza el listado de todas los tableros que se añaden
              ListaSelect()
@@ -682,12 +689,12 @@ var editarval=true;
                                      filaob[fil]['estado']=1;
                                      fila();
                                      boolfila=true;
-                                     console.log("Actualizar producto");                      
+                                     //console.log("Actualizar producto");                      
                                  }                
                              }
                          }
                          if(boolfila==false){
-                             console.log("produc nuevoo",contp);
+                            // console.log("produc nuevoo",contp);
                              var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:2,fila:""};
                              filaob.push(dat);
                              fila();
@@ -724,7 +731,7 @@ var editarval=true;
                                  filas=
                                      '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
                                          '<td style="color:black !important;"> '+ 
-                                             '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+                                             '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idTarea']+'">'+filaob[fila]['tarea']+
                                          '</td>'+
                                          '<td style="color:black !important;"> '+ 
                                              '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
@@ -926,7 +933,7 @@ var editarval=true;
          cambioMoneda();
      }
     function cambioMoneda(){
-        console.log(contp);
+        //console.log(contp);
         if(filaob.length>0 && boolean_dolar!=true){
             if("$"==simbolo){    
                 totaldolares=(totalt/tipocam).toFixed(2);        
@@ -945,7 +952,7 @@ var editarval=true;
          for (var key in filaob) {
              if (filaob.hasOwnProperty(key)) {
                  if(index==filaob[key]['posiP']){
-                     console.log(filaob[key]['nomTablero'],"eliminar");
+                     //console.log(filaob[key]['nomTablero'],"eliminar");
                      $("#fila_"+filaob[key]['nomTablero']+'_'+index).remove();
                      // filaob.splice(key,1);
                      filaob[key]['estado']=0;  
