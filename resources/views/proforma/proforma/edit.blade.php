@@ -447,7 +447,6 @@ function cambiaropcion(){
             alert('ingrese productos al tablero!!');
         }
     }
-    var bool;
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
         var idProd=Producto[0];
@@ -459,19 +458,22 @@ function cambiaropcion(){
         var filas;
         if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!=""  ){
             document.getElementById('totales-general').style.display = 'block';
-            var bool=false;
             var boolfila=false;
-            bool=true;
             for (const fil in filaob) {
                 if (filaob.hasOwnProperty(fil)) {
-                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd || filaob[fil]['estado']==0){
+                    if(filaob[fil]['nomTablero']==nomTablero  && filaob[fil]['estado']==0 && filaob[fil]['idProducto']==idProd){
+                        // console.log(filaob[fil]['nomTablero']);         
+                        // console.log(filaob[fil]['idProducto']);    
+                        // console.log(filaob[fil]['estado']);     
+                            
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
                         filaob[fil]['cantidadP']=su;
                         filaob[fil]['descuentoP']=des;
                         filaob[fil]['descripcionP']=pdescripcion;
                         fila();
-                        boolfila=true;                
+                        boolfila=true; 
+                        // console.log("reusame...",filaob);              
                     }                
                 }
             }
@@ -558,7 +560,7 @@ function cambiaropcion(){
         var plazpOf;
         var obser;
         // var descuento;
-        console.log(pro);
+        // console.log(pro);
         if (editarval==true) {
             for (const key in pro) {
                 if (pro.hasOwnProperty(key)) {
@@ -587,7 +589,7 @@ function cambiaropcion(){
                     formade=pro[key]['forma_de'];
                     plazpOf=pro[key]['plazo_oferta'];
                     obser=pro[key]['observacion_proforma']; 
-                    console.log(estado);
+                    // console.log(estado);
                     var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
                     filaob.push(dat);  
                     fila();
@@ -595,7 +597,7 @@ function cambiaropcion(){
                 }
             }
             document.getElementById('totales-general').style.display = 'block';
-            console.log(filaob);
+            // console.log(filaob);
             valoresFinales(); 
             editarval=false;
             // cotizador
@@ -698,7 +700,7 @@ function cambiaropcion(){
         cambioMoneda();
     }
     function cambioMoneda(){
-        console.log(contp);
+        // console.log(contp);
         if(filaob.length>0 && boolean_dolar!=true){
             if("$"==simbolo){    
                 totaldolares=(totalt/tipocam).toFixed(2);        
@@ -722,7 +724,7 @@ function cambiaropcion(){
                 }
             }
         } 
-        console.log(filaob);
+        // console.log(filaob);
         valoresFinales();
     }    
     function ocultar(){

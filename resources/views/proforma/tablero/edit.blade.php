@@ -697,7 +697,7 @@ var editarval=true;
      }
      function agregarProductosTablero(){    
          Producto=document.getElementById('pidProducto').value.split('_');
-         var idProd=Producto[0];
+         var idProd=parseInt(Producto[0]);
          var pname=Producto[1];
          var pdescripcion=$("#descripcionp ").val();
          var puni=$('#precio_uni').val();
