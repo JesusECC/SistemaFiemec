@@ -386,9 +386,11 @@ var editarval=true;
                     // var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalleProforma:idDetalleProforma};
                     // filaob.push(dat);  
                     // fila();
-                    contp++;               
+                    contp++;    
+                    // console.log(var);           
                 }
             }
+            // console.log(pro);
             editarval=false;
             document.getElementById('totales-general').style.display = 'block';
             // cotizador
@@ -467,27 +469,41 @@ var editarval=true;
         console.log(pro); 
          for (const dtp in pro) {
              idprofo=pro[dtp]['idProforma'];
-             var idProd=pro[dtp]['idProducto'];
-             var pname=pro[dtp]['nombre_producto'];
-             var pdescripcion
-             if(pro[dtp]['descripcionDP']==null){
-                 pdescripcion='';
-             }else{
-                 pdescripcion=pro[dtp]['descripcionDP'];
-             }
-             var puni=pro[dtp]['precio_venta'];
-             var pcant=pro[dtp]['cantidad'];
-             var descuento=pro[dtp]['descuento'];
-             var nomTabl=pro[dtp]['nombre_tablero'];
-             var idDetaTab=pro[dtp]['idDetalle_tableros'];
-             var estado=pro[dtp]['estadoDP'];
-             var dat={idDetalleProforma:idDetalleProforma,idDetalleTablero:idDetaTab,idProducto:idProd,producto:pname,idTarea:idTar,tarea:tname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,posiP:contp,estado:estado,fila:""};
+             idProforma=pro[dtp]['idProforma'];
+            nombreClie=pro[dtp]['nombres_Rs'];
+            apellidoP=pro[dtp]['paterno'];
+            apellidoM=pro[dtp]['materno'];
+            direccion=pro[dtp]['Direccion'];
+            documento=pro[dtp]['nro_documento'];
+            var idProd=pro[dtp]['idProducto'];
+            var pname=pro[dtp]['nombre_producto'];
+            var idTar=pro[dtp]['idTarea'];
+            var tname=pro[dtp]['nombre_tarea'];
+            var pdescripcion;
+            tipocam=pro[dtp]['tipocambio'];
+            simbolo=pro[dtp]['simboloP'];
+            cotiza=pro[dtp]['nombre_RE'];
+            if(pro[dtp]['descripcionDP']==null){
+                pdescripcion='';
+            }else{
+                pdescripcion=pro[dtp]['descripcionDP'];
+            }
+            var nombre_servicio=pro[dtp]['nombre_servicio'];
+            var puni=pro[dtp]['precio_venta'];
+            var pcant=pro[dtp]['cantidad'];
+            var descuento=pro[dtp]['descuento'];     
+            var estado=parseInt(pro[dtp]['estadoDP']);  
+            var idDetalleProforma=pro[dtp]['idDetalle_proforma']; //revisar 
+            formade=pro[dtp]['forma_de'];
+            plazpOf=pro[dtp]['plazo_oferta'];
+            obser=pro[dtp]['observacion_proforma']; 
+             var dat={idDetalleProforma:idDetalleProforma,idProducto:idProd,producto:pname,idTarea:idTar,tarea:tname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nombre_servicio,posiP:contp,estado:estado,fila:""};
              filaob.push(dat);
              fila();
              contp++;
          }
          valoresFinales();  
-         console.log(filaob);
+         console.log(filaob,"+++++++++++++");
 
      }
  
@@ -734,7 +750,7 @@ var editarval=true;
                                              '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idTarea']+'">'+filaob[fila]['tarea']+
                                          '</td>'+
                                          '<td style="color:black !important;"> '+ 
-                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
+                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idTarea']+'">'+filaob[fila]['descripcionP']+
                                          '</td>'+
                                          '<td style="color:black !important;"> '+ 
                                              '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
