@@ -361,8 +361,6 @@ var editarval=true;
                     var idProd=pro[key]['idProducto'];
                     var pname=pro[key]['nombre_producto'];
 
-
-
                     var idTar=pro[key]['idTarea'];
                     var tname=pro[key]['nombre_tarea'];
 
