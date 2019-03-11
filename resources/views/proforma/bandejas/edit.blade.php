@@ -713,6 +713,7 @@
                         var subt=precioga*cantidad;
 
                 }
+
         if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!=""  ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
@@ -720,7 +721,7 @@
             bool=true;
             for (const fil in filaob) {
                 if (filaob.hasOwnProperty(fil)) {
-                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['estado']==0){
+                    if(filaob[fil]['nomTablero']==nomTablero){
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);
                         filaob[fil]['cantidadP']=su;

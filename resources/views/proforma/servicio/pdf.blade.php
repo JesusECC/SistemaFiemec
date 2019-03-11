@@ -311,7 +311,7 @@ border-collapse: collapse;
   @foreach($proforma as $p)
     @if($s->nombre_servicio==$p->nombre_servicio)
   <tr>
-    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
+    <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center; height: 5px !important">
       <h4 style="background-color: #E5EAEA">{{$p->item2}}</h4>{{$p->item}}
     </td>
     <td colspan="1" style="border: 1px solid black;font-size: 11px">
