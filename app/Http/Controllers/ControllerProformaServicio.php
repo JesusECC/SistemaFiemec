@@ -247,7 +247,6 @@ public function pdf($id)
         $Servicios=DB::table('Servicios as s')
         ->distinct()
         ->join('Detalle_proforma_servicios as dps','s.idServicios','=','dps.idServicios')
-        ->where('s.estadoT','=',1)
         ->where('dps.idProforma','=',$id)
         ->get(['s.nombre_servicio','s.estadoT']);
         
