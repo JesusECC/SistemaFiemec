@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+ @extends ('layouts.admin')
 @section ('contenido')
 <section class="content-header">
   <h1 style="margin-top: 55px;">
@@ -111,8 +111,12 @@
                           <thead>
                             <tr role="row">
                               <th>Item</th>
-                              <th >Producto</th>
-                              <th >Desc. %</th>
+                              <th >Descripcion</th>
+                              <th >Detalles</th>
+                              <th >Unds.</th>
+                              <th >Cant.</th>
+                              <th >P Unit.</th>
+                              <th >Importe</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -122,17 +126,21 @@
                           @foreach($proforma as $p)
                             @if($s->nombre_servicio==$p->nombre_servicio)
                             <tr role="row" class="odd">
-                              <td align="center">{{$i++}}</td>
-                              <td align="center">{{ $p->nombre_tarea}}</td>
-                              <td align="center" >{{$p->descuento}} % </td>
+                              <td align="center"><p style="background-color: #E5EAEA">{{$p->item2}}</p><p>{{$p->item}}</p></td>
+                              <td align="center"><p style="text-align: center;background-color: #E5EAEA" > {{ $p->subtitulo}}</p><p>{{ $p->nombre_tarea }}</p></td>
+                              <td align="center">{{$p->descripcionDP}}</td>
+                              <td align="center">{{$p->descuento}}</td>
+                              <td align="center">{{$p->cantidad}}</td>
+                              <td align="center">{{$p->precio_venta}}</td>
+                              <td align="center">{{$p->precio_venta*$p->cantidad}}</td>
                             </tr>
-                         
+                          {{$sub+=($p->precio_venta*$p->cantidad)}}
                             @endif
                           @endforeach
                           </tbody>
                           <tfoot>
                             <tr style="font-weight: bold;">
-                              <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
+                              <td colspan="5" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
                               <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
                               <td align="center" style="border-right: 1px solid #323639"> S/.{{$sub}}</td>
                             </tr>
@@ -160,7 +168,6 @@
                 <p style="color: black !important;">Forma de:  {{$td->forma_de}}</p>
                 <p style="color: black !important;">Plazo de Oferta:  {{$td->plazo_oferta}}</p>
                 <p style="color: black !important;">Observaciones:  {{$td->observacion_proforma}}</p>
-                <p style="color: black !important;">Realizado por : {{$td->nameE}}</p>
               </div> 
               <div class="col-sm-3">
                 <div class="table-responsive">

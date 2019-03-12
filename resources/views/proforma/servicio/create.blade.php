@@ -148,9 +148,6 @@
                                         <div class="col-sm-2">
                                             <input type="radio" name="subtitulo" id="subtitulo" value="Sub titulo"> Sub titulo
                                         </div>
-
-
-                                        
                                     </div>
                                     <div class="row" id="producto-crear-oculto" style="display:none;margin-top:20px">
                                         <div class="col-lg-2" style="margin-top:20px">
@@ -224,8 +221,7 @@
                                     <div class="row" id="subtitulos" style="display:none;margin-top:20px">
                                         <div class="col-sm-2" style="margin-top:20px">
                                             <div class="form-group">
-                                                <label class="control-label">Nom.Tablero</label>
-                                                <!-- <input type="text" id="NomTablero" class="form-control" name="NomTablero" > -->
+                                                <label class="control-label">Ingresar el Nombre de Tablero</label>
                                                 <div id="select-subtitle" ></div>
                                             </div>
                                         </div> 

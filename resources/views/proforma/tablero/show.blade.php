@@ -67,7 +67,7 @@
               <div class="col-sm-4">
                 <center><strong>Atendido por</strong></center>
                 <address>
-                  <strong style="font-weight: 400 !important;">Nombre: {{$td->cliente_empleado}}</strong>
+                  <strong style="font-weight: 400 !important;">Nombre: {{$td->name}} {{$td->up}} {{$td->um}} | {{$td->telefonoU}}/{{$td->celularU}}</strong>
                   <br>
                   <strong style="font-weight: 400 !important;">Dirección: P. P. N. Pachacutec Mz. W1 Lot. 7 Gru. Residencial E4 - Sector E Callao - Ventanilla</strong>
                   <br>
@@ -98,6 +98,7 @@
               <div class="box">
                 <div class="box-header with-border" style="padding: 5px !important;">
                   <p>Tablero {{$t->nombre_tablero }}</p>
+                  <p>CantidadxTablero {{$t->cantidadTab}}</p>
                 </div>  
                 <div class="box-body">
                   <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -121,6 +122,7 @@
                           <tbody>
                           {{$i=1}}
                           {{$sub=0}}
+                          {{$sub2=0}}
                           {{$igv=0}}
                           @foreach($proforma as $p)
                             @if($t->nombre_tablero==$p->nombre_tablero)
@@ -133,6 +135,7 @@
                               <td align="center" >S/.{{($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}</td>
                             </tr>
                           {{$sub+=($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}
+                          {{$sub2+=(($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)))*$p->cantidadTab}}
                           {{$igv=$p->igv}}
                             @endif
                           @endforeach
@@ -142,6 +145,11 @@
                               <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
                               <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
                               <td align="center" style="border-right: 1px solid #323639"> S/.{{$sub}}</td>
+                            </tr>
+                            <tr style="font-weight: bold;">
+                              <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
+                              <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
+                              <td align="center" style="border-right: 1px solid #323639"> S/.{{$sub2}}</td>
                             </tr>
                           </tfoot>
                         </table>
@@ -158,16 +166,18 @@
 {{$sub_tableros=0}}
       {{$igv_tableros=0}}
       {{$pt=0}}
+      {{$pxt=0}}
       @foreach($proforma as $p)
         {{$sub_tableros=$p->subtotal}}
         {{$igv_tableros=$p->igv}}
         {{$pt=$p->precio_total}}
+        {{$pxt=$p->totalxtab}}
       @endforeach
               <div class="col-sm-9" style="color: white">
                 <p style="color: black !important;">Forma de:  {{$td->forma_de}}</p>
                 <p style="color: black !important;">Plazo de Oferta:  {{$td->plazo_oferta}}</p>
-                <p style="color: black !important;">Observaciones:  {{$td->observacion_condicion}}</p>
-                <p style="color: black !important;">Realizado por : {{$td->nameE}}</p>
+                <p style="color: black !important;">Observaciones:  {{$td->observacion_proforma}}</p>
+                
               </div> 
               <div class="col-sm-3">
                 <div class="table-responsive">
@@ -184,6 +194,19 @@
                       <tr>
                         <th>Precio total</th>
                         <td>S/. {{round($pt,2)}}</td>
+                      </tr>
+
+                      <tr>
+                        <th>Sub TotalxCantTab</th>
+                        <td>S/. {{$pxt}}</td>
+                      </tr>
+                      <tr>
+                        <th>IGV (18%)</th>
+                        <td>S/. {{round(($pxt)*($igv_tableros/100),2)}}</td>
+                      </tr>
+                      <tr>
+                        <th>Precio TotalxCantTab</th>
+                        <td>S/. {{round(($pxt)+(($pxt)*($igv_tableros/100)),2)}}</td>
                       </tr>
                     </tbody>
                   </table>

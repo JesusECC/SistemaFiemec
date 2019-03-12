@@ -652,6 +652,7 @@
                         var subt2=precioga;
                         var subt=precioga*cantidad;
                 }
+                
         if(nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && descuento!=""  ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
@@ -659,7 +660,7 @@
             bool=true;
             for (const fil in filaob) {
                 if (filaob.hasOwnProperty(fil)) {
-                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['estado']==0 && filaob[fil]['idProducto']==idProd  ){
+                    if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['estado']==0 && filaob[fil]['idProducto']==idProd ){
                         var su=parseInt(pcant);
                         var des=parseInt(descuento);                        
                         filaob[fil]['cantidadP']=su;
@@ -755,6 +756,7 @@
                         '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%;">'+
                             '<td class="text-center"> '+ 
                                 '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+
                                 '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medi']+'">'+filaob[fila]['medi']+' fabricado en plancha galvanizada LAC/LAF acabado '+
                                '<input style="width: 70px !important;" type="hidden" name="idgal_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idGalvanizado']+'">'+filaob[fila]['galvanizada']+', Espesor de '+
                                '<input  type="hidden" name="esp_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de '+

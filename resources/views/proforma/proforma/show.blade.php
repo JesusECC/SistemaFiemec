@@ -69,7 +69,7 @@
               <div class="col-sm-4">
                 <center><strong>Atendido por</strong></center>
                 <address>
-                  <strong style="font-weight: 400 !important;">Nombre: {{$proforma->cliente_empleado}}</strong>
+                  <strong style="font-weight: 400 !important;">Nombre: {{$proforma->name}} {{$proforma->paterno}} {{$proforma->materno}} | {{$proforma->telefonoU}}/ {{$proforma->celularU}}</strong>
                   <br>
                   <strong style="font-weight: 400 !important;">Dirección: P. P. N. Pachacutec Mz. W1 Lot. 7 Gru. Residencial E4 - Sector E Callao - Ventanilla</strong>
                   <br>

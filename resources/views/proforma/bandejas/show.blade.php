@@ -69,7 +69,7 @@
               <div class="col-sm-4">
                 <center><strong>Atendido por</strong></center>
                 <address>
-                  <strong style="font-weight: 400 !important;">Nombre:{{$proforma->nombres}} {{$proforma->paterno}} {{$proforma->materno}}</strong>
+                  <strong style="font-weight: 400 !important;">Nombre:{{$proforma->name}} {{$proforma->up}} {{$proforma->um}} | {{$proforma->telefonoU}}/{{$proforma->celularU}}</strong>
                   <br>
                   <strong style="font-weight: 400 !important;">Dirección: P. P. N. Pachacutec Mz. W1 Lot. 7 Gru. Residencial E4 - Sector E Callao - Ventanilla</strong>
                   <br>
@@ -107,26 +107,14 @@
                   </thead>
                   <tbody>
                     @foreach($detalles as $det)
-
-                    if($det->precioGal>0){
                         <tr>
                             <td>{{$det->nombre_producto}} {{$det->medidas}}, acabado en {{$det->nombreGalvanizado}}, Espesor de {{$det->espesor}} y tramo de {{$det->tramo}} metros. {{$det->descripcionDP}}, {{$det->tapa}} </td>
                             <td>{{$det->dimenciones}}</td>
                             <td>{{$det->cantidad}}</td>
-                            <td>{{(((($det->precioGal)*$det->tramo)+$det->precioTap))}}</td>
-                            <td>{{(((($det->precioGal + $det->precioPin)*$det->tramo)+$det->precioTap)-10)*$det->cantidad}}</td>
+                            <td>S/.{{round($det->preciouniB,2)}}</td>
+                            <td>S/.{{round($det->preciouniB*$det->cantidad,2)}}</td>
                         </tr>
-                      }else{
-
-                      <td>{{$det->nombre_producto}} {{$det->medidas}}, acabado en {{$det->nombreGalvanizado}}, Espesor de {{$det->espesor}} y tramo de {{$det->tramo}} metros. {{$det->descripcionDP}}, {{$det->tapa}} </td>
-                            <td>{{$det->dimenciones}}</td>
-                            <td>{{$det->cantidad}}</td>
-                            <td>{{(((($det->precioGal))+$det->precioTap))}}</td>
-                            <td>{{(((($det->precioGal + $det->precioPin)*$det->tramo)+$det->precioTap)-10)*$det->cantidad}}</td>
-
-
-
-                    }
+                      
                         @endforeach
                       }
                   </tbody>
@@ -141,7 +129,7 @@
                 <p>Garantia:  {{$proforma->garantia}}</p>
                 <p>Forma de entrega:  {{$proforma->incluye}}</p>
                 <p>Observaciones:  {{$proforma->observacion_condicion}}</p>
-                <p>Realizado por:  {{$proforma->nombres.' '.$proforma->paterno.' '.$proforma->materno.' | Telf. '.$proforma->telefono.' / '.$proforma->celular}}</p>
+                
 
               </div>
               <div class="col-sm-3">

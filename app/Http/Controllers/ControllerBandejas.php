@@ -187,16 +187,16 @@ public function store(Request $request)
     ->join('users as u','u.id','=','p.idEmpleado')
     ->join('Empleado as em','em.id','=','u.idEmp')
     ->join('Cliente_Representante as cr','cr.idCR','=','cp.idCliente')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno as paternoC','cp.materno as maternoC','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma','u.name','u.paterno as up','u.materno as um','u.telefonoU','u.celularU')
     ->where('p.idProforma','=',$id)
     ->first();
 
     $detalles=DB::table('Detalle_bandejas as db')
     ->join('Producto as pro','db.idProducto','=','pro.idProducto')
     ->join('Galvanizado as gal','gal.idGalvanizado','=','db.idGalvanizado')
-    ->join('Pintado as pin','pin.idPintado','=','db.idPintura')
-    ->select('db.idGalvanizado','pin.idPintado','pro.marca_producto','pro.codigo_producto','pro.nombre_producto','pro.descripcion_producto','db.descripcionDP','db.espesor','gal.nombreGalvanizado','pin.nombrePintado','db.espesor','db.cantidad','db.precioGal','db.precioPin','db.precioTap','db.tramo','db.medidas','db.descripcionDP','db.dimenciones','db.tapa')
+    ->select('db.idGalvanizado','pro.marca_producto','pro.codigo_producto','pro.nombre_producto','pro.descripcion_producto','db.descripcionDP','gal.nombreGalvanizado','db.espesor','db.cantidad','db.precioGal','db.precioTap','db.tramo','db.medidas','db.descripcionDP','db.dimenciones','db.tapa','db.promed','db.preciouniB','pro.promedio')
     ->where('db.idProforma','=',$id)
+    ->where('db.estadoDB','=','1')
     ->get();
     
     return view("proforma.bandejas.show",["proforma"=>$proforma,"detalles"=>$detalles]);
@@ -286,6 +286,7 @@ public function edit($id)
     ->join('Galvanizado as gal','gal.idGalvanizado','=','deP.idGalvanizado')
     ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.cambioBandejas','deP.estadoDB','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','p.incluye','deP.espesor','deP.precioGal','deP.preciouniB','deP.precioTap','deP.tramo','deP.medidas','deP.dimenciones','deP.tapa','deP.cambioBandejas','deP.simboloBandejas','deP.promed','deP.tramo','deP.idGalvanizado','gal.nombreGalvanizado','pd.promedio','cr.nombre_RE')
     ->where('deP.idProforma','=',$id)
+    ->where('deP.estadoDB','=','1')
     ->get();
     
         

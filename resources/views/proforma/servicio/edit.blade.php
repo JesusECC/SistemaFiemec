@@ -120,10 +120,40 @@
                                         </div>
                                     </div>
                                     <div class="row" id="producto-oculto" style="margin-top:20px">
-                                        
+
+                                        <div class="col-lg-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Nom. Item de Subtitulo</label>
+                                                <input type="text" id="pitem2" class="form-control" name="pitem2" >
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Subtitulo</label>
+                                                <input type="text"  id="subti" class="form-control" name="subti"  >
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Nom. Item de Producto</label>
+                                                <input type="text" id="pitem" class="form-control" name="item" >
+                                            </div>
+                                        </div>
+                                         <div class="col-lg-10" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label for="" class="control-label">Tarea</label>
+                                                <select name="pidTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
+                                                    <option value="" selected="" disabled="">Seleccione Tarea</option>
+                                                    @foreach($Tareas as $ta)
+                                                    <option value="{{ $ta->idTarea }}_{{ $ta->nombre_tarea }}_{{ $ta->precioT }}">{{$ta->nombre_tarea}}</option>
+                                                    @endforeach
+                                                </select> 
+                                            </div>
+                                        </div>
+
                                         <div class="col-lg-3" style="margin-top:20px">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Descripcion</label>
+                                                <label class="control-label">Detalles</label>
                                                 <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
                                             </div>
                                         </div> 
@@ -133,18 +163,13 @@
                                                 <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
                                             </div>
                                         </div> 
-                                        <div class="col-lg-1" style="margin-top:20px">
+                                        <div class="col-lg-2" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Cantidad</label>
                                                 <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
                                             </div>
                                         </div> 
-                                        <div class="col-sm-2" style="margin-top:20px">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Descuento %</label>
-                                                <input type="number" id="pdescuento" class="form-control" name="pdescuento" step="any" >
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-sm-2" style="margin-top:20px">
                                             <div class="form-group">
                                                 <label class="control-label">Nom.Tablero</label>
@@ -160,6 +185,7 @@
                                         </div>                                                                                 
                                     </div>
                                 </div>
+                            </div>
                                 <div class="panel-footer">
                                     <div id="tablerosn" style="color: #f5f5f5 !important;">
                                     </div>
@@ -326,7 +352,7 @@ var editarval=true;
      var idProfo;
      var idtipocam;
      
-     $("#pidProducto").change(MostarProducto);
+     $("#pidTarea").change(MostarProducto);
      $("#idTipo_moneda").change(cambioMoneda);
     // variables para asignar valores    
     
@@ -429,25 +455,31 @@ var editarval=true;
                                                          '<div class="col-md-12">'+
                                                              '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
                                                                  '<thead style="background-color:#A9D0F5">'+
-                                                                     '<th>Producto</th>'+
+                                                                     '<th>Item</th>'+
                                                                      '<th>Descripción</th>'+
+                                                                     '<th>Detalles</th>'+
+                                                                     '<th>Unds.</th>'+
                                                                      '<th>Cant.</th>'+
-                                                                     '<th>P. Unit.</th>'+
-                                                                     '<th>Descuento</th>'+
-                                                                     '<th>Importe</th>'+
+                                                                     '<th>P. Unit</th>'+
+                                                                     '<th>P. Importe</th>'+
+                                                                     '<th>Quitar</th>'+
                                                                      //'<th></th>'+
                                                                  '</thead>'+
                                                                  '<tbody id="detalle_'+nomTablero+'">'+
                                                                  '</tbody>'+ 
-                                                                 '<tfoot>'+
-                                                                     '<th>Total</th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th  style="color:black !important;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4><input type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                                     '</th>'+
-                                                                 '</tfoot>'+
+                                                                 '<tr>'+
+                                                                    '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
+                                                                    '<th style="color:black !important; border-right:1px solid white !important;" ></th>'+
+                                                                    '<td style="border-right:1px solid white !important;"></th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
+                                                                     '</td>'+
+
+                                                                     
+                                                                '</tr>'+
                                                              '</table>'+
                                                          '</div>'+
                                                      '<div>'+
@@ -475,8 +507,15 @@ var editarval=true;
             documento=pro[dtp]['nro_documento'];
             var idProd=pro[dtp]['idProducto'];
             var pname=pro[dtp]['nombre_producto'];
+
             var idTar=pro[dtp]['idTarea'];
             var tname=pro[dtp]['nombre_tarea'];
+            var it=pro[dtp]['item'];
+            var it2=pro[dtp]['item2'];
+            var subtt=pro[dtp]['subtitulo'];
+
+
+
             var pdescripcion;
             tipocam=pro[dtp]['tipocambio'];
             simbolo=pro[dtp]['simboloP'];
@@ -495,7 +534,7 @@ var editarval=true;
             formade=pro[dtp]['forma_de'];
             plazpOf=pro[dtp]['plazo_oferta'];
             obser=pro[dtp]['observacion_proforma']; 
-             var dat={idDetalleProforma:idDetalleProforma,idProducto:idProd,producto:pname,idTarea:idTar,tarea:tname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nombre_servicio,posiP:contp,estado:estado,fila:""};
+             var dat={idDetalleProforma:idDetalleProforma,idProducto:idProd,producto:pname,idTarea:idTar,tarea:tname,item:it,item2:it2,subtitulo:subtt,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nombre_servicio,posiP:contp,estado:estado,fila:""};
              filaob.push(dat);
              fila();
              contp++;
@@ -514,11 +553,11 @@ var editarval=true;
          $("#cnro_documento").val(Cliente[2]);
      }
      function MostarProducto(){
-         Producto=document.getElementById('pidProducto').value.split('_');
+         Tarea=document.getElementById('pidTarea').value.split('_');
          // $("#idProd").val(Producto[0]);
          // $("#Productoname").val(Producto[1]);
-         $("#precio_uni").val(Producto[2]);
-         $("#pdescuento").val(Producto[3]);
+         $("#precio_uni").val(Tarea[2]);
+         
          // descuentoP -->para emostar el 
      }
      function mostrarTipoCambio(){
@@ -620,25 +659,30 @@ var editarval=true;
                                                          '<div class="col-md-12">'+
                                                              '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
                                                                  '<thead style="background-color:#A9D0F5;color: black !important;">'+
-                                                                     '<th>Producto</th>'+
+                                                                     '<th>Item</th>'+
                                                                      '<th>Descripción</th>'+
+                                                                     '<th>Detalles</th>'+
+                                                                     '<th>Unds.</th>'+
                                                                      '<th>Cant.</th>'+
-                                                                     '<th>P. Unit.</th>'+
-                                                                     '<th>Descuento</th>'+
-                                                                     '<th>Importe</th>'+
-                                                                     //'<th></th>'+
+                                                                     '<th>P. Unit</th>'+
+                                                                     '<th>P. Importe</th>'+
+                                                                     '<th>Quitar</th>'+
                                                                  '</thead>'+
                                                                  '<tbody id="detalle_'+nomTablero+'">'+
                                                                  '</tbody>'+ 
-                                                                 '<tfoot>'+
-                                                                     '<th style="color:black !important;" >Total</th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th></th>'+
-                                                                     '<th>< h4 id="total_'+nomTablero+'">s/. 0.00</h4><input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+
-                                                                     '</th>'+
-                                                                 '</tfoot>'+
+                                                                 '<tr>'+
+                                                                    '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
+                                                                    '<th style="color:black !important; border-right:1px solid white !important;" ></th>'+
+                                                                    '<td style="border-right:1px solid white !important;"></th>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
+                                                                    '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
+                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
+                                                                     '</td>'+
+
+                                                                     
+                                                                '</tr>'+
                                                              '</table>'+
                                                          '</div>'+
                                                      '<div>'+
@@ -672,19 +716,22 @@ var editarval=true;
          
      }
      function agregarProductosTablero(){    
-         Producto=document.getElementById('pidProducto').value.split('_');
-         var idProd=Producto[0];
-         var pname=Producto[1];
+         Tarea=document.getElementById('pidTarea').value.split('_');
+         var idProd=Tarea[0];
+         var pname=Tarea[1];
          var pdescripcion=$("#descripcionp ").val();
-         var puni=$('#precio_uni').val();
+         var subti=$("#subti").val();
+        var puni=$('#precio_uni').val();
+        var pit=$('#pitem').val();
+        var pit2=$('#pitem2').val();
          var pcant=$('#Pcantidad').val();
          var sel=$('#prod-selec').val();
-         var descuento=$('#pdescuento').val();
+         
          // console.log(descuento);
          nomTablero=$('#prod-selec').val();
          var filas;
          // console.log(idProd,pname);
-         if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!="" && descuento!="" ){
+         if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!="" ){
              // document.getElementById('totales-general').style.display = 'block';
              var bool=false;
              var boolfila=false;
@@ -709,7 +756,7 @@ var editarval=true;
                          }
                          if(boolfila==false){
                             // console.log("produc nuevoo",contp);
-                             var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:2,fila:""};
+                             var dat={idTarea:idProd,tarea:pname,item:pit,item2:pit2,subtitulo:subti,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,nomTablero:nomTablero,posiP:contp,estado:2,fila:""};
                              filaob.push(dat);
                              fila();
                              contp++;
@@ -724,7 +771,7 @@ var editarval=true;
              // console.log(filaob);            
              nomtablero="";            
          }else{
-             alert("Ingresar Datos del Producto!!");
+             alert("Te quiero maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas!!");
          }
      }
      function fila(){
@@ -739,28 +786,33 @@ var editarval=true;
                          if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {                            
                              var cantidad=parseFloat(filaob[fila]['cantidadP']);
                              var precio=parseFloat(filaob[fila]['prec_uniP']);
-                             var descuento=parseFloat(filaob[fila]['descuentoP']);
-                             var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                             
+                             var subt=(cantidad*precio);
                              if(tablero[key]['nombre']==filaob[fila]['nomTablero']){
                                  filas=
                                      '<tr class="selected" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'">'+
-                                         '<td style="color:black !important;"> '+ 
+                                         '<td style="color:black !important;text-align: center"> '+ 
+                                             '<p style="text-align: center; background-color: #E5EAEA">'+'<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['item2']+'">'+filaob[fila]['item2']+'</p>'+
+                                             '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['item']+'">'+filaob[fila]['item']+
+                                         '</td>'+
+                                         '<td style="color:black !important;"> '+
+                                         '<p style="text-align: center; background-color: #E5EAEA">'+'<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['subtitulo']+'">'+filaob[fila]['subtitulo']+'</p>'+
                                              '<input type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idTarea']+'">'+filaob[fila]['tarea']+
                                          '</td>'+
-                                         '<td style="color:black !important;"> '+ 
-                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idTarea']+'">'+filaob[fila]['descripcionP']+
+                                         '<td style="color:black !important;"> '+ '</br>'+
+                                             '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                                          '</td>'+
-                                         '<td style="color:black !important;"> '+ 
-                                             '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                                         '<td style="color:black !important;"> '+ '</br>'+
+                                             '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'">'+filaob[fila]['descuentoP']+
                                          '</td>'+
-                                         '<td style="color:black !important;"> '+   
-                                             '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                                         '<td style="color:black !important;"> '+ '</br>'+  
+                                             '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                                          '</td>'+
-                                         '<td style="color:black !important;"> '+   
-                                             '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                                         '<td style="color:black !important;"> '+   '</br>'+
+                                             '<input type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+filaob[fila]['prec_uniP']+
                                          '</td>'+
-                                         '<td style="color:black !important;"> '+   
-                                             '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+
+                                         '<td style="color:black !important;"> '+  '</br>'+ 
+                                             '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+subt +
                                          '</td>'+
                                          '<td style="color:black !important;">'+
                                              '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
@@ -837,8 +889,8 @@ var editarval=true;
                                  // (cantidad*precio)-((cantidad*precio)*(cantidad*(descuento/100)));
                                  var precio=parseFloat(filaob[fila]['prec_uniP']);
                                  var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                                 var descuento=parseFloat(filaob[fila]['descuentoP']);
-                                 sub+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                                 
+                                 sub+=(cantidad*precio);
                                  // console.log(sub,"---");
                              }                            
                          }
@@ -857,7 +909,7 @@ var editarval=true;
              if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
                  var precio=parseFloat(filaob[fila]['prec_uniP']);
                  var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                 
                  // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
                  sub+=cantidad*precio;
                  // console.log(sub);                        
@@ -884,9 +936,9 @@ var editarval=true;
              if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
                  var precio=parseFloat(filaob[fila]['prec_uniP']);
                  var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                 
                  // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 venta+=(cantidad*precio);
                  // console.log(sub);                        
              }
          }
@@ -901,9 +953,8 @@ var editarval=true;
              if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
                  var precio=parseFloat(filaob[fila]['prec_uniP']);
                  var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                 var descuento=parseFloat(filaob[fila]['descuentoP']);
                  // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 venta+=(cantidad*precio);
                  // console.log(sub);                        
              }
          }
@@ -920,9 +971,9 @@ var editarval=true;
              if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
                  var precio=parseFloat(filaob[fila]['prec_uniP']);
                  var cantidad=parseFloat(filaob[fila]['cantidadP']);
-                 var descuento=parseFloat(filaob[fila]['descuentoP']);
+                 
                  // var subt=(cantidad*precio)-((precio*(descuento/100)*cantidad));
-                 venta+=(cantidad*precio)-((precio*(descuento/100)*cantidad));
+                 venta+=(cantidad*precio);
                  totaldolares=(tota/tipocam).toFixed(2);
                  // console.log(sub);                        
              }

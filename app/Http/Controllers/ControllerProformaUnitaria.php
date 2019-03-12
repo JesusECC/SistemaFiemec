@@ -150,7 +150,8 @@ public function store(Request $request)
    {
     $proforma=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idcliente','=','p.idcliente')
-    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento as ndoc','cp.correo as mail','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','p.cliente_empleado')
+    ->join('users as u','u.id','=','p.idEmpleado')
+    ->select('p.idProforma','p.fecha_hora',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento as ndoc','cp.correo as mail','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plazo_oferta','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','p.cliente_empleado','u.name','u.paterno','u.materno','u.telefonoU','u.celularU')
     ->where('p.idProforma','=',$id)
     ->first();
 
@@ -158,6 +159,7 @@ public function store(Request $request)
     ->join('Producto as pro','dpr.idProducto','=','pro.idProducto')
     ->select('pro.nombre_producto as producto','dpr.cantidad','dpr.descuento','dpr.precio_venta','dpr.descripcionDP')
     ->where('dpr.idProforma','=',$id)
+    ->where('dpr.estadoDP','=',1)
     ->get();
 
     return view("proforma.proforma.show",["proforma"=>$proforma,"detalles"=>$detalles]);
