@@ -40,7 +40,7 @@
 										</div>
 										<div class="widget-stats-right">
 											<div class="widget-stats-value">
-												18
+												{{$unitario[0]->total}}
 											</div>
 											<div class="widget-desc" style="font-size:16px">Proforma Unitaria</div>
 										</div>
@@ -55,7 +55,7 @@
 										</div>
 										<div class="widget-stats-right">
 											<div class="widget-stats-value">
-												18
+												{{$tableros[0]->total2}}
 											</div>
 											<div class="widget-desc" style="font-size:16px">Proforma Tableros</div>
 										</div>
@@ -70,7 +70,7 @@
 										</div>
 										<div class="widget-stats-right">
 											<div class="widget-stats-value">
-												18
+												{{$servicios[0]->total3}}
 											</div>
 											<div class="widget-desc" style="font-size:16px">Proforma Servicios</div>
 										</div>
@@ -85,7 +85,7 @@
 										</div>
 										<div class="widget-stats-right">
 											<div class="widget-stats-value">
-												18
+												{{$bandejas[0]->total4}}
 											</div>
 											<div class="widget-desc" style="font-size:16px">Proforma Bandejas</div>
 										</div>
@@ -181,6 +181,7 @@
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
+
         </section><!-- /.content -->
 
 @endsection

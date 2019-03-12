@@ -123,6 +123,7 @@ Route::middleware(['auth','admin'])->group(function () {
     
     //se crea rutas para ajsutes
     Route::get('Ajustes',['as'=>'ajustes','uses'=>'ControllerAjustes@index']);
+    Route::get('Prof',['as'=>'prof','uses'=>'ControllerAjustes@index2']);
 });   
 Auth::routes();
 

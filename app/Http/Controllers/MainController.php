@@ -3,7 +3,16 @@
 namespace SistemaFiemec\Http\Controllers;
 
 use Illuminate\Http\Request;
+use SistemaFiemec\Http\Requests;
 
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use SistemaFiemec\Http\Requests\RequestFormProforma;
+
+use Response;
+use Illuminate\Support\Collection;
+
+use DB;
 class MainController extends Controller
 {
     /**
@@ -13,7 +22,32 @@ class MainController extends Controller
      */
     public function index()
     {
-        return view('main.index');
+    $unitario=DB::table('Proforma')
+    ->select(DB::raw('COUNT(*) as total'))
+    ->where('tipo_proforma','=','unitaria')
+    ->where('estado','=',1)
+    ->get();
+
+     $tableros=DB::table('Proforma')
+    ->select(DB::raw('COUNT(*) as total2'))
+    ->where('tipo_proforma','=','Tablero')
+    ->where('estado','=',1)
+    ->get();
+
+    $servicios=DB::table('Proforma')
+    ->select(DB::raw('COUNT(*) as total3'))
+    ->where('tipo_proforma','=','Servicios')
+    ->where('estado','=',1)
+    ->get();
+
+     $bandejas=DB::table('Proforma')
+    ->select(DB::raw('COUNT(*) as total4'))
+    ->where('tipo_proforma','=','bandeja')
+    ->where('estado','=',1)
+    ->get();
+    
+     return view('main.index',["unitario"=>$unitario,"tableros"=>$tableros,"servicios"=>$servicios,"bandejas"=>$bandejas]);
+
     }
 
     /**
