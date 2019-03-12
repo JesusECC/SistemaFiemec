@@ -158,7 +158,7 @@
                                                 <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
-                                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->producto2}}">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->marca_producto.' | '.$producto->descripcion_producto}}</option>
+                                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->producto2}}_{{$producto->tipo_producto}}">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->marca_producto.' | '.$producto->descripcion_producto}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -444,9 +444,10 @@
     var iduser={!! Auth::user()->id !!}
     $("#pidProducto").change(MostarProducto);
     
+    
   function cambiaropcion(){
         Producto=document.getElementById('pidProducto').value.split('_');
-        var tipo_producto=Producto[4];
+        var tipo_producto=Producto[5];
        if(tipo_producto=="Tableros"){
             $('#precio_uni').attr("disabled", false);
         }
@@ -470,6 +471,7 @@
         $("#precio_uni").val(Producto[2]);
         $("#pdescuento").val(Producto[3]);
         // descuentoP -->para emostar el 
+        cambiaropcion();
     }
     function mostrarTipoCambio(){
     
