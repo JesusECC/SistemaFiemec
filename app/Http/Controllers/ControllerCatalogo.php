@@ -26,7 +26,11 @@ class ControllerCatalogo extends Controller
        ->orderby('idProducto','asc')
        ->paginate(20);
 
-       return view('proforma.catalogo.index',["catalogos"=>$catalogos,"searchText"=>$query]);
+       $tipomenda=DB::table('Tipo_moneda')
+       ->where('idTipo_moneda','=',1)
+        ->get();
+
+       return view('proforma.catalogo.index',["tipomenda"=>$tipomenda,"catalogos"=>$catalogos,"searchText"=>$query]);
     }
 }
     

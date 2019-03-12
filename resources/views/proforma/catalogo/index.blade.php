@@ -29,6 +29,9 @@
 					<div class="row">
 						<div class="col-lg-4"></div>
 						<div class='col-lg-8 col-sm-8 col-xs-12'>
+                            
+                            
+
 							@include('proforma.catalogo.search')
 						</div>	
 					</div>
@@ -64,7 +67,7 @@
 													<span class="input-group-addon" style="padding: 5px 5px !important;font-size: 12px !important">
 														$. 
 													</span>
-													<input type="text" class="form-control" disabled="" value="{{$pro->precio_unitario}}" style="height: 30px !important;padding: 6px 4px !important;font-size: 11px !important;text-align: center;">
+													<input type="text" class="form-control" disabled="" value="{{round($pro->precio_unitario/$tipomenda[0]->tipo_cambio,2)}}" style="height: 30px !important;padding: 6px 4px !important;font-size: 11px !important;text-align: center;">
 												</div>
 											</div>											
 										</div>
@@ -74,7 +77,9 @@
 											<i class="fas fa-boxes"></i> Stock : {{$pro->stock}}
 										</div>
 										<div class="col-sm-6">
-											<i class="fas fa-barcode"></i> Código : {{$pro->codigo_producto}}
+											<i class="fas fa-barcode"></i> Código : {{$pro->codigo_producto}} 
+											
+
 										</div>
 									</div>
 								</div>
