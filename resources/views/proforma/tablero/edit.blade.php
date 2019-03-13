@@ -420,6 +420,7 @@ var editarval=true;
          for (const tab in tabl) {
              nomTablero=tabl[tab]['nombre_tablero'];
              cantxtabs=tabl[tab]['cantidadTab'];
+             var idtable=tabl[tab]['idTableros'];
              var esta=tabl[tab]['estadoT'];
             
              table='<div id="'+nomTablero+'_'+cont+'">'+
@@ -482,18 +483,22 @@ var editarval=true;
                                  '</section>'+
                              '</div>';
              
-             var ta={nombre:nomTablero,posi:cont,tablero:table,cantTaB:cantxtabs,estado:esta}
+             var ta={nombre:nomTablero,posi:cont,tablero:table,cantTaB:cantxtabs,estado:esta,idtablero:idtable}
              tablero.push(ta);
              cont++;
          }
          nomTablero="";
 
+         console.log(tablero);
+
          ListaSelect();
+
          // console.log(pro); 
          for (const dtp in pro) {
              idprofo=pro[dtp]['idProforma'];
              var idProd=pro[dtp]['idProducto'];
              var pname=pro[dtp]['nombre_producto'];
+             var idTablero=pro[dtp]['idTAB'];
              var pdescripcion
              if(pro[dtp]['descripcionDP']==null){
                  pdescripcion='';
@@ -507,13 +512,14 @@ var editarval=true;
              var cantiTabl=pro[dtp]['cantidadTab'];
              var idDetaTab=pro[dtp]['idDetalle_tableros'];
              var estado=pro[dtp]['estadoDP'];
-             var dat={idDetalleTablero:idDetaTab,idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,cantidadTa:cantiTabl,posiP:contp,estado:estado,fila:""};
+
+             var dat={idDetalleTablero:idDetaTab,idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTabl,cantidadTa:cantiTabl,posiP:contp,estado:estado,idTableros:idTablero,fila:""};
              filaob.push(dat);
              fila();
              contp++;
          }
          valoresFinales();  
-         // console.log(pro); 
+         console.log(filaob); 
      }
  
      //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
@@ -593,7 +599,7 @@ var editarval=true;
          var tabl=$("#NomTablerop").val();
          var cantt=$("#canTT").val();
          nomTablero=tabl.replace(/ /gi,"_"); 
-         console.log(nomTablero); 
+         //console.log(nomTablero); 
          bool=false;  
          // if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
              // mostrarcampos(tabl);
@@ -672,12 +678,12 @@ var editarval=true;
                                      '</div>'+
                                  '</section>'+
                              '</div>';
-                 var ta={nombre:nomTablero,posi:cont,tablero:table,estado:2 }
+                 var ta={nombre:nomTablero,posi:cont,tablero:table,estado:2,cantTaB:cantt}
                  tablero.push(ta);                        
                  } cont++;       
              }
 
-             console.log(table,filaob);
+             console.log(tablero,filaob);
              nomTablero="";
              // realiza el listado de todas los tableros que se añaden
              ListaSelect()

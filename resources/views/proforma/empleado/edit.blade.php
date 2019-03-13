@@ -44,32 +44,7 @@
                   <div class="row">
                         <div class="col-md-8">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel panel-default panel-shadow">
-                                    	<div class="row">
-
-
-									<div class="col-sm-12">
-                                        <div class="panel-body">
-                                      <div class="form-group">
-										<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
-											Foto 
-										</label>
-			                			
-									
-										
-									</div>
-                                        </div>
-                                        <div class="col-sm-8">
-											<div class="form-group">
-												<input type="text"     name="nombres" class="form-control" required value="{{$Empleado->nombres.' '.$Empleado->paterno.' '.$Empleado->materno}}">
-											</div>								
-										  </div>
-	                                     </div>
-
-                                     </div>
-                                  </div>
-                                </div>
+                                
                                 <div class="col-md-12">
                                     <div class="panel panel-default panel-shadow">
                                         <div class="panel-body">
@@ -82,6 +57,11 @@
 															<input type="text"   name="nro_documento" class="form-control" required value="{{$Empleado->nro_documento}}">
 														</div> 												
 													</div>
+													 <div class="col-sm-8">
+											<div class="form-group">
+												<input type="text"     name="nombres" class="form-control" required value="{{$Empleado->nombres.' '.$Empleado->paterno.' '.$Empleado->materno}}">
+											</div>								
+										  </div>
 													
 													</div>
 													<div class="row">
@@ -122,20 +102,22 @@
 													</label>
 												</div>
 												<div class="row">
-													<div class="col-md-12">
+													<div class="col-md-6">
 														<div class="form-group">
 															<input type="text"   name="Departamento" class="form-control" required value="{{$Empleado->direccion}}">
 														</div>														
 													</div>
 
-												</div>
-												<div class="row">
-													
-													<div class="col-md-4">
+													<div class="col-md-3">
 														<div class="form-group">
-															<input type="text"   name="Distrito" class="form-control" required value="{{$Empleado->direccion}}">
+															<input type="date"   name="Distrito" class="form-control" required value="{{$Empleado->fecha_inicio}}">
 														</div>
-													</div>													
+													</div>	
+													<div class="col-md-3">
+														<div class="form-group">
+															<input type="date"   name="Distrito" class="form-control" required value="{{$Empleado->fecha_fin}}">
+														</div>
+													</div>												
 													<div class="col-md-4">
 														<div class="form-group">
 															<input type="text"   name="Direccion" class="form-control" required value="{{$Empleado->sueldo}}">

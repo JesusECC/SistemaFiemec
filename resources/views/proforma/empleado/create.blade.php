@@ -100,7 +100,7 @@
                                                 <label>Sexo</label>
                                          <select name="sexo" id="sex" class="form-control">
                                                   <option ></option>
-                                                  <option value="Marculino">Marculino</option>
+                                                  <option value="Marculino">Masculino</option>
                                                   <option value="Femenino">Femenino</option>
             
                                          </select>
@@ -196,7 +196,7 @@
                                  <div class="col-sm-12">
                                      <div class="form-group">
                                        <label for="sueldo">Usuario</label>
-                                        <input type="text" name="email" id="emaill" class="form-control" placeholder="Ingrese el sueldo">
+                                        <input type="text" name="email" id="emaill" class="form-control" placeholder="Ingrese nombre de Usuario">
                                       </div>  
                                  </div>
                                         

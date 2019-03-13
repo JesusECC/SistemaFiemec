@@ -5,7 +5,7 @@ namespace SistemaFiemec\Http\Controllers;
 use Illuminate\Http\Request;
 use Producto;
 use SistemaFiemec\Proforma;
-use Tableros;
+use SistemaFiemec\Tableros;
 use SistemaFiemec\DetalleProformaTableros;
 use SistemaFiemec\DetalleProforma;
 use SistemaFiemec\ProformaDetalleTableros;
@@ -173,6 +173,8 @@ public function show($id){
         ->distinct()
         ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
         ->where('dpt.idProforma','=',$id)
+        ->where('t.estadoT','=','1')
+
         ->get(['t.nombre_tablero','estadoT','t.cantidadTab']);
 
         $proforma=DB::table('Proforma as p')
@@ -204,6 +206,7 @@ public function show($id){
         ->distinct()
         ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
         ->where('dpt.idProforma','=',$id)
+        ->where('t.estadoT','=','1')
         ->get(['t.nombre_tablero','estadoT','t.cantidadTab']);
 
         $proforma=DB::table('Proforma as p')
@@ -306,7 +309,8 @@ public function pdf2($id){
         ->distinct()
         ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
         ->where('dpt.idProforma','=',$id)
-        ->get(['t.nombre_tablero','estadoT','t.cantidadTab']);
+
+        ->get(['t.nombre_tablero','estadoT','t.cantidadTab','t.idTableros']);
 
 
         $proforma=DB::table('Proforma as p')
@@ -315,8 +319,9 @@ public function pdf2($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
         ->join('Cliente_Representante as cre','p.cliente_empleado','=','cre.idCR')
-        ->select('cre.nombre_RE','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.cantidadTab','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP')
+        ->select('cre.nombre_RE','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros as idTAB','t.nombre_tablero','t.cantidadTab','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP')
         ->where('p.idProforma','=',$id)
+        ->where('dePT.estadoDP','=','1')
         ->get();
         // 'dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP'
         // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
@@ -379,25 +384,45 @@ public function pdf2($id){
                 // 'observacion_proforma'=>$observacion,
                 'estado'=>1
                 ]);
-            foreach ($request->tableros as $tablero) {
+
+                $idTablero;
+
+
+           foreach ($request->tableros as $tablero) {
                 $nombre=$tablero['nombre'];
                 $est=$tablero['estado'];
-                $idTablero=DB::table('Tableros')->insertGetId(
-                    ['nombre_tablero'=>$nombre,
-                    'estadoT'=>$est,
-                    ]
-                );
+                $cantxT=$tablero['cantTaB'];
+
+                if($est==2){
+                    $idTablero=DB::table('Tableros')->insertGetId(
+                     ['nombre_tablero'=>$nombre,
+                      'estadoT'=>1,
+                      'cantidadTab'=>$cantxT]);
+
+                }else if($est==0 || $est==1){
+
+                    $idTablero=$tablero['idtablero'];
+
+                    $table=Tableros::find($idTablero);
+                    $table->estadoT=$est;
+                    $table->update();
+
+
+                }
                 
                 foreach($request->filas as $fila){
+
                     if($fila['nomTablero']==$tablero['nombre']){
                         if($fila['estado']==2){
+
                             $detalleProforma=new ProformaDetalleTableros;
                             // $detalleProforma->idDetalle_proforma=$fila[''];  
                             $detalleProforma->idProducto=$fila['idProducto'];
                             $detalleProforma->idProforma=$idProforma;
                             $detalleProforma->idTableros=$idTablero;
                             $detalleProforma->cantidad=$fila['cantidadP'];
-                            $detalleProforma->precio_venta=$fila['prec_uniP'];  
+                            $detalleProforma->precio_venta=$fila['prec_uniP']; 
+                            $detalleProforma->estadoDP=1; 
                             // $detalleProforma->texto_precio_venta=$fila[''];  
                             // $detalleProforma->observacion_detalleP=$fila[''];    
                             $detalleProforma->descuento=$fila['descuentoP'];    

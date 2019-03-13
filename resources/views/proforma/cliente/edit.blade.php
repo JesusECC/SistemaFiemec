@@ -38,16 +38,8 @@
 					{{Form::token()}}
 				<div class="box-body bg-gray-c">
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-12">
 							<div class="nav-tabs-custom">
-								<ul class="nav nav-tabs">
-									<li class="active">
-										<a href="#dni" data-toggle="tab"  style="font-size: 13px;color: #676a6c">DNI</a>
-									</li>
-									<li>
-										<a href="#ruc" data-toggle="tab" style="font-size: 13px;color: #676a6c">RUC</a>
-									</li>
-								</ul>
 								<div class="tab-content">
 									<div class="active tab-pane" id="dni">
 										<div class="panel panel-default panel-shadow">
@@ -58,31 +50,30 @@
 													</label>
 												</div>
 												<div class="row">
-													<div class="col-sm-4">
+													<div class="col-sm-3">
 														<div class="form-group">
 															<input type="text" name="nro_documento" class="form-control" required value="{{$Cliente->nro_documento}}">
 														</div> 												
 													</div>
-													<div class="col-sm-8">
+													<div class="col-sm-3">
 														<div class="form-group">
 															<input type="text" name="nombres_Rs" class="form-control" required value="{{$Cliente->nombres_Rs}}">
 														</div>													
 													</div>
-												</div>
-												<div class="row">
-													<div class="col-sm-6">
+													<div class="col-sm-3">
 														<div class="form-group">
 															<input type="text" name="paterno" class="form-control" required value="{{$Cliente->paterno}}" {{old('paterno')}}>
 														</div> 												
 													</div>
-													<div class="col-sm-6">
+													<div class="col-sm-3">
 														<div class="form-group">
 															<input type="text" name="materno" class="form-control" required value="{{$Cliente->materno}}" {{old('materno')}}>	
 														</div>
 													</div>
 												</div>
+												
 												<div class="row">
-													<div class="col-sm-5">
+													<div class="col-sm-3">
 														<div class="form-group">
 															<div class="input-group date">
 																<div class="input-group-addon">
@@ -105,17 +96,21 @@
 															</select>													
 														</div>
 													</div>
-													<div class="col-sm-4">
-														<input type="text" name="telefono" class="form-control" required value="{{$Cliente->telefono}}">	
+													<div class="col-sm-3">
+														<div class="form-group">
+														<input type="text" name="telefono" class="form-control" required value="{{$Cliente->telefono}}">
+														</div>
+	
 													</div>
-												</div>
-												<div class="row">
-													<div class="col-sm-5">
+													<div class="col-sm-3">
 														<div class="form-group">
 															<input type="text" name="celular" class="form-control" required value="{{$Cliente->celular}}">	
 														</div>   												
 													</div>
-													<div class="col-sm-7">
+												</div>
+												<div class="row">
+													
+													<div class="col-sm-6">
 														<div class="form-group">
 															<input type="text" name="correo" class="form-control" required value="{{$Cliente->correo}}">	
 														</div>  												
@@ -127,18 +122,17 @@
 													</label>
 												</div>
 												<div class="row">
-													<div class="col-md-6">
+													<div class="col-md-3">
 														<div class="form-group">
 															<input type="text" name="Departamento" class="form-control" required value="{{$Cliente->Departamento}}">
 														</div>														
 													</div>
-													<div class="col-md-6">
+													<div class="col-md-3">
 														<div class="form-group">
 															<input type="text" name="Distrito" class="form-control" required value="{{$Cliente->Distrito}}">
 														</div>
 													</div>
-												</div>
-												<div class="row">
+												
 													<div class="col-md-6">
 														<div class="form-group">
 															<input type="text" name="Direccion" class="form-control" required value="{{$Cliente->Direccion}}">
