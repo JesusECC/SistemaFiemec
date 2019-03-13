@@ -100,10 +100,14 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('servicios/guardar',['as'=>'servicio-store','uses'=>'ControllerProformaServicio@store']);
     Route::get('servicios/show/{id}',['as'=>'servicio-show','uses'=>'ControllerProformaServicio@show']);
     Route::get('servicios/edit/{id}',['as'=>'servicios-edit','uses'=>'ControllerProformaServicio@edit']);
+    Route::post('servicios/edit/update',['as' => 'servicios-update','uses'=>'ControllerProformaServicio@update']);
     Route::get('servicios/pdf/{idProforma}','ControllerProformaServicio@pdf');
     Route::get('servicios/pdf2/{idProforma}','ControllerProformaServicio@pdf2');
     Route::delete('servicios/eliminar/{id}',['as'=>'servicios-eliminar','uses'=>'ControllerProformaServicio@destroy']);
     Route::post('servicios/cli',['as'=>'clientes-representante','uses'=>'ControllerProformaServicio@representante']);
+
+    Route::get('tableros/edit/{id}',['as'=>'tablero-edit','uses'=>'ControllerProformaTableros@edit']);
+    Route::post('tableros/edit/update',['as' => 'tablero-update','uses'=>'ControllerProformaTableros@update']);
 
     //Se crea rutas cliente
     Route::get('cliente',['as'=>'clientes','uses'=>'ControllerClientes@index']);

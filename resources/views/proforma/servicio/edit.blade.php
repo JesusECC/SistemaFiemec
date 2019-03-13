@@ -435,6 +435,8 @@ var editarval=true;
 
              nomTablero=tabl[tab]['nombre_servicio'];
              var esta=tabl[tab]['estadoT'];
+             var idser=tabl[tab]['idServicios'];
+
              table='<div id="'+nomTablero+'_'+cont+'">'+
                                  '<section class="content" style="min-height:0px !important">'+
                                      '<div class="row">'+
@@ -490,8 +492,9 @@ var editarval=true;
                                  '</section>'+
                              '</div>';
              
-             var ta={nombre:nomTablero,posi:cont,tablero:table,estado:esta}
+             var ta={nombre:nomTablero,posi:cont,tablero:table,estado:esta,idServicio:idser}
              tablero.push(ta);
+             console.log(tablero);
              cont++;
          }
          nomTablero="";
@@ -505,6 +508,8 @@ var editarval=true;
             apellidoM=pro[dtp]['materno'];
             direccion=pro[dtp]['Direccion'];
             documento=pro[dtp]['nro_documento'];
+
+            var idServic=pro[dtp]['idSer'];
             var idProd=pro[dtp]['idProducto'];
             var pname=pro[dtp]['nombre_producto'];
 
@@ -534,13 +539,13 @@ var editarval=true;
             formade=pro[dtp]['forma_de'];
             plazpOf=pro[dtp]['plazo_oferta'];
             obser=pro[dtp]['observacion_proforma']; 
-             var dat={idDetalleProforma:idDetalleProforma,idProducto:idProd,producto:pname,idTarea:idTar,tarea:tname,item:it,item2:it2,subtitulo:subtt,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nombre_servicio,posiP:contp,estado:estado,fila:""};
+             var dat={idDetalleProforma:idDetalleProforma,idProducto:idProd,producto:pname,idTarea:idTar,tarea:tname,item:it,item2:it2,subtitulo:subtt,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,nomTablero:nombre_servicio,posiP:contp,estado:estado,idservicios:idServic,fila:""};
              filaob.push(dat);
              fila();
              contp++;
          }
          valoresFinales();  
-         console.log(filaob,"+++++++++++++");
+         
 
      }
  

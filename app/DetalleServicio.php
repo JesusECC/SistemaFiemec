@@ -19,11 +19,18 @@ class DetalleServicio extends Model
         'idTarea',
         'texto_precio_venta',
         'cantidad',
+        'precio_venta',
         'descuento',
         'item2',
         'subtitulo',
         'descripcionDP',
-        'estadoDP'
+        'estadoDP',
+        'simboloDPT',
+        'cambioDPT',
+        'item',
+        'item2',
+        'subtitulo',
+
    ];
 
    protected $guarded =[
