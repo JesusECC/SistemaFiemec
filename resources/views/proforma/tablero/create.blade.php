@@ -448,7 +448,8 @@
   function cambiaropcion(){
         Producto=document.getElementById('pidProducto').value.split('_');
         var tipo_producto=Producto[5];
-       if(tipo_producto=="Tableros"){
+        var preciouni=Producto[2];
+       if(tipo_producto=="Tableros" || preciouni==0.00){
             $('#precio_uni').attr("disabled", false);
         }
         else{
@@ -763,7 +764,7 @@
                                             '<input type="hidden" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+filaob[fila]['descuentoP']+
                                         '</td>'+
                                         '<td style="color:black !important;"> '+   
-                                            '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+subt+
+                                            '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+subt.toFixed(2)+
                                         '</td>'+
                                         '<td style="color:black !important;">'+
                                             '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+

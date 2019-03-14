@@ -321,6 +321,7 @@ border-collapse: collapse;
       {{$p->descripcionDP}}
     </td>
     <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
+      {{$p->unidades}}
     </td>
     <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">
       {{$p->cantidad}}

@@ -132,7 +132,7 @@
                                                  <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                                      <option value="">Seleccione Producto</option>
                                                      @foreach($productos as $producto)
-                                                         <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto }}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}">{{ $producto->nombre_producto }}</option>
+                                                         <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->producto2}}_{{$producto->tipo_producto}}">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->marca_producto.' | '.$producto->descripcion_producto}}</option>
                                                      @endforeach
                                                  </select> 
                                             </div>
@@ -377,7 +377,7 @@ var editarval=true;
                     direccion=pro[key]['Direccion'];
                     documento=pro[key]['nro_documento'];
                     var idProd=pro[key]['idProducto'];
-                    var pname=pro[key]['nombre_producto'];
+                    var pname=pro[key]['producto2'];
                     var pdescripcion;
                     tipocam=pro[key]['tipocambio'];
                     simbolo=pro[key]['simboloP'];
@@ -497,7 +497,7 @@ var editarval=true;
          for (const dtp in pro) {
              idprofo=pro[dtp]['idProforma'];
              var idProd=pro[dtp]['idProducto'];
-             var pname=pro[dtp]['nombre_producto'];
+             var pname=pro[dtp]['producto2'];
              var idTablero=pro[dtp]['idTAB'];
              var pdescripcion
              if(pro[dtp]['descripcionDP']==null){
@@ -537,6 +537,7 @@ var editarval=true;
          $("#precio_uni").val(Producto[2]);
          $("#pdescuento").val(Producto[3]);
          // descuentoP -->para emostar el 
+         cambiaropcion();
      }
      function mostrarTipoCambio(){
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
@@ -549,6 +550,17 @@ var editarval=true;
         valorcambio=tipoCambio[1];
  
      }
+     function cambiaropcion(){
+        Producto=document.getElementById('pidProducto').value.split('_');
+        var tipo_producto=Producto[5];
+        var preciouni=Producto[2];
+       if(tipo_producto=="Tableros" || preciouni==0.00){
+            $('#precio_uni').attr("disabled", false);
+        }
+        else{
+           $('#precio_uni').attr("disabled", true); 
+        }
+   }
      // function mostrarcampos(){
      //     document.getElementById('producto-crear-oculto').style.display = 'block';
      //     document.getElementById('producto-oculto').style.display = 'block';
@@ -704,7 +716,7 @@ var editarval=true;
      function agregarProductosTablero(){    
          Producto=document.getElementById('pidProducto').value.split('_');
          var idProd=parseInt(Producto[0]);
-         var pname=Producto[1];
+         var pname=Producto[4];
          var pdescripcion=$("#descripcionp ").val();
          var puni=$('#precio_uni').val();
          var pcant=$('#Pcantidad').val();
@@ -787,16 +799,16 @@ var editarval=true;
                                              '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                                          '</td>'+
                                          '<td style="color:black !important;"> '+ 
-                                             '<input type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                                             '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                                          '</td>'+
                                          '<td style="color:black !important;"> '+   
-                                             '<input type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                                             '<input type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+filaob[fila]['prec_uniP']+
                                          '</td>'+
                                          '<td style="color:black !important;"> '+   
-                                             '<input type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                                             '<input type="hidden" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+filaob[fila]['descuentoP']+
                                          '</td>'+
                                          '<td style="color:black !important;"> '+   
-                                             '<input type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+
+                                             '<input type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt +'">'+subt.toFixed(2)+
                                          '</td>'+
                                          '<td style="color:black !important;">'+
                                              '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+

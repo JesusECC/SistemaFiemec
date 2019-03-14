@@ -10,6 +10,7 @@ use SistemaFiemec\DetalleBandejas;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SistemaFiemec\Http\Requests\RequestFormProforma;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 use Response;
@@ -26,15 +27,18 @@ class ControllerBandejas extends Controller
     }
     public function index(Request $request)
     {
+          $id=Auth::user()->id;
     if ($request)
     {
     $query=trim($request->get('searchText'));
     $proformas=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
+    ->join('users as u','u.id','=','p.idEmpleado')
     ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno','cp.materno','p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('p.estado','=',1)
     ->where('tipo_proforma','=','bandeja')
+    ->where('p.idEmpleado','=',$id)
     ->orderBy('p.idProforma','desc')
     ->paginate(7);           
             return view('proforma.bandejas.index',["proformas"=>$proformas,"searchText"=>$query]);

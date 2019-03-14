@@ -129,7 +129,7 @@
                               <td align="center"><p style="background-color: #E5EAEA">{{$p->item2}}</p><p>{{$p->item}}</p></td>
                               <td align="center"><p style="text-align: center;background-color: #E5EAEA" > {{ $p->subtitulo}}</p><p>{{ $p->nombre_tarea }}</p></td>
                               <td align="center">{{$p->descripcionDP}}</td>
-                              <td align="center">{{$p->descuento}}</td>
+                              <td align="center">{{$p->unidades}}</td>
                               <td align="center">{{$p->cantidad}}</td>
                               <td align="center">{{$p->precio_venta}}</td>
                               <td align="center">{{$p->precio_venta*$p->cantidad}}</td>

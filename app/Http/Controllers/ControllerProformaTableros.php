@@ -15,6 +15,7 @@ use SistemaFiemec\Http\Requests;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 use PDF;
 use DB;
@@ -23,15 +24,18 @@ class ControllerProformaTableros extends Controller
     //
     public function index(Request $request)
     {
+          $id=Auth::user()->id;
         if ($request)
     {
     $query=trim($request->get('searchText'));
     $proformas=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
+    ->join('users as u','u.id','=','p.idEmpleado')
     ->select('p.idProforma','p.fecha_hora','cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno','p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('tipo_proforma','=','tablero')
     ->where('p.estado','=',1)
+    ->where('p.idEmpleado','=',$id)
     ->orderBy('p.idProforma','desc')
      
         ->paginate(7);           
@@ -291,7 +295,7 @@ public function pdf2($id){
         //
         $productos=DB::table('Producto as po')
         ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
-        ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema')
+        ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.codigo_producto," | ",po.nombre_producto," | ",po.marca_producto," | ",po.descripcion_producto) as producto2'),'po.tipo_producto')
         ->where('po.estado','=','activo')
         ->get();
 
@@ -319,7 +323,7 @@ public function pdf2($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
         ->join('Cliente_Representante as cre','p.cliente_empleado','=','cre.idCR')
-        ->select('cre.nombre_RE','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros as idTAB','t.nombre_tablero','t.cantidadTab','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP')
+        ->select('cre.nombre_RE','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros as idTAB','t.nombre_tablero','t.cantidadTab','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP',DB::raw('CONCAT(pd.codigo_producto," | ",pd.nombre_producto," | ",pd.marca_producto," | ",pd.descripcion_producto) as producto2'),'pd.tipo_producto')
         ->where('p.idProforma','=',$id)
         ->where('dePT.estadoDP','=','1')
         ->get();

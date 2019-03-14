@@ -120,6 +120,7 @@ $idUser=DB::table('users')->insertGetId(
             [
 
             'idEmp'=>$idEmpleado,
+            'idCargo'=>$cargo,
             'name'=>$nombre, 
             'paterno'=>$paterno, 
             'materno'=>$materno,  

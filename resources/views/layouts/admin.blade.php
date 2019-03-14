@@ -59,7 +59,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <small class="bg-red">Online</small>
-                  <span class="hidden-xs">{{ Auth::user()->name}}</span>
+                  <span class="hidden-xs">{{ Auth::user()->name}} {{ Auth::user()->paterno}}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -83,6 +83,8 @@
           </div>
         </nav>
       </header>
+
+      
      
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
@@ -94,7 +96,7 @@
               <img src="img/avatar.png" alt="" class="img-circle">
             </div>
             <div class="pull-left info">
-              <span>{{ Auth::user()->name}}</span> 
+              <span>{{ Auth::user()->name}} {{ Auth::user()->paterno}}</span>     
             </div>
           </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -143,6 +145,7 @@
                 <li><a href="{{ route('bandejas')}}"><i class="fas fa-circle-notch"></i> Bandejas</a></li>
               </ul>
             </li>
+            @if(Auth::user()->idCargo==1)
             <li class="treeview">
               <a href="#">
                 <i class="fas fa-users"></i>
@@ -155,6 +158,7 @@
                 
               </ul>
             </li>
+            @endif
             <!--
             <li class="treeview">
               <a href="#">
@@ -170,7 +174,8 @@
                 <li><a href="{{ route('tablero')}}"><i class="fas fa-circle-notch"></i> Proforma de Tableros</a></li>
               </ul>
             </li>
-               -->        
+               --> 
+               @if(Auth::user()->idCargo==1)       
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-folder"></i> <span>Acceso</span>
@@ -181,11 +186,14 @@
                 
               </ul>
             </li>
+            @endif
+           @if(Auth::user()->idCargo==1)
              <li>
               <a href="{{route('ajustes')}}">
                 <i class="far fa-sun"></i> <span>Ajustes</span>
               </a>
             </li>
+             @endif 
             <li>
               <a href="#">
                 <i class="fa fa-info-circle"></i> <span>Acerca De Sistema</span>

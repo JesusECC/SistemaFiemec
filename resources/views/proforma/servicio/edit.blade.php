@@ -139,7 +139,7 @@
                                                 <input type="text" id="pitem" class="form-control" name="item" >
                                             </div>
                                         </div>
-                                         <div class="col-lg-10" style="margin-top:20px">
+                                         <div class="col-lg-8" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label for="" class="control-label">Tarea</label>
                                                 <select name="pidTarea" class="form-control selectpicker" id="pidTarea" data-live-search="true">
@@ -148,6 +148,12 @@
                                                     <option value="{{ $ta->idTarea }}_{{ $ta->nombre_tarea }}_{{ $ta->precioT }}">{{$ta->nombre_tarea}}</option>
                                                     @endforeach
                                                 </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Unidadess</label>
+                                                <input type="text" id="punidad" class="form-control" name="punidad" step="any" >
                                             </div>
                                         </div>
 
@@ -177,7 +183,7 @@
                                                 <div id="select-pro" ></div>
                                             </div>
                                         </div> 
-                                        <div class="col-sm-1" style="margin-top:20px">
+                                        <div class="col-sm-1" style="margin-top:44px">
                                             <div class="form-group label-floating">
                                             <label class="control-label"></label>
                                                 <button type="button" id="bt_add_produc" class="btn btn-primary">Agregar</button>
@@ -281,6 +287,12 @@
                                                                     <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
                                                                 </div>
                                                             </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Obsercaviones:</label>
+                                                                    <textarea type="text" name="observacion_proforma" id="observacion_proforma" class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -324,12 +336,12 @@
          $('#Pcantidad').click(function (){
              this.value = (this.value + '').replace(/[^0-9]/g, '1');
          });
-         $('#pdescuento').keyup(function (){
+       //  $('#pdescuento').keyup(function (){
              this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
-         });
-         $('#pdescuento').click(function (){
-             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
-         });
+        // });
+        // $('#pdescuento').click(function (){
+           //  this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
+        // });
      });
      $("#idClientes").change(MostrarCliente);
      $("#idTipo_moneda").change(mostrarTipoCambio);
@@ -383,6 +395,7 @@ var editarval=true;
                     apellidoP=pro[key]['paterno'];
                     apellidoM=pro[key]['materno'];
                     direccion=pro[key]['Direccion'];
+                    nombreClieRe=pro[key]['nombre_RE'];
                     documento=pro[key]['nro_documento'];
                     var idProd=pro[key]['idProducto'];
                     var pname=pro[key]['nombre_producto'];
@@ -419,15 +432,16 @@ var editarval=true;
             document.getElementById('totales-general').style.display = 'block';
             // cotizador
             $("#nombreclie").val(nombreClie+" "+apellidoP+" "+apellidoM);
+            $("#cotizador").val(nombreClieRe);
             $("#cdireccion").val(direccion);
             $("#cnro_documento").val(documento);
-            $("#cotizador").val(cotiza);
+           // $("#cotizador").val(cotiza);
 
             $("#simbolo").val(simbolo);
             $("#valorcambio").val(tipocam);
             $("#forma_de").val(formade);
             $("#plazo_oferta").val(plazpOf);
-            $("#observacion_condicion").val(obser);
+            $("#observacion_proforma").val(obser);
 
             
         }         
@@ -512,6 +526,7 @@ var editarval=true;
             var idServic=pro[dtp]['idSer'];
             var idProd=pro[dtp]['idProducto'];
             var pname=pro[dtp]['nombre_producto'];
+            var unid=pro[dtp]['unidades'];
 
             var idTar=pro[dtp]['idTarea'];
             var tname=pro[dtp]['nombre_tarea'];
@@ -539,7 +554,7 @@ var editarval=true;
             formade=pro[dtp]['forma_de'];
             plazpOf=pro[dtp]['plazo_oferta'];
             obser=pro[dtp]['observacion_proforma']; 
-             var dat={idDetalleProforma:idDetalleProforma,idProducto:idProd,producto:pname,idTarea:idTar,tarea:tname,item:it,item2:it2,subtitulo:subtt,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,nomTablero:nombre_servicio,posiP:contp,estado:estado,idservicios:idServic,fila:""};
+             var dat={idDetalleProforma:idDetalleProforma,idProducto:idProd,producto:pname,idTarea:idTar,tarea:tname,item:it,item2:it2,subtitulo:subtt,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,nomTablero:nombre_servicio,posiP:contp,estado:estado,idservicios:idServic,unidades:unid,fila:""};
              filaob.push(dat);
              fila();
              contp++;
@@ -587,13 +602,15 @@ var editarval=true;
          // se enviar los datos al controlador proforma tableros
          // console.log(idcliente);
          // tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
-         // var idtipocam=tipoCambio[0];
+         var formade=$("#forma_de").val();
+         var plazoofer=$("#plazo_oferta").val();
+         var obserprof=$("#observacion_proforma").val();
          // var valorcambio=tipoCambio[1];
          // var vVenta=$("#valorVenta").val();
          // var tl=$("#total").val();
          // console.log(tablero,filaob);
          // if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-             var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt}];
+             var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt,forma_de:formade,plazo_oferta:plazoofer,obspro:obserprof}];
              //console.log(dat,tablero,filaob);
 
              $.ajax({
@@ -730,6 +747,7 @@ var editarval=true;
         var pit=$('#pitem').val();
         var pit2=$('#pitem2').val();
          var pcant=$('#Pcantidad').val();
+         var unid=$('#punidad').val();
          var sel=$('#prod-selec').val();
          
          // console.log(descuento);
@@ -761,7 +779,7 @@ var editarval=true;
                          }
                          if(boolfila==false){
                             // console.log("produc nuevoo",contp);
-                             var dat={idTarea:idProd,tarea:pname,item:pit,item2:pit2,subtitulo:subti,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,nomTablero:nomTablero,posiP:contp,estado:2,fila:""};
+                             var dat={idTarea:idProd,tarea:pname,item:pit,item2:pit2,subtitulo:subti,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,nomTablero:nomTablero,posiP:contp,estado:2,unidades:unid,fila:""};
                              filaob.push(dat);
                              fila();
                              contp++;
@@ -808,7 +826,7 @@ var editarval=true;
                                              '<input type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                                          '</td>'+
                                          '<td style="color:black !important;"> '+ '</br>'+
-                                             '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'">'+filaob[fila]['descuentoP']+
+                                             '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['unidades']+'">'+filaob[fila]['unidades']+
                                          '</td>'+
                                          '<td style="color:black !important;"> '+ '</br>'+  
                                              '<input type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
