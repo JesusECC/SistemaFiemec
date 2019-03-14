@@ -210,20 +210,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-1 hidden-xs text-center p-t-xs"> 
-                                                                <i class="fa fa-minus m-t-lg"> 
-                                                                </i>  
-                                                            </div>
+                                                            
+                                                            
                                                             <div class="col-sm-3">
-                                                                <div class="form-group display-flex dec">
-                                                                    <label for="" class="control-label">Descuento</label>
-                                                                    <div class="input-group ">
-                                                                        <h4 id="descuentos" class="form-control">    </h4>
-                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4">
                                                                 <div class="form-group display-flex dec">
                                                                     <label for="" class="control-label">Valor Venta</label>
                                                                     <div class="input-group ">
@@ -231,11 +220,7 @@
                                                                         <input type="hidden" name="valorVenta" id="valorVenta">
                                                                     </div>
                                                                 </div>
-                                                            </div>                                                            
-                                                        </div> 
-                                                        <hr>    
-                                                        <div class="row">   
-                                                            <div class="col-sm-4">
+                                                            </div>                               <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> IGV %</label>
                                                                     <div class="input-group ">
@@ -246,7 +231,7 @@
                                                                    
                                                                 </div>  
                                                             </div>
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> Total Soles</label>
                                                                     <div class="input-group ">
@@ -255,8 +240,13 @@
                                                                     </div> 
                                                                    
                                                                 </div>  
-                                                            </div>
-                                                            <div class="col-sm-4">
+                                                            </div>                             
+                                                        </div> 
+                                                        <hr>    
+                                                        <div class="row">   
+                                                            
+                                                            
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> Total Dolares</label>
                                                                     <div class="input-group date">
@@ -267,6 +257,30 @@
                                                                    
                                                                 </div>  
                                                             </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Desc%</label>
+                                                                    <div class="input-group ">
+                                                                      
+                                                                        <input style="margin-top:13px" type="number" name="pdesc" id="pdesc"  >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Precio Final</label>
+                                                                    <div class="input-group ">
+
+                                                                      <h4 id="descuentos" class="form-control">    </h4>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1" style="margin-top:13px">
+                                                             <div class="form-group label-floating">
+                                                         <label class="control-label"></label>
+                                                          <button type="button" id="bt_alicar" class="btn btn-primary">Aplicar Desc.</button>
+                                                          </div>
+                                                          </div> 
                                                         </div>  
                                                     </div>  
                                                 </div>
@@ -316,6 +330,7 @@
          $('#bt_add_tablero').click(function(){
              agregarTablero();
              valoresFinales();
+
              
          });
          $('#save').click(function(){
@@ -336,8 +351,13 @@
          $('#Pcantidad').click(function (){
              this.value = (this.value + '').replace(/[^0-9]/g, '1');
          });
+
+         $('#bt_alicar').click(function(){
+             aplicadescuento();
+            
+         });
        //  $('#pdescuento').keyup(function (){
-             this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
+          //   this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
         // });
         // $('#pdescuento').click(function (){
            //  this.value = (this.value + '').replace(/[^0-9/^\d*\.?\d*$/]/g, '');
@@ -1019,6 +1039,7 @@ var editarval=true;
          igv();
          total();
          cambioMoneda();
+         
      }
     function cambioMoneda(){
         //console.log(contp);
@@ -1081,6 +1102,31 @@ var editarval=true;
          if (0<tablero.length && 0<filaob){
              
          }
+     }
+     function aplicadescuento(){       
+        var venta=0;   
+         var igv=0;  
+         var tota=0;
+        var descu=0;  
+         for (const fila in filaob) {
+             if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
+                 var precio=parseFloat(filaob[fila]['prec_uniP']);
+                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                 var descuento=$('#pdesc').val();
+                 
+      
+                 venta+=(cantidad*precio);
+                 
+                                        
+             }
+         }
+
+         igv=venta*0.18;
+         tota=(venta+igv)-((venta+igv)*(descuento/100));
+         
+         
+
+         $("#descuentos").html("s/. " + tota);
      }
  </script>
  @endpush

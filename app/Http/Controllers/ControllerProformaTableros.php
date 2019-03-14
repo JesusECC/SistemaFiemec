@@ -51,6 +51,7 @@ class ControllerProformaTableros extends Controller
         'po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock',
         'po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.codigo_producto," | ",po.nombre_producto," | ",po.marca_producto," | ",po.descripcion_producto) as producto2'),'po.tipo_producto')
         ->where('po.estado','=','activo')
+        ->where('po.tipo_producto','!=','accesorios')
         ->get();
         
         $monedas=DB::table('Tipo_moneda')
@@ -297,6 +298,7 @@ public function pdf2($id){
         ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
         ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock','po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.codigo_producto," | ",po.nombre_producto," | ",po.marca_producto," | ",po.descripcion_producto) as producto2'),'po.tipo_producto')
         ->where('po.estado','=','activo')
+        ->where('po.tipo_producto','!=','accesorios')
         ->get();
 
         $monedas=DB::table('Tipo_moneda')
@@ -344,6 +346,9 @@ public function pdf2($id){
             $tableros;
             $idTipoCam;
             $valorcambio;
+            $forma_de;
+            $plazo_oferta;
+            $observacion;
             foreach ($request->datos as $dato) {
                 // $idclie=$dato['idcliente'];
                 $valorv=$dato['valorVenta'];
@@ -351,6 +356,9 @@ public function pdf2($id){
                 // $idTipoCam=$dato['idTipoCambio'];
                 // $valorcambio=$dato['valorTipoCambio'];
                 $idProforma=$dato['idProforma'];
+                $forma_de=$dato['forma_de'];
+                $plazo_oferta=$dato['plazo_oferta'];
+                $observacion=$dato['obspro'];
             }   
             // $idProforma=DB::table('Proforma')->insertGetId(
             //     [
@@ -380,12 +388,9 @@ public function pdf2($id){
                 // 'descripcion_proforma'=>$observacion, //preguntar
                 'tipo_proforma'=>'Tablero',
                 // 'caracteristicas_proforma'=>$request->, preguntar
-                // 'forma_de'=>$forma,
-                // 'plaza_fabricacion'=>$request->,
-                // 'plazo_oferta'=>$plazo,
-                // 'garantia'=>$request->,
-                // 'observacion_condicion'=>$request->,
-                // 'observacion_proforma'=>$observacion,
+                'forma_de'=>$forma_de,
+                'plazo_oferta'=>$plazo_oferta,
+                'observacion_proforma'=>$observacion,
                 'estado'=>1
                 ]);
 

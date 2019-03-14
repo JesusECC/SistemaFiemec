@@ -271,6 +271,14 @@
                                                                     <input type="date" name="plazo_oferta" id="plazo_oferta" class="form-control">
                                                                 </div>
                                                             </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">
+                                                                        Observaciones
+                                                                    </label>
+                                                                    <textarea name="observacion_proforma" id="observacion_proforma" cols="30" rows="2" class="form-control">Ninguna</textarea>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -413,7 +421,7 @@ var editarval=true;
             $("#valorcambio").val(tipocam);
             $("#forma_de").val(formade);
             $("#plazo_oferta").val(plazpOf);
-            $("#observacion_condicion").val(obser);
+            $("#observacion_proforma").val(obser);
 
             
         }         
@@ -483,7 +491,7 @@ var editarval=true;
                                  '</section>'+
                              '</div>';
              
-             var ta={nombre:nomTablero,posi:cont,tablero:table,cantTaB:cantxtabs,estado:esta,idtablero:idtable}
+             var ta={nombre:nomTablero,posi:cont,tablero:table,cantidadTa:cantxtabs,estado:esta,idtablero:idtable}
              tablero.push(ta);
              cont++;
          }
@@ -578,7 +586,11 @@ var editarval=true;
          // var tl=$("#total").val();
          // console.log(tablero,filaob);
          // if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-             var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt}];
+
+         var formade=$("#forma_de").val();
+         var plazoofer=$("#plazo_oferta").val();
+         var obserprof=$("#observacion_proforma").val();
+             var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt,forma_de:formade,plazo_oferta:plazoofer,obspro:obserprof}];
              console.log(dat,tablero,filaob);
 
              $.ajax({
@@ -690,7 +702,7 @@ var editarval=true;
                                      '</div>'+
                                  '</section>'+
                              '</div>';
-                 var ta={nombre:nomTablero,posi:cont,tablero:table,estado:2,cantTaB:cantt}
+                 var ta={nombre:nomTablero,posi:cont,tablero:table,estado:2,cantidadTa:cantt}
                  tablero.push(ta);                        
                  } cont++;       
              }
@@ -896,8 +908,8 @@ var editarval=true;
                          }
                      }   
                      // console.log(sub);
-                     $("#total_"+tablero[key]['nombre']).html("s/. " + sub);
-                     $("#total2_"+tablero[key]['nombre']).html("s/. " + sub2);                 
+                     $("#total_"+tablero[key]['nombre']).html("s/. " + sub.toFixed(2));
+                     $("#total2_"+tablero[key]['nombre']).html("s/. " + sub2.toFixed(2));                 
                  }
                  sub=0;
                  sub2=0;
