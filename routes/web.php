@@ -45,6 +45,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('tableros/cli',['as'=>'clientes-representante','uses'=>'ControllerProformaTableros@representante']);
     Route::post('tableros/fam',['as'=>'marca-familia','uses'=>'ControllerProformaTableros@familia']);
     Route::post('tableros/prod',['as'=>'familia-producto','uses'=>'ControllerProformaTableros@producto']);
+    Route::post('tableros/predes',['as'=>'preciodescuento-producto','uses'=>'ControllerProformaTableros@preciodescuento']);
 
    
    

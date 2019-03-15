@@ -499,12 +499,26 @@ public function pdf2($id){
     public function producto(Request $request)
     {
         $idFamilia=$request->get('familia');
-        $familia=DB::table('Producto')
+        $familia=DB::table('Producto as p')
+        ->select('p.idProducto','p.precio_unitario',DB::raw('CONCAT(p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'))
         ->where('idFamilia','=',$idFamilia)
 
         ->get();
         // dd($request);
         return ['familia' =>$familia,'veri'=>true];
+    }
+
+    public function preciodescuento(Request $request)
+    {
+        $idProducto=$request->get('producto');
+        $producto=DB::table('Producto as p')
+        ->join('Familia as f','p.idFamilia','=','f.idFamilia')
+        ->select('p.idProducto','f.descuento_familia','p.precio_unitario',DB::raw('CONCAT(p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'))
+        ->where('idProducto','=',$idProducto)
+
+        ->get();
+        // dd($request);
+        return ['producto' =>$producto,'veri'=>true];
     }
 }
 

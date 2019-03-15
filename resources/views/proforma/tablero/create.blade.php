@@ -156,6 +156,7 @@
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
+                                            	<label for="" class="control-label">Marca Producto</label>
                                                 <select  name="pidMarca" class="form-control selectpicker" id="pidMarca" data-live-search="true">
                                                     <option value="" disabled="" selected="">Marca producto</option>
                                                     @foreach($marcas as $ma)                
@@ -167,29 +168,21 @@
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
+                                            	<label for="" class="control-label">Familia</label>
                                                 <select required name="pfamilia" class="form-control " id="pfamilia" >
                                                </select> 
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
+                                            	<label for="" class="control-label">Producto</label>
                                                 <select required name="pproduc" class="form-control " id="pproduc" >
                                                </select> 
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-12">
-                                            <div class="">
-                                                <label for="" class="control-label">Producto</label>
-                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                                    <option value="" selected="" disabled="">Seleccione Producto</option>
-                                                    @foreach($productos as $producto)
-                                                    <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->producto2}}_{{$producto->tipo_producto}}">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->marca_producto.' | '.$producto->descripcion_producto}}</option>
-                                                    @endforeach
-                                                </select> 
-                                            </div>
-                                        </div>
+                                        
 
 
                                         <div class="col-lg-3" style="margin-top:20px">
@@ -201,6 +194,7 @@
                                         <div class="col-lg-2" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">P. UNIT.</label>
+                                                <input type="hidden"  id="nombreproducto" class="form-control" name="nombreproducto"  disabled>
                                                 <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
                                             </div>
                                         </div> 
@@ -442,6 +436,14 @@
         
     });
 
+    var selectPD= document.getElementById('pproduc');
+    selectPD.addEventListener('change',function(){
+        var selectedOptionPD = this.options[selectPD.selectedIndex];
+        var selctedidPD=selectedOptionPD.value;
+        preciodescuento(selctedidPD);
+        
+    });
+
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
             agregarTablero();
@@ -534,6 +536,8 @@
         // $("#producto-oculto").style.display='block';
     } 
 
+
+   //obtener el cliente representante median ajax
     function representante(idCliente){
         console.log(idCliente,'-----');
       $.ajax({
@@ -567,7 +571,7 @@
             }
         });
     }
-
+//obtener la familia la cual pertenece tanto la marca como los productos
     function familia(idMarca){
         console.log(idMarca,'-----');
       $.ajax({
@@ -601,7 +605,8 @@
             }
         });
     }
-
+    
+//obtener el producto la cual pertenece tanto la familia y obteniendo el precio y decuento
     function producto(idFamilia){
         console.log(idFamilia,'-----');
       $.ajax({
@@ -623,12 +628,54 @@
                     // document.location.href=url;
                     var producto=response.familia;
                     var va;
-                    console.log(producto);
+                    console.log('productowey',producto);
                     va='<option value="" disabled="" selected="">Seleccione</option>'
                     for(const i in producto){
-                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['nombre_producto']+'</option>';                 
+                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['producto2']+'</option>';                 
                     }
                     $("#pproduc").html(va); 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+
+
+    function preciodescuento(idProducto){
+        console.log(idProducto,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{producto:idProducto}, //datos que se envian a traves de ajax
+            url:'predes', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var preciodescuento=response.producto;
+                   
+                    
+                    console.log('preciounitarioooooooooo',preciodescuento);
+                   
+                  
+                    for(const i in preciodescuento){
+                      
+                                       
+                    }
+                    console.log('preciounitarioooooooooo',preciodescuento[0]['producto2']);
+                    //$("#pproduc").html(va);
+                    $("#precio_uni").val(preciodescuento[0]['precio_unitario']);
+                    $("#pdescuento").val(preciodescuento[0]['descuento_familia']);
+                    $("#nombreproducto").val(preciodescuento[0]['producto2']);  
                 }else{
                     alert("problemas al enviar la informacion");
                 }
@@ -788,9 +835,9 @@
         
     }
     function agregarProductosTablero(){    
-        Producto=document.getElementById('pidProducto').value.split('_');
-        var idProd=Producto[0];
-        var pname=Producto[4];
+        
+        var idProd=$("#pproduc").val();
+        var pname=$("#nombreproducto ").val();
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
