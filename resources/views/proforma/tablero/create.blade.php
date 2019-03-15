@@ -152,6 +152,33 @@
                                         </div>
                                     </div>
                                     <div class="row" id="producto-crear-oculto" style="display:none;margin-top:20px">
+
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select  name="pidMarca" class="form-control selectpicker" id="pidMarca" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Marca producto</option>
+                                                    @foreach($marcas as $ma)                
+                                                        <option value="{{$ma->idMarca}}_{{$ma->nombre_proveedor}}">{{$ma->nombre_proveedor}}</option>
+                                                    @endforeach  
+                                                </select>                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select required name="pfamilia" class="form-control " id="pfamilia" >
+                                               </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <select required name="pproduc" class="form-control " id="pproduc" >
+                                               </select> 
+                                            </div>
+                                        </div>
+
+
                                         <div class="col-sm-12">
                                             <div class="">
                                                 <label for="" class="control-label">Producto</label>
@@ -163,6 +190,8 @@
                                                 </select> 
                                             </div>
                                         </div>
+
+
                                         <div class="col-lg-3" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Descripcion</label>
@@ -397,6 +426,22 @@
         
     });
 
+    var selectMarca = document.getElementById('pidMarca');
+    selectMarca.addEventListener('change',function(){
+        var selectedOptionF = this.options[selectMarca.selectedIndex];
+        var selctedidF=selectedOptionF.value.split('_');
+        familia(selctedidF[0]);
+        
+    });
+
+    var selectFamilia = document.getElementById('pfamilia');
+    selectFamilia.addEventListener('change',function(){
+        var selectedOptionP = this.options[selectFamilia.selectedIndex];
+        var selctedidP=selectedOptionP.value;
+        producto(selctedidP);
+        
+    });
+
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
             agregarTablero();
@@ -516,6 +561,74 @@
                         va+='<option value="'+representante[i]['idCR']+'">'+representante[i]['nombre_RE']+'</option>';                 
                     }
                     $("#cliente_empleado").html(va); 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+
+    function familia(idMarca){
+        console.log(idMarca,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{marca:idMarca}, //datos que se envian a traves de ajax
+            url:'fam', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var familia=response.marca;
+                    var va;
+                    console.log(familia);
+                    va='<option value="" disabled="" selected="">Seleccione</option>'
+                    for(const i in familia){
+                        va+='<option value="'+familia[i]['idFamilia']+'">'+familia[i]['nombre_familia']+'</option>';                 
+                    }
+                    $("#pfamilia").html(va); 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+
+    function producto(idFamilia){
+        console.log(idFamilia,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{familia:idFamilia}, //datos que se envian a traves de ajax
+            url:'prod', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var producto=response.familia;
+                    var va;
+                    console.log(producto);
+                    va='<option value="" disabled="" selected="">Seleccione</option>'
+                    for(const i in producto){
+                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['nombre_producto']+'</option>';                 
+                    }
+                    $("#pproduc").html(va); 
                 }else{
                     alert("problemas al enviar la informacion");
                 }

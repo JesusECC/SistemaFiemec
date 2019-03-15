@@ -47,13 +47,17 @@ class ControllerProformaTableros extends Controller
         
         $productos=DB::table('Producto as po')
         ->join('Familia as fa','po.idFamilia','=','fa.idFamilia')
-        ->select('po.idProducto','fa.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto',
-        'po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock',
+        ->select('po.idProducto','po.idFamilia','fa.nombre_familia','fa.descuento_familia','po.serie_producto','po.codigo_pedido','po.codigo_producto','po.nombre_producto','po.marca_producto','po.stock',
         'po.descripcion_producto','po.precio_unitario','po.foto','po.categoria_producto','po.fecha_sistema',DB::raw('CONCAT(po.codigo_producto," | ",po.nombre_producto," | ",po.marca_producto," | ",po.descripcion_producto) as producto2'),'po.tipo_producto')
         ->where('po.estado','=','activo')
         ->where('po.tipo_producto','!=','accesorios')
+        ->where('po.marca_producto','=','ABB')
         ->get();
         
+        $marcas=DB::table('Marca')
+        ->where('estadoMa','=',1)
+        ->get();
+
         $monedas=DB::table('Tipo_moneda')
         ->where('estado','=',1)
         ->get();
@@ -66,7 +70,7 @@ class ControllerProformaTableros extends Controller
          ->select('cp.idCliente','cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
         ->where('estado','=',1)
         ->get();
-        return view('proforma.tablero.create',["representante"=>$representante,"productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
+        return view('proforma.tablero.create',["representante"=>$representante,"productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"marcas"=>$marcas]);
     }
     public function buscarProducto(Request $request)
     {
@@ -481,6 +485,26 @@ public function pdf2($id){
         ->get();
         // dd($request);
         return ['cliente' =>$cliente,'veri'=>true];
+    }
+    public function familia(Request $request)
+    {
+        $idMarca=$request->get('marca');
+        $marca=DB::table('Familia')
+        ->where('idMarca','=',$idMarca)
+        ->where('estado','=','1')
+        ->get();
+        // dd($request);
+        return ['marca' =>$marca,'veri'=>true];
+    }
+    public function producto(Request $request)
+    {
+        $idFamilia=$request->get('familia');
+        $familia=DB::table('Producto')
+        ->where('idFamilia','=',$idFamilia)
+
+        ->get();
+        // dd($request);
+        return ['familia' =>$familia,'veri'=>true];
     }
 }
 
