@@ -155,7 +155,7 @@
                                                 <select name="pgalvanizado" class="form-control selectpicker" id="pgalvanizado" data-live-search="true">
                                                     <option value="" disabled="" selected="">Seleccione Acabado</option>
                                                     @foreach($galvanizado as $gal)                
-                                                        <option value="{{$gal->idGalvanizado}}_{{$gal->nombreGalvanizado}}_{{$gal->tipoG}}">{{$gal->nombreGalvanizado}}</option>
+                                                        <option value="{{$gal->idGalvanizado}}_{{$gal->nombreGalvanizado}}">{{$gal->nombreGalvanizado}}</option>
                                                     @endforeach  
                                                    
                                                 </select> 
@@ -176,7 +176,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4" style="margin-top:20px">
+                                        <div class="col-lg-3" style="margin-top:20px">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Dimenciones</label> 
                                                  <select name="pdimencion" class="form-control selectpicker" id="pdimencion" data-live-search="true">
@@ -190,7 +190,7 @@
                                         </div>
                                          
 
-                                         <div class="col-lg-3" style="margin-top:20px">
+                                         <div class="col-lg-2" style="margin-top:20px">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Tapa</label> 
                                                   <select name="ptapa" class="form-control selectpicker" id="ptapa" data-live-search="true">
@@ -205,6 +205,12 @@
                                             <div class="form-group">
                                                 <label for="" class="control-label">Precio de Tapa</label>
                                                  <input type="number" disabled id="ppreciot" class="form-control" name="ppreciot">                                                   
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label for="" class="control-label">Espesor Tapa</label>
+                                                <input type="text" disabled id="pespesorT" class="form-control" name="pespesorT"  >  
                                             </div>
                                         </div>
                                         <div class="col-sm-3" style="margin-top:19px">
@@ -513,11 +519,16 @@
        
         Pin=document.getElementById('ptapa').value;
         //var tipo_pin=Pin[2];
-       if(Pin=='Sin tapa'){
-            $('#ppreciot').attr("disabled", true); 
-            $("#ppreciot").val("");             
+        if(Pin=='Sin tapa'){
+
+            $('#ppreciot').attr("disabled", true);
+            $('#pespesorT').attr("disabled", true);
+            $("#ppreciot").val(""); 
+            $("#pespesorT").val("");            
         }else{
+
             $('#ppreciot').attr("disabled", false);
+            $('#pespesorT').attr("disabled", false);
                                  
         }
        }
@@ -585,6 +596,7 @@
         var descuento=parseFloat($('#pdescuento').val());
         var proacc=$('#pacc').val();
         var esp=$('#pespesor').val();
+        var espT=$('#pespesorT').val();
         var tra=$('#ptramo').val();
         var med=$('#medidasp').val();
         var tap=$('#ptapa').val();
@@ -633,9 +645,24 @@
                 }else if(precioga>0 && promedio==2 && tapas=='Con tapa'){
                         var subt2=(precioga+preciota)+((precioga+preciota)*0.1);
                         var subt=((precioga+preciota)+((precioga+preciota)*0.1))*cantidad;
+                }else if(precioga>0 && tram>0 && tapas=='Con tapa'){
+
+                        var subt2=(precioga*tram)+preciota;
+
+                        var subt=((precioga*tram)+preciota)*cantidad;
+
+                }else if(precioga>0 && tram>0 && tapas=='Sin tapa'){
+
+                        var subt2=(precioga*tram);
+
+                        var subt=(precioga*tram)*cantidad;
+
                 }else if(precioga>0 && procentaje>0 && tram>0){
                         var subt2=(precioga*tram)*(procentaje/100);
                         var subt=((precioga*tram)*(procentaje/100))*cantidad;
+                }else if(precioga>0 && tram>0){
+                        var subt2=(precioga*tram);
+                        var subt=(precioga*tram)*cantidad;
                 }else if(precioga>0 && promedio==1){
                         var subt2=(precioga-(precioga*0.1));
                         var subt=(precioga-(precioga*0.1))*cantidad;
@@ -675,7 +702,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizada:gname,descripcionP:pdescripcion,prec_tap:preciot,prec_gal:preciog,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,tramo:tra,posiP:contp,porcentajeacc:proacc,espesor:esp,medi:med,tapa:tap,dimenciones:dim,prome:promed,preciounit:subt2,fila:"",estado:2,idDetalleProforma:''};
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizada:gname,descripcionP:pdescripcion,prec_tap:preciot,prec_gal:preciog,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,tramo:tra,posiP:contp,porcentajeacc:proacc,espesor:esp,espesorT:espT,medi:med,tapa:tap,dimenciones:dim,prome:promed,preciounit:subt2,fila:"",estado:2,idDetalleProforma:''};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -733,9 +760,24 @@
                 }else if(precioga>0 && promedio==2 && tapas=='Con tapa'){
                         var subt2=(precioga+preciota)+((precioga+preciota)*0.1);
                         var subt=((precioga+preciota)+((precioga+preciota)*0.1))*cantidad;
+                }else if(precioga>0 && tram>0 && tapas=='Con tapa'){
+
+                        var subt2=(precioga*tram)+preciota;
+
+                        var subt=((precioga*tram)+preciota)*cantidad;
+
+                }else if(precioga>0 && tram>0 && tapas=='Sin tapa'){
+
+                        var subt2=(precioga*tram);
+
+                        var subt=(precioga*tram)*cantidad;
+
                 }else if(precioga>0 && procentaje>0 && tram>0){
                         var subt2=(precioga*tram)*(procentaje/100);
                         var subt=((precioga*tram)*(procentaje/100))*cantidad;
+                }else if(precioga>0 && tram>0){
+                        var subt2=(precioga*tram);
+                        var subt=(precioga*tram)*cantidad;
                 }else if(precioga>0 && promedio==1){
                         var subt2=(precioga-(precioga*0.1));
                         var subt=(precioga-(precioga*0.1))*cantidad;
@@ -762,7 +804,8 @@
                                '<input  type="hidden" name="esp_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de '+
                                 '<input  type="hidden" name="tram_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tramo']+'">'+filaob[fila]['tramo']+' metros. Fabricado bajo la norma NEMA V-1 y recomendacion de la NFPA-70. '+
                                 '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+' ('+
-                                '<input  type="hidden" name="tap_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+')'+
+                                '<input  type="hidden" name="tap_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+')'+' esp. de '+
+                                '<input  type="hidden" name="espT_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesorT']+'">'+filaob[fila]['espesorT']+
                             '</td>'+
                              '<td  class="text-center"> '+ 
                                 '<input type="hidden" style="width:40px !important;" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimenciones']+'">'+filaob[fila]['dimenciones']+
@@ -845,6 +888,7 @@
                     var idPin=pro[key]['idPintura'];
                    // var nomPin=pro[key]['nombrePintado'];
                     var esp=pro[key]['espesor'];
+                    var espT=pro[key]['espesorT'];
                     var tap=pro[key]['tapa'];
                     var dim=pro[key]['dimenciones'];
                     var precioGal=pro[key]['precioGal'];
@@ -866,7 +910,7 @@
                     garantia=pro[key]['garantia']; 
                     incluye=pro[key]['incluye'];   
                     // console.log(estado);
-                    var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,idGalvanizado:idGal,galvanizada:nomGal,espesor:esp,dimenciones:dim,prec_gal:precioGal,prec_pin:precioPin,prec_tap:precioTap,tapa:tap,tramo:tram,promed:promedi,porcentajeacc:promedioacc,cantidadP:pcant,descuentoP:descuento,medi:medida,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalle_Bandeja:idDetalleBandejas,incluy:incluye,preciounit:precioUn,observacion:obser};
+                    var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,idGalvanizado:idGal,galvanizada:nomGal,espesor:esp,espesorT:espT,dimenciones:dim,prec_gal:precioGal,prec_pin:precioPin,prec_tap:precioTap,tapa:tap,tramo:tram,promed:promedi,porcentajeacc:promedioacc,cantidadP:pcant,descuentoP:descuento,medi:medida,nomTablero:nomTablero,posiP:contp,fila:"",estado:estado,idDetalle_Bandeja:idDetalleBandejas,incluy:incluye,preciounit:precioUn,observacion:obser};
                     filaob.push(dat);  
                     fila();
                     contp++;               

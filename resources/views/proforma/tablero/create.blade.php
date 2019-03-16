@@ -176,7 +176,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                             	<label for="" class="control-label">Producto</label>
-                                                <select required name="pproduc" class="form-control " id="pproduc" >
+                                                <select required name="pproduc" class="form-control" id="pproduc" data-live-search="true">
                                                </select> 
                                             </div>
                                         </div>
@@ -195,6 +195,7 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">P. UNIT.</label>
                                                 <input type="hidden"  id="nombreproducto" class="form-control" name="nombreproducto"  disabled>
+                                                <input type="hidden"  id="tipopro" class="form-control" name="tipopro"  disabled>
                                                 <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
                                             </div>
                                         </div> 
@@ -449,6 +450,7 @@
             agregarTablero();
             valoresFinales();
             mostrarcampos();
+            
         });
         $('#save').click(function(){
             // console.log("asd");
@@ -456,9 +458,16 @@
         });
         $('#bt_add_produc').click(function(){
             agregarProductosTablero();
-            valoresFinales();
-           
+            valoresFinales(); 
         });
+
+       /* $('#pproduc').change(function(){
+
+         cambiaropcion();
+
+        });*/
+
+
         $('#Pcantidad').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
         });
@@ -492,17 +501,23 @@
     $("#pidProducto").change(MostarProducto);
     
     
-  function cambiaropcion(){
-        Producto=document.getElementById('pidProducto').value.split('_');
-        var tipo_producto=Producto[5];
-        var preciouni=Producto[2];
-       if(tipo_producto=="Tableros" || preciouni==0.00){
+ /* function cambiaropcion(){
+       
+        var tipo_producto=$('#tipopro').val();
+        var tp=String(tipo_producto);
+        var puni=$('#precio_uni').val();
+        
+       if(tp=='Tableros' || puni==0.00){
+
+        console.log('ingrese',puni)
+
             $('#precio_uni').attr("disabled", false);
         }
         else{
+            console.log('no ingrese',puni)
            $('#precio_uni').attr("disabled", true); 
         }
-   }
+   }*/
     //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
     function MostrarCliente(){
         // cdireccion/cnro_documentoidClientes
@@ -519,8 +534,9 @@
         $("#precio_uni").val(Producto[2]);
         $("#pdescuento").val(Producto[3]);
         // descuentoP -->para emostar el 
-        cambiaropcion();
+        
     }
+
     function mostrarTipoCambio(){
     
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
@@ -592,13 +608,21 @@
                     // var url=urlBase+'/'+response.data;
                     // document.location.href=url;
                     var familia=response.marca;
+                    var productos=response.producto;
                     var va;
+                    var va2;
                     console.log(familia);
                     va='<option value="" disabled="" selected="">Seleccione</option>'
+                    va2='<option value="" disabled="" selected="">Seleccione</option>'
                     for(const i in familia){
-                        va+='<option value="'+familia[i]['idFamilia']+'">'+familia[i]['nombre_familia']+'</option>';                 
+                        va+='<option value="'+familia[i]['idFamilia']+'">'+familia[i]['nombre_familia']+'</option>';                
                     }
-                    $("#pfamilia").html(va); 
+                    $("#pfamilia").html(va);
+
+                    for(const i in productos){
+                    va2+='<option value="'+productos[i]['idProducto']+'">'+productos[i]['nombre_producto']+' | '+productos[i]['codigo_producto']+''+productos[i]['marca_producto']+' | '+productos[i]['descripcion_producto']+'</option>';                 
+                    }
+                    $("#pproduc").html(va2); 
                 }else{
                     alert("problemas al enviar la informacion");
                 }
@@ -631,12 +655,13 @@
                     console.log('productowey',producto);
                     va='<option value="" disabled="" selected="">Seleccione</option>'
                     for(const i in producto){
-                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['producto2']+'</option>';                 
+                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['nombre_producto']+' | '+producto[i]['codigo_producto']+' | '+producto[i]['marca_producto']+' | '+producto[i]['descripcion_producto']+'</option>';                 
                     }
                     $("#pproduc").html(va); 
                 }else{
                     alert("problemas al enviar la informacion");
                 }
+
             }
         });
     }
@@ -671,11 +696,25 @@
                       
                                        
                     }
-                    console.log('preciounitarioooooooooo',preciodescuento[0]['producto2']);
+                    console.log('preciounitarioooooooooo',preciodescuento[0]['tipo_producto']);
                     //$("#pproduc").html(va);
                     $("#precio_uni").val(preciodescuento[0]['precio_unitario']);
                     $("#pdescuento").val(preciodescuento[0]['descuento_familia']);
-                    $("#nombreproducto").val(preciodescuento[0]['producto2']);  
+                    $("#nombreproducto").val(preciodescuento[0]['producto2']);
+                    $("#tipopro").val(preciodescuento[0]['tipo_producto']); 
+
+                    //validacion de cambios de formulario de proecio unitario
+
+                    if(preciodescuento[0]['tipo_producto']=='Tableros' || preciodescuento[0]['precio_unitario']==0.00){
+
+                    $('#precio_uni').attr("disabled", false);
+
+                    }else{
+
+                    $('#precio_uni').attr("disabled", true); 
+
+                         }
+
                 }else{
                     alert("problemas al enviar la informacion");
                 }

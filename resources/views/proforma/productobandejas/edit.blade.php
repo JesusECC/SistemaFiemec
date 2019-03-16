@@ -39,7 +39,7 @@
 
 				</div>
                 <!-- /.box-header -->
-                	{!!Form::model($productobandejas,['method'=>'PATCH','route'=>['productobandejas-edit',$productobandejas->idProducto]])!!}
+                	{!!Form::model($productobandejas,['method'=>'PATCH','route'=>['productobandejas.update',$productobandejas->idProducto]])!!}
 		    		{{Form::token()}}
 				<div class="box-body bg-gray-c">
 					<div class="row">

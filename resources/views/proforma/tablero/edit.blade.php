@@ -126,17 +126,37 @@
                                         </div>
                                     </div>
                                     <div class="row" id="producto-oculto" style="margin-top:20px">
-                                        <div class="col-sm-12">
-                                            <div class="">
-                                                <label for="" class="control-label">Producto</label>
-                                                 <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
-                                                     <option value="">Seleccione Producto</option>
-                                                     @foreach($productos as $producto)
-                                                         <option value="{{ $producto->idProducto }}_{{ $producto->nombre_producto}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->producto2}}_{{$producto->tipo_producto}}">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->marca_producto.' | '.$producto->descripcion_producto}}</option>
-                                                     @endforeach
-                                                 </select> 
+
+
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Marca Producto</label>
+                                                <select  name="pidMarca" class="form-control selectpicker" id="pidMarca" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Marca producto</option>
+                                                    @foreach($marcas as $ma)                
+                                                        <option value="{{$ma->idMarca}}_{{$ma->nombre_proveedor}}">{{$ma->nombre_proveedor}}</option>
+                                                    @endforeach  
+                                                </select>                                                
                                             </div>
                                         </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Familia</label>
+                                                <select required name="pfamilia" class="form-control " id="pfamilia" >
+                                               </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Producto</label>
+                                                <select required name="pproduc" class="form-control" id="pproduc" data-live-search="true">
+                                               </select> 
+                                            </div>
+                                        </div>
+
+                                     
                                         <div class="col-lg-3" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Descripcion</label>
@@ -146,6 +166,8 @@
                                         <div class="col-lg-2" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">P. UNIT.</label>
+                                                <input type="hidden"  id="nombreproducto" class="form-control" name="nombreproducto"  disabled>
+                                                <input type="hidden"  id="tipopro" class="form-control" name="tipopro"  disabled>
                                                 <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled>
                                             </div>
                                         </div> 
@@ -297,7 +319,33 @@
     </div>
 </section>
  @push('scripts')
- <script>    
+ <script>  
+
+     var selectMarca = document.getElementById('pidMarca');
+    selectMarca.addEventListener('change',function(){
+        var selectedOptionF = this.options[selectMarca.selectedIndex];
+        var selctedidF=selectedOptionF.value.split('_');
+        familia(selctedidF[0]);
+        
+    });
+
+    var selectFamilia = document.getElementById('pfamilia');
+    selectFamilia.addEventListener('change',function(){
+        var selectedOptionP = this.options[selectFamilia.selectedIndex];
+        var selctedidP=selectedOptionP.value;
+        producto(selctedidP);
+        
+    });
+
+    var selectPD= document.getElementById('pproduc');
+    selectPD.addEventListener('change',function(){
+        var selectedOptionPD = this.options[selectPD.selectedIndex];
+        var selctedidPD=selectedOptionPD.value;
+        preciodescuento(selctedidPD);
+        
+    });
+
+
      $(document).ready(function(){
          $('#bt_add_tablero').click(function(){
              agregarTablero();
@@ -569,12 +617,139 @@ var editarval=true;
            $('#precio_uni').attr("disabled", true); 
         }
    }
-     // function mostrarcampos(){
-     //     document.getElementById('producto-crear-oculto').style.display = 'block';
-     //     document.getElementById('producto-oculto').style.display = 'block';
-     //     // $("#producto-crear-oculto").style.display='block';
-     //     // $("#producto-oculto").style.display='block';
-     // } 
+
+   function familia(idMarca){
+        console.log(idMarca,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{marca:idMarca}, //datos que se envian a traves de ajax
+            url:'famT', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var familia=response.marca;
+                    var productos=response.producto;
+                    var va;
+                    var va2;
+                    console.log(familia);
+                    va='<option value="" disabled="" selected="">Seleccione</option>'
+                    va2='<option value="" disabled="" selected="">Seleccione</option>'
+                    for(const i in familia){
+                        va+='<option value="'+familia[i]['idFamilia']+'">'+familia[i]['nombre_familia']+'</option>';                
+                    }
+                    $("#pfamilia").html(va);
+
+                    for(const i in productos){
+                    va2+='<option value="'+productos[i]['idProducto']+'">'+productos[i]['nombre_producto']+' | '+productos[i]['codigo_producto']+''+productos[i]['marca_producto']+' | '+productos[i]['descripcion_producto']+'</option>';                 
+                    }
+                    $("#pproduc").html(va2); 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+    
+//obtener el producto la cual pertenece tanto la familia y obteniendo el precio y decuento
+    function producto(idFamilia){
+        console.log(idFamilia,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{familia:idFamilia}, //datos que se envian a traves de ajax
+            url:'prodT', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var producto=response.familia;
+                    var va;
+                    console.log('productowey',producto);
+                    va='<option value="" disabled="" selected="">Seleccione</option>'
+                    for(const i in producto){
+                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['nombre_producto']+' | '+producto[i]['codigo_producto']+' | '+producto[i]['marca_producto']+' | '+producto[i]['descripcion_producto']+'</option>';                 
+                    }
+                    $("#pproduc").html(va); 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+
+
+    function preciodescuento(idProducto){
+        console.log(idProducto,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{producto:idProducto}, //datos que se envian a traves de ajax
+            url:'predesT', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var preciodescuento=response.producto;
+                   
+                    
+                    console.log('preciounitarioooooooooo',preciodescuento);
+                   
+                  
+                    for(const i in preciodescuento){
+                      
+                                       
+                    }
+                    console.log('preciounitarioooooooooo',preciodescuento[0]['producto2']);
+                    //$("#pproduc").html(va);
+                    $("#precio_uni").val(preciodescuento[0]['precio_unitario']);
+                    $("#pdescuento").val(preciodescuento[0]['descuento_familia']);
+                    $("#nombreproducto").val(preciodescuento[0]['producto2']); 
+                    $("#tipopro").val(preciodescuento[0]['tipo_producto']); 
+
+                    //validacion de cambios de formulario de proecio unitario
+
+                    if(preciodescuento[0]['tipo_producto']=='Tableros' || preciodescuento[0]['precio_unitario']==0.00){
+
+                    $('#precio_uni').attr("disabled", false);
+
+                    }else{
+
+                    $('#precio_uni').attr("disabled", true); 
+
+                         } 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+     
  
      function saveProforma(){
          // se enviar los datos al controlador proforma tableros

@@ -29,6 +29,8 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::resource('dashboard/dashboard-admin','ControllerDashboard');
     Route::resource('proforma/tarea','ControllerTarea');
     Route::resource('proforma/cargo','ControllerCargo');
+    Route::resource('proforma/productobandejas','ControllerProductoBandeja');
+   
 
     // Se crea las rutas para tableros
     Route::get('tableros',['as' => 'tablero','uses'=>'ControllerProformaTableros@index']);
@@ -43,9 +45,14 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('proforma/tablero/pdf2/{idProforma}',['as'=>'tablero-pdf2','uses'=>'ControllerProformaTableros@pdf2']);
     Route::get('proforma/tablero/pdf3/{idProforma}',['as'=>'tablero-pdf3','uses'=>'ControllerProformaTableros@pdf3']);
     Route::post('tableros/cli',['as'=>'clientes-representante','uses'=>'ControllerProformaTableros@representante']);
+
     Route::post('tableros/fam',['as'=>'marca-familia','uses'=>'ControllerProformaTableros@familia']);
     Route::post('tableros/prod',['as'=>'familia-producto','uses'=>'ControllerProformaTableros@producto']);
     Route::post('tableros/predes',['as'=>'preciodescuento-producto','uses'=>'ControllerProformaTableros@preciodescuento']);
+
+    Route::post('tableros/edit/famT',['as'=>'marcaT-familiaT','uses'=>'ControllerProformaTableros@familia']);
+    Route::post('tableros/edit/prodT',['as'=>'familiaT-productoT','uses'=>'ControllerProformaTableros@producto']);
+    Route::post('tableros/edit/predesT',['as'=>'preciodescuentoT-productoT','uses'=>'ControllerProformaTableros@preciodescuento']);
 
    
    
@@ -58,7 +65,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('empleados/show/{idEmpleado}',['as'=>'empleado-show','uses'=>'ControllerEmpleados@show']);
 
 
-    //Se crea las rutas para productos 
+    //Se crea las rutas para producto 
     Route::get('productos',['as'=>'producto','uses'=>'ControllerProducto@index']);
     Route::get('productos/create',['as'=>'producto-create','uses'=>'ControllerProducto@create']);
     Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
@@ -83,6 +90,14 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('proforma/proforma/pdf2/{idProforma}','ControllerProformaUnitaria@pdf2');
     Route::get('proformas/show/{id}',['as'=>'proforma-show','uses'=>'ControllerProformaUnitaria@show']);
     Route::delete('proformas/eliminar/{id}',['as'=>'proforma-eliminar','uses'=>'ControllerProformaUnitaria@destroy']);
+
+    Route::post('proformas/fam',['as'=>'marcaP-familiaP','uses'=>'ControllerProformaUnitaria@familia']);
+    Route::post('proformas/prod',['as'=>'familiaP-productoP','uses'=>'ControllerProformaUnitaria@producto']);
+    Route::post('proformas/predes',['as'=>'preciodescuentoP-productoP','uses'=>'ControllerProformaUnitaria@preciodescuento']);
+
+    Route::post('proformas/editar/famE',['as'=>'marcaE-familiaE','uses'=>'ControllerProformaUnitaria@familia']);
+    Route::post('proformas/editar/prodE',['as'=>'familiaE-productoE','uses'=>'ControllerProformaUnitaria@producto']);
+    Route::post('proformas/editar/predesE',['as'=>'preciodescuentoE-productoE','uses'=>'ControllerProformaUnitaria@preciodescuento']);
 
     //Se crea rutas bandejas
     Route::post('bandejas/guardar',['as' => 'bandejas-store','uses'=>'ControllerBandejas@store']);
@@ -122,11 +137,12 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('tarea/create',['as'=>'tarea-create','uses'=>'ControllerTarea@create']);
     Route::post('proformas/cli',['as'=>'clientes-representante','uses'=>'ControllerProformaUnitaria@representante']);
 
-
-
-
-    //bandejas producto
-
+   //rutas de proforma bandejas
+   Route::get('productobandejas',['as'=>'productobandejas','uses'=>'ControllerProductoBandeja@index']);
+   Route::get('productobandejas/create',['as'=>'productobandejas-create','uses'=>'ControllerProductoBandeja@create']);
+   Route::post('productobandejas/',['as'=>'productobandejas-store','uses'=>'ControllerProductoBandeja@store']);
+   Route::get('productobandejas/{idProducto}/edit',['as'=>'productobandejas-edit','uses'=>'ControllerProductoBandeja@edit']);
+   
      
     
     //se crea rutas para ajsutes

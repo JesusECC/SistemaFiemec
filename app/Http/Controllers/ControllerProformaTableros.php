@@ -55,6 +55,7 @@ class ControllerProformaTableros extends Controller
         ->get();
         
         $marcas=DB::table('Marca')
+        ->where('nombre_proveedor','!=','FIEMEC BANDEJAS')
         ->where('estadoMa','=',1)
         ->get();
 
@@ -194,6 +195,7 @@ public function show($id){
         
         ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.codigo_producto," ",pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','t.cantidadTab','p.totalxtab')
         ->where('p.idProforma','=',$id)
+        ->where('dePT.estadoDP','=','1')
         ->get();
 
         // dd($tablero,$proforma,$p);
@@ -309,6 +311,12 @@ public function pdf2($id){
         ->where('estado','=','activo')
         ->get();
 
+        $marcas=DB::table('Marca')
+        ->where('nombre_proveedor','!=','FIEMEC BANDEJAS')
+        ->where('estadoMa','=',1)
+        ->get();
+
+
         $clientes=DB::table('Cliente_Proveedor as cp')
         ->select('cp.idCliente',DB::raw('CONCAT(cp.nombres_Rs," ",cp.paterno," ",cp.materno) as nombre'),DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
         ->where('tipo_persona','=','Cliente persona')
@@ -335,7 +343,7 @@ public function pdf2($id){
         ->get();
         // 'dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP'
         // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
-        return view("proforma.tablero.edit",["productos"=>$productos,'tablero'=>$tablero,"clientes"=>$clientes,"monedas"=>$monedas,'proforma'=>$proforma]);
+        return view("proforma.tablero.edit",["productos"=>$productos,'tablero'=>$tablero,"marcas"=>$marcas,"clientes"=>$clientes,"monedas"=>$monedas,'proforma'=>$proforma]);
     }   
     public function update(Request $request)
     {
@@ -404,7 +412,7 @@ public function pdf2($id){
            foreach ($request->tableros as $tablero) {
                 $nombre=$tablero['nombre'];
                 $est=$tablero['estado'];
-                $cantxT=$tablero['cantTaB'];
+                $cantxT=$tablero['cantidadTa'];
 
                 if($est==2){
                     $idTablero=DB::table('Tableros')->insertGetId(
@@ -491,16 +499,22 @@ public function pdf2($id){
         $idMarca=$request->get('marca');
         $marca=DB::table('Familia')
         ->where('idMarca','=',$idMarca)
-        ->where('estado','=','1')
+        ->where('estado','=','activo')
         ->get();
-        // dd($request);
-        return ['marca' =>$marca,'veri'=>true];
+
+        $producto=DB::table('Producto as p')
+        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto')
+        ->where('p.idMarca','=',$idMarca)
+        ->orderby('p.idProducto')
+        ->get();
+ 
+        return ['producto' =>$producto,'marca' =>$marca,'veri'=>true];
     }
     public function producto(Request $request)
     {
         $idFamilia=$request->get('familia');
         $familia=DB::table('Producto as p')
-        ->select('p.idProducto','p.precio_unitario',DB::raw('CONCAT(p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'))
+        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto')
         ->where('idFamilia','=',$idFamilia)
 
         ->get();
@@ -513,7 +527,7 @@ public function pdf2($id){
         $idProducto=$request->get('producto');
         $producto=DB::table('Producto as p')
         ->join('Familia as f','p.idFamilia','=','f.idFamilia')
-        ->select('p.idProducto','f.descuento_familia','p.precio_unitario',DB::raw('CONCAT(p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'))
+        ->select('p.idProducto','f.descuento_familia','p.precio_unitario','p.tipo_producto',DB::raw('CONCAT(p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'))
         ->where('idProducto','=',$idProducto)
 
         ->get();

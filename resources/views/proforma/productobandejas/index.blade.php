@@ -58,7 +58,7 @@
 									<a href="" data-target="#modal-delete-{{$pro->idProducto}}"  data-toggle="modal" class="btn btn-danger btn-xs" title="Eliminar Bandeja o Accesorio"><i class="fas fa-trash-alt"></i> </a>
 								</td>
 							</tr>
-							@include('proforma.producto.modal')
+							@include('proforma.productobandejas.modal')
 							@endforeach
 				        </tbody>
 				        
@@ -70,4 +70,7 @@
           </div><!-- /.row -->
 </section><!-- /.content -->
 @endsection
+
+
+
 

@@ -64,6 +64,11 @@ public function create()
     ->where('estado','=',1)
     ->get();
 
+    $marcas=DB::table('Marca')
+    ->where('nombre_proveedor','!=','FIEMEC BANDEJAS')
+        ->where('estadoMa','=',1)
+        ->get();
+
      $representante=DB::table('Cliente_Representante') 
     ->where('estadoCE','=',1)
     ->get();
@@ -76,7 +81,7 @@ public function create()
 
     $json=json_encode($clientes);
 
- return view("proforma.proforma.create",["representante"=>$representante,"productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,'json'=>$json]);
+ return view("proforma.proforma.create",["representante"=>$representante,"productos"=>$productos,"marcas"=>$marcas,"clientes"=>$clientes,"monedas"=>$monedas,'json'=>$json]);
 }
 
 public function store(Request $request)
@@ -235,18 +240,24 @@ public function pdf($id){
         ->where('po.estado','=','activo')
         ->get();
 
+        $marcas=DB::table('Marca')
+        ->where('nombre_proveedor','!=','FIEMEC BANDEJAS')
+        ->where('estadoMa','=',1)
+        ->get();
+
 
         $proforma=DB::table('Proforma as p')
         ->join('Detalle_proforma as deP','p.idProforma','=','deP.idProforma')
         ->join('Producto as pd','pd.idProducto','=','deP.idProducto')
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
-        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_proforma','deP.idProducto','deP.idProforma','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.cambioDP','deP.estadoDP','deP.descuento','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion')
+        ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado') 
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_proforma','deP.idProducto','deP.idProforma','deP.cantidad','deP.precio_venta','deP.texto_precio_venta','deP.cambioDP','deP.estadoDP','pd.codigo_producto','deP.descuento','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion',DB::raw('CONCAT(pd.codigo_producto," | ",pd.nombre_producto," | ",pd.marca_producto," | ",pd.descripcion_producto) as producto2'),'cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
         ->where('deP.idProforma','=',$id)
         ->where('deP.estadoDP','=',1)
         ->get();
     
         // return view("proforma.proforma.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas]);
-        return view("proforma.proforma.edit",["productos"=>$productos,'proforma'=>$proforma]);
+        return view("proforma.proforma.edit",["productos"=>$productos,'proforma'=>$proforma,'marcas'=>$marcas]);
 
 
     }
@@ -342,5 +353,48 @@ public function pdf($id){
         ->get();
         // dd($request);
         return ['cliente' =>$cliente,'veri'=>true];
+    }
+
+    public function familia(Request $request)
+    {
+        $idMarca=$request->get('marca');
+        $marca=DB::table('Familia')
+        ->where('idMarca','=',$idMarca)
+        ->where('estado','=','activo')
+        ->get();
+
+        $producto=DB::table('Producto as p')
+        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto')
+        ->where('p.idMarca','=',$idMarca)
+        ->where('p.estado','=','activo')
+        ->orderby('p.idProducto')
+        ->get();
+ 
+        return ['producto' =>$producto,'marca' =>$marca,'veri'=>true];
+    }
+
+    public function producto(Request $request)
+    {
+        $idFamilia=$request->get('familia');
+        $familia=DB::table('Producto as p')
+        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto')
+        ->where('idFamilia','=',$idFamilia)
+
+        ->get();
+        // dd($request);
+        return ['familia' =>$familia,'veri'=>true];
+    }
+
+    public function preciodescuento(Request $request)
+    {
+        $idProducto=$request->get('producto');
+        $producto=DB::table('Producto as p')
+        ->join('Familia as f','p.idFamilia','=','f.idFamilia')
+        ->select('p.idProducto','f.descuento_familia','p.precio_unitario',DB::raw('CONCAT(p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'),'p.tipo_producto')
+        ->where('idProducto','=',$idProducto)
+
+        ->get();
+        // dd($request);
+        return ['producto' =>$producto,'veri'=>true];
     }
 }

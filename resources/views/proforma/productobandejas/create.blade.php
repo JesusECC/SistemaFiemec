@@ -39,7 +39,7 @@
 
 				</div>
                 <!-- /.box-header  productobandejas-create-->
-                	{!!Form::open(array('url'=>'producto/productobandejas','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
+                	{!!Form::open(array('url'=>'productobandejas','method'=>'POST','autocomplete'=>'off'))!!}
 
     				{{Form::token()}}
 					<div class="box-body bg-gray-c">

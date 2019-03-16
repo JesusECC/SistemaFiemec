@@ -128,8 +128,13 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+                @if(Auth::user()->idCargo==1)
                 <li><a href="{{ route('producto')}}"><i class="fas fa-circle-notch"></i> Fiemec </a></li>
+                @endif
                 <li><a href="{{ route('catalogo')}}"><i class="fas fa-circle-notch"></i> Catálogo</a></li>
+                @if(Auth::user()->idCargo==1)
+                <li><a href="{{ route('productobandejas')}}"><i class="fas fa-circle-notch"></i> Accesorios Fiemec</a></li>
+                @endif
               </ul>
             </li>            
             <li class="treeview">

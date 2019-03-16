@@ -139,17 +139,34 @@
                                         </label>
                                     </div>
                                     <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Marca Producto</label>
+                                                <select  name="pidMarca" class="form-control selectpicker" id="pidMarca" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Marca producto</option>
+                                                    @foreach($marcas as $ma)                
+                                                        <option value="{{$ma->idMarca}}_{{$ma->nombre_proveedor}}">{{$ma->nombre_proveedor}}</option>
+                                                    @endforeach  
+                                                </select>                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Familia</label>
+                                                <select required name="pfamilia" class="form-control " id="pfamilia" >
+                                               </select> 
+                                            </div>
+                                        </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true"  style="font-size: 12px !important">
-                                                    <option value=""  style="font-size: 12px !important">Seleccione Producto</option>
-                                                    @foreach($productos as $producto)
-                                                        <option value="{{ $producto->idProducto }}_{{ $producto->productos}}_{{ $producto->precio_unitario }}_{{$producto->descuento_familia}}_{{$producto->tipo_producto}}" style="font-size: 12px !important">{{ $producto->codigo_producto.' | '.$producto->nombre_producto.' | '.$producto->nombre_proveedor .' | '.$producto->descripcion_producto }}</option>
-                                                    @endforeach
-                                                </select>                                                 
+                                                <label for="" class="control-label">Producto</label>
+                                                <select required name="pproduc" class="form-control" id="pproduc" data-live-search="true">
+                                               </select> 
                                             </div>
-                                             
                                         </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -160,6 +177,8 @@
                                         <div class="col-sm-2">
                                             <div class="input-group">
                                                 <span class="input-group-addon">S/.</span>
+                                                <input type="hidden"  id="nombreproducto" class="form-control" name="nombreproducto"  disabled>
+                                                <input type="hidden"  id="tipopro" class="form-control" name="tipopro"  disabled>
                                                 <input type="number"  id="precio_uni" class="form-control" name="precio_uni"  disabled placeholder="Precio Unitario">
                                             </div>
                                         </div>
@@ -370,6 +389,30 @@
         
     });
 
+    var selectMarca = document.getElementById('pidMarca');
+    selectMarca.addEventListener('change',function(){
+        var selectedOptionF = this.options[selectMarca.selectedIndex];
+        var selctedidF=selectedOptionF.value.split('_');
+        familia(selctedidF[0]);
+        
+    });
+
+    var selectFamilia = document.getElementById('pfamilia');
+    selectFamilia.addEventListener('change',function(){
+        var selectedOptionP = this.options[selectFamilia.selectedIndex];
+        var selctedidP=selectedOptionP.value;
+        producto(selctedidP);
+        
+    });
+
+    var selectPD= document.getElementById('pproduc');
+    selectPD.addEventListener('change',function(){
+        var selectedOptionPD = this.options[selectPD.selectedIndex];
+        var selctedidPD=selectedOptionPD.value;
+        preciodescuento(selctedidPD);
+        
+    });
+
     $(document).ready(function(){
         $('#bt_add_tablero').click(function(){
             valoresFinales();
@@ -494,6 +537,138 @@
         });
     }
 
+    function familia(idMarca){
+        console.log(idMarca,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{marca:idMarca}, //datos que se envian a traves de ajax
+            url:'fam', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var familia=response.marca;
+                    var productos=response.producto;
+                    var va;
+                    var va2;
+                    console.log(familia);
+                    va='<option value="" disabled="" selected="">Seleccione</option>'
+                    va2='<option value="" disabled="" selected="">Seleccione</option>'
+                    for(const i in familia){
+                        va+='<option value="'+familia[i]['idFamilia']+'">'+familia[i]['nombre_familia']+'</option>';                
+                    }
+                    $("#pfamilia").html(va);
+
+                    for(const i in productos){
+                    va2+='<option value="'+productos[i]['idProducto']+'">'+productos[i]['nombre_producto']+' | '+productos[i]['codigo_producto']+''+productos[i]['marca_producto']+' | '+productos[i]['descripcion_producto']+'</option>';                 
+                    }
+                    $("#pproduc").html(va2); 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+    
+//obtener el producto la cual pertenece tanto la familia y obteniendo el precio y decuento
+    function producto(idFamilia){
+        console.log(idFamilia,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{familia:idFamilia}, //datos que se envian a traves de ajax
+            url:'prod', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var producto=response.familia;
+                    var va;
+                    console.log('productowey',producto);
+                    va='<option value="" disabled="" selected="">Seleccione</option>'
+                    for(const i in producto){
+                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['nombre_producto']+' | '+producto[i]['codigo_producto']+' | '+producto[i]['marca_producto']+' | '+producto[i]['descripcion_producto']+'</option>';                 
+                    }
+                    $("#pproduc").html(va); 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+
+
+    function preciodescuento(idProducto){
+        console.log(idProducto,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{producto:idProducto}, //datos que se envian a traves de ajax
+            url:'predes', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+
+                    // var urlBase=window.location.origin;
+                    // var url=urlBase+'/'+response.data;
+                    // document.location.href=url;
+                    var preciodescuento=response.producto;
+                   
+                    
+                    console.log('preciounitarioooooooooo',preciodescuento);
+                   
+                  
+                    for(const i in preciodescuento){
+                      
+                                       
+                    }
+                    console.log('preciounitarioooooooooo',preciodescuento[0]['producto2']);
+                    //$("#pproduc").html(va);
+                    $("#precio_uni").val(preciodescuento[0]['precio_unitario']);
+                    $("#pdescuento").val(preciodescuento[0]['descuento_familia']);
+                    $("#nombreproducto").val(preciodescuento[0]['producto2']);
+                    $("#tipopro").val(preciodescuento[0]['tipo_producto']); 
+
+                    //validacion de cambios de formulario de proecio unitario
+
+                    if(preciodescuento[0]['tipo_producto']=='Tableros' || preciodescuento[0]['precio_unitario']==0.00){
+
+                    $('#precio_uni').attr("disabled", false);
+
+                    }else{
+
+                    $('#precio_uni').attr("disabled", true); 
+
+                         }  
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+
     function saveProforma(){
         // se enviar los datos al controlador proforma tableros
         tipoCambio=document.getElementById('idTipo_moneda').value.split('_');
@@ -531,9 +706,8 @@
     }
     var bool;
     function agregarProductosTablero(){    
-        Producto=document.getElementById('pidProducto').value.split('_');
-        var idProd=Producto[0];
-        var pname=Producto[1];
+        var idProd=$("#pproduc").val();
+        var pname=$("#nombreproducto ").val();
         var pdescripcion=$("#descripcionp ").val();
         var puni=$('#precio_uni').val();
         var pcant=$('#Pcantidad').val();
@@ -596,16 +770,16 @@ alert("La cantidad no puede ser '0' ");
                                 '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+
                             '</td>'+
                             '<td  class="text-center"> '+ 
-                                '<input style="width:40px !important;" width="40px" type="number" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+
+                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                             '</td>'+
                             '<td class="text-center"> '+   
-                                '<input style="width:60px !important;" width="40px" type="number" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+
+                                '<input style="width:60px !important;" width="40px" type="hidden" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['prec_uniP']+'" >'+filaob[fila]['prec_uniP']+
                             '</td>'+
                             '<td class="text-center"> '+   
-                                '<input style="width:60px !important;" width="40px" type="number" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+
+                                '<input style="width:60px !important;" width="40px" type="hidden" disabled name="pdescu'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descuentoP']+'" >'+filaob[fila]['descuentoP']+
                             '</td>'+
                             '<td class="text-center"> '+   
-                                '<input style="width:40px !important;" width="40px" type="number" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+
+                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2) +
                             '</td>'+
                             '<td class="text-center">'+
                                 '<center>'+

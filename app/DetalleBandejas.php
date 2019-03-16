@@ -18,7 +18,7 @@ class DetalleBandejas extends Model
       'idProforma',
       'espesor',
       'precioGal',
-      
+      'espesorT',
       'precioTap',
       'preciouniB',
       'tramo',

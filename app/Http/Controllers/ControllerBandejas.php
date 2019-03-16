@@ -173,6 +173,7 @@ public function store(Request $request)
             $detalleProforma->cambioBandejas=$fila['tipocambio'];    
             $detalleProforma->simboloBandejas=$fila['simbolocambio'];
             $detalleProforma->promed=$fila['promed'];
+            $detalleProforma->espesorT=$fila['espesorT'];
             $detalleProforma->save();            
         }
         return ['data' =>'bandejas','veri'=>true];
@@ -288,7 +289,7 @@ public function edit($id)
     ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
     ->join('Cliente_Representante as cr','cr.idCR','=','clp.idCliente')
     ->join('Galvanizado as gal','gal.idGalvanizado','=','deP.idGalvanizado')
-    ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.cambioBandejas','deP.estadoDB','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','p.incluye','deP.espesor','deP.precioGal','deP.preciouniB','deP.precioTap','deP.tramo','deP.medidas','deP.dimenciones','deP.tapa','deP.cambioBandejas','deP.simboloBandejas','deP.promed','deP.tramo','deP.idGalvanizado','gal.nombreGalvanizado','pd.promedio','cr.nombre_RE')
+    ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.cambioBandejas','deP.estadoDB','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','p.incluye','deP.espesor','deP.espesorT','deP.precioGal','deP.preciouniB','deP.precioTap','deP.tramo','deP.medidas','deP.dimenciones','deP.tapa','deP.cambioBandejas','deP.simboloBandejas','deP.promed','deP.tramo','deP.idGalvanizado','gal.nombreGalvanizado','pd.promedio','cr.nombre_RE')
     ->where('deP.idProforma','=',$id)
     ->where('deP.estadoDB','=','1')
     ->get();
@@ -367,6 +368,7 @@ public function edit($id)
                     'dimenciones'=>$fila['dimenciones'],
                     'tapa'=>$fila['tapa'],   
                     'promed'=>$fila['promed'],
+                    'espesorT'=>$fila['espesorT'],
                     ]);
 
                 }else if($fila['estado']==2){
@@ -388,6 +390,7 @@ public function edit($id)
             $Detallebandejas->cambioBandejas=$valorcambio;   
             $Detallebandejas->simboloBandejas=$simbolo;
             $Detallebandejas->promed=$fila['prome'];
+            $detalleProforma->espesorT=$fila['espesorT'];
             $Detallebandejas->save(); 
 
                 }
