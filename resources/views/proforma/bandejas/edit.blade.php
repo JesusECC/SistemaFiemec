@@ -163,7 +163,7 @@
                                         </div>
                                         <div class="col-lg-2">
                                             <div class="form-group">
-                                                <label for="" class="control-label">Tipo Acabado</label>
+                                                <label for="" class="control-label">Precio Acabado</label>
                                                  <input type="number" id="ppreciog" class="form-control" name="ppreciog">                                                   
                                             </div>
                                         </div>

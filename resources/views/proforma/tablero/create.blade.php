@@ -780,7 +780,7 @@
                 //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
                 for (const key in tablero) {
                     if (tablero.hasOwnProperty(key)) {
-                        if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
+                        if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){  
                             bool=true; 
                         }                                       
                     }
