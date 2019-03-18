@@ -620,7 +620,7 @@
                     $("#pfamilia").html(va);
 
                     for(const i in productos){
-                    va2+='<option value="'+productos[i]['idProducto']+'">'+productos[i]['nombre_producto']+' | '+productos[i]['codigo_producto']+''+productos[i]['marca_producto']+' | '+productos[i]['descripcion_producto']+'</option>';                 
+                    va2+='<option value="'+productos[i]['idProducto']+'">'+productos[i]['codigo_producto']+' | '+productos[i]['nombre_producto']+' | '+productos[i]['marca_producto']+' | '+productos[i]['descripcion_producto']+'</option>';                 
                     }
                     $("#pproduc").html(va2); 
                 }else{
@@ -899,8 +899,10 @@
                                 if(filaob[fil]['nomTablero']==nomTablero && filaob[fil]['idProducto']==idProd && filaob[fil]['nomTablero']==tablero[key]['nombre']){
                                     var su=parseInt(pcant);
                                     var des=parseInt(descuento);
+                                    var precuni=parseFloat(puni);
                                     filaob[fil]['cantidadP']=su;
                                     filaob[fil]['descuentoP']=des;
+                                    filaob[fil]['prec_uniP']=precuni;
                                     filaob[fil]['descripcionP']=pdescripcion;
                                     fila();
                                     boolfila=true;

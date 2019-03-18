@@ -901,9 +901,8 @@ var editarval=true;
          
      }
      function agregarProductosTablero(){    
-         Producto=document.getElementById('pidProducto').value.split('_');
-         var idProd=parseInt(Producto[0]);
-         var pname=Producto[4];
+         var idProd=$("#pproduc").val();
+        var pname=$("#nombreproducto ").val();
          var pdescripcion=$("#descripcionp ").val();
          var puni=$('#precio_uni').val();
          var pcant=$('#Pcantidad').val();
@@ -928,14 +927,17 @@ var editarval=true;
                                      var su=parseInt(pcant);
                                      var des=parseInt(descuento);
                                      var cxtb=parseInt(cantiTabl);
+                                     var precuni=parseFloat(puni);
                                      filaob[fil]['cantidadP']=su;
                                      filaob[fil]['descuentoP']=des;
                                      filaob[fil]['cantidadTa']=cxtb;
                                      filaob[fil]['descripcionP']=pdescripcion;
+                                     filaob[fil]['prec_uniP']=precuni;
                                      filaob[fil]['estado']=1;
                                      fila();
                                      boolfila=true;
-                                     console.log("Actualizar producto");                      
+                                     console.log("Actualizar producto"); 
+                    
                                  }                
                              }
                          }
