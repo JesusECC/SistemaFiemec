@@ -75,10 +75,10 @@ class ControllerProformaServicio extends Controller
         ->get();
 
         $clientes=DB::table('Cliente_Proveedor as cp')
-         ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,cp.Departamento,cp.Distrito) as direccion'),'cp.nro_documento')
-        ->where('tipo_persona','=','Cliente persona')
-        ->orwhere('tipo_persona','=','Cliente Empresa')
-        ->get();
+    ->join('users as u','u.id','=','cp.idU')
+    ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento','cp.idU',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno) as user'))
+    ->where('estado','=',1)
+    ->get();
         // dd($clientes);
         return view('proforma.servicio.create',["tarea"=>$tarea,"representante"=>$representante,"productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"servicios"=>$servicios]);
     }

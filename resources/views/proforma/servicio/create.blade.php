@@ -50,7 +50,7 @@
                                                 <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
                                                     <option value="">Seleccione Cliente</option>
                                                     @foreach($clientes as $cliente)
-                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombres_Rs.' '.$cliente->paterno.' '.$cliente->materno}}</option>
+                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}_{{$cliente->idU}}_{{$cliente->nombres_Rs}}_{{$cliente->paterno}}_{{$cliente->materno}}_{{$cliente->user}}">{{$cliente->nombres_Rs.' '.$cliente->paterno.' '.$cliente->materno}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -481,7 +481,21 @@
     var iduser={!! Auth::user()->id !!}
     $("#pidTarea").change(MostarTarea);
     
+    function MostrarAlertaCliente(){
 
+        Cliente=document.getElementById('idClientes').value.split('_');
+        idU=Cliente[3];
+        nombre=Cliente[4];
+        paterno=Cliente[5];
+        matero=Cliente[6];
+        user=Cliente[7];
+        
+        if(iduser!=idU){
+
+           alert("El Cliente "+nombre+" "+paterno+" "+matero+"esta asignadado al Usuario "+user);
+
+        }   
+    }
     //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
     function MostrarCliente(){
         // cdireccion/cnro_documentoidClientes
@@ -489,6 +503,7 @@
         idcliente=Cliente[0];
         $("#cdireccion").val(Cliente[1]);
         $("#cnro_documento").val(Cliente[2]);
+        MostrarAlertaCliente();
     }
 
     function MostarTarea(){

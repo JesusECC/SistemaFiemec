@@ -68,9 +68,10 @@ class ControllerProformaTableros extends Controller
           ->get();
           
         $clientes=DB::table('Cliente_Proveedor as cp')
-         ->select('cp.idCliente','cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento')
-        ->where('estado','=',1)
-        ->get();
+    ->join('users as u','u.id','=','cp.idU')
+    ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento','cp.idU',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno) as user'))
+    ->where('estado','=',1)
+    ->get();
         return view('proforma.tablero.create',["representante"=>$representante,"productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"marcas"=>$marcas]);
     }
     public function buscarProducto(Request $request)

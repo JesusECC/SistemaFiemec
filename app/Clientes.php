@@ -14,6 +14,7 @@ class Clientes extends Model
 
     protected $filleable = [
 
+        'idU',
     	'tipo_documento',//tabla aparte
     	'nro_documento',
     	'nombres_Rs',

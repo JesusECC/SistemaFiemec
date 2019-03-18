@@ -50,7 +50,7 @@
                                                 <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
                                                     <option value="">Seleccione Cliente</option>
                                                     @foreach($clientes as $cliente)
-                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombres_Rs.' '.$cliente->paterno.' '.$cliente->materno}}</option>
+                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}_{{$cliente->idU}}_{{$cliente->nombres_Rs}}_{{$cliente->paterno}}_{{$cliente->materno}}_{{$cliente->user}}">{{$cliente->nombres_Rs.' '.$cliente->paterno.' '.$cliente->materno}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -500,31 +500,28 @@
     var iduser={!! Auth::user()->id !!}
     $("#pidProducto").change(MostarProducto);
     
-    
- /* function cambiaropcion(){
-       
-        var tipo_producto=$('#tipopro').val();
-        var tp=String(tipo_producto);
-        var puni=$('#precio_uni').val();
+function MostrarAlertaCliente(){
+
+        Cliente=document.getElementById('idClientes').value.split('_');
+        idU=Cliente[3];
+        nombre=Cliente[4];
+        paterno=Cliente[5];
+        matero=Cliente[6];
+        user=Cliente[7];
         
-       if(tp=='Tableros' || puni==0.00){
+        if(iduser!=idU){
 
-        console.log('ingrese',puni)
+           alert("El Cliente "+nombre+" "+paterno+" "+matero+"esta asignadado al Usuario "+user);
 
-            $('#precio_uni').attr("disabled", false);
-        }
-        else{
-            console.log('no ingrese',puni)
-           $('#precio_uni').attr("disabled", true); 
-        }
-   }*/
-    //$("#bt_add_tablero").change($("#total").html("s/. " + subtotal));
+        }   
+    }
     function MostrarCliente(){
         // cdireccion/cnro_documentoidClientes
         Cliente=document.getElementById('idClientes').value.split('_');
         idcliente=Cliente[0];
         $("#cdireccion").val(Cliente[1]);
         $("#cnro_documento").val(Cliente[2]);
+        MostrarAlertaCliente();
     }
 
     function MostarProducto(){

@@ -54,7 +54,7 @@
                                                 <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
                                                     <option value="">Seleccione Cliente</option>
                                                     @foreach($clientes as $cliente)
-                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}">{{$cliente->nombres_Rs.' '.$cliente->paterno.' '.$cliente->materno}}</option>
+                                                    <option value="{{$cliente->idCliente}}_{{$cliente->direccion}}_{{$cliente->nro_documento}}_{{$cliente->idU}}_{{$cliente->nombres_Rs}}_{{$cliente->paterno}}_{{$cliente->materno}}_{{$cliente->user}}">{{$cliente->nombres_Rs.' '.$cliente->paterno.' '.$cliente->materno}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -474,13 +474,29 @@
         }
    }
 
-    
+    function MostrarAlertaCliente(){
+
+        Cliente=document.getElementById('idClientes').value.split('_');
+        idU=Cliente[3];
+        nombre=Cliente[4];
+        paterno=Cliente[5];
+        matero=Cliente[6];
+        user=Cliente[7];
+        
+        if(iduser!=idU){
+
+           alert("El Cliente "+nombre+" "+paterno+" "+matero+"esta asignadado al Usuario "+user);
+
+        }   
+    }
+
     function MostrarCliente(){
        
         Cliente=document.getElementById('idClientes').value.split('_');
         idcliente=Cliente[0];
         $("#cdireccion").val(Cliente[1]);
         $("#cnro_documento").val(Cliente[2]);
+        MostrarAlertaCliente();
     }
     function MostarProducto(){
         Producto=document.getElementById('pidProducto').value.split('_');
@@ -681,7 +697,7 @@
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion").val();
         console.log(iduser);
-        if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
+        if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' && typeof(clienteemp)!='undefined'){
             var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp,simbolo:simbolo,userid:iduser}];
             // var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp}];
             $.ajax({
@@ -742,7 +758,8 @@
             }
             valoresFinales();            
             }else{
-alert("La cantidad no puede ser '0' ");
+                
+                    alert("La cantidad no puede ser '0' ");
 
 
             }

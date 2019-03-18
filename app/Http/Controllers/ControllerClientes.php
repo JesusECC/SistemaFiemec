@@ -8,6 +8,7 @@ use SistemaFiemec\Clientes;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SistemaFiemec\Http\Requests\RequestFormIngresoCliProEmp;
+use Illuminate\Support\Facades\Auth;
 
 
 use Carbon\Carbon;
@@ -61,8 +62,11 @@ class ControllerClientes extends Controller
 
 
  public function store(Request $request){
-  
+
+                  $id=Auth::user()->id;
+
                   $Cliente=new Clientes;
+                  $Cliente->idU=$id;
                   $Cliente->tipo_documento=$request->get('tipo_documento');
                   $Cliente->nro_documento=intval($request->get('nro_documento'));
                   $Cliente->nombres_Rs=$request->get('nombres_RS');                  
