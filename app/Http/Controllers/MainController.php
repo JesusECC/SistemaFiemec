@@ -8,6 +8,7 @@ use SistemaFiemec\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use SistemaFiemec\Http\Requests\RequestFormProforma;
+use Illuminate\Support\Facades\Auth;
 
 use Response;
 use Illuminate\Support\Collection;
@@ -22,27 +23,35 @@ class MainController extends Controller
      */
     public function index()
     {
+
+        $id=Auth::user()->id;
+
+
     $unitario=DB::table('Proforma')
     ->select(DB::raw('COUNT(*) as total'))
     ->where('tipo_proforma','=','unitaria')
+    ->where('idEmpleado','=',$id)
     ->where('estado','=',1)
     ->get();
 
      $tableros=DB::table('Proforma')
     ->select(DB::raw('COUNT(*) as total2'))
     ->where('tipo_proforma','=','Tablero')
+    ->where('idEmpleado','=',$id)
     ->where('estado','=',1)
     ->get();
 
     $servicios=DB::table('Proforma')
     ->select(DB::raw('COUNT(*) as total3'))
     ->where('tipo_proforma','=','Servicios')
+    ->where('idEmpleado','=',$id)
     ->where('estado','=',1)
     ->get();
 
      $bandejas=DB::table('Proforma')
     ->select(DB::raw('COUNT(*) as total4'))
     ->where('tipo_proforma','=','bandeja')
+    ->where('idEmpleado','=',$id)
     ->where('estado','=',1)
     ->get();
     

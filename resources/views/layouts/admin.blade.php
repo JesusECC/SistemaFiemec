@@ -218,7 +218,7 @@
       <!--Fin-Contenido-->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
+          <b>Version</b> 1.0
         </div>
         <strong>
           <span class="pi-header-block pi-header-block-txt">

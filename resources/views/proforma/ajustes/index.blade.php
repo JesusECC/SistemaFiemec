@@ -60,23 +60,7 @@
 					            </div>
 					        </div>
 					    </div>
-					    <div class="col-sm-4">
-					        <div class="ibox">
-					            
-					            <div class="ibox-content no-padding">
-					                <div class="list-group">
-					                    <a class="list-group-item" href="?c=Config&amp;a=IndexDE">
-					                        <h4 class="list-group-item-heading">Datos de la empresa</h4>
-					                        <p class="list-group-item-text">Información de mi negocio.</p>
-					                    </a>
-					                    <a class="list-group-item" href="?c=Config&amp;a=IndexTD">
-					                        <h4 class="list-group-item-heading">Datos de la empresa</h4>
-					                        <p class="list-group-item-text">Información de mi negocio.</p>
-					                    </a>
-					                </div>
-					            </div>
-					        </div>
-					    </div>
+					    
 					</div>
 				</div>
               </div><!-- /.box -->
