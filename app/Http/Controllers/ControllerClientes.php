@@ -77,13 +77,14 @@ class ControllerClientes extends Controller
                   $Cliente->telefono=$request->get('telefono');
                   $Cliente->celular=$request->get('celular');
                   $Cliente->correo=$request->get('correo');
-                  $Cliente->tipo_persona='Cliente persona';
+                  $Cliente->tipo_persona=$request->get('tipo_persona');
                   $Cliente->cuenta_1=$request->get('cuenta_1');
                   $Cliente->cuenta_2=$request->get('cuenta_2');
                   $Cliente->cuenta_3=$request->get('cuenta_3');
                   $Cliente->estado=1;
                   $Cliente->Departamento=$request->get('Departamento');
                   $Cliente->Distrito=$request->get('Distrito');
+                  $Cliente->Provincia=$request->get('Provincia');
                   $Cliente->Direccion=$request->get('Direccion');
                   $Cliente->Referencia=$request->get('Referencia');
                   
@@ -117,11 +118,11 @@ class ControllerClientes extends Controller
                   $Cliente->telefono=$request->get('telefono');
                   $Cliente->celular=$request->get('celular');
                   $Cliente->correo=$request->get('correo');
-                  $Cliente->tipo_persona='Cliente persona';
                   $Cliente->cuenta_1=$request->get('cuenta_1');
                   $Cliente->cuenta_2=$request->get('cuenta_2');
                   $Cliente->cuenta_3=$request->get('cuenta_3');
                   $Cliente->Departamento=$request->get('Departamento');
+                  $Cliente->Provincia=$request->get('Provincia');
                   $Cliente->Distrito=$request->get('Distrito');
                   $Cliente->Direccion=$request->get('Direccion');
                   $Cliente->Referencia=$request->get('Referencia');

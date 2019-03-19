@@ -32,6 +32,7 @@ class Clientes extends Model
     	'cuenta_3',
     	'fecha_sistema',
         'Departamento',
+        'Provincia',
         'Distrito',
         'Direccion',
         'Referencia',
