@@ -86,7 +86,7 @@
 												<label>
 														Numero de Documento
 													</label>
-												<input type="text" name="nro_documento" class="form-control" placeholder="Ingrese numero de Documento..."  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
+												<input type="text" id="nro_documento" name="nro_documento" required="" class="form-control" placeholder="Ingrese numero de Documento...">
 											</div> 												
 										</div>
 										
@@ -105,7 +105,7 @@
 												<label>
 														Apell. Paterno
 													</label>
-												<input type="text" name="paterno" class="form-control" placeholder="Ingrese Apellido Paterno" {{old('paterno')}}>
+												<input type="text" id="paterno" name="paterno" class="form-control" placeholder="Ingrese Apellido Paterno" {{old('paterno')}}>
 											</div> 												
 										</div>
 										<div class="col-sm-4">
@@ -113,7 +113,7 @@
 												<label>
 														Apell. Materno
 													</label>
-												<input type="text" name="materno" class="form-control" placeholder="Ingrese Apellido Materno" {{old('materno')}}>
+												<input type="text" id="materno" required name="materno" class="form-control" placeholder="Ingrese Apellido Materno" {{old('materno')}}>
 											</div>
 					    				</div>
 									</div>
@@ -127,7 +127,7 @@
 													    <div class="input-group-addon">
 															<i class="far fa-calendar-alt"></i>
 														</div>
-												<input type="date" class="form-control pull-right" name="fecha_nacimiento">	
+												<input  id="fecha_nacimiento" type="date" class="form-control pull-right" name="fecha_nacimiento">	
 												    </div>
 											    </div>										
 											</div>
@@ -136,8 +136,8 @@
 													<label>
 														Genero
 													</label>
-													<select name="sexo" class="form-control">
-														<option value="" disabled selected>Seleccione</option>
+													<select id="sexo" disabled name="sexo" class="form-control">
+														<option value="" selected>Seleccione</option>
 														<option value="Masculino">Masculino</option>
 													    <option value="Femenino">Femenino</option>
 													</select>													
@@ -259,14 +259,79 @@
 		</div>
 		<div class="box-footer">
 			<div class="text-right">
-			    <button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
+			    <button class="btn btn-primary btn-sm" type="submit" id="save"><i class="far fa-save"></i> Guardar</button>
 				<button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-				<button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{route('clientes')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+				<button  class="btn btn-success btn-sm " type="button" ><a style="color: white!important;text-decoration: none" href="{{route('clientes')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
 			</div>
 		</div>
     </div><!-- /.box -->
     {!!Form::close()!!}
     </div><!-- /.col -->
 </div><!-- /.row -->
+@push('scripts')
+<!-- -->
+<script type="text/javascript">
+	//Metodo para llamar a la funcion 
+	$(document).ready(function(){
+		$('#tipo_documento').change(function(){
+			validarCampo();
+			limpiar ();
+		});
+	//Metodo para llamar a tipo persona
+	$('#tipo_persona').click(function(){
+			ValidacionEmpresa ();
+	
+		});
+	});
+	//Funcion para validar la cantidad de digitos Tanto DNI  Como  RUC
+
+	function validarCampo(){
+	
+	tipodocumento = document.getElementById('tipo_documento').value;
+	if(tipodocumento == 'DNI'){
+		$("input#nro_documento").attr('maxlength','8');
+
+	}else if (tipodocumento == 'RUC'){
+			$("input#nro_documento").attr('maxlength','11');
+	}
+
+
+
+}
+
+
+	 function limpiar (){
+			$("input#nro_documento").val("");
+
+	 }
+
+//Funcion bloquear algunos campos
+
+ function ValidacionEmpresa (){
+tipocliente = document.getElementById('tipo_persona').value;
+
+	if (tipocliente == '2'){
+		// document.getElementById("paterno").disabled;materno
+			$("input#paterno").attr('disabled',true);
+			$("input#materno").attr('disabled',true);
+			$("select#sexo").attr('disabled',true);
+			$("input#fecha_nacimiento").attr('disabled',true);
+		
+		
+	}else if(tipocliente == '1'){
+			$("input#paterno").attr('disabled',false);
+			$("input#materno").attr('disabled',false);
+			$("select#sexo").attr('disabled',false);
+			$("input#fecha_nacimiento").attr('disabled',false);
+
+	}
+
+
+ }
+
+
+</script>
+
 </section><!-- /.content -->
+@endpush
 @endsection
