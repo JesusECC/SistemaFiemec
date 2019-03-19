@@ -301,20 +301,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-1 hidden-xs text-center p-t-xs"> 
-                                                                <i class="fa fa-minus m-t-lg"> 
-                                                                </i>  
-                                                            </div>
+                                                        
                                                             <div class="col-sm-3">
-                                                                <div class="form-group display-flex dec">
-                                                                    <label for="" class="control-label">Descuento</label>
-                                                                    <div class="input-group ">
-                                                                        <h4 id="descuentos" class="form-control">    </h4>
-                                                                        <input type="hidden" name="descuentos" id="descuentos"  >
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4">
                                                                 <div class="form-group display-flex dec">
                                                                     <label for="" class="control-label">Valor Venta</label>
                                                                     <div class="input-group ">
@@ -323,10 +311,10 @@
                                                                     </div>
                                                                 </div>
                                                             </div>                                                            
-                                                        </div> 
-                                                        <hr>    
-                                                        <div class="row">   
-                                                            <div class="col-sm-4">
+                                                         
+                                                            
+                                                          
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> IGV %</label>
                                                                     <div class="input-group ">
@@ -337,7 +325,7 @@
                                                                    
                                                                 </div>  
                                                             </div>
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group display-flex dec">  
                                                                     <label for="    " class="control-label"> Total Soles</label>
                                                                     <div class="input-group ">
@@ -347,18 +335,43 @@
                                                                    
                                                                 </div>  
                                                             </div>
-                                                            <div class="col-sm-4">
-                                                                <div class="form-group display-flex dec">  
-                                                                    <label for="    " class="control-label"> Total Dolares</label>
-                                                                    <div class="input-group date">
-                                                                        <h4 class="form-control" id="total_dolares">    
-                                                                        </h4>
-                                                                        <input type="hidden" name="tota_dolares" id="tota_dolares">
-                                                                    </div> 
-                                                                   
-                                                                </div>  
+                                                            
+                                                        </div> 
+                                                         <div class="row">   
+                                                         
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Añadir Desc%</label>
+                                                                    <div class="form-group label-floating">
+                                                                        <input class="form-control" style="margin-top:10px" type="number" name="pdesc" id="pdesc" >
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>  
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Valor venta Final</label>
+                                                                    <div class="form-group label-floating">
+
+                                                                      <h4 disabled id="descuentos" class="form-control">    </h4>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group display-flex dec">
+                                                                    <label for="" class="control-label">Total Soles Final</label>
+                                                                    <div class="form-group label-floating">
+
+                                                                      <h4 disabled id="descuentos2" class="form-control">    </h4>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3" style="margin-top:35px">
+                                                             <div class="form-group label-floating">
+                                                         <label class="control-label"></label>
+                                                          <button type="button" id="bt_alicar" class="btn btn-primary">Aplicar Desc.</button>
+                                                          </div>
+                                                          </div> 
+                                                        </div>   
                                                     </div>  
                                                 </div>
                                             </div>
@@ -447,6 +460,10 @@
         $('#Pcantidad').click(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
         });
+        $('#bt_alicar').click(function(){
+             aplicadescuento();
+            
+         });
         //logica para colocar los subtitulos
         $('#subtitulo').click(function(){
             console.log("aaaa");
@@ -577,9 +594,10 @@
         var clienteemp=$("#cliente_empleado").val();
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion").val();
+        var descuento=$("#pdesc").val();
         
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,simbolo:simbolo,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,userid:iduser,clienteemp:clienteemp}];
+            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,simbolo:simbolo,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,userid:iduser,clienteemp:clienteemp,desc:descuento}];
             // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -1029,6 +1047,32 @@
             
         }
     }
+    function aplicadescuento(){       
+        var venta=0;   
+         var igv=0;  
+         var tota=0;
+        var descu=0;  
+         for (const fila in filaob) {
+             if (filaob.hasOwnProperty(fila) && filaob[fila]['estado']!=0) {
+                 var precio=parseFloat(filaob[fila]['prec_uniP']);
+                 var cantidad=parseFloat(filaob[fila]['cantidadP']);
+                 var descuento=$('#pdesc').val();
+                 
+      
+                 venta+=(cantidad*precio);
+                 
+                                        
+             }
+         }
+         tota2=venta-(venta*(descuento/100));
+         igv=venta*0.18;
+         tota=(venta+igv)-((venta+igv)*(descuento/100));
+         
+         
+
+         $("#descuentos").html("s/. " + tota2);
+         $("#descuentos2").html("s/. " + tota);
+     }
 
     $('#bt_add_subtitle').click(function(){
         var nomt=$("#prod-selec").val();

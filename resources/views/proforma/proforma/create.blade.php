@@ -916,7 +916,7 @@
         total();
         cambioMoneda();
     }
-    function cambioMoneda(){
+   /* function cambioMoneda(){
         if(filaob.length>0){
             if("$"==simbolo){    
                 totaldolares=(totalt/tipocam).toFixed(2);        
@@ -925,7 +925,7 @@
                 $("#total_dolares").html(0);
             }
         }
-    }
+    }*/
     function eliminar(index){
         // elimina las filas de un tablero especifico 
         for (var key in filaob) {

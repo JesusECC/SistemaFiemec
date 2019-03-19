@@ -62,12 +62,12 @@
 													</div>
 													<div class="col-sm-3">
 														<div class="form-group">
-															<input type="text" name="paterno" class="form-control" required value="{{$Cliente->paterno}}" {{old('paterno')}}>
+															<input type="text" name="paterno" class="form-control" required value="{{$Cliente->paterno}}">
 														</div> 												
 													</div>
 													<div class="col-sm-3">
 														<div class="form-group">
-															<input type="text" name="materno" class="form-control" required value="{{$Cliente->materno}}" {{old('materno')}}>	
+															<input type="text" name="materno" class="form-control" required value="{{$Cliente->materno}}">	
 														</div>
 													</div>
 												</div>
@@ -80,18 +80,19 @@
 																	<i class="far fa-calendar-alt"></i>
 																</div>
 																<input type="date" name="fecha_nacimiento" class="form-control" required value="{{$Cliente->fecha_nacimiento}}">
+
 															</div>
 														</div>												
 													</div>
 													<div class="col-sm-3">
 														<div class="form-group">
 															<select name="sexo" class="form-control">
-																@if($Cliente->sexo=='hombre')
-															   <option value="hombre" selected>Hombre</option>
-															   <option value="mujer">Mujer</option>	
-															   @elseif($Cliente->sexo=='mujer')
-															   <option value="hombre">Hombre</option>
-															   <option value="mujer" selected>Mujer</option>
+																@if($Cliente->sexo=='Masculino')
+															   <option value="Masculino" selected>Masculino</option>
+															   <option value="Femenino">Femenino</option>	
+															   @elseif($Cliente->sexo=='Femenino')
+															   <option value="Masculino">Masculino</option>
+															   <option value="Femenino" selected>Femenino</option>
 															   @endif
 															</select>													
 														</div>
@@ -99,6 +100,7 @@
 													<div class="col-sm-3">
 														<div class="form-group">
 														<input type="text" name="telefono" class="form-control" required value="{{$Cliente->telefono}}">
+														
 														</div>
 	
 													</div>

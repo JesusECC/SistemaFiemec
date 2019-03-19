@@ -52,9 +52,12 @@
 														Datos Generales
 													</label>
 												</div>
-												<div class="row">
-													<div class="col-sm-4">				
-										<div class="form-group">
+									<div class="row">
+										<div class="col-sm-4">				
+										    <div class="form-group">
+										    	<label>
+														Tipo de Documento
+													</label>
 												<select id="tipo_documento" name="tipo_documento" class="form-control">
 												 <option value="" disabled selected >Selecione Tipo de Documento</option>
 												<option value="DNI">DNI</option>
@@ -62,140 +65,193 @@
 												
 												
 												</select>
+										    </div>
+									    </div>	
+										<div class="col-sm-4">
+											<div class="form-group">
+												<label>
+														Numero de Documento
+													</label>
+												<input type="text" name="nro_documento" class="form-control" placeholder="Ingrese numero de Documento..."  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
+											</div> 												
 										</div>
-									</div>	
-													<div class="col-sm-4">
-														<div class="form-group">
-															<input type="text" name="nro_documento" class="form-control" placeholder="Ingrese numero de Documento..."  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
-														</div> 												
-													</div>
-													<div class="col-sm-4">
-														<div class="form-group">
-															<input type="text" name="nombres_RS" class="form-control" placeholder="Ingrese Nombre" {{old('nombres_RS')}}>
-														</div>													
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-sm-6">
-														<div class="form-group">
-															<input type="text" name="paterno" class="form-control" placeholder="Ingrese Apellido Paterno" {{old('paterno')}}>
-														</div> 												
-													</div>
-													<div class="col-sm-6">
-														<div class="form-group">
-															<input type="text" name="materno" class="form-control" placeholder="Ingrese Apellido Materno" {{old('materno')}}>
+										<div class="col-sm-4">
+											<div class="form-group">
+												<label>
+														Nombre
+													</label>
+												<input type="text" name="nombres_RS" class="form-control" placeholder="Ingrese Nombre" {{old('nombres_RS')}}>
+											</div>													
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>
+														Apell. Paterno
+													</label>
+												<input type="text" name="paterno" class="form-control" placeholder="Ingrese Apellido Paterno" {{old('paterno')}}>
+											</div> 												
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>
+														Apell. Materno
+													</label>
+												<input type="text" name="materno" class="form-control" placeholder="Ingrese Apellido Materno" {{old('materno')}}>
+											</div>
+					    				</div>
+									</div>
+									<div class="row">
+											<div class="col-sm-5">
+												<div class="form-group">
+													<label>
+														Fecha de Nacimiento
+													</label>
+													<div class="input-group date">
+													    <div class="input-group-addon">
+															<i class="far fa-calendar-alt"></i>
 														</div>
-													</div>
+												<input type="date" class="form-control pull-right" name="fecha_nacimiento">	
+												    </div>
+											    </div>										
+											</div>
+											<div class="col-sm-3">
+												<div class="form-group">
+													<label>
+														Genero
+													</label>
+													<select name="sexo" class="form-control">
+														<option value="" disabled selected>Seleccione</option>
+														<option value="Masculino">Masculino</option>
+													    <option value="Femenino">Femenino</option>
+													</select>													
 												</div>
-												<div class="row">
-													<div class="col-sm-5">
-														<div class="form-group">
-															<div class="input-group date">
-																<div class="input-group-addon">
-																	<i class="far fa-calendar-alt"></i>
-																</div>
-																<input type="date" class="form-control pull-right" name="fecha_nacimiento">	
-															</div>
-														</div>												
-													</div>
-													<div class="col-sm-3">
-														<div class="form-group">
-														    <select name="sexo" class="form-control">
-														    	<option value="" disabled selected>Sexo</option>
-														    	<option value="Masculino">Masculino</option>
-																<option value="Femenino">Femenino</option>
-															</select>													
-														</div>
-													</div>
-													<div class="col-sm-4">
-														<input type="text" name="telefono" class="form-control" placeholder="Ingrese Teléfono">
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-sm-5">
-														<div class="form-group">
-															<input type="text" name="celular" class="form-control" placeholder="Ingrese Celular">	
-														</div>   												
-													</div>
-													<div class="col-sm-7">
-														<div class="form-group">
-															<input type="email" name="correo" class="form-control" placeholder="Ingrese Correo">	
-														</div>  												
-													</div>										
+											</div>
+											<div class="col-sm-4">
+												<label>
+														Num. de telefono
+													</label>
+												<input type="text" name="telefono" class="form-control" placeholder="Ingrese Teléfono">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-5">
+												<div class="form-group">
+													<label>
+														Num. de Celular
+													</label>
+													<input type="text" name="celular" class="form-control" placeholder="Ingrese Celular">
+												</div>	   												
+											</div>
+											<div class="col-sm-7">
+												<div class="form-group">
+													<label>
+														Correo
+													</label>
+													<input type="email" name="correo" class="form-control" placeholder="Ingrese Correo">	
+												</div>  												
+											</div>										
 												</div>
 												<div class="form-group">
 													<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
 														Dirección de Cliente
 													</label>
 												</div>
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<input type="text" name="Departamento" class="form-control" placeholder="Ingrese Departamento">	
-														</div>
-														
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<input type="text" name="Distrito" class="form-control" placeholder="Ingrese Distrito">	
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<input type="text" name="Direccion" class="form-control" placeholder="Ingrese Direccion">
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<input type="text" name="Referencia" class="form-control" placeholder="Ingrese la referencia">
-														</div>
-													</div>
-												</div>
+										<div class="row">
+											<div class="col-md-4">
 												<div class="form-group">
+													<label>
+														Departamento
+													</label>
+													<input type="text" name="Departamento" class="form-control" placeholder="Ingrese Departamento">	
+												</div>
+														
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>
+														Provincia
+													</label>
+													<input type="text" name="Provincia" class="form-control" placeholder="Ingrese Provincia">	
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>
+														Distrito
+													</label>
+													<input type="text" name="Distrito" class="form-control" placeholder="Ingrese Distrito">	
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>
+														Direccion
+													</label>
+													<input type="text" name="Direccion" class="form-control" placeholder="Ingrese Direccion">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>
+														Referncia de Direccion
+													</label>
+													<input type="text" name="Referencia" class="form-control" placeholder="Ingrese la referencia">
+												</div>
+											</div>
+										</div>
+										    <div class="form-group">
 													<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
 														Número de Cuentas
 													</label>
 												</div>
-												<div class="row">
-													<div class="col-md-4">
-														<div class="form-group">
-															<input type="text" name="cuenta_1" class="form-control" placeholder="Ingrese la cuenta">
-														</div>
-													</div>
-													<div class="col-md-4">
-														<div class="form-group">
-															<input type="text" name="cuenta_2" class="form-control" placeholder="Ingrese la cuenta">
-														</div>
-													</div>
-													<div class="col-md-4">
-														<div class="form-group">
-															<input type="text" name="cuenta_3" class="form-control" placeholder="Ingrese la cuenta">
-														</div>
-													</div>
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>
+														Numero de Cuenta 1
+													</label>
+													<input type="text" name="cuenta_1" class="form-control" placeholder="Ingrese la cuenta">
 												</div>
 											</div>
-										</div>										
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>
+														Numero de Cuenta 2
+													</label>
+													<input type="text" name="cuenta_2" class="form-control" placeholder="Ingrese la cuenta">
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>
+														Numero de Cuenta 3
+													</label>
+													<input type="text" name="cuenta_3" class="form-control" placeholder="Ingrese la cuenta">
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="tab-pane" id="ruc">
-										RUC
-									</div>
-								</div>
+								</div>										
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="box-footer">
-					<div class="text-right">
-			    		<button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
-						<button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-						<button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{route('clientes')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
-					</div>
-				</div>
-              </div><!-- /.box -->
-              {!!Form::close()!!}
-            </div><!-- /.col -->
-          </div><!-- /.row -->
+			</div>
+		</div>
+		<div class="box-footer">
+			<div class="text-right">
+			    <button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
+				<button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+				<button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{route('clientes')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+			</div>
+		</div>
+    </div><!-- /.box -->
+    {!!Form::close()!!}
+    </div><!-- /.col -->
+</div><!-- /.row -->
 </section><!-- /.content -->
 @endsection

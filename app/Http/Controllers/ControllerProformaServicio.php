@@ -110,6 +110,8 @@ class ControllerProformaServicio extends Controller
             $plazoOferta;
             $observaciones;
             $simbolo;
+            $descuento;
+
             // idcliente,total,idTipoCambio,valorTipoCambio
             foreach ($request->datos as $dato) {
                 $idclie=$dato['idcliente'];
@@ -122,6 +124,7 @@ class ControllerProformaServicio extends Controller
                 $plazoOferta=$dato['plazo'];
                 $observaciones=$dato['observacion'];
                 $simbolo=$dato['simbolo'];
+                $descuento=$dato['desc'];
             }
             $idProforma=DB::table('Proforma')->insertGetId(
                 ['idCliente'=>$idclie,
@@ -138,6 +141,7 @@ class ControllerProformaServicio extends Controller
                 'forma_de'=> $formaPago,
                 'plazo_oferta'=>$plazoOferta,
                 'observacion_proforma'=>$observaciones,
+                'descuento'=>$descuento,
                 'estado'=>1
                 ]
             );
@@ -263,7 +267,7 @@ public function pdf($id)
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Cliente_Representante as cr','p.cliente_empleado','=','cr.idCR')
         ->join('Servicios as s','s.idServicios','=','deTS.idServicios')
-        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','p.idestado','p.incluye','deTS.idDetalle_proforma','deTS.idProforma','deTS.idServicios as idSer','deTS.idTarea','deTS.descripcionDP','deTS.item','deTS.item2','deTS.subtitulo','deTS.estadoDP','deTS.precio_venta','deTS.cantidad','deTS.estadoDP','ta.nombre_tarea','ta.descripcion_tarea','ta.estado as est','clp.idCliente','clp.nro_documento','clp.nombres_Rs','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT','deTS.unidades','cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.descuento','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','p.idestado','p.incluye','deTS.idDetalle_proforma','deTS.idProforma','deTS.idServicios as idSer','deTS.idTarea','deTS.descripcionDP','deTS.item','deTS.item2','deTS.subtitulo','deTS.estadoDP','deTS.precio_venta','deTS.cantidad','deTS.estadoDP','ta.nombre_tarea','ta.descripcion_tarea','ta.estado as est','clp.idCliente','clp.nro_documento','clp.nombres_Rs','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT','deTS.unidades','cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
         ->where('p.idProforma','=',$id)
         ->where('deTS.estadoDP','=','1')
         ->orderBy('deTS.item')
@@ -289,6 +293,7 @@ public function pdf($id)
             $forma_de;
             $plazo_oferta;
             $observacion;
+            $descuento;
 
             foreach ($request->datos as $dato) {
                 $valorv=$dato['valorVenta'];
@@ -297,6 +302,7 @@ public function pdf($id)
                 $forma_de=$dato['forma_de'];
                 $plazo_oferta=$dato['plazo_oferta'];
                 $observacion=$dato['obspro'];
+                $descuento=$dato['desc'];
             }  
 
             Proforma::where('idProforma',$idProforma)
@@ -307,6 +313,7 @@ public function pdf($id)
                 'forma_de'=>$forma_de,
                 'plazo_oferta'=>$plazo_oferta,
                 'observacion_proforma'=>$observacion,
+                'descuento'=>$descuento,               
                 'estado'=>1
                 ]);
 
