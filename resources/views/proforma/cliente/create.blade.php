@@ -56,6 +56,20 @@
 										<div class="col-sm-4">				
 										    <div class="form-group">
 										    	<label>
+														Tipo Persona
+													</label>
+												<select id="tipo_persona" name="tipo_persona" class="form-control">
+												 <option value="" disabled selected >Selecione Tipo de Persona</option>
+												<option value="1">Persona Natural</option>
+												<option value="2">Empresa</option>
+												
+												
+												</select>
+										    </div>
+									    </div>	
+										<div class="col-sm-4">				
+										    <div class="form-group">
+										    	<label>
 														Tipo de Documento
 													</label>
 												<select id="tipo_documento" name="tipo_documento" class="form-control">
@@ -75,6 +89,9 @@
 												<input type="text" name="nro_documento" class="form-control" placeholder="Ingrese numero de Documento..."  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
 											</div> 												
 										</div>
+										
+									</div>
+									<div class="row">
 										<div class="col-sm-4">
 											<div class="form-group">
 												<label>
@@ -83,9 +100,7 @@
 												<input type="text" name="nombres_RS" class="form-control" placeholder="Ingrese Nombre" {{old('nombres_RS')}}>
 											</div>													
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-6">
+										<div class="col-sm-4">
 											<div class="form-group">
 												<label>
 														Apell. Paterno
@@ -93,7 +108,7 @@
 												<input type="text" name="paterno" class="form-control" placeholder="Ingrese Apellido Paterno" {{old('paterno')}}>
 											</div> 												
 										</div>
-										<div class="col-sm-6">
+										<div class="col-sm-4">
 											<div class="form-group">
 												<label>
 														Apell. Materno
