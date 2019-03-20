@@ -45,7 +45,7 @@
 				        	@foreach ($proformas as $prof)
 				        	<tr>
 				        		<td>
-				        			{{$prof->fecha_hora}}
+				        			{{$prof->fh}}
 				        		</td>
 				        		<td>
 				        			{{$prof->serie_proforma.' /  F000-'.$prof->idProforma}}

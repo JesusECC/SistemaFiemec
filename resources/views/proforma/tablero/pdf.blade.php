@@ -271,7 +271,7 @@ border-collapse: collapse;
     <div class="datos" > 
       <div id="company">
         <div><span style="color: black !important;font-weight: bold;">EMAIL :</span> <span style="font-size: 11px !important;"><a href="{{$td->correo}}">{{$td->correo}}</a></span></div>
-        <div><span style="color: black !important;font-weight: bold;"> FECHA :</span> <span style="font-size: 11px !important;color: black">{{$td->fecha_hora}}</span></div>
+        <div><span style="color: black !important;font-weight: bold;"> FECHA :</span> <span style="font-size: 11px !important;color: black">{{$td->fh}}</span></div>
         <div><span style="color: black !important;font-weight: bold;">REPRESENTANTE :</span ><span class="cliente" style="font-size: 0.7em;color: black">{{$td->nombre_RE .' | Tlf: '.$td->telefonoRE.' / '.$td->CelularRE}}</span></div>
       </div>
     </div>

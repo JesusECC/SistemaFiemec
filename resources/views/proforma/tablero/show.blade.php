@@ -39,7 +39,7 @@
               <div class="col-md-12">
                 <img class="float-left" src="{{asset('img/logo-invoce.jpg')}}" alt="" style="width: 150px;">
                 <h5 class="float-left mr-t-1">Fabricaciones e Instalaciones Electro Mecánicas del Perú S.A.C</h5>
-                <small class="float-right mr-t-1"><span class="negrita">Fecha y Hora</span> {{$td->fecha_hora}}</small>
+                <small class="float-right mr-t-1"><span class="negrita">Fecha y Hora</span> {{$td->fh}}</small>
               </div>
             </div>
             <div class="row">

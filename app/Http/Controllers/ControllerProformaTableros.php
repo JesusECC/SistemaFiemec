@@ -31,7 +31,7 @@ class ControllerProformaTableros extends Controller
     $proformas=DB::table('Proforma as p')
     ->join('Cliente_Proveedor as cp','p.idCliente','=','cp.idCliente')
     ->join('users as u','u.id','=','p.idEmpleado')
-    ->select('p.idProforma','p.fecha_hora','cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno','p.serie_proforma','p.igv','p.precio_total')
+    ->select('p.idProforma',DB::raw('DATE_ADD(p.fecha_hora, INTERVAL -2 HOUR) as fh'),'cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno','p.serie_proforma','p.igv','p.precio_total')
     ->where('p.idProforma','LIKE','%'.$query.'%')
     ->where('tipo_proforma','=','tablero')
     ->where('p.estado','=',1)
@@ -176,7 +176,7 @@ public function show($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('users as u','u.id','=','p.idEmpleado')
 
-        ->select('u.id','u.name','u.paterno as up','u.materno as um','clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','u.telefonoU','u.celularU')
+        ->select('u.id','u.name','u.paterno as up','u.materno as um','clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','u.telefonoU','u.celularU',DB::raw('DATE_ADD(p.fecha_hora, INTERVAL -2 HOUR) as fh'))
         ->where('idProforma','=',$id)
         ->first();
 
@@ -210,7 +210,7 @@ public function show($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('users as u','u.id','=','p.idEmpleado')   
         ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')  
-        ->select('u.id',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU','p.totalxtab')
+        ->select('u.id',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU','p.totalxtab',DB::raw('DATE_ADD(p.fecha_hora, INTERVAL -2 HOUR) as fh'))
         ->where('p.idProforma','=',$id)
         ->first();
 
@@ -227,7 +227,7 @@ public function show($id){
        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
         
-        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_producto','t.cantidadTab')
+        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora',DB::raw('DATE_ADD(fecha_hora, INTERVAL -2 HOUR) as fh'),'p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_producto','t.cantidadTab')
         ->where('p.idProforma','=',$id)
         ->where('dePT.estadoDP','=','1')
         ->get();
@@ -244,7 +244,7 @@ public function pdf2($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('users as u','u.id','=','p.idEmpleado')
         ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')
-        ->select('u.id',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU')
+        ->select('u.id',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU',DB::raw('DATE_ADD(p.fecha_hora, INTERVAL -2 HOUR) as fh'))
         ->where('idProforma','=',$id)
         ->first();
 
@@ -275,7 +275,7 @@ public function pdf2($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('users as u','u.id','=','p.idEmpleado')   
         ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')  
-        ->select('u.id',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU')
+        ->select('u.id',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU',DB::raw('DATE_ADD(p.fecha_hora, INTERVAL -2 HOUR) as fh'))
         ->where('p.idProforma','=',$id)
         ->first();
 
