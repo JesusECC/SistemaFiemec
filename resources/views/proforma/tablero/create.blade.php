@@ -778,78 +778,18 @@ function MostrarAlertaCliente(){
                 for (const key in tablero) {
                     if (tablero.hasOwnProperty(key)) {
                         if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){  
+                            tablero[key]['cantt']=$("#canTT").val();
+                            table=tablerosView(nomTablero,cont,cantt);
+                            tablero[key]['tablero']=table;
                             bool=true; 
                         }                                       
                     }
                 }
                 //if que compara e inserta la tabla contenedora de los produtos vacia.
                 if(bool==false ){  
-                    table='<div id="'+nomTablero+'_'+cont+'" style="color: #f5f5f5 !important;">'+
-                                '<section class="content" style="min-height:0px !important">'+
-                                    '<div class="row">'+
-                                        '<div class="col-md-12">'+
-                                            '<div class="box">'+
-                                                '<div class="box-header with-border" style="padding:5px !important;">'+
-                                                '<p> Tablero: ' +nomTablero.replace(/_/gi," ")+"<br> Cantidad Tab: "+cantt+'</p>'+
-                                                    '<div class="box-tools pull-right">'+
-
-                                                        '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
-                                                        '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
-                                                                        '<i class="fa fa-times"></i>'+
-                                                                '</button>'+
-                                                    '</div>'+
-                                                '</div>'+
-                                                '<div class="box-body">'+
-                                                    '<div class="row">'+
-                                                        '<div class="col-md-12 table-responsive">'+
-                                                            '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover" >'+
-                                                                '<thead style="background-color:#A9D0F5;color: black !important;">'+
-                                                                    '<th>Producto</th>'+
-                                                                    '<th>Descripción</th>'+
-                                                                    '<th>Cant.</th>'+
-                                                                    '<th>P. Unit.</th>'+
-                                                                    '<th>Descuento</th>'+
-                                                                    '<th>Importe</th>'+
-                                                                    '<th>Quitar</th>'+
-                                                                    //'<th></th>'+
-                                                                '</thead>'+
-                                                                '<tbody id="detalle_'+nomTablero+'">'+
-                                                                '</tbody>'+ 
-
-                                                                '<tr>'+
-                                                                    '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
-                                                                    '<td style="border-right:1px solid white !important;"></th>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
-                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
-                                                                     '</td>'+
-
-                                                                     
-                                                                '</tr>'+
-                                                                     '<tr>'+
-                                                                     '<th style="color:black !important; border-right:1px solid white !important;" >Total x Cant. de tableros</th>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td style="border-right:1px solid white !important;"></td>'+
-                                                                    '<td style="border-right:1px solid white !important;"></td>'+
-                                                                     '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
-                                                                          '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+ 
-                                                                     '</td>'+
-                                                                     '</tr>'+
-                                                            '</table>'+
-
-                                                        '</div>'+
-                                                    '<div>'+
-                                                '</div>'+                                
-                                            '</div>'+
-                                        '</div>'+
-                                    '</div>'+
-                                '</section>'+
-                            '</div>';
-                var ta={nombre:nomTablero,posi:cont,tablero:table,estado:1,cantt:cantt};
-                tablero.push(ta);                        
+                    table=tablerosView(nomTablero,cont,cantt);
+                    var ta={nombre:nomTablero,posi:cont,tablero:table,estado:1,cantt:cantt};
+                    tablero.push(ta);                        
                 } cont++;       
             }
             // console.log(table);
@@ -869,6 +809,68 @@ function MostrarAlertaCliente(){
             }            
         }
         
+    }
+    function tablerosView(nomTablero,cont,cantt){
+        table='<div id="'+nomTablero+'_'+cont+'" style="color: #f5f5f5 !important;">'+
+            '<section class="content" style="min-height:0px !important">'+
+                '<div class="row">'+
+                    '<div class="col-md-12">'+
+                        '<div class="box">'+
+                            '<div class="box-header with-border" style="padding:5px !important;">'+
+                            '<p> Tablero: ' +nomTablero.replace(/_/gi," ")+"<br> Cantidad Tab: "+cantt+'</p>'+
+                                '<div class="box-tools pull-right">'+
+                                    '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
+                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
+                                                    '<i class="fa fa-times"></i>'+
+                                            '</button>'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="box-body">'+
+                                '<div class="row">'+
+                                    '<div class="col-md-12 table-responsive">'+
+                                        '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover" >'+
+                                            '<thead style="background-color:#A9D0F5;color: black !important;">'+
+                                                '<th>Producto</th>'+
+                                                '<th>Descripción</th>'+
+                                                '<th>Cant.</th>'+
+                                                '<th>P. Unit.</th>'+
+                                                '<th>Descuento</th>'+
+                                                '<th>Importe</th>'+
+                                                '<th>Quitar</th>'+
+                                                //'<th></th>'+
+                                            '</thead>'+
+                                            '<tbody id="detalle_'+nomTablero+'">'+
+                                            '</tbody>'+ 
+                                            '<tr>'+
+                                                '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
+                                                '<td style="border-right:1px solid white !important;"></th>'+
+                                                '<td style="border-right:1px solid white !important;" ></td>'+
+                                                '<td style="border-right:1px solid white !important;" ></td>'+
+                                                '<td style="border-right:1px solid white !important;" ></td>'+
+                                                '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
+                                                '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
+                                                 '</td>'+                                                                     
+                                            '</tr>'+
+                                                 '<tr>'+
+                                                 '<th style="color:black !important; border-right:1px solid white !important;" >Total x Cant. de tableros</th>'+
+                                                '<td style="border-right:1px solid white !important;" ></td>'+
+                                                '<td style="border-right:1px solid white !important;" ></td>'+
+                                                '<td style="border-right:1px solid white !important;"></td>'+
+                                                '<td style="border-right:1px solid white !important;"></td>'+
+                                                 '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
+                                                      '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+ 
+                                                 '</td>'+
+                                                 '</tr>'+
+                                        '</table>'+
+                                    '</div>'+
+                                '<div>'+
+                            '</div>'+                                
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</section>'+
+        '</div>';
+        return table;
     }
     function agregarProductosTablero(){    
         
