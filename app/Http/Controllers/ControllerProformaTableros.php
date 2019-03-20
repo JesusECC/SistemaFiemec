@@ -227,7 +227,7 @@ public function show($id){
        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
         
-        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora',DB::raw('DATE_ADD(fecha_hora, INTERVAL -2 HOUR) as fh'),'p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_producto','t.cantidadTab')
+        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora',DB::raw('DATE_ADD(fecha_hora, INTERVAL -2 HOUR) as fh'),'p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_pedido','pd.codigo_producto','t.cantidadTab')
         ->where('p.idProforma','=',$id)
         ->where('dePT.estadoDP','=','1')
         ->get();
@@ -504,7 +504,7 @@ public function pdf2($id){
         ->get();
 
         $producto=DB::table('Producto as p')
-        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto')
+        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto','p.codigo_pedido')
         ->where('p.idMarca','=',$idMarca)
         ->orderby('p.idProducto')
         ->get();
@@ -515,7 +515,7 @@ public function pdf2($id){
     {
         $idFamilia=$request->get('familia');
         $familia=DB::table('Producto as p')
-        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto')
+        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto','p.codigo_pedido')
         ->where('idFamilia','=',$idFamilia)
 
         ->get();
@@ -528,7 +528,7 @@ public function pdf2($id){
         $idProducto=$request->get('producto');
         $producto=DB::table('Producto as p')
         ->join('Familia as f','p.idFamilia','=','f.idFamilia')
-        ->select('p.idProducto','f.descuento_familia','p.precio_unitario','p.tipo_producto',DB::raw('CONCAT(p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'))
+        ->select('p.idProducto','f.descuento_familia','p.precio_unitario','p.tipo_producto',DB::raw('CONCAT(p.codigo_pedido," | ",p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'),'p.codigo_pedido')
         ->where('idProducto','=',$idProducto)
 
         ->get();

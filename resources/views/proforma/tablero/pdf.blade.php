@@ -317,7 +317,7 @@ border-collapse: collapse;
             <tr>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$i++}}</td>
              
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">COD: {{$p->codigo_producto.' ||-|| '.$p->producto}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"> {{$p->codigo_pedido.' |-| '.$p->codigo_producto.' | '.$p->producto}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->descripcionDP}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->cantidad}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->precio_venta}}</td>
