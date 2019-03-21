@@ -58,6 +58,7 @@
 				        	
 				        		</td>
 		<td align="center">
+			
 		    <a href="{{URL::action('ControllerFamilia@edit',$fa->idFamilia)}}" class="btn btn-success btn-xs" role="button"><i class="fas fa-edit" title="Editar Producto"></i> 
 		    </a>
 									

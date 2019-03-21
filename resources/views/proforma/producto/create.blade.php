@@ -145,17 +145,13 @@
 										</div>											
 									</div>
 									<div class="row">
-										<div class="col-sm-9">
+										<div class="col-sm-12">
 											<div class="form-group">
                         <label>Descripcion</label> 
 												<input id="k" type="text" name="descripcion_producto" class="form-control" placeholder="Descripción...">
 											</div>	
 										</div>
-										<div class="col-sm-9">
-											<div class="form-group">
-									<button  type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Consultar</button>
-											</div>	
-										</div>
+										
 									</div>
 								</div>
 							</div>

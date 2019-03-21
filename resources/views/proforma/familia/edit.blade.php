@@ -53,47 +53,49 @@
                                                         Datos Generales
                                                     </label>
                                                 </div>
-<div class="row">
-<div class="col-sm-4">
-      <div class="form-group">
-      	<label for="nombre_familia">Marca</label>
-              <select required name="idMarca" class="form-control selectpicker" id="idMarca" data-live-search="true">
-              	
-                    <option value="">Seleccione Marca</option>
-                             @foreach($marca as $mar)
-                    <option value="{{$mar->idMarca}}">{{$mar->nombre_proveedor}}</option>
-                                                    @endforeach
-               </select> 
-                       </div>
-                    </div>
-<div class="col-sm-6">
-<div class="form-group">
-	<label for="nombre_familia">Nombre de Familia</label>
-	<input type="text" name="nombre_familia" class="form-control" value="{{$familia->nombre_familia}}">	
-</div>
-</div>
-<div class="col-sm-2">
-<div class="form-group">
-	<label for="descuento_familia">Descuesto%</label>
-	<input type="text" name="descuento_familia" class="form-control" value="{{$familia->descuento_familia}}">	
-</div>
-
-</div>
-                                   
-                                </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="nombre_familia">Estado</label>
+                                        <select required name="idEstado" class="form-control selectpicker" id="idEstado" data-live-search="true">
+                                        <option value="">Seleccione Estado</option>
+                                        @if($familia->estado=='1')
+                                            <option value="1" selected>Habilitado</option>
+                                            <option value="0">Deshabilitado</option>   
+                                            @elseif($familia->estado=='0')
+                                            <option value="1">Habilitado</option>
+                                            <option value="0" selected>Deshabilitado</option>
+                                        @endif
+                                        </select> 
                             </div>
+                        </div>
+                       
+                        <div class="col-sm-6">
+                            <div class="form-group">
+	                            <label for="nombre_familia">Nombre de Familia</label>
+	                                    <input type="text" name="nombre_familia" class="form-control" value="{{$familia->nombre_familia}}">	
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+	                            <label for="descuento_familia">Descuesto%</label>
+	                                   <input type="text" name="descuento_familia" class="form-control" value="{{$familia->descuento_familia}}">	
+                            </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="box-footer">
-                    <div class="text-right">
-                        <button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
-                        <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-                        <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('proforma/familia')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
-                        
-                    </div>
-                </div>
-              </div><!-- /.box -->
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <div class="text-right">
+            <button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
+            <button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
+            <button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('proforma/familia')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+        </div>
+    </div>
+</div><!-- /.box -->
               {!!Form::close()!!}
             </div><!-- /.col -->
           </div><!-- /.row -->
