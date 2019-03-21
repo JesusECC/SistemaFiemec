@@ -928,8 +928,8 @@ function MostrarAlertaCliente(){
         '</div>';
         return table;
     }
-    function agregarProductosTablero(){    
-        
+
+    function agregarProductosTablero(){        
         var idProd=$("#pproduc").val();
         var pname=$("#nombreproducto ").val();
         var pdescripcion=$("#descripcionp ").val();
@@ -939,8 +939,9 @@ function MostrarAlertaCliente(){
         var descuento=$('#pdescuento').val();
         var cantt=$("#canTT").val();
         nomTablero=$('#prod-selec').val();
+        var simb=$('#simbolo').val();
+        var tipocamb=$("#valorcambio").val();
         var filas;
-        // console.log(idProd,pname);
         if(tablero.length>=0 && nomTablero!="" && idProd!="" && pname!="" && puni!="" && pcant!="" && nomTablero!="" && descuento!="" ){
             document.getElementById('totales-general').style.display = 'block';
             var bool=false;
@@ -967,7 +968,7 @@ function MostrarAlertaCliente(){
                         }
                         if(boolfila==false){
                             console.log("produc nuevoo",contp);
-                            var dat={idProducto:idProd,producto:pname,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,cantidadT:cantt,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:1,fila:""};
+                            var dat={idProducto:idProd,producto:pname,simbolo:simb,tipocambio:tipocamb,descripcionP:pdescripcion,prec_uniP:puni,cantidadP:pcant,cantidadT:cantt,descuentoP:descuento,nomTablero:nomTablero,posiP:contp,estado:1,fila:""};
                             filaob.push(dat);
                             fila();
                             contp++;

@@ -293,11 +293,11 @@ border-collapse: collapse;
             <th class="principal" >Desc.</th>
             <th class="principal" >Cant. </th>
             <th class="principal" >Precio</th>
-            <th class="principal" >Desc. %</th>
+            <th class="principal" >Desct. %</th>
             <th class="principal" >Valor V.</th>
           </tr>
         </thead>
-
+      {{$sub3=0}}
       @foreach($tablero as $t)
       <tr>
         <td colspan="7" style="background-color: #E5EAEA;border: 1px;font-size: 12px ;text-align: center;">
@@ -309,7 +309,7 @@ border-collapse: collapse;
       {{$i=1}}
       {{$sub=0}}
       {{$sub2=0}}
-      {{$sub3=0}}
+      
       {{$igv=0}}
       {{$precio=0}}
         @foreach($proforma as $p)
@@ -317,20 +317,26 @@ border-collapse: collapse;
             <tr>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$i++}}</td>
              
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">COD: {{$p->codigo_producto.' ||-|| '.$p->producto}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"> {{$p->codigo_pedido.' |-| '.$p->codigo_producto.' | '.$p->producto}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->descripcionDP}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->cantidad}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"></td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"></td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"></td>
             </tr>
+
             {{$sub+=($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}
             {{$sub2+=(($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)))*$p->cantidadTab}}
+            
             {{$igv=$p->igv}}
 
             
           @endif
+          
+        
         @endforeach
+        
+        {{$sub3+=$sub2}}
         <tr>
           <td colspan="1"></td>
           <td colspan="5" style="text-align: right;border-top: 1px solid black;font-size: 10px">
@@ -364,6 +370,7 @@ border-collapse: collapse;
       {{$sub_tableros=0}}
       {{$igv_tableros=0}}
       {{$pt=0}}
+      {{$cantxTab=0}}
       
       @foreach($proforma as $p)
 
@@ -371,6 +378,7 @@ border-collapse: collapse;
         {{$igv_tableros=$p->igv}}
         {{$pt=$p->precio_total}}
         {{$txt=$p->totalxtab}}
+
       @endforeach
       <tr>
         <td colspan="1" style="border-top: 1px solid black">
@@ -379,7 +387,27 @@ border-collapse: collapse;
           SUBTOTAL S/.
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px;border-top: 1px solid black"> 
-          {{$sub_tableros}}
+          {{$sub3}}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" >
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          DESC. %
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          {{$p->de}}%
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" >
+        </td>
+        <td colspan="5" style="text-align: right;font-size: 10px">
+          TOTAL S/. 
+        </td>
+        <td colspan="1" style="text-align: center;font-size: 11px"> 
+          {{$ttt=round($sub3-($sub3*($p->de/100)),2)}}
         </td>
       </tr>
       <tr>
@@ -389,58 +417,32 @@ border-collapse: collapse;
           IGV % S/.
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{round(($sub_tableros)*($igv_tableros/100),2)}} 
+          {{$igvtt=round(($ttt)*($igv_tableros/100),2)}} 
         </td>
       </tr>
       <tr>
         <td colspan="1" >
         </td>
         <td colspan="5" style="text-align: right;font-size: 10px">
-          TOTAL S/.
+          TOTAL FINAL S/.
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{round($pt,2)}}
+          {{round($ttt+$igvtt,2)}}
         </td>
       </tr>
-      <tr>
-        <td colspan="1">
-        </td>
-        <td colspan="5" style="text-align: right;font-size: 10px">
-          SUBTOTALxCantTab S/.
-        </td>
-        <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{round($txt,2)}}
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1">
-        </td>
-        <td colspan="5" style="text-align: right;font-size: 10px">
-          IGV % S/.
-        </td>
-        <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{round($txt*0.18,2)}}
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1">
-        </td>
-        <td colspan="5" style="text-align: right;font-size: 10px">
-          TOTALxCantTab S/.
-        </td>
-        <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{round($txt+($txt*0.18),2)}}
-        </td>
-      </tr>
+      
+      
+     
       </table>
     </div>
   </main>
   <footer> 
         <div style="width: 50%;float: initial;display: block;">
-          <h5 style="font-size: 10px !important;line-height:1px">Forma de pago: {{$td->forma_de}}</h5>
-          <h5 style="font-size: 10px !important;line-height:1px">Plazo de oferta {{$td->plazo_oferta}}  </h5>
-          <h5 style="font-size: 10px !important;line-height:1px">Condición de venta: {{$td->observacion_proforma}} </h5>
-      <h5 style="font-size: 10px !important;line-height:0.3cm;margin-top: -10px !important">Realizado por:{{$td->nameE.' | Tlf:'.$td->telefonoU.' / '.$td->celularU}}</h5>
+          <h5 style="font-size: 10px !important;line-height:0.3cm">Realizado por:{{$td->nameE.' | Tlf:'.$td->telefonoU.' / '.$td->celularU}}</h5>
+          <h5 style="font-size: 8px !important;line-height:1px;margin-top: -6px !important">Forma de pago: {{$td->forma_de}}</h5>
+          <h5 style="font-size: 10px !important;line-height:1px;margin-top: -4px !important">Plazo de oferta {{$td->plazo_oferta}}  </h5>
+          <h5 style="font-size: 8px !important;line-height:1px;margin-top: -10px !important">Observacion de venta: {{$td->observacion_proforma}} </h5>
+      
     </div>
 <div style="width: 50%; float: right;display: block;">
           <h4 style="font-size: 12px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>

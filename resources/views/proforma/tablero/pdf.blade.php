@@ -293,7 +293,7 @@ border-collapse: collapse;
             <th class="principal" >Desc.</th>
             <th class="principal" >Cant. </th>
             <th class="principal" >Precio</th>
-            <th class="principal" >Desc. %</th>
+            <th class="principal" >Desct. %</th>
             <th class="principal" >Valor V.</th>
           </tr>
         </thead>
@@ -335,6 +335,7 @@ border-collapse: collapse;
           
         
         @endforeach
+
         {{$sub3+=$sub2}}
         <tr>
           <td colspan="1"></td>
@@ -396,7 +397,7 @@ border-collapse: collapse;
           DESC. %
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{$p->descuento}}%
+          {{$p->de}}%
         </td>
       </tr>
       <tr>
@@ -406,7 +407,7 @@ border-collapse: collapse;
           TOTAL S/. 
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{$ttt=round($sub3-($sub3*($p->descuento/100)),2)}}
+          {{$ttt=round($sub3-($sub3*($p->de/100)),2)}}
         </td>
       </tr>
       <tr>

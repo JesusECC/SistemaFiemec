@@ -231,7 +231,7 @@ public function show($id){
        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
         
-        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora',DB::raw('DATE_ADD(fecha_hora, INTERVAL -2 HOUR) as fh'),'p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_pedido','pd.codigo_producto','t.cantidadTab')
+        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora',DB::raw('DATE_ADD(fecha_hora, INTERVAL -2 HOUR) as fh'),'p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_pedido','pd.codigo_producto','t.cantidadTab','p.descuento as de')
         ->where('p.idProforma','=',$id)
         ->where('dePT.estadoDP','=','1')
         ->get();
@@ -264,7 +264,7 @@ public function pdf2($id){
        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
         
-        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.codigo_producto," ",pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_producto','t.cantidadTab')
+        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.codigo_pedido," | ",pd.codigo_producto," ",pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_producto','t.cantidadTab','pd.codigo_pedido','p.descuento as de')
         ->where('p.idProforma','=',$id)
         ->get();
     // dd($td,$tablero,$proforma);
@@ -295,7 +295,7 @@ public function pdf2($id){
        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
         
-        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.codigo_producto," ",pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_producto','t.cantidadTab')
+        ->select('p.idProforma','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(pd.codigo_pedido," | ",pd.codigo_producto," ",pd.nombre_producto," | ",marca_producto," | ",descripcion_producto) as producto'), 'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros','t.nombre_tablero','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP','dePT.simboloDPT','dePT.cambioDPT','pd.codigo_producto','t.cantidadTab','pd.codigo_pedido','p.descuento as de')
         ->where('p.idProforma','=',$id)
         ->get();
 
@@ -342,7 +342,7 @@ public function pdf2($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
         ->join('Cliente_Representante as cre','p.cliente_empleado','=','cre.idCR')
-        ->select('cre.nombre_RE','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros as idTAB','t.nombre_tablero','t.cantidadTab','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP',DB::raw('CONCAT(pd.codigo_producto," | ",pd.nombre_producto," | ",pd.marca_producto," | ",pd.descripcion_producto) as producto2'),'pd.tipo_producto','p.descuento as des')
+        ->select('cre.nombre_RE','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros as idTAB','t.nombre_tablero','t.cantidadTab','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP',DB::raw('CONCAT(pd.codigo_pedido," | ",pd.codigo_producto," | ",pd.nombre_producto," | ",pd.marca_producto," | ",pd.descripcion_producto) as producto2'),'pd.tipo_producto','p.descuento as des')
         ->where('p.idProforma','=',$id)
         ->where('dePT.estadoDP','=','1')
         ->get();
@@ -361,7 +361,7 @@ public function pdf2($id){
             $nombre;
             $tota;
             $tableros;
-            $idTipoCam;
+            $simbolo;
             $valorcambio;
             $forma_de;
             $plazo_oferta;
@@ -371,27 +371,15 @@ public function pdf2($id){
                 // $idclie=$dato['idcliente'];
                 $valorv=$dato['valorVenta'];
                 $tota=$dato['total'];
-                // $idTipoCam=$dato['idTipoCambio'];
-                // $valorcambio=$dato['valorTipoCambio'];
                 $idProforma=$dato['idProforma'];
                 $forma_de=$dato['forma_de'];
                 $plazo_oferta=$dato['plazo_oferta'];
                 $observacion=$dato['obspro'];
                 $descuento=$dato['desc'];
+                $simbolo=$dato['simbolo'];
+                $valorcambio=$dato['valorTipoCambio'];
             }   
-            // $idProforma=DB::table('Proforma')->insertGetId(
-            //     [
-            //         // 'idCliente'=>$idclie,        
-            //         // 'idTipo_moneda'=>$idTipoCam,
-            //         // 'serie_proforma'=>'PU365122019',
-            //         'igv'=>'18',
-            //         'subtotal'=>$valorv,
-            //         'precio_total'=>$tota,
-            //         'tipocambio'=>$valorcambio,
-            //         'tipo_proforma'=>'Tablero',
-            //         'estado'=>1
-            //     ]
-            // );
+            
             Proforma::where('idProforma',$idProforma)
                 ->update([
                     // 'idCliente'=>$idclie,
@@ -453,8 +441,8 @@ public function pdf2($id){
                             $detalleProforma->cantidad=$fila['cantidadP'];
                             $detalleProforma->precio_venta=$fila['prec_uniP']; 
                             $detalleProforma->estadoDP=1; 
-                            // $detalleProforma->texto_precio_venta=$fila[''];  
-                            // $detalleProforma->observacion_detalleP=$fila[''];    
+                            $detalleProforma->simboloDPT=$simbolo;
+                            $detalleProforma->cambioDPT=$valorcambio;   
                             $detalleProforma->descuento=$fila['descuentoP'];    
                             $detalleProforma->descripcionDP=$fila['descripcionP'];
                             $detalleProforma->save();
@@ -468,8 +456,8 @@ public function pdf2($id){
                                 // 'idTableros'=>$idTablero,
                                 'cantidad'=>$fila['cantidadP'],
                                 'precio_venta'=>$fila['prec_uniP'],
-                                // texto_precio_venta=>$fila['' 
-                                // observacion_detalleP=>$fila[''   
+                                'simboloDPT'=>$simbolo, 
+                                'cambioDPT'=>$valorcambio,   
                                 'descuento'=>$fila['descuentoP'],
                                 'descripcionDP'=>$fila['descripcionP'],
                                 'estadoDP'=>$fila['estado']

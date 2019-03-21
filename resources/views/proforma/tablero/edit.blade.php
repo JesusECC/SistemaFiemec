@@ -695,7 +695,7 @@ var editarval=true;
                     $("#pfamilia").html(va);
 
                     for(const i in productos){
-                    va2+='<option value="'+productos[i]['idProducto']+'">'+productos[i]['nombre_producto']+' | '+productos[i]['codigo_producto']+''+productos[i]['marca_producto']+' | '+productos[i]['descripcion_producto']+'</option>';                 
+                    va2+='<option value="'+productos[i]['idProducto']+'">'+productos[i]['codigo_pedido']+' | '+productos[i]['nombre_producto']+' | '+productos[i]['codigo_producto']+' | '+productos[i]['marca_producto']+' | '+productos[i]['descripcion_producto']+'</option>';                 
                     }
                     $("#pproduc").html(va2); 
                 }else{
@@ -730,7 +730,7 @@ var editarval=true;
                     console.log('productowey',producto);
                     va='<option value="" disabled="" selected="">Seleccione</option>'
                     for(const i in producto){
-                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['nombre_producto']+' | '+producto[i]['codigo_producto']+' | '+producto[i]['marca_producto']+' | '+producto[i]['descripcion_producto']+'</option>';                 
+                        va+='<option value="'+producto[i]['idProducto']+'">'+productos[i]['codigo_pedido']+' | '+producto[i]['nombre_producto']+' | '+producto[i]['codigo_producto']+' | '+producto[i]['marca_producto']+' | '+producto[i]['descripcion_producto']+'</option>';                 
                     }
                     $("#pproduc").html(va); 
                 }else{
@@ -811,8 +811,12 @@ var editarval=true;
          var plazoofer=$("#plazo_oferta").val();
          var obserprof=$("#observacion_proforma").val();
          var descuento=$("#pdesc").val();
+         var simb=$("#simbolo").val();
+         var tipocam=$("#valorcambio").val();
 
-             var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt,forma_de:formade,plazo_oferta:plazoofer,desc:descuento,obspro:obserprof}];
+
+
+             var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt,forma_de:formade,plazo_oferta:plazoofer,desc:descuento,obspro:obserprof,simbolo:simb,valorTipoCambio:tipocam}];
              console.log(dat,tablero,filaob);
 
              $.ajax({
