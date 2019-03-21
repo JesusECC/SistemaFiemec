@@ -800,112 +800,7 @@ var editarval=true;
          // }
      }
      var bool;
-    /* function agregarTablero(){    
-         var tabl=$("#NomTablerop").val();
-         var cantt=$("#canTT").val();
-         nomTablero=tabl.replace(/ /gi,"_"); 
-         //console.log(nomTablero); 
-         bool=false;  
-         // if(tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!='' ){
-             // mostrarcampos(tabl);
-             // fila();
-             console.log(tablero);
-             if(tablero.length>=0 && nomTablero!="" && cantt!=""){
-                 //for para evitar tablas con el  mismo nombre sin iportar las mayusculas o minisculas
-                 for (const key in tablero) {
-                     if (tablero.hasOwnProperty(key)) {
-                         if(tablero[key]['nombre'].toLowerCase()==nomTablero.toLowerCase()){
-                             // tablero[key]['estado']=1;
-                             bool=true; 
-                         }                                       
-                     }
-                 }
-                 //if que compara e inserta la tabla contenedora de los produtos vacia.
-                 if(bool==false ){  
-                     table='<div id="'+nomTablero+'_'+cont+'">'+
-                                 '<section class="content" style="min-height:0px !important">'+
-                                     '<div class="row">'+
-                                         '<div class="col-md-12">'+
-                                             '<div class="box">'+
-                                                 '<div class="box-header with-border" style="padding:5px !important;">'+
-                                                 '<p> Tablero ' +nomTablero.replace(/_/gi," ")+"<br> Cantidad Tab: "+cantt+'</p>'+
-                                                     '<div class="box-tools pull-right">'+
- 
-                                                         '<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>'+
-                                                         '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminarTablero('+cont+');">'+
-                                                                         '<i class="fa fa-times"></i>'+
-                                                                 '</button>'+
-                                                     '</div>'+
-                                                 '</div>'+
-                                                 '<div class="box-body">'+
-                                                     '<div class="row">'+
-                                                         '<div class="col-md-12">'+
-                                                             '<table id="detalle_'+nomTablero+'_Principal" class="table table-striped table-bordered table-condensed table-hover">'+
-                                                                 '<thead style="background-color:#A9D0F5;color: black !important;">'+
-                                                                     '<th>Producto</th>'+
-                                                                     '<th>Descripción</th>'+
-                                                                     '<th>Cant.</th>'+
-                                                                     '<th>P. Unit.</th>'+
-                                                                     '<th>Descuento</th>'+
-                                                                     '<th>Importe</th>'+
-                                                                     //'<th></th>'+
-                                                                 '</thead>'+
-                                                                 '<tbody id="detalle_'+nomTablero+'">'+
-                                                                 '</tbody>'+ 
-                                                                  '<tr>'+
-                                                                    '<th style="color:black !important; border-right:1px solid white !important;" >Total</th>'+
-                                                                    '<td style="border-right:1px solid white !important;"></th>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total_'+nomTablero+'">s/. 0.00</h4>'+
-                                                                    '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+         
-                                                                     '</td>'+
-
-                                                                     
-                                                                '</tr>'+
-                                                                 '<tr>'+
-                                                                     '<th style="color:black !important; border-right:1px solid white !important;" >Total x Cant. de tableros</th>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td style="border-right:1px solid white !important;" ></td>'+
-                                                                    '<td style="border-right:1px solid white !important;"></td>'+
-                                                                    '<td style="border-right:1px solid white !important;"></td>'+
-                                                                     '<td colspan="2" style="color:black !important; text-align: center;"><h4 id="total2_'+nomTablero+'">s/. 0.00</h4>'+
-                                                                          '<input style="color:black !important;" type="hidden" name="precio_subtotal_'+nomTablero+'" id="precio_subtotal_'+nomTablero+'">'+ 
-                                                                     '</td>'+
-                                                                     '</tr>'+
-                                                             '</table>'+
-                                                         '</div>'+
-                                                     '<div>'+
-                                                 '</div>'+                                
-                                             '</div>'+
-                                         '</div>'+
-                                     '</div>'+
-                                 '</section>'+
-                             '</div>';
-                 var ta={nombre:nomTablero,posi:cont,tablero:table,estado:2,cantidadTa:cantt}
-                 tablero.push(ta);                        
-                 } cont++;       
-             }
-
-             console.log(tablero,filaob);
-             nomTablero="";
-             // realiza el listado de todas los tableros que se añaden
-             ListaSelect()
-             // mantiene en la vista las filas cuando se agrega una nueva tabla
-             detalleFilas();
-             // fila();
-             //nomtablero="";
-         // }else{
-         //     // (tabl!='' && $("#simbolo").val()!='' && $("#valorcambio").val()!='' && $("#igv_tipocambio").val()!=''
-         //     if($("#simbolo").val()=='' && $("#valorcambio").val()=='' && $("#igv_tipocambio").val()==''){
-         //         alert("seleccione un tipo de Moneda");
-         //     }else if(tabl==''){
-         //         alert("ingrese nombre del Tablero");
-         //     }            
-         // }
-         
-     }*/
+    
 
      function agregarTablero(){    
         var tabl=$("#NomTablerop").val();
@@ -952,6 +847,7 @@ var editarval=true;
         }
         
     }
+
     function tablerosView(nomTablero,cont,cantt){
         table='<div id="'+nomTablero+'_'+cont+'" style="color: #f5f5f5 !important;">'+
             '<section class="content" style="min-height:0px !important">'+
