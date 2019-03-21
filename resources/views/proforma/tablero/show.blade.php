@@ -93,6 +93,7 @@
         </div>
         <div class="box-footer">
           <div class="row">
+            {{$sub3=0}}
           @foreach($tablero as $t)
             <div class="col-md-12">
               <div class="box">
@@ -139,16 +140,17 @@
                           {{$igv=$p->igv}}
                             @endif
                           @endforeach
+                          {{$sub3+=$sub2}}
                           </tbody>
                           <tfoot>
                             <tr style="font-weight: bold;">
                               <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
-                              <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
+                              <td colspan="1" style="border-left:1px solid #323639; "> Precio unitario S/.</td>
                               <td align="center" style="border-right: 1px solid #323639"> S/.{{$sub}}</td>
                             </tr>
                             <tr style="font-weight: bold;">
                               <td colspan="4" style="border-bottom: 1px solid white !important;border-top:none !important;background-color: white !important" ></td>
-                              <td colspan="1" style="border-left:1px solid #323639; ">Subtotal</td>
+                              <td colspan="1" style="border-left:1px solid #323639; ">Total S/.</td>
                               <td align="center" style="border-right: 1px solid #323639"> S/.{{$sub2}}</td>
                             </tr>
                           </tfoot>
@@ -160,6 +162,7 @@
               </div>
             </div>
             @endforeach
+
           </div>
 
           <div class="row" style="color: white">
@@ -198,15 +201,15 @@
 
                       <tr>
                         <th>Sub TotalxCantTab</th>
-                        <td>S/. {{$pxt}}</td>
+                        <td>S/. {{$sub3}}</td>
                       </tr>
                       <tr>
                         <th>IGV (18%)</th>
-                        <td>S/. {{round(($pxt)*($igv_tableros/100),2)}}</td>
+                        <td>S/. {{round(($sub3)*($igv_tableros/100),2)}}</td>
                       </tr>
                       <tr>
                         <th>Precio TotalxCantTab</th>
-                        <td>S/. {{round(($pxt)+(($pxt)*($igv_tableros/100)),2)}}</td>
+                        <td>S/. {{round(($sub3)+(($sub3)*($igv_tableros/100)),2)}}</td>
                       </tr>
                     </tbody>
                   </table>

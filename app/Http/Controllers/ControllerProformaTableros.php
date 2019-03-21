@@ -105,6 +105,8 @@ class ControllerProformaTableros extends Controller
             $simbolo;
             $iduser;
             $cantt;
+            $descuento;
+            
             // idTipoCambio:idtipocam,valorTipoCambio:valorcambio
             foreach ($request->datos as $dato) {
             $idclie=$dato['idcliente'];
@@ -117,6 +119,7 @@ class ControllerProformaTableros extends Controller
             $plazo=$dato['plazo'];
             $clienteemp=$dato['clienteemp'];
             $observacion=$dato['observacion'];
+            $descuento=$dato['desc'];
             $simbolo=$dato['simbolo'];
             $iduser=$dato['userid'];
             }	
@@ -136,6 +139,7 @@ class ControllerProformaTableros extends Controller
                 'plazo_oferta'=>$plazo,
                 'cliente_empleado'=>$clienteemp,
                 'observacion_proforma'=>$observacion,
+                'descuento'=>$descuento,
                 'estado'=>1
                 ]
             );
@@ -210,7 +214,7 @@ public function show($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('users as u','u.id','=','p.idEmpleado')   
         ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')  
-        ->select('u.id',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU','p.totalxtab',DB::raw('DATE_ADD(p.fecha_hora, INTERVAL -2 HOUR) as fh'))
+        ->select('u.id',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU','p.totalxtab',DB::raw('DATE_ADD(p.fecha_hora, INTERVAL -2 HOUR) as fh'),'p.descuento')
         ->where('p.idProforma','=',$id)
         ->first();
 
@@ -338,7 +342,7 @@ public function pdf2($id){
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Tableros as t','t.idTableros','=','dePT.idTableros')
         ->join('Cliente_Representante as cre','p.cliente_empleado','=','cre.idCR')
-        ->select('cre.nombre_RE','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros as idTAB','t.nombre_tablero','t.cantidadTab','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP',DB::raw('CONCAT(pd.codigo_producto," | ",pd.nombre_producto," | ",pd.marca_producto," | ",pd.descripcion_producto) as producto2'),'pd.tipo_producto')
+        ->select('cre.nombre_RE','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','t.idTableros as idTAB','t.nombre_tablero','t.cantidadTab','t.estadoT','dePT.idDetalle_tableros','dePT.idProducto','dePT.idProforma','dePT.idTableros','dePT.cantidad','dePT.precio_venta','dePT.texto_precio_venta','dePT.descuento','dePT.descripcionDP','dePT.estadoDP',DB::raw('CONCAT(pd.codigo_producto," | ",pd.nombre_producto," | ",pd.marca_producto," | ",pd.descripcion_producto) as producto2'),'pd.tipo_producto','p.descuento as des')
         ->where('p.idProforma','=',$id)
         ->where('dePT.estadoDP','=','1')
         ->get();
@@ -362,6 +366,7 @@ public function pdf2($id){
             $forma_de;
             $plazo_oferta;
             $observacion;
+            $descuento;
             foreach ($request->datos as $dato) {
                 // $idclie=$dato['idcliente'];
                 $valorv=$dato['valorVenta'];
@@ -372,6 +377,7 @@ public function pdf2($id){
                 $forma_de=$dato['forma_de'];
                 $plazo_oferta=$dato['plazo_oferta'];
                 $observacion=$dato['obspro'];
+                $descuento=$dato['desc'];
             }   
             // $idProforma=DB::table('Proforma')->insertGetId(
             //     [
@@ -404,6 +410,7 @@ public function pdf2($id){
                 'forma_de'=>$forma_de,
                 'plazo_oferta'=>$plazo_oferta,
                 'observacion_proforma'=>$observacion,
+                'descuento'=>$descuento,
                 'estado'=>1
                 ]);
 
@@ -413,7 +420,7 @@ public function pdf2($id){
            foreach ($request->tableros as $tablero) {
                 $nombre=$tablero['nombre'];
                 $est=$tablero['estado'];
-                $cantxT=$tablero['cantidadTa'];
+                $cantxT=$tablero['cantt'];
 
                 if($est==2){
                     $idTablero=DB::table('Tableros')->insertGetId(
