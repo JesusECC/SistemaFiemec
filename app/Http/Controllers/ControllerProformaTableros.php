@@ -328,7 +328,7 @@ public function pdf2($id){
         ->distinct()
         ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
         ->where('dpt.idProforma','=',$id)
-
+        ->where('t.estadoT','=','1')
         ->get(['t.nombre_tablero','estadoT','t.cantidadTab','t.idTableros']);
 
 
@@ -426,6 +426,7 @@ public function pdf2($id){
                     $idTablero=$tablero['idtablero'];
 
                     $table=Tableros::find($idTablero);
+                    $table->cantidadTab=$cantxT;
                     $table->estadoT=$est;
                     $table->update();
 
@@ -500,7 +501,7 @@ public function pdf2($id){
         $idMarca=$request->get('marca');
         $marca=DB::table('Familia')
         ->where('idMarca','=',$idMarca)
-        ->where('estado','=','activo')
+        ->where('estado','=','1')
         ->get();
 
         $producto=DB::table('Producto as p')

@@ -360,7 +360,7 @@ public function pdf($id){
         $idMarca=$request->get('marca');
         $marca=DB::table('Familia')
         ->where('idMarca','=',$idMarca)
-        ->where('estado','=','activo')
+        ->where('estado','=','1')
         ->get();
 
         $producto=DB::table('Producto as p')
