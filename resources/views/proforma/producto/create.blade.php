@@ -53,7 +53,7 @@
 									<div class="col-sm-6">				
 										<div class="form-group">
                       <label>Tipo Producto</label>
-												<select id="a" name="marca_producto" class="form-control">
+												<select id="a" name="tipo_producto" class="form-control">
 												 <option value="" disabled selected >Selecione Tipo de Producto</option>
 												<option value="CAS">Catalogo</option>
 												<option value="Bandejas">Bandejas</option>
@@ -83,6 +83,7 @@
 										<div class="col-sm-4">
 											<div class="form-group">
                         <label>Serie Producto</label>  
+                        <input id="nombreMarca" type="hidden" name="nombreMarca" class="form-control">
 												<input id="c" type="text" name="serie_producto" class="form-control" {{old('serie_producto')}} placeholder="Número Serie ...">	
 											</div> 												
 										</div>
@@ -109,12 +110,12 @@
 										<div class="col-sm-4">
                                       <div class="form-group label-floating"> 
                                       <label>Marca Producto</label>                                      
-                                      <select name="idMarca" class="form-control selectpicker" id="g" data-live-search="true">
+                                      <select name="idMarca" id="idMarca" class="form-control selectpicker" id="idMarca" data-live-search="true">
 
                                  <option value="" disabled selected>Seleccione Marca</option>
                                       @foreach($marca as $fa)
                                                
-                                <option value="{{$fa->idMarca}}">{{$fa->nombre_proveedor}}</option>
+                                <option value="{{$fa->idMarca}}_{{$fa->nombre_proveedor}}">{{$fa->nombre_proveedor}}</option>
                                                @endforeach  
                                            </select>
                                         </div> 
@@ -277,6 +278,9 @@ $(document).ready(function(){
     $('#bt_add').click(function(){
         agregar();
     });
+     $('#idMarca').change(function(){
+        MostrarMarca();
+    });
 });
 
 var cont=0;
@@ -311,31 +315,43 @@ function cambiaropcion(){
         }
    }
 
+function MostrarMarca(){
+       
+        Marca=document.getElementById('idMarca').value.split('_');
+        Nommarca=Marca[1];
+        $("#nombreMarca").val(Marca[1]);
+      
+}
+
 function agregar()
 {
 
 	datosFamilia=document.getElementById('b').value.split('_');
+   Marca=document.getElementById('idMarca').value.split('_');
     
+
     idFamilia=datosFamilia[0];
+    idM=Marca[0];
     tipoP=$("#a").val();
     familia=$("#b option:selected").text();
     numserie=$("#c").val();
     codpedido=$("#d").val();
     codproducto=$("#e").val();
     nomproducto=$("#f").val();
-    marca=$("#g").val();
+   // marca=$("#g").val();
     stock=$("#h").val();
     precio=$("#i").val();
     cat=$("#j").val();
     descripcion=$("#k").val();
     foto=$("#files").val();
+    nombreM=$("#nombreMarca").val();
    
 
-    if(idFamilia!="" && marca!="" && cat!="")
+    if(idFamilia!="" && idM!="" && cat!="")
     {
        
 
-       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="tipo_producto[]" value="'+tipoP+'">'+tipoP+'</td> <td><input type="hidden" name="idFamilia[]" value="'+idFamilia+'">'+idFamilia+'</td> <td><input type="hidden" name="serie_producto[]" value="'+numserie+'">'+numserie+'</td>  <td><input type="hidden" name="codigo_pedido[]" value="'+codpedido+'">'+codpedido+'</td> <td><input type="hidden" name="codigo_producto[]" value="'+codproducto+'">'+codproducto+'</td> <td><input type="hidden" name="nombre_producto[]" value="'+nomproducto+'">'+nomproducto+'</td> <td><input type="hidden" name="idMarca[]" value="'+marca+'">'+marca+'</td> <td><input type="hidden" name="stock[]" value="'+stock+'">'+stock+'</td> <td><input type="hidden" name="precio_unitario[]" value="'+precio+'">'+precio+'</td> <td><input type="hidden" name="categoria_producto[]" value="'+cat+'">'+cat+'</td> <td><input type="hidden" name="descripcion_producto[]" value="'+descripcion+'">'+descripcion+'</td> <td><input type="hidden" name="foto[]" value="'+foto+'">'+foto+'</td> </tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="tipo_producto[]" value="'+tipoP+'">'+tipoP+'</td> <td><input type="hidden" name="idFamilia[]" value="'+idFamilia+'">'+idFamilia+'</td> <td><input type="hidden" name="serie_producto[]" value="'+numserie+'">'+numserie+'</td>  <td><input type="hidden" name="codigo_pedido[]" value="'+codpedido+'">'+codpedido+'</td> <td><input type="hidden" name="codigo_producto[]" value="'+codproducto+'">'+codproducto+'</td> <td><input type="hidden" name="nombre_producto[]" value="'+nomproducto+'">'+nomproducto+'</td> <td><input type="hidden" name="idMarca[]" value="'+idM+'">'+nombreM+'</td> <td><input type="hidden" name="marca_producto[]" value="'+nombreM+'">'+'</td> <td><input type="hidden" name="stock[]" value="'+stock+'">'+stock+'</td> <td><input type="hidden" name="precio_unitario[]" value="'+precio+'">'+precio+'</td> <td><input type="hidden" name="categoria_producto[]" value="'+cat+'">'+cat+'</td> <td><input type="hidden" name="descripcion_producto[]" value="'+descripcion+'">'+descripcion+'</td> <td><input type="hidden" name="foto[]" value="'+foto+'">'+foto+'</td> </tr>';
        cont++;
        limpiar();
        evaluar();
