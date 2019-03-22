@@ -302,6 +302,35 @@ public function pdf2($id){
         $pdf=PDF::loadView('proforma/tablero/pdf3',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
         return $pdf->stream('proforma.pdf3');
     }
+    public function pdf4($id){
+
+        $td=DB::table('Proforma as p')
+        ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
+        ->join('users as u','u.id','=','p.idEmpleado')   
+        ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')  
+        ->select('u.id',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno)as nameE'),'clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.igv','p.subtotal','p.precio_total','p.totalxtab','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE','u.telefonoU','u.celularU','p.totalxtab',DB::raw('DATE_ADD(p.fecha_hora, INTERVAL -2 HOUR) as fh'))
+        ->where('p.idProforma','=',$id)
+        ->first();
+
+        $tablero=DB::table('Tableros as t')
+        ->distinct()
+        ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
+        ->where('dpt.idProforma','=',$id)
+        ->where('t.estadoT','=','1')
+        ->get(['t.nombre_tablero','estadoT','t.cantidadTab']);
+
+        $proforma=DB::table('Proforma as p')
+        ->join('Detalle_proforma_tableros as dePT','p.idProforma','=','dePT.idProforma')
+        ->join('Producto as pd','pd.idProducto','=','dePT.idProducto')
+        ->select('p.idProforma','p.idEmpleado','p.serie_proforma','dePT.idProducto','dePT.idProforma',DB::raw('SUM(dePT.cantidad) as cant'),'dePT.cantidad','dePT.descripcionDP','pd.codigo_pedido','pd.codigo_producto','pd.nombre_producto')
+        ->where('p.idProforma','=',$id)
+        ->where('dePT.estadoDP','=','1')
+        ->groupBy('p.idProforma','p.idEmpleado','p.serie_proforma','dePT.idProducto','dePT.idProforma','dePT.cantidad','dePT.descripcionDP','pd.codigo_pedido','pd.codigo_producto','pd.nombre_producto')
+        ->get();
+
+        $pdf=PDF::loadView('proforma/tablero/pdf4',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
+        return $pdf->stream('proforma.pdf4');
+    }
     public function edit($id)
     {
         //

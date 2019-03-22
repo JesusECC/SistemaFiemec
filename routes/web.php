@@ -44,6 +44,9 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('proforma/tablero/pdf/{idProforma}',['as'=>'tablero-pdf','uses'=>'ControllerProformaTableros@pdf']);
     Route::get('proforma/tablero/pdf2/{idProforma}',['as'=>'tablero-pdf2','uses'=>'ControllerProformaTableros@pdf2']);
     Route::get('proforma/tablero/pdf3/{idProforma}',['as'=>'tablero-pdf3','uses'=>'ControllerProformaTableros@pdf3']);
+    Route::get('proforma/tablero/pdf4/{idProforma}',['as'=>'tablero-pdf4','uses'=>'ControllerProformaTableros@pdf4']);
+
+
     Route::post('tableros/cli',['as'=>'clientes-representante','uses'=>'ControllerProformaTableros@representante']);
 
     Route::post('tableros/fam',['as'=>'marca-familia','uses'=>'ControllerProformaTableros@familia']);
