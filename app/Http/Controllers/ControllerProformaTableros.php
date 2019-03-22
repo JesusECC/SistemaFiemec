@@ -312,23 +312,17 @@ public function pdf2($id){
         ->where('p.idProforma','=',$id)
         ->first();
 
-        $tablero=DB::table('Tableros as t')
-        ->distinct()
-        ->join('Detalle_proforma_tableros as dpt','t.idTableros','=','dpt.idTableros')
-        ->where('dpt.idProforma','=',$id)
-        ->where('t.estadoT','=','1')
-        ->get(['t.nombre_tablero','estadoT','t.cantidadTab']);
 
         $proforma=DB::table('Proforma as p')
         ->join('Detalle_proforma_tableros as dePT','p.idProforma','=','dePT.idProforma')
         ->join('Producto as pd','pd.idProducto','=','dePT.idProducto')
-        ->select('p.idProforma','p.idEmpleado','p.serie_proforma','dePT.idProducto','dePT.idProforma',DB::raw('SUM(dePT.cantidad) as cant'),'dePT.cantidad','dePT.descripcionDP','pd.codigo_pedido','pd.codigo_producto','pd.nombre_producto')
+        ->select('p.idProforma','p.idEmpleado','p.serie_proforma','dePT.idProducto','dePT.idProforma','dePT.cantidad','dePT.cantidad','dePT.descripcionDP','pd.codigo_pedido','pd.codigo_producto','pd.nombre_producto','pd.descripcion_producto')
         ->where('p.idProforma','=',$id)
         ->where('dePT.estadoDP','=','1')
-        ->groupBy('p.idProforma','p.idEmpleado','p.serie_proforma','dePT.idProducto','dePT.idProforma','dePT.cantidad','dePT.descripcionDP','pd.codigo_pedido','pd.codigo_producto','pd.nombre_producto')
+        ->orderby('dePT.idProducto')
         ->get();
 
-        $pdf=PDF::loadView('proforma/tablero/pdf4',['td'=>$td,'proforma'=>$proforma,"tablero"=>$tablero]);
+        $pdf=PDF::loadView('proforma/tablero/pdf4',['td'=>$td,'proforma'=>$proforma]);
         return $pdf->stream('proforma.pdf4');
     }
     public function edit($id)

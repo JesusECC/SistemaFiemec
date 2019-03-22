@@ -275,28 +275,27 @@ border-collapse: collapse;
         <thead class="principal"> 
           <tr class="principal"> 
             <th class="principal">Item</th>
-            <th class="principal">IdProducto</th>
             <th class="principal" style="width: 460px !important">Producto</th>
             <th class="principal" >Cant. </th>
             
           </tr>
         </thead>
-     {{$i=0}}
+     {{$i=1}}
     
       @foreach($proforma as $p)
+           
+
+           
       <tr>
           
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$i++}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->idProducto}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"> {{$p->codigo_pedido.' |-| '.$p->codigo_producto.' | '.$p->nombre_producto}}</td>
-
-              {{$p->cant}}
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">F0{{$p->idProducto}}</td>
               
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->cant}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"> {{$p->codigo_pedido.' |-| '.$p->codigo_producto.' | '.$p->nombre_producto.' | '.$p->descripcion_producto}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->cantidad}}</td>
               
             </tr>
            
-          
+         
         @endforeach
 
         
