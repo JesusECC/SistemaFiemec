@@ -55,7 +55,7 @@
                     <div class="panel-body">
                     <div class="form-group">
                     <label for="" class="control-label" style="font-size: 13px;color: #676a6c">
-                      Marca
+                      Cargo
                     </label>
                             
                   

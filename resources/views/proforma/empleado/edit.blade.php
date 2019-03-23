@@ -42,7 +42,7 @@
 
              <div class="box-body bg-gray-c">
                   <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="row">
                                 
                                 <div class="col-md-12">
@@ -129,36 +129,9 @@
                                      </div>
                                 </div>
                            </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default panel-shadow">
-                                <div class="panel-body">
-                                 <div class="box-body">
-					
-						<label for="" class="control-label" style="font-size: 13px;color: #676a6c">
-														Utlima Sesiones
-													</label>
-				       <div class="row">
-    				                    <div class="col-sm-12">
-											<div class="form-group">
-										<input type="text"   name="email" class="form-control" required value="{{$Empleado->email}}">
-											</div>								
-										</div>
-
-                                        <div class="col-sm-12">
-											<div class="form-group">
-											<input type="text" name="Direccion" class="form-control" required value="{{$Empleado->sueldo}}">
-											</div>								
-										</div>
-
-
-							           </div>
-				                      </div>  
-                                     </div>                 
-                                    </div>                            
-                                   </div>
-                                  </div>
-                                 </div>
-							    </div>
+                       </div>
+                    </div>
+                </div>
 							   </div>
 						      </div>
 					         </div>

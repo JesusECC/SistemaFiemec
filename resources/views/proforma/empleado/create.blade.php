@@ -8,7 +8,7 @@
     <ol class="breadcrumb" style="margin-top: 55px;">
         <li>
             <a href="#">
-                <i class="fas fa-dolly"></i> Productos</a>
+                <i class="fas fa-dolly"></i> Empleados</a>
         </li>
         <li class="active">Fiemec</li>
         <li>
@@ -50,7 +50,7 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="" class="control-label" style="font-size: 13px;color: #676a6c">
-                                            Producto Fiemec
+                                            Empleados Fiemec
                                         </label>
                                     </div>
                                     <div class="row">

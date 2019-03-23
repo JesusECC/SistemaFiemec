@@ -672,7 +672,7 @@ function MostrarAlertaCliente(){
                     $("#pfamilia").html(va);
 
                     for(const i in productos){
-                    va2+='<option value="'+productos[i]['idProducto']+'">'+productos[i]['codigo_pedido']+' | '+productos[i]['nombre_producto']+' | '+productos[i]['marca_producto']+' | '+productos[i]['descripcion_producto']+'</option>';                 
+                    va2+='<option value="'+productos[i]['idProducto']+'">'+productos[i]['codigo_pedido']+' | '+productos[i]['codigo_producto']+' | '+productos[i]['nombre_producto']+' | '+productos[i]['marca_producto']+' | '+productos[i]['descripcion_producto']+'</option>';                 
                     }
                     $("#pproduc").html(va2); 
                 }else{
@@ -707,7 +707,7 @@ function MostrarAlertaCliente(){
                     console.log('productowey',producto);
                     va='<option value="" disabled="" selected="">Seleccione</option>'
                     for(const i in producto){
-                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['codigo_pedido']+' | '+producto[i]['nombre_producto']+' | '+producto[i]['marca_producto']+' | '+producto[i]['descripcion_producto']+'</option>';                 
+                        va+='<option value="'+producto[i]['idProducto']+'">'+producto[i]['codigo_pedido']+' | '+producto[i]['codigo_producto']+' | '+producto[i]['nombre_producto']+' | '+producto[i]['marca_producto']+' | '+producto[i]['descripcion_producto']+'</option>';                 
                     }
                     $("#pproduc").html(va); 
                 }else{
