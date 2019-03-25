@@ -97,14 +97,14 @@
 													<div class="col-sm-3">
 														<div class="form-group">
 															<label for="nombres_Rs">Telefono</label>
-															<input type="number" name="telefonoRE" class="form-control" placeholder="Ingrese Telefono" required value="{{$representante->telefonoRE}}">
+															<input type="text" name="telefonoRE" class="form-control" placeholder="Ingrese Telefono" required value="{{$representante->telefonoRE}}">
 														</div> 												
 													</div>
 														
 													<div class="col-sm-3">
 														<div class="form-group">
 															<label for="nombres_Rs">Celular</label>
-															<input type="number" name="CelularRE" class="form-control" placeholder="Ingrese Celular" required value="{{$representante->CelularRE}}">
+															<input type="text" name="CelularRE" class="form-control" placeholder="Ingrese Celular" required value="{{$representante->CelularRE}}">
 														</div> 												
 													</div>
 													</div>												

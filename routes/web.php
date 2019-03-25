@@ -73,6 +73,8 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('productos/create',['as'=>'producto-create','uses'=>'ControllerProducto@create']);
     Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
     Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
+
+
     //se crea las rutas para catalago 
     Route::get('catalogo',['as'=>'catalogo','uses'=>'ControllerCatalogo@index']);
     Route::get('catalogo/show/{idProducto}',['as'=>'catalogo-show','uses'=>'ControllerCatalogo@show']);

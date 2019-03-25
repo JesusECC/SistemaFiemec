@@ -39,7 +39,7 @@
 
 				</div>
                 <!-- /.box-header -->
-                	{!!Form::model($producto,['method'=>'PATCH','route'=>['producto.update',$producto->id]])!!}
+                	{!!Form::model($producto,['method'=>'PATCH','route'=>['producto.update',$producto->idProducto]])!!}
 		    		{{Form::token()}}
 				<div class="box-body bg-gray-c">
 					<div class="row">
@@ -83,17 +83,17 @@
 												<label>Marca</label>
 												<select name="marca_producto" class="form-control">
 													@if($producto->marca_producto=='FIEMEC')
-												   <option value="FIEMEC" selected>FIEMEC</option>
+												   <option value="Fiemec" selected>FIEMEC</option>
 												   <option value="ABB">ABB</option>
-												   <option value="SCHNEIDER">SCHNEIDER</option>	
+												   <option value="schneider">SCHNEIDER</option>	
 												   @elseif($producto->marca_producto=='ABB')
-												   <option value="FIEMEC">FIEMEC</option>
+												   <option value="Fiemec">FIEMEC</option>
 												   <option value="ABB" selected>ABB</option>
-												   <option value="SCHNEIDER">SCHNEIDER</option>
+												   <option value="schneider">SCHNEIDER</option>
 												   @else($producto->marca_producto=='SCHNEIDER')
-												   <option value="FIEMEC">FIEMEC</option>
+												   <option value="Fiemec">FIEMEC</option>
 												   <option value="ABB">ABB</option>
-												   <option value="SCHNEIDER" selected>SCHNEIDER</option>
+												   <option value="schneider" selected>SCHNEIDER</option>
 												   @endif
 												</select>													
 											</div>

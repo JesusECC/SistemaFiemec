@@ -77,7 +77,7 @@
 
 									<div class="col-sm-4">
 														<div class="form-group">
-															<input type="number" name="nro_doc_RE" class="form-control" placeholder="Ingrese numero de Documento"  value data-inputmask="'mask': '(999) 999-9999'" data-mask autocomplete="off" {{old('nro_documento')}}>
+															<input type="text" name="nro_doc_RE" class="form-control" placeholder="Ingrese numero de Documento">
 														</div> 												
 													</div>	
 									</div>
@@ -85,20 +85,20 @@
 													
 													<div class="col-sm-6">
 														<div class="form-group">
-															<input type="text" name="nombre_RE" class="form-control" placeholder="Ingrese Nombre Completo" {{old('nombres_RS')}}>
+															<input type="text" name="nombre_RE" class="form-control" placeholder="Ingrese Nombre Completo">
 														</div>													
 													</div>
 												
 												
 													<div class="col-sm-3">
 														<div class="form-group">
-															<input type="number" name="telefonoRE" class="form-control" placeholder="Ingrese Telefono" {{old('paterno')}}>
+															<input type="text" name="telefonoRE" class="form-control" placeholder="Ingrese Telefono">
 														</div> 												
 													</div>
 														
 													<div class="col-sm-3">
 														<div class="form-group">
-															<input type="number" name="CelularRE" class="form-control" placeholder="Ingrese Celular" {{old('paterno')}}>
+															<input type="text" name="CelularRE" class="form-control" placeholder="Ingrese Celular" >
 														</div> 												
 													</div>
 													</div>												

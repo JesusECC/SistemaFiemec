@@ -50,13 +50,29 @@
 													</label>
 												</div>
 												<div class="row">
-													<div class="col-sm-3">
-														<div class="form-group">
-															<label>
+													<div class="col-sm-4">
+                                                      <div class="form-group">
+                                                      <label for="nombre_familia">Tipo Documento</label>
+                                                      <select required name="tipodoc" class="form-control selectpicker" id="tipodoc" data-live-search="true">
+                                                      <option value="">Seleccione Tipo</option>
+                                                      @if($Cliente->tipo_documento=='DNI')
+                                                      <option value="DNI" selected>DNI</option>
+                                                      <option value="RUC">RUC</option>   
+                                                      @elseif($Cliente->tipo_documento=='RUC')
+                                                      <option value="DNI">DNI</option>
+                                                      <option value="RUC" selected>RUC</option>
+                                                      @endif
+                                                      </select> 
+                                                    </div>
+                                                </div>
+
+												<div class="col-sm-3">
+													<div class="form-group">
+													    <label>
 														Numero de Documento
-													        </label>
+													    </label>
 															<input type="text" name="nro_documento" class="form-control"   value="{{$Cliente->nro_documento}}">
-														</div> 												
+														</div> 							
 													</div>
 													<div class="col-sm-3">
 														<div class="form-group">

@@ -100,6 +100,8 @@ class ControllerClientes extends Controller
   public function edit($id)
     {
 
+      
+
         return view("proforma.cliente.edit",["Cliente"=>Clientes::findOrFail($id)]);
     }
 
@@ -108,7 +110,7 @@ class ControllerClientes extends Controller
     {
 
                   $Cliente=Clientes::Find($id);
-                  $Cliente->tipo_documento='DNI';
+                  $Cliente->tipo_documento=$request->get('tipodoc');
                   $Cliente->nro_documento=intval($request->get('nro_documento'));
                   $Cliente->nombres_Rs=$request->get('nombres_Rs');               
                   $Cliente->paterno=$request->get('paterno');

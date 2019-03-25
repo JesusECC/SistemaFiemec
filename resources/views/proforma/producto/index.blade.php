@@ -30,12 +30,13 @@
 							</button></a>
 					</div>
 				</div>
-                <!-- /.box-header -->
+                @include('proforma.producto.search')
 				<div class="box-body">
 					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%;font-size: 11px !important">
 				       <thead>
 				            <tr>
 				                <th>N° Serie</th>
+				                <th>Código Pedido</th>
 				                <th>Código</th>
 				                <th>Nombre</th>
 				                <th>Marca</th>
@@ -48,6 +49,9 @@
 				        	<tr>
 				        		<td>
 				        			{{$pro->serie_producto}}
+				        		</td>
+				        		<td>
+				        			{{$pro->codigo_pedido}}
 				        		</td>
 				        		<td>
 				        			{{$pro->codigo_producto}}
@@ -71,16 +75,7 @@
 							@include('proforma.producto.modal-producto')
 							@endforeach
 				        </tbody>
-				        <tfoot>
-				            <tr>
-				                <th>N° Serie</th>
-				                <th>Código</th>
-				                <th>Nombre</th>
-				                <th>Marca</th>
-				                <th>Precio</th>
-				                <th>Opciones</th>
-				            </tr>
-				        </tfoot>
+				       
     				</table>
     				{{$productos->render()}}
 				</div>

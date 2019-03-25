@@ -30,7 +30,7 @@ class ControllerProducto extends Controller
         {
            $query=trim($request->get('searchText'));
            $productos=DB::table('Producto')
-            ->where('codigo_producto','LIKE','%'.$query.'%')
+            ->where('codigo_pedido','LIKE','%'.$query.'%')
             ->where('estado','=','activo')
            ->orderby('idProducto','asc')
            ->paginate(10);
@@ -115,7 +115,7 @@ while ($cont<count($idFamilia)) {
 
         $producto=Producto::find($id);
 
-       $producto->serie_producto=$request->get('serie_producto');
+        $producto->serie_producto=$request->get('serie_producto');
         $producto->codigo_pedido=$request->get('codigo_pedido');
         $producto->codigo_producto=$request->get('codigo_producto');
         $producto->nombre_producto=$request->get('nombre_producto');
@@ -127,13 +127,6 @@ while ($cont<count($idFamilia)) {
         $mytime = Carbon::now('America/Lima');
         $producto->fecha_sistema=$mytime->toDateTimeString();
         $producto->estado='activo';
-
-         if(Input::hasFile('foto')){
-           $file=Input::file('foto');
-           $file->move(public_path().'/fotos/productos/',$file->getClientOriginalName());
-           $producto->foto=$file->getClientOriginalName();
-
-        }
         $producto->update();
         return Redirect::to('productos');
     }

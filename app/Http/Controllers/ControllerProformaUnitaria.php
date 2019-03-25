@@ -364,20 +364,18 @@ public function pdf($id){
         ->get();
 
         $producto=DB::table('Producto as p')
-        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto')
+        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto','p.codigo_pedido')
         ->where('p.idMarca','=',$idMarca)
-        ->where('p.estado','=','activo')
         ->orderby('p.idProducto')
         ->get();
  
         return ['producto' =>$producto,'marca' =>$marca,'veri'=>true];
     }
-
     public function producto(Request $request)
     {
         $idFamilia=$request->get('familia');
         $familia=DB::table('Producto as p')
-        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto')
+        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto','p.codigo_pedido')
         ->where('idFamilia','=',$idFamilia)
 
         ->get();
@@ -390,7 +388,7 @@ public function pdf($id){
         $idProducto=$request->get('producto');
         $producto=DB::table('Producto as p')
         ->join('Familia as f','p.idFamilia','=','f.idFamilia')
-        ->select('p.idProducto','f.descuento_familia','p.precio_unitario',DB::raw('CONCAT(p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'),'p.tipo_producto')
+        ->select('p.idProducto','f.descuento_familia','p.precio_unitario','p.tipo_producto',DB::raw('CONCAT(p.codigo_pedido," | ",p.codigo_producto," | ",p.nombre_producto," | ",p.marca_producto," | ",p.descripcion_producto) as producto2'),'p.codigo_pedido')
         ->where('idProducto','=',$idProducto)
 
         ->get();
