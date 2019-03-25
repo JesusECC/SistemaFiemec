@@ -525,6 +525,7 @@ public function pdf2($id){
         $producto=DB::table('Producto as p')
         ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto','p.codigo_pedido')
         ->where('p.idMarca','=',$idMarca)
+        ->where('p.estado','=','activo')
         ->orderby('p.idProducto')
         ->get();
  
