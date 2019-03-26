@@ -555,5 +555,19 @@ public function pdf2($id){
         // dd($request);
         return ['producto' =>$producto,'veri'=>true];
     }
+
+    public function busqueda(Request $request)
+    {
+      $codigopedido=$request->get('codigop');
+      $producto=DB::table('Producto as p')
+        ->join('Familia as f','p.idFamilia','=','f.idFamilia')
+        ->select('p.idProducto','p.precio_unitario','p.idProducto','p.codigo_producto','p.nombre_producto','p.marca_producto','p.descripcion_producto','p.tipo_producto','p.codigo_pedido')
+        ->where('p.codigo_pedido','LIKE','%'.$codigopedido.'%')
+        ->where('p.estado','=','activo')
+        ->get();
+        // dd($request);
+        return ['producto' =>$producto,'veri'=>true];
+
+    }
 }
 

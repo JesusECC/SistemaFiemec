@@ -201,8 +201,7 @@
              @endif 
             <li>
               <a href="#">
-                <i class="fa fa-info-circle"></i> <span>Acerca De Sistema</span>
-                <small class="label pull-right bg-yellow">IT</small>
+                <i class="fa fa-info-circle"></i> <span>Inventario</span>
               </a>
             </li>
                         
