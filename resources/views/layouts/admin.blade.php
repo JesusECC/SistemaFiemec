@@ -144,7 +144,7 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{ route('proforma')}}"><i class="fas fa-circle-notch"></i> Productos</a></li>
+                <li><a href="{{ route('proforma')}}"><i class="fas fa-circle-notch"></i> Proforma Unitaria</a></li>
                 <li><a href="{{ route('tablero')}}"><i class="fas fa-circle-notch"></i> Tableros</a></li>
                 <li><a href="{{ route('servicio')}}"><i class="fas fa-circle-notch"></i> Servicios</a></li>
                 <li><a href="{{ route('bandejas')}}"><i class="fas fa-circle-notch"></i> Bandejas</a></li>

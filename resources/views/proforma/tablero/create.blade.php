@@ -175,6 +175,7 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
+                                                <label for="" class="control-label">Buscar Producto</label>
                                                 <input type="text"  id="busqueda" class="form-control" name="busqueda"  placeholder="Buscar por codigo Pedido" >
                                             </div>
                                         </div>

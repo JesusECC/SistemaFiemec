@@ -129,6 +129,12 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
+                                                <label for="" class="control-label">Buscar Producto</label>
+                                                <input type="text"  id="busqueda" class="form-control" name="busqueda"  placeholder="Buscar por codigo Pedido" >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
                                                 <label for="" class="control-label">Producto</label>
                                                 <select required name="pproduc" class="form-control" id="pproduc" data-live-search="true">
                                                </select> 
@@ -376,6 +382,12 @@
             agregarProductosTablero();
             valoresFinales();           
         });
+
+        $('#busqueda').keyup(function(){ 
+        codigopedido=$('#busqueda').val(); 
+        busqueda(codigopedido);
+        });
+
         $('#Pcantidad').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
         });
@@ -619,6 +631,38 @@ function cambiaropcion(){
                     $('#precio_uni').attr("disabled", true); 
 
                          } 
+                }else{
+                    alert("problemas al enviar la informacion");
+                }
+            }
+        });
+    }
+
+     function busqueda(codigopedido){
+
+          
+        console.log(codigopedido,'-----');
+      $.ajax({
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{codigop:codigopedido}, //datos que se envian a traves de ajax
+            url:'busE', //archivo que recibe la peticion
+            type:'post', //método de envio
+            dataType:"json",//tipo de dato que envio 
+            beforeSend: function () {
+                console.log('procesando');
+                // $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                console.log(response);
+                if(response.veri==true){
+                    var codigoped=response.producto;
+                    var va;
+                    console.log('productowey',codigoped);
+                    va='<option value="" disabled="" selected="">Seleccione</option>'
+                    for(const i in codigoped){
+                        va+='<option value="'+codigoped[i]['idProducto']+'">'+codigoped[i]['codigo_pedido']+' | '+codigoped[i]['nombre_producto']+' | '+codigoped[i]['codigo_producto']+' | '+codigoped[i]['marca_producto']+' | '+codigoped[i]['descripcion_producto']+'</option>';                 
+                    }
+                    $("#pproduc").html(va); 
                 }else{
                     alert("problemas al enviar la informacion");
                 }

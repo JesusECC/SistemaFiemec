@@ -56,6 +56,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('tableros/edit/famT',['as'=>'marcaT-familiaT','uses'=>'ControllerProformaTableros@familia']);
     Route::post('tableros/edit/prodT',['as'=>'familiaT-productoT','uses'=>'ControllerProformaTableros@producto']);
     Route::post('tableros/edit/predesT',['as'=>'preciodescuentoT-productoT','uses'=>'ControllerProformaTableros@preciodescuento']);
+    Route::post('tableros/edit/busET',['as'=>'busquedaproductotE-productotE','uses'=>'ControllerProformaTableros@busqueda']);
     Route::post('tableros/bus',['as'=>'busquedaproductot-productot','uses'=>'ControllerProformaTableros@busqueda']);
 
    
@@ -105,6 +106,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('proformas/editar/famE',['as'=>'marcaE-familiaE','uses'=>'ControllerProformaUnitaria@familia']);
     Route::post('proformas/editar/prodE',['as'=>'familiaE-productoE','uses'=>'ControllerProformaUnitaria@producto']);
     Route::post('proformas/editar/predesE',['as'=>'preciodescuentoE-productoE','uses'=>'ControllerProformaUnitaria@preciodescuento']);
+    Route::post('proformas/editar/busE',['as'=>'busquedaproductoE-productoE','uses'=>'ControllerProformaUnitaria@busqueda']);
 
     //Se crea rutas bandejas
     Route::post('bandejas/guardar',['as' => 'bandejas-store','uses'=>'ControllerBandejas@store']);
