@@ -26,7 +26,7 @@
 					<div class="ibox-title-buttons pull-right">
 						<a href="{{url('proforma/familia/create')}}" style="text-decoration: none !important">
 							<button class="btn btn-block btn-success" style="background-color: #18A689 !important;">
-								<i class="fas fa-plus-circle"></i> Nuevo de Familia
+								<i class="fas fa-plus-circle"></i> Nueva Familia
 							</button></a>
 					</div>
 				</div>

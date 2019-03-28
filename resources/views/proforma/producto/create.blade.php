@@ -230,7 +230,7 @@
                         <th>Precio</th>
                         <th>Categoria</th>
                         <th>descripcion</th>
-                        <th>foto</th>
+                        
                		</thead>
             		<tfoot>
             			
@@ -245,7 +245,7 @@
             			<th></th>
             			<th></th>
             			<th></th>
-            			<th></th>   
+            			  
                   <th></th>         			
             		
             		</tfoot>
@@ -351,7 +351,10 @@ function agregar()
     {
        
 
-       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="tipo_producto[]" value="'+tipoP+'">'+tipoP+'</td> <td><input type="hidden" name="idFamilia[]" value="'+idFamilia+'">'+idFamilia+'</td> <td><input type="hidden" name="serie_producto[]" value="'+numserie+'">'+numserie+'</td>  <td><input type="hidden" name="codigo_pedido[]" value="'+codpedido+'">'+codpedido+'</td> <td><input type="hidden" name="codigo_producto[]" value="'+codproducto+'">'+codproducto+'</td> <td><input type="hidden" name="nombre_producto[]" value="'+nomproducto+'">'+nomproducto+'</td> <td><input type="hidden" name="idMarca[]" value="'+idM+'">'+nombreM+'</td> <td><input type="hidden" name="marca_producto[]" value="'+nombreM+'">'+'</td> <td><input type="hidden" name="stock[]" value="'+stock+'">'+stock+'</td> <td><input type="hidden" name="precio_unitario[]" value="'+precio+'">'+precio+'</td> <td><input type="hidden" name="categoria_producto[]" value="'+cat+'">'+cat+'</td> <td><input type="hidden" name="descripcion_producto[]" value="'+descripcion+'">'+descripcion+'</td> <td><input type="hidden" name="foto[]" value="'+foto+'">'+foto+'</td> </tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"> <td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td> <td><input type="hidden" name="tipo_producto[]" value="'+tipoP+'">'+tipoP+'</td> <td><input type="hidden" name="idFamilia[]" value="'+idFamilia+'">'+idFamilia+'</td> <td><input type="hidden" name="serie_producto[]" value="'+numserie+'">'+numserie+'</td>  <td><input type="hidden" name="codigo_pedido[]" value="'+codpedido+'">'+codpedido+'</td> <td><input type="hidden" name="codigo_producto[]" value="'+codproducto+'">'+codproducto+'</td> <td><input type="hidden" name="nombre_producto[]" value="'+nomproducto+'">'+nomproducto+'</td> <td><input type="hidden" name="idMarca[]" value="'+idM+'">'+nombreM+'</td><td><input type="hidden" name="stock[]" value="'+stock+'">'+stock+'</td> <td><input type="hidden" name="precio_unitario[]" value="'+precio+'">'+precio+'<input type="hidden" name="marca_producto[]" value="'+nombreM+'">'+'</td> <td><input type="hidden" name="categoria_producto[]" value="'+cat+'">'+cat+'</td> <td><input type="hidden" name="descripcion_producto[]" value="'+descripcion+'">'+descripcion+'</td> <td><input type="hidden" name="foto[]" value="'+foto+'">'+foto+'</td> </tr>';
+
+      
+
        cont++;
        limpiar();
        evaluar();

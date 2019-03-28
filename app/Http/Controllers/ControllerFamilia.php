@@ -22,8 +22,9 @@ class ControllerFamilia extends Controller
      $query=trim($request->get('searchText'));
      $familias=DB::table('Familia as fa')
      ->join('Marca as ma','ma.idMarca','=','fa.idMarca')
-     ->select('ma.nombre_proveedor','fa.nombre_familia','fa.descuento_familia','fa.idFamilia')
-     ->where('nombre_familia','LIKE','%'.$query.'%')
+     ->select('ma.nombre_proveedor','fa.nombre_familia','fa.descuento_familia','fa.idFamilia','fa.estado')
+     //->where('nombre_familia','LIKE','%'.$query.'%')
+     ->where('fa.estado2','=',1)
      ->paginate(17);
        return view('proforma.familia.index',["familias"=>$familias,"searchText"=>$query]);
     }
@@ -74,7 +75,8 @@ public function destroy($id)
 
 {
  $familia=Familia::findOrFail($id);
- $familia->estado='inactivo';
+ $familia->estado='0';
+ $familia->estado2='0';
  $familia->update();
  return Redirect::to('proforma/familia');
 

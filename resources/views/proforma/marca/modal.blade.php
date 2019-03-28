@@ -14,10 +14,10 @@
               <div class="panel panel-transparent text-center p-md">
                 <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
                 <h3 class="m-t-none m-b-sm text-warning">Advertencia</h3>
-                <p class="p-text-delete">Al eliminar la siguiente Moneda <span style="color: red">{{$m->nombre_proveedor}}</span>  no volvera a verlo en la lista </p>
+                <p class="p-text-delete">Al eliminar la siguiente Marca <span style="color: red">{{$m->nombre_proveedor}}</span>  no volvera a verlo en la lista </p>
               </div>
             </div>
-            <h3>¿Desea eliminar la moneda?</h3>
+            <h3>¿Desea eliminar la marca?</h3>
           </div>         
       </center>
   </div>

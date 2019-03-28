@@ -16,6 +16,7 @@ class Familia extends Model
     	'nombre_familia',
     	'descuento_familia',
       'estado',
+      'estado2',
       'idMarca',
       
      
