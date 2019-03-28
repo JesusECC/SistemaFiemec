@@ -22,9 +22,10 @@ class ControllerFamilia extends Controller
      $query=trim($request->get('searchText'));
      $familias=DB::table('Familia as fa')
      ->join('Marca as ma','ma.idMarca','=','fa.idMarca')
-     ->select('ma.nombre_proveedor','fa.nombre_familia','fa.descuento_familia','fa.idFamilia','fa.estado')
-     //->where('nombre_familia','LIKE','%'.$query.'%')
-     ->where('fa.estado2','=',1)
+     ->select('ma.nombre_proveedor','fa.nombre_familia','fa.descuento_familia','fa.idFamilia')
+     
+     ->where('estado2','=',1)
+     
      ->paginate(17);
        return view('proforma.familia.index',["familias"=>$familias,"searchText"=>$query]);
     }
