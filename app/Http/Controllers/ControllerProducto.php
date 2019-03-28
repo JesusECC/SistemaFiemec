@@ -44,6 +44,7 @@ class ControllerProducto extends Controller
     {
        
        $familia=db::table('Familia')
+       ->where('estado','=','1')
        ->where('estado2','=','1')
        ->get();
        $marca=db::table('Marca')
