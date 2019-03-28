@@ -96,7 +96,7 @@
 										<div class="col-sm-4">
 											<div class="form-group">
                         <label>Codigo Producto</label>
-												<input id="e" type="text" name="codigo_producto" class="form-control" {{old('odigo_producto')}} placeholder="Código Producto ...">	
+												<input id="e" type="text" name="codigo_producto" class="form-control">	
 											</div> 												
 										</div>
 									</div>

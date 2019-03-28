@@ -47,6 +47,7 @@ $familia=new Familia;
 $familia->nombre_familia=$request->get('nombre_familia');
 $familia->descuento_familia=$request->get('descuento_familia');
 $familia->estado='1';
+$familia->estado2='1';
 $familia->idMarca=$request->get('idMarca');
 $familia->save();
 
