@@ -76,7 +76,7 @@
 				        			</div>							
 								</td>
 							</tr>
-							@include('proforma.proforma.modal')
+							@include('proforma.tablero.modal')
 							@endforeach
 				        </tbody>
     				</table>
