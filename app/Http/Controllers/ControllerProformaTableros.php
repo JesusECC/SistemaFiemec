@@ -316,10 +316,10 @@ public function pdf2($id){
         $proforma=DB::table('Proforma as p')
         ->join('Detalle_proforma_tableros as dePT','p.idProforma','=','dePT.idProforma')
         ->join('Producto as pd','pd.idProducto','=','dePT.idProducto')
-        ->select('p.idProforma','p.idEmpleado','p.serie_proforma','dePT.idProducto','dePT.idProforma','dePT.cantidad','dePT.cantidad','dePT.descripcionDP','pd.codigo_pedido','pd.codigo_producto','pd.nombre_producto','pd.descripcion_producto')
+        ->select('p.idProforma','p.idEmpleado','p.serie_proforma','dePT.idProducto','dePT.idProforma','dePT.cantidad','dePT.cantidad','dePT.descripcionDP','pd.codigo_pedido','pd.marca_producto','pd.codigo_producto','pd.nombre_producto','pd.descripcion_producto',DB::raw('sum(case dePT.idProducto when dePT.idProducto then cantidad end) as total'))
         ->where('p.idProforma','=',$id)
         ->where('dePT.estadoDP','=','1')
-        ->orderby('dePT.idProducto')
+        ->groupBy('p.idProforma','dePT.idProducto','p.idEmpleado','p.serie_proforma','dePT.idProducto','dePT.idProforma','dePT.cantidad','dePT.cantidad','dePT.descripcionDP','pd.codigo_pedido','pd.codigo_producto','pd.nombre_producto','pd.descripcion_producto','pd.marca_producto')
         ->get();
 
         $pdf=PDF::loadView('proforma/tablero/pdf4',['td'=>$td,'proforma'=>$proforma]);

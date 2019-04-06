@@ -275,23 +275,24 @@ border-collapse: collapse;
         <thead class="principal"> 
           <tr class="principal"> 
             <th class="principal">Item</th>
+            <th class="principal">Marca</th>
             <th class="principal" style="width: 460px !important">Producto</th>
             <th class="principal" >Cant. </th>
             
           </tr>
         </thead>
-     {{$i=1}}
+     {{$i=0}}
     
       @foreach($proforma as $p)
            
-
+       
            
       <tr>
           
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">F0{{$p->idProducto}}</td>
-              
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$i=$i+1}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->marca_producto}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"> {{$p->codigo_pedido.' |-| '.$p->codigo_producto.' | '.$p->nombre_producto.' | '.$p->descripcion_producto}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->cantidad}}</td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->total}}</td>
               
             </tr>
            
