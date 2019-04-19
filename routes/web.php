@@ -151,6 +151,11 @@ Route::middleware(['auth','admin'])->group(function () {
    Route::get('productobandejas/create',['as'=>'productobandejas-create','uses'=>'ControllerProductoBandeja@create']);
    Route::post('productobandejas/',['as'=>'productobandejas-store','uses'=>'ControllerProductoBandeja@store']);
    Route::get('productobandejas/{idProducto}/edit',['as'=>'productobandejas-edit','uses'=>'ControllerProductoBandeja@edit']);
+
+   //ruta de inventario
+   Route::get('inventario',['as'=>'inventarios','uses'=>'ControllerInventario@index']);
+   //ruta entrada-create
+   Route::get('entrada/create',['as'=>'entradas-create','uses'=>'ControllerInventario@createentrada']);
    
      
     
