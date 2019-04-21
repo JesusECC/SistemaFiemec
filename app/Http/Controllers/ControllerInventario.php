@@ -27,6 +27,20 @@ class ControllerInventario extends Controller
 
    public function createentrada(){
 
-   	return view('proforma.entrada.create');
+    $marcas = DB::Table('Marca')
+    ->where('estadoMa','=',1)
+    ->get();
+
+    $familia = DB::Table('Familia')
+    ->where('estado','=','1')
+    ->get();
+
+   	return view('proforma.entrada.create',["marcas"=>$marcas,"familia"=>$familia]);
+   }
+
+   public function storeentrada(){
+
+   
+
    }
 }

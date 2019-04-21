@@ -13,59 +13,113 @@
         <li class="active">Nuevo Ingreso</li>
     </ol>
 </section>
-<section class="content">
-	    <div class="row">
-	        <div class="col-md-12">
-	            <div class="box" style="border-top: 3px solid #18A689">
-	                <div class="box-header with-border" style="padding: 10px !important">
-	                    <h4>
-	                        <strong style="font-weight: 400">
-	                            <i class="fas fa-dolly"></i> Ingreso de Inventario
-	                        </strong>
-	                    </h4>
-	                    @if(count($errors)>0)
-	                    <div class="alert-alert-danger">
-	                        <ul>
-	                            @foreach ($errors->all() as $error)
-	                                <li>{{$error}}</li>
-	                            @endforeach 
-	                        </ul>   
-	                    </div>
-	                    @endif
-	                    
-	                </div>
 
-	                    {!!Form::open(array('url'=>'proforma/inventario','method'=>'POST','autocomplete'=>'off'))!!}
+			<div class="box-body bg-gray-c">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="panel panel-default panel-shadow">
+							<div class="box-body">
+								<table id="example" class="table table-striped table-bordered table-hover" style="width:100%;font-size: 14px !important">
+			                        	<thead>
+			                        		<tr>
+			                        			<th>N° Guia</th>
+			                        			<th>Fecha</th>
+			                        			<th>Codigo Producto</th>
+			                        			<th>Descripcion</th>
+			                        			<th>Cantidad</th>
+			                        		</tr>
+			                        	</thead>
+			                        	<tbody>
+			                        		                    		
+			                        	</tbody>
+			                    </table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default panel-shadow">
+							<div class="box-body">
+								<div class="row">
+									<div class="col-sm-5">
+										<div class="form-group">
+											<label>N° de Orden</label>
+											<input type="text" id="orden" name="orden" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="form-group">
+											<label>Buscar por Codigo</label>
+											<input type="text" id="codigop" name="codigop" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-12">
+                                        <div class="form-group">
+                                         	<label>Marca</label>
+                                         	<select required name="marca" class="form-control">
+                                         		<option value="" disabled selected>Seleccione Marca</option>
+                                         		@foreach($marcas as $ma)
+                                         		<option value="{{$ma->idMarca}}">{{$ma->nombre_proveedor}}</option>
+                                         		@endforeach
+                                         	</select>
+                                        </div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label>Familia</label>
+											<select required name="familia" class="form-control">
 
-	                    {{Form::token()}}
-
-	                    <div class="box-body bg-gray-c">
-	                        <div class="row">
-	                            <div class="col-md-8">
-	                                <div class="panel panel-default panel-shadow">
-	                                    <div class="panel-body">
-	                                        <div class="form-group">
-	                                            <label for="" class="control-label" style="color: #676a6c !important">
-	                                            Producto
-	                                            </label>
-                                                
-
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>                                        
-	                </div>
-	            </div>
-	        </div>
-	   <div class="box-footer">
-			<div class="ibox-title-buttons pull-right">
-				<button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
-				<button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
-				<button  class="btn btn-success btn-sm " type="button"><a style="color: white!important;text-decoration: none" href="{{url('proformas')}}"><i class="fas fa-reply-all"></i> Volver</a></button>
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label>Producto</label>
+											<select required name="producto" class="form-control">
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label>Descripcion</label>
+											<input type="text" name="descripcion" class="form-control">
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Cantidad</label>
+											<input type="text" name="cantidad" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-6" style="margin-top: 25px">
+										<div class="form-group">
+											<button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-				    
-</section>
+@push('scripts')
+<script>
+
+	$(document).ready(function(){
+
+		$('#orden').keyup(function(){
+         cambio();
+		});
+
+	});
+
+	function cambio(){
+
+		var v1=$('#orden').val();
+
+		$('#codigop').val(v1);
+	}
+				
+</script>
+@endpush
 @endsection
