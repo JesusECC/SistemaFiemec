@@ -84,6 +84,38 @@
 							</div><!-- /.col -->
 						</div>
 					</div>
+
+					<<!-- /.box-header -->
+				<div class="box-body">
+					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%;font-size: 14px !important">
+                        	<thead>
+                        		<tr>
+                        			<th>Id</th>
+                        			<th>Codigo Producto</th>
+                        			<th>Descripcion</th>
+                        			<th>Existencias Iniciales</th>
+                        			<th>Entrada</th>
+                        			<th>Salida</th>
+                        			<th>Stock</th>
+                        		</tr>
+                        	</thead>
+                        	<tbody>
+                        		@foreach($inventario as $inv)
+                        		<tr>}
+                        			<td>{{$inv->idProducto}}</td>
+                                     <td>{{$inv->codigo_pedido}}</td>
+                                     <td>{{$inv->nombre_producto}}</td>
+                                     <td>{{$inv->descripcion_producto}}</td>
+                                     <td></td>
+                                     <td></td>
+                                     <td>{{$inv->stock}}</td>
+                                </tr>
+                        		@endforeach
+                        		
+                        	</tbody>
+                        </table>
+                      
+				    </div>
 				</div>
               </div><!-- /.box -->
             </div><!-- /.col -->

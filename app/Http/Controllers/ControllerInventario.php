@@ -15,8 +15,13 @@ use DB;
 class ControllerInventario extends Controller
 {
    public function index(){
+
+   	$inventario=DB::table('Producto')
+   	->where('estado','=','activo')
+   	->where('stock','>=',0)
+   	->get();
     
-   return view('proforma.inventario.index');
+   return view('proforma.inventario.index',["inventario"=>$inventario]);
 
    } 
 

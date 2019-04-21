@@ -200,7 +200,7 @@
             </li>
              @endif 
             <li>
-              <a href="#">
+              <a href="{{ route('inventarios')}}">
                 <i class="fa fa-info-circle"></i> <span>Inventario</span>
               </a>
             </li>
