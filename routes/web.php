@@ -156,12 +156,21 @@ Route::middleware(['auth','admin'])->group(function () {
    Route::get('inventario',['as'=>'inventarios','uses'=>'ControllerInventario@index']);
    //ruta entrada-create
    Route::get('entrada/create',['as'=>'entradas-create','uses'=>'ControllerInventario@createentrada']);
+   Route::post('entrada/mar',['as'=>'marcaEn-familiaEn','uses'=>'ControllerInventario@marca']);
+   Route::post('entrada/busEn',['as'=>'busqueda-entrada','uses'=>'ControllerInventario@busqueda']);
+   Route::post('entrada/asig',['as'=>'asginar-preciostock','uses'=>'ControllerInventario@stockprecio']);
+   Route::get('entrada/list',['as'=>'listar-entradas','uses'=>'ControllerInventario@listar']);
+   Route::post('entrada/save',['as'=>'guardar-entrada','uses'=>'ControllerInventario@storeentrada']);
+   Route::post('entrada/delete',['as'=>'eliminar-entrada','uses'=>'ControllerInventario@destroy']);
+   
    
      
     
     //se crea rutas para ajsutes
     Route::get('Ajustes',['as'=>'ajustes','uses'=>'ControllerAjustes@index']);
+    
     Route::get('Prof',['as'=>'prof','uses'=>'ControllerAjustes@index2']);
+
 });   
 Auth::routes();
 
