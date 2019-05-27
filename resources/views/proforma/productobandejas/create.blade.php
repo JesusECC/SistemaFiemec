@@ -56,20 +56,37 @@
 																Registro de Bandejas -  Accessorios
 															</label>
 														</div>
-														
+												 
+												<div class="col-sm-4">
+												      <div class="form-group">
+												      	<label for="nombre_familia">Tipos</label>
+												              <select required name="tipo" class="form-control selectpicker" id="tipo" data-live-search="true">									             
+												                    <option value="" disabled selected>Seleccione</option>
+												                     <option value="1" >Bandeja</option>
+												                     <option value="2">Accesorios</option> 
+												               </select> 
+												        </div>
+										          </div>
 										<div class="col-sm-4">
 											<div class="form-group">
                        					 <label>Nombre Accesorio</label>  
 												<input type="text" name="nombre_producto" id="nombre_producto" class="form-control" placeholder="Nombre del Accesorio">	
 											</div> 												
 										</div>
-										<div class="col-sm-4">
-											<div class="form-group">
-                      				  		<label>Promedio</label>
-												<input  type="number" id="promedio" name="promedio" class="form-control"  placeholder="Promedio">	
-											</div>					
-														
-														</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+		                      				  		<label>Promedio</label>
+														<input  type="number" id="promedio" name="promedio" class="form-control"  placeholder="Promedio">	
+													</div>					
+																
+												</div>
+
+												<div class="col-md-8">
+													<div class="form-group">
+									                    <label> Descripcion </label>
+									                        <input type="text" class="form-control" name="DescripcionAccesory" id="DescripcionAccesory" placeholder="Ingresar la descripcion">
+									                 </div>
+									             </div>		
 													</div>
 												</div>										
 											</div>
@@ -89,4 +106,26 @@
             </div><!-- /.col -->
           </div><!-- /.row -->
 </section><!-- /.content -->
+@push('scripts')
+<script>
+ $(document).ready(function(){
+ 	$('#tipo').change(function(){
+ 			deshabilitar();
+ 	});
+ });
+
+ function deshabilitar(){
+ 		tipobandeja =document.getElementById('tipo').value;
+ 		console.log(tipobandeja);
+ 	if(tipobandeja == '1'){
+ 		$("input#promedio").attr('disabled',true);
+ 	}else if (tipobandeja == '2')
+ 	{
+ 		$("input#promedio").attr('disabled',false);
+ 	}
+ }
+
+
+</script>
+@endpush
 @endsection

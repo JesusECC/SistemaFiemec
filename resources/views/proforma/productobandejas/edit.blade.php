@@ -55,7 +55,7 @@
 										<div class="col-sm-4">
 											<div class="form-group">
                        					 <label>Nombre Accesorio</label>  
-												<input type="text" name="nombre_producto" id="nombre_producto" class="form-control" value="{{$productobandejas->nombre_producto}}">	
+												<input type="text" name="nombre_producto" id="nombre_producto" class="form-control" value="{{$productobandejas->nombre_producto}}">
 											</div> 												
 										</div>
 										<div class="col-sm-4">
@@ -65,7 +65,7 @@
 									</div>													
 				<div class="box-footer">
 					<div class="text-right">
-			    		<button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i> Guardar</button>
+			    		<button class="btn btn-primary btn-sm" type="submit"><i class="far fa-save"></i>Guardar</button>
 						<button class="btn btn-danger btn-sm" type="reset"><i class="far fa-times-circle"></i> Cancelar</button>
 					</div>
 				</div>

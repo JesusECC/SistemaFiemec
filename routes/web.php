@@ -77,6 +77,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
 
 
+
     //se crea las rutas para catalago 
     Route::get('catalogo',['as'=>'catalogo','uses'=>'ControllerCatalogo@index']);
     Route::get('catalogo/show/{idProducto}',['as'=>'catalogo-show','uses'=>'ControllerCatalogo@show']);
