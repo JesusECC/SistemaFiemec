@@ -285,6 +285,7 @@
 					var listar=response.entradas;
 					var va;
 					console.log('lista',listar);
+					va='<tr><td></td><td></td><td></td><td></td><td></td><td class=""><center><button type="" rel="" title="" class="" onclick=""><i class=""></i></button></center></td></tr>'
 					for(const i in listar){
 						va+='<tr>'+
 						'<td>'+listar[i]['numero_comprobante']+'</td>'+
