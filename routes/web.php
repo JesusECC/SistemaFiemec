@@ -76,7 +76,7 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('productos/',['as'=>'producto-store','uses'=>'ControllerProducto@store']);
     Route::get('productos/{idProducto}/edit',['as'=>'producto-edit','uses'=>'ControllerProducto@edit']);
 
-
+    ('localhost','root','','Nombre');
     //se crea las rutas para catalago 
     Route::get('catalogo',['as'=>'catalogo','uses'=>'ControllerCatalogo@index']);
     Route::get('catalogo/show/{idProducto}',['as'=>'catalogo-show','uses'=>'ControllerCatalogo@show']);
@@ -162,14 +162,15 @@ Route::middleware(['auth','admin'])->group(function () {
    Route::get('entrada/list',['as'=>'listar-entradas','uses'=>'ControllerInventario@listar']);
    Route::post('entrada/save',['as'=>'guardar-entrada','uses'=>'ControllerInventario@storeentrada']);
    Route::post('entrada/delete',['as'=>'eliminar-entrada','uses'=>'ControllerInventario@destroy']);
-   
-   
+
+   //prueba
+   Route::get('/hola',['as'=>'vista','uses'=>'ControllerPrueba@index']);
      
+   //se crea rutas para ajsutes
+   Route::get('Ajustes',['as'=>'ajustes','uses'=>'ControllerAjustes@index']);
     
-    //se crea rutas para ajsutes
-    Route::get('Ajustes',['as'=>'ajustes','uses'=>'ControllerAjustes@index']);
-    
-    Route::get('Prof',['as'=>'prof','uses'=>'ControllerAjustes@index2']);
+   
+   Route::get('Prof',['as'=>'prof','uses'=>'ControllerAjustes@index2']);
 
 });   
 Auth::routes();
