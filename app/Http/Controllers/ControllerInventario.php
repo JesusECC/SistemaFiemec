@@ -58,6 +58,19 @@ class ControllerInventario extends Controller
 
    }
 
+    public function createsalida(){
+
+    $marcas = DB::Table('Marca')
+    ->where('estadoMa','=',1)
+    ->get();
+
+    $familia = DB::Table('Familia')
+    ->where('estado','=','1')
+    ->get();
+
+   	return view('proforma.salida.create',["marcas"=>$marcas,"familia"=>$familia]);
+   }
+
    public function marca(Request $request){
 
    	$idMarca = $request->get('marca');

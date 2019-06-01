@@ -163,8 +163,15 @@ Route::middleware(['auth','admin'])->group(function () {
    Route::get('entrada/list',['as'=>'listar-entradas','uses'=>'ControllerInventario@listar']);
    Route::post('entrada/save',['as'=>'guardar-entrada','uses'=>'ControllerInventario@storeentrada']);
    Route::post('entrada/delete',['as'=>'eliminar-entrada','uses'=>'ControllerInventario@destroy']);
-   
-   
+
+    //ruta salida-create
+   Route::get('salida/create',['as'=>'salidas-create','uses'=>'ControllerInventario@createsalida']);
+   Route::post('salida/mar',['as'=>'marcaEn-familiaEn','uses'=>'ControllerInventario@marcasalida']);
+   Route::post('salida/busEn',['as'=>'busqueda-salida','uses'=>'ControllerInventario@busquedasalida']);
+   Route::post('salida/asig',['as'=>'asginar-preciostock','uses'=>'ControllerInventario@stockpreciosalida']);
+   Route::get('salida/list',['as'=>'listar-salidas','uses'=>'ControllerInventario@listarsalida']);
+   Route::post('salida/save',['as'=>'guardar-salida','uses'=>'ControllerInventario@storesalida']);
+   Route::post('salida/delete',['as'=>'eliminar-salida','uses'=>'ControllerInventario@destroysalida']);
      
     
     //se crea rutas para ajsutes
