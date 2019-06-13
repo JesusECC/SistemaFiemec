@@ -364,7 +364,7 @@ border-collapse: collapse;
             NOTA
         </td>
         <td colspan="6" style="font-size: 10px">
-            NO ESTA CONSIDERADO, OTRO TRABAJO ADICIONAL QUE NO ESTE COOMPRENDIDO EN LA PRESENTE OFERTA NO ESTA CONSIDERADO PICADO DE OBSTRUCCIONES
+           LA COTIZACIÓN SE REALIZÓ DE ACUERDO A LA INFORMACIÓN ENVIADA POR EL CLIENTE, CUALQUIER MODIFICACIÓN SE PROCEDERA A UNA NUEVA COTIZACIÓN.
         </td>
       </tr>
       {{$sub_tableros=0}}
@@ -393,10 +393,10 @@ border-collapse: collapse;
       <tr>
         <td colspan="1" >
         </td>
-        <td colspan="5" style="text-align: right;font-size: 10px">
+        <td colspan="5" style="text-align: right;font-size: 10px ; color:red;">
           DESC. %
         </td>
-        <td colspan="1" style="text-align: center;font-size: 11px"> 
+        <td colspan="1" style="text-align: center;font-size: 11px ; color:red;"> 
           {{$p->de}}%
         </td>
       </tr>
@@ -441,7 +441,7 @@ border-collapse: collapse;
           <h5 style="font-size: 10px !important;line-height:0.3cm">Realizado por:{{$td->nameE.' | Tlf:'.$td->telefonoU.' / '.$td->celularU}}</h5>
           <h5 style="font-size: 8px !important;line-height:1px;margin-top: -6px !important">Forma de pago: {{$td->forma_de}}</h5>
           <h5 style="font-size: 10px !important;line-height:1px;margin-top: -4px !important">Plazo de oferta {{$td->plazo_oferta}}  </h5>
-          <h5 style="font-size: 8px !important;line-height:1px;margin-top: -10px !important">Observacion de venta: {{$td->observacion_proforma}} </h5>
+          <h5 style="font-size: 8px !important;line-height:6px;margin-top: -10px !important">Observacion de venta: {{$td->observacion_proforma}} </h5>
       
     </div>
 <div style="width: 50%; float: right;display: block;">
