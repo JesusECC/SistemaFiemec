@@ -440,8 +440,8 @@ border-collapse: collapse;
     <div style="width: 50%;float: initial;display: block;">
           <h5 style="font-size: 10px !important;line-height:0.3cm">Realizado por:{{$td->nameE.' | Tlf:'.$td->telefonoU.' / '.$td->celularU}}</h5>
           <h5 style="font-size: 8px !important;line-height:1px;margin-top: -6px !important">Forma de pago: {{$td->forma_de}}</h5>
-          <h5 style="font-size: 10px !important;line-height:1px;margin-top: -4px !important">Plazo de oferta {{$td->plazo_oferta}}  </h5>
-          <h5 style="font-size: 8px !important;line-height:9px;margin-top: -10px !important">Observacion de venta:{{$td->observacion_proforma}}</h5>
+          <h5 style="font-size: 8px !important;line-height:1px;margin-top: -4px !important">Plazo de oferta {{$td->plazo_oferta}}  </h5>
+          <h5 style="font-size: 8px !important;line-height:8px;margin-top: -10px !important">Observacion de venta:{{$td->observacion_proforma}}</h5>
     </div>
     <div style="width: 50%; float: right;display: block;">
           <h4 style="font-size: 12px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
