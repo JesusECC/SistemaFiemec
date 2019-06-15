@@ -301,7 +301,7 @@ border-collapse: collapse;
       @foreach($tablero as $t)
       <tr>
         <td colspan="7" style="background-color: #E5EAEA;border: 1px;font-size: 12px ;text-align: center;">
-          Tablero:  {{$t->nombre_tablero.'  ||  Canttidad de Tab: '.$t->cantidadTab }}
+          Tablero:  {{$t->nombre_tablero.'  ||  Cantidad de Tab: '.$t->cantidadTab }}
         
         </td>
         
@@ -397,7 +397,7 @@ border-collapse: collapse;
           DESC. %
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px ; color:red;"> 
-          {{$p->de}}%
+          {{round($sub3*($p->de/100),2)}}
         </td>
       </tr>
       <tr>

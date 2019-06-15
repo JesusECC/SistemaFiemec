@@ -364,7 +364,7 @@ border-collapse: collapse;
             NOTA
         </td>
         <td colspan="6" style="font-size: 10px">
-            NO ESTA CONSIDERADO, OTRO TRABAJO ADICIONAL QUE NO ESTE COOMPRENDIDO EN LA PRESENTE OFERTA NO ESTA CONSIDERADO PICADO DE OBSTRUCCIONES
+            LA COTIZACIÓN SE REALIZÓ DE ACUERDO A LA INFORMACIÓN ENVIADA POR EL CLIENTE, CUALQUIER MODIFICACIÓN SE PROCEDERA A UNA NUEVA COTIZACIÓN.
         </td>
       </tr>
       {{$sub_tableros=0}}
@@ -397,7 +397,7 @@ border-collapse: collapse;
           DESC. %
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px; color:red;"> 
-          {{round($sub3 * ($p->de/100),2)}}%
+          {{round($sub3 * ($p->de/100),2)}}
         </td>
       </tr>
       <tr>

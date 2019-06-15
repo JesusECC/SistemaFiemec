@@ -397,7 +397,7 @@ border-collapse: collapse;
           DESC. %
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px; color:red;"> 
-          {{round($sub3 * ($p->de/100),2)}}%
+          {{round($sub3 * ($p->de/100),2)}}
         </td>
       </tr>
       <tr>
