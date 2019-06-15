@@ -301,7 +301,7 @@ border-collapse: collapse;
       @foreach($tablero as $t)
       <tr>
         <td colspan="7" style="background-color: #E5EAEA;border: 1px;font-size: 12px ;text-align: center;">
-          Tablero:  {{$t->nombre_tablero.'  ||  Canttidad de Tab: '.$t->cantidadTab }}
+          Tablero:  {{$t->nombre_tablero.'  ||  Cantidad de Tab: '.$t->cantidadTab }}
         
         </td>
         
@@ -387,17 +387,17 @@ border-collapse: collapse;
           SUBTOTAL S/.
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px;border-top: 1px solid black"> 
-          {{$sub3}}
+          {{round($sub3,2)}}
         </td>
       </tr>
       <tr>
         <td colspan="1" >
         </td>
-        <td colspan="5" style="text-align: right;font-size: 10px">
+        <td colspan="5" style="text-align: right;font-size: 10px; color:red;">
           DESC. %
         </td>
-        <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{$p->de}}%
+        <td colspan="1" style="text-align: center;font-size: 11px; color:red;"> 
+          {{round($sub3 * ($p->de/100),2)}}%
         </td>
       </tr>
       <tr>
@@ -440,8 +440,8 @@ border-collapse: collapse;
         <div style="width: 50%;float: initial;display: block;">
           <h5 style="font-size: 10px !important;line-height:0.3cm">Realizado por:{{$td->nameE.' | Tlf:'.$td->telefonoU.' / '.$td->celularU}}</h5>
           <h5 style="font-size: 8px !important;line-height:1px;margin-top: -6px !important">Forma de pago: {{$td->forma_de}}</h5>
-          <h5 style="font-size: 10px !important;line-height:1px;margin-top: -4px !important">Plazo de oferta {{$td->plazo_oferta}}  </h5>
-          <h5 style="font-size: 8px !important;line-height:1px;margin-top: -10px !important">Observacion de venta: {{$td->observacion_proforma}} </h5>
+          <h5 style="font-size: 8px !important;line-height:1px;margin-top: -4px !important">Plazo de oferta {{$td->plazo_oferta}}  </h5>
+          <h5 style="font-size: 8px !important;line-height:8px;margin-top: -10px !important">Observacion de venta: {{$td->observacion_proforma}} </h5>
       
     </div>
 <div style="width: 50%; float: right;display: block;">
