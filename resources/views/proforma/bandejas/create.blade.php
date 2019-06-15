@@ -240,15 +240,10 @@
                                                 <input type="text" disabled id="pespesorT" class="form-control" name="pespesorT"  >  
                                             </div>
                                         </div>
-                                        <div class="col-sm-3" style="margin-top:19px">
+                                        <div class="col-sm-2" style="margin-top:19px">
                                             <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Promedio</label>
-                                                    <select name="ppromedio" class="form-control selectpicker" id="ppromedio" data-live-search="true">
-                                                    <option value="" disabled="" selected="">Seleccione Promedio</option>
-                                                    <option value="0" >Sin Promedio</option>
-                                                    <option value="1" >Menos 10%</option>
-                                                    <option value="2" >Mas 10%</option>
-                                                </select>
+                                                   <input type="text"  id="ppromedio" class="form-control" name="ppromedio" placeholder="Ingrese el promedio" >  
                                             </div>
                                         </div>
 

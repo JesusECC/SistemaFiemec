@@ -143,7 +143,7 @@ td.foot
 footer {
   color: black;
   width: 100%;
-  height: 60px !important;
+  height: 80px !important;
   position: absolute;
   bottom: 0;
   border-top: 1px solid #C1CED9;
@@ -290,7 +290,7 @@ border-collapse: collapse;
             <th class="principal">Item</th>
             
             <th class="principal" style="width: 460px !important">Producto</th>
-            <th class="principal" >Desc.</th>
+            <th class="principal" >Descp.</th>
             <th class="principal" >Cant. </th>
             <th class="principal" >Precio</th>
             <th class="principal" >Desct. %</th>
@@ -301,7 +301,7 @@ border-collapse: collapse;
       @foreach($tablero as $t)
       <tr>
         <td colspan="7" style="background-color: #E5EAEA;border: 1px;font-size: 12px ;text-align: center;">
-          Tablero:  {{$t->nombre_tablero.'  ||  Canttidad de Tab: '.$t->cantidadTab }}
+          Tablero:  {{$t->nombre_tablero.'  ||  Cantidad de Tab: '.$t->cantidadTab }}
         
         </td>
         
@@ -321,8 +321,8 @@ border-collapse: collapse;
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->descripcionDP}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->cantidad}}</td>
               <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->precio_venta}}</td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{$p->descuento}} % </td>
-              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}</td>
+             <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;"> {{$p->descuento}} % </td>
+              <td colspan="1" style="border: 1px solid black;font-size: 11px;text-align: center;">{{round(($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100)),2)}}</td>
             </tr>
 
             {{$sub+=($p->precio_venta*$p->cantidad)-(($p->cantidad*$p->precio_venta)*($p->descuento/100))}}
@@ -364,7 +364,7 @@ border-collapse: collapse;
             NOTA
         </td>
         <td colspan="6" style="font-size: 10px">
-            NO ESTA CONSIDERADO, OTRO TRABAJO ADICIONAL QUE NO ESTE COOMPRENDIDO EN LA PRESENTE OFERTA NO ESTA CONSIDERADO PICADO DE OBSTRUCCIONES
+         LA COTIZACIÓN SE REALIZÓ DE ACUERDO A LA INFORMACIÓN ENVIADA POR EL CLIENTE, CUALQUIER MODIFICACIÓN SE PROCEDERA A UNA NUEVA COTIZACIÓN.
         </td>
       </tr>
       {{$sub_tableros=0}}
@@ -387,17 +387,17 @@ border-collapse: collapse;
           SUBTOTAL S/.
         </td>
         <td colspan="1" style="text-align: center;font-size: 11px;border-top: 1px solid black"> 
-          {{$sub3}}
+          {{round($sub3,2)}}
         </td>
       </tr>
       <tr>
         <td colspan="1" >
         </td>
-        <td colspan="5" style="text-align: right;font-size: 10px">
+       <td colspan="5" style="text-align: right;font-size: 10px; color:red;">
           DESC. %
         </td>
-        <td colspan="1" style="text-align: center;font-size: 11px"> 
-          {{$p->de}}%
+        <td colspan="1" style="text-align: center;font-size: 11px; color:red;"> 
+          {{round($sub3 * ($p->de/100),2)}}%
         </td>
       </tr>
       <tr>
@@ -437,14 +437,13 @@ border-collapse: collapse;
     </div>
   </main>
   <footer> 
-        <div style="width: 50%;float: initial;display: block;">
+    <div style="width: 50%;float: initial;display: block;">
           <h5 style="font-size: 10px !important;line-height:0.3cm">Realizado por:{{$td->nameE.' | Tlf:'.$td->telefonoU.' / '.$td->celularU}}</h5>
           <h5 style="font-size: 8px !important;line-height:1px;margin-top: -6px !important">Forma de pago: {{$td->forma_de}}</h5>
-          <h5 style="font-size: 10px !important;line-height:1px;margin-top: -4px !important">Plazo de oferta {{$td->plazo_oferta}}  </h5>
-          <h5 style="font-size: 8px !important;line-height:1px;margin-top: -10px !important">Observacion de venta: {{$td->observacion_proforma}} </h5>
-      
+          <h5 style="font-size: 8px !important;line-height:1px;margin-top: -4px !important">Plazo de oferta {{$td->plazo_oferta}}  </h5>
+          <h5 style="font-size: 8px !important;line-height:8px;margin-top: -10px !important">Observacion de venta:{{$td->observacion_proforma}}</h5>
     </div>
-<div style="width: 50%; float: right;display: block;">
+    <div style="width: 50%; float: right;display: block;">
           <h4 style="font-size: 12px !important;line-height:1px">Cuenta Corriente de FIEMEC S.A.C RUC: 20546979611</h4>
           <h5 style="font-size: 10px !important;line-height:1px">BBVA Soles: 0011 0339-0100014584   (CCI) : 011-339-000100014584-95</h5>
           <h5 style="font-size: 10px !important;line-height:1px">BCP Soles:   192-2324867-0-03        ( CCI) 00219200232486700338</h5>

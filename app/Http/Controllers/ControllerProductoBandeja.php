@@ -27,12 +27,12 @@ class ControllerProductoBandeja extends Controller
     {
     if($request)
     {
-       $query=trim($request->get('searchText'));
+       $query=trim($request->get('searchsText'));
        $producto=DB::table('Producto')
        ->where('nombre_producto','LIKE','%'.$query.'%')
-       ->where('tipo_producto','=','accesorios')
+      ->where('categoria_producto','=','Producto FiemecA')
+    
        ->where('estado','=','activo')
-       ->orwhere('tipo_producto','=','bandejas')
        ->orderby('nombre_producto')
        ->paginate(10);
 
@@ -50,19 +50,44 @@ class ControllerProductoBandeja extends Controller
     }
 
 public function store(Request $request){
-  
+          //dd($request);
+            
+            $TipoEntradaProducto =$request ->get('tipo');
+
+  if ($TipoEntradaProducto  == '1')
+  {
+
             $productobandejas=new Producto;
+            $productobandejas->idFamilia=32;
+            $productobandejas->idMarca=6;//observacion
+            $productobandejas->nombre_producto=$request->get('nombre_producto');
+            $productobandejas->promedio=0;
+            $productobandejas->tipo_producto='bandejas';
+            $productobandejas->estado='activo';
+            $productobandejas->marca_producto='Fiemec';
+            $productobandejas->categoria_producto ='Producto FiemecA';
+            $productobandejas->serie_producto='BAN';
+            $productobandejas->codigo_producto='BANP';
+            $productobandejas->descripcion_producto=$request->get('DescripcionAccesory');
+            $productobandejas->save();
+            
+  }elseif ($TipoEntradaProducto == '2') {
+             $productobandejas=new Producto;
             $productobandejas->idFamilia=34;
-            $productobandejas->idMarca=2;
+            $productobandejas->idMarca=6;
             $productobandejas->nombre_producto=$request->get('nombre_producto');
             $productobandejas->promedio=$request->get('promedio');
             $productobandejas->tipo_producto='accesorios';
             $productobandejas->estado='activo';
             $productobandejas->marca_producto='Fiemec';
+           $productobandejas->categoria_producto ='Producto FiemecA';
+            $productobandejas->serie_producto='ACC';
             $productobandejas->codigo_producto='ACCF';
+            $productobandejas->descripcion_producto=$request->get('DescripcionAccesory');
+
             $productobandejas->save();
-            
-  
+    # code...
+  }
             return redirect::to('productobandejas');
           }
 
@@ -86,7 +111,7 @@ public function edit($id)
   public function destroy($id)
     {
         $productobandejas=Producto::findOrFail($id);
-        $productobandejas->estado=0;
+        $productobandejas->estado='retirado';
         $productobandejas->update();
         return Redirect::to('productobandejas');
 
