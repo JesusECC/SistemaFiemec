@@ -92,6 +92,7 @@ while ($cont<count($idFamilia)) {
     $Producto->precio_unitario=$precio_unitario[$cont];
     $Producto->categoria_producto=$categoria_producto[$cont];
     $Producto->foto=$foto[$cont];
+    $Producto->total_entradas=$stock[$cont];
     $Producto->estado='activo';
 
     $Producto->save();

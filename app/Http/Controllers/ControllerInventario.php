@@ -19,7 +19,7 @@ class ControllerInventario extends Controller
 
    	$inventario=DB::table('Producto')
    	->where('estado','=','activo')
-   	->where('stock','>=',0)
+   	->where('stock','>',0)
    	->get();
     
    return view('proforma.inventario.index',["inventario"=>$inventario]);
@@ -68,7 +68,34 @@ class ControllerInventario extends Controller
     ->where('estado','=','1')
     ->get();
 
-   	return view('proforma.salida.create',["marcas"=>$marcas,"familia"=>$familia]);
+    $clientes=DB::table('Cliente_Proveedor as cp')
+    ->join('users as u','u.id','=','cp.idU')
+    ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento','cp.idU',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno) as user'))
+    ->where('estado','=',1)
+    ->get();
+
+   	return view('proforma.salida.create',["marcas"=>$marcas,"familia"=>$familia,"clientes"=>$clientes]);
+   }
+
+   public function storesalida(Request $request){
+
+    $numeropedido = $request->get('numero');
+    $idProducto = $request->get('idProducto');
+    $descripcion = $request->get('descripcion');
+    $cantidad = $request->get('cantidad');
+    $idUser = $request->get('uss');
+    $idCliente = $request->get('idcliente');
+
+    $Entrada = new Salida; 
+    $Entrada->idCliente=$idCliente;
+    $Entrada->idEmpleado=$idUser;
+    $Entrada->idProducto=$idProducto;
+    $Entrada->numero_comprobante=$numeropedido;
+    $Entrada->descripcion_ingreso=$descripcion;
+    $Entrada->estado='activo';
+    $Entrada->cantidad=$cantidad;
+    $Entrada->save();
+
    }
 
    public function marca(Request $request){
