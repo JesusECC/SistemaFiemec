@@ -97,6 +97,26 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default panel-shadow">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="" class="control-label" style="color: #676a6c !important">
+                                                   Nombre del proyecto
+                                                </label>
+                                            </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <input type="text"  name="nombproyecto" id="nombproyecto" class="form-control" placeholder="Ingrese el nombre del proyecto">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
                     <!--Tablero-->
                     <div class="row">
                         <div class="col-sm-12">
@@ -412,6 +432,7 @@ var editarval=true;
         var documento;
         var cotiza;
         var formade;
+        var nombproyecto;
         var plazpOf;
         var obser;
        //console.log(tabl);
@@ -447,6 +468,7 @@ var editarval=true;
                     var estado=parseInt(pro[key]['estadoDP']);  
                     var idDetalleProforma=pro[key]['idDetalle_proforma']; //revisar 
                     formade=pro[key]['forma_de'];
+                    nombproyect=pro[key]['proyecto']
                     plazpOf=pro[key]['plazo_oferta'];
                     obser=pro[key]['observacion_proforma'];
                     obser=pro[key]['observacion_proforma']; 
@@ -471,6 +493,7 @@ var editarval=true;
             $("#simbolo").val(simbolo);
             $("#valorcambio").val(tipocam);
             $("#forma_de").val(formade);
+            $("#nombproyecto").val(nombproyect);
             $("#plazo_oferta").val(plazpOf);
             $("#observacion_proforma").val(obser);
             $("#pdesc").val(descuen);
@@ -638,12 +661,13 @@ var editarval=true;
          var plazoofer=$("#plazo_oferta").val();
          var obserprof=$("#observacion_proforma").val();
          var descuento=$("#pdesc").val();
+         var nombrproyecto=$("#nombproyecto").val();
          // var valorcambio=tipoCambio[1];
          // var vVenta=$("#valorVenta").val();
          // var tl=$("#total").val();
          // console.log(tablero,filaob);
          // if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-             var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt,forma_de:formade,plazo_oferta:plazoofer,obspro:obserprof,desc:descuento}];
+             var dat=[{idProforma:idprofo,idcliente:idcliente,valorVenta:valorventa,total:totalt,forma_de:formade,nombproyect:nombrproyecto,plazo_oferta:plazoofer,obspro:obserprof,desc:descuento}];
              //console.log(dat,tablero,filaob);
 
              $.ajax({

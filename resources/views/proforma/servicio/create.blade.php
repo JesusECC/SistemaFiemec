@@ -125,6 +125,25 @@
                         </div>
                     </div>
                     <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default panel-shadow">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="" class="control-label" style="color: #676a6c !important">
+                                                   Nombre del proyecto
+                                                </label>
+                                            </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <input type="text"  name="nombproyecto" id="nombproyecto" class="form-control" placeholder="Ingrese el nombre del proyecto">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body">
@@ -595,9 +614,11 @@
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion").val();
         var descuento=$("#pdesc").val();
+        var nombproyecto=$("#nombproyecto").val();
+
         
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,simbolo:simbolo,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,userid:iduser,clienteemp:clienteemp,desc:descuento}];
+            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,simbolo:simbolo,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,nombproyect:nombproyecto,plazo:plazo,observacion:observacion,userid:iduser,clienteemp:clienteemp,desc:descuento}];
             // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},

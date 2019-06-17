@@ -220,7 +220,7 @@ public function pdf($id){
     ->join('users as u','u.id','=','p.idEmpleado')
     ->join('Empleado as em','em.id','=','u.idEmp')
     ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno as paternoC','cp.materno as maternoC','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno as paternoC','cp.materno as maternoC','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.proyecto','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma')
     ->where('p.idProforma','=',$id)
     ->first();
 
@@ -244,7 +244,7 @@ public function pdf2($id){
     ->join('users as u','u.id','=','p.idEmpleado')
     ->join('Empleado as em','em.id','=','u.idEmp')
     ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno as paternoC','cp.materno as maternoC','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.proyecto','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma','p.tipocambio','p.simboloP')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno as paternoC','cp.materno as maternoC','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.proyecto','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.proyecto','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma','p.tipocambio','p.simboloP')
     ->where('p.idProforma','=',$id)
     ->first();
 
