@@ -105,6 +105,7 @@ public function store(Request $request)
         $iduser;
         $garantias;
         $simbolo;
+        $nombproyecto;
 // [{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldola:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,
 //     forma:forma,plazo:plazo,observacion:observacion}];
            
@@ -125,6 +126,7 @@ public function store(Request $request)
             $garantias=$dato['garantias'];
             $iduser=$dato['userid'];
             $simbolo=$dato['simbolo'];
+            $nombproyecto=$dato['nombproyect'];
         }
         $idProforma=DB::table('Proforma')->insertGetId(
             ['idCliente'=>$idclie,
@@ -141,6 +143,7 @@ public function store(Request $request)
             'tipo_proforma'=>'bandeja',
             // 'caracteristicas_proforma'=>$request->, preguntar
             'forma_de'=>$forma,
+            'proyecto'=>$nombproyecto,
             // 'plaza_fabricacion'=>$request->,
             'plazo_oferta'=>$plazo,
             'garantia'=>$garantias,
@@ -241,7 +244,7 @@ public function pdf2($id){
     ->join('users as u','u.id','=','p.idEmpleado')
     ->join('Empleado as em','em.id','=','u.idEmp')
     ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')
-    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno as paternoC','cp.materno as maternoC','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma','p.tipocambio','p.simboloP')
+    ->select('p.idProforma','p.fecha_hora','cp.nombres_Rs','cp.paterno as paternoC','cp.materno as maternoC','cp.Direccion','cp.Departamento','cp.Distrito','p.serie_proforma','p.igv','p.precio_total','p.forma_de','p.proyecto','p.plaza_fabricacion','p.observacion_condicion','p.igv','p.precio_total','p.subtotal','p.precio_totalC','cp.correo as email','p.cliente_empleado','cp.nro_documento as ndoc','p.forma_de','p.plazo_oferta','p.observacion_proforma','cr.nombre_RE','em.nombres','em.paterno','em.materno','em.telefono','em.celular','p.garantia','p.incluye','p.serie_proforma','p.tipocambio','p.simboloP')
     ->where('p.idProforma','=',$id)
     ->first();
 
@@ -290,7 +293,7 @@ public function edit($id)
     ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
     ->join('Cliente_Representante as cr','cr.idCR','=','p.cliente_empleado')
     ->join('Galvanizado as gal','gal.idGalvanizado','=','deP.idGalvanizado')
-    ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.cambioBandejas','deP.estadoDB','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','p.incluye','deP.espesor','deP.espesorT','deP.precioGal','deP.preciouniB','deP.precioTap','deP.tramo','deP.medidas','deP.dimenciones','deP.tapa','deP.cambioBandejas','deP.simboloBandejas','deP.promed','deP.tramo','deP.idGalvanizado','gal.nombreGalvanizado','pd.promedio','cr.nombre_RE')
+    ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.proyecto','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','deP.idDetalle_bandejas','deP.idProducto','deP.idProforma','deP.cantidad','deP.cambioBandejas','deP.estadoDB','deP.descripcionDP','pd.nombre_producto','clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','p.incluye','deP.espesor','deP.espesorT','deP.precioGal','deP.preciouniB','deP.precioTap','deP.tramo','deP.medidas','deP.dimenciones','deP.tapa','deP.cambioBandejas','deP.simboloBandejas','deP.promed','deP.tramo','deP.idGalvanizado','gal.nombreGalvanizado','pd.promedio','cr.nombre_RE')
     ->where('deP.idProforma','=',$id)
     ->where('deP.estadoDB','=','1')
     ->get();
@@ -316,6 +319,8 @@ public function edit($id)
             $garantias;
             $simbolo;
             $valorcambio;
+            $nombproyecto;
+           
      
             foreach ($request->datos as $dato) {
                 $idProforma=$dato['idProforma'];
@@ -331,6 +336,8 @@ public function edit($id)
                 $incluye=$dato['incluy'];
                 $plazofabri=$dato['plazofabri'];
                 $garantias=$dato['garantias'];
+                $nombproyecto=$dato['nombproyecto'];
+                
                 
             }        
             
@@ -343,6 +350,8 @@ public function edit($id)
                 'precio_totalC'=>$totaldolares,
                 'tipo_proforma'=>'bandeja',
                 'forma_de'=>$forma,
+                'proyecto'=>$nombproyecto,
+               
                 'plaza_fabricacion'=>$plazofabri,
                 'plazo_oferta'=>$plazo,
                 'garantia'=>$garantias,

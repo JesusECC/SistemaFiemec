@@ -98,6 +98,27 @@
                             </div>
                         </div>
                     </div>
+
+                     <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default panel-shadow">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="" class="control-label" style="color: #676a6c !important">
+                                                   Nombre del proyecto
+                                                </label>
+                                            </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <input type="text"  name="nombproyecto" id="nombproyecto" class="form-control" placeholder="Ingrese el nombre del proyecto">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-shadow">
@@ -557,10 +578,11 @@
         var simbolo=$("#simbolo").val();
         var valorcambio=$("#valorcambio").val();
         var forma=$("#forma_de").val();
+        var nombr=$("#nombproyecto").val();
         var observacion=$("#observacion_proforma").val();
         
         if(valorventa>0 && totalt>0 ){
-            var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,simbolo:simbolo,valorcambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,garantias:garant,incluy:incl,plazofabri:plazoF,idTipoCambio:idtipocam}];
+            var dat=[{idProforma:idProforma,nomTablero:nomTablero,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,simbolo:simbolo,valorcambio:valorcambio,forma:forma,nombproyecto:nombr,plazo:plazo,observacion:observacion,garantias:garant,incluy:incl,plazofabri:plazoF,idTipoCambio:idtipocam}];
            $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {tableros:tablero,filas:filaob,datos:dat}, //datos que se envian a traves de ajax
@@ -908,6 +930,7 @@
         var formade;
         var plazpOf;
         var obser;
+        var nombproyecto;
         // var descuento;
         // console.log(pro);
         if (editarval==true) {
@@ -952,6 +975,8 @@
                     var estado=parseInt(pro[key]['estadoDB']);  
                     var idDetalleBandejas=pro[key]['idDetalle_bandejas'];
                     formade=pro[key]['forma_de'];
+                    //
+                     nombrproyecto=pro[key]['proyecto'];
                     plazpOf=pro[key]['plazo_oferta'];
                     plazaf=pro[key]['plaza_fabricacion'];
                     obser=pro[key]['observacion_condicion'];
@@ -977,6 +1002,7 @@
             $("#simbolo").val(simbolo);
             $("#valorcambio").val(tipocam);
             $("#forma_de").val(formade);
+            $("#nombproyecto").val(nombrproyecto);
             $("#plazo_oferta").val(plazpOf);
             $("#plaza_fabricacion").val(plazaf);
             $("#observacion_proforma").val(obser);
