@@ -337,7 +337,7 @@
          $.ajax({
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
               data:{numero:numeroorden,idProducto:idProducto,descripcion:descripcion,cantidad:cantidad,uss:iduser,idCliente:idCliente},
-             // url:'save',
+              url:'save',
               type:'post',
               datatype:'json'
          });

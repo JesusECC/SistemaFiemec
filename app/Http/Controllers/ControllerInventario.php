@@ -4,6 +4,7 @@ namespace SistemaFiemec\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Producto;
+use SistemaFiemec\Salida;
 use SistemaFiemec\Entrada;
 use Carbon\Carbon;
 use SistemaFiemec\Http\Requests;
@@ -86,15 +87,15 @@ class ControllerInventario extends Controller
     $idUser = $request->get('uss');
     $idCliente = $request->get('idcliente');
 
-    $Entrada = new Salida; 
-    $Entrada->idCliente=$idCliente;
-    $Entrada->idEmpleado=$idUser;
-    $Entrada->idProducto=$idProducto;
-    $Entrada->numero_comprobante=$numeropedido;
-    $Entrada->descripcion_ingreso=$descripcion;
-    $Entrada->estado='activo';
-    $Entrada->cantidad=$cantidad;
-    $Entrada->save();
+    $Salida = new Salida; 
+    $Salida->idCliente=$idCliente;
+    $Salida->idEmpleado=$idUser;
+    $Salida->idProducto=$idProducto;
+    $Salida->num_comprobante=$numeropedido;
+    $Salida->descripcion=$descripcion;
+    $Salida->estado='activo';
+    $Salida->cantidad=$cantidad;
+    $Salida->save();
 
    }
 
