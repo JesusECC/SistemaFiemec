@@ -62,7 +62,7 @@
 									</a>		
 								</div>
 					 			<div class="col-md-4 col-sm-12">
-									<a href="{{ route('servicio')}}" class="widget widget-stats bg-gradient-purple inverse-mode">
+									<a href="{{ route('salidas-create')}}" class="widget widget-stats bg-gradient-purple inverse-mode">
 										<div class="widget-stats-left">
 											<div class="widget-stats-title">
 												<i class="fas fa-wrench"  style="font-size:50px"></i>
@@ -102,7 +102,7 @@
 		                                     <td>{{$inv->codigo_pedido}}</td>
 		                                     <td>{{$inv->nombre_producto}} {{$inv->descripcion_producto}}</td>
 		                                     <td></td>
-		                                     <td></td>
+		                                     <td>{{$inv->total_entradas}}</td>
 		                                     <td></td>
 		                                     <td>{{$inv->stock}}</td>
 		                                </tr>

@@ -339,7 +339,14 @@ function agregar()
     codproducto=$("#e").val();
     nomproducto=$("#f").val();
    // marca=$("#g").val();
-    stock=$("#h").val();
+    stock1=$("#h").val();
+
+    if(stock1!=""){
+      stock=stock1;
+    }else{
+      stock=0;
+    }
+    
     precio=$("#i").val();
     cat=$("#j").val();
     descripcion=$("#k").val();

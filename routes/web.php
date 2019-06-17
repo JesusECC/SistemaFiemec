@@ -166,9 +166,9 @@ Route::middleware(['auth','admin'])->group(function () {
 
     //ruta salida-create
    Route::get('salida/create',['as'=>'salidas-create','uses'=>'ControllerInventario@createsalida']);
-   Route::post('salida/mar',['as'=>'marcaEn-familiaEn','uses'=>'ControllerInventario@marcasalida']);
-   Route::post('salida/busEn',['as'=>'busqueda-salida','uses'=>'ControllerInventario@busquedasalida']);
-   Route::post('salida/asig',['as'=>'asginar-preciostock','uses'=>'ControllerInventario@stockpreciosalida']);
+   Route::post('salida/mar',['as'=>'marcaEn-familiaEn','uses'=>'ControllerInventario@marca']);
+   Route::post('salida/busEn',['as'=>'busqueda-salida','uses'=>'ControllerInventario@busqueda']);
+   Route::post('salida/asig',['as'=>'asginar-preciostock','uses'=>'ControllerInventario@stockprecio']);
    Route::get('salida/list',['as'=>'listar-salidas','uses'=>'ControllerInventario@listarsalida']);
    Route::post('salida/save',['as'=>'guardar-salida','uses'=>'ControllerInventario@storesalida']);
    Route::post('salida/delete',['as'=>'eliminar-salida','uses'=>'ControllerInventario@destroysalida']);

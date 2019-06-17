@@ -8,9 +8,9 @@
     <ol class="breadcrumb" style="margin-top: 55px;">
         <li>
             <a href="#">
-                <i class="fas fa-file-signature"></i> Ingreso</a>
+                <i class="fas fa-file-signature"></i> Salida</a>
         </li>
-        <li class="active">Nuevo Ingreso</li>
+        <li class="active">Nuevo Salida</li>
     </ol>
 </section>
 <section class="content">
@@ -20,7 +20,7 @@
 				<div class="box-header with-border" style="padding: 10px !important">
 					<h4>
 						<strong style="font-weight: 400">
-							<i class="fas fa-list-ul"></i> Lista de Entradas
+							<i class="fas fa-list-ul"></i> Lista de Salidas
 						</strong>
 					</h4>
 					
@@ -48,6 +48,17 @@
 						<div class="panel panel-default panel-shadow">
 							<div class="box-body">
 								<div class="row">
+                                    <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Cliente</label>
+                                                <select required name="idClientes" class="form-control selectpicker" id="idClientes" data-live-search="true">
+                                                    <option value="">Seleccione Cliente</option>
+                                                    @foreach($clientes as $cliente)
+                                                    <option value="{{$cliente->idCliente}}">{{$cliente->nombres_Rs.' '.$cliente->paterno.' '.$cliente->materno}}</option>
+                                                    @endforeach
+                                                </select> 
+                                            </div>
+                                        </div>
 									<div class="col-sm-5">
 										<div class="form-group">
 											<label>N° de Orden</label>
@@ -182,7 +193,7 @@
     			
 
     			va = '<option value="" disabled="" selected=""> Selecione Familia</option>'
-    			va2 = '<option value="" disabled="" selected=""> Selecione Familia</option>'
+    			va2 = '<option value="" disabled="" selected=""> Selecione Producto</option>'
     			for(const i in familias){
 
     				va+='<option value="'+familias[i]['idFamilia']+'">'+familias[i]['nombre_familia']+'</option>';
@@ -313,17 +324,19 @@
     }
 
     function guardar(){
+        idCli=document.getElementById('idClientes').value.split('_');
+        var idCliente=parseInt(idCli);
     	var numeroorden=$('#orden').val();
     	var idProducto=$('#producto').val();
     	var descripcion=$('#descripcion').val();
     	var cantidad=$('#cantidad').val();
     	var iduser={!! Auth::user()->id !!}
 
-    	console.log(numeroorden,idProducto,descripcion,cantidad,iduser);
+    	console.log(numeroorden,idProducto,descripcion,cantidad,iduser,idCliente);
 
          $.ajax({
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
-              data:{numero:numeroorden,idProducto:idProducto,descripcion:descripcion,cantidad:cantidad,uss:iduser},
+              data:{numero:numeroorden,idProducto:idProducto,descripcion:descripcion,cantidad:cantidad,uss:iduser,idCliente:idCliente},
               url:'save',
               type:'post',
               datatype:'json'

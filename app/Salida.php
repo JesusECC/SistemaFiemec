@@ -12,15 +12,16 @@ class Salida extends Model
 
     protected $filleable =[
         'idCliente', 
-        'idProducto',
         'idEmpleado',
-        'idTipo_salida',
-        'serie_comprobante',  
-        'num_comprobante', 
+        'idProducto',
+        'idTipo_salida',  
+        'num_comprobante',
+        'fecha_hora', 
         'precio_total', 
         'descripcion', 
-        'cantidad',
         'estado',
+        'cantidad',
+        
     ];
 
     protected $guarded=[
