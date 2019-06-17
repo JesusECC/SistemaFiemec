@@ -34,6 +34,7 @@ class Proforma extends Model
         'garantia',
         'observacion_condicion',
         'observacion_proforma',
+        'proyecto',
         'estado',
         'incluye',
     	

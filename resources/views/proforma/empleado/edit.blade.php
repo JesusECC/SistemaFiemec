@@ -54,11 +54,13 @@
 														<div class="row">
 													<div class="col-sm-4">
 														<div class="form-group">
+														<label for="" class="control-label">Documento</label>
 															<input type="text"   name="nro_documento" class="form-control" required value="{{$Empleado->nro_documento}}">
 														</div> 												
 													</div>
 													 <div class="col-sm-8">
 											<div class="form-group">
+											<label for="" class="control-label">Nombre Completos </label>
 												<input type="text"     name="nombres" class="form-control" required value="{{$Empleado->nombres.' '.$Empleado->paterno.' '.$Empleado->materno}}">
 											</div>								
 										  </div>
@@ -69,29 +71,34 @@
 														<div class="form-group">
 															<div class="input-group date">
 																<div class="input-group-addon">
-																	<i class="far fa-calendar-alt"></i>
+																	<i class="far fa-calendar-alt">	<label for="" class="control-label">Fecha Nacimiento</label></i>
 																</div>
+															
 																<input type="date"   name="fecha_nacimiento" class="form-control" required value="{{$Empleado->fecha_nacimiento}}">
 															</div>
 														</div>												
 													</div>
 													<div class="col-sm-3">
 														<div class="form-group">
+															<label for="" class="control-label">Sexo</label>
 															<input type="text"     name="sexo" class="form-control" required value="{{$Empleado->sexo}}">
 														</div>		
 													</div>
 													<div class="col-sm-4">
+															<label for="" class="control-label">Telefono</label>
 														<input type="text"   name="telefono" class="form-control" required value="{{$Empleado->telefono}}">	
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-sm-5">
 														<div class="form-group">
+														<label for="" class="control-label">Celular</label>
 															<input type="text"   name="celular" class="form-control" required value="{{$Empleado->celular}}">	
 														</div>   												
 													</div>
 													<div class="col-sm-7">
 														<div class="form-group">
+														<label for="" class="control-label">Correo</label>
 															<input type="text"   name="correo" class="form-control" required value="{{$Empleado->correo}}">	
 														</div>  												
 													</div>										
@@ -104,22 +111,26 @@
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
+														<label for="" class="control-label">Direccion</label>
 															<input type="text"   name="Departamento" class="form-control" required value="{{$Empleado->direccion}}">
 														</div>														
 													</div>
 
 													<div class="col-md-3">
 														<div class="form-group">
+															<label for="" class="control-label">Fecha Inicio</label>
 															<input type="date"   name="Distrito" class="form-control" required value="{{$Empleado->fecha_inicio}}">
 														</div>
 													</div>	
 													<div class="col-md-3">
 														<div class="form-group">
+														<label for="" class="control-label">Fecha Final</label>
 															<input type="date"   name="Distrito" class="form-control" required value="{{$Empleado->fecha_fin}}">
 														</div>
 													</div>												
 													<div class="col-md-4">
 														<div class="form-group">
+															<label for="" class="control-label">Sueldo</label>
 															<input type="text"   name="Direccion" class="form-control" required value="{{$Empleado->sueldo}}">
 														</div>
 													</div>						

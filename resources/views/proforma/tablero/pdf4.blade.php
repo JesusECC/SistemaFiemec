@@ -268,7 +268,10 @@ border-collapse: collapse;
           </th>     
     </table>
   </header> 
-
+  <div  style="margin-top: -15px;margin-bottom: 20px; ">    
+          <center><span  style="font-size: 9.5px !important; color: black !important;font-weight: bold;">PROYECTO :</span> <span class="direccion" style="font-size: 12px !important;color: black">{{$td->proyecto}}</span><center>
+          
+  </div>
   <main> 
     <div id="main-container"> 
       <table class="principal" width="100%"> 

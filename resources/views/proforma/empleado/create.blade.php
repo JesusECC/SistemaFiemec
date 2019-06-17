@@ -39,9 +39,9 @@
 
                 </div>
 <!-- mantener valores al -->
-    {!!Form::open(array('url'=>'proforma/empleado','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
+   <!--{!!Form::open(array('url'=>'proforma/empleado','method'=>'POST','autocomplete'=>'off','files'=>'true'))!!}
 
-    {{Form::token()}}
+    {{Form::token()}}-->
 <div class="box-body bg-gray-c">
                     <div class="row">
 
@@ -57,7 +57,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="nombres">N Documento</label>
-                                                <input type="text" name="nro_documento" id="nrodoc" class="form-control" placeholder="Ingrese numero Documento">  
+                                                <input type="text" name="nro_documento" id="nrodoc" class="form-control" placeholder="Ingrese numero Documento" >  
                                             </div>                                              
                                         </div>
                                         
@@ -207,12 +207,12 @@
                                                 <input type="text" name="password" id="pw" class="form-control" placeholder="Ingrese Fecha Inicio"> 
                                             </div>  
                                         </div>
-                            <div style="margin-top: 20px" class="from-group ">
+                            <div id="ocultar" style="margin-top: 20px" class="from-group ">
 
-                          <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
-                           <button class="btn btn-danger" type="reset">Limpiar</button>
+                                    <button  id="save" class="btn btn-primary btn-sm" type="button"><i class="far fa-save"></i> Guardar</button>
+                                    <button class="btn btn-danger" type="reset">Limpiar</button>
     
-             </div>
+                             </div>
                                     </div>
                                </div>  
                            </div>                 
@@ -230,6 +230,7 @@
 <script>
     
         $('#save').click(function(){
+           // validardocumento();
             saveEmpleado();
         });
         
@@ -240,10 +241,80 @@
             this.value = (this.value + '').replace(/[^0-9]/g, '1');
        
         // Actualizar
-       
+         });
 
-    });
+        /* function validardocumento(){
+          
+             var cargo=$("#car").val();
+            var documento=$("#nrodoc").val();
+            var nombre=$("#nombre").val();
+            var paterno=$("#pa").val();
+            var materno=$("#ma").val();
+            var fechanac=$("#fecnac").val();
+            var sexo=$("#sex").val();
+            var telefono=$("#tf").val();
+            var celular=$("#cell").val();
+            var direccion=$("#dir").val();
+            var email=$("#email").val();
 
+            var pass=$("#pw").val();
+           var emaill=$("#emaill").val();
+
+          // document.getElementById("start_date").setCustomValidity("mensaje de prueba");
+
+             if(documento === ''){
+                alert("ingrese N° Documento");
+             }
+             else  if(nombre === ''){
+                 alert("ingrese nombre");
+             }
+             else if(paterno === ''){
+                 alert("ingrese Paterno");
+             }
+             else if(materno === ''){
+                 alert("ingrese Materno");
+             }
+             else if(fechanac === ''){
+                 alert("ingrese fecha nacimiento");
+             }
+             else if(sexo === ''){
+                 alert("ingrese sexo");
+             }
+             else if(telefono === ''){
+                 alert("ingrese Telefono");
+             }
+             else if(celular === ''){
+                 alert("ingrese Numero de celular");
+             }
+             else if(email === ''){
+                 alert("ingrese Email");
+             }
+             else  if(direccion === ''){
+                 alert("ingrese Direccion");
+             }
+             else if(cargo === ''){
+                 alert("ingrese Cargo");
+             }
+
+             else if(emaill === ''){
+                 alert("ingrese Email de Usuario");
+             }
+             else if(pass === ''){
+                 alert("ingrese Password de Usuario");
+             }
+             return false;
+         }
+
+*/
+/*
+         $('#nrodoc').click(function(){
+                if(this.value == ''){
+                    alert("ingrese el valor");
+                }
+
+         });
+
+*/
     function saveEmpleado(){
         // se enviar los datos al controlador empleados
         var cargo=$("#car").val();
@@ -265,8 +336,11 @@
         var emaill=$("#emaill").val();
 
 
-        if(cargo!='' && documento!=''){
+        if(cargo!=null && documento!='' && nombre!='' && paterno!='' && materno!='' && fechanac!='' && sexo!='' && telefono!='' && celular!='' && direccion!='' && email!='' && pass!='' && emaill!=''){
             var dat=[{cargo:cargo,documento:documento,nombre:nombre,paterno:paterno,materno:materno,fechanac:fechanac,sexo:sexo,telefono:telefono,celular:celular,direccion:direccion,email:email,sueldo:sueldo,fechaini:fechaini,fechafin:fechafin,pass:pass,emaill:emaill}];
+        
+        document.getElementById("ocultar").style.display = "none";
+
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data:  {datos:dat}, //datos que se envian a traves de ajax
@@ -283,9 +357,13 @@
                     }
                 }
             });
+        }else{
+            
+            alert("Data Incompleta");
         }
     }
     var bool;
+
     
    
 </script>

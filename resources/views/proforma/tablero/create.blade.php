@@ -83,47 +83,66 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default panel-shadow">
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label for="" class="control-label" style="color: #676a6c !important">
-                                            Tipo de Moneda
-                                        </label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
-                                                    <option value="" disabled="" selected="">Moneda</option>
-                                                    @foreach($monedas as $mo)                
-                                                        <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
-                                                    @endforeach  
-                                                </select>                                                
+                                        <div class="col-md-4">
+                                            <div class="panel panel-default panel-shadow">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <label for="" class="control-label" style="color: #676a6c !important">
+                                                            Tipo de Moneda
+                                                        </label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <select  name="idTipo_moneda" class="form-control selectpicker" id="idTipo_moneda" data-live-search="true">
+                                                                    <option value="" disabled="" selected="">Moneda</option>
+                                                                    @foreach($monedas as $mo)                
+                                                                        <option value="{{$mo->idTipo_moneda}}_{{$mo->tipo_cambio}}_{{$mo->simbolo}}_{{$mo->impuesto}}">{{$mo->nombre_moneda}}</option>
+                                                                    @endforeach  
+                                                                </select>                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" placeholder="Simbolo">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input type="text" disabled id="valorcambio" class="form-control" placeholder="Cambio">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input type="text" disabled id="igv_tipocambio" class="form-control" placeholder="% IGV">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
+                                        </div>                   
+                     </div>
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default panel-shadow">
+                                        <div class="panel-body">
                                             <div class="form-group">
-                                                <input type="text" disabled name="simbolo" id="simbolo" class="form-control" placeholder="Simbolo">
+                                                <label for="" class="control-label" style="color: #676a6c !important">
+                                                   Nombre del proyecto
+                                                </label>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" disabled id="valorcambio" class="form-control" placeholder="Cambio">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" disabled id="igv_tipocambio" class="form-control" placeholder="% IGV">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <input type="text"  name="nombproyecto" id="nombproyecto" class="form-control" placeholder="Ingrese el nombre del proyecto">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
-                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-shadow">
@@ -832,10 +851,10 @@ function MostrarAlertaCliente(){
         var plazo=$("#plazo_oferta").val();
         var observacion=$("#observacion").val();
         var descuento=$("#pdesc").val();
-        console.log(tablero,filaob);
-        console.log(iduser);
+        var nombproyecto=$("#nombproyecto").val();
+
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,total2:totalt2,simbolo:simbolo,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,userid:iduser,desc:descuento,clienteemp:clienteemp}];
+            var dat=[{idcliente:idcliente,valorVenta:valorventa,total:totalt,total2:totalt2,simbolo:simbolo,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,userid:iduser,desc:descuento,clienteemp:clienteemp,nombproyecto:nombproyecto}];
             // console.log(dat,tablero,filaob);
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
