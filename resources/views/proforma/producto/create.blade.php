@@ -288,33 +288,6 @@ var cont=0;
 
 $("#guardar").show();
 
-$("#a").change(cambiaropcion);
-
-function cambiaropcion(){
-        tipoP=$("#a").val();
-
-       if(tipoP=="Bandejas"){
-            $('#d').attr("disabled", true);
-            $('#h').attr("disabled", true);
-            $('#i').attr("disabled", true);
-        }
-      else if(tipoP=="Tableros"){
-            $('#d').attr("disabled", true);
-            $('#h').attr("disabled", true);
-            $('#i').attr("disabled", true);
-        }
-        else if(tipoP=="Accesorios"){
-            $('#d').attr("disabled", true);
-            $('#h').attr("disabled", true);
-            $('#i').attr("disabled", true);
-        }
-        else{
-           $('#d').attr("disabled", false);
-           $('#h').attr("disabled", false); 
-           $('#i').attr("disabled", false);  
-        }
-   }
-
 function MostrarMarca(){
        
         Marca=document.getElementById('idMarca').value.split('_');
