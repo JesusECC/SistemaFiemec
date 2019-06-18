@@ -280,7 +280,10 @@ border-collapse: collapse;
         <div><span style="color: black !important;font-weight: bold;">DIRECCIÓN :</span> <span class="direccion" style="font-size: 11px !important;color: black">{{$proforma->Direccion}} {{$proforma->Departamento}} - {{$proforma->Distrito}}</span> </div>
     </div>
   </header> 
-
+  <div  style="margin-top: -15px;margin-bottom: 5px; border-top: 1px solid #7D7D7D !important ;">    
+          <center><span  style="font-size: 9.5px !important; color: black !important;font-weight: bold;">PROYECTO :</span> <span class="direccion" style="font-size: 12px !important;color: black">{{$proforma->proyecto}}</span><center>
+          
+  </div>
   <main> 
     <div id="main-container"> 
       <p style="text-align: center; color: black; font-size: 14px; border: 1px inset black; border-radius: 5px; " >Fabricado en plancha galvanizada LAC/LAF, Diseño Constructivo segun norma NEMA VE-1 y recomendacion de la NFPA-70.</p>

@@ -126,6 +126,26 @@
                         </div>
                     </div>
                     <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default panel-shadow">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="" class="control-label" style="color: #676a6c !important">
+                                                   Nombre del proyecto
+                                                </label>
+                                            </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <input type="text"  name="nombproyecto" id="nombproyecto" class="form-control" placeholder="Ingrese el nombre del proyecto">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                    <div class="row">
                         <div class="col-sm-12">
                             <div class="panel panel-default panel-shadow">
                                 <div class="panel-body">
@@ -670,10 +690,11 @@
         var incl=$("#incluye").val();
         var observacion=$("#observacion_condicion").val();
         var garant=$("#garantia").val();
+        var nombproyecto=$("#nombproyecto").val();
         var simbolop=$("#simbolo").val();
         console.log(iduser);
         if(valorventa>0 && totalt>0 && idtipocam!='' && valorcambio!='' && typeof(idcliente)!='undefined' && idcliente!='null' ){
-            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,incluye:incl,plazofabri:plazoF,clienteemp:clienteemp,garantias:garant,simbolo:simbolop,userid:iduser}];
+            var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,nombproyect:nombproyecto,plazo:plazo,observacion:observacion,incluye:incl,plazofabri:plazoF,clienteemp:clienteemp,garantias:garant,simbolo:simbolop,userid:iduser}];
             // var dat=[{nomTablero:nomTablero,idcliente:idcliente,valorVenta:valorventa,total:totalt,totaldolares:totaldolares,idTipoCambio:idtipocam,valorTipoCambio:valorcambio,forma:forma,plazo:plazo,observacion:observacion,clienteemp:clienteemp}];
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},

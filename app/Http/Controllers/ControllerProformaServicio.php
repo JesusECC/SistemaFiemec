@@ -111,6 +111,7 @@ class ControllerProformaServicio extends Controller
             $observaciones;
             $simbolo;
             $descuento;
+            $nombreproyecto;
 
             // idcliente,total,idTipoCambio,valorTipoCambio
             foreach ($request->datos as $dato) {
@@ -125,6 +126,7 @@ class ControllerProformaServicio extends Controller
                 $observaciones=$dato['observacion'];
                 $simbolo=$dato['simbolo'];
                 $descuento=$dato['desc'];
+                $nombreproyecto=$dato['nombproyect'];
             }
             $idProforma=DB::table('Proforma')->insertGetId(
                 ['idCliente'=>$idclie,
@@ -139,6 +141,7 @@ class ControllerProformaServicio extends Controller
                 'simboloP'=>$simbolo,
                 'tipo_proforma'=>'Servicios',
                 'forma_de'=> $formaPago,
+                'proyecto'=>$nombreproyecto,
                 'plazo_oferta'=>$plazoOferta,
                 'observacion_proforma'=>$observaciones,
                 'descuento'=>$descuento,
@@ -212,7 +215,7 @@ public function pdf($id)
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('users as u','u.id','=','p.idEmpleado')
         ->join('Cliente_Representante as cr','cr.idCliente','=','clp.idCliente')
-        ->select('u.id','u.name','u.paterno as up','u.materno as um','u.celularU','clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
+        ->select('u.id','u.name','u.paterno as up','u.materno as um','u.celularU','clp.correo','p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.proyecto','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado',DB::raw('CONCAT(clp.Direccion,"  ",clp.Departamento,"-",clp.Distrito) as direccion'),'clp.nombres_Rs','clp.paterno','clp.materno','clp.nro_documento','clp.Direccion','cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
         ->where('idProforma','=',$id)
         ->first();
 
@@ -267,7 +270,7 @@ public function pdf($id)
         ->join('Cliente_Proveedor as clp','clp.idCliente','=','p.idCliente')
         ->join('Cliente_Representante as cr','p.cliente_empleado','=','cr.idCR')
         ->join('Servicios as s','s.idServicios','=','deTS.idServicios')
-        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.descuento','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','p.idestado','p.incluye','deTS.idDetalle_proforma','deTS.idProforma','deTS.idServicios as idSer','deTS.idTarea','deTS.descripcionDP','deTS.item','deTS.item2','deTS.subtitulo','deTS.estadoDP','deTS.precio_venta','deTS.cantidad','deTS.estadoDP','ta.nombre_tarea','ta.descripcion_tarea','ta.estado as est','clp.idCliente','clp.nro_documento','clp.nombres_Rs','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT','deTS.unidades','cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
+        ->select('p.idProforma','p.idCliente','p.idEmpleado','p.idTipo_moneda','p.cliente_empleado','p.descuento','p.serie_proforma','p.fecha_hora','p.igv','p.subtotal','p.precio_total','p.tipocambio','p.simboloP','p.precio_totalC','p.descripcion_proforma','p.tipo_proforma','p.caracteristicas_proforma','p.forma_de','p.proyecto','p.plaza_fabricacion','p.plazo_oferta','p.garantia','p.observacion_condicion','p.observacion_proforma','p.estado','p.idestado','p.incluye','deTS.idDetalle_proforma','deTS.idProforma','deTS.idServicios as idSer','deTS.idTarea','deTS.descripcionDP','deTS.item','deTS.item2','deTS.subtitulo','deTS.estadoDP','deTS.precio_venta','deTS.cantidad','deTS.estadoDP','ta.nombre_tarea','ta.descripcion_tarea','ta.estado as est','clp.idCliente','clp.nro_documento','clp.nombres_Rs','clp.Direccion','s.idServicios','s.nombre_servicio','s.estadoT','deTS.unidades','cr.nombre_RE','cr.telefonoRE','cr.CelularRE')
         ->where('p.idProforma','=',$id)
         ->where('deTS.estadoDP','=','1')
         ->orderBy('deTS.item')
@@ -294,6 +297,7 @@ public function pdf($id)
             $plazo_oferta;
             $observacion;
             $descuento;
+            $nombrproyecto;
 
             foreach ($request->datos as $dato) {
                 $valorv=$dato['valorVenta'];
@@ -303,6 +307,7 @@ public function pdf($id)
                 $plazo_oferta=$dato['plazo_oferta'];
                 $observacion=$dato['obspro'];
                 $descuento=$dato['desc'];
+                $nombrproyecto=$dato['nombproyect'];
             }  
 
             Proforma::where('idProforma',$idProforma)
@@ -311,6 +316,7 @@ public function pdf($id)
                 'subtotal'=>$valorv,
                 'precio_total'=>$tota,
                 'forma_de'=>$forma_de,
+                'proyecto'=>$nombrproyecto,
                 'plazo_oferta'=>$plazo_oferta,
                 'observacion_proforma'=>$observacion,
                 'descuento'=>$descuento,               
