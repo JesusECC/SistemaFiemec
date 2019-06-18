@@ -47,7 +47,7 @@
 									</a>		
 								</div>
 								<div class="col-md-4 col-sm-12">
-									<a href="{{ route('tablero')}}" class="widget widget-stats bg-gradient-blue inverse-mode">
+									<a href="{{ route('inventarios')}}" class="widget widget-stats bg-gradient-blue inverse-mode">
 										<div class="widget-stats-left">
 											<div class="widget-stats-title">
 												<i class="fas fa-clipboard-list"  style="font-size:50px"></i>
@@ -101,9 +101,9 @@
 		                        		<tr>
 		                                     <td>{{$inv->codigo_pedido}}</td>
 		                                     <td>{{$inv->nombre_producto}} {{$inv->descripcion_producto}}</td>
-		                                     <td></td>
+		                                     <td>{{$inv->total_existencias}}</td>
 		                                     <td>{{$inv->total_entradas}}</td>
-		                                     <td></td>
+		                                     <td>{{$inv->total_salidas}}</td>
 		                                     <td>{{$inv->stock}}</td>
 		                                </tr>
 		                        		@endforeach                       		

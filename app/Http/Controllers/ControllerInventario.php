@@ -85,7 +85,7 @@ class ControllerInventario extends Controller
     $descripcion = $request->get('descripcion');
     $cantidad = $request->get('cantidad');
     $idUser = $request->get('uss');
-    $idCliente = $request->get('idcliente');
+    $idCliente = $request->get('idCliente');
 
     $Salida = new Salida; 
     $Salida->idCliente=$idCliente;
@@ -157,6 +157,18 @@ class ControllerInventario extends Controller
     	return ['entradas'=>$entradas,'veri'=>true];
     }
 
+    public function listarsalida(){
+
+      $salidas=DB::table('Salida as s')
+      ->join('Producto as pro','pro.idProducto','=','s.idProducto')
+      ->join('Marca as m','m.idMarca','=','pro.idmarca')
+      ->select('s.num_comprobante','s.cantidad','s.fecha_hora','s.descripcion','pro.codigo_pedido','pro.nombre_producto','pro.descripcion_producto','m.nombre_proveedor','s.idProducto','s.idSalida','s.precio_total')
+      ->where('s.estado','=','activo')
+      ->get();
+      
+      return ['salidas'=>$salidas,'veri'=>true];
+    }
+
     public function destroy(Request $request){
 
     	$idProducto = $request->get('dato');
@@ -164,6 +176,16 @@ class ControllerInventario extends Controller
     	$entrada = Entrada::findOrFail($idProducto);
     	$entrada->estado='elimnado';
     	$entrada->update();
+
+    }
+
+    public function destroysalida(Request $request){
+
+      $idProducto = $request->get('dato');
+
+      $salida = Salida::findOrFail($idProducto);
+      $salida->estado='elimnado';
+      $salida->update();
 
     }
 

@@ -293,20 +293,19 @@
 				console.log(response);
 
 				if(response.veri==true){
-					var listar=response.entradas;
+					var listar=response.salidas;
 					var va;
 					console.log('lista',listar);
-					//va='<tr><td></td><td></td><td></td><td></td><td></td><td class=""><center><button type="" rel="" title="" class="" onclick=""><i class=""></i></button></center></td></tr>'
 					for(const i in listar){
 						va+='<tr>'+
-						'<td>'+listar[i]['numero_comprobante']+'</td>'+
-						'<td>'+listar[i]['fecha']+'</td>'+
+						'<td>'+listar[i]['num_comprobante']+'</td>'+
+						'<td>'+listar[i]['fecha_hora']+'</td>'+
 						'<td>'+listar[i]['codigo_pedido']+'</td>'+
 						'<td>'+listar[i]['nombre_producto']+' | '+listar[i]['descripcion_producto']+' | '+listar[i]['nombre_proveedor']+'</td>'+
 						'<td>'+listar[i]['cantidad']+'</td>'+
 						'<td>'+
                                 '<center>'+
-                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+listar[i]['idIngreso']+');">'+
+                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+listar[i]['idSalida']+');">'+
                                             '<i class="fas fa-trash"></i>'+
                                     '</button>'+                                
                                 '</center>'+
@@ -344,14 +343,11 @@
 
     }
 
-    function eliminar(idIngreso){
-    	console.log(idIngreso);
-
-
-
+    function eliminar(idSalida){
+    	console.log(idSalida);
        $.ajax({
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
-              data:{dato:idIngreso},
+              data:{dato:idSalida},
               url:'delete',
               type:'post',
               datatype:'json'

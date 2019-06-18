@@ -27,6 +27,7 @@ class Producto extends Model
     	'fecha_sistema',
     	'estado',
         'promedio',
+        'total_existencias',
    ];
 
    protected $guarded =[
