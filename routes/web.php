@@ -123,6 +123,14 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('proforma/bandejas/pdf2/{idProforma}',['as'=>'bandeja-pdf2','uses'=>'ControllerBandejas@pdf2']);
     
     
+    //prueba  Andy Ancajima
+    Route::get('bandejas/prototipo',['as'=>'bandejas-prototipo','uses'=>'ControllerBandejas@pruebabandeja']);
+    //****************************************************************************************************************************+ */
+
+
+
+
+
     //Se crea rutas servicios
     Route::get('servicios',['as'=>'servicio','uses'=>'ControllerProformaServicio@index']);
     Route::get('servicios/create',['as'=>'servicio-create','uses'=>'ControllerProformaServicio@create']);
@@ -153,6 +161,11 @@ Route::middleware(['auth','admin'])->group(function () {
    Route::post('productobandejas/',['as'=>'productobandejas-store','uses'=>'ControllerProductoBandeja@store']);
    Route::get('productobandejas/{idProducto}/edit',['as'=>'productobandejas-edit','uses'=>'ControllerProductoBandeja@edit']);
 
+    
+
+//
+
+
    //ruta de inventario
    Route::get('inventario',['as'=>'inventarios','uses'=>'ControllerInventario@index']);
    //ruta entrada-create
@@ -179,7 +192,11 @@ Route::middleware(['auth','admin'])->group(function () {
     
     Route::get('Prof',['as'=>'prof','uses'=>'ControllerAjustes@index2']);
 
+
+
 });   
+
+
 Auth::routes();
 
 
