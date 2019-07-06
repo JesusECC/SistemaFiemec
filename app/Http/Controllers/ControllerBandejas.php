@@ -45,25 +45,7 @@ class ControllerBandejas extends Controller
         }
     }
 
-    public function pruebabandeja()
-    {
-        $monedas=DB::table('Tipo_moneda')
-        ->where('estado','=','1')
-        ->get();
 
-        $representante=DB::table('Cliente_Representante') 
-        ->where('estadoCE','=',1)
-        ->get();
-        $clientes=DB::table('Cliente_Proveedor as cp')
-        ->join('users as u','u.id','=','cp.idU')
-        ->select('cp.idCliente','cp.nombres_Rs','cp.paterno','cp.materno',DB::raw('CONCAT(cp.Direccion,"  ",cp.Departamento,"-",cp.Distrito) as direccion'),'cp.nro_documento','cp.idU',DB::raw('CONCAT(u.name," ",u.paterno," ",u.materno) as user'))
-        ->where('estado','=',1)
-        ->get();
-
-       
-    return view('proforma.bandejas.bandejasprueba',["clientes"=>$clientes,"representante"=>$representante,"monedas"=>$monedas,]);
-
-    }
 
 
 

@@ -155,9 +155,9 @@
                                         </label>
                                     </div>
                                     <div class="row"  style="margin-top:20px">
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-4">
                                             <div class="" id="producto-oculto">
-                                                <label for="" class="control-label">Producto</label>
+                                                <label for="" class="control-label">Modelo</label>
                                                 <select name="pidProducto" class="form-control selectpicker" id="pidProducto" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Producto</option>
                                                     @foreach($productos as $producto)
@@ -169,61 +169,12 @@
 
                                         <div class="col-sm-2">
                                             <div class="form-group label-floating">
-                                                <label for="" class="control-label">Acc. %</label>
-                                                <input type="text"  id="pacc" class="form-control" name="pacc"  >  
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="form-group label-floating">
                                                 <label for="" class="control-label">Espesor</label>
                                                 <input type="text"  id="pespesor" class="form-control" name="pespesor"  >  
                                             </div>
                                         </div>
-                                         
-                                         <div class="col-lg-2">
-                                            <div class="form-group">
-                                                <label for="" class="control-label">Tramo</label> 
-                                                 <select name="ptramo" class="form-control selectpicker" id="ptramo" data-live-search="true">
-                                                    <option value="" disabled="" selected="">Seleccione Tramo</option>
-                                                    <option value="1">sin tramo</option>
-                                                    <option value="2.4">2400mm</option>
-                                                    <option value="3">3000mm</option>
-                                                   
-                                                </select>                                                  
-                                            </div>
-                                        </div>
-                                          
 
-                                         <div class="col-sm-4">
-                                            <div class="" id="producto-oculto">
-                                                <label for="" class="control-label">Tipo de Acabado</label>
-                                                <select name="pgalvanizado" class="form-control selectpicker" id="pgalvanizado" data-live-search="true">
-                                                    <option value="" disabled="" selected="">Seleccione Acabado</option>
-                                                    @foreach($galvanizado as $gal)                
-                                                        <option value="{{$gal->idGalvanizado}}_{{$gal->nombreGalvanizado}}">{{$gal->nombreGalvanizado}}</option>
-                                                    @endforeach  
-                                                   
-                                                </select> 
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="form-group">
-                                                <label for="" class="control-label">Precio de Acabado</label>
-                                                 <input type="number" id="ppreciog" class="form-control" name="ppreciog">                                                   
-                                            </div>
-                                        </div>
-                                        
-                                        
-
-                                        <div class="col-lg-4">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Medidas</label>
-                                                <input type="text"  id="medidasp" class="form-control" name="medidasp"  >
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3" style="margin-top:20px">
+                                        <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Dimenciones</label> 
                                                  <select name="pdimencion" class="form-control selectpicker" id="pdimencion" data-live-search="true">
@@ -235,6 +186,61 @@
                                                 </select>                                                  
                                             </div>
                                         </div>
+                                        
+                                        <div class="col-sm-2">
+                                               <label for="" class="control-label">Tipo de Acabado</label>
+                                                <select name="pgalvanizado" class="form-control selectpicker" id="pgalvanizado" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Acabado</option>
+                                                    @foreach($galvanizado as $gal)                
+                                                        <option value="{{$gal->idGalvanizado}}_{{$gal->nombreGalvanizado}}">{{$gal->nombreGalvanizado}}</option>
+                                                    @endforeach  
+                                                </select> 
+                                            </div>
+                                        
+                                        </div>
+
+                                         <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Tramo</label> 
+                                                 <select name="ptramo" class="form-control selectpicker" id="ptramo" data-live-search="true">
+                                                    <option value="" disabled="" selected="">Seleccione Tramo</option>
+                                                    <option value="1">sin tramo</option>
+                                                    <option value="2.4">2400mm</option>
+                                                    <option value="3">3000mm</option>   
+                                                </select>                                                  
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            
+                                                <label for="" class="control-label">Pintado</label>
+                                                <select name="idpintado" class="form-control selectpicker" id="idpintado" data-live-search="true">
+                                                    <option value="" selected="" disabled="">Seleccione Pintado</option>
+                                                    @foreach($pintado as $pi)
+                                                   <option value="{{ $pi->idPintado }}">{{$pi->nombrePintado}}</option>
+                                                    @endforeach
+                                                </select> 
+                                            </div>
+                                          
+
+                                       
+                                  
+                                        
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="" class="control-label">Precio de Acabado</label>
+                                                 <input type="number" id="ppreciog" class="form-control" name="ppreciog">                                                   
+                                            </div>
+                                        </div>
+                                               
+                                        <div class="col-lg-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Medidas</label>
+                                                <input type="text"  id="medidasp" class="form-control" name="medidasp"  >
+                                            </div>
+                                        </div>
+
+                                      
                                          
 
                                          <div class="col-lg-2" style="margin-top:20px">
@@ -242,8 +248,8 @@
                                                 <label for="" class="control-label">Tapa</label> 
                                                   <select name="ptapa" class="form-control selectpicker" id="ptapa" data-live-search="true">
                                                     <option value="" disabled="" selected="">Seleccione Tapa</option>
-                                                    <option value="Con tapa" >Con tapa</option>
-                                                    <option value="Sin tapa" >Sin tapa</option>
+                                                    <option value="Plana" >Plana</option>
+                                                    <option value="A 2 Agua" >A 2 Agua</option>
                                                 </select>                                                        
                                             </div>
                                         </div>
@@ -271,16 +277,17 @@
                                         
                                          
 
-                                        <div class="col-lg-6" style="margin-top:20px">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Descripcion</label>
-                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
-                                            </div>
-                                        </div> 
+                                       
                                         <div class="col-lg-2" style="margin-top:20px">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Cantidad</label>
                                                  <input type="number" id="Pcantidad" class="form-control" name="Pcantidad" >
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-6" style="margin-top:20px">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descripcion</label>
+                                                <input type="textarea"  id="descripcionp" class="form-control" name="descripcionp"  >
                                             </div>
                                         </div> 
                                         <div class="col-sm-2" style="margin-top:45px">
@@ -290,6 +297,7 @@
                                             </div>
                                         </div>                                                                                 
                                     </div>
+                                </div>
                                 </div>
                                 <div class="panel-footer">
                                     <div id="tablerosn" style="color: #f5f5f5 !important;">
@@ -745,7 +753,9 @@
         var proacc=$('#pacc').val();
         var preciouni=$('#preuni').val();
         var filas;
+        var pin=$('#idpintado').val();
 
+        var pintado=parseFloat(pin);
         var cantidad=parseFloat(pcant);
         var precioga=parseFloat(preciog);
         var preciota=parseFloat(preciot);
@@ -872,7 +882,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,espesorT:espT,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,porcentajeacc:proacc,simbolocambio:simboloB,preciounit:subt2,fila:""};
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,espesorT:espT,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,porcentajeacc:proacc,simbolocambio:simboloB,preciounit:subt2,pintado:pintado,fila:""};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -907,6 +917,7 @@
                     var dimenciones=parseFloat(filaob[fila]['dimencion']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                     var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
+                    var pintadoB=parseFloat(filaob[fila]['pintado']);
         
         
                     
@@ -1075,6 +1086,11 @@
                                 '<input  type="hidden" name="dem_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimencion']+'">'+filaob[fila]['dimencion']+
                             '</td>'+
                             
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="dem_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['pintado']+'">'+pintado+
+                            '</td>'+
+
+
                             '<td  class="text-center"> '+ 
                                 '<input  type="hidden" name="cant_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                             '</td>'+
