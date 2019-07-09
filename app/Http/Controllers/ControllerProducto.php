@@ -109,8 +109,10 @@ while ($cont<count($idFamilia)) {
    
     public function edit($id)
     {
-        
-        return view("proforma.producto.edit",["producto"=>Producto::findOrFail($id)]);
+        $marca=db::table('Marca')
+        ->where('estadoMA','=',1)
+        ->get();
+        return view("proforma.producto.edit",["producto"=>Producto::findOrFail($id),"marca"=>$marca]);
     }
 
    
@@ -118,12 +120,13 @@ while ($cont<count($idFamilia)) {
     {
 
         $producto=Producto::find($id);
+        $producto->idMarca=$request->get('id_marca');
 
         $producto->serie_producto=$request->get('serie_producto');
         $producto->codigo_pedido=$request->get('codigo_pedido');
         $producto->codigo_producto=$request->get('codigo_producto');
         $producto->nombre_producto=$request->get('nombre_producto');
-        $producto->marca_producto=$request->get('marca_producto');
+        $producto->marca_producto=$request->get('marca_text');
         $producto->stock=$request->get('stock');
         $producto->descripcion_producto=$request->get('descripcion_producto');
         $producto->precio_unitario=$request->get('precio_unitario');

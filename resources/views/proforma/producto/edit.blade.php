@@ -78,27 +78,31 @@
 												<input type="text" name="nombre_producto" class="form-control" required value="{{$producto->nombre_producto}}">		
 											</div>												
 										</div>
-										<div class="col-sm-4">
+										<div class="col-sm-4" style="display:none" id="marcabox">
 											<div class="form-group">
 												<label>Marca</label>
-												<select name="marca_producto" class="form-control">
-													@if($producto->marca_producto=='FIEMEC')
-												   <option value="Fiemec" selected>FIEMEC</option>
-												   <option value="ABB">ABB</option>
-												   <option value="schneider">SCHNEIDER</option>	
-												   @elseif($producto->marca_producto=='ABB')
-												   <option value="Fiemec">FIEMEC</option>
-												   <option value="ABB" selected>ABB</option>
-												   <option value="schneider">SCHNEIDER</option>
-												   @else($producto->marca_producto=='SCHNEIDER')
-												   <option value="Fiemec">FIEMEC</option>
-												   <option value="ABB">ABB</option>
-												   <option value="schneider" selected>SCHNEIDER</option>
-												   @endif
+												<select name="marca_producto" id="marca_producto" onchange="implementacion()" class="form-control">
+													@foreach($marca as $mar)
+												   <option value="{{$mar->idMarca}}_{{$mar->nombre_proveedor}}" selected>{{$mar->nombre_proveedor}}</option>
+												   @endforeach
 												</select>													
 											</div>
 										</div>
+										<div class="col-sm-4" style="display:block" id="marcatext">
+											<div class="input-group">
+												<label>Marca</label>
+													<input type="text" id="marca_text" name="marca_text" class="form-control"  value="{{$producto->marca_producto}}">
+													<input type="hidden" id="id_marca" name="id_marca" >	
+													<samp class="input-group-btn">
+														<a   type="button" onclick="prueba()" class="btn btn-primary" style="background-color: #18A689 !important;border:1px solid #18A689 !important;  margin-top: 63% !important"><i class="fas fa-pencil-alt"></i>
+														</a>
+													</samp>
+											</div>
+										</div>
 									</div>
+									
+									
+
 									<div class="row">
 										<div class="col-sm-4">
 											<div class="form-group">
@@ -195,3 +199,29 @@
           </div><!-- /.row -->
 </section><!-- /.content -->
 @endsection
+
+@push('scripts')
+<script>
+ function prueba() {
+  document.getElementById("marcabox").style.display = "block";
+  document.getElementById("marcatext").style.display = "none";
+}
+
+function implementacion(){
+	marca=document.getElementById('marca_producto').value.split('_');
+        idmarca=marca[0];
+		nommarc=marca[1];
+
+	$('#id_marca').val(idmarca);
+	$('#marca_text').val(nommarc);
+
+	document.getElementById("marcabox").style.display = "none";
+  document.getElementById("marcatext").style.display = "block";
+}
+
+
+
+
+
+</script>
+@endpush
