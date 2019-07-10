@@ -217,7 +217,7 @@
                                                 <select name="idpintado" class="form-control selectpicker" id="idpintado" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Pintado</option>
                                                     @foreach($pintado as $pi)
-                                                   <option value="{{ $pi->idPintado }}">{{$pi->nombrePintado}}</option>
+                                                   <option value="{{$pi->idPintado}}_{{$pi->nombrePintado}}">{{$pi->nombrePintado}}</option>
                                                     @endforeach
                                                 </select> 
                                             </div>
@@ -319,6 +319,7 @@
                                                                             
                                                                             <th>Producto</th>
                                                                             <th>Unds.</th>
+                                                                            <th>Pintado</th>
                                                                             <th>Cant.</th>
                                                                             <th>P. Unit.</th>
                                                                             <th>total</th>
@@ -728,15 +729,22 @@
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
         Galvanizado=document.getElementById('pgalvanizado').value.split('_');
-        
+        Pintando=document.getElementById('idpintado').value.split('-');
+
         var idProd=Producto[0];
         var pname=Producto[1];
         var idGal=Galvanizado[0];
         var gname=Galvanizado[1];
-        var pdescripcion=$("#descripcionp ").val();
+        
+        var ipPin=Pintando[0];
+        var nombPin=Pintando[1];
+
+
+
+        var pdescripcion=$("#descripcionp").val();
         var puni=$('#precio_uni').val();
         var preciog=$('#ppreciog').val();
-        var idPin=$('#idPintado').val();
+       // var idPin=$('#idPintado').val();
         var preciop=$('#ppreciop').val();
         var preciot=$('#ppreciot').val();
         var tra=$('#ptramo').val();
@@ -753,9 +761,9 @@
         var proacc=$('#pacc').val();
         var preciouni=$('#preuni').val();
         var filas;
-        var pin=$('#idpintado').val();
+        //var pin=$('#idpintado').val();
 
-        var pintado=parseFloat(pin);
+       // var pintado=parseFloat(pin);
         var cantidad=parseFloat(pcant);
         var precioga=parseFloat(preciog);
         var preciota=parseFloat(preciot);
@@ -882,7 +890,8 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,espesorT:espT,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,porcentajeacc:proacc,simbolocambio:simboloB,preciounit:subt2,pintado:pintado,fila:""};
+               
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizado:gname,descripcionP:pdescripcion,prec_uniP:puni,prec_gal:preciog,prec_pin:preciop,prec_tap:preciot,tramo:tra,promed:pro,cantidadP:pcant,medi:med,tapa:tap,espesor:esp,espesorT:espT,descuentoP:descuento,dimencion:dim,nomTablero:nomTablero,posiP:contp,tipocambio:cambioB,porcentajeacc:proacc,simbolocambio:simboloB,preciounit:subt2,codpin:ipPin,nompinta:nombPin,fila:""};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -917,7 +926,7 @@
                     var dimenciones=parseFloat(filaob[fila]['dimencion']);
                     var descuento=parseFloat(filaob[fila]['descuentoP']);
                     var procentaje=parseFloat(filaob[fila]['porcentajeacc']);
-                    var pintadoB=parseFloat(filaob[fila]['pintado']);
+                   // var pintadoB=parseFloat(filaob[fila]['codpin']);
         
         
                     
@@ -1087,7 +1096,7 @@
                             '</td>'+
                             
                             '<td  class="text-center"> '+ 
-                                '<input  type="hidden" name="dem_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['pintado']+'">'+pintado+
+                                '<input  type="hidden" name="ipPin_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['codpin']+'">'+filaob[fila]['nompinta']+
                             '</td>'+
 
 
