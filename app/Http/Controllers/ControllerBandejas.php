@@ -76,6 +76,9 @@ $pintado=DB::table('Pintado')
  ->where('estado','=','1')
  ->get();
 
+ $Pestania=DB::table('Pestania')
+    ->get();
+
  $representante=DB::table('Cliente_Representante') 
     ->where('estadoCE','=',1)
     ->get();
@@ -86,7 +89,7 @@ $pintado=DB::table('Pintado')
     ->where('estado','=',1)
     ->get();
 
- return view("proforma.bandejas.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"medidas"=>$medidas,"accesorios"=>$accesorios,"galvanizado"=>$galvanizado,"pintado"=>$pintado,"representante"=>$representante]);
+ return view("proforma.bandejas.create",["productos"=>$productos,"clientes"=>$clientes,"monedas"=>$monedas,"medidas"=>$medidas,"accesorios"=>$accesorios,"galvanizado"=>$galvanizado,"pintado"=>$pintado,"representante"=>$representante,"Pestania"=>$Pestania]);
 }
 
 public function store(Request $request)
@@ -181,7 +184,10 @@ public function store(Request $request)
             $detalleProforma->cambioBandejas=$fila['tipocambio'];    
             $detalleProforma->simboloBandejas=$fila['simbolocambio'];
             $detalleProforma->promed=$fila['promed'];
-            $detalleProforma->espesorT=$fila['espesorT'];
+
+            $detalleProforma->idPintado=$fila['codpin'];
+            $detalleProforma->idPintadoTapa=$fila['codpinT'];
+            $detalleProforma->idPestania=$fila['codPest'];
             $detalleProforma->save();            
         }
         return ['data' =>'bandejas','veri'=>true];
@@ -291,6 +297,10 @@ public function edit($id)
     ->where('estado','=','1')
     ->get();
 
+
+    $Pestania=DB::table('Pestania')
+    ->get();
+
     $proforma=DB::table('Proforma as p')
     ->join('Detalle_bandejas as deP','p.idProforma','=','deP.idProforma')
     ->join('Producto as pd','pd.idProducto','=','deP.idProducto')
@@ -303,7 +313,7 @@ public function edit($id)
     ->get();
     
         
-    return view("proforma.bandejas.edit",["productos"=>$productos,'proforma'=>$proforma,"accesorios"=>$accesorios,'galvanizado'=>$galvanizado,'medidas'=>$medidas,'monedas'=>$monedas]);
+    return view("proforma.bandejas.edit",["productos"=>$productos,'proforma'=>$proforma,"accesorios"=>$accesorios,'galvanizado'=>$galvanizado,'medidas'=>$medidas,'monedas'=>$monedas,'Pestania'=>$Pestania]);
 
     }
     public function update(Request $request)
