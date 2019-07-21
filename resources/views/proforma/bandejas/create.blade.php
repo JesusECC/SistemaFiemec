@@ -176,13 +176,14 @@
                                                                     <option value="mtrs">Metros</option>
                                                                     <option value="cm">Centimentros</option>
                                                                     <option value="mm">Milimetros</option>
-                                                                    <option value="pul">pulgada</option>
+                                                                    <option value="pulgada">pulgada</option>
                                                                 </select>                                                  
                                                             </div>
                                                         </div>
 
                                                     
-                                                        <div class="col-lg-2">
+                                                      
+														<div class="col-lg-2">
                                                              <label for="" class="control-label">Espesor:</label> 
                                                             <div class="form-group" id="opcionmm">
                                                                 <select name="pespesor" class="form-control selectpicker" id="pespesor" data-live-search="true">
@@ -708,8 +709,8 @@
        }
 
               /*implementacion de Andy Ancajima ---- */
-
-              function ActivarOpciones(){
+             
+            function ActivarOpciones(){
 
                  var x = document.getElementById("pdimencion").value;
                 console.log(x);
@@ -719,7 +720,7 @@
                  document.getElementById("opcionmmtapa").style.display = "block";
                  document.getElementById("opcionpulgadatapa").style.display = "none";
 
-               } else if(x =="pul"){
+               } else if(x =="pulgada"){
                  document.getElementById("opcionmm").style.display = "none";
                  document.getElementById("opcionpulgada").style.display = "block";
                  document.getElementById("opcionmmtapa").style.display = "none";
@@ -727,13 +728,7 @@
                }
         }
 
-
-
-       /*------------------------------------------- */
-
-
-
-
+                      
     function MostrarCliente(){
        
         Cliente=document.getElementById('idClientes').value.split('_');
@@ -892,9 +887,10 @@
         var promedio=parseFloat(pro);
         var tapas=String(tap);
         var procentaje=parseFloat(proacc);
-        /***************************************** */
+        /***************************************** 
             console.log(esp);
             console.log(espT);
+            */
                     
                 if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
                         var subt2=((precioga*tram)*(procentaje/100)+preciota)-(((precioga*tram)*(procentaje/100)+preciota)*0.1);
