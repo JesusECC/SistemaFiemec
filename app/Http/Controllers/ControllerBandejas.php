@@ -175,7 +175,7 @@ public function store(Request $request)
             $detalleProforma->precioGal=$fila['prec_gal'];
             $detalleProforma->preciouniB=$fila['preciounit'];
             $detalleProforma->precioTap=$fila['prec_tap'];
-            $detalleProforma->tramo=$fila['tramo'];
+           // $detalleProforma->tramo=$fila['tramo'];
             $detalleProforma->descripcionDP=$fila['descripcionP'];
             $detalleProforma->estadoDB=1;	
             $detalleProforma->medidas=$fila['medi'];	

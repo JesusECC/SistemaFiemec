@@ -170,7 +170,7 @@
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="" class="control-label">Dimenciones</label> 
-                                                                <select name="pdimencion" class="form-control selectpicker" id="pdimencion" onchange="ActivarOpciones()" data-live-search="true">
+                                                                <select name="pdimencion" class="form-control selectpicker" id="pdimencion"  data-live-search="true">
                                                                     <option value="" disabled="" selected="">Seleccione Dimenciones</option>
                                                                     <option value="unds">Unidades</option>
                                                                     <option value="mtrs">Metros</option>
@@ -183,39 +183,15 @@
 
                                                     
                                                       
-														<div class="col-lg-2">
-                                                             <label for="" class="control-label">Espesor:</label> 
-                         
-                                                            <div class="form-group"  id="opcionpulgada">
-                                                                <select name="pespesormm" class="form-control selectpicker" id="pespesormm" data-live-search="true">
-                                                                    <option value="" disabled="" selected="">Seleccione Espesor</option>                                                     
-                                                                   
-                                                                    <option value="1/20">1/20</option>
-                                                                    <option value="1/16">1/16</option>
-                                                                    <option value="5/64">5/64</option>  
-                                                                </select>                                                                                                                
-                                                            </div>
-                                                            <div class="form-group" id="opcionmm">
-                                                                <select name="pespesorPul" class="form-control selectpicker" id="pespesorPul" data-live-search="true">
-                                                                    <option value="" disabled="" selected="">Seleccione Espesor</option>
-                                                                    <option value="1">1</option>
-                                                                    <option value="1.2">1.2</option>
-                                                                    <option value="1.5">1.5</option>
-                                                                    <option value="2">2</option> 
-                                                                    
-                                                                </select>                                                
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- pruebas
+													
+                                                       
                                                             <div class="col-sm-2">
                                                             <div class="form-group label-floating">
                                                                 <label for="" class="control-label">Espesor</label>
                                                                 <input type="text"  id="pespesor" class="form-control" name="pespesor"  >  
                                                             </div>
                                                         </div>
-                                                        -->
-
+                                                        
                                                             
                                                      
 
@@ -300,38 +276,15 @@
                                                                             <input type="number" disabled id="ppreciot" class="form-control" name="ppreciot">                                                   
                                                                         </div>
                                                                 </div>
-                            <!--
+                            
                                                                 <div class="col-lg-2" >
                                                                     <div class="form-group label-floating">
                                                                         <label for="" class="control-label">Espesor Tapa</label>
                                                                         <input type="text" disabled id="pespesorT" class="form-control" name="pespesorT"  >  
                                                                     </div>
                                                                 </div>
-                            -->
-                                                                <div class="col-lg-2">
-                                                                        <label for="" class="control-label">Espesor:</label> 
-                                                                        <div class="form-group" id="opcionmmtapa">
-                                                                            <select name="pespesorTmm" class="form-control selectpicker" id="pespesorTmm" data-live-search="true">
-                                                                                <option value="" disabled="" selected="">Seleccione Espesor</option>
-                                                                                <option value="1">1</option>
-                                                                                <option value="1.2">1.2</option>
-                                                                                <option value="1.5">1.5</option>
-                                                                                <option value="2">2</option> 
-                                                                                
-                                                                            </select>                                                
-                                                                        </div>
-                                                                        <div class="form-group"  id="opcionpulgadatapa">
-                                                                            <select name="pespesorTpul" class="form-control selectpicker" id="pespesorTpul" data-live-search="true">
-                                                                                <option value="" disabled="" selected="">Seleccione Espesor</option>                                                     
-                                                                                <option value="1/20">1/20</option>
-                                                                                <option value="1/16">1/16</option>
-                                                                                <option value="5/64">5/64</option>  
-                                                                            </select>   
-                                                                                                                        
-                                                                        </div>
-                                                                    </div>
-
-
+                            
+                                                            
 
 
                                                                 <div class="col-lg-4">
@@ -579,10 +532,7 @@
 
 <script>
 
-                document.getElementById("opcionmm").style.display = "block";
-              document.getElementById("opcionpulgada").style.display = "none";
-              document.getElementById("opcionmmtapa").style.display = "block";
-                 document.getElementById("opcionpulgadatapa").style.display = "none";
+             
 
     var selectCliente = document.getElementById('idClientes');
     selectCliente.addEventListener('change',function(){
@@ -709,26 +659,9 @@
         }
        }
 
-              /*implementacion de Andy Ancajima ---- */
+       
              
-            function ActivarOpciones(){
-
-                 var x = document.getElementById("pdimencion").value;
-                console.log(x);
-               if(x =="mm"){
-                document.getElementById("opcionmm").style.display = "block";
-                 document.getElementById("opcionpulgada").style.display = "none";
-                 document.getElementById("opcionmmtapa").style.display = "block";
-                 document.getElementById("opcionpulgadatapa").style.display = "none";
-
-               } else if(x =="pulgada"){
-                 document.getElementById("opcionmm").style.display = "none";
-                 document.getElementById("opcionpulgada").style.display = "block";
-                 document.getElementById("opcionmmtapa").style.display = "none";
-                 document.getElementById("opcionpulgadatapa").style.display = "block";
-               }
-        }
-
+           
                       
     function MostrarCliente(){
        
@@ -869,29 +802,8 @@
         var pcant=$('#Pcantidad').val();
         var med=$('#medidasp').val();
         var tap=$('#ptapa').val();
-      
-        
-
-
-        var espmm=$('#pespesormm').val();
-        var esppul=$('#pespesorPul').val();
-        if(espmm==null){
-            espmm=esppul;
-        }else  if(esppul==null){
-            esppul=espmm;
-        }
-        console.log(espmm);
-
-        var espTmm=$('#pespesorTmm').val();
-        var espTpul=$('#pespesorTpul').val();
-
-        if(espTmm==null){
-            espTmm=espTpul;
-        }else if(espTpul==null){
-            espTpul=espTmm;
-        }
-        console.log(espTmm);
-
+        var esp=$('#pespesor').val();
+        var espT=$('#pespesorT').val();
         var dim=$('#pdimencion').val();
         var descuento=$('#pdescuento').val();
         var cambioB=$('#valorcambio').val();
@@ -910,9 +822,7 @@
         var tapas=String(tap);
         var procentaje=parseFloat(proacc);
        
-          console.log(esp);
-          
-            
+
             
                     
                 if(precioga>0 && procentaje>0 && tram>0 && tapas=='Con tapa' && promedio==1){
