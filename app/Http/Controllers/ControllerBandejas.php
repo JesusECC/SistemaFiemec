@@ -301,6 +301,9 @@ public function edit($id)
     $Pestania=DB::table('Pestania')
     ->get();
 
+    $pintado=DB::table('Pintado')
+    ->get();
+
     $proforma=DB::table('Proforma as p')
     ->join('Detalle_bandejas as deP','p.idProforma','=','deP.idProforma')
     ->join('Producto as pd','pd.idProducto','=','deP.idProducto')
@@ -313,7 +316,7 @@ public function edit($id)
     ->get();
     
         
-    return view("proforma.bandejas.edit",["productos"=>$productos,'proforma'=>$proforma,"accesorios"=>$accesorios,'galvanizado'=>$galvanizado,'medidas'=>$medidas,'monedas'=>$monedas,'Pestania'=>$Pestania]);
+    return view("proforma.bandejas.edit",["productos"=>$productos,'proforma'=>$proforma,"accesorios"=>$accesorios,'galvanizado'=>$galvanizado,'medidas'=>$medidas,'monedas'=>$monedas,'Pestania'=>$Pestania,'pintado'=>$pintado]);
 
     }
     public function update(Request $request)
