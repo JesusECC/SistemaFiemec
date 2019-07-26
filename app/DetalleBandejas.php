@@ -14,9 +14,9 @@ class DetalleBandejas extends Model
     protected $filleable = [
       'idProducto',
       'idGalvanizado',
-      
       'idProforma',
       'espesor',
+      'espesorT',
       'precioGal',
       'espesorT',
       'precioTap',
@@ -33,7 +33,10 @@ class DetalleBandejas extends Model
       'estadoDB',
       'cambioBandejas',
       'simboloBandejas',
-      'promed'
+      'promed',
+      'idPintado',
+      'idPintadoTapa',
+      'idPestania'
 
    ];
 
