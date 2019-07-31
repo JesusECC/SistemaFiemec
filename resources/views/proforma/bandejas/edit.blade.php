@@ -131,6 +131,8 @@
 
 <!-- Poner parametros-->
                                     <div class="row" >
+
+                                    <div class="row"  style="margin-top:20px">
                                          <div class="col-sm-4">
                                             <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Producto</label>
@@ -143,7 +145,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-3">
+                                        <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="" class="control-label">Dimenciones</label> 
                                                                 <select name="pdimencion" class="form-control selectpicker" id="pdimencion"  data-live-search="true">
@@ -167,7 +169,7 @@
                                   
                               
 
-                                         <div class="col-sm-3">
+                                         <div class="col-lg-3">
                                             <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Tipo de Acabado</label>
                                                 <select name="pgalvanizado" class="form-control selectpicker" id="pgalvanizado" data-live-search="true">
@@ -179,8 +181,11 @@
                                                 </select> 
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-2">
+
+                                    <div class="row"  style="margin-top:20px">
+                                        <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Precio Acabado</label>
                                                  <input type="number" id="ppreciog" class="form-control" name="ppreciog">                                                   
@@ -197,13 +202,9 @@
                                                 @endforeach
                                             </select> 
                                         </div>
-
-
-
-                                     
                                          
 
-                                         <div class="col-lg-2" style="margin-top:20px">
+                                         <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label for="" class="control-label">Tapa</label> 
                                                   <select name="ptapa" class="form-control selectpicker" id="ptapa" data-live-search="true">
@@ -215,7 +216,7 @@
                                         </div>
 
 
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                                 <label for="" class="control-label">Pintado Tapa</label>
                                                 <select name="idpintadoT" class="form-control selectpicker" id="idpintadoT" data-live-search="true">
                                                     <option value="" selected="" disabled="">Seleccione Pintado</option>
@@ -224,15 +225,17 @@
                                                     @endforeach
                                                 </select> 
                                         </div>
-                                        
+                                    </div>
 
-                                         <div class="col-lg-2" style="margin-top:20px">
+
+                                    <div class="row"  style="margin-top:20px">
+                                         <div class="col-lg-2" >
                                             <div class="form-group">
                                                 <label for="" class="control-label">Precio de Tapa</label>
                                                  <input type="number" disabled id="ppreciot" class="form-control" name="ppreciot">                                                   
                                             </div>
                                         </div>
-                                        <div class="col-sm-2" style="margin-top:20px">
+                                        <div class="col-sm-2" >
                                             <div class="form-group label-floating">
                                                 <label for="" class="control-label">Espesor Tapa</label>
                                                 <input type="text" disabled id="pespesorT" class="form-control" name="pespesorT"  >  
@@ -257,9 +260,12 @@
                                             </div>
                                         </div>
 
-                                      
+                                      </div>
 
-                                        <div class="col-sm-3" style="margin-top:19px">
+
+
+
+                                        <div class="col-sm-2" style="margin-top:19px">
                                             <div class="" id="producto-oculto">
                                                 <label for="" class="control-label">Promedio</label>
                                                     <select name="ppromedio" class="form-control selectpicker" id="ppromedio" data-live-search="true">
@@ -637,6 +643,20 @@
     function agregarProductosTablero(){    
         Producto=document.getElementById('pidProducto').value.split('_');
          Galvanizado=document.getElementById('pgalvanizado').value.split('_');
+        Pintado=document.getElementById('idpintado').value.split('_');
+        PintadoT=document.getElementById('idpintadoT').value.split('_');
+        Pestania=document.getElementById('idPestania').value.split('_');
+
+        var ipPin=Pintado[0];
+        var nombPin=Pintado[1];
+
+        var ipPinT=PintadoT[0];
+        var nombPinT=Pintado[1];
+
+        var ipPest=Pestania[0];
+        var nombPest=Pestania[1];
+
+
         
         var idProd=parseInt(Producto[0]);
         var pname=Producto[1];
@@ -778,7 +798,7 @@
             }
             if(boolfila==false){
                 // console.log("produc nuevo",contp);
-                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizada:gname,descripcionP:pdescripcion,prec_tap:preciot,prec_gal:preciog,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,tramo:tra,posiP:contp,porcentajeacc:proacc,espesor:esp,espesorT:espT,medi:med,tapa:tap,dimenciones:dim,prome:promed,preciounit:subt2,fila:"",estado:2,idDetalleProforma:''};
+                var dat={idProducto:idProd,producto:pname,idGalvanizado:idGal,galvanizada:gname,descripcionP:pdescripcion,prec_tap:preciot,prec_gal:preciog,prec_uniP:puni,cantidadP:pcant,descuentoP:descuento,nomTablero:nomTablero,tramo:tra,posiP:contp,porcentajeacc:proacc,espesor:esp,espesorT:espT,medi:med,tapa:tap,dimenciones:dim,codpin:ipPin,nompinta:nombPin,codpinT:ipPinT,nompintaT:nombPinT,codPest:ipPest,nomPest:nombPest,prome:promed,preciounit:subt2,fila:"",estado:2,idDetalleProforma:''};
                 filaob.push(dat);
                 fila();
                 contp++;            
@@ -894,38 +914,72 @@
                         var subt2=precioga;
                         var subt=precioga*cantidad;
                 }
+                console.log('dimenciones');
                     filas=
-                        '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%;">'+
+                    '<tr class="selected text-center" id="fila_'+filaob[fila]['nomTablero']+'_'+filaob[fila]['posiP']+'" style="width:100%; color:black !important">'+
                             '<td class="text-center"> '+ 
-                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+
+                                '<input style="width: 70px !important;" type="hidden" name="idpod_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idProducto']+'">'+filaob[fila]['producto']+ ' espesor de ' +
+                                
+                                '<input  type="hidden" name="esp_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+' '+
+                                
+                                '<input  type="hidden" name="dem_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimenciones']+'">'+filaob[fila]['dimenciones']+', '+
 
-                                '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medi']+'">'+filaob[fila]['medi']+' fabricado en plancha galvanizada LAC/LAF acabado '+
-                               '<input style="width: 70px !important;" type="hidden" name="idgal_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idGalvanizado']+'">'+filaob[fila]['galvanizada']+', Espesor de '+
-                               '<input  type="hidden" name="esp_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesor']+'">'+filaob[fila]['espesor']+', Tramo de '+
-                                '<input  type="hidden" name="tram_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tramo']+'">'+filaob[fila]['tramo']+' metros. Fabricado bajo la norma NEMA V-1 y recomendacion de la NFPA-70. '+
-                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+' ('+
-                                '<input  type="hidden" name="tap_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+')'+' esp. de '+
-                                '<input  type="hidden" name="espT_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesorT']+'">'+filaob[fila]['espesorT']+
+                                '<input style="width: 70px !important;" type="hidden" name="idgal_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['idGalvanizado']+'">'+filaob[fila]['galvanizado']+', Pintado en '+
+                               
+                                '<input  type="hidden" name="ipPin_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['codpin']+'">'+filaob[fila]['nompinta']+ '. Tapa '+
+
+                                '<input  type="hidden" name="tap_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['tapa']+'">'+filaob[fila]['tapa']+', Pintado en '+
+
+                                '<input  type="hidden" name="ipPin_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['codpinT']+'">'+filaob[fila]['nompintaT']+ ', espesor de '+
+                                
+
+                                '<input  type="hidden" name="espT_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['espesorT']+'">'+filaob[fila]['espesorT']+' '+
+
+                                '<input  type="hidden" name="dem_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimenciones']+'">'+filaob[fila]['dimenciones']+', '+
+                              
+                                
+
+                               '<input  type="hidden" name="medi_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['medi']+'">'+filaob[fila]['medi']+' '+
+
+                               '<input  type="hidden" name="dem_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimenciones']+'">'+filaob[fila]['dimenciones']+',Pestaña '+
+
+                               '<input  type="hidden" name="pest_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['codPest']+'">'+filaob[fila]['nomPest']+', '+
+                              
+                                '<input  type="hidden" name="descri_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['descripcionP']+'">'+filaob[fila]['descripcionP']+'. '+
+
+    
+                               
                             '</td>'+
-                             '<td  class="text-center"> '+ 
-                                '<input type="hidden" style="width:40px !important;" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimenciones']+'">'+filaob[fila]['dimenciones']+
+
+                            '<td  class="text-center"> '+ 
+                                '<input  type="hidden" name="dem_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['dimenciones']+'">'+filaob[fila]['dimenciones']+
                             '</td>'+
                             
+                           
+
+
                             '<td  class="text-center"> '+ 
-                                '<input type="hidden" style="width:40px !important;" disabled name="pcant'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
+                                '<input  type="hidden" name="cant_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['cantidadP']+'">'+filaob[fila]['cantidadP']+
                             '</td>'+
-                            '<td  class="text-center"> '+ 
+
+                            '<td class="text-center"> '+ 
+                           
                             '<input  type="hidden" name="cant_'+filaob[fila]['nomTablero']+'[]" value="'+filaob[fila]['preciounit']+'">'+
-                                '<input type="hidden" style="width:60px !important;" width="40px" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt2.toFixed(2) +'">'+subt2.toFixed(2) +
+
+                                '<input style="width:60px !important;" width="40px" type="hidden" id="preuni" disabled name="preuni'+filaob[fila]['nomTablero']+'[]" value="'+subt2.toFixed(2)+'" >'+subt2.toFixed(2)+
+                                
                             '</td>'+
                             
-                            '<td  class="text-center"> '+   
-                                '<input type="hidden" style="width:60px !important;" width="40px" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2) +
+                            '<td class="text-center"> '+   
+                                '<input style="width:40px !important;" width="40px" type="hidden" disabled name="ptotal'+filaob[fila]['nomTablero']+'[]" value="'+subt.toFixed(2) +'">'+subt.toFixed(2)+
                             '</td>'+
-                            '<td  class="text-center">'+
-                                '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
-                                        '<i class="fas fa-trash"></i>'+
-                                '</button>'+
+                            '<td class="text-center">'+
+                                '<center>'+
+                                    '<button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" onclick="eliminar('+filaob[fila]['posiP']+');">'+
+                                            '<i class="fas fa-trash"></i>'+
+                                    '</button>'+                                
+                                '</center>'+
+
                             '</td>'+
                         '</tr>';  
                     filaob[fila]['fila']=filas;
@@ -1004,7 +1058,22 @@
                     var medida=pro[key]['medidas'];      
                     var estado=parseInt(pro[key]['estadoDB']);  
                     var idDetalleBandejas=pro[key]['idDetalle_bandejas'];
+      
+/**              
+                    var ipPin=pro[key]['idPintado'];
+                    var nombPin=pro[key]['nombrePintado'];
+                    var ipPinT=pro[key]['idPintado'];
+                    var nombPinT=pro[key]['nombrePintado'];
+                    var ipPest=pro[key]['idPestania'];
+                    var nomPestania=pro[key]['nombrePestania'];
+
+ * realizando Prueba de editar 28 julio
+ * 
+ */
+
                     formade=pro[key]['forma_de'];
+
+
                     //
                      nombrproyecto=pro[key]['proyecto'];
                     plazpOf=pro[key]['plazo_oferta'];

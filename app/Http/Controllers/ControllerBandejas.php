@@ -388,7 +388,7 @@ public function edit($id)
                     'cantidad'=>$fila['cantidadP'],
                     'precioGal'=>$fila['prec_gal'],
                     'precioTap'=>$fila['prec_tap'],
-                    'tramo'=>$fila['tramo'],
+                    //'tramo'=>$fila['tramo'],
                     'descripcionDP'=>$fila['descripcionP'],
                     'estadoDB'=>$fila['estado'], 
                     'medidas'=>$fila['medi'],    
@@ -396,6 +396,10 @@ public function edit($id)
                     'tapa'=>$fila['tapa'],   
                     'promed'=>$fila['promed'],
                     'espesorT'=>$fila['espesorT'],
+                 /*  'idPintado'=>$fila['codpin'],
+                    'idPintadoTapa'=>$fila['codpinT'],
+                    'idPestania'=>$fila['codPest'],
+*/
                     ]);
 
                 }else if($fila['estado']==2){
@@ -408,7 +412,7 @@ public function edit($id)
             $Detallebandejas->precioGal=$fila['prec_gal'];
             $Detallebandejas->preciouniB=$fila['preciounit'];
             $Detallebandejas->precioTap=$fila['prec_tap'];
-            $Detallebandejas->tramo=$fila['tramo'];
+           // $Detallebandejas->tramo=$fila['tramo'];
             $Detallebandejas->descripcionDP=$fila['descripcionP'];
             $Detallebandejas->estadoDB=1;   
             $Detallebandejas->medidas=$fila['medi'];    
@@ -417,7 +421,11 @@ public function edit($id)
             $Detallebandejas->cambioBandejas=$valorcambio;   
             $Detallebandejas->simboloBandejas=$simbolo;
             $Detallebandejas->promed=$fila['prome'];
-            $detalleProforma->espesorT=$fila['espesorT'];
+            
+            $Detallebandejas->espesorT=$fila['espesorT'];
+            $Detallebandejas->idPintado=$fila['codpin'];
+            $Detallebandejas->idPintadoTapa=$fila['codpinT'];
+            $Detallebandejas->idPestania=$fila['codPest'];
             $Detallebandejas->save(); 
 
                 }
