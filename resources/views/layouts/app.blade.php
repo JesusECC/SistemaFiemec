@@ -8,7 +8,7 @@
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>FIEMEC</title>
+    <title>Albalex Electric</title>
    
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
 

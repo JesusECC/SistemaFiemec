@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>FIEMEC | www.fiemec.pe</title>
+    <title>Albalex Electric | www.albalexelectric.pe</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 4.1 -->
@@ -35,9 +35,9 @@
         <!-- Logo -->
         <a href="{{ route('fiemec')}}" class="logo" style="text-decoration: none !important;">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>HE</b></span>
+          <span class="logo-mini"><b>AE</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>FIEMEC</b></span>
+          <span class="logo-lg" style="font-size: 17px;"><b>ALBALEX ELECTRIC</b></span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -129,11 +129,11 @@
               </a>
               <ul class="treeview-menu">
                 @if(Auth::user()->idCargo==1)
-                <li><a href="{{ route('producto')}}"><i class="fas fa-circle-notch"></i> Fiemec </a></li>
+                <li><a href="{{ route('producto')}}"><i class="fas fa-circle-notch"></i> Albalex Electric </a></li>
                 @endif
                 <li><a href="{{ route('catalogo')}}"><i class="fas fa-circle-notch"></i> Catálogo</a></li>
                 @if(Auth::user()->idCargo==1)
-                <li><a href="{{ route('productobandejas')}}"><i class="fas fa-circle-notch"></i> Accesorios Fiemec</a></li>
+                <li><a href="{{ route('productobandejas')}}"><i class="fas fa-circle-notch"></i> Accesorios Albalex Electric</a></li>
                 @endif
               </ul>
             </li>            
@@ -224,7 +224,7 @@
             <script type="text/javascript">
               copyright=new Date();
               update=copyright.getFullYear();
-              document.write("  © Copyright –  MANTIS CODE 2018 - " + update + " " );
+              document.write("  © Copyright –  Albalex Electric con Mantis Code 2019 - " + update + " " );
             </script> 
           </span>
         </strong> All rights reserved.
